@@ -18,6 +18,9 @@
 * create a sprint or task branch (should be done when you start a new functionality)
 * git branch name convention (taskname)
 
+### Creating a new branch inside dev
+* git checkout -b <branch-name> dev
+
 # Git commands
 
 * git commit
@@ -25,6 +28,7 @@
 * write code
 * git commit
 * git push
+
 
 # Git commit message
 
