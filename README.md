@@ -19,7 +19,8 @@
 * git branch name convention (taskname)
 
 ### Creating a new branch inside dev
-* git checkout -b <branch-name> dev
+* git checkout -b <branch-name> dev (to create a new branch under dev branch)
+* git checkout <branch-name> (to switch between branch's)
 
 # Git commands
 
