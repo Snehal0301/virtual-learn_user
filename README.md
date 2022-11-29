@@ -9,23 +9,23 @@
 
 # Import Convention
 
-* 1. Import all css
-* 2. Import all modules (Eg: import {useState} from 'react')
-* 3. Import all components
+* Import all css
+* Import all modules (Eg: import {useState} from 'react')
+* Import all components
 
 # Git branch convention
 
-* 0. create a sprint or task branch (should be done when you start a new functionality)
-* 1. git branch name convention (taskname)
+* create a sprint or task branch (should be done when you start a new functionality)
+* git branch name convention (taskname)
 
 # Git commands
 
-* 1. git commit
-* 2. git pull (merge)
-* 3. write code
-* 4. git commit
-* 5. git push
+* git commit
+* git pull (merge)
+* write code
+* git commit
+* git push
 
 # Git commit message
 
-* 1. (Eg: login-added input functionality)
+* (Eg: login-added input functionality)
