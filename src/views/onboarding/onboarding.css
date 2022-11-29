@@ -87,4 +87,6 @@ button.nav.default-nav {
 
 .onboarding-detailsBody {
   margin-top: 60px;
+  height: auto;
+  overflow-y: auto;
 }
