@@ -1,0 +1,79 @@
+@import 'react-slideshow-image/dist/styles.css';
+
+.onboarding {
+  display: flex;
+  width: 100%;
+  position: absolute;
+  height: 100%;
+}
+
+.onboarding-entryMessage {
+  width: 68%;
+}
+
+.onboarding-entryMessageimage {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.onboarding-entryMessageTitle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: Biko;
+  font-size: 26px;
+  font-weight: 700;
+  padding: 20px 0 30px 0;
+  color: var(--blackFontClr);
+}
+.onboarding-entryMessageBody {
+  font-size: 20px;
+  font-weight: 700;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 0 20% 70px 20%;
+  color: var(--greyFont);
+  line-height: 28px;
+}
+.onboarding-detailsContainer {
+  width: 32%;
+  background-color: var(--primaryClr);
+}
+
+button.nav.default-nav {
+  display: none !important;
+}
+
+.react-slideshow-container + ul.indicators {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px !important;
+}
+
+.indicator {
+  cursor: pointer;
+  /* padding: 10px; */
+  text-align: center;
+  /* border: 1px #666 solid; */
+  margin: 0;
+  width: 8px;
+  height: 8px;
+  border-radius: 4px;
+  background-color: #d8d8d8;
+}
+.indicator.active {
+  width: 32px;
+  background-color: var(--secondaryClr);
+}
+.onboarding-entryMessageSlider {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 100vh;
+  height: auto;
+}
