@@ -1,3 +1,0 @@
-this is components folder
-
-from test-2

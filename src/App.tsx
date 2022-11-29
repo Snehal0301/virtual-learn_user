@@ -1,9 +1,10 @@
 import './App.css';
+import Onboarding from './views/onboarding/onboarding';
 
 const App = () => {
   return (
     <div className="app">
-      <h1>This is App Page</h1>
+      <Onboarding />
     </div>
   );
 };
