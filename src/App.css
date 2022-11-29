@@ -1,3 +1,5 @@
-.app-l-r{
-    background-color: red;
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
