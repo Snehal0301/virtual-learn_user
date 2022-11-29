@@ -1,5 +1,6 @@
 import './onboarding.css';
 import { Slide } from 'react-slideshow-image';
+import { onboardingLogo } from '../../utils/svgIcons';
 
 const Onboarding = () => {
   const indicators = () => <div className="indicator"></div>;
@@ -59,7 +60,10 @@ const Onboarding = () => {
           </Slide>
         </div>
       </div>
-      <div className="onboarding-detailsContainer">right</div>
+      <div className="onboarding-detailsContainer">
+        <div className="onboarding-detailsLogo">{onboardingLogo}</div>
+        <div className="onboarding-detailsBody">Body</div>
+      </div>
     </div>
   );
 };
