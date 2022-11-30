@@ -2,6 +2,7 @@ import './onboarding.css'
 import { Slide } from 'react-slideshow-image'
 import { onboardingLogo } from '../../utils/svgIcons'
 import WelcomeScreen from '../../components/onboarding/welcome/welcome'
+import LoginVerfication from '../../components/onboarding/login/login-verification/LoginVerfication'
 
 const Onboarding = () => {
   const indicators = () => <div className="indicator"></div>
@@ -64,7 +65,8 @@ const Onboarding = () => {
       <div className="onboarding-detailsContainer">
         <div className="onboarding-detailsLogo">{onboardingLogo}</div>
         <div className="onboarding-detailsBody">
-          <WelcomeScreen />
+          {/* <WelcomeScreen /> */}
+          <LoginVerfication/>
         </div>
       </div>
     </div>
