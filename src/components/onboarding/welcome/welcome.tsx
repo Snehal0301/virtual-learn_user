@@ -1,4 +1,4 @@
-import './welcome.css';
+import './welcome.css'
 
 const WelcomeScreen = () => {
   return (
@@ -17,7 +17,7 @@ const WelcomeScreen = () => {
         <a href="#">Terms of Services</a> & <a href="#">Privacy Policy</a>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default WelcomeScreen;
+export default WelcomeScreen

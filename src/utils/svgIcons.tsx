@@ -30,4 +30,4 @@ export const onboardingLogo = (
       </clipPath>
     </defs>
   </svg>
-);
+)

@@ -1,10 +1,10 @@
-import './onboarding.css';
-import { Slide } from 'react-slideshow-image';
-import { onboardingLogo } from '../../utils/svgIcons';
-import WelcomeScreen from '../../components/onboarding/welcome/welcome';
+import './onboarding.css'
+import { Slide } from 'react-slideshow-image'
+import { onboardingLogo } from '../../utils/svgIcons'
+import WelcomeScreen from '../../components/onboarding/welcome/welcome'
 
 const Onboarding = () => {
-  const indicators = () => <div className="indicator"></div>;
+  const indicators = () => <div className="indicator"></div>
   return (
     <div className="onboarding">
       <div className="onboarding-entryMessage">
@@ -68,7 +68,7 @@ const Onboarding = () => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Onboarding;
+export default Onboarding
