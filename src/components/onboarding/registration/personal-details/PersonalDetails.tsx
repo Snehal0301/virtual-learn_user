@@ -6,6 +6,7 @@ import { Formik, useFormik } from 'formik'
 import ReactTooltip from 'react-tooltip';
 
 const PersonalDetails = () => {
+    const [personaldata, setpersonaldata] = useState({})
 
     const { values, errors, handleChange, touched, handleBlur, handleSubmit } = useFormik({
         initialValues: {
@@ -19,16 +20,20 @@ const PersonalDetails = () => {
         },
         validationSchema: signupSchema,
         onSubmit: (values: any, action: any) => {
-            console.log(values)
+            // console.log(values)
+            setpersonaldata(values)
             action.resetForm()
-        }
-    })
-    return (
-        <div className='outerRectangle'>
-            <div className='innerRect'>
 
-                <div className='heading'>Personal Details</div>
-                <div className='heading2'>
+        }
+
+    })
+
+    return (
+        <div className='personaldetails-outerRectangle'>
+            <div className='personaldetails-innerRect'>
+
+                <div className='personalDetails-heading'>Personal Details</div>
+                <div className='personalDetails-heading2'>
                     Please fill out the fields below so we can learn some information about you.
                 </div>
 
@@ -36,74 +41,118 @@ const PersonalDetails = () => {
             </div>
             <div className='inputFields'>
                 <form onSubmit={handleSubmit}>
-                    <input type="text"
-                        id="mobileNumber"
-                        name="mobileNumber"
-                        placeholder=" "
-                        value={values.mobileNumber}
-                        onChange={handleChange}
-                        onBlur={handleBlur}
-                        maxLength={10}
-                    />
-                    <label htmlFor="mobileNumber">Mobile Number</label>
-                    {errors.mobileNumber && touched.mobileNumber ? (<p className='form-error'>{errors.mobileNumber}</p>) : null}
-                    <input type="text"
-                        id="fullName"
-                        name="fullName"
-                        placeholder=" "
-                        value={values.fullName}
-                        onChange={handleChange}
-                        onBlur={handleBlur}
-                    />
-                    <label htmlFor="fullName">Full Name</label>
-                    {errors.fullName && touched.fullName ? (<p className='form-error'>{errors.fullName}</p>) : null}
+                    <div className="personal-input">
+                        <input type="text" className='PeronsalDetailsInput'
+                            id="mobileNumber"
+                            name="mobileNumber"
+                            placeholder=" "
+                            value={values.mobileNumber}
+                            onChange={handleChange}
+                            onBlur={handleBlur}
+                        // maxLength={10}
+                        />
+                        <label htmlFor="mobileNumber">Mobile Number</label>
+                        {errors.mobileNumber && touched.mobileNumber ?
+                            (<>
+                                <div className="personal-error-line"></div>
+                                <p className='personaldetail-form-error'>{errors.mobileNumber}</p>
+                            </>
+                            )
+                            : null}
+                    </div>
+                    <div className="personal-input">
+                        <input type="text" className='PeronsalDetailsInput'
+                            id="fullName"
+                            name="fullName"
+                            placeholder=" "
+                            value={values.fullName}
+                            onChange={handleChange}
+                            onBlur={handleBlur}
+                        />
+                        <label htmlFor="fullName">Full Name</label>
+                        {errors.fullName && touched.fullName ?
+                            (<>
+                                <div className="personal-error-line"></div>
+                                <p className='personaldetail-form-error'>{errors.fullName}</p>
+                            </>
+                            )
+                            : null}
 
-                    <input type="text"
-                        id="UserName"
-                        name="UserName"
-                        placeholder=" "
-                        value={values.UserName}
-                        onChange={handleChange}
-                        onBlur={handleBlur}
-                    />
-                    <label htmlFor="UserName">User Name</label>
-                    {errors.UserName && touched.UserName ? (<p className='form-error'>{errors.UserName}</p>) : null}
+                    </div>
 
-                    <input
-                        type="email"
-                        id="email"
-                        name="email"
-                        placeholder=" "
-                        value={values.email}
-                        onChange={handleChange}
-                        onBlur={handleBlur}
-                    />
-                    <label htmlFor="email">Email Id</label>
-                    {errors.email && touched.email ? (<p className='form-error'>{errors.email}</p>) : null}
-                    <input
-                        type="password"
-                        id="password"
-                        name="password"
-                        placeholder=" "
-                        value={values.password}
-                        onChange={handleChange}
-                        onBlur={handleBlur}
-                    />
+                    <div className="personal-input">
 
-                    <label htmlFor="password"  >Password
-                        <div data-tip="React-tooltip" data-for='sadFace' className='tooltip'>{info_btn}</div>
-                        <ReactTooltip id='sadFace' type='light' effect='solid' place="right">
-                            <span><p>Our minimum Requirment</p>
-                                At least 6 characters long with one number, 
-                                one uppercase letter,
-                                 and one lowercase letter.</span>
-                        </ReactTooltip>
-                    </label>
+                        <input type="text" className='PeronsalDetailsInput'
+                            id="UserName"
+                            name="UserName"
+                            placeholder=" "
+                            value={values.UserName}
+                            onChange={handleChange}
+                            onBlur={handleBlur}
+                        />
+                        <label htmlFor="UserName">User Name</label>
+                        {errors.UserName && touched.UserName ? (<>
+                            <div className="personal-error-line"></div>
+                            <p className='personaldetail-form-error'>{errors.UserName}</p>
+                        </>
+                        )
+                            : null}
+                    </div>
 
-                    {errors.password && touched.password ? (<p className='form-error'>{errors.password}</p>) : null}
+                    <div className="personal-input">
 
+                        <input
+                            type="email" className='PeronsalDetailsInput'
+                            id="email"
+                            name="email"
+                            placeholder=" "
+                            value={values.email}
+                            onChange={handleChange}
+                            onBlur={handleBlur}
+                        />
+                        <label htmlFor="email">Email Id</label>
+                        {errors.email && touched.email ?
+                            (<>
+                                <div className="personal-error-line"></div>
+                                <p className='personaldetail-form-error'>{errors.email}</p>
+                            </>
+                            )
+                            : null}
 
-                    <input type="password"
+                    </div>
+
+                    <div className="personal-input">
+
+                        <input
+                            type="password" className='PeronsalDetailsInput'
+                            id="password"
+                            name="password"
+                            placeholder=" "
+                            value={values.password}
+                            onChange={handleChange}
+                            onBlur={handleBlur}
+                        />
+
+                        <label htmlFor="password"  >Password
+                            <div data-tip="React-tooltip" data-for='sadFace' className='tooltip'>{info_btn}</div>
+                            <ReactTooltip id='sadFace' type='light' effect='solid' place="right">
+                                <span><p>Our minimum Requirment</p>
+                                    At least 6 characters long with one number,
+                                    one uppercase letter,
+                                    and one lowercase letter.</span>
+                            </ReactTooltip>
+                        </label>
+
+                        {errors.password && touched.password ? (<>
+                            <div className="personal-error-line"></div>
+                            <p className='personaldetail-form-error'>{errors.password}</p>
+                        </>
+                        )
+                            : null}
+                    </div>
+                    <div className="personal-input">
+
+                    <input type="password" className='PeronsalDetailsInput'
                         id="ConfirmPassword"
                         name="ConfirmPassword"
                         placeholder=" "
@@ -112,7 +161,15 @@ const PersonalDetails = () => {
                         onBlur={handleBlur}
                     />
                     <label htmlFor="ConfirmPassword">Confirm Password</label>
-                    {errors.ConfirmPassword && touched.ConfirmPassword ? (<p className='form-error'>{errors.ConfirmPassword}</p>) : null}
+                    {errors.ConfirmPassword && touched.ConfirmPassword ?
+                     (<>
+                        <div className="personal-error-line"></div>
+                        <p className='personaldetail-form-error'>{errors.ConfirmPassword}</p>
+                    </>
+                    )
+                    : null}
+
+                     </div>
 
 
                     <button type="submit">Verify</button>

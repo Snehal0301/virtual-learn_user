@@ -68,7 +68,7 @@ const Onboarding = () => {
         <div className="onboarding-detailsBody">
           {/* <WelcomeScreen /> */}
           {/* <LoginVerfication/> */}
-          <PersonalDetails/>
+          {/* <PersonalDetails/> */}
         </div>
       </div>
     </div>
