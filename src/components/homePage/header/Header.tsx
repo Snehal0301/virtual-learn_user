@@ -43,7 +43,12 @@ const Header = () => {
               }}
             />
             {headerOptions && (
-              <div className="header-profileOptions">
+              <div
+                className="header-profileOptions"
+                onClick={(e: any) => {
+                  e.stopPropagation();
+                }}
+              >
                 <div className="header-profileOption header-profileOptionBorder">
                   <div className="header-profileOptionIcon">
                     {graduationCapIcon}
