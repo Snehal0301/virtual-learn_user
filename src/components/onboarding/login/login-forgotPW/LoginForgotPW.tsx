@@ -51,7 +51,7 @@ const LoginForgotPW = () => {
             {/* loginAuth-formInputError */}
             <label htmlFor="mobileNum">Enter your mobile number</label>
           </div>
-          <button className="loginAuth-formSubmit" disabled={invalidPhone}>
+          <button className="loginAuth-formSubmit" disabled={!invalidPhone}>
             Send
           </button>
         </form>
