@@ -9,4 +9,5 @@
 .homePageBody {
   position: relative;
   top: 80px;
+  z-index: -20;
 }

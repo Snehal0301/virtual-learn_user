@@ -1,3 +1,0 @@
-This is redux folder
-
-from test-1

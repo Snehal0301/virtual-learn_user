@@ -11,6 +11,7 @@
 
 .header-logo {
   flex-basis: 10%;
+  cursor: pointer;
 }
 
 .header-search {
@@ -79,4 +80,36 @@
 
 .header-settings {
   cursor: pointer;
+}
+
+.header-profileOptions {
+  position: absolute;
+  border-radius: 4px;
+  right: 40px;
+  padding: 0px 20px;
+  background: var(--primaryFontClr);
+  box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.2);
+  z-index: 999;
+}
+
+.header-profileOption {
+  display: flex;
+  width: 220px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 17px 0;
+}
+
+.header-profileOptiontext {
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 26px;
+  text-align: right;
+  color: #373737;
+}
+
+.header-profileOptionBorder {
+  border-bottom: 1px solid #042c5c20;
 }
