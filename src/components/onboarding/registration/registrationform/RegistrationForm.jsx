@@ -30,12 +30,9 @@ const RegistrationForm = () => {
         </div>
 
         <form className="login-password-form" onSubmit={handleSubmit}>
+          <div className="error-line-registration">
           <input
-            className={
-              Boolean(errors.mobilenumber)
-                ? "login-input-error login-input"
-                : "login-input"
-            }
+            className="login-input"
             type="text"
             id="mobilenumber"
             name="mobilenumber"
@@ -53,6 +50,7 @@ const RegistrationForm = () => {
               <p className="form-errors">{errors.mobilenumber}</p>
             </>
           ) : null}
+          </div>
           <button type="submit" className="reset-password">
             Continue
           </button>

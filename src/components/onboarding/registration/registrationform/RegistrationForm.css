@@ -74,6 +74,18 @@
 }
 .form-errors{
   color: red;
+  margin-top: -20px;
+  font-size:13px;
+}
+.error-line-registration{
+position: relative;
+}
+.error-line{
+  width: 100%;
+  height:2px;
+  position: absolute;
+  top:53px;
+  background-color: red;
 }
 .reset-password {
     margin-top: 40px;
