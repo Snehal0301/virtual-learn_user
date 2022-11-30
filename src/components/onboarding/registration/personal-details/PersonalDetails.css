@@ -18,12 +18,14 @@
 
 .heading {
     font-size: 32px;
+    font-weight: 700;
 
 }
 
 .heading2 {
     padding-top: 1rem;
     font-size: 20px;
+    color: #f7f0f0b5;
 }
 
 /* .inputFields {
@@ -49,10 +51,12 @@ input {
     border-bottom: 2px solid #ffffff58;
     transition: border-color 0.2s ease;
     background-color: transparent;
-    color: #FFFFFF;
+    color: var(--primaryFontClr);
+    font-weight: 700;
     font-family: Avenir;
     font-size: 16px;
 }
+
 .input-error {
     width: 100%;
     margin-top: 1.5rem;
@@ -77,7 +81,8 @@ button {
     border: none;
     outline: none;
     background-color: #EE5C4D;
-    color: #fff;
+    color: var(--primaryFontClr);
+    /* color: #fff; */
     font-weight: bold;
     width: 100%;
     margin-top: 15px;
@@ -93,6 +98,22 @@ button {
     font-size: 14px;
     width: 100%;
     line-height: 1pt;
+}
+
+.tooltip {
+    height: 16px;
+    width: 16px;
+    position: absolute;
+    top: 0;
+    left: 70px;
+}
+#sadFace{
+    width: 200px;
+    color: 
+    #7A7A7A;
+}
+span p{
+    color: #092963;
 }
 
 @supports (not (-ms-ime-align:auto)) {

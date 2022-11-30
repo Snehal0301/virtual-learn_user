@@ -3,11 +3,10 @@ import { info_btn } from '../../../../utils/svgIcons'
 import './PersonalDetails.css'
 import { signupSchema } from './schema'
 import { Formik, useFormik } from 'formik'
+import ReactTooltip from 'react-tooltip';
 
 const PersonalDetails = () => {
 
-
-    const [formError, setformError] = useState(false)
     const { values, errors, handleChange, touched, handleBlur, handleSubmit } = useFormik({
         initialValues: {
             email: "",
@@ -44,9 +43,10 @@ const PersonalDetails = () => {
                         value={values.mobileNumber}
                         onChange={handleChange}
                         onBlur={handleBlur}
+                        maxLength={10}
                     />
                     <label htmlFor="mobileNumber">Mobile Number</label>
-                    {errors.mobileNumber && touched.mobileNumber ?(<p className='form-error'>{errors.mobileNumber}</p> ):null}
+                    {errors.mobileNumber && touched.mobileNumber ? (<p className='form-error'>{errors.mobileNumber}</p>) : null}
                     <input type="text"
                         id="fullName"
                         name="fullName"
@@ -56,7 +56,7 @@ const PersonalDetails = () => {
                         onBlur={handleBlur}
                     />
                     <label htmlFor="fullName">Full Name</label>
-                    {errors.fullName && touched.fullName ?(<p className='form-error'>{errors.fullName}</p> ):null}
+                    {errors.fullName && touched.fullName ? (<p className='form-error'>{errors.fullName}</p>) : null}
 
                     <input type="text"
                         id="UserName"
@@ -67,7 +67,7 @@ const PersonalDetails = () => {
                         onBlur={handleBlur}
                     />
                     <label htmlFor="UserName">User Name</label>
-                    {errors.UserName && touched.UserName ?(<p className='form-error'>{errors.UserName}</p> ):null}
+                    {errors.UserName && touched.UserName ? (<p className='form-error'>{errors.UserName}</p>) : null}
 
                     <input
                         type="email"
@@ -79,7 +79,7 @@ const PersonalDetails = () => {
                         onBlur={handleBlur}
                     />
                     <label htmlFor="email">Email Id</label>
-                    {errors.email && touched.email ?(<p className='form-error'>{errors.email}</p> ):null}
+                    {errors.email && touched.email ? (<p className='form-error'>{errors.email}</p>) : null}
                     <input
                         type="password"
                         id="password"
@@ -90,8 +90,17 @@ const PersonalDetails = () => {
                         onBlur={handleBlur}
                     />
 
-                    <label htmlFor="password" >Password {info_btn}</label>
-                    {errors.password && touched.password ?(<p className='form-error'>{errors.password}</p> ):null}
+                    <label htmlFor="password"  >Password
+                        <div data-tip="React-tooltip" data-for='sadFace' className='tooltip'>{info_btn}</div>
+                        <ReactTooltip id='sadFace' type='light' effect='solid' place="right">
+                            <span><p>Our minimum Requirment</p>
+                                At least 6 characters long with one number, 
+                                one uppercase letter,
+                                 and one lowercase letter.</span>
+                        </ReactTooltip>
+                    </label>
+
+                    {errors.password && touched.password ? (<p className='form-error'>{errors.password}</p>) : null}
 
 
                     <input type="password"
@@ -103,10 +112,10 @@ const PersonalDetails = () => {
                         onBlur={handleBlur}
                     />
                     <label htmlFor="ConfirmPassword">Confirm Password</label>
-                    {errors.ConfirmPassword && touched.ConfirmPassword ?(<p className='form-error'>{errors.ConfirmPassword}</p> ):null}
-                
+                    {errors.ConfirmPassword && touched.ConfirmPassword ? (<p className='form-error'>{errors.ConfirmPassword}</p>) : null}
 
-                <button type="button">Verify</button>
+
+                    <button type="submit">Verify</button>
 
                 </form>
 
