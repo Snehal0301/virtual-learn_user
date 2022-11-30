@@ -3,6 +3,8 @@ import { Slide } from 'react-slideshow-image'
 import { onboardingLogo } from '../../utils/svgIcons'
 import WelcomeScreen from '../../components/onboarding/welcome/welcome'
 import LoginVerfication from '../../components/onboarding/login/login-verification/LoginVerfication'
+import LoginAuth from '../../components/onboarding/login/login-auth/LoginAuth'
+import LoginForgotPW from '../../components/onboarding/login/login-forgotPW/LoginForgotPW'
 
 const Onboarding = () => {
   const indicators = () => <div className="indicator"></div>
@@ -66,7 +68,9 @@ const Onboarding = () => {
         <div className="onboarding-detailsLogo">{onboardingLogo}</div>
         <div className="onboarding-detailsBody">
           {/* <WelcomeScreen /> */}
-          <LoginVerfication/>
+          {/* <LoginVerfication/> */}
+          {/* <LoginAuth /> */}
+          <LoginForgotPW />
         </div>
       </div>
     </div>
