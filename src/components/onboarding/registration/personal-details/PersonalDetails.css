@@ -2,6 +2,7 @@
     /* width: 464px; */
     /* height: 800px; */
     /* background-color: rgb(241, 220, 220); */
+    padding: 0 10%;
 }
 
 .innerRect {
@@ -12,12 +13,14 @@
     align-items: center;
     text-align: center;
     color: #FFFFFF;
-    
+
 }
-.heading{
+
+.heading {
     font-size: 32px;
 
 }
+
 .heading2 {
     padding-top: 1rem;
     font-size: 20px;
@@ -28,21 +31,20 @@
 }
    */
 form {
-    padding:  1rem 4rem;
-  }
-  
-  label {
+    padding: 1rem 2rem;
+}
+
+label {
     display: block;
     transform: translate(0, -2.75rem);
     font-size: 16px;
-   
-  }
-  
-  input {
+
+}
+
+input {
     width: 100%;
     margin-top: 1.5rem;
     padding: 0.25rem;
-    
     border: none;
     border-bottom: 2px solid #ffffff58;
     transition: border-color 0.2s ease;
@@ -50,14 +52,26 @@ form {
     color: #FFFFFF;
     font-family: Avenir;
     font-size: 16px;
-  }
-  
-  input:focus {
-      outline: none;
-      border-color: #6E8FCA;
-  }
-  
-  button {
+}
+.input-error {
+    width: 100%;
+    margin-top: 1.5rem;
+    padding: 0.25rem;
+    border: none;
+    border-bottom: 2px solid #f9111158;
+    transition: border-color 0.2s ease;
+    /* background-color: transparent;
+    color: #f00b0b;
+    font-family: Avenir;
+    font-size: 16px; */
+}
+
+input:focus {
+    outline: none;
+    border-color: #6E8FCA;
+}
+
+button {
     padding: 0.75rem 1.5rem;
     /* border: 2px solid #111; */
     border: none;
@@ -67,24 +81,30 @@ form {
     font-weight: bold;
     width: 100%;
     margin-top: 15px;
-  }
-  .btn_info
-  {
+}
+
+.btn_info {
     height: 16px;
     width: 16px;
-  }
-  
-  
-  @supports (not (-ms-ime-align:auto)) {
-      label {
+}
+
+.form-error {
+    color: rgb(245, 20, 20);
+    font-size: 14px;
+    width: 100%;
+    line-height: 1pt;
+}
+
+@supports (not (-ms-ime-align:auto)) {
+    label {
         color: #6E8FCA;
         transform: translate(0.25rem, -1.5rem);
         transition: all 0.2s ease-out;
-      }
-      
-      input:focus + label,
-      input:not(:placeholder-shown) + label {
+    }
+
+    input:focus+label,
+    input:not(:placeholder-shown)+label {
         color: #6E8FCA;
         transform: translate(0, -2.75rem);
-      }
-  }
+    }
+}
