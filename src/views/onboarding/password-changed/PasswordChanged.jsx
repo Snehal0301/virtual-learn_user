@@ -6,9 +6,9 @@ const PasswordChanged = () => {
         <div className='password-changed'>
             <div className="password-changed-content">
                 {passwordChanged}
-                <p>Password Changed</p>
-                <p>Your password has been successfully changed. You can now Login with your new password</p>
-                <p>Login</p>
+                <p className='password-changed-heading'>Password Changed</p>
+                <p className='password-changed-description'>Your password has been successfully changed. You can now Login with your new password</p>
+                <p className='login'>Login</p>
             </div>
         </div>
     )

@@ -5,8 +5,8 @@ import PasswordChanged from './views/onboarding/password-changed/PasswordChanged
 const App = () => {
   return (
     <div className="app">
-      {/* <Onboarding /> */}
-      <PasswordChanged/>
+      <Onboarding />
+      {/* <PasswordChanged/> */}
     </div>
   );
 };
