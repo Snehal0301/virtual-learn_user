@@ -203,3 +203,51 @@ input[type='number'] {
     background-repeat: no-repeat;
     background-position: right;
 }
+
+.Toastify {
+    position: absolute !important;
+    bottom: 0 !important;
+    right: 0 !important;
+    right: 0 !important;
+    width: 100% !important;
+    left: 0 !important;
+}
+
+button.Toastify__close-button.Toastify__close-button--light {
+    display: none !important;
+}
+
+.loginAuth-showError {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    justify-content: center;
+}
+
+.Toastify__toast-theme--light {
+    background: var(--error) !important;
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border-radius: 0 !important;
+    position: absolute !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+}
+
+.Toastify__toast-container--bottom-right {
+    position: fixed !important;
+    bottom: 0 !important;
+    right: 0 !important;
+    width: 32% !important;
+}
+
+.loginAuth-showErrorMessage {
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 26px;
+    text-align: center;
+    color: var(--primaryFontClr);
+}

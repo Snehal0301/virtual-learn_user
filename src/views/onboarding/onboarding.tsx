@@ -69,8 +69,8 @@ const Onboarding = () => {
         <div className="onboarding-detailsBody">
           {/* <WelcomeScreen /> */}
           {/* <LoginVerfication/> */}
-          {/* <LoginAuth /> */}
-          <LoginForgotPW />
+          <LoginAuth />
+          {/* <LoginForgotPW /> */}
         </div>
       </div>
     </div>
