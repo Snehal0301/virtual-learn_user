@@ -3,6 +3,7 @@ import { Slide } from 'react-slideshow-image'
 import { onboardingLogo } from '../../utils/svgIcons'
 import WelcomeScreen from '../../components/onboarding/welcome/welcome'
 import LoginVerfication from '../../components/onboarding/login/login-verification/LoginVerfication'
+import PersonalDetails from '../../components/onboarding/registration/personal-details/PersonalDetails'
 
 const Onboarding = () => {
   const indicators = () => <div className="indicator"></div>
@@ -66,7 +67,8 @@ const Onboarding = () => {
         <div className="onboarding-detailsLogo">{onboardingLogo}</div>
         <div className="onboarding-detailsBody">
           {/* <WelcomeScreen /> */}
-          <LoginVerfication/>
+          {/* <LoginVerfication/> */}
+          <PersonalDetails/>
         </div>
       </div>
     </div>

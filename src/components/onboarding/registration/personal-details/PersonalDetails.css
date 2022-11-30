@@ -1,0 +1,90 @@
+.outerRectangle {
+    /* width: 464px; */
+    /* height: 800px; */
+    /* background-color: rgb(241, 220, 220); */
+}
+
+.innerRect {
+    /* padding: 2rem 3rem; */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: #FFFFFF;
+    
+}
+.heading{
+    font-size: 32px;
+
+}
+.heading2 {
+    padding-top: 1rem;
+    font-size: 20px;
+}
+
+/* .inputFields {
+    padding: 2rem 3rem;
+}
+   */
+form {
+    padding:  1rem 4rem;
+  }
+  
+  label {
+    display: block;
+    transform: translate(0, -2.75rem);
+    font-size: 16px;
+   
+  }
+  
+  input {
+    width: 100%;
+    margin-top: 1.5rem;
+    padding: 0.25rem;
+    
+    border: none;
+    border-bottom: 2px solid #ffffff58;
+    transition: border-color 0.2s ease;
+    background-color: transparent;
+    color: #FFFFFF;
+    font-family: Avenir;
+    font-size: 16px;
+  }
+  
+  input:focus {
+      outline: none;
+      border-color: #6E8FCA;
+  }
+  
+  button {
+    padding: 0.75rem 1.5rem;
+    /* border: 2px solid #111; */
+    border: none;
+    outline: none;
+    background-color: #EE5C4D;
+    color: #fff;
+    font-weight: bold;
+    width: 100%;
+    margin-top: 15px;
+  }
+  .btn_info
+  {
+    height: 16px;
+    width: 16px;
+  }
+  
+  
+  @supports (not (-ms-ime-align:auto)) {
+      label {
+        color: #6E8FCA;
+        transform: translate(0.25rem, -1.5rem);
+        transition: all 0.2s ease-out;
+      }
+      
+      input:focus + label,
+      input:not(:placeholder-shown) + label {
+        color: #6E8FCA;
+        transform: translate(0, -2.75rem);
+      }
+  }
