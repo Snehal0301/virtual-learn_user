@@ -22,8 +22,10 @@ const LoginAuth = () => {
               name="username"
               id="username"
               placeholder="Enter your username"
-              className="loginAuth-formInput"
+              className="loginAuth-formInput "
             />
+            {/* loginAuth-formInputSuccess */}
+            {/* loginAuth-formInputError */}
             <label htmlFor="username">Username</label>
           </div>
           <div className="loginAuth-FormInput">
