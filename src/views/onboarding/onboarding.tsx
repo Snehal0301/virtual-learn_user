@@ -2,7 +2,11 @@ import './onboarding.css'
 import { Slide } from 'react-slideshow-image'
 import { onboardingLogo } from '../../utils/svgIcons'
 import WelcomeScreen from '../../components/onboarding/welcome/welcome'
-import LoginVerfication from '../../components/onboarding/login/login-verification/LoginVerfication'
+import LoginVerfication from '../../components/onboarding/login/login-verification/login-otp/LoginOtp'
+import LoginPassword from '../../components/onboarding/login/login-verification/login-password/LoginPassword'
+import LoginAuth from '../../components/onboarding/login/login-auth/LoginAuth'
+import LoginForgotPW from '../../components/onboarding/login/login-forgotPW/LoginForgotPW'
+import PersonalDetails from '../../components/onboarding/registration/personal-details/PersonalDetails'
 import RegistrationForm from '../../components/onboarding/registration/registrationform/RegistrationForm'
 
 const Onboarding = () => {
@@ -67,8 +71,12 @@ const Onboarding = () => {
         <div className="onboarding-detailsLogo">{onboardingLogo}</div>
         <div className="onboarding-detailsBody">
           {/* <WelcomeScreen /> */}
-          {/* <LoginVerfication/> */}
-          <RegistrationForm/>
+          {/* {/* {/* <LoginVerfication/> */}
+          <RegistrationForm/> */
+          {/* <LoginAuth /> */}
+          {/* <LoginForgotPW /> */}
+          <LoginPassword/> 
+          {/* <PersonalDetails/> */}
         </div>
       </div>
     </div>
