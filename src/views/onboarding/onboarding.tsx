@@ -69,7 +69,9 @@ const Onboarding = () => {
         <div className="onboarding-detailsLogo">{onboardingLogo}</div>
         <div className="onboarding-detailsBody">
           {/* <WelcomeScreen /> */}
-          <LoginVerfication/>
+          {/* <LoginVerfication/> */}
+          {/* <LoginAuth /> */}
+          <LoginForgotPW />
         </div>
       </div>
     </div>
