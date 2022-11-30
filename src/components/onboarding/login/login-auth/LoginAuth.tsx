@@ -68,7 +68,7 @@ const LoginAuth = () => {
           <span className="loginAuth-regLink">Register</span>
         </div>
       </div>
-      <button onClick={showError}>showError!</button>
+      {/* onClick={showError} to call error */}
       <ToastContainer />
     </div>
   )

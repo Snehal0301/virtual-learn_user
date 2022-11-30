@@ -246,7 +246,7 @@ button.Toastify__close-button.Toastify__close-button--light {
 .loginAuth-showErrorMessage {
     font-style: normal;
     font-weight: 700;
-    font-size: 20px;
+    font-size: 120%;
     line-height: 26px;
     text-align: center;
     color: var(--primaryFontClr);
