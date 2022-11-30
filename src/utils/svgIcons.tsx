@@ -31,3 +31,4 @@ export const onboardingLogo = (
     </defs>
   </svg>
 )
+

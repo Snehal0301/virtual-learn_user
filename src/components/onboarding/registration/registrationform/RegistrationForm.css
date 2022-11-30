@@ -1,0 +1,145 @@
+.registration-form {
+  /* background-color: red; */
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+.registration-form-container {
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  /* background-color:aqua; */
+  align-items: center;
+}
+.new-account {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: center;
+}
+.new-account .new-account-text {
+  font-family: "Proxima Nova Soft";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 2rem;
+  text-align: center;
+  color: var(--primaryFontClr);
+}
+.new-account .create-account-text {
+    width:90%;
+  font-family: "Proxima Nova Soft";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 20px;
+  text-align: center;
+  color: var(--secondaryFontClr);
+  opacity: 0.6;
+  margin-top: 1.25em;
+}
+.registration-form-content {
+  width: 80%;
+  /* background-color: rgb(255, 238, 127); */
+  display: flex;
+  flex-direction: column;
+  margin-top: 1.625em;
+}
+.input-field {
+  width: 100%;
+  display: block;
+}
+
+.label-text label {
+  display: block;
+  transform: translate(0, -2.75rem);
+}
+
+.input-field input {
+  width: 100%;
+  margin-top: 1.5rem;
+  padding: 0.26rem;
+  border: none;
+  outline: none;
+  background-color: var(--primaryClr);
+  border-bottom: 2px solid #ffffff58;
+  transition: border-color 0.2s ease;
+  color: var(--primaryFontClr);
+}
+
+.input-field input:focus {
+  outline: none;
+  background: transparent;
+  border-bottom: 2px solid #ffffff58;
+}
+
+@supports (not (-ms-ime-align: auto)) {
+ .label-text label {
+    transform: translate(0.25rem, -1.5rem);
+    transition: all 0.2s ease-out;
+  }
+
+  .input-field input:not(:placeholder-shown) +   label {
+    color: var(--blueFont);
+    transform: translate(0, -2.75rem);
+  }
+}
+.registration-form-content .label-text label {
+  color: var(--blueFont);
+}
+
+.registration-form-content .button-continue {
+  width: 100%;
+  margin-top: 1.5em;
+}
+.button-continue button {
+  width: 100%;
+  background-color: var(--secondaryClr);
+  border: none;
+  padding: 1em;
+  border-radius: 6px;
+  color: var(--primaryFontClr);
+  font-family: "Proxima Nova Soft";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 1.125rem;
+  text-align: center;
+}
+.already-text {
+  font-family: "Proxima Nova Soft";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 1.25rem;
+  text-align: center;
+  color: var(--primaryFontClr);
+  margin-top: 1.5em;
+}
+.already-text .login-text {
+  font-family: "Proxima Nova Soft";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 1.25rem;
+  text-align: center;
+  color: var(--secondaryClr);
+}
+.face-goog-buttons {
+  width: 100%;
+  margin-top: 3.75em;
+  /* background-color: red; */
+  display: flex;
+  justify-content: space-around;
+}
+.facebook-button {
+  width: 35%;
+  background-color: var(--primaryFontClr);
+  padding: 0.8em;
+  border-radius: 6px;
+  display: flex;
+  justify-content: center;
+}
+.google-button {
+  width: 35%;
+  background-color: var(--primaryFontClr);
+  padding: 0.8em;
+  border-radius: 6px;
+  display: flex;
+  justify-content: center;
+}
