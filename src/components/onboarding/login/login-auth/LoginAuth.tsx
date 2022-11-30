@@ -18,25 +18,23 @@ const LoginAuth = () => {
           {' '}
           <div className="loginAuth-FormInput">
             <input
-              type="email"
-              name="email"
+              type="text"
+              name="username"
+              id="username"
+              placeholder="Enter your username"
               className="loginAuth-formInput"
-              required
             />
-            <label htmlFor="email" className="loginAuth-formLabel">
-              Email
-            </label>
+            <label htmlFor="username">Username</label>
           </div>
           <div className="loginAuth-FormInput">
             <input
-              type="email"
-              name="email"
+              type="number"
+              name="phoneNum"
+              id="phoneNum"
+              placeholder="Enter your mobile number"
               className="loginAuth-formInput"
-              required
             />
-            <label htmlFor="email" className="loginAuth-formLabel">
-              PassWord
-            </label>
+            <label htmlFor="phoneNum">Mobile number</label>
           </div>
           <button className="loginAuth-formSubmit">Continue</button>
         </form>

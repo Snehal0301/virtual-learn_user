@@ -43,17 +43,8 @@
     padding: 11px 0;
 }
 
-label.loginAuth-formLabel {
-    position: absolute;
-    left: 0;
-}
-
 .loginAuth-Form {
     width: 100%;
-}
-
-.loginAuth-FormInput {
-    position: relative;
 }
 
 .loginAuth-FormContainer {
@@ -69,100 +60,132 @@ label.loginAuth-formLabel {
     gap: 40px;
 }
 
+.loginAuth-FormInput {
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.loginAuth-FormInput {
+    display: flex;
+    flex-flow: column-reverse;
+    margin-bottom: 1em;
+}
+
+
+/**
+* Add a transition to the label and input.
+* I'm not even sure that touch-action: manipulation works on
+* inputs, but hey, it's new and cool and could remove the 
+* pesky delay.
+*/
+
+label,
 .loginAuth-formInput {
-    width: 100%;
+    transition: all 0.2s;
+    touch-action: manipulation;
+}
+
+.loginAuth-formInput {
+    font-size: 10px;
+    border: 0;
+    border-bottom: 2px solid #ffffff57;
+    font-family: inherit;
+    -webkit-appearance: none;
+    border-radius: 0;
     padding: 10px 0;
+    font-size: 20px;
+    color: var(--primaryFontClr);
+    cursor: text;
     background: none;
     outline: none;
-    border-top: 0;
-    border-left: 0;
-    border-right: 0;
-    border-bottom: 2px solid #ffffff60;
 }
 
-.input-group {
-    position: relative;
-    margin: 40px 0 20px;
+label {
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
 }
 
-.loginAuth-formInput {
+
+/**
+* Translate down and scale the label up to cover the placeholder,
+* when following an input (with placeholder-shown support).
+* Also make sure the label is only on one row, at max 2/3rds of the
+* loginAuth-FormInput—to make sure it scales properly and doesn't wrap.
+*/
+
+.loginAuth-formInput:placeholder-shown+label {
+    cursor: text;
+    max-width: 66.66%;
+    font-family: 'Avenir';
+    white-space: nowrap;
+    color: var(--labelClr);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    transform-origin: left bottom;
+    font-size: 10px;
+    transform: translate(0, 2.125rem) scale(1.5);
+    font-size: 12px;
+}
+
+
+/* Chrome, Safari, Edge, Opera */
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+
+/* Firefox */
+
+input[type='number'] {
+    -moz-appearance: textfield;
+}
+
+::-webkit-input-placeholder {
+    opacity: 0;
+    transition: inherit;
+}
+
+.loginAuth-formInput:focus::-webkit-input-placeholder {
+    opacity: 1;
+}
+
+.loginAuth-formInput:not(:placeholder-shown)+label,
+.loginAuth-formInput:focus+label {
+    transform: translate(0, 0) scale(1);
+    /* cursor: pointer; */
+    color: var(--labelClr);
+    font-family: Avenir;
+    font-size: 15px;
+}
+
+.loginAuth-formSubmit {
+    width: 100%;
+    height: auto;
+    border-radius: 6px;
+    background: var(--secondaryClr);
+    color: var(--primaryFontClr);
     font-size: 18px;
-    padding: 10px 10px 10px 5px;
-    display: block;
-    width: 300px;
+    font-weight: 700;
+    padding: 4% 0;
+    cursor: pointer;
     border: none;
-    border-bottom: 1px solid #757575;
-}
-
-.loginAuth-formInput:focus {
     outline: none;
+    margin-bottom: 20px;
 }
 
-.loginAuth-formLabel {
-    color: #999;
-    font-size: 18px;
-    font-weight: normal;
-    position: absolute;
-    pointer-events: none;
-    left: 5px;
-    top: 10px;
-    transition: 0.2s ease all;
-    -moz-transition: 0.2s ease all;
-    -webkit-transition: 0.2s ease all;
+.loginAuth-noAccount {
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 26px;
+    /* identical to box height, or 130% */
+    text-align: center;
+    color: var(--primaryFontClr);
 }
 
-.loginAuth-formInput:focus~label,
-.loginAuth-formInput:valid~label {
-    top: -20px;
-    font-size: 14px;
-    color: #4285f4;
-}
-
-.highlight {
-    position: absolute;
-    height: 60%;
-    width: 100px;
-    top: 25%;
-    left: 0;
-    pointer-events: none;
-    opacity: 0.5;
-}
-
-.loginAuth-formInput:focus~.highlight {
-    -webkit-animation: inputHighlighter 0.3s ease;
-    -moz-animation: inputHighlighter 0.3s ease;
-    animation: inputHighlighter 0.3s ease;
-}
-
-
-/* animations */
-
-@-webkit-keyframes inputHighlighter {
-    from {
-        background: #4285f4;
-    }
-    to {
-        width: 0;
-        background: transparent;
-    }
-}
-
-@-moz-keyframes inputHighlighter {
-    from {
-        background: #4285f4;
-    }
-    to {
-        width: 0;
-        background: transparent;
-    }
-}
-
-@keyframes inputHighlighter {
-    from {
-        background: #4285f4;
-    }
-    to {
-        width: 0;
-        background: transparent;
-    }
+.loginAuth-regLink {
+    color: var(--secondaryClr);
+    cursor: pointer;
 }
