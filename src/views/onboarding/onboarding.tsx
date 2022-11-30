@@ -71,7 +71,8 @@ const Onboarding = () => {
           {/* <WelcomeScreen /> */}
           {/* <LoginVerfication/> */}
           {/* <LoginAuth /> */}
-          <LoginForgotPW />
+          {/* <LoginForgotPW /> */}
+          <LoginPassword/>
         </div>
       </div>
     </div>
