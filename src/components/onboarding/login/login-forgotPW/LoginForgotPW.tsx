@@ -14,6 +14,11 @@ const LoginForgotPW = () => {
       setInvalidPhone(await phoneSchema.isValid(e.target.value)) // → true
     })()
   }
+
+  const submithandler = (e: any) => {
+    const mobileNum = e.target.mobileNum.value
+    console.log('mobile no', mobileNum)
+  }
   return (
     <div className="loginAuth">
       <div className="loginAuth-title">Forgot Password</div>
@@ -23,7 +28,7 @@ const LoginForgotPW = () => {
       </div>
 
       <div className="loginAuth-Form">
-        <form className="loginAuth-FormContainer">
+        <form className="loginAuth-FormContainer" onSubmit={submithandler}>
           {' '}
           <div className="loginAuth-FormInput">
             <input
