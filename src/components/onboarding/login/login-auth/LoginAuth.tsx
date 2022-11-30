@@ -1,4 +1,6 @@
 import React from 'react'
+import { facebookIcon, googleIcon } from '../../../../utils/svgIcons'
+import './LoginAuth.css'
 
 const LoginAuth = () => {
   return (
@@ -8,8 +10,8 @@ const LoginAuth = () => {
         Easy to learn anytime and anywhere. Login to your account
       </div>
       <div className="loginAuth-buttons">
-        <button>Facebook</button>
-        <button>Google</button>
+        <button>{facebookIcon}</button>
+        <button>{googleIcon}</button>
       </div>
       <div className="loginAuth-Form">
         <form className="loginAuth-FormContainer">
