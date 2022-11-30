@@ -149,7 +149,7 @@ input[type='number'] {
 }
 
 .loginAuth-formInput:focus::-webkit-input-placeholder {
-    opacity: 1;
+    opacity: 0;
 }
 
 .loginAuth-formInput:not(:placeholder-shown)+label,
