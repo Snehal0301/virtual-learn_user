@@ -6,7 +6,7 @@ import Success_Page from './views/onboarding/success_page/Success_Page';
 const App = () => {
   return (
     <div className="app">
-      {/* <Onboarding /> */}
+      <Onboarding />
       {/* <Success_Page/> */}
       {/* <PasswordChanged/> */}
     </div>

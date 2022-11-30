@@ -75,7 +75,7 @@ const Onboarding = () => {
           <RegistrationForm/> */
           {/* <LoginAuth /> */}
           {/* <LoginForgotPW /> */}
-          <LoginPassword/> 
+          {/* <LoginPassword/>  */}
           {/* <PersonalDetails/> */}
         </div>
       </div>
