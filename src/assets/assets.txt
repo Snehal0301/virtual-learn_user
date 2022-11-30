@@ -1,3 +1,0 @@
-This is assets folder
-
-from test-1
