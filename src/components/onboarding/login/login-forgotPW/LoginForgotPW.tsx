@@ -1,6 +1,19 @@
 import '../login-auth/LoginAuth.css'
+import * as yup from 'yup'
+import 'yup-phone'
+import { useState } from 'react'
 
 const LoginForgotPW = () => {
+  const [invalidPhone, setInvalidPhone] = useState(false)
+  const [mobileNum, setMobileNum] = useState('')
+
+  const phoneSchema = yup.string().phone().required()
+  const phoneNumValidation = (e: any) => {
+    setMobileNum(e.target.value)
+    ;(async () => {
+      setInvalidPhone(await phoneSchema.isValid(e.target.value)) // → true
+    })()
+  }
   return (
     <div className="loginAuth">
       <div className="loginAuth-title">Forgot Password</div>
@@ -15,14 +28,21 @@ const LoginForgotPW = () => {
           <div className="loginAuth-FormInput">
             <input
               type="text"
-              name="username"
-              id="username"
-              placeholder="Enter your username"
-              className="loginAuth-formInput "
+              name="mobileNum"
+              id="mobileNum"
+              placeholder="Enter your mobile number"
+              className={
+                mobileNum === ''
+                  ? 'loginAuth-formInput'
+                  : invalidPhone
+                  ? 'loginAuth-formInput loginAuth-formInputSuccess'
+                  : 'loginAuth-formInput loginAuth-formInputError'
+              }
+              onChange={phoneNumValidation}
             />
             {/* loginAuth-formInputSuccess */}
             {/* loginAuth-formInputError */}
-            <label htmlFor="username">Enter your mobile number</label>
+            <label htmlFor="mobileNum">Enter your mobile number</label>
           </div>
           <button className="loginAuth-formSubmit">Send</button>
         </form>
