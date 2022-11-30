@@ -11,10 +11,14 @@ const Header = () => {
   return (
     <div className="header">
       <div className="header-logo">{headerLogo}</div>
-      <div className="header-search">
-        <input type="text" className="header-searchField" />
+      <form className="header-search">
+        <input
+          type="text"
+          className="header-searchField"
+          placeholder="Search"
+        />
         <div className="header-searchIcon">{searchIcon}</div>
-      </div>
+      </form>
       <div className="header-options">
         <div className="header-optionsBell">{bellIcon}</div>
         <div className="header-settings">{settingsIcon}</div>
