@@ -15,7 +15,8 @@ const LoginForgotPW = () => {
     })()
   }
 
-  const submithandler = (e: any) => {
+  const submitHandler = (e: any) => {
+    e.preventDefault()
     const mobileNum = e.target.mobileNum.value
     console.log('mobile no', mobileNum)
   }
@@ -28,7 +29,7 @@ const LoginForgotPW = () => {
       </div>
 
       <div className="loginAuth-Form">
-        <form className="loginAuth-FormContainer" onSubmit={submithandler}>
+        <form className="loginAuth-FormContainer" onSubmit={submitHandler}>
           {' '}
           <div className="loginAuth-FormInput">
             <input
@@ -44,12 +45,15 @@ const LoginForgotPW = () => {
                   : 'loginAuth-formInput loginAuth-formInputError'
               }
               onChange={phoneNumValidation}
+              required
             />
             {/* loginAuth-formInputSuccess */}
             {/* loginAuth-formInputError */}
             <label htmlFor="mobileNum">Enter your mobile number</label>
           </div>
-          <button className="loginAuth-formSubmit">Send</button>
+          <button className="loginAuth-formSubmit" disabled={invalidPhone}>
+            Send
+          </button>
         </form>
       </div>
     </div>

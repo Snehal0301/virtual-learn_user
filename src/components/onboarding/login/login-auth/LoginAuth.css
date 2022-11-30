@@ -251,3 +251,7 @@ button.Toastify__close-button.Toastify__close-button--light {
     text-align: center;
     color: var(--primaryFontClr);
 }
+
+.loginAuth-formSubmit:disabled {
+    cursor: no-drop;
+}
