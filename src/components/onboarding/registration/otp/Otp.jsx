@@ -1,3 +1,4 @@
+import './Otp.css'
 import React from 'react'
 
 const Otp = () => {

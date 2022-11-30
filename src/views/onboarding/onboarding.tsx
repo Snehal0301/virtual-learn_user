@@ -7,6 +7,7 @@ import LoginPassword from '../../components/onboarding/login/login-verification/
 import LoginAuth from '../../components/onboarding/login/login-auth/LoginAuth'
 import LoginForgotPW from '../../components/onboarding/login/login-forgotPW/LoginForgotPW'
 import PersonalDetails from '../../components/onboarding/registration/personal-details/PersonalDetails'
+import RegistrationForm from '../../components/onboarding/registration/registrationform/RegistrationForm'
 
 const Onboarding = () => {
   const indicators = () => <div className="indicator"></div>
@@ -70,10 +71,11 @@ const Onboarding = () => {
         <div className="onboarding-detailsLogo">{onboardingLogo}</div>
         <div className="onboarding-detailsBody">
           {/* <WelcomeScreen /> */}
-          {/* {/* <LoginVerfication/> */}
+          {/* {/* {/* <LoginVerfication/> */}
+          <RegistrationForm/> */
           {/* <LoginAuth /> */}
           {/* <LoginForgotPW /> */}
-          <LoginPassword/> */
+          <LoginPassword/> 
           {/* <PersonalDetails/> */}
         </div>
       </div>
