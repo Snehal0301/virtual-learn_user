@@ -17,13 +17,23 @@ const LoginAuth = () => {
         <form className="loginAuth-FormContainer">
           {' '}
           <div className="loginAuth-FormInput">
-            <input type="email" name="email" className="form-input" required />
+            <input
+              type="email"
+              name="email"
+              className="loginAuth-formInput"
+              required
+            />
             <label htmlFor="email" className="loginAuth-formLabel">
               Email
             </label>
           </div>
           <div className="loginAuth-FormInput">
-            <input type="email" name="email" className="form-input" required />
+            <input
+              type="email"
+              name="email"
+              className="loginAuth-formInput"
+              required
+            />
             <label htmlFor="email" className="loginAuth-formLabel">
               PassWord
             </label>

@@ -58,4 +58,111 @@ label.loginAuth-formLabel {
 
 .loginAuth-FormContainer {
     width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.loginAuth-FormContainer {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+.loginAuth-formInput {
+    width: 100%;
+    padding: 10px 0;
+    background: none;
+    outline: none;
+    border-top: 0;
+    border-left: 0;
+    border-right: 0;
+    border-bottom: 2px solid #ffffff60;
+}
+
+.input-group {
+    position: relative;
+    margin: 40px 0 20px;
+}
+
+.loginAuth-formInput {
+    font-size: 18px;
+    padding: 10px 10px 10px 5px;
+    display: block;
+    width: 300px;
+    border: none;
+    border-bottom: 1px solid #757575;
+}
+
+.loginAuth-formInput:focus {
+    outline: none;
+}
+
+.loginAuth-formLabel {
+    color: #999;
+    font-size: 18px;
+    font-weight: normal;
+    position: absolute;
+    pointer-events: none;
+    left: 5px;
+    top: 10px;
+    transition: 0.2s ease all;
+    -moz-transition: 0.2s ease all;
+    -webkit-transition: 0.2s ease all;
+}
+
+.loginAuth-formInput:focus~label,
+.loginAuth-formInput:valid~label {
+    top: -20px;
+    font-size: 14px;
+    color: #4285f4;
+}
+
+.highlight {
+    position: absolute;
+    height: 60%;
+    width: 100px;
+    top: 25%;
+    left: 0;
+    pointer-events: none;
+    opacity: 0.5;
+}
+
+.loginAuth-formInput:focus~.highlight {
+    -webkit-animation: inputHighlighter 0.3s ease;
+    -moz-animation: inputHighlighter 0.3s ease;
+    animation: inputHighlighter 0.3s ease;
+}
+
+
+/* animations */
+
+@-webkit-keyframes inputHighlighter {
+    from {
+        background: #4285f4;
+    }
+    to {
+        width: 0;
+        background: transparent;
+    }
+}
+
+@-moz-keyframes inputHighlighter {
+    from {
+        background: #4285f4;
+    }
+    to {
+        width: 0;
+        background: transparent;
+    }
+}
+
+@keyframes inputHighlighter {
+    from {
+        background: #4285f4;
+    }
+    to {
+        width: 0;
+        background: transparent;
+    }
 }
