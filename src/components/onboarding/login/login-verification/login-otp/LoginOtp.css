@@ -1,0 +1,77 @@
+.login-verification {
+    padding: 0 10%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.login-verification-heading {
+    color: white;
+    font-size: 32px;
+    font-weight: 700;
+    text-align: center;
+}
+
+.login-verification-content {
+    color: rgba(255, 255, 255, 0.511);
+    font-size: 20px;
+    font-weight: 700;
+    text-align: center;
+    margin-top: 20px;
+    width: 75%;
+    line-height: 26px;
+}
+
+.login-verification-form {
+    padding-top: 9%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.otp {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-left: 2rem;
+}
+
+/* 
+.otp-input {
+    height: 70px;
+    width: 90px;
+    outline: none;
+    font-size: 20px;
+    background-color: transparent;
+    color: white;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.411);
+} */
+
+.resend-otp {
+    font-size: 20px;
+    font-weight: 700;
+    text-align: center;
+    color: var(--primaryFontClr);
+    margin: 30px 0 45px 0;
+}
+
+.resend-otp span {
+    color: var(--secondaryClr);
+    cursor: pointer;
+}
+
+.verify-otp-button {
+    height: 44px;
+    background-color: var(--secondaryClr);
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--primaryFontClr);
+    border: none;
+    cursor: pointer;
+    border-radius: 6px;
+    /* width: 100%; */
+}

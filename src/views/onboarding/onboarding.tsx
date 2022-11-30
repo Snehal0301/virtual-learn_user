@@ -2,7 +2,8 @@ import './onboarding.css'
 import { Slide } from 'react-slideshow-image'
 import { onboardingLogo } from '../../utils/svgIcons'
 import WelcomeScreen from '../../components/onboarding/welcome/welcome'
-import LoginVerfication from '../../components/onboarding/login/login-verification/LoginVerfication'
+import LoginVerfication from '../../components/onboarding/login/login-verification/login-otp/LoginOtp'
+import LoginPassword from '../../components/onboarding/login/login-verification/login-password/LoginPassword'
 import LoginAuth from '../../components/onboarding/login/login-auth/LoginAuth'
 import LoginForgotPW from '../../components/onboarding/login/login-forgotPW/LoginForgotPW'
 
@@ -70,7 +71,8 @@ const Onboarding = () => {
           {/* <WelcomeScreen /> */}
           {/* <LoginVerfication/> */}
           {/* <LoginAuth /> */}
-          <LoginForgotPW />
+          {/* <LoginForgotPW /> */}
+          <LoginPassword/>
         </div>
       </div>
     </div>
