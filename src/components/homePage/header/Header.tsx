@@ -3,6 +3,7 @@ import './Header.css';
 import {
   bellIcon,
   closeProfile,
+  filterIcon,
   graduationCapIcon,
   headerLogo,
   logoutIcon,
@@ -74,6 +75,7 @@ const Header = () => {
             <button className="header-searchIconButton">{searchIcon}</button>
           )}
         </form>
+
         {!searchFieldFocus ? (
           <div className="header-options">
             <div className="header-optionsBell" onClick={handlenotify}>
@@ -129,6 +131,9 @@ const Header = () => {
           </div>
         ) : (
           <div className="header-options">
+            {searchFieldFocus && (
+              <button className="header-filterButton">{filterIcon}</button>
+            )}
             <div
               onClick={() => {
                 dispatch(searchFocus(false));
