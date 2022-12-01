@@ -102,7 +102,10 @@ const Router = () => {
         <Route
           path="accountCreatedSuccessfully"
           element={
-            <LoginProtected redirectTo="/onboarding/login" condition={true}>
+            <LoginProtected
+              redirectTo="/onboarding/login"
+              condition={successReg}
+            >
               <Success_Page />
             </LoginProtected>
           }
