@@ -16,6 +16,7 @@ import Drawer from 'react-modern-drawer'
 //import styles 👇
 import 'react-modern-drawer/dist/index.css'
 
+
 const Header = () => {
   const [isOpen, setIsOpen] = React.useState(false)
   const handleClick = () => {
@@ -40,7 +41,7 @@ const Header = () => {
         </form>
         {
           <div className="header-options">
-            <div className="header-optionsBell">{bellIcon}</div>
+            <div className="header-optionsBell" onClick={handleClick} >{bellIcon}</div>
             <div className="header-settings">{settingsIcon}</div>
             <div className="header-profilePic">
               <img
@@ -89,10 +90,10 @@ const Header = () => {
         className='bla bla bla'
         style={{
           width: '25rem',
-          padding:'30px'
+          
         }}
       >
-        <div>Hello World</div>
+        <div>hello</div>
       </Drawer>
     </>
   );
