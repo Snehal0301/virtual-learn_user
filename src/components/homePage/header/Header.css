@@ -23,8 +23,8 @@
 
 .header-searchIcon {
   position: absolute;
-  left: 18px;
-  top: 9.5px;
+  left: 33px;
+  top: 25px;
 }
 
 .header-searchField {
@@ -115,4 +115,3 @@
 .header-profileOptionBorder {
   border-bottom: 1px solid #042c5c20;
 }
-
