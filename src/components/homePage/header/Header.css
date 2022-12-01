@@ -68,7 +68,7 @@
   opacity: 0.3;
 }
 
-.header-profilePic>img {
+.header-profilePic > img {
   width: 40px;
   height: 40px;
   border-radius: 50%;
@@ -114,4 +114,12 @@
 
 .header-profileOptionBorder {
   border-bottom: 1px solid #042c5c20;
+}
+
+.header-optionsCloseIcon {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  cursor: pointer;
 }

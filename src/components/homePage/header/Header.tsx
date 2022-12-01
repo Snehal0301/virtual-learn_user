@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import './Header.css';
 import {
   bellIcon,
+  closeProfile,
   graduationCapIcon,
   headerLogo,
   logoutIcon,
@@ -61,13 +62,10 @@ const Header = () => {
             onFocus={() => {
               dispatch(searchFocus(true));
             }}
-            onBlur={() => {
-              dispatch(searchFocus(false));
-            }}
           />
           <div className="header-searchIcon">{searchIcon}</div>
         </form>
-        {
+        {!searchFieldFocus ? (
           <div className="header-options">
             <div className="header-optionsBell" onClick={handlenotify}>
               {bellIcon}
@@ -120,7 +118,18 @@ const Header = () => {
               )}
             </div>
           </div>
-        }
+        ) : (
+          <div className="header-options">
+            <div
+              onClick={() => {
+                dispatch(searchFocus(false));
+              }}
+              className="header-optionsCloseIcon"
+            >
+              {closeProfile}
+            </div>
+          </div>
+        )}
       </div>
       <Drawer
         open={profileDrawerState}
