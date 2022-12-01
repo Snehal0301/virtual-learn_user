@@ -24,128 +24,120 @@ const Header = () => {
   // const [isOpen, setIsOpen] = useState(false)
   const [setting, setSetting] = useState(false);
 
-  // import Notification from './notification/Notification';
+  const [notifydata, setnotifydata] = useState(false)
+  const handleClick = () => {
+    // setIsOpen(!isOpen)
+    dispatch(profileDrawer(true))
+    dispatch(headerProfile(false))
+    setSetting(false)
+    setnotifydata(false)
 
-  // import EditProfile from './edit-profile/EditProfile';
+  }
 
-  const Header = () => {
-    // const [isOpen, setIsOpen] = useState(false)
-
-    const [notifydata, setnotifydata] = useState(false)
-    const handleClick = () => {
-      // setIsOpen(!isOpen)
-      dispatch(profileDrawer(true))
-      dispatch(headerProfile(false))
-      setSetting(false)
-      setnotifydata(false)
-
-    }
-
-    const handlenotify = () => {
-      // setIsOpen(!isOpen)
-      dispatch(profileDrawer(true))
-      dispatch(headerProfile(false))
-      setnotifydata(true)
-    }
-    const handleSetting = () => {
-      // setIsOpen(!isOpen)
-      dispatch(profileDrawer(true));
-      dispatch(headerProfile(false));
-      setSetting(true)
-    };
-    const dispatch = useDispatch();
-    const headerOptions = useSelector((state: any) => state.headerProfile.value);
-    const profileDrawerState = useSelector((state: any) => state.headerProfile.drawer);
+  const handlenotify = () => {
+    // setIsOpen(!isOpen)
+    dispatch(profileDrawer(true))
+    // dispatch(headerProfile(false))
+    setnotifydata(true)
+  }
+  const handleSetting = () => {
+    // setIsOpen(!isOpen)
+    dispatch(profileDrawer(true));
+    dispatch(headerProfile(false));
+    setSetting(true)
+  };
+  const dispatch = useDispatch();
+  const headerOptions = useSelector((state: any) => state.headerProfile.value);
+  const profileDrawerState = useSelector((state: any) => state.headerProfile.drawer);
 
 
+  return (
+    <>
+      <div className="header">
+        <div className="header-logo">{headerLogo}</div>
+        <form className="header-search">
+          <input
+            type="text"
+            className="header-searchField"
+            placeholder="Search"
+          />
+          <div className="header-searchIcon">{searchIcon}</div>
+        </form>
+        {
+          <div className="header-options">
+            <div className="header-optionsBell" onClick={handlenotify} >{bellIcon}</div>
+            <div className="header-settings" onClick={handleSetting}>{settingsIcon}</div>
+            <div className="header-profilePic">
+              <img
+                src={require("../../../assets/images/dhoni.png")}
+                alt="Profile Pic"
+                onClick={(e: any) => {
+                  e.stopPropagation();
+                  dispatch(headerProfile(!headerOptions));
+                }}
+              />
+              {
+                headerOptions &&
+                (
+                  <div
+                    className="header-profileOptions"
+                    onClick={(e: any) => {
+                      e.stopPropagation();
+                    }}
+                  >
+                    <div className="header-profileOption header-profileOptionBorder">
+                      <div className="header-profileOptionIcon">
+                        {graduationCapIcon}
+                      </div>
+                      <div className="header-profileOptiontext">My Course</div>
+                    </div>
 
-    return (
-      <>
-        <div className="header">
-          <div className="header-logo">{headerLogo}</div>
-          <form className="header-search">
-            <input
-              type="text"
-              className="header-searchField"
-              placeholder="Search"
-            />
-            <div className="header-searchIcon">{searchIcon}</div>
-          </form>
-          {
-            <div className="header-options">
-              <div className="header-optionsBell" onClick={handlenotify}  >{bellIcon}</div>
-              <div className="header-settings">{settingsIcon}</div>
-              <div className="header-profilePic">
-                <img
-                  src={require("../../../assets/images/dhoni.png")}
-                  alt="Profile Pic"
-                  onClick={(e: any) => {
-                    e.stopPropagation();
-                    dispatch(headerProfile(!headerOptions));
-                  }}
-                />
-                {
-                  headerOptions &&
-                  (
+                    <div className="header-profileOption  header-profileOptionBorder" onClick={handleClick}>
+                      <div className="header-profileOptionIcon">{profileIcon}</div>
+                      <div className="header-profileOptiontext"
+                      >My Profile</div>
+                    </div>
+
                     <div
-                      className="header-profileOptions"
-                      onClick={(e: any) => {
-                        e.stopPropagation();
+                      className="header-profileOption"
+                      onClick={() => {
+                        localStorage.setItem('auth', 'false')
+                        window.location.reload()
                       }}
                     >
-                      <div className="header-profileOption header-profileOptionBorder">
-                        <div className="header-profileOptionIcon">
-                          {graduationCapIcon}
-                        </div>
-                        <div className="header-profileOptiontext">My Course</div>
-                      </div>
-
-                      <div className="header-profileOption  header-profileOptionBorder" onClick={handleClick}>
-                        <div className="header-profileOptionIcon">{profileIcon}</div>
-                        <div className="header-profileOptiontext"
-                        >My Profile</div>
-                      </div>
-
-                      <div
-                        className="header-profileOption"
-                        onClick={() => {
-                          localStorage.setItem('auth', 'false')
-                          window.location.reload()
-                        }}
-                      >
-                        <div className="header-profileOptionIcon">{logoutIcon}</div>
-                        <div className="header-profileOptiontext">Logout</div>
-                      </div>
-
+                      <div className="header-profileOptionIcon">{logoutIcon}</div>
+                      <div className="header-profileOptiontext">Logout</div>
                     </div>
-                  )
-                }
-              </div>
+
+                  </div>
+                )
+              }
             </div>
-          }
-        </div>
-        <Drawer
-          open={profileDrawerState}
-          onClose={handleClick}
-          direction="right"
-          className=""
-          style={{
-            width: "25rem",
-          }}
-        >
-          {/* <Profile /> */}
-          {setting ? <Settings /> : <Profile />}
-          {/* <Settings /> */}
-          {/* <PrivacyPolicy/> */}
-          {/* <Terms/> */}
-          {
-            notifydata ? <Notification /> : <Profile />
-          }
+          </div>
+        }
+      </div>
+      <Drawer
+        open={profileDrawerState}
+        onClose={handleClick}
+        direction="right"
+        className=""
+        style={{
+          width: "25rem",
+        }}
+      >
+        {/* <Profile /> */}
+        {/* {setting ? <Settings /> : <Profile />} */}
+        {/* <Settings /> */}
+        {/* <PrivacyPolicy/> */}
+        {/* <Terms/> */}
+        {
+          notifydata ? <Notification /> : <Profile />
+        }
 
 
-        </Drawer>
-      </>
-    );
-  }
+      </Drawer>
+    </>
+  );
 }
+
 export default Header;
