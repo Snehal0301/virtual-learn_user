@@ -16,9 +16,9 @@ const App = () => {
         dispatch(headerProfile(false))
       }}
     >
-      {/* <Router /> */}
+      <Router />
       {/* <Onboarding /> */}
-      <HomePage />  
+      {/* <HomePage />   */}
       {/* <Success_Page/> */}
       {/* <PasswordChanged/> */}
     </div>
