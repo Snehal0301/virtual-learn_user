@@ -70,9 +70,9 @@ const Onboarding = () => {
       <div className="onboarding-detailsContainer">
         <div className="onboarding-detailsLogo">{onboardingLogo}</div>
         <div className="onboarding-detailsBody">
-          {/* <WelcomeScreen /> */}
-          {/* {/* {/* <LoginVerfication/> */}
-          <RegistrationForm/> */
+          <WelcomeScreen />
+           {/* <LoginVerfication/> */}
+          {/* <RegistrationForm/>  */}
           {/* <LoginAuth /> */}
           {/* <LoginForgotPW /> */}
           {/* <LoginPassword/>  */}
