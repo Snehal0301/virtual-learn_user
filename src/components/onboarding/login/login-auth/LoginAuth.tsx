@@ -1,9 +1,11 @@
 import './LoginAuth.css'
+import { useNavigate } from 'react-router-dom'
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import { facebookIcon, googleIcon } from '../../../../utils/svgIcons'
 
 const LoginAuth = () => {
+  const navigate = useNavigate()
   const showError = () =>
     toast(
       <div className="loginAuth-showError">
@@ -61,11 +63,35 @@ const LoginAuth = () => {
             />
             <label htmlFor="phoneNum">Mobile number</label>
           </div>
+          <div
+            className="loginAuth-noAccount"
+            style={{
+              width: ' 100%',
+              display: 'flex',
+              justifyContent: 'flex-end',
+            }}
+          >
+            <span
+              className="loginAuth-regLink"
+              onClick={() => {
+                navigate('/onboarding/forgotPassword')
+              }}
+            >
+              Forgot password?{' '}
+            </span>
+          </div>
           <button className="loginAuth-formSubmit">Continue</button>
         </form>
         <div className="loginAuth-noAccount">
           Don’t have a account?{' '}
-          <span className="loginAuth-regLink">Register</span>
+          <span
+            className="loginAuth-regLink"
+            onClick={() => {
+              navigate('/onboarding/register')
+            }}
+          >
+            Register
+          </span>
         </div>
       </div>
       {/* onClick={showError} to call error */}

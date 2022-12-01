@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import './Header.css';
+import React, { useState } from 'react'
+import './Header.css'
 import {
   bellIcon,
   graduationCapIcon,
@@ -53,32 +53,43 @@ const Header = () => {
                   dispatch(headerProfile(!headerOptions));
                 }}
               />
-              {headerOptions && (
-                <div
-                  className="header-profileOptions"
-                  onClick={(e: any) => {
-                    e.stopPropagation();
-                  }}
-                >
-                  <div className="header-profileOption header-profileOptionBorder">
-                    <div className="header-profileOptionIcon">
-                      {graduationCapIcon}
+              {
+                headerOptions &&
+                (
+                  <div
+                    className="header-profileOptions"
+                    onClick={(e: any) => {
+                      e.stopPropagation();
+                    }}
+                  >
+                    <div className="header-profileOption header-profileOptionBorder">
+                      <div className="header-profileOptionIcon">
+                        {graduationCapIcon}
+                      </div>
+                      <div className="header-profileOptiontext">My Course</div>
                     </div>
-                    <div className="header-profileOptiontext">My Course</div>
-                  </div>
 
-                  <div className="header-profileOption  header-profileOptionBorder" onClick={handleClick}>
-                    <div className="header-profileOptionIcon">{profileIcon}</div>
-                    <div className="header-profileOptiontext"
-                    >My Profile</div>
-                  </div>
+                    <div className="header-profileOption  header-profileOptionBorder" onClick={handleClick}>
+                      <div className="header-profileOptionIcon">{profileIcon}</div>
+                      <div className="header-profileOptiontext"
+                      >My Profile</div>
+                    </div>
 
-                  <div className="header-profileOption">
-                    <div className="header-profileOptionIcon">{logoutIcon}</div>
-                    <div className="header-profileOptiontext">Logout</div>
+                    <div
+                      className="header-profileOption"
+                      onClick={() => {
+                        localStorage.setItem('auth', 'false')
+                        window.location.reload()
+                      }}
+                    >
+                      <div className="header-profileOptionIcon">{logoutIcon}</div>
+                      <div className="header-profileOptiontext">Logout</div>
+                    </div>
+
+
                   </div>
-                </div>
-              )}
+                )
+              }
             </div>
           </div>
         }
@@ -97,6 +108,5 @@ const Header = () => {
       </Drawer>
     </>
   );
-};
-
+}
 export default Header;

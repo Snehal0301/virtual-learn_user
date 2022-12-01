@@ -2,10 +2,16 @@ import '../login-auth/LoginAuth.css'
 import * as yup from 'yup'
 import 'yup-phone'
 import { useState } from 'react'
+import { useDispatch } from 'react-redux'
+import { otpPage } from '../../../../redux/reducers/loginConditions'
+import { useNavigate } from 'react-router-dom'
 
 const LoginForgotPW = () => {
   const [invalidPhone, setInvalidPhone] = useState(false)
   const [mobileNum, setMobileNum] = useState('')
+
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
 
   const phoneSchema = yup.string().phone().required()
   const phoneNumValidation = (e: any) => {
@@ -19,6 +25,8 @@ const LoginForgotPW = () => {
     e.preventDefault()
     const mobileNum = e.target.mobileNum.value
     console.log('mobile no', mobileNum)
+    dispatch(otpPage(true))
+    navigate('/onboarding/otpVerification')
   }
   return (
     <div className="loginAuth">
