@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import './Header.css';
+import React, { useState } from 'react'
+import './Header.css'
 import {
   bellIcon,
   graduationCapIcon,
@@ -8,15 +8,17 @@ import {
   profileIcon,
   searchIcon,
   settingsIcon,
-} from '../../../utils/svgIcons';
-import { useDispatch, useSelector } from 'react-redux';
-import { headerProfile } from '../../../redux/reducers/headerProfileOptions';
+} from '../../../utils/svgIcons'
+import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
+import { headerProfile } from '../../../redux/reducers/headerProfileOptions'
 
 const Header = () => {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
 
-  const headerOptions = useSelector((state: any) => state.headerProfile.value);
-  console.log(headerOptions);
+  const headerOptions = useSelector((state: any) => state.headerProfile.value)
+  console.log(headerOptions)
 
   return (
     <div className="header">
@@ -38,15 +40,15 @@ const Header = () => {
               src={require('../../../assets/images/dhoni.png')}
               alt="Profile Pic"
               onClick={(e: any) => {
-                e.stopPropagation();
-                dispatch(headerProfile(!headerOptions));
+                e.stopPropagation()
+                dispatch(headerProfile(!headerOptions))
               }}
             />
             {headerOptions && (
               <div
                 className="header-profileOptions"
                 onClick={(e: any) => {
-                  e.stopPropagation();
+                  e.stopPropagation()
                 }}
               >
                 <div className="header-profileOption header-profileOptionBorder">
@@ -61,7 +63,13 @@ const Header = () => {
                   <div className="header-profileOptiontext">My Profile</div>
                 </div>
 
-                <div className="header-profileOption">
+                <div
+                  className="header-profileOption"
+                  onClick={() => {
+                    localStorage.setItem('auth', 'false')
+                    window.location.reload()
+                  }}
+                >
                   <div className="header-profileOptionIcon">{logoutIcon}</div>
                   <div className="header-profileOptiontext">Logout</div>
                 </div>
@@ -71,7 +79,7 @@ const Header = () => {
         </div>
       }
     </div>
-  );
-};
+  )
+}
 
-export default Header;
+export default Header

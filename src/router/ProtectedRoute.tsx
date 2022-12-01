@@ -1,8 +1,7 @@
-import { Route, Navigate } from 'react-router-dom'
-import Onboarding from '../views/onboarding/onboarding'
+import { Navigate } from 'react-router-dom'
 
 const RequireAuth = ({ children }: any) => {
-  let isAuthenticated = !true
+  let isAuthenticated = JSON.parse(localStorage.getItem('auth') || 'false')
   return isAuthenticated ? children : <Navigate to={'/login'} />
 }
 

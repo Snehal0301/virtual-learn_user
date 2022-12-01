@@ -16,7 +16,7 @@ const Router = () => {
               <HomePage />
             </RequireAuth>
           }
-        />
+        ></Route>
       </Routes>
     </>
   )
