@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import './Header.css';
+import React, { useState } from "react";
+import "./Header.css";
 import {
   bellIcon,
   graduationCapIcon,
@@ -8,9 +8,9 @@ import {
   profileIcon,
   searchIcon,
   settingsIcon,
-} from '../../../utils/svgIcons';
-import { useDispatch, useSelector } from 'react-redux';
-import { headerProfile } from '../../../redux/reducers/headerProfileOptions';
+} from "../../../utils/svgIcons";
+import { useDispatch, useSelector } from "react-redux";
+import { headerProfile } from "../../../redux/reducers/headerProfileOptions";
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -35,7 +35,7 @@ const Header = () => {
           <div className="header-settings">{settingsIcon}</div>
           <div className="header-profilePic">
             <img
-              src={require('../../../assets/images/dhoni.png')}
+              src={require("../../../assets/images/dhoni.png")}
               alt="Profile Pic"
               onClick={(e: any) => {
                 e.stopPropagation();

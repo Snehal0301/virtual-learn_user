@@ -18,7 +18,7 @@ const App = () => {
       {/* <Onboarding /> */}
       <HomePage />
       {/* <Success_Page/> */}
-      {/* <PasswordChanged/> */}
+      {/* <PasswordChanged/>  */}
     </div>
   );
 };
