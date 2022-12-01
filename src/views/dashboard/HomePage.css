@@ -1,17 +1,23 @@
 .homePageNavbar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 80px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 80px;
 }
 
 .homePageBody {
-  position: relative;
-  top: 80px;
-  z-index: -20;
+    position: relative;
+    top: 80px;
+    z-index: -20;
 }
 
 .homePageBody {
-  padding: 25px 10%;
+    padding: 25px 10%;
+}
+
+.homePage {
+    min-height: 100vh;
+    z-index: 0;
+    position: relative;
 }

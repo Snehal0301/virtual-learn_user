@@ -1,5 +1,5 @@
-import './Start.css';
-import React from 'react';
+import './Start.css'
+import React from 'react'
 
 const Start = () => {
   return (
@@ -13,7 +13,7 @@ const Start = () => {
       <div className="start-courseChoice">Top courses in business</div>
       <div className="start-courseChoice">Top courses in design</div>
     </div>
-  );
-};
+  )
+}
 
-export default Start;
+export default Start

@@ -14,14 +14,20 @@ const WelcomeScreen = () => {
         <button
           className="welcome-btn"
           onClick={() => {
-            localStorage.setItem('auth', 'true')
-            navigate('/')
+            navigate('login')
           }}
         >
           Login
         </button>
         Or
-        <button className="welcome-btn">Register</button>
+        <button
+          className="welcome-btn"
+          onClick={() => {
+            navigate('register')
+          }}
+        >
+          Register
+        </button>
       </div>
       <div className="welcome-footer">
         By creating new account, you agree to our{' '}
