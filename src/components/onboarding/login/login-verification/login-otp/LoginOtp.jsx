@@ -1,37 +1,38 @@
-import "./LoginOtp.css";
-import OTPInput, { ResendOTP } from "otp-input-react";
-import React, { useState, useEffect } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import './LoginOtp.css';
+import OTPInput, { ResendOTP } from 'otp-input-react';
+import React, { useState, useEffect } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   changePassword,
   registerOtp,
-} from "../../../../../redux/reducers/loginConditions";
+  registerPersonalDetails,
+} from '../../../../../redux/reducers/loginConditions';
 
 const LoginVerfication = () => {
-  const [OTP, setOTP] = useState("");
+  const [OTP, setOTP] = useState('');
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const location = useLocation();
 
-  console.log("location", location.pathname);
+  console.log('location', location.pathname);
 
   const changePass = useSelector((state) => state.loginConditions.passChange);
 
   const submitHandler = (e) => {
     e.preventDefault();
-    if (location.pathname === "/onboarding/registerOtp") {
-      dispatch(registerOtp(true));
-      navigate("/onboarding/personalDetails");
+    if (location.pathname === '/onboarding/registerOtp') {
+      dispatch(registerPersonalDetails(true));
+      navigate('/onboarding/personalDetails');
     } else {
       dispatch(changePassword(true));
-      navigate("/onboarding/changePassword");
+      navigate('/onboarding/changePassword');
     }
   };
 
   useEffect(() => {
-    console.log("change pass", changePass);
+    console.log('change pass', changePass);
   }, [changePass]); //when otp is valid(this comes from redux)
 
   return (
@@ -51,16 +52,16 @@ const LoginVerfication = () => {
             otpType="number"
             disabled={false}
             inputStyles={{
-              width: "30%",
-              outline: "none",
-              fontSize: "20px",
-              paddingBottom: "15px",
-              backgroundColor: "transparent",
-              color: "white",
-              borderTop: "none",
-              borderLeft: "none",
-              borderRight: "none",
-              borderBottom: "1px solid rgba(255, 255, 255, 0.411)",
+              width: '30%',
+              outline: 'none',
+              fontSize: '20px',
+              paddingBottom: '15px',
+              backgroundColor: 'transparent',
+              color: 'white',
+              borderTop: 'none',
+              borderLeft: 'none',
+              borderRight: 'none',
+              borderBottom: '1px solid rgba(255, 255, 255, 0.411)',
             }}
           />
           {/* <ResendOTP onResendClick={() => console.log("Resend clicked")} /> */}
