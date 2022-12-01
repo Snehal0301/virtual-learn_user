@@ -4,9 +4,12 @@ import { Formik, useFormik } from "formik";
 import { useNavigate } from "react-router-dom";
 import { facebook, google } from "../../../../utils/svg";
 import { mobilenumberSchema } from "./schema/MobileSchema";
+import { useDispatch } from "react-redux";
+import { registerOtp } from "../../../../redux/reducers/loginConditions";
 
 const RegistrationForm = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const { values, errors, handleChange, touched, handleBlur, handleSubmit } =
     useFormik({
@@ -17,6 +20,8 @@ const RegistrationForm = () => {
       onSubmit: (values, action) => {
         console.log(values);
         action.resetForm();
+        dispatch(registerOtp(true));
+        navigate("/onboarding/registerOtp");
       },
     });
 

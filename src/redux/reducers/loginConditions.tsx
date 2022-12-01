@@ -39,6 +39,9 @@ export const {
   otpPage,
   changePassword,
   passChangeSuccess,
+  registerOtp,
+  registerPersonalDetails,
+  registerSuccess,
 } = showLoginConditions.actions
 
 export default showLoginConditions

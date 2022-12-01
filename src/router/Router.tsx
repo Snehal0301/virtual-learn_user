@@ -12,6 +12,7 @@ import LoginVerfication from '../components/onboarding/login/login-verification/
 import LoginPassword from '../components/onboarding/login/login-verification/login-password/LoginPassword'
 import PasswordChanged from '../views/onboarding/password-changed/PasswordChanged'
 import { useSelector } from 'react-redux'
+import PersonalDetails from '../components/onboarding/registration/personal-details/PersonalDetails'
 
 const Router = () => {
   const showOtp = useSelector((state: any) => state.loginConditions.value)
@@ -63,6 +64,28 @@ const Router = () => {
           />
 
           <Route path="register" element={<RegistrationForm />} />
+          <Route
+            path="registerOtp"
+            element={
+              <LoginProtected
+                redirectTo="/onboarding/register"
+                condition={otpReg}
+              >
+                <LoginVerfication />
+              </LoginProtected>
+            }
+          />
+          <Route
+            path="personalDetails"
+            element={
+              <LoginProtected
+                redirectTo="/onboarding/register"
+                condition={personalDetails}
+              >
+                <PersonalDetails />
+              </LoginProtected>
+            }
+          />
         </Route>
 
         <Route
