@@ -7,7 +7,6 @@ import { profileDrawer } from '../../../../redux/reducers/headerProfileOptions'
 const Profile = () => {
 
     const dispatch = useDispatch()
-
     const handleClick = () => {
         dispatch(profileDrawer(false))
     }

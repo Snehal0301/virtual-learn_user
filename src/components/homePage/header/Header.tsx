@@ -14,18 +14,22 @@ import { headerProfile, profileDrawer } from '../../../redux/reducers/headerProf
 import Drawer from 'react-modern-drawer'
 import 'react-modern-drawer/dist/index.css'
 import Profile from './profile/Profile';
+import Settings from "./settings/Settings";
+import PrivacyPolicy from "./privacypolicy/PrivacyPolicy";
+import Terms from "./terms/Terms";
 import Notification from './notification/Notification';
 
-import EditProfile from './edit-profile/EditProfile';
 
 const Header = () => {
   // const [isOpen, setIsOpen] = useState(false)
+  const [setting, setSetting] = useState(false);
 
   const [notifydata, setnotifydata] = useState(false)
   const handleClick = () => {
     // setIsOpen(!isOpen)
     dispatch(profileDrawer(true))
     dispatch(headerProfile(false))
+    setSetting(false)
     setnotifydata(false)
 
   }
@@ -33,14 +37,18 @@ const Header = () => {
   const handlenotify = () => {
     // setIsOpen(!isOpen)
     dispatch(profileDrawer(true))
-    dispatch(headerProfile(false))
+    // dispatch(headerProfile(false))
     setnotifydata(true)
   }
+  const handleSetting = () => {
+    // setIsOpen(!isOpen)
+    dispatch(profileDrawer(true));
+    dispatch(headerProfile(false));
+    setSetting(true)
+  };
   const dispatch = useDispatch();
-
   const headerOptions = useSelector((state: any) => state.headerProfile.value);
   const profileDrawerState = useSelector((state: any) => state.headerProfile.drawer);
-
 
 
   return (
@@ -57,11 +65,11 @@ const Header = () => {
         </form>
         {
           <div className="header-options">
-            <div className="header-optionsBell" onClick={handlenotify}  >{bellIcon}</div>
-            <div className="header-settings">{settingsIcon}</div>
+            <div className="header-optionsBell" onClick={handlenotify} >{bellIcon}</div>
+            <div className="header-settings" onClick={handleSetting}>{settingsIcon}</div>
             <div className="header-profilePic">
               <img
-                src={require('../../../assets/images/dhoni.png')}
+                src={require("../../../assets/images/dhoni.png")}
                 alt="Profile Pic"
                 onClick={(e: any) => {
                   e.stopPropagation();
@@ -111,12 +119,17 @@ const Header = () => {
       <Drawer
         open={profileDrawerState}
         onClose={handleClick}
-        direction='right'
-        className=''
+        direction="right"
+        className=""
         style={{
-          width: '25rem'
+          width: "25rem",
         }}
       >
+        {/* <Profile /> */}
+        {/* {setting ? <Settings /> : <Profile />} */}
+        {/* <Settings /> */}
+        {/* <PrivacyPolicy/> */}
+        {/* <Terms/> */}
         {
           notifydata ? <Notification /> : <Profile />
         }
@@ -126,4 +139,5 @@ const Header = () => {
     </>
   );
 }
+
 export default Header;

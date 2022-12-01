@@ -2,11 +2,11 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState: any = {
   value: false,
-  drawer:false
+  drawer: false,
 };
 
 export const showHeaderProfile = createSlice({
-  name: 'headerProfile',
+  name: "headerProfile",
   initialState,
   reducers: {
     headerProfile: (state, action) => {
@@ -19,6 +19,7 @@ export const showHeaderProfile = createSlice({
 });
 
 // Action creators are generated for each case reducer function
-export const { headerProfile, profileDrawer } = showHeaderProfile.actions;
+export const { headerProfile, profileDrawer} =
+  showHeaderProfile.actions;
 
 export default showHeaderProfile.reducer;
