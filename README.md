@@ -29,6 +29,7 @@
 * write code
 * git commit
 * git push
+* git branch --delete <branch-name>
 
 
 # Git commit message

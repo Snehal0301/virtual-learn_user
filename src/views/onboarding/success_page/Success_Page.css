@@ -1,0 +1,42 @@
+.succesContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    min-height: 100vh;
+}
+
+.successContent {
+    padding: 10% 28%;
+    background: #FFFFFF;
+    /* box-shadow: 0px 0px 8px rgb(0 0 0 / 10%); */
+
+}
+
+.successText {
+    font-family: 'Biko';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 40px;
+}
+
+.successDesc {
+    font-family: 'Proxima Nova Soft';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 18px;
+    /* line-height: 28px; */
+    color: #7A7A7A;
+    padding-top: 10px;
+}
+
+.getStarted {
+    font-family: 'Proxima Nova Soft';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    /* line-height: 28px; */
+    /* text-align: center; */
+    padding-top: 25px;
+    color: #EE5C4D;
+}
