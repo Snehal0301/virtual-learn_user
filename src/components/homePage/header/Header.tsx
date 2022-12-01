@@ -14,19 +14,34 @@ import { headerProfile, profileDrawer } from '../../../redux/reducers/headerProf
 import Drawer from 'react-modern-drawer'
 import 'react-modern-drawer/dist/index.css'
 import Profile from './profile/Profile';
+import Notification from './notification/Notification';
+
 import EditProfile from './edit-profile/EditProfile';
 
 const Header = () => {
   // const [isOpen, setIsOpen] = useState(false)
+
+  const [notifydata, setnotifydata] = useState(false)
   const handleClick = () => {
     // setIsOpen(!isOpen)
     dispatch(profileDrawer(true))
     dispatch(headerProfile(false))
+    setnotifydata(false)
+
+  }
+
+  const handlenotify = () => {
+    // setIsOpen(!isOpen)
+    dispatch(profileDrawer(true))
+    dispatch(headerProfile(false))
+    setnotifydata(true)
   }
   const dispatch = useDispatch();
 
   const headerOptions = useSelector((state: any) => state.headerProfile.value);
   const profileDrawerState = useSelector((state: any) => state.headerProfile.drawer);
+
+
 
   return (
     <>
@@ -42,7 +57,7 @@ const Header = () => {
         </form>
         {
           <div className="header-options">
-            <div className="header-optionsBell">{bellIcon}</div>
+            <div className="header-optionsBell" onClick={handlenotify}  >{bellIcon}</div>
             <div className="header-settings">{settingsIcon}</div>
             <div className="header-profilePic">
               <img
@@ -86,6 +101,12 @@ const Header = () => {
                       <div className="header-profileOptiontext">Logout</div>
                     </div>
 
+                  <div className="header-profileOption  header-profileOptionBorder" onClick={handleClick}>
+                    <div className="header-profileOptionIcon">{profileIcon}</div>
+                    <div className="header-profileOptiontext"
+
+                    >My Profile</div>
+                  </div>
 
                   </div>
                 )
@@ -103,8 +124,11 @@ const Header = () => {
           width: '25rem'
         }}
       >
-        <Profile />
-        {/* <EditProfile/> */}
+        {
+          notifydata ? <Notification /> : <Profile />
+        }
+
+
       </Drawer>
     </>
   );
