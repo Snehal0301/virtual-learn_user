@@ -132,8 +132,9 @@ const PersonalDetails = () => {
                             onChange={handleChange}
                             onBlur={handleBlur}
                         />
+                       
 
-                        <label htmlFor="password"  >Password
+                        <label htmlFor="password"  className='labelwithTooltip' >Password
                             <div data-tip="React-tooltip" data-for='sadFace' className='tooltip'>{info_btn}</div>
                             <ReactTooltip id='sadFace' type='light' effect='solid' place="right">
                                 <span><p>Our minimum Requirment</p>
@@ -142,6 +143,7 @@ const PersonalDetails = () => {
                                     and one lowercase letter.</span>
                             </ReactTooltip>
                         </label>
+                      
 
                         {errors.password && touched.password ? (<>
                             <div className="personal-error-line"></div>
