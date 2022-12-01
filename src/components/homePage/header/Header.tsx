@@ -14,6 +14,7 @@ import { headerProfile, profileDrawer } from '../../../redux/reducers/headerProf
 import Drawer from 'react-modern-drawer'
 import 'react-modern-drawer/dist/index.css'
 import Profile from './profile/Profile';
+import Notification from './notification/Notification';
 
 
 const Header = () => {
@@ -93,7 +94,8 @@ const Header = () => {
           width: '25rem'
         }}
       >
-        <Profile />
+        {/* <Profile /> */}
+        <Notification/>
       </Drawer>
     </>
   );
