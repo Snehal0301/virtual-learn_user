@@ -53,97 +53,106 @@ const Header = () => {
   console.log('search', searchFieldFocus);
   return (
     <>
-      <div className={searchFieldFocus ? 'header headerSearchFocus' : 'header'}>
-        <div className="header-logo">{headerLogo}</div>
-        <form className="header-search">
-          <input
-            type="text"
-            className={
-              searchFieldFocus
-                ? 'header-searchField header-searchFieldPadding'
-                : 'header-searchField'
-            }
-            placeholder="Search"
-            onFocus={() => {
-              dispatch(searchFocus(true));
-            }}
-          />
-          {!searchFieldFocus && (
-            <div className="header-searchIcon">{searchIcon}</div>
-          )}
-          {searchFieldFocus && (
-            <button className="header-searchIconButton">{searchIcon}</button>
-          )}
-        </form>
+      <div className="header-parent">
+        <div
+          className={searchFieldFocus ? 'header headerSearchFocus' : 'header'}
+        >
+          <div className="header-logo">{headerLogo}</div>
+          <form className="header-search">
+            <input
+              type="text"
+              className={
+                searchFieldFocus
+                  ? 'header-searchField header-searchFieldPadding'
+                  : 'header-searchField'
+              }
+              placeholder="Search"
+              onFocus={() => {
+                dispatch(searchFocus(true));
+              }}
+            />
+            {!searchFieldFocus && (
+              <div className="header-searchIcon">{searchIcon}</div>
+            )}
+            {searchFieldFocus && (
+              <button className="header-searchIconButton">{searchIcon}</button>
+            )}
+          </form>
 
-        {!searchFieldFocus ? (
-          <div className="header-options">
-            <div className="header-optionsBell" onClick={handlenotify}>
-              {bellIcon}
-            </div>
-            <div className="header-settings">{settingsIcon}</div>
-            <div className="header-profilePic">
-              <img
-                src={require('../../../assets/images/dhoni.png')}
-                alt="Profile Pic"
-                onClick={(e: any) => {
-                  e.stopPropagation();
-                  dispatch(headerProfile(!headerOptions));
-                }}
-              />
-              {headerOptions && (
-                <div
-                  className="header-profileOptions"
+          {!searchFieldFocus ? (
+            <div className="header-options">
+              <div className="header-optionsBell" onClick={handlenotify}>
+                {bellIcon}
+              </div>
+              <div className="header-settings">{settingsIcon}</div>
+              <div className="header-profilePic">
+                <img
+                  src={require('../../../assets/images/dhoni.png')}
+                  alt="Profile Pic"
                   onClick={(e: any) => {
                     e.stopPropagation();
+                    dispatch(headerProfile(!headerOptions));
                   }}
-                >
-                  <div className="header-profileOption header-profileOptionBorder">
-                    <div className="header-profileOptionIcon">
-                      {graduationCapIcon}
-                    </div>
-                    <div className="header-profileOptiontext">My Course</div>
-                  </div>
-
+                />
+                {headerOptions && (
                   <div
-                    className="header-profileOption  header-profileOptionBorder"
-                    onClick={handleClick}
-                  >
-                    <div className="header-profileOptionIcon">
-                      {profileIcon}
-                    </div>
-                    <div className="header-profileOptiontext">My Profile</div>
-                  </div>
-
-                  <div
-                    className="header-profileOption"
-                    onClick={() => {
-                      localStorage.setItem('auth', 'false');
-                      window.location.reload();
+                    className="header-profileOptions"
+                    onClick={(e: any) => {
+                      e.stopPropagation();
                     }}
                   >
-                    <div className="header-profileOptionIcon">{logoutIcon}</div>
-                    <div className="header-profileOptiontext">Logout</div>
+                    <div className="header-profileOption header-profileOptionBorder">
+                      <div className="header-profileOptionIcon">
+                        {graduationCapIcon}
+                      </div>
+                      <div className="header-profileOptiontext">My Course</div>
+                    </div>
+
+                    <div
+                      className="header-profileOption  header-profileOptionBorder"
+                      onClick={handleClick}
+                    >
+                      <div className="header-profileOptionIcon">
+                        {profileIcon}
+                      </div>
+                      <div className="header-profileOptiontext">My Profile</div>
+                    </div>
+
+                    <div
+                      className="header-profileOption"
+                      onClick={() => {
+                        localStorage.setItem('auth', 'false');
+                        window.location.reload();
+                      }}
+                    >
+                      <div className="header-profileOptionIcon">
+                        {logoutIcon}
+                      </div>
+                      <div className="header-profileOptiontext">Logout</div>
+                    </div>
                   </div>
-                </div>
+                )}
+              </div>
+            </div>
+          ) : (
+            <div className="header-options">
+              {searchFieldFocus && (
+                <button className="header-filterButton">{filterIcon}</button>
               )}
+              <div
+                onClick={() => {
+                  dispatch(searchFocus(false));
+                }}
+                className="header-optionsCloseIcon"
+              >
+                {closeProfile}
+              </div>
             </div>
-          </div>
-        ) : (
-          <div className="header-options">
-            {searchFieldFocus && (
-              <button className="header-filterButton">{filterIcon}</button>
-            )}
-            <div
-              onClick={() => {
-                dispatch(searchFocus(false));
-              }}
-              className="header-optionsCloseIcon"
-            >
-              {closeProfile}
-            </div>
-          </div>
-        )}
+          )}
+          {searchFieldFocus && (
+            <div className="header-categoryContents">hello</div>
+          )}
+        </div>
       </div>
       <Drawer
         open={profileDrawerState}
