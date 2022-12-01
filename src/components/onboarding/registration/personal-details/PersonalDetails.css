@@ -46,7 +46,7 @@ label {
 .PeronsalDetailsInput{
     width: 100%;
     margin-top: 1.5rem;
-    padding: 0.25rem;
+    padding:  0.25rem;
     border: none;
     border-bottom: 2px solid #ffffff58;
     transition: border-color 0.2s ease;
@@ -55,6 +55,7 @@ label {
     font-weight: 700;
     font-family: Avenir;
     font-size: 16px;
+    margin-left: 5px;
 }
 
 
@@ -92,7 +93,13 @@ button {
     width: 16px;
     position: absolute;
     top: 0;
-    left: 70px;
+    left: 74px;
+    /* margin-left: 5px; */
+}
+.labelwithTooltip
+{
+    position: relative;
+    /* display: flex; */
 }
 #sadFace{
     width: 250px;
@@ -102,6 +109,10 @@ button {
 span p{
     color: #092963;
 }
+/* .personalDetailsPass
+{
+    position: relative;
+} */
 
 @supports (not (-ms-ime-align:auto)) {
     label {
