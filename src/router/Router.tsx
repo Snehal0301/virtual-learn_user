@@ -22,6 +22,14 @@ const Router = () => {
     (state: any) => state.loginConditions.successPassChange,
   )
 
+  const otpReg = useSelector((state: any) => state.loginConditions.otpReg)
+  const personalDetails = useSelector(
+    (state: any) => state.loginConditions.personalDetails,
+  )
+  const successReg = useSelector(
+    (state: any) => state.loginConditions.successReg,
+  )
+
   console.log(changePassSuccess)
 
   return (

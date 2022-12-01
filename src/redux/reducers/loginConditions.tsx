@@ -4,6 +4,9 @@ const initialState: any = {
   value: false,
   passChange: false,
   successPassChange: false,
+  otpReg: false,
+  personalDetails: false,
+  successReg: false,
 }
 
 export const showLoginConditions = createSlice({
@@ -18,6 +21,15 @@ export const showLoginConditions = createSlice({
     },
     passChangeSuccess: (state, action) => {
       state.successPassChange = action.payload
+    },
+    registerOtp: (state, action) => {
+      state.otpReg = action.payload
+    },
+    registerPersonalDetails: (state, action) => {
+      state.personalDetails = action.payload
+    },
+    registerSuccess: (state, action) => {
+      state.successReg = action.payload
     },
   },
 })
