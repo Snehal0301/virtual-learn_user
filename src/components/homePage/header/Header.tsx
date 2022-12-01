@@ -14,6 +14,7 @@ import { headerProfile, profileDrawer } from '../../../redux/reducers/headerProf
 import Drawer from 'react-modern-drawer'
 import 'react-modern-drawer/dist/index.css'
 import Profile from './profile/Profile';
+import EditProfile from './edit-profile/EditProfile';
 
 const Header = () => {
   // const [isOpen, setIsOpen] = useState(false)
@@ -69,7 +70,6 @@ const Header = () => {
                   <div className="header-profileOption  header-profileOptionBorder" onClick={handleClick}>
                     <div className="header-profileOptionIcon">{profileIcon}</div>
                     <div className="header-profileOptiontext"
-                     
                     >My Profile</div>
                   </div>
 
@@ -93,6 +93,7 @@ const Header = () => {
         }}
       >
         <Profile />
+        {/* <EditProfile/> */}
       </Drawer>
     </>
   );
