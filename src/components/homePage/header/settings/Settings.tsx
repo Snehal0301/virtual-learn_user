@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import "./Settings.css";
 import {
   closeProfile,
@@ -11,11 +11,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { profileDrawer } from "../../../../redux/reducers/headerProfileOptions";
 
 const Settings = () => {
+    
   const dispatch = useDispatch();
   const handleClick = () => {
     dispatch(profileDrawer(false));
   };
-
+  
   return (
     <div className="drawer-profile">
       <div className="drawer-profile-header">

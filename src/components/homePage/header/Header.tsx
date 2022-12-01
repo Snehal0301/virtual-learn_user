@@ -10,7 +10,7 @@ import {
   settingsIcon,
 } from '../../../utils/svgIcons';
 import { useDispatch, useSelector } from 'react-redux';
-import { headerProfile, profileDrawer } from '../../../redux/reducers/headerProfileOptions';
+import { headerProfile, profileDrawer} from '../../../redux/reducers/headerProfileOptions';
 import Drawer from 'react-modern-drawer'
 import 'react-modern-drawer/dist/index.css'
 import Profile from './profile/Profile';
@@ -21,11 +21,20 @@ import Terms from "./terms/Terms";
 
 const Header = () => {
   // const [isOpen, setIsOpen] = useState(false)
+const [setting, setSetting] = useState(false);
+
   const handleClick = () => {
     // setIsOpen(!isOpen)
     dispatch(profileDrawer(true))
     dispatch(headerProfile(false))
+    setSetting(false)
   }
+  const handleSetting = () => {
+    // setIsOpen(!isOpen)
+    dispatch(profileDrawer(true));
+    dispatch(headerProfile(false));
+    setSetting(true)
+  };
   const dispatch = useDispatch();
   const headerOptions = useSelector((state: any) => state.headerProfile.value);
   const profileDrawerState = useSelector((state: any) => state.headerProfile.drawer);
@@ -45,7 +54,7 @@ const Header = () => {
         {
           <div className="header-options">
             <div className="header-optionsBell">{bellIcon}</div>
-            <div className="header-settings" onClick={handleClick}>
+            <div className="header-settings" onClick={handleSetting}>
               {settingsIcon}
             </div>
             <div className="header-profilePic">
@@ -71,11 +80,14 @@ const Header = () => {
                     <div className="header-profileOptiontext">My Course</div>
                   </div>
 
-                  <div className="header-profileOption  header-profileOptionBorder" onClick={handleClick}>
-                    <div className="header-profileOptionIcon">{profileIcon}</div>
-                    <div className="header-profileOptiontext"
-                     
-                    >My Profile</div>
+                  <div
+                    className="header-profileOption  header-profileOptionBorder"
+                    onClick={handleClick}
+                  >
+                    <div className="header-profileOptionIcon">
+                      {profileIcon}
+                    </div>
+                    <div className="header-profileOptiontext">My Profile</div>
                   </div>
 
                   <div className="header-profileOption">
@@ -91,15 +103,16 @@ const Header = () => {
       <Drawer
         open={profileDrawerState}
         onClose={handleClick}
-        direction='right'
-        className=''
+        direction="right"
+        className=""
         style={{
-          width: '25rem'
+          width: "25rem",
         }}
       >
         {/* <Profile /> */}
-        {/* <Settings/> */}
-        <PrivacyPolicy/>
+        {setting ? <Settings /> : <Profile />}
+        {/* <Settings /> */}
+        {/* <PrivacyPolicy/> */}
         {/* <Terms/> */}
       </Drawer>
     </>
