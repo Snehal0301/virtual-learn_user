@@ -14,7 +14,7 @@ const reducers = combineReducers({
 const persistConfig = {
   key: 'root',
   storage,
-  blacklist: ['loginConditions'],
+  blacklist: [],
 }
 
 const persistedReducer = persistReducer(persistConfig, reducers)

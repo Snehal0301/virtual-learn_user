@@ -9,10 +9,20 @@ import RegistrationForm from '../components/onboarding/registration/registration
 import LoginProtected from './loginProtected'
 import LoginForgotPW from '../components/onboarding/login/login-forgotPW/LoginForgotPW'
 import LoginVerfication from '../components/onboarding/login/login-verification/login-otp/LoginOtp'
+import LoginPassword from '../components/onboarding/login/login-verification/login-password/LoginPassword'
+import PasswordChanged from '../views/onboarding/password-changed/PasswordChanged'
 import { useSelector } from 'react-redux'
 
 const Router = () => {
   const showOtp = useSelector((state: any) => state.loginConditions.value)
+  const changePass = useSelector(
+    (state: any) => state.loginConditions.passChange,
+  )
+  const changePassSuccess = useSelector(
+    (state: any) => state.loginConditions.successPassChange,
+  )
+
+  console.log(changePassSuccess)
 
   return (
     <>
@@ -32,9 +42,32 @@ const Router = () => {
               </LoginProtected>
             }
           />
+          <Route
+            path="changePassword"
+            element={
+              <LoginProtected
+                redirectTo="/onboarding/login"
+                condition={changePass}
+              >
+                <LoginPassword />
+              </LoginProtected>
+            }
+          />
 
           <Route path="register" element={<RegistrationForm />} />
         </Route>
+
+        <Route
+          path="passwordChangedSuccessfully"
+          element={
+            <LoginProtected
+              redirectTo="/onboarding/login"
+              condition={changePassSuccess}
+            >
+              <PasswordChanged />
+            </LoginProtected>
+          }
+        />
         <Route
           path="/"
           element={
