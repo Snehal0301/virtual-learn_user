@@ -7,6 +7,7 @@
   gap: 8%;
   padding: 0 10%;
   justify-content: space-between;
+  z-index: 555;
 }
 
 .header-logo {
@@ -67,13 +68,14 @@
   opacity: 0.3;
 }
 
-.header-profilePic > img {
+.header-profilePic>img {
   width: 40px;
   height: 40px;
   border-radius: 50%;
   background-size: cover;
   cursor: pointer;
 }
+
 .header-optionsBell {
   cursor: pointer;
 }
@@ -113,3 +115,4 @@
 .header-profileOptionBorder {
   border-bottom: 1px solid #042c5c20;
 }
+

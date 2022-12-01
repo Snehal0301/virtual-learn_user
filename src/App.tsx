@@ -2,6 +2,10 @@ import { useDispatch } from 'react-redux'
 import './App.css'
 import { headerProfile } from './redux/reducers/headerProfileOptions'
 import Router from './router/Router'
+import HomePage from './views/dashboard/HomePage'
+import Onboarding from './views/onboarding/onboarding'
+import PasswordChanged from './views/onboarding/password-changed/PasswordChanged'
+import Success_Page from './views/onboarding/success_page/Success_Page'
 
 const App = () => {
   const dispatch = useDispatch()
@@ -12,7 +16,11 @@ const App = () => {
         dispatch(headerProfile(false))
       }}
     >
-      <Router />
+      {/* <Router /> */}
+      {/* <Onboarding /> */}
+      <HomePage />  
+      {/* <Success_Page/> */}
+      {/* <PasswordChanged/> */}
     </div>
   )
 }

@@ -32,7 +32,9 @@
     --error: #ea2626;
     --success: #12a73b;
     --inputBlue: #123779;
-    --blueFont: #6e8fca;
+    --blueFont: #6E8FCA;
+    --drawerBlueClr: #042C5C;
+    --profileBlueCLr: #36B6F1
 }
 
 body {
