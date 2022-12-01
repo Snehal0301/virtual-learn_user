@@ -101,13 +101,6 @@ const Header = () => {
                       <div className="header-profileOptiontext">Logout</div>
                     </div>
 
-                  <div className="header-profileOption  header-profileOptionBorder" onClick={handleClick}>
-                    <div className="header-profileOptionIcon">{profileIcon}</div>
-                    <div className="header-profileOptiontext"
-
-                    >My Profile</div>
-                  </div>
-
                   </div>
                 )
               }
