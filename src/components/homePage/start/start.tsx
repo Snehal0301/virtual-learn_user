@@ -1,7 +1,8 @@
 import './Start.css';
-import React from 'react';
+import React, { useState } from 'react';
 
 const Start = () => {
+
   return (
     <div className="start">
       <div className="start-greeting">Hello!</div>
@@ -12,7 +13,8 @@ const Start = () => {
       <div className="start-courseChoice">Course choice</div>
       <div className="start-courseChoice">Top courses in business</div>
       <div className="start-courseChoice">Top courses in design</div>
-    </div>
+      <button onClick={() => alert("Clicked")}>Click me</button>
+    </div >
   );
 };
 

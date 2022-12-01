@@ -16,7 +16,7 @@ const App = () => {
       }}
     >
       {/* <Onboarding /> */}
-      <HomePage />
+      <HomePage />  
       {/* <Success_Page/> */}
       {/* <PasswordChanged/> */}
     </div>
