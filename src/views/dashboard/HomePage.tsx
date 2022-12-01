@@ -1,4 +1,5 @@
 import Header from '../../components/homePage/header/Header';
+import Start from '../../components/homePage/start/start';
 import './HomePage.css';
 
 const HomePage = () => {
@@ -8,7 +9,7 @@ const HomePage = () => {
         <Header />
       </div>
       <div className="homePageBody">
-        <h1>Body</h1>
+        <Start />
       </div>
     </div>
   );
