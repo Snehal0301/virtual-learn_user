@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import 'react-modern-drawer/dist/index.css'
+
 import './Header.css';
 import {
   bellIcon,
@@ -13,6 +15,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { headerProfile } from '../../../redux/reducers/headerProfileOptions';
 
 const Header = () => {
+
   const dispatch = useDispatch();
 
   const headerOptions = useSelector((state: any) => state.headerProfile.value);
@@ -31,7 +34,7 @@ const Header = () => {
       </form>
       {
         <div className="header-options">
-          <div className="header-optionsBell">{bellIcon}</div>
+          <div className="header-optionsBell" >{bellIcon} </div>
           <div className="header-settings">{settingsIcon}</div>
           <div className="header-profilePic">
             <img
