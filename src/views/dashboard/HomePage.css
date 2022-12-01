@@ -1,0 +1,17 @@
+.homePageNavbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 80px;
+}
+
+.homePageBody {
+  position: relative;
+  top: 80px;
+  z-index: -20;
+}
+
+.homePageBody {
+  padding: 25px 10%;
+}
