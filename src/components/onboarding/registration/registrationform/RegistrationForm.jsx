@@ -1,11 +1,11 @@
-import "../registrationform/RegistrationForm.css";
-import React from "react";
-import { Formik, useFormik } from "formik";
-import { useNavigate } from "react-router-dom";
-import { facebook, google } from "../../../../utils/svg";
-import { mobilenumberSchema } from "./schema/MobileSchema";
-import { useDispatch } from "react-redux";
-import { registerOtp } from "../../../../redux/reducers/loginConditions";
+import '../registrationform/RegistrationForm.css';
+import React from 'react';
+import { Formik, useFormik } from 'formik';
+import { useNavigate } from 'react-router-dom';
+import { facebook, google } from '../../../../utils/svg';
+import { mobilenumberSchema } from './schema/MobileSchema';
+import { useDispatch } from 'react-redux';
+import { registerOtp } from '../../../../redux/reducers/Conditions';
 
 const RegistrationForm = () => {
   const navigate = useNavigate();
@@ -14,14 +14,14 @@ const RegistrationForm = () => {
   const { values, errors, handleChange, touched, handleBlur, handleSubmit } =
     useFormik({
       initialValues: {
-        mobilenumber: "",
+        mobilenumber: '',
       },
       validationSchema: mobilenumberSchema,
       onSubmit: (values, action) => {
         console.log(values);
         action.resetForm();
         dispatch(registerOtp(true));
-        navigate("/onboarding/registerOtp");
+        navigate('/onboarding/registerOtp');
       },
     });
 
@@ -68,10 +68,10 @@ const RegistrationForm = () => {
           <span
             className="login-text"
             onClick={() => {
-              navigate("/onboarding/login");
+              navigate('/onboarding/login');
             }}
           >
-            {" "}
+            {' '}
             Login
           </span>
         </span>

@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import './Header.css'
+import React, { useState } from 'react';
+import './Header.css';
 import {
   bellIcon,
   graduationCapIcon,
@@ -10,39 +10,45 @@ import {
   settingsIcon,
 } from '../../../utils/svgIcons';
 import { useDispatch, useSelector } from 'react-redux';
-import { headerProfile, profileDrawer } from '../../../redux/reducers/headerProfileOptions';
-import Drawer from 'react-modern-drawer'
-import 'react-modern-drawer/dist/index.css'
+import {
+  headerProfile,
+  profileDrawer,
+} from '../../../redux/reducers/headerProfileOptions';
+import Drawer from 'react-modern-drawer';
+import 'react-modern-drawer/dist/index.css';
 import Profile from './profile/Profile';
 import Notification from './notification/Notification';
-
+import { searchFocus } from '../../../redux/reducers/headerProfileOptions';
 import EditProfile from './edit-profile/EditProfile';
 
 const Header = () => {
   // const [isOpen, setIsOpen] = useState(false)
 
-  const [notifydata, setnotifydata] = useState(false)
+  const [notifydata, setnotifydata] = useState(false);
   const handleClick = () => {
     // setIsOpen(!isOpen)
-    dispatch(profileDrawer(true))
-    dispatch(headerProfile(false))
-    setnotifydata(false)
-
-  }
+    dispatch(profileDrawer(true));
+    dispatch(headerProfile(false));
+    setnotifydata(false);
+  };
 
   const handlenotify = () => {
     // setIsOpen(!isOpen)
-    dispatch(profileDrawer(true))
-    dispatch(headerProfile(false))
-    setnotifydata(true)
-  }
+    dispatch(profileDrawer(true));
+    dispatch(headerProfile(false));
+    setnotifydata(true);
+  };
   const dispatch = useDispatch();
 
   const headerOptions = useSelector((state: any) => state.headerProfile.value);
-  const profileDrawerState = useSelector((state: any) => state.headerProfile.drawer);
+  const profileDrawerState = useSelector(
+    (state: any) => state.headerProfile.drawer
+  );
+  const searchFieldFocus = useSelector(
+    (state: any) => state.headerProfile.searchFocused
+  );
 
-
-
+  console.log('search', searchFieldFocus);
   return (
     <>
       <div className="header">
@@ -52,12 +58,20 @@ const Header = () => {
             type="text"
             className="header-searchField"
             placeholder="Search"
+            onFocus={() => {
+              dispatch(searchFocus(true));
+            }}
+            onBlur={() => {
+              dispatch(searchFocus(false));
+            }}
           />
           <div className="header-searchIcon">{searchIcon}</div>
         </form>
         {
           <div className="header-options">
-            <div className="header-optionsBell" onClick={handlenotify}  >{bellIcon}</div>
+            <div className="header-optionsBell" onClick={handlenotify}>
+              {bellIcon}
+            </div>
             <div className="header-settings">{settingsIcon}</div>
             <div className="header-profilePic">
               <img
@@ -68,42 +82,42 @@ const Header = () => {
                   dispatch(headerProfile(!headerOptions));
                 }}
               />
-              {
-                headerOptions &&
-                (
+              {headerOptions && (
+                <div
+                  className="header-profileOptions"
+                  onClick={(e: any) => {
+                    e.stopPropagation();
+                  }}
+                >
+                  <div className="header-profileOption header-profileOptionBorder">
+                    <div className="header-profileOptionIcon">
+                      {graduationCapIcon}
+                    </div>
+                    <div className="header-profileOptiontext">My Course</div>
+                  </div>
+
                   <div
-                    className="header-profileOptions"
-                    onClick={(e: any) => {
-                      e.stopPropagation();
+                    className="header-profileOption  header-profileOptionBorder"
+                    onClick={handleClick}
+                  >
+                    <div className="header-profileOptionIcon">
+                      {profileIcon}
+                    </div>
+                    <div className="header-profileOptiontext">My Profile</div>
+                  </div>
+
+                  <div
+                    className="header-profileOption"
+                    onClick={() => {
+                      localStorage.setItem('auth', 'false');
+                      window.location.reload();
                     }}
                   >
-                    <div className="header-profileOption header-profileOptionBorder">
-                      <div className="header-profileOptionIcon">
-                        {graduationCapIcon}
-                      </div>
-                      <div className="header-profileOptiontext">My Course</div>
-                    </div>
-
-                    <div className="header-profileOption  header-profileOptionBorder" onClick={handleClick}>
-                      <div className="header-profileOptionIcon">{profileIcon}</div>
-                      <div className="header-profileOptiontext"
-                      >My Profile</div>
-                    </div>
-
-                    <div
-                      className="header-profileOption"
-                      onClick={() => {
-                        localStorage.setItem('auth', 'false')
-                        window.location.reload()
-                      }}
-                    >
-                      <div className="header-profileOptionIcon">{logoutIcon}</div>
-                      <div className="header-profileOptiontext">Logout</div>
-                    </div>
-
+                    <div className="header-profileOptionIcon">{logoutIcon}</div>
+                    <div className="header-profileOptiontext">Logout</div>
                   </div>
-                )
-              }
+                </div>
+              )}
             </div>
           </div>
         }
@@ -111,19 +125,15 @@ const Header = () => {
       <Drawer
         open={profileDrawerState}
         onClose={handleClick}
-        direction='right'
-        className=''
+        direction="right"
+        className=""
         style={{
-          width: '25rem'
+          width: '25rem',
         }}
       >
-        {
-          notifydata ? <Notification /> : <Profile />
-        }
-
-
+        {notifydata ? <Notification /> : <Profile />}
       </Drawer>
     </>
   );
-}
+};
 export default Header;
