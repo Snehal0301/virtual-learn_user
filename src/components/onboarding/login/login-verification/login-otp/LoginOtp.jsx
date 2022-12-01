@@ -1,22 +1,33 @@
 import "./LoginOtp.css";
 import OTPInput, { ResendOTP } from "otp-input-react";
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { changePassword } from "../../../../../redux/reducers/loginConditions";
+import {
+  changePassword,
+  registerOtp,
+} from "../../../../../redux/reducers/loginConditions";
 
 const LoginVerfication = () => {
   const [OTP, setOTP] = useState("");
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const location = useLocation();
+
+  console.log("location", location.pathname);
 
   const changePass = useSelector((state) => state.loginConditions.passChange);
 
   const submitHandler = (e) => {
     e.preventDefault();
-    dispatch(changePassword(true));
-    navigate("/onboarding/changePassword");
+    if (location.pathname === "/onboarding/registerOtp") {
+      dispatch(registerOtp(true));
+      navigate("/onboarding/personalDetails");
+    } else {
+      dispatch(changePassword(true));
+      navigate("/onboarding/changePassword");
+    }
   };
 
   useEffect(() => {
