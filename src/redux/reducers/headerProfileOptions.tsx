@@ -2,7 +2,8 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState: any = {
   value: false,
-  drawer:false
+  drawer: false,
+  
 };
 
 export const showHeaderProfile = createSlice({

@@ -14,6 +14,10 @@ import { headerProfile, profileDrawer } from '../../../redux/reducers/headerProf
 import Drawer from 'react-modern-drawer'
 import 'react-modern-drawer/dist/index.css'
 import Profile from './profile/Profile';
+import Settings from "./settings/Settings";
+import PrivacyPolicy from "./privacypolicy/PrivacyPolicy";
+import Terms from "./terms/Terms";
+
 
 const Header = () => {
   // const [isOpen, setIsOpen] = useState(false)
@@ -93,7 +97,10 @@ const Header = () => {
           width: '25rem'
         }}
       >
-        <Profile />
+        {/* <Profile /> */}
+        {/* <Settings/> */}
+        <PrivacyPolicy/>
+        {/* <Terms/> */}
       </Drawer>
     </>
   );
