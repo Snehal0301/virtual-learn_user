@@ -1,44 +1,41 @@
-import React, { useState } from 'react'
-import { info_btn } from '../../../../utils/svgIcons'
-import './PersonalDetails.css'
-import { signupSchema } from './schema'
-import { Formik, useFormik } from 'formik'
-import ReactTooltip from 'react-tooltip'
-import { useDispatch } from 'react-redux'
-import { useNavigate } from 'react-router-dom'
-import { registerPersonalDetails } from '../../../../redux/reducers/loginConditions'
+import React, { useState } from 'react';
+import { info_btn } from '../../../../utils/svgIcons';
+import './PersonalDetails.css';
+import { signupSchema } from './schema';
+import { Formik, useFormik } from 'formik';
+import ReactTooltip from 'react-tooltip';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import {
+  registerPersonalDetails,
+  registerSuccess,
+} from '../../../../redux/reducers/loginConditions';
 
 const PersonalDetails = () => {
-  const [personaldata, setpersonaldata] = useState({})
+  const [personaldata, setpersonaldata] = useState({});
 
-  const dispatch = useDispatch()
-  const navigate = useNavigate()
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-  const {
-    values,
-    errors,
-    handleChange,
-    touched,
-    handleBlur,
-    handleSubmit,
-  } = useFormik({
-    initialValues: {
-      email: '',
-      UserName: '',
-      password: '',
-      ConfirmPassword: '',
-      fullName: '',
-      mobileNumber: '',
-    },
-    validationSchema: signupSchema,
-    onSubmit: (values: any, action: any) => {
-      // console.log(values)
-      setpersonaldata(values)
-      action.resetForm()
-      dispatch(registerPersonalDetails(true))
-      navigate('/passwordChangedSuccessfully')
-    },
-  })
+  const { values, errors, handleChange, touched, handleBlur, handleSubmit } =
+    useFormik({
+      initialValues: {
+        email: '',
+        UserName: '',
+        password: '',
+        ConfirmPassword: '',
+        fullName: '',
+        mobileNumber: '',
+      },
+      validationSchema: signupSchema,
+      onSubmit: (values: any, action: any) => {
+        // console.log(values)
+        setpersonaldata(values);
+        action.resetForm();
+        dispatch(registerSuccess(true));
+        navigate('/accountCreatedSuccessfully');
+      },
+    });
 
   return (
     <div className="personaldetails-outerRectangle">
@@ -201,7 +198,7 @@ const PersonalDetails = () => {
         </form>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default PersonalDetails
+export default PersonalDetails;
