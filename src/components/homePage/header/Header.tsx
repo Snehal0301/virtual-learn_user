@@ -10,22 +10,23 @@ import {
   settingsIcon,
 } from '../../../utils/svgIcons';
 import { useDispatch, useSelector } from 'react-redux';
-import { headerProfile } from '../../../redux/reducers/headerProfileOptions';
+import { headerProfile, profileDrawer } from '../../../redux/reducers/headerProfileOptions';
 import Drawer from 'react-modern-drawer'
-
-//import styles 👇
 import 'react-modern-drawer/dist/index.css'
+import Profile from './profile/Profile';
 
 
 const Header = () => {
-  const [isOpen, setIsOpen] = React.useState(false)
+  // const [isOpen, setIsOpen] = useState(false)
   const handleClick = () => {
-    setIsOpen(!isOpen)
+    // setIsOpen(!isOpen)
+    dispatch(profileDrawer(true))
     dispatch(headerProfile(false))
   }
   const dispatch = useDispatch();
 
   const headerOptions = useSelector((state: any) => state.headerProfile.value);
+  const profileDrawerState = useSelector((state: any) => state.headerProfile.drawer);
 
   return (
     <>
@@ -66,10 +67,10 @@ const Header = () => {
                     <div className="header-profileOptiontext">My Course</div>
                   </div>
 
-                  <div className="header-profileOption  header-profileOptionBorder">
+                  <div className="header-profileOption  header-profileOptionBorder" onClick={handleClick}>
                     <div className="header-profileOptionIcon">{profileIcon}</div>
                     <div className="header-profileOptiontext"
-                      onClick={handleClick}
+                     
                     >My Profile</div>
                   </div>
 
@@ -84,16 +85,15 @@ const Header = () => {
         }
       </div>
       <Drawer
-        open={isOpen}
+        open={profileDrawerState}
         onClose={handleClick}
         direction='right'
-        className='bla bla bla'
+        className=''
         style={{
-          width: '25rem',
-          
+          width: '25rem'
         }}
       >
-        <div>hello</div>
+        <Profile />
       </Drawer>
     </>
   );
