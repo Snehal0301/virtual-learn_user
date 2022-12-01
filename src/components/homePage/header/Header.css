@@ -123,3 +123,27 @@
   justify-content: flex-end;
   cursor: pointer;
 }
+
+.header-searchIconButton {
+  position: absolute !important;
+  background: none;
+  border: none;
+  margin: 0;
+  padding: 0;
+  top: 16px;
+  right: 17px;
+  width: 73px;
+  border-radius: 22px;
+  /* width: unset !important; */
+  background-color: var(--btnClr);
+  height: 44px;
+  cursor: pointer;
+}
+
+.header-searchFieldPadding {
+  padding-left: 22px !important;
+}
+
+.headerSearchFocus {
+  height: auto !important;
+}

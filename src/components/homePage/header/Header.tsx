@@ -52,18 +52,27 @@ const Header = () => {
   console.log('search', searchFieldFocus);
   return (
     <>
-      <div className="header">
+      <div className={searchFieldFocus ? 'header headerSearchFocus' : 'header'}>
         <div className="header-logo">{headerLogo}</div>
         <form className="header-search">
           <input
             type="text"
-            className="header-searchField"
+            className={
+              searchFieldFocus
+                ? 'header-searchField header-searchFieldPadding'
+                : 'header-searchField'
+            }
             placeholder="Search"
             onFocus={() => {
               dispatch(searchFocus(true));
             }}
           />
-          <div className="header-searchIcon">{searchIcon}</div>
+          {!searchFieldFocus && (
+            <div className="header-searchIcon">{searchIcon}</div>
+          )}
+          {searchFieldFocus && (
+            <button className="header-searchIconButton">{searchIcon}</button>
+          )}
         </form>
         {!searchFieldFocus ? (
           <div className="header-options">
