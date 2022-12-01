@@ -1,3 +1,10 @@
+.homePage{
+  min-height: 100vh;
+  z-index: 0;
+  position: relative;
+}
+
+
 .homePageNavbar {
   position: fixed;
   top: 0;
@@ -10,8 +17,8 @@
   position: relative;
   top: 80px;
   z-index: -20;
-}
-
-.homePageBody {
   padding: 25px 10%;
 }
+
+
+
