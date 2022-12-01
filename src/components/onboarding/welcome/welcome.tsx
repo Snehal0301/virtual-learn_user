@@ -1,6 +1,9 @@
 import './welcome.css'
+import { useNavigate } from 'react-router-dom'
 
 const WelcomeScreen = () => {
+  const navigate = useNavigate()
+
   return (
     <div className="welcomeScreen">
       <div className="welcome-title">Welcome</div>
@@ -8,9 +11,23 @@ const WelcomeScreen = () => {
         Are you ready to study easily in a virtual way?
       </div>
       <div className="welcome-btns">
-        <button className="welcome-btn">Login</button>
+        <button
+          className="welcome-btn"
+          onClick={() => {
+            navigate('login')
+          }}
+        >
+          Login
+        </button>
         Or
-        <button className="welcome-btn">Register</button>
+        <button
+          className="welcome-btn"
+          onClick={() => {
+            navigate('register')
+          }}
+        >
+          Register
+        </button>
       </div>
       <div className="welcome-footer">
         By creating new account, you agree to our{' '}

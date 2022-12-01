@@ -1,6 +1,7 @@
 import './onboarding.css'
 import { Slide } from 'react-slideshow-image'
 import { onboardingLogo } from '../../utils/svgIcons'
+import { Outlet } from 'react-router-dom'
 import WelcomeScreen from '../../components/onboarding/welcome/welcome'
 import LoginVerfication from '../../components/onboarding/login/login-verification/login-otp/LoginOtp'
 import LoginPassword from '../../components/onboarding/login/login-verification/login-password/LoginPassword'
@@ -77,6 +78,7 @@ const Onboarding = () => {
           {/* <LoginForgotPW /> */}
           {/* <LoginPassword/>  */}
           <PersonalDetails/>
+          <Outlet />
         </div>
       </div>
     </div>
