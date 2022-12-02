@@ -18,21 +18,21 @@ import {
   notificationSection,
   profileDrawer,
   profileSection,
-  settingsSection
+  settingsSection,
 } from '../../../redux/reducers/headerProfileOptions';
-import Drawer from 'react-modern-drawer'
-import 'react-modern-drawer/dist/index.css'
+import Drawer from 'react-modern-drawer';
+import 'react-modern-drawer/dist/index.css';
 import Profile from './profile/Profile';
-import Settings from "./settings/Settings";
-import PrivacyPolicy from "./privacypolicy/PrivacyPolicy";
-import Terms from "./terms/Terms";
+import Settings from './settings/Settings';
+import PrivacyPolicy from './privacypolicy/PrivacyPolicy';
+import Terms from './terms/Terms';
 import Notification from './notification/Notification';
 import { searchFocus } from '../../../redux/reducers/headerProfileOptions';
 import EditProfile from './edit-profile/EditProfile';
 
 const Header = () => {
   // const [isOpen, setIsOpen] = useState(false)
-  const [setting, setSetting] = useState(false);
+  const [onChange, setOnChange] = useState('');
 
   const topSearch = [
     'Python',
@@ -58,23 +58,50 @@ const Header = () => {
     'Teaching',
   ];
 
+  const searchdata: any = [
+    {
+      title: 'User Experience Design Fundamentals',
+      img: require('../../../assets/images/dummy/1.png'),
+      chapters: '14 Chapter',
+      cat: 'Design',
+    },
+    {
+      title: 'Digital Marketing for 2021 Masterclass',
+      img: require('../../../assets/images/dummy/2.png'),
+      chapters: '21 Chapter',
+      cat: 'Design',
+    },
+    {
+      title: 'Graphic Design Masterclass - Learn GREAT Design',
+      img: require('../../../assets/images/dummy/3.png'),
+      chapters: '11 Chapter',
+      cat: 'Design',
+    },
+    {
+      title: 'Study on Design Principles and 7 features ',
+      img: require('../../../assets/images/dummy/4.png'),
+      chapters: '7 Chapter',
+      cat: 'Design',
+    },
+  ];
+
   const [notifydata, setnotifydata] = useState(false);
   const handleProfileClick = () => {
     dispatch(profileDrawer(true));
     dispatch(headerProfile(false));
-    dispatch(profileSection(true))
+    dispatch(profileSection(true));
   };
 
   const handlenotify = () => {
     dispatch(profileDrawer(true));
     dispatch(headerProfile(false));
-    dispatch(notificationSection(true))
+    dispatch(notificationSection(true));
   };
 
   const handleSetting = () => {
     dispatch(profileDrawer(true));
     dispatch(headerProfile(false));
-    dispatch(settingsSection(true))
+    dispatch(settingsSection(true));
   };
   const dispatch = useDispatch();
   const headerOptions = useSelector((state: any) => state.headerProfile.value);
@@ -82,13 +109,23 @@ const Header = () => {
   const searchFieldFocus = useSelector(
     (state: any) => state.headerProfile.searchFocused
   );
-  const profileDrawerState = useSelector((state: any) => state.headerProfile.drawer);
-  const profileSectionState = useSelector((state: any) => state.headerProfile.profile);
-  const notificationSectionState = useSelector((state: any) => state.headerProfile.notification);
-  const settingsSectionState = useSelector((state: any) => state.headerProfile.settings);
+  const profileDrawerState = useSelector(
+    (state: any) => state.headerProfile.drawer
+  );
+  const profileSectionState = useSelector(
+    (state: any) => state.headerProfile.profile
+  );
+  const notificationSectionState = useSelector(
+    (state: any) => state.headerProfile.notification
+  );
+  const settingsSectionState = useSelector(
+    (state: any) => state.headerProfile.settings
+  );
 
+  const changeHandler = (e: any) => {
+    setOnChange(e.target.value);
+  };
 
-  console.log('search', searchFieldFocus);
   return (
     <>
       <div className="header-parent">
@@ -108,6 +145,7 @@ const Header = () => {
               onFocus={() => {
                 dispatch(searchFocus(true));
               }}
+              onChange={changeHandler}
             />
             {!searchFieldFocus && (
               <div className="header-searchIcon">{searchIcon}</div>
@@ -122,7 +160,9 @@ const Header = () => {
               <div className="header-optionsBell" onClick={handlenotify}>
                 {bellIcon}
               </div>
-              <div className="header-settings" onClick={handleSetting}>{settingsIcon}</div>
+              <div className="header-settings" onClick={handleSetting}>
+                {settingsIcon}
+              </div>
               <div className="header-profilePic">
                 <img
                   src={require('../../../assets/images/dhoni.png')}
@@ -146,10 +186,14 @@ const Header = () => {
                       <div className="header-profileOptiontext">My Course</div>
                     </div>
 
-                    <div className="header-profileOption  header-profileOptionBorder" onClick={handleProfileClick}>
-                      <div className="header-profileOptionIcon">{profileIcon}</div>
-                      <div className="header-profileOptiontext"
-                      >My Profile</div>
+                    <div
+                      className="header-profileOption  header-profileOptionBorder"
+                      onClick={handleProfileClick}
+                    >
+                      <div className="header-profileOptionIcon">
+                        {profileIcon}
+                      </div>
+                      <div className="header-profileOptiontext">My Profile</div>
                     </div>
 
                     <div
@@ -185,47 +229,88 @@ const Header = () => {
           )}
           {searchFieldFocus && (
             <div className="header-categoryContents">
-              <div className="headerSearchCategoriesTopSearch">
-                <div className="headerSearchCategoriesTopSearchTitle">
-                  Top Search
-                </div>
-                <div className="headerSearchCategoriesTopSearchBody">
-                  {topSearch.map((ele: any, i: any) => {
-                    return (
+              {false ? (
+                <>
+                  {!(onChange.length > 0) ? (
+                    <div className="headerSearchCategoriesTopSearch">
+                      <div className="headerSearchCategoriesTopSearchTitle">
+                        Top Search
+                      </div>
+                      <div className="headerSearchCategoriesTopSearchBody">
+                        {topSearch.map((ele: any, i: any) => {
+                          return (
+                            <div
+                              className="headerSearchCategoriesTopSearchesParent"
+                              key={i}
+                            >
+                              <div className="headerSearchCategoriesTopSearchesName">
+                                {ele}
+                              </div>
+                            </div>
+                          );
+                        })}
+                      </div>
+                    </div>
+                  ) : (
+                    <div className="headerSearchcategories-nosearchResults">
                       <div
-                        className="headerSearchCategoriesTopSearchesParent"
-                        key={i}
+                        className="headerSearchCategoriesTopSearchTitle"
+                        style={{ fontSize: '32px' }}
                       >
-                        <div className="headerSearchCategoriesTopSearchesName">
-                          {ele}
+                        No matching course
+                      </div>
+                      <div className="headerSearchcategories-TryDiffCourse">
+                        Try a different search or browse categories
+                      </div>
+                    </div>
+                  )}
+                  <div className="headerSearchCategoriesTopSearch">
+                    <div className="headerSearchCategoriesTopSearchTitle">
+                      Search from Categories
+                    </div>
+                    <div className="headerSearchCategoriesTopSearchBody">
+                      {topCategories.map((ele: any, i: any) => {
+                        return (
+                          <div
+                            className="headerSearchCategoriesTopSearchesParent"
+                            key={i}
+                          >
+                            <div className="headerSearchCategoriesTopSearchesIcon">
+                              {design}
+                            </div>
+                            <div className="headerSearchCategoriesTopSearchesName">
+                              {ele}
+                            </div>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  </div>
+                </>
+              ) : (
+                <div className="headerSearch-response">
+                  {searchdata.map((ele: any, i: number) => {
+                    return (
+                      <div className="headersearch-responseBody" key={i}>
+                        <div className="headerSearch-responsePic">
+                          <img src={ele.img} alt={ele.title} />
+                        </div>
+                        <div className="headerSearch-responseContainer">
+                          <div className="headerSearch-responseTitle">
+                            {ele.title}
+                          </div>
+                          <div className="headerSearch-responseChapters">
+                            {ele.chapters}
+                          </div>
+                          <div className="headerSearch-responseCategory">
+                            {ele.cat}
+                          </div>
                         </div>
                       </div>
                     );
                   })}
                 </div>
-              </div>
-              <div className="headerSearchCategoriesTopSearch">
-                <div className="headerSearchCategoriesTopSearchTitle">
-                  Search from Categories
-                </div>
-                <div className="headerSearchCategoriesTopSearchBody">
-                  {topCategories.map((ele: any, i: any) => {
-                    return (
-                      <div
-                        className="headerSearchCategoriesTopSearchesParent"
-                        key={i}
-                      >
-                        <div className="headerSearchCategoriesTopSearchesIcon">
-                          {design}
-                        </div>
-                        <div className="headerSearchCategoriesTopSearchesName">
-                          {ele}
-                        </div>
-                      </div>
-                    );
-                  })}
-                </div>
-              </div>
+              )}
             </div>
           )}
         </div>
@@ -237,13 +322,10 @@ const Header = () => {
           direction="right"
           enableOverlay={false}
           style={{
-            width: "25rem",
+            width: '25rem',
           }}
         >
-
-          {
-            profileSectionState && <Profile />
-          }
+          {profileSectionState && <Profile />}
 
           {/* {
             notificationSectionState && <Notification />
@@ -256,16 +338,14 @@ const Header = () => {
           {/* {setting ? <Settings /> : <Profile />} */}
           {/* <Settings /> */}
           {/* <PrivacyPolicy/> */}
-          <Terms/>
+          <Terms />
           {/* {
           notifydata ? <Notification /> : <Profile />
         } */}
-
-
         </Drawer>
       </div>
     </>
   );
-}
+};
 
 export default Header;
