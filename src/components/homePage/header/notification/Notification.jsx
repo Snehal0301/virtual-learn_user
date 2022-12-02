@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { closeProfile, editProfile } from '../../../../utils/svgIcons'
 import { useDispatch, useSelector } from 'react-redux'
-import { profileDrawer } from '../../../../redux/reducers/headerProfileOptions'
+import { notificationSection, profileDrawer, profileSection, settingsSection } from '../../../../redux/reducers/headerProfileOptions'
 import Switch from "react-switch";
 import './Notification.css'
 
@@ -10,12 +10,10 @@ const Notification = () => {
 
     const handleClick = () => {
         dispatch(profileDrawer(false))
+        dispatch(profileSection(false))
+        dispatch(notificationSection(false))
+        dispatch(settingsSection(false))
     }
-
-    const [checked, setChecked] = useState(false);
-    const handleChange = nextChecked => {
-        setChecked(nextChecked);
-    };
 
     const NotifyData = [
         {

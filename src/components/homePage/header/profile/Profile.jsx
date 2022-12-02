@@ -2,19 +2,22 @@ import React from 'react'
 import './Profile.css'
 import { closeProfile, editProfile, privacyIcon, rightArrowPrivacy } from '../../../../utils/svgIcons'
 import { useDispatch, useSelector } from 'react-redux'
-import { profileDrawer } from '../../../../redux/reducers/headerProfileOptions'
+import { notificationSection, profileDrawer, profileSection, settingsSection } from '../../../../redux/reducers/headerProfileOptions'
 
 const Profile = () => {
 
     const dispatch = useDispatch()
-    const handleClick = () => {
+    const handleProfileClose = () => {
         dispatch(profileDrawer(false))
+        dispatch(profileSection(false))
+        dispatch(notificationSection(false))
+        dispatch(settingsSection(false))
     }
 
     return (
         <div className='drawer-profile'>
             <div className="drawer-profile-header">
-                <div className="drawer-profile-clear" onClick={handleClick}>
+                <div className="drawer-profile-clear" onClick={handleProfileClose}>
                     {closeProfile}
                 </div>
 
@@ -90,7 +93,7 @@ const Profile = () => {
                                 {rightArrowPrivacy}
                             </div>
                         </div>
-                    </div>       
+                    </div>
                 </div>
             </div>
         </div>
