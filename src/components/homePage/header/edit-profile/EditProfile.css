@@ -1,0 +1,161 @@
+.drawer-profile {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.drawer-profile-header {
+    background-color: var(--drawerBlueClr);
+    padding: 30px;
+}
+
+.drawer-profile-clear {
+    cursor: pointer;
+}
+
+.editprofiletext {
+    font-family: "Proxima Nova Soft";
+    font-style: normal;
+    font-weight: 700;
+    font-size: 24px;
+    color: var(--primaryFontClr);
+    padding-top: 0.8em;
+}
+
+.editProfileImage {
+    text-align: center;
+    align-items: center;
+    padding-top: 20px;
+}
+
+.editProfileImage img {
+    height: 80px;
+    width: 80px;
+}
+
+.editProfileForm {
+    padding: 1rem 3rem;
+}
+
+.editPInput {
+    width: 100%;
+    margin-top: 1.5rem;
+    /* padding: 0.25rem; */
+    border: none;
+    border-bottom: 1px solid #072D5B;
+    transition: border-color 0.2s ease;
+    background-color: transparent;
+    color: #072D5B;
+    font-weight: 700;
+    font-family: Avenir;
+    font-size: 14px;
+
+
+}
+
+.editprofilelabel {
+    display: block;
+    transform: translate(0, -1.75rem);
+    font-size: 16px;
+    font-family: Avenir;
+
+}
+.editprofilelabelGender
+{
+    color: #7A7A7A;
+    font-size: 12px;
+    font-family: Avenir;
+    margin-top: 40px;
+}
+
+.editprofilelabel,
+.editPInput {
+    transition: all 0.2s;
+    touch-action: manipulation;
+
+}
+
+.editPInput:focus {
+    outline: none;
+    border-color: #6E8FCA;
+    font-family: Avenir;
+}
+
+#gender
+{
+    padding-top: 10px;
+    border: none;
+    border-bottom: 1px solid #072D5B;
+    outline: none;
+    margin-bottom: 17px;
+    color: #072D5B;
+    font-size: 16px;
+    font-family: Avenir;
+    font-weight: 700;
+    /* margin-left: -5px; */
+}
+@supports (not (-ms-ime-align:auto)) {
+    .editprofilelabel {
+        color: #7A7A7A;
+        transform: translate(0rem, -1.5rem);
+        transition: all 0.2s ease-out;
+    }
+
+    .editPInput:focus+label,
+    .editPInput:not(:placeholder-shown)+label {
+        color: #7A7A7A;
+        transform: translate(0, -2.55rem);
+    }
+}
+
+.editPbtn {
+    padding: 0.75rem 1.5rem;
+    border: none;
+    outline: none;
+    background-color: #EE5C4D;
+    color: var(--primaryFontClr);
+    font-weight: bold;
+    width: 100%;
+    margin-top: 15px;
+    border-radius: 6px;
+}
+
+.genderSection
+{
+    /* background-color: red; */
+    display: flex;
+    flex-direction: column;
+}
+.genderSection label{
+    color: #7A7A7A;
+    font-size: 16px;
+    font-family: Avenir;
+    margin-top: 12px;
+}
+option{
+    color: #072D5B;
+
+}
+.edit-error-line
+{
+    position: absolute;
+    background-color: red;
+    width: 100%;
+    height: 2px;
+    top: 40px;
+    padding-left: -4px;
+    left: 0px;
+}
+.edit-form-error{
+    color: rgb(255, 57, 57);
+    font-size: 14px;
+    width: 100%;
+    line-height: 1pt;
+    padding-left: 0px;
+    margin-top: -8px;
+}
+
+.edit-error-input
+{
+    position: relative;
+}

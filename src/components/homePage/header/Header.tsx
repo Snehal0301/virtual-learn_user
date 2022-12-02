@@ -256,7 +256,8 @@ const Header = () => {
           {/* {setting ? <Settings /> : <Profile />} */}
           {/* <Settings /> */}
           {/* <PrivacyPolicy/> */}
-          <Terms/>
+          {/* <Terms/> */}
+          <EditProfile/>
           {/* {
           notifydata ? <Notification /> : <Profile />
         } */}
