@@ -8,7 +8,7 @@ const RegistrationForm = () => {
   const { values, errors, handleChange, touched, handleBlur, handleSubmit } =
     useFormik({
       initialValues: {
-        mobilenumber: "",
+        Mobilenumber: "",
       },
       validationSchema: mobilenumberSchema,
       onSubmit: (values, action) => {
@@ -34,9 +34,9 @@ const RegistrationForm = () => {
           <input
             className="login-input"
             type="text"
-            id="mobilenumber"
-            name="mobilenumber"
-            value={values.mobilenumber}
+            id="Mobilenumber"
+            name="Mobilenumber"
+            value={values.Mobilenumber}
             onChange={handleChange}
             onBlur={handleBlur}
             placeholder=" "
@@ -44,10 +44,10 @@ const RegistrationForm = () => {
             required
           />
           <label className="login-password-label">Mobile Number</label>
-          {errors.mobilenumber && touched.mobilenumber ? (
+          {errors.Mobilenumber && touched.Mobilenumber ? (
             <>
               <div className="error-line"></div>
-              <p className="form-errors">{errors.mobilenumber}</p>
+              <p className="form-errors">{errors.Mobilenumber}</p>
             </>
           ) : null}
           </div>
