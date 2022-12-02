@@ -97,7 +97,7 @@
 @supports (not (-ms-ime-align:auto)) {
     .editprofilelabel {
         color: #7A7A7A;
-        transform: translate(0rem, -1.5rem);
+        transform: translate(0rem, -1.8rem);
         transition: all 0.2s ease-out;
     }
 
@@ -150,9 +150,9 @@ option{
     color: rgb(255, 57, 57);
     font-size: 14px;
     width: 100%;
-    line-height: 1pt;
+    /* line-height: 1pt; */
     padding-left: 0px;
-    margin-top: -8px;
+    margin-top: -15px;
 }
 
 .edit-error-input
