@@ -1,11 +1,11 @@
-import './LoginAuth.css';
-import { useNavigate } from 'react-router-dom';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import { facebookIcon, googleIcon } from '../../../../utils/svgIcons';
+import './LoginAuth.css'
+import { useNavigate } from 'react-router-dom'
+import { ToastContainer, toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
+import { facebookIcon, googleIcon } from '../../../../utils/svgIcons'
 
 const LoginAuth = () => {
-  const navigate = useNavigate();
+  const navigate = useNavigate()
   const showError = () =>
     toast(
       <div className="loginAuth-showError">
@@ -25,15 +25,21 @@ const LoginAuth = () => {
         hideProgressBar: true,
         pauseOnHover: true,
         draggable: true,
-      }
-    );
+      },
+    )
 
   const submitHandler = (e: any) => {
-    e.preventDefault();
-    localStorage.setItem('auth', 'true');
-    navigate('/');
-    window.location.reload();
-  };
+    e.preventDefault()
+    const credentials = {
+      userName: e.target.username.value,
+      password: e.target.password.value,
+    }
+
+    console.log('credentials', credentials)
+    // localStorage.setItem('auth', 'true')
+    // navigate('/')
+    // window.location.reload()
+  }
 
   return (
     <div className="loginAuth">
@@ -62,13 +68,13 @@ const LoginAuth = () => {
           </div>
           <div className="loginAuth-FormInput">
             <input
-              type="number"
-              name="phoneNum"
-              id="phoneNum"
-              placeholder="Enter your mobile number"
+              type="password"
+              name="password"
+              id="password"
+              placeholder="Enter your password"
               className="loginAuth-formInput"
             />
-            <label htmlFor="phoneNum">Mobile number</label>
+            <label htmlFor="password">Password</label>
           </div>
           <div
             className="loginAuth-noAccount"
@@ -81,7 +87,7 @@ const LoginAuth = () => {
             <span
               className="loginAuth-regLink"
               onClick={() => {
-                navigate('/onboarding/forgotPassword');
+                navigate('/onboarding/forgotPassword')
               }}
             >
               Forgot password?{' '}
@@ -94,7 +100,7 @@ const LoginAuth = () => {
           <span
             className="loginAuth-regLink"
             onClick={() => {
-              navigate('/onboarding/register');
+              navigate('/onboarding/register')
             }}
           >
             Register
@@ -104,7 +110,7 @@ const LoginAuth = () => {
       {/* onClick={showError} to call error */}
       <ToastContainer />
     </div>
-  );
-};
+  )
+}
 
-export default LoginAuth;
+export default LoginAuth
