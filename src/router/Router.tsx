@@ -36,7 +36,9 @@ const Router = () => {
   return (
     <>
       <Routes>
+        <Route path="*" element={<Navigate to="/" />} />
         <Route path="/onboarding" element={<Onboarding />}>
+          <Route path="*" element={<Navigate to="login" />} />
           <Route path="" element={<WelcomeScreen />} />
           <Route path="login" element={<LoginAuth />} />
           <Route path="forgotPassword" element={<LoginForgotPW />} />
@@ -64,6 +66,7 @@ const Router = () => {
           />
 
           <Route path="register" element={<RegistrationForm />} />
+
           <Route
             path="registerOtp"
             element={
