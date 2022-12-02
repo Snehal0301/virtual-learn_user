@@ -3,14 +3,18 @@ import { useNavigate } from 'react-router-dom'
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import { facebookIcon, googleIcon } from '../../../../utils/svgIcons'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { login } from '../../../../redux/reducers/loginSlice'
+import { useEffect, useState } from 'react'
 
 const LoginAuth = () => {
+  const [submitted, setSubmitted] = useState(false)
+
   const navigate = useNavigate()
   const dispatch = useDispatch()
+  const loginResponse = useSelector((state: any) => state.login)
 
-  const showError = () =>
+  const showError = (msg: any) =>
     toast(
       <div className="loginAuth-showError">
         <div className="loginAuth-showErrorIcon">
@@ -19,9 +23,7 @@ const LoginAuth = () => {
             alt="invalid"
           />
         </div>
-        <div className="loginAuth-showErrorMessage">
-          Invalid verification code, please try again
-        </div>
+        <div className="loginAuth-showErrorMessage">{msg}</div>
       </div>,
       {
         position: 'bottom-right',
@@ -47,6 +49,17 @@ const LoginAuth = () => {
     // localStorage.setItem('auth', 'true')
     // navigate('/')
     // window.location.reload()
+    setSubmitted(true)
+  }
+
+  useEffect(() => {
+    responseFunction()
+  }, [loginResponse && loginResponse.isRejected && loginResponse.message])
+
+  const responseFunction = () => {
+    if (loginResponse.message.error) {
+      showError(loginResponse.message.error)
+    }
   }
 
   return (

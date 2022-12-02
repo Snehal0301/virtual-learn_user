@@ -6,6 +6,7 @@ const initialState = {
   message: '',
   data: [],
   isSuccess: false,
+  isRejected: false,
   loading: false,
 }
 
@@ -45,7 +46,7 @@ export const loginSlice = createSlice({
     builder.addCase(login.rejected, (state, action) => {
       state.message = action.payload
       state.loading = false
-      state.isSuccess = false
+      state.isRejected = true
     })
   },
 })
