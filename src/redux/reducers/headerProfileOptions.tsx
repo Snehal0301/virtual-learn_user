@@ -3,6 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 const initialState: any = {
   value: false,
   drawer: false,
+  searchFocused: false,
   profile: false,
   notification: false,
   settings: false,
@@ -18,6 +19,9 @@ export const showHeaderProfile = createSlice({
     profileDrawer: (state, action) => {
       state.drawer = action.payload;
     },
+    searchFocus: (state, action) => {
+      state.searchFocused = action.payload;
+    },
     profileSection: (state, { payload }) => {
       state.profile = payload
     },
@@ -31,7 +35,7 @@ export const showHeaderProfile = createSlice({
 });
 
 // Action creators are generated for each case reducer function
-export const { headerProfile, profileDrawer, profileSection, notificationSection, settingsSection } =
+export const { headerProfile, profileDrawer,searchFocus, profileSection, notificationSection, settingsSection } =
   showHeaderProfile.actions;
 
 export default showHeaderProfile.reducer;

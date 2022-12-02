@@ -7,7 +7,7 @@ import {
   changePassword,
   registerOtp,
   registerPersonalDetails,
-} from '../../../../../redux/reducers/loginConditions';
+} from '../../../../../redux/reducers/Conditions';
 
 const LoginVerfication = () => {
   const [OTP, setOTP] = useState('');

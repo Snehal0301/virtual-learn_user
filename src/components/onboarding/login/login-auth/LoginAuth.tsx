@@ -1,11 +1,11 @@
-import './LoginAuth.css'
-import { useNavigate } from 'react-router-dom'
-import { ToastContainer, toast } from 'react-toastify'
-import 'react-toastify/dist/ReactToastify.css'
-import { facebookIcon, googleIcon } from '../../../../utils/svgIcons'
+import './LoginAuth.css';
+import { useNavigate } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { facebookIcon, googleIcon } from '../../../../utils/svgIcons';
 
 const LoginAuth = () => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const showError = () =>
     toast(
       <div className="loginAuth-showError">
@@ -25,8 +25,15 @@ const LoginAuth = () => {
         hideProgressBar: true,
         pauseOnHover: true,
         draggable: true,
-      },
-    )
+      }
+    );
+
+  const submitHandler = (e: any) => {
+    e.preventDefault();
+    localStorage.setItem('auth', 'true');
+    navigate('/');
+    window.location.reload();
+  };
 
   return (
     <div className="loginAuth">
@@ -39,7 +46,7 @@ const LoginAuth = () => {
         <button>{googleIcon}</button>
       </div>
       <div className="loginAuth-Form">
-        <form className="loginAuth-FormContainer">
+        <form className="loginAuth-FormContainer" onSubmit={submitHandler}>
           {' '}
           <div className="loginAuth-FormInput">
             <input
@@ -74,7 +81,7 @@ const LoginAuth = () => {
             <span
               className="loginAuth-regLink"
               onClick={() => {
-                navigate('/onboarding/forgotPassword')
+                navigate('/onboarding/forgotPassword');
               }}
             >
               Forgot password?{' '}
@@ -87,7 +94,7 @@ const LoginAuth = () => {
           <span
             className="loginAuth-regLink"
             onClick={() => {
-              navigate('/onboarding/register')
+              navigate('/onboarding/register');
             }}
           >
             Register
@@ -97,7 +104,7 @@ const LoginAuth = () => {
       {/* onClick={showError} to call error */}
       <ToastContainer />
     </div>
-  )
-}
+  );
+};
 
-export default LoginAuth
+export default LoginAuth;

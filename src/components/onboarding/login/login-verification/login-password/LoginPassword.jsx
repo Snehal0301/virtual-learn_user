@@ -1,14 +1,14 @@
-import "./LoginPassword.css";
-import React from "react";
-import { useFormik } from "formik";
-import * as Yup from "yup";
-import { useDispatch } from "react-redux";
-import { passChangeSuccess } from "../../../../../redux/reducers/loginConditions";
-import { useNavigate } from "react-router-dom";
+import './LoginPassword.css';
+import React from 'react';
+import { useFormik } from 'formik';
+import * as Yup from 'yup';
+import { useDispatch } from 'react-redux';
+import { passChangeSuccess } from '../../../../../redux/reducers/Conditions';
+import { useNavigate } from 'react-router-dom';
 
 const initialValues = {
-  password: "",
-  cpassword: "",
+  password: '',
+  cpassword: '',
 };
 const LoginPassword = () => {
   const dispatch = useDispatch();
@@ -18,22 +18,22 @@ const LoginPassword = () => {
     initialValues,
     validationSchema: Yup.object({
       password: Yup.string()
-        .min(6, "Password must be 6 characters long")
-        .matches(/[0-9]/, "Password must contain a number")
-        .matches(/[a-z]/, "Password must contain a lowercase letter")
-        .matches(/[A-Z]/, "Password must contain an uppercase letter")
-        .matches(/[^\w]/, "Password must contain a special symbol")
-        .required("Please Enter your password"),
+        .min(6, 'Password must be 6 characters long')
+        .matches(/[0-9]/, 'Password must contain a number')
+        .matches(/[a-z]/, 'Password must contain a lowercase letter')
+        .matches(/[A-Z]/, 'Password must contain an uppercase letter')
+        .matches(/[^\w]/, 'Password must contain a special symbol')
+        .required('Please Enter your password'),
       cpassword: Yup.string()
         .oneOf(
-          [Yup.ref("password  "), null],
+          [Yup.ref('password  '), null],
           'Must match "password" field value'
         )
-        .required("Please Enter your password"),
+        .required('Please Enter your password'),
     }),
     onSubmit: (values) => {
       dispatch(passChangeSuccess(true));
-      navigate("/passwordChangedSuccessfully");
+      navigate('/passwordChangedSuccessfully');
     },
   });
 

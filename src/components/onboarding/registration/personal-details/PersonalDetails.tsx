@@ -9,7 +9,7 @@ import { useNavigate } from 'react-router-dom';
 import {
   registerPersonalDetails,
   registerSuccess,
-} from '../../../../redux/reducers/loginConditions';
+} from '../../../../redux/reducers/Conditions';
 
 const PersonalDetails = () => {
   const [personaldata, setpersonaldata] = useState({});
