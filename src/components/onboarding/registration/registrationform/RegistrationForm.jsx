@@ -1,10 +1,16 @@
 import "../registrationform/RegistrationForm.css";
 import React from "react";
 import { Formik, useFormik } from "formik";
+import { useNavigate } from "react-router-dom";
 import { facebook, google } from "../../../../utils/svg";
 import { mobilenumberSchema } from "./schema/MobileSchema";
+import { useDispatch } from "react-redux";
+import { registerOtp } from "../../../../redux/reducers/loginConditions";
 
 const RegistrationForm = () => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
   const { values, errors, handleChange, touched, handleBlur, handleSubmit } =
     useFormik({
       initialValues: {
@@ -12,9 +18,10 @@ const RegistrationForm = () => {
       },
       validationSchema: mobilenumberSchema,
       onSubmit: (values, action) => {
-           console.log(values);
+        console.log(values);
         action.resetForm();
-    
+        dispatch(registerOtp(true));
+        navigate("/onboarding/registerOtp");
       },
     });
 
@@ -31,25 +38,25 @@ const RegistrationForm = () => {
 
         <form className="login-password-form" onSubmit={handleSubmit}>
           <div className="error-line-registration">
-          <input
-            className="login-input"
-            type="text"
-            id="mobilenumber"
-            name="mobilenumber"
-            value={values.mobilenumber}
-            onChange={handleChange}
-            onBlur={handleBlur}
-            placeholder=" "
-            autoComplete="off"
-            required
-          />
-          <label className="login-password-label">Mobile Number</label>
-          {errors.mobilenumber && touched.mobilenumber ? (
-            <>
-              <div className="error-line"></div>
-              <p className="form-errors">{errors.mobilenumber}</p>
-            </>
-          ) : null}
+            <input
+              className="login-input"
+              type="text"
+              id="mobilenumber"
+              name="mobilenumber"
+              value={values.mobilenumber}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              placeholder=" "
+              autoComplete="off"
+              required
+            />
+            <label className="login-password-label">Mobile Number</label>
+            {errors.mobilenumber && touched.mobilenumber ? (
+              <>
+                <div className="error-line"></div>
+                <p className="form-errors">{errors.mobilenumber}</p>
+              </>
+            ) : null}
           </div>
           <button type="submit" className="reset-password">
             Continue
@@ -57,7 +64,16 @@ const RegistrationForm = () => {
         </form>
 
         <span className="already-text">
-          Already have an account?<span className="login-text"> Login</span>
+          Already have an account?
+          <span
+            className="login-text"
+            onClick={() => {
+              navigate("/onboarding/login");
+            }}
+          >
+            {" "}
+            Login
+          </span>
         </span>
         <div className="face-goog-buttons">
           <button className="facebook-button">{facebook}</button>

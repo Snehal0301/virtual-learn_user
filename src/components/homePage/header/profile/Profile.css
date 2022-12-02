@@ -7,7 +7,9 @@
 .drawer-profile-header {
     background-color: var(--drawerBlueClr);
     padding: 30px;
+    /* position: fixed; */
 }
+
 
 .drawer-profile-name {
     display: flex;
@@ -68,4 +70,99 @@
 
 .drawer-profile-clear {
     cursor: pointer;
+}
+
+.progress-details {
+    display: flex;
+    justify-content: space-evenly;
+    margin-top: 30px;
+
+}
+
+.progress-1 {
+    width: 100px;
+    height: 110px;
+    border-radius: 6px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.15);
+
+}
+
+.progress-digit {
+    color: var(--profileBlueCLr);
+    font-size: 40px;
+    font-weight: 700;
+}
+
+.progress-content {
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.personal-details-section {
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    overflow: auto;
+    position: relative;
+}
+
+.personal-details-title {
+    font-size: 22px;
+    font-weight: 700;
+}
+
+.personal-section-1 {
+    margin-top: 15px;
+    /* min-height: 100vh; */
+    height: 100vh;
+}
+
+.personal-detail-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 0 20px 0;
+    border-bottom: 1px solid #042c5c39;
+    border-top: 1px solid #042c5c39;
+}
+
+.personal-detail-section:first-child {
+    border-top: none;
+}
+
+.pd-title {
+    color: #7A7A7A;
+    font-weight: 700;
+    font-size: 20px;
+}
+
+.pd-value {
+    color: #373737;
+    font-weight: 700;
+    font-size: 20px;
+}
+
+.personal-detail-section-1 {
+    display: flex;
+}
+
+.privacy-icon-detail {
+    margin-left: 10px;
+}
+
+.privacy-privacy {
+    color: #072D5B;
+    font-size: 22px;
+    font-weight: 700;
+}
+
+.privacy-password-title {
+    color: #7A7A7A;
+    font-weight: 700;
+    font-size: 18px;
+
 }

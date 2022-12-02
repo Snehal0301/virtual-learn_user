@@ -1,11 +1,20 @@
-import React, { useState } from 'react'
-import { info_btn } from '../../../../utils/svgIcons'
-import './PersonalDetails.css'
-import { signupSchema } from './schema'
-import { Formik, useFormik } from 'formik'
+import React, { useState } from 'react';
+import { info_btn } from '../../../../utils/svgIcons';
+import './PersonalDetails.css';
+import { signupSchema } from './schema';
+import { Formik, useFormik } from 'formik';
 import ReactTooltip from 'react-tooltip';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import {
+    registerPersonalDetails,
+    registerSuccess,
+} from '../../../../redux/reducers/loginConditions';
 
 const PersonalDetails = () => {
+
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
     const [personaldata, setpersonaldata] = useState({})
 
     const { values, errors, handleChange, touched, handleBlur, handleSubmit } = useFormik({
@@ -23,10 +32,11 @@ const PersonalDetails = () => {
             // console.log(values)
             setpersonaldata(values)
             action.resetForm()
-
+            dispatch(registerSuccess(true));
+            navigate('/accountCreatedSuccessfully');
         }
 
-    })  
+    })
 
     return (
         <div className='personaldetails-outerRectangle'>
@@ -137,9 +147,9 @@ const PersonalDetails = () => {
                             onBlur={handleBlur}
                             autoComplete="off"
                         />
-                       
 
-                        <label htmlFor="password"  className='PersonalDetailslabel'  >Password
+
+                        <label htmlFor="password" className='PersonalDetailslabel'  >Password
                             <div data-tip="React-tooltip" data-for='sadFace' className='personalDetailstooltip'>{info_btn}</div>
                             <ReactTooltip id='sadFace' type='light' effect='solid' place="right">
                                 <span className='personalSpan'><p>Our minimum Requirment</p>
@@ -148,7 +158,7 @@ const PersonalDetails = () => {
                                     and one lowercase letter.</span>
                             </ReactTooltip>
                         </label>
-                      
+
 
                         {errors.password && touched.password ? (<>
                             <div className="personal-error-line"></div>
@@ -159,25 +169,25 @@ const PersonalDetails = () => {
                     </div>
                     <div className="personal-input">
 
-                    <input type="password" className='PeronsalDetailsInput'
-                        id="ConfirmPassword"
-                        name="ConfirmPassword"
-                        placeholder=" "
-                        value={values.ConfirmPassword}
-                        onChange={handleChange}
-                        onBlur={handleBlur}
-                        autoComplete="off"
-                    />
-                    <label htmlFor="ConfirmPassword" className='PersonalDetailslabel'>Confirm Password</label>
-                    {errors.ConfirmPassword && touched.ConfirmPassword ?
-                     (<>
-                        <div className="personal-error-line"></div>
-                        <p className='personaldetail-form-error'>{errors.ConfirmPassword}</p>
-                    </>
-                    )
-                    : null}
+                        <input type="password" className='PeronsalDetailsInput'
+                            id="ConfirmPassword"
+                            name="ConfirmPassword"
+                            placeholder=" "
+                            value={values.ConfirmPassword}
+                            onChange={handleChange}
+                            onBlur={handleBlur}
+                            autoComplete="off"
+                        />
+                        <label htmlFor="ConfirmPassword" className='PersonalDetailslabel'>Confirm Password</label>
+                        {errors.ConfirmPassword && touched.ConfirmPassword ?
+                            (<>
+                                <div className="personal-error-line"></div>
+                                <p className='personaldetail-form-error'>{errors.ConfirmPassword}</p>
+                            </>
+                            )
+                            : null}
 
-                     </div>
+                    </div>
 
 
                     <button type="submit" className='personalDetailsbtn'>Verify</button>
@@ -187,10 +197,8 @@ const PersonalDetails = () => {
 
 
             </div>
-
-
         </div>
     )
-}
+};
 
-export default PersonalDetails
+export default PersonalDetails;
