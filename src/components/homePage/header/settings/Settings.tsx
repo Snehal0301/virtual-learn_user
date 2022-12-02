@@ -15,6 +15,7 @@ import Terms from "../terms/Terms";
 
 const Settings = () => {
   const [checked, setChecked] = useState(false);
+  const [checkedSound,setCheckedSound] = useState(false)
   const dispatch = useDispatch();
   const privacyPolicyState = useSelector((state: any) => state.headerProfile.privacy)
   const TermsState = useSelector((state: any) => state.headerProfile.terms)
@@ -22,6 +23,9 @@ const Settings = () => {
   const handleChange = (nextChecked : any) => {
     setChecked(nextChecked);
   };
+   const handleChangeSound = (nextChecked: any) => {
+     setCheckedSound(nextChecked);
+   };
 
   const handleClick = () => {
     dispatch(profileDrawer(false))
@@ -77,8 +81,8 @@ const Settings = () => {
               <div className="settings-notification-sound">
                 <p>Notification Sound</p>
                 <Switch
-                  onChange={handleChange}
-                  checked={checked}
+                  onChange={handleChangeSound}
+                  checked={checkedSound}
                   uncheckedIcon={false}
                   checkedIcon={false}
                   width={48}
@@ -111,7 +115,7 @@ const Settings = () => {
             </div>
           </div>
         </div>
-      )
+      );
     }
   }
   return (
