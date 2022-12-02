@@ -67,6 +67,9 @@ const LoginAuth = () => {
         loginResponse.data.data &&
         loginResponse.data.data.jwtToken,
     )
+    localStorage.setItem('auth', 'true')
+    navigate('/')
+    window.location.reload()
   }, [loginResponse && loginResponse.isSuccess && loginResponse.data])
 
   const responseFunction = () => {
