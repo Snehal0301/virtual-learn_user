@@ -3,9 +3,13 @@ import { useNavigate } from 'react-router-dom'
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import { facebookIcon, googleIcon } from '../../../../utils/svgIcons'
+import { useDispatch } from 'react-redux'
+import { login } from '../../../../redux/reducers/loginSlice'
 
 const LoginAuth = () => {
   const navigate = useNavigate()
+  const dispatch = useDispatch()
+
   const showError = () =>
     toast(
       <div className="loginAuth-showError">
@@ -35,7 +39,11 @@ const LoginAuth = () => {
       password: e.target.password.value,
     }
 
+    if (e.target.username.value !== '') {
+    }
+
     console.log('credentials', credentials)
+    dispatch(login(credentials))
     // localStorage.setItem('auth', 'true')
     // navigate('/')
     // window.location.reload()
