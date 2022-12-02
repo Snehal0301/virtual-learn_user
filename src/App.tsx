@@ -15,8 +15,8 @@ const App = () => {
         dispatch(headerProfile(false));
       }}
     >
-      {/* <Onboarding /> */}
-      <HomePage />  
+      <Onboarding />
+      {/* <HomePage />   */}
       {/* <Success_Page/> */}
       {/* <PasswordChanged/> */}
     </div>

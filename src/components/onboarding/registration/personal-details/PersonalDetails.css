@@ -28,25 +28,21 @@
     color: #f7f0f0b5;
 }
 
-/* .inputFields {
-    padding: 2rem 3rem;
-}
-   */
-form {
+.personalDetailsform {
     padding: 1rem 1rem;
 }
 
-label {
+.PersonalDetailslabel {
     display: block;
     transform: translate(0, -2.75rem);
     font-size: 16px;
-
+    position: relative;
 }
 
-.PeronsalDetailsInput{
+.PeronsalDetailsInput {
     width: 100%;
     margin-top: 1.5rem;
-    padding:  0.25rem;
+    padding: 0.25rem 0rem;
     border: none;
     border-bottom: 2px solid #ffffff58;
     transition: border-color 0.2s ease;
@@ -55,7 +51,6 @@ label {
     font-weight: 700;
     font-family: Avenir;
     font-size: 16px;
-    margin-left: 5px;
 }
 
 
@@ -64,7 +59,7 @@ label {
     border-color: #6E8FCA;
 }
 
-button {
+.personalDetailsbtn {
     padding: 0.75rem 1.5rem;
     border: none;
     outline: none;
@@ -76,63 +71,61 @@ button {
     border-radius: 6px;
 }
 
-.btn_info {
-    height: 16px;
-    width: 16px;
-}
-
 .personaldetail-form-error {
     color: rgb(245, 20, 20);
     font-size: 14px;
     width: 100%;
-    line-height: 1pt;
+    line-height: 1px;
+    margin-top: -10px;
 }
 
-.tooltip {
+.personalDetailstooltip {
     height: 16px;
     width: 16px;
     position: absolute;
-    top: 0;
-    left: 74px;
-    /* margin-left: 5px; */
+    top: 2px;
+    left: 78px;
+  
 }
-.labelwithTooltip
-{
+
+.personalLabelwithTooltip {
     position: relative;
+    display: block;
+    transform: translate(0, -2.75rem);
+    font-size: 16px;
+    color: #6E8FCA;
     /* display: flex; */
 }
-#sadFace{
+
+#sadFace {
     width: 250px;
-    color: 
-    #7A7A7A;
+    color:
+        #7A7A7A;
 }
-span p{
+
+.personalSpan p {
     color: #092963;
 }
-/* .personalDetailsPass
-{
-    position: relative;
-} */
 
 @supports (not (-ms-ime-align:auto)) {
-    label {
+    .PersonalDetailslabel {
         color: #6E8FCA;
-        transform: translate(0.25rem, -1.5rem);
+        transform: translate(0rem, -1.9rem);
         transition: all 0.2s ease-out;
     }
 
-    input:focus+label,
-    input:not(:placeholder-shown)+label {
+    .PeronsalDetailsInput:focus+label,
+    .PeronsalDetailsInput:not(:placeholder-shown)+label {
         color: #6E8FCA;
-        transform: translate(0, -2.75rem);
+        transform: translate(0, -2.95rem);
     }
 }
 
-.personal-input{
+.personal-input {
     position: relative;
 }
 
-.personal-error-line{
+.personal-error-line {
     position: absolute;
     background-color: red;
     width: 100%;
