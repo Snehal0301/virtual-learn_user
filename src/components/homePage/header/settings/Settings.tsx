@@ -17,7 +17,7 @@ const Settings = () => {
     dispatch(profileDrawer(false))
     dispatch(profileSection(false))
     dispatch(notificationSection(false))
-    dispatch(settingsSection(false))
+    // dispatch(settingsSection(false))
   };
   
   return (
