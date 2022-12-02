@@ -7,9 +7,9 @@ import ReactTooltip from 'react-tooltip';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import {
-    registerPersonalDetails,
-    registerSuccess,
-} from '../../../../redux/reducers/loginConditions';
+  registerPersonalDetails,
+  registerSuccess,
+} from '../../../../redux/reducers/Conditions';
 
 const PersonalDetails = () => {
 
