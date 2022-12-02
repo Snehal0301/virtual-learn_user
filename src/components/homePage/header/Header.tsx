@@ -15,17 +15,24 @@ import {
 import { useDispatch, useSelector } from 'react-redux';
 import {
   headerProfile,
+  notificationSection,
   profileDrawer,
+  profileSection,
+  settingsSection
 } from '../../../redux/reducers/headerProfileOptions';
-import Drawer from 'react-modern-drawer';
-import 'react-modern-drawer/dist/index.css';
+import Drawer from 'react-modern-drawer'
+import 'react-modern-drawer/dist/index.css'
 import Profile from './profile/Profile';
+import Settings from "./settings/Settings";
+import PrivacyPolicy from "./privacypolicy/PrivacyPolicy";
+import Terms from "./terms/Terms";
 import Notification from './notification/Notification';
 import { searchFocus } from '../../../redux/reducers/headerProfileOptions';
 import EditProfile from './edit-profile/EditProfile';
 
 const Header = () => {
   // const [isOpen, setIsOpen] = useState(false)
+  const [setting, setSetting] = useState(false);
 
   const topSearch = [
     'Python',
@@ -52,28 +59,34 @@ const Header = () => {
   ];
 
   const [notifydata, setnotifydata] = useState(false);
-  const handleClick = () => {
-    // setIsOpen(!isOpen)
+  const handleProfileClick = () => {
     dispatch(profileDrawer(true));
     dispatch(headerProfile(false));
-    setnotifydata(false);
+    dispatch(profileSection(true))
   };
 
   const handlenotify = () => {
-    // setIsOpen(!isOpen)
     dispatch(profileDrawer(true));
     dispatch(headerProfile(false));
-    setnotifydata(true);
+    dispatch(notificationSection(true))
+  };
+
+  const handleSetting = () => {
+    dispatch(profileDrawer(true));
+    dispatch(headerProfile(false));
+    dispatch(settingsSection(true))
   };
   const dispatch = useDispatch();
-
   const headerOptions = useSelector((state: any) => state.headerProfile.value);
-  const profileDrawerState = useSelector(
-    (state: any) => state.headerProfile.drawer
-  );
+
   const searchFieldFocus = useSelector(
     (state: any) => state.headerProfile.searchFocused
   );
+  const profileDrawerState = useSelector((state: any) => state.headerProfile.drawer);
+  const profileSectionState = useSelector((state: any) => state.headerProfile.profile);
+  const notificationSectionState = useSelector((state: any) => state.headerProfile.notification);
+  const settingsSectionState = useSelector((state: any) => state.headerProfile.settings);
+
 
   console.log('search', searchFieldFocus);
   return (
@@ -109,7 +122,7 @@ const Header = () => {
               <div className="header-optionsBell" onClick={handlenotify}>
                 {bellIcon}
               </div>
-              <div className="header-settings">{settingsIcon}</div>
+              <div className="header-settings" onClick={handleSetting}>{settingsIcon}</div>
               <div className="header-profilePic">
                 <img
                   src={require('../../../assets/images/dhoni.png')}
@@ -133,14 +146,10 @@ const Header = () => {
                       <div className="header-profileOptiontext">My Course</div>
                     </div>
 
-                    <div
-                      className="header-profileOption  header-profileOptionBorder"
-                      onClick={handleClick}
-                    >
-                      <div className="header-profileOptionIcon">
-                        {profileIcon}
-                      </div>
-                      <div className="header-profileOptiontext">My Profile</div>
+                    <div className="header-profileOption  header-profileOptionBorder" onClick={handleProfileClick}>
+                      <div className="header-profileOptionIcon">{profileIcon}</div>
+                      <div className="header-profileOptiontext"
+                      >My Profile</div>
                     </div>
 
                     <div
@@ -221,18 +230,42 @@ const Header = () => {
           )}
         </div>
       </div>
-      <Drawer
-        open={profileDrawerState}
-        onClose={handleClick}
-        direction="right"
-        className=""
-        style={{
-          width: '25rem',
-        }}
-      >
-        {notifydata ? <Notification /> : <Profile />}
-      </Drawer>
+      <div className="overlay">
+        <Drawer
+          open={profileDrawerState}
+          onClose={handleProfileClick}
+          direction="right"
+          enableOverlay={false}
+          style={{
+            width: "25rem",
+          }}
+        >
+
+          {
+            profileSectionState && <Profile />
+          }
+
+          {/* {
+            notificationSectionState && <Notification />
+          }
+          
+          {
+            settingsSectionState && <Settings />
+          } */}
+          {/* <Profile /> */}
+          {/* {setting ? <Settings /> : <Profile />} */}
+          {/* <Settings /> */}
+          {/* <PrivacyPolicy/> */}
+          <Terms/>
+          {/* {
+          notifydata ? <Notification /> : <Profile />
+        } */}
+
+
+        </Drawer>
+      </div>
     </>
   );
-};
+}
+
 export default Header;
