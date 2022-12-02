@@ -73,8 +73,8 @@ const LoginAuth = () => {
     if (loginResponse && loginResponse.message && loginResponse.message.error) {
       showError(loginResponse.message.error);
     }
-    if (loginResponse && !loginResponse.message) {
-      submitted && showError('Server Error');
+    if (loginResponse && submitted && !loginResponse.message) {
+      showError('Server Error');
     }
   };
 
