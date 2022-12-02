@@ -15,6 +15,7 @@ import {
 import { useDispatch, useSelector } from 'react-redux';
 import {
   headerProfile,
+  modalFilter,
   notificationSection,
   profileDrawer,
   profileSection,
@@ -31,7 +32,6 @@ import { searchFocus } from '../../../redux/reducers/headerProfileOptions';
 import EditProfile from './edit-profile/EditProfile';
 
 const Header = () => {
-  // const [isOpen, setIsOpen] = useState(false)
   const [onChange, setOnChange] = useState('');
 
   const topSearch = [
@@ -120,6 +120,9 @@ const Header = () => {
   );
   const settingsSectionState = useSelector(
     (state: any) => state.headerProfile.settings
+  );
+  const modalFilterStatus = useSelector(
+    (state: any) => state.headerProfile.filterModal
   );
 
   const changeHandler = (e: any) => {
@@ -215,7 +218,14 @@ const Header = () => {
           ) : (
             <div className="header-options">
               {searchFieldFocus && (
-                <button className="header-filterButton">{filterIcon}</button>
+                <button
+                  className="header-filterButton"
+                  onClick={() => {
+                    dispatch(modalFilter(true));
+                  }}
+                >
+                  {filterIcon}
+                </button>
               )}
               <div
                 onClick={() => {
@@ -344,6 +354,23 @@ const Header = () => {
         } */}
         </Drawer>
       </div>
+      {modalFilterStatus && (
+        <aside
+          className="headerSearch-filterModal"
+          onClick={() => {
+            dispatch(modalFilter(false));
+          }}
+        >
+          <div
+            className="headerSearch-filterActualModal"
+            onClick={(e: any) => {
+              e.stopPropagation();
+            }}
+          >
+            <div className="headerSearch-filterModalBody">hello</div>
+          </div>
+        </aside>
+      )}
     </>
   );
 };
