@@ -150,7 +150,9 @@ const Header = () => {
             </div>
           )}
           {searchFieldFocus && (
-            <div className="header-categoryContents">hello</div>
+            <div className="header-categoryContents">
+              <h1>hello</h1>
+            </div>
           )}
         </div>
       </div>
