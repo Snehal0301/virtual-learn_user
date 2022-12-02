@@ -3,6 +3,7 @@ import './Header.css';
 import {
   bellIcon,
   closeProfile,
+  design,
   filterIcon,
   graduationCapIcon,
   headerLogo,
@@ -25,6 +26,30 @@ import EditProfile from './edit-profile/EditProfile';
 
 const Header = () => {
   // const [isOpen, setIsOpen] = useState(false)
+
+  const topSearch = [
+    'Python',
+    'Java',
+    'Javascript',
+    'Leadership',
+    'Photoshop',
+    'React',
+    'Communication',
+  ];
+
+  const topCategories = [
+    'Design',
+    'Development',
+    'Business',
+    'Finance',
+    'Health & Fitness',
+    'Music',
+    'IT & Software',
+    'Marketing',
+    'Lifestyle',
+    'Photography',
+    'Teaching',
+  ];
 
   const [notifydata, setnotifydata] = useState(false);
   const handleClick = () => {
@@ -151,7 +176,47 @@ const Header = () => {
           )}
           {searchFieldFocus && (
             <div className="header-categoryContents">
-              <h1>hello</h1>
+              <div className="headerSearchCategoriesTopSearch">
+                <div className="headerSearchCategoriesTopSearchTitle">
+                  Top Search
+                </div>
+                <div className="headerSearchCategoriesTopSearchBody">
+                  {topSearch.map((ele: any, i: any) => {
+                    return (
+                      <div
+                        className="headerSearchCategoriesTopSearchesParent"
+                        key={i}
+                      >
+                        <div className="headerSearchCategoriesTopSearchesName">
+                          {ele}
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+              <div className="headerSearchCategoriesTopSearch">
+                <div className="headerSearchCategoriesTopSearchTitle">
+                  Search from Categories
+                </div>
+                <div className="headerSearchCategoriesTopSearchBody">
+                  {topCategories.map((ele: any, i: any) => {
+                    return (
+                      <div
+                        className="headerSearchCategoriesTopSearchesParent"
+                        key={i}
+                      >
+                        <div className="headerSearchCategoriesTopSearchesIcon">
+                          {design}
+                        </div>
+                        <div className="headerSearchCategoriesTopSearchesName">
+                          {ele}
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
             </div>
           )}
         </div>
