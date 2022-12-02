@@ -41,20 +41,33 @@ const LoginAuth = () => {
       password: e.target.password.value,
     }
 
-    if (e.target.username.value !== '') {
+    if (e.target.username.value !== '' && e.target.password.value !== '') {
+      console.log('credentials', credentials)
+      dispatch(login(credentials))
+      // localStorage.setItem('auth', 'true')
+      // navigate('/')
+      // window.location.reload()
+      setSubmitted(true)
     }
-
-    console.log('credentials', credentials)
-    dispatch(login(credentials))
-    // localStorage.setItem('auth', 'true')
-    // navigate('/')
-    // window.location.reload()
-    setSubmitted(true)
   }
 
   useEffect(() => {
     responseFunction()
   }, [loginResponse && loginResponse.isRejected && loginResponse.message])
+
+  useEffect(() => {
+    console.log(
+      'login message',
+      loginResponse && loginResponse.data && loginResponse.data.data,
+    )
+    localStorage.setItem(
+      'Token',
+      loginResponse &&
+        loginResponse.data &&
+        loginResponse.data.data &&
+        loginResponse.data.data.jwtToken,
+    )
+  }, [loginResponse && loginResponse.isSuccess && loginResponse.data])
 
   const responseFunction = () => {
     if (loginResponse.message.error) {
