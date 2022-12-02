@@ -172,7 +172,6 @@
 }
 
 .header-categoryContents {
-  display: flex;
   align-items: baseline;
   justify-content: center;
   position: absolute;
@@ -238,7 +237,7 @@
 .headerSearch-response {
   display: flex;
   flex-direction: column;
-  margin: 40px 0;
+  margin: 40px 14%;
   align-items: center;
   /* width: max-content; */
   align-items: stretch;
@@ -247,8 +246,7 @@
 .headersearch-responseBody {
   display: flex;
   padding: 20px 0;
-
-  min-width: 750px;
+  /* min-width: 750px; */
   gap: 20px;
   border-bottom: 1px solid #1e4284;
 }
