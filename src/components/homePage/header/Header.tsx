@@ -229,7 +229,7 @@ const Header = () => {
           )}
           {searchFieldFocus && (
             <div className="header-categoryContents">
-              {!true ? (
+              {!(onChange.length > 1) ? (
                 <>
                   {!(onChange.length > 0) ? (
                     <div className="headerSearchCategoriesTopSearch">
