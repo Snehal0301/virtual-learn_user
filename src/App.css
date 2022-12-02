@@ -32,18 +32,35 @@
   --error: #ea2626;
   --success: #12a73b;
   --inputBlue: #123779;
-  --blueFont:#6E8FCA;
-  --drawerBlueClr:#042C5C;
-  --notificationFont:#373737;
-
+  --blueFont: #6e8fca;
+  --drawerBlueClr: #042c5c;
+  --profileBlueCLr: #36b6f1;
+  --btnClr: #244f9c;
+  --chipFontclr: #373737;
 }
 
 body {
   min-height: 100vh;
-  z-index: -999;
+  z-index: -9999;
 }
 
 .app {
-  z-index: -999;
   min-height: 100vh;
+  z-index: 0;
+}
+
+::-webkit-scrollbar {
+  width: 4px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: var(--blueFont);
+  width: 24px !important;
+  z-index: 100;
 }

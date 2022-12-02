@@ -4,9 +4,11 @@ import { combineReducers } from 'redux';
 import { persistReducer } from 'redux-persist';
 import thunk from 'redux-thunk';
 import { showHeaderProfile } from '../reducers/headerProfileOptions';
+import showLoginConditions from '../reducers/Conditions';
 
 const reducers = combineReducers({
   headerProfile: showHeaderProfile.reducer,
+  loginConditions: showLoginConditions.reducer,
 });
 
 const persistConfig = {

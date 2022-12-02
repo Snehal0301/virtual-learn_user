@@ -23,8 +23,8 @@
 
 .header-searchIcon {
   position: absolute;
-  left: 18px;
-  top: 9.5px;
+  left: 33px;
+  top: 25px;
 }
 
 .header-searchField {
@@ -68,7 +68,7 @@
   opacity: 0.3;
 }
 
-.header-profilePic>img {
+.header-profilePic > img {
   width: 40px;
   height: 40px;
   border-radius: 50%;
@@ -116,3 +116,100 @@
   border-bottom: 1px solid #042c5c20;
 }
 
+.header-optionsCloseIcon {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  cursor: pointer;
+}
+
+.header-searchIconButton {
+  position: absolute !important;
+  background: none;
+  border: none;
+  margin: 0;
+  padding: 0;
+  top: 16px;
+  right: 17px;
+  width: 73px;
+  border-radius: 22px;
+  /* width: unset !important; */
+  background-color: var(--btnClr);
+  height: 44px;
+  cursor: pointer;
+}
+
+.header-searchFieldPadding {
+  padding-left: 22px !important;
+}
+
+.headerSearchFocus {
+  height: auto !important;
+}
+
+.header-filterButton {
+  position: relative !important;
+  background: none;
+  border: none;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  top: unset;
+  right: unset;
+  width: 100px;
+  border-radius: 22px;
+  /* width: unset !important; */
+  background-color: var(--secondaryClr);
+  height: 44px;
+  cursor: pointer;
+}
+
+.header-parent {
+  display: flex;
+  flex-direction: column;
+}
+
+.header-categoryContents {
+  position: absolute;
+  top: 76px;
+  right: 0;
+  left: 0;
+  padding: 0px 10% 4%;
+  color: white;
+  background-color: var(--primaryClr);
+}
+
+.headerSearchCategoriesTopSearchBody {
+  display: flex;
+  gap: 24px;
+  flex-direction: row;
+  padding-bottom: 20px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.headerSearchCategoriesTopSearchTitle {
+  padding: 20px 0;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 26px;
+  color: var(--primaryFontClr);
+}
+
+.headerSearchCategoriesTopSearchesParent {
+  color: var(--chipFontclr);
+  background-color: var(--primaryFontClr);
+  border-radius: 4px;
+  padding: 6px 20px;
+  cursor: pointer;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 26px;
+}
