@@ -16,7 +16,7 @@ const Terms = () => {
           {arrowRight}
         </div>
         <div className="settings-settings-text">
-          <p>Privacy Policy</p>
+          <p>Terms of Services</p>
         </div>
       </div>
       <div className="privacy-policy-phrases">
