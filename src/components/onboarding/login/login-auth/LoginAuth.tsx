@@ -27,6 +27,8 @@ const LoginAuth = () => {
         draggable: true,
       }
     );
+  
+  showError()
 
   const submitHandler = (e: any) => {
     e.preventDefault();

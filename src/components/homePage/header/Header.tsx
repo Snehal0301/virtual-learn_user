@@ -14,6 +14,7 @@ import {
 } from '../../../utils/svgIcons';
 import { useDispatch, useSelector } from 'react-redux';
 import {
+  editProfileSection,
   headerProfile,
   notificationSection,
   profileDrawer,
@@ -29,10 +30,9 @@ import Terms from "./terms/Terms";
 import Notification from './notification/Notification';
 import { searchFocus } from '../../../redux/reducers/headerProfileOptions';
 import EditProfile from './edit-profile/EditProfile';
+import ChangePassword from './changePassword/ChangePassword';
 
 const Header = () => {
-  // const [isOpen, setIsOpen] = useState(false)
-  const [setting, setSetting] = useState(false);
 
   const topSearch = [
     'Python',
@@ -58,24 +58,29 @@ const Header = () => {
     'Teaching',
   ];
 
-  const [notifydata, setnotifydata] = useState(false);
   const handleProfileClick = () => {
     dispatch(profileDrawer(true));
     dispatch(headerProfile(false));
     dispatch(profileSection(true))
+    // dispatch(editProfileSection(false))
   };
 
   const handlenotify = () => {
     dispatch(profileDrawer(true));
     dispatch(headerProfile(false));
+    dispatch(profileSection(false))
     dispatch(notificationSection(true))
   };
 
   const handleSetting = () => {
     dispatch(profileDrawer(true));
+    dispatch(profileSection(false))
+    dispatch(notificationSection(false))
     dispatch(headerProfile(false));
     dispatch(settingsSection(true))
   };
+
+
   const dispatch = useDispatch();
   const headerOptions = useSelector((state: any) => state.headerProfile.value);
 
@@ -238,6 +243,7 @@ const Header = () => {
           enableOverlay={false}
           style={{
             width: "25rem",
+            zIndex: '9999'
           }}
         >
 
@@ -245,23 +251,19 @@ const Header = () => {
             profileSectionState && <Profile />
           }
 
-          {/* {
+          {
             notificationSectionState && <Notification />
           }
-          
+
           {
             settingsSectionState && <Settings />
-          } */}
+          }
           {/* <Profile /> */}
           {/* {setting ? <Settings /> : <Profile />} */}
           {/* <Settings /> */}
           {/* <PrivacyPolicy/> */}
-          <Terms/>
-          {/* {
-          notifydata ? <Notification /> : <Profile />
-        } */}
-
-
+          {/* <Terms/> */}
+          {/* <ChangePassword/> */}
         </Drawer>
       </div>
     </>

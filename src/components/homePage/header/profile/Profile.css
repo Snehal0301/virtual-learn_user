@@ -165,3 +165,8 @@
 .EZDrawer .EZDrawer__checkbox:checked ~ .EZDrawer__container {
   z-index: 999 !important;
 }
+
+
+.password-chng{
+  cursor: pointer;
+}
