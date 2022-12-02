@@ -133,8 +133,6 @@ const Header = () => {
         {
           notifydata ? <Notification /> : <Profile />
         }
-
-
       </Drawer>
     </>
   );
