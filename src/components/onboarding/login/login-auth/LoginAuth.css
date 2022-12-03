@@ -79,7 +79,7 @@
 * pesky delay.
 */
 
-label,
+.loginAuth-FormContainer label,
 .loginAuth-formInput {
     transition: all 0.2s;
     touch-action: manipulation;
@@ -100,7 +100,7 @@ label,
     outline: none;
 }
 
-label {
+.loginAuth-FormContainer label {
     text-transform: uppercase;
     letter-spacing: 0.05em;
 }
