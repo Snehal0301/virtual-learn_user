@@ -36,10 +36,10 @@ const RegistrationForm = () => {
           </span>
         </div>
 
-        <form className="login-password-form" onSubmit={handleSubmit}>
-          <div className="error-line-registration">
+        <form className="login-password-form-reg" onSubmit={handleSubmit}>
+          <div className="error-line-registration-reg">
             <input
-              className="login-input"
+              className="login-input-reg"
               type="text"
               id="Mobilenumber"
               name="Mobilenumber"
@@ -50,7 +50,7 @@ const RegistrationForm = () => {
               autoComplete="off"
               required
             />
-            <label className="login-password-label">Mobile Number</label>
+            <label className="login-password-label-reg">Mobile Number</label>
             {errors.Mobilenumber && touched.Mobilenumber ? (
               <>
                 <div className="error-line"></div>
@@ -58,7 +58,7 @@ const RegistrationForm = () => {
               </>
             ) : null}
           </div>
-          <button type="submit" className="reset-password">
+          <button type="submit" className="reset-passwords">
             Continue
           </button>
         </form>
