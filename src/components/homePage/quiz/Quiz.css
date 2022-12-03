@@ -43,3 +43,7 @@
 .quiz-bodyQuestionNum {
   margin-top: 0;
 }
+
+.quiz-bodyQuestionForm > div > :first-child {
+  display: none !important;
+}

@@ -56,12 +56,28 @@ const Quiz = () => {
       </div>
       <div className="quiz-body">
         <div className="quiz-bodyQuestionForm">
-          <MultiStepForm activeStep={active}>
+          <MultiStepForm activeStep={active} className="hi">
             {items &&
-              items.map((ele) => {
+              items.map((ele, i) => {
                 return (
-                  <div>
-                    <Step label="one">{ele.question}</Step>
+                  <div key={i}>
+                    <Step label={i}>
+                      <div className="quiz-question">{ele.question}</div>
+                      <div className="quiz-options">
+                        {ele.answers.map((option) => {
+                          return (
+                            <>
+                              <input
+                                type="radio"
+                                name={ele.questionId}
+                                value={option}
+                              />
+                              {option}
+                            </>
+                          );
+                        })}
+                      </div>
+                    </Step>
                   </div>
                 );
               })}
