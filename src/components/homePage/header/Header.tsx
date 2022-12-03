@@ -91,7 +91,6 @@ const Header = () => {
   const notificationSectionState = useSelector((state: any) => state.headerProfile.notification);
   const settingsSectionState = useSelector((state: any) => state.headerProfile.settings);
 
-  console.log('search', searchFieldFocus);
   return (
     <>
       <div className="header-parent">

@@ -1,7 +1,7 @@
 import React from 'react'
 import './EditProfile.css'
 import '../profile/Profile'
-import { profileDrawer } from "../../../../redux/reducers/headerProfileOptions";
+import { editProfileSection, profileDrawer, showChangePasswordSection } from "../../../../redux/reducers/headerProfileOptions";
 import { useDispatch, useSelector } from "react-redux";
 import { arrowRight } from '../../../../utils/svgIcons'
 import { editProfile } from './../../../../utils/svgIcons';
@@ -13,7 +13,7 @@ const EditProfile = () => {
 
     const dispatch = useDispatch();
     const handleClick = () => {
-        dispatch(profileDrawer(false));
+        dispatch(editProfileSection(false))
     };
     const EditProfileData = [
         {
@@ -22,7 +22,7 @@ const EditProfile = () => {
             image: require('../../../../assets/images/dhoni.png'),
             time: "5 mins ago"
         },]
-    const { errors, values,touched, handleChange, handleBlur, handleSubmit } = useFormik({
+    const { errors, values, touched, handleChange, handleBlur, handleSubmit } = useFormik({
         initialValues: {
             editPfullname: "",
             editPUsername: "",
@@ -55,8 +55,8 @@ const EditProfile = () => {
                 {
                     EditProfileData.map(item =>
                     (
-                        <div className='editProfileImage'><img src={item.image} alt="" />
-
+                        <div className='editProfileImage'>
+                            <img src={item.image} alt="" />
                         </div>
                     ))
                 }
@@ -66,100 +66,100 @@ const EditProfile = () => {
             <div className='EditForm'>
                 <form action="" className='editProfileForm' onSubmit={handleSubmit}>
                     <div className='edit-error-input'>
-                    <input type="text"
-                        id='editPfullname'
-                        name='editPfullname'
-                        placeholder=" "
-                        className='editPInput'
-                        onChange={handleChange}
-                        onBlur={handleBlur}
-                        value={values.editPfullname}
-                        autoComplete='off' />
-                    <label htmlFor="" className='editprofilelabel'>Full Name</label>
+                        <input type="text"
+                            id='editPfullname'
+                            name='editPfullname'
+                            placeholder=" "
+                            className='editPInput'
+                            onChange={handleChange}
+                            onBlur={handleBlur}
+                            value={values.editPfullname}
+                            autoComplete='off' />
+                        <label htmlFor="" className='editprofilelabel'>Full Name</label>
 
-                    {errors.editPfullname && touched.editPfullname ? (
-                        <>
-                            <div className="edit-error-line"></div>
-                            <p className="edit-form-error">{errors.editPfullname}</p>
-                        </>
-                    ) : null}
-                    </div>
-
-                  <div className='edit-error-input'>
-                    <input type="text"
-                        id='editPUsername'
-                        name='editPUsername'
-                        placeholder=" "
-                        className='editPInput'
-                        onChange={handleChange}
-                        onBlur={handleBlur}
-                        value={values.editPUsername}
-                        autoComplete='off' />
-                    <label htmlFor="" className='editprofilelabel'>Username</label>
-                    {errors.editPUsername && touched.editPUsername ? (
-                        <>
-                            <div className="edit-error-line"></div>
-                            <p className="edit-form-error">{errors.editPUsername}</p>
-                        </>
-                    ) : null}
+                        {errors.editPfullname && touched.editPfullname ? (
+                            <>
+                                <div className="edit-error-line"></div>
+                                <p className="edit-form-error">{errors.editPfullname}</p>
+                            </>
+                        ) : null}
                     </div>
 
                     <div className='edit-error-input'>
-                    <input type="email"
-                        id='editPEmail'
-                        name='editPEmail'
-                        placeholder=" "
-                        className='editPInput'
-                        onChange={handleChange}
-                        onBlur={handleBlur}
-                        value={values.editPEmail}
-                        autoComplete='off' />
-                    <label htmlFor="" className='editprofilelabel'>Email Id</label>
-                    {errors.editPEmail && touched.editPEmail ? (
-                        <>
-                            <div className="edit-error-line"></div>
-                            <p className="edit-form-error">{errors.editPEmail}</p>
-                        </>
-                    ) : null}
+                        <input type="text"
+                            id='editPUsername'
+                            name='editPUsername'
+                            placeholder=" "
+                            className='editPInput'
+                            onChange={handleChange}
+                            onBlur={handleBlur}
+                            value={values.editPUsername}
+                            autoComplete='off' />
+                        <label htmlFor="" className='editprofilelabel'>Username</label>
+                        {errors.editPUsername && touched.editPUsername ? (
+                            <>
+                                <div className="edit-error-line"></div>
+                                <p className="edit-form-error">{errors.editPUsername}</p>
+                            </>
+                        ) : null}
                     </div>
 
                     <div className='edit-error-input'>
-                    <input type="text"
-                        id='editPmobile'
-                        name='MobileNo'
-                        placeholder=" "
-                        className='editPInput'
-                        onChange={handleChange}
-                        onBlur={handleBlur}
-                        value={values.MobileNo}
-                        autoComplete='off' />
-                    <label htmlFor="" className='editprofilelabel'>Mobile Number</label>
-                    {errors.MobileNo && touched.MobileNo ? (
-                        <>
-                            <div className="edit-error-line"></div>
-                            <p className="edit-form-error">{errors.MobileNo}</p>
-                        </>
-                    ) : null}
+                        <input type="email"
+                            id='editPEmail'
+                            name='editPEmail'
+                            placeholder=" "
+                            className='editPInput'
+                            onChange={handleChange}
+                            onBlur={handleBlur}
+                            value={values.editPEmail}
+                            autoComplete='off' />
+                        <label htmlFor="" className='editprofilelabel'>Email Id</label>
+                        {errors.editPEmail && touched.editPEmail ? (
+                            <>
+                                <div className="edit-error-line"></div>
+                                <p className="edit-form-error">{errors.editPEmail}</p>
+                            </>
+                        ) : null}
                     </div>
 
                     <div className='edit-error-input'>
-                    <input type="text"
-                        id='editPOccupation'
-                        name='editPOccupation'
-                        placeholder=" "
-                        className='editPInput'
-                        onChange={handleChange}
-                        onBlur={handleBlur}
-                        value={values.editPOccupation}
-                        autoComplete='off' />
-                    <label htmlFor="" className='editprofilelabel'>Occupation</label>
-                    {errors.editPOccupation && touched.editPOccupation ? (
-                        <>
-                            <div className="edit-error-line"></div>
-                            <p className="edit-form-error">{errors.editPOccupation}</p>
-                        </>
-                    ) : null}
-                     </div>
+                        <input type="text"
+                            id='editPmobile'
+                            name='MobileNo'
+                            placeholder=" "
+                            className='editPInput'
+                            onChange={handleChange}
+                            onBlur={handleBlur}
+                            value={values.MobileNo}
+                            autoComplete='off' />
+                        <label htmlFor="" className='editprofilelabel'>Mobile Number</label>
+                        {errors.MobileNo && touched.MobileNo ? (
+                            <>
+                                <div className="edit-error-line"></div>
+                                <p className="edit-form-error">{errors.MobileNo}</p>
+                            </>
+                        ) : null}
+                    </div>
+
+                    <div className='edit-error-input'>
+                        <input type="text"
+                            id='editPOccupation'
+                            name='editPOccupation'
+                            placeholder=" "
+                            className='editPInput'
+                            onChange={handleChange}
+                            onBlur={handleBlur}
+                            value={values.editPOccupation}
+                            autoComplete='off' />
+                        <label htmlFor="" className='editprofilelabel'>Occupation</label>
+                        {errors.editPOccupation && touched.editPOccupation ? (
+                            <>
+                                <div className="edit-error-line"></div>
+                                <p className="edit-form-error">{errors.editPOccupation}</p>
+                            </>
+                        ) : null}
+                    </div>
 
 
                     <div className="genderSection">
@@ -183,41 +183,41 @@ const EditProfile = () => {
                     <label htmlFor="" className='editprofilelabel'>Date Of Birth</label>
 
                     <div className='edit-error-input'>
-                    <input type="url"
-                        id='editPTwitter'
-                        name='TwitterURL'
-                        placeholder=" "
-                        className='editPInput'
-                        onChange={handleChange}
-                        onBlur={handleBlur}
-                        value={values.TwitterURL}
-                        autoComplete='off' />
-                    <label htmlFor="" className='editprofilelabel'>Twitter Link</label>
-                    {errors.TwitterURL && touched.TwitterURL ? (
-                        <>
-                            <div className="edit-error-line"></div>
-                            <p className="edit-form-error">{errors.TwitterURL}</p>
-                        </>
-                    ) : null}
+                        <input type="url"
+                            id='editPTwitter'
+                            name='TwitterURL'
+                            placeholder=" "
+                            className='editPInput'
+                            onChange={handleChange}
+                            onBlur={handleBlur}
+                            value={values.TwitterURL}
+                            autoComplete='off' />
+                        <label htmlFor="" className='editprofilelabel'>Twitter Link</label>
+                        {errors.TwitterURL && touched.TwitterURL ? (
+                            <>
+                                <div className="edit-error-line"></div>
+                                <p className="edit-form-error">{errors.TwitterURL}</p>
+                            </>
+                        ) : null}
                     </div>
 
                     <div className='edit-error-input'>
-                    <input type="url"
-                        id='editPFacebook'
-                        name='FacebookURL'
-                        placeholder=" "
-                        className='editPInput'
-                        onChange={handleChange}
-                        onBlur={handleBlur}
-                        value={values.FacebookURL}
-                        autoComplete='off' />
-                    <label htmlFor="" className='editprofilelabel'>Facebook Link</label>
-                    {errors.FacebookURL && touched.FacebookURL ? (
-                        <>
-                            <div className="edit-error-line"></div>
-                            <p className="edit-form-error">{errors.FacebookURL }</p>
-                        </>
-                    ) : null}
+                        <input type="url"
+                            id='editPFacebook'
+                            name='FacebookURL'
+                            placeholder=" "
+                            className='editPInput'
+                            onChange={handleChange}
+                            onBlur={handleBlur}
+                            value={values.FacebookURL}
+                            autoComplete='off' />
+                        <label htmlFor="" className='editprofilelabel'>Facebook Link</label>
+                        {errors.FacebookURL && touched.FacebookURL ? (
+                            <>
+                                <div className="edit-error-line"></div>
+                                <p className="edit-form-error">{errors.FacebookURL}</p>
+                            </>
+                        ) : null}
                     </div>
                     <button type='submit' className='editPbtn'>save</button>
                 </form>

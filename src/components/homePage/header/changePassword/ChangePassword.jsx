@@ -2,13 +2,14 @@ import React from 'react'
 import './ChangePassword.css'
 import { useDispatch, useSelector } from "react-redux";
 import { arrowRight, warningIcon } from "../../../../utils/svgIcons";
-import { profileDrawer, showChangePasswordSection } from "../../../../redux/reducers/headerProfileOptions";
+import { editProfileSection, profileDrawer, showChangePasswordSection } from "../../../../redux/reducers/headerProfileOptions";
 
 
 const ChangePassword = () => {
     const dispatch = useDispatch();
     const handleClick = () => {
         // dispatch(profileDrawer(false));
+        dispatch(editProfileSection(false))
         dispatch(showChangePasswordSection(false))
     };
 

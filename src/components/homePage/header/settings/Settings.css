@@ -19,8 +19,7 @@
   color: var(--primaryFontClr);
   padding-top: 0.8em;
 }
-.settings-body {
-}
+
 .settings-notification {
   display: flex;
   flex-direction: column;
@@ -81,6 +80,7 @@ margin:0.5em 1.5em 0.5em 2em;
   border-bottom: 1px solid #042c5c60;
   justify-content: space-between;
   align-items: center;
+  cursor: pointer;
 }
 .privacy-policy-text-icon {
   width: 45%;
@@ -115,4 +115,5 @@ margin:0.5em 1.5em 0.5em 2em;
   justify-content: space-between;
   align-items: center;
   padding: 0.5em;
+  cursor: pointer;
 }
