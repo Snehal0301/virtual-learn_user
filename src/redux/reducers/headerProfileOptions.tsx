@@ -8,7 +8,9 @@ const initialState: any = {
   notification: false,
   settings: false,
   showChangePassword: false,
-  editSection:true
+  editSection:true,
+  privacy: false,
+  terms:false,
 };
 
 export const showHeaderProfile = createSlice({
@@ -25,13 +27,19 @@ export const showHeaderProfile = createSlice({
       state.searchFocused = action.payload;
     },
     profileSection: (state, { payload }) => {
-      state.profile = payload
+      state.profile = payload;
     },
     notificationSection: (state, { payload }) => {
-      state.notification = payload
+      state.notification = payload;
     },
     settingsSection: (state, { payload }) => {
-      state.settings = payload
+      state.settings = payload;
+    },
+    privacySection: (state, { payload }) => {
+      state.privacy = payload;
+    },
+    termsSection: (state, { payload }) => {
+      state.terms = payload;
     },
     showChangePasswordSection: (state, { payload }) => {
       state.showChangePassword = payload
@@ -43,7 +51,7 @@ export const showHeaderProfile = createSlice({
 });
 
 // Action creators are generated for each case reducer function
-export const { headerProfile, profileDrawer, searchFocus, profileSection, notificationSection, settingsSection, showChangePasswordSection, editProfileSection } =
+export const { headerProfile, profileDrawer, searchFocus, profileSection, notificationSection, settingsSection, privacySection, termsSection, showChangePasswordSection, editProfileSection } =
   showHeaderProfile.actions;
 
 export default showHeaderProfile.reducer;
