@@ -37,6 +37,9 @@
   --profileBlueCLr: #36b6f1;
   --btnClr: #244f9c;
   --chipFontclr: #373737;
+  --filterChipFontClr:#2B2B2B
+  --black: #000000;
+  --chipBorder: #e4e4e4;
 }
 
 body {

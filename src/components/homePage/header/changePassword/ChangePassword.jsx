@@ -33,7 +33,7 @@ const ChangePassword = () => {
                         <label for="email">New Password</label>
                         <input type="password" id="password" name="password" placeholder=" " />
                         <label for="password">Confirm Password</label>
-                        <button type='button'>Reset Password</button>
+                        <button type='button' className='change-password-reset-btn'>Reset Password</button>
                     </form>
                 </div>
                 {/* <div className="toast">
