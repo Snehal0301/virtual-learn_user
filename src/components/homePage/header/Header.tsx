@@ -92,7 +92,7 @@ const Header = () => {
     '10/20 Chapters',
     '20/30 Chapters',
     '30/40 Chapters',
-    '40/50 Chapters',
+    '50+ Chapters',
   ];
 
   const [notifydata, setnotifydata] = useState(false);
@@ -390,7 +390,7 @@ const Header = () => {
                   {topCategories.map((ele: any, i: any) => {
                     return (
                       <div
-                        className="headerSearchCategoriesTopSearchesParent"
+                        className="headerSearchCategoriesTopSearchesParent headerSearchCategories-chpBorder"
                         key={i}
                       >
                         <div className="headerSearchCategoriesTopSearchesIcon">
@@ -412,7 +412,7 @@ const Header = () => {
                   {Duration.map((ele: any, i: any) => {
                     return (
                       <div
-                        className="headerSearchCategoriesTopSearchesParent"
+                        className="headerSearchCategoriesTopSearchesParent  headerSearchCategories-chpBorder"
                         key={i}
                       >
                         <div className="headerSearchCategoriesTopSearchesIcon">
@@ -426,7 +426,14 @@ const Header = () => {
                   })}
                 </div>
               </div>
-              <div className="headerSearch-filterModalButtons"></div>
+              <div className="headerSearch-filterModalButtons">
+                <button className="headerSearch-applyFilterButton">
+                  Apply Filter
+                </button>
+                <button className="headerSearch-clearAllButton">
+                  Clear All
+                </button>
+              </div>
             </div>
             <div
               className="headerSearch-filterModalBodyCloseIcon"
