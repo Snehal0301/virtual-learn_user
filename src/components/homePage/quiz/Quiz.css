@@ -127,7 +127,7 @@ small {
   content: url('../../../assets/icons/checkedIconRed.png');
 }
 
-#accent:checked + .quiz-accentLabel {
+#accent:checked + .quiz-eachOptionBox {
   position: absolute;
   top: 0;
   right: 0;
@@ -135,7 +135,11 @@ small {
   bottom: 0;
   background-color: var(--selectedRed);
   border-radius: 6px;
+  display: flex;
   z-index: -1;
+  color: var(--primaryFontClr);
+  align-items: center;
+  padding-left: 58px;
 }
 
 .custom-radio:checked {

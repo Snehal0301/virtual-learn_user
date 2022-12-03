@@ -86,9 +86,14 @@ const Quiz = () => {
                               />
                               <label
                                 htmlFor="accent"
+                                className="quiz-eachOptionBox"
+                              >
+                                {option}
+                              </label>
+                              <label
+                                htmlFor="accent"
                                 className="quiz-accentLabel"
                               ></label>
-                              <div className="quiz-eachOptionBox">{option}</div>
                             </div>
                           );
                         })}
