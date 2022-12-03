@@ -8,13 +8,16 @@ import {
   chevron_right,
 } from "../../../../utils/svgIcons";
 import { useDispatch, useSelector } from "react-redux";
-import { profileDrawer } from "../../../../redux/reducers/headerProfileOptions";
+import { notificationSection, profileDrawer, profileSection, settingsSection } from "../../../../redux/reducers/headerProfileOptions";
 
 const Settings = () => {
     
   const dispatch = useDispatch();
   const handleClick = () => {
-    dispatch(profileDrawer(false));
+    dispatch(profileDrawer(false))
+    dispatch(profileSection(false))
+    dispatch(notificationSection(false))
+    // dispatch(settingsSection(false))
   };
   
   return (

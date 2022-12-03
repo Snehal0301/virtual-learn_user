@@ -1,7 +1,10 @@
-import React, { useState } from 'react'
-import './Header.css'
+import React, { useState } from 'react';
+import './Header.css';
 import {
   bellIcon,
+  closeProfile,
+  design,
+  filterIcon,
   graduationCapIcon,
   headerLogo,
   logoutIcon,
@@ -10,7 +13,14 @@ import {
   settingsIcon,
 } from '../../../utils/svgIcons';
 import { useDispatch, useSelector } from 'react-redux';
-import { headerProfile, profileDrawer } from '../../../redux/reducers/headerProfileOptions';
+import {
+  editProfileSection,
+  headerProfile,
+  notificationSection,
+  profileDrawer,
+  profileSection,
+  settingsSection
+} from '../../../redux/reducers/headerProfileOptions';
 import Drawer from 'react-modern-drawer'
 import 'react-modern-drawer/dist/index.css'
 import Profile from './profile/Profile';
@@ -18,67 +28,116 @@ import Settings from "./settings/Settings";
 import PrivacyPolicy from "./privacypolicy/PrivacyPolicy";
 import Terms from "./terms/Terms";
 import Notification from './notification/Notification';
-
+import { searchFocus } from '../../../redux/reducers/headerProfileOptions';
+import EditProfile from './edit-profile/EditProfile';
+import ChangePassword from './changePassword/ChangePassword';
 
 const Header = () => {
-  // const [isOpen, setIsOpen] = useState(false)
-  const [setting, setSetting] = useState(false);
 
-  const [notifydata, setnotifydata] = useState(false)
-  const handleClick = () => {
-    // setIsOpen(!isOpen)
-    dispatch(profileDrawer(true))
-    dispatch(headerProfile(false))
-    setSetting(false)
-    setnotifydata(false)
+  const topSearch = [
+    'Python',
+    'Java',
+    'Javascript',
+    'Leadership',
+    'Photoshop',
+    'React',
+    'Communication',
+  ];
 
-  }
+  const topCategories = [
+    'Design',
+    'Development',
+    'Business',
+    'Finance',
+    'Health & Fitness',
+    'Music',
+    'IT & Software',
+    'Marketing',
+    'Lifestyle',
+    'Photography',
+    'Teaching',
+  ];
 
-  const handlenotify = () => {
-    // setIsOpen(!isOpen)
-    dispatch(profileDrawer(true))
-    // dispatch(headerProfile(false))
-    setnotifydata(true)
-  }
-  const handleSetting = () => {
-    // setIsOpen(!isOpen)
+  const handleProfileClick = () => {
     dispatch(profileDrawer(true));
     dispatch(headerProfile(false));
-    setSetting(true)
+    dispatch(profileSection(true))
+    // dispatch(editProfileSection(false))
   };
+
+  const handlenotify = () => {
+    dispatch(profileDrawer(true));
+    dispatch(headerProfile(false));
+    dispatch(profileSection(false))
+    dispatch(notificationSection(true))
+  };
+
+  const handleSetting = () => {
+    dispatch(profileDrawer(true));
+    dispatch(profileSection(false))
+    dispatch(notificationSection(false))
+    dispatch(headerProfile(false));
+    dispatch(settingsSection(true))
+  };
+
+
   const dispatch = useDispatch();
   const headerOptions = useSelector((state: any) => state.headerProfile.value);
+
+  const searchFieldFocus = useSelector(
+    (state: any) => state.headerProfile.searchFocused
+  );
   const profileDrawerState = useSelector((state: any) => state.headerProfile.drawer);
+  const profileSectionState = useSelector((state: any) => state.headerProfile.profile);
+  const notificationSectionState = useSelector((state: any) => state.headerProfile.notification);
+  const settingsSectionState = useSelector((state: any) => state.headerProfile.settings);
 
 
+  console.log('search', searchFieldFocus);
   return (
     <>
-      <div className="header">
-        <div className="header-logo">{headerLogo}</div>
-        <form className="header-search">
-          <input
-            type="text"
-            className="header-searchField"
-            placeholder="Search"
-          />
-          <div className="header-searchIcon">{searchIcon}</div>
-        </form>
-        {
-          <div className="header-options">
-            <div className="header-optionsBell" onClick={handlenotify} >{bellIcon}</div>
-            <div className="header-settings" onClick={handleSetting}>{settingsIcon}</div>
-            <div className="header-profilePic">
-              <img
-                src={require("../../../assets/images/dhoni.png")}
-                alt="Profile Pic"
-                onClick={(e: any) => {
-                  e.stopPropagation();
-                  dispatch(headerProfile(!headerOptions));
-                }}
-              />
-              {
-                headerOptions &&
-                (
+      <div className="header-parent">
+        <div
+          className={searchFieldFocus ? 'header headerSearchFocus' : 'header'}
+        >
+          <div className="header-logo">{headerLogo}</div>
+          <form className="header-search">
+            <input
+              type="text"
+              className={
+                searchFieldFocus
+                  ? 'header-searchField header-searchFieldPadding'
+                  : 'header-searchField'
+              }
+              placeholder="Search"
+              onFocus={() => {
+                dispatch(searchFocus(true));
+              }}
+            />
+            {!searchFieldFocus && (
+              <div className="header-searchIcon">{searchIcon}</div>
+            )}
+            {searchFieldFocus && (
+              <button className="header-searchIconButton">{searchIcon}</button>
+            )}
+          </form>
+
+          {!searchFieldFocus ? (
+            <div className="header-options">
+              <div className="header-optionsBell" onClick={handlenotify}>
+                {bellIcon}
+              </div>
+              <div className="header-settings" onClick={handleSetting}>{settingsIcon}</div>
+              <div className="header-profilePic">
+                <img
+                  src={require('../../../assets/images/dhoni.png')}
+                  alt="Profile Pic"
+                  onClick={(e: any) => {
+                    e.stopPropagation();
+                    dispatch(headerProfile(!headerOptions));
+                  }}
+                />
+                {headerOptions && (
                   <div
                     className="header-profileOptions"
                     onClick={(e: any) => {
@@ -92,7 +151,7 @@ const Header = () => {
                       <div className="header-profileOptiontext">My Course</div>
                     </div>
 
-                    <div className="header-profileOption  header-profileOptionBorder" onClick={handleClick}>
+                    <div className="header-profileOption  header-profileOptionBorder" onClick={handleProfileClick}>
                       <div className="header-profileOptionIcon">{profileIcon}</div>
                       <div className="header-profileOptiontext"
                       >My Profile</div>
@@ -101,39 +160,112 @@ const Header = () => {
                     <div
                       className="header-profileOption"
                       onClick={() => {
-                        localStorage.setItem('auth', 'false')
-                        window.location.reload()
+                        localStorage.setItem('auth', 'false');
+                        window.location.reload();
                       }}
                     >
-                      <div className="header-profileOptionIcon">{logoutIcon}</div>
+                      <div className="header-profileOptionIcon">
+                        {logoutIcon}
+                      </div>
                       <div className="header-profileOptiontext">Logout</div>
                     </div>
-
                   </div>
-                )
-              }
+                )}
+              </div>
             </div>
-          </div>
-        }
+          ) : (
+            <div className="header-options">
+              {searchFieldFocus && (
+                <button className="header-filterButton">{filterIcon}</button>
+              )}
+              <div
+                onClick={() => {
+                  dispatch(searchFocus(false));
+                }}
+                className="header-optionsCloseIcon"
+              >
+                {closeProfile}
+              </div>
+            </div>
+          )}
+          {searchFieldFocus && (
+            <div className="header-categoryContents">
+              <div className="headerSearchCategoriesTopSearch">
+                <div className="headerSearchCategoriesTopSearchTitle">
+                  Top Search
+                </div>
+                <div className="headerSearchCategoriesTopSearchBody">
+                  {topSearch.map((ele: any, i: any) => {
+                    return (
+                      <div
+                        className="headerSearchCategoriesTopSearchesParent"
+                        key={i}
+                      >
+                        <div className="headerSearchCategoriesTopSearchesName">
+                          {ele}
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+              <div className="headerSearchCategoriesTopSearch">
+                <div className="headerSearchCategoriesTopSearchTitle">
+                  Search from Categories
+                </div>
+                <div className="headerSearchCategoriesTopSearchBody">
+                  {topCategories.map((ele: any, i: any) => {
+                    return (
+                      <div
+                        className="headerSearchCategoriesTopSearchesParent"
+                        key={i}
+                      >
+                        <div className="headerSearchCategoriesTopSearchesIcon">
+                          {design}
+                        </div>
+                        <div className="headerSearchCategoriesTopSearchesName">
+                          {ele}
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            </div>
+          )}
+        </div>
       </div>
-      <Drawer
-        open={profileDrawerState}
-        onClose={handleClick}
-        direction="right"
-        className=""
-        style={{
-          width: "25rem",
-        }}
-      >
-        {/* <Profile /> */}
-        {/* {setting ? <Settings /> : <Profile />} */}
-        {/* <Settings /> */}
-        {/* <PrivacyPolicy/> */}
-        {/* <Terms/> */}
-        {
-          notifydata ? <Notification /> : <Profile />
-        }
-      </Drawer>
+      <div className="overlay">
+        <Drawer
+          open={profileDrawerState}
+          onClose={handleProfileClick}
+          direction="right"
+          enableOverlay={false}
+          style={{
+            width: "25rem",
+            zIndex: '9999'
+          }}
+        >
+
+          {
+            profileSectionState && <Profile />
+          }
+
+          {
+            notificationSectionState && <Notification />
+          }
+
+          {
+            settingsSectionState && <Settings />
+          }
+          {/* <Profile /> */}
+          {/* {setting ? <Settings /> : <Profile />} */}
+          {/* <Settings /> */}
+          {/* <PrivacyPolicy/> */}
+          {/* <Terms/> */}
+          {/* <ChangePassword/> */}
+        </Drawer>
+      </div>
     </>
   );
 }

@@ -1,11 +1,11 @@
-import "../registrationform/RegistrationForm.css";
-import React from "react";
-import { Formik, useFormik } from "formik";
-import { useNavigate } from "react-router-dom";
-import { facebook, google } from "../../../../utils/svg";
-import { mobilenumberSchema } from "./schema/MobileSchema";
-import { useDispatch } from "react-redux";
-import { registerOtp } from "../../../../redux/reducers/loginConditions";
+import '../registrationform/RegistrationForm.css';
+import React from 'react';
+import { Formik, useFormik } from 'formik';
+import { useNavigate } from 'react-router-dom';
+import { facebook, google } from '../../../../utils/svg';
+import { mobilenumberSchema } from './schema/MobileSchema';
+import { useDispatch } from 'react-redux';
+import { registerOtp } from '../../../../redux/reducers/Conditions';
 
 const RegistrationForm = () => {
   const navigate = useNavigate();
@@ -14,14 +14,14 @@ const RegistrationForm = () => {
   const { values, errors, handleChange, touched, handleBlur, handleSubmit } =
     useFormik({
       initialValues: {
-        mobilenumber: "",
+        Mobilenumber: "",
       },
       validationSchema: mobilenumberSchema,
       onSubmit: (values, action) => {
         console.log(values);
         action.resetForm();
         dispatch(registerOtp(true));
-        navigate("/onboarding/registerOtp");
+        navigate('/onboarding/registerOtp');
       },
     });
 
@@ -41,9 +41,9 @@ const RegistrationForm = () => {
             <input
               className="login-input"
               type="text"
-              id="mobilenumber"
-              name="mobilenumber"
-              value={values.mobilenumber}
+              id="Mobilenumber"
+              name="Mobilenumber"
+              value={values.Mobilenumber}
               onChange={handleChange}
               onBlur={handleBlur}
               placeholder=" "
@@ -51,10 +51,10 @@ const RegistrationForm = () => {
               required
             />
             <label className="login-password-label">Mobile Number</label>
-            {errors.mobilenumber && touched.mobilenumber ? (
+            {errors.Mobilenumber && touched.Mobilenumber ? (
               <>
                 <div className="error-line"></div>
-                <p className="form-errors">{errors.mobilenumber}</p>
+                <p className="form-errors">{errors.Mobilenumber}</p>
               </>
             ) : null}
           </div>
@@ -68,10 +68,10 @@ const RegistrationForm = () => {
           <span
             className="login-text"
             onClick={() => {
-              navigate("/onboarding/login");
+              navigate('/onboarding/login');
             }}
           >
-            {" "}
+            {' '}
             Login
           </span>
         </span>

@@ -1,168 +1,172 @@
 .drawer-profile {
-    height: 100%;
-    display: flex;
-    flex-direction: column;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 .drawer-profile-header {
-    background-color: var(--drawerBlueClr);
-    padding: 30px;
-    /* position: fixed; */
+  background-color: var(--drawerBlueClr);
+  padding: 30px;
+  /* position: fixed; */
 }
 
-
 .drawer-profile-name {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin: 14px 0 30px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 14px 0 30px 0;
 }
 
 .profile-logo-name {
-    display: flex;
+  display: flex;
 }
 
 .drawer-profile-edit {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .profile-img-frame {
-    background-color: white;
-    width: 78px;
-    height: 78px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 6px;
-
+  background-color: white;
+  width: 78px;
+  height: 78px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
 }
 
 .profile-img-frame img {
-    width: 70px;
-    height: 70px;
-    background-position: center;
-    background-size: cover;
+  width: 70px;
+  height: 70px;
+  background-position: center;
+  background-size: cover;
 }
 
 .profile-image-name {
-    color: white;
-    margin-left: 20px;
-    display: flex;
-    flex-direction: column;
+  color: white;
+  margin-left: 20px;
+  display: flex;
+  flex-direction: column;
 }
 
 .profile-image-name .name {
-    font-weight: 700;
-    font-size: 22px;
+  font-weight: 700;
+  font-size: 22px;
 }
 
 .profile-image-name .role {
-    margin-top: 5px;
-    font-weight: 700;
-    font-size: 18px;
+  margin-top: 5px;
+  font-weight: 700;
+  font-size: 18px;
 }
 
 .drawer-profile-profile {
-    font-size: 28px;
-    font-weight: 700;
-    color: white;
+  font-size: 28px;
+  font-weight: 700;
+  color: white;
 }
 
 .drawer-profile-clear {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .progress-details {
-    display: flex;
-    justify-content: space-evenly;
-    margin-top: 30px;
-
+  display: flex;
+  justify-content: space-evenly;
+  margin-top: 30px;
 }
 
 .progress-1 {
-    width: 100px;
-    height: 110px;
-    border-radius: 6px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.15);
-
+  width: 100px;
+  height: 110px;
+  border-radius: 6px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.15);
 }
 
 .progress-digit {
-    color: var(--profileBlueCLr);
-    font-size: 40px;
-    font-weight: 700;
+  color: var(--profileBlueCLr);
+  font-size: 40px;
+  font-weight: 700;
 }
 
 .progress-content {
-    font-size: 20px;
-    font-weight: 700;
+  font-size: 20px;
+  font-weight: 700;
 }
 
 .personal-details-section {
-    padding: 25px;
-    display: flex;
-    flex-direction: column;
-    overflow: auto;
-    position: relative;
+  padding: 25px;
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+  position: relative;
 }
 
 .personal-details-title {
-    font-size: 22px;
-    font-weight: 700;
+  font-size: 22px;
+  font-weight: 700;
 }
 
 .personal-section-1 {
-    margin-top: 15px;
-    /* min-height: 100vh; */
-    height: 100vh;
+  margin-top: 15px;
+  /* min-height: 100vh; */
+  height: 100vh;
 }
 
 .personal-detail-section {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px 0 20px 0;
-    border-bottom: 1px solid #042c5c39;
-    border-top: 1px solid #042c5c39;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 0 20px 0;
+  border-bottom: 1px solid #042c5c39;
+  border-top: 1px solid #042c5c39;
 }
 
 .personal-detail-section:first-child {
-    border-top: none;
+  border-top: none;
 }
 
 .pd-title {
-    color: #7A7A7A;
-    font-weight: 700;
-    font-size: 20px;
+  color: #7a7a7a;
+  font-weight: 700;
+  font-size: 20px;
 }
 
 .pd-value {
-    color: #373737;
-    font-weight: 700;
-    font-size: 20px;
+  color: #373737;
+  font-weight: 700;
+  font-size: 20px;
 }
 
 .personal-detail-section-1 {
-    display: flex;
+  display: flex;
 }
 
 .privacy-icon-detail {
-    margin-left: 10px;
+  margin-left: 10px;
 }
 
 .privacy-privacy {
-    color: #072D5B;
-    font-size: 22px;
-    font-weight: 700;
+  color: #072d5b;
+  font-size: 22px;
+  font-weight: 700;
 }
 
 .privacy-password-title {
-    color: #7A7A7A;
-    font-weight: 700;
-    font-size: 18px;
+  color: #7a7a7a;
+  font-weight: 700;
+  font-size: 18px;
+}
 
+.EZDrawer .EZDrawer__checkbox:checked ~ .EZDrawer__container {
+  z-index: 999 !important;
+}
+
+
+.password-chng{
+  cursor: pointer;
 }
