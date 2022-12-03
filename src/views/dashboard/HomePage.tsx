@@ -1,4 +1,5 @@
 import Header from '../../components/homePage/header/Header';
+import MyCourse from '../../components/homePage/mycourse/MyCourse';
 import Start from '../../components/homePage/start/start';
 import './HomePage.css';
 
@@ -9,7 +10,8 @@ const HomePage = () => {
         <Header />
       </div>
       <div className="homePageBody">
-        <Start />
+        {/* <Start /> */}
+        <MyCourse/>
       </div>
     </div>
   );
