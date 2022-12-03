@@ -23,6 +23,7 @@
     "react-scripts": "5.0.1",
     "react-slideshow-image": "^4.0.5",
     "react-switch": "^7.0.0",
+    "react-tabs": "^6.0.0",
     "react-toastify": "^9.1.1",
     "react-tooltip": "^4.5.1",
     "redux": "^4.2.0",
