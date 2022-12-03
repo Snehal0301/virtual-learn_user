@@ -1,42 +1,31 @@
-import { time } from 'console';
 import React, { useEffect, useState } from 'react';
 import Countdown from 'react-countdown';
+import { MultiStepForm, Step } from 'react-multi-form';
 import { closeIcon, timerIcon } from '../../../utils/svgIcons';
 import './Quiz.css';
 
 const Quiz = () => {
-  const myQuestions = [
+  const [active, setActive] = useState(1);
+
+  const items = [
     {
       question: 'Who invented JavaScript?',
-      answers: {
-        a: 'Douglas Crockford',
-        b: 'Sheryl Sandberg',
-        c: 'Brendan Eich',
-      },
+      answers: ['Douglas Crockford', 'Sheryl Sandberg', 'Brendan Eich'],
       questionId: 'a',
     },
     {
       question: 'Which one of these is a JavaScript package manager?',
-      answers: {
-        a: 'Node.js',
-        b: 'TypeScript',
-        c: 'npm',
-      },
+      answers: ['Node.js', 'TypeScript', 'npm'],
       questionId: 'b',
     },
     {
       question: 'Which tool can you use to ensure code quality?',
-      answers: {
-        a: 'Angular',
-        b: 'jQuery',
-        c: 'RequireJS',
-        d: 'ESLint',
-      },
+      answers: ['Angular', 'jQuery', 'RequireJS', 'ESLint'],
       questionId: 'c',
     },
   ];
 
-  const renderer = ({ minutes, seconds, completed }: any) => {
+  const renderer = ({ minutes, seconds, completed }) => {
     if (completed) {
       alert('time up');
       return <div>Completed</div>;
@@ -66,10 +55,31 @@ const Quiz = () => {
         <div className="quiz-HeaderCloseIcon">{closeIcon}</div>
       </div>
       <div className="quiz-body">
-        <div className="quiz-bodyQuestionNum">Question 5 of 25</div>
-        <form className="quiz-bodyQuestionForm"></form>
+        <div className="quiz-bodyQuestionForm">
+          <MultiStepForm activeStep={active}>
+            {items &&
+              items.map((ele) => {
+                return (
+                  <div>
+                    <Step label="one">{ele.question}</Step>
+                  </div>
+                );
+              })}
+          </MultiStepForm>
+
+          <button onClick={() => setActive(active - 1)} disabled={active === 1}>
+            Previous
+          </button>
+
+          <button
+            onClick={() => setActive(active + 1)}
+            style={{ float: 'right' }}
+            disabled={active === items.length}
+          >
+            Next
+          </button>
+        </div>
       </div>
-      <div className="quiz-footer">Quiz Footer</div>
     </div>
   );
 };
