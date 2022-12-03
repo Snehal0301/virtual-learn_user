@@ -2,12 +2,12 @@ import "./Terms.css"
 import { useDispatch, useSelector } from "react-redux";
 import React from 'react'
 import { arrowRight } from "../../../../utils/svgIcons";
-import { profileDrawer } from "../../../../redux/reducers/headerProfileOptions";
+import { termsSection } from "../../../../redux/reducers/headerProfileOptions";
 
 const Terms = () => {
       const dispatch = useDispatch();
     const handleClick = () => {
-      dispatch(profileDrawer(false));
+      dispatch(termsSection(false));
     };
   return (
     <div className="drawer-profile">

@@ -14,6 +14,7 @@ import {
 } from '../../../utils/svgIcons';
 import { useDispatch, useSelector } from 'react-redux';
 import {
+  editProfileSection,
   headerProfile,
   notificationSection,
   profileDrawer,
@@ -29,10 +30,9 @@ import Terms from "./terms/Terms";
 import Notification from './notification/Notification';
 import { searchFocus } from '../../../redux/reducers/headerProfileOptions';
 import EditProfile from './edit-profile/EditProfile';
+import ChangePassword from './changePassword/ChangePassword';
 
 const Header = () => {
-  // const [isOpen, setIsOpen] = useState(false)
-  const [setting, setSetting] = useState(false);
 
   const topSearch = [
     'Python',
@@ -58,24 +58,28 @@ const Header = () => {
     'Teaching',
   ];
 
-  const [notifydata, setnotifydata] = useState(false);
   const handleProfileClick = () => {
     dispatch(profileDrawer(true));
     dispatch(headerProfile(false));
     dispatch(profileSection(true))
+    // dispatch(editProfileSection(false))
   };
 
   const handlenotify = () => {
     dispatch(profileDrawer(true));
     dispatch(headerProfile(false));
+    dispatch(profileSection(false))
     dispatch(notificationSection(true))
   };
 
   const handleSetting = () => {
     dispatch(profileDrawer(true));
+    dispatch(profileSection(false))
+    dispatch(notificationSection(false))
     dispatch(headerProfile(false));
     dispatch(settingsSection(true))
   };
+
   const dispatch = useDispatch();
   const headerOptions = useSelector((state: any) => state.headerProfile.value);
 
@@ -87,13 +91,12 @@ const Header = () => {
   const notificationSectionState = useSelector((state: any) => state.headerProfile.notification);
   const settingsSectionState = useSelector((state: any) => state.headerProfile.settings);
 
-
   console.log('search', searchFieldFocus);
   return (
     <>
       <div className="header-parent">
         <div
-          className={searchFieldFocus ? 'header headerSearchFocus' : 'header'}
+          className={searchFieldFocus ? "header headerSearchFocus" : "header"}
         >
           <div className="header-logo">{headerLogo}</div>
           <form className="header-search">
@@ -101,8 +104,8 @@ const Header = () => {
               type="text"
               className={
                 searchFieldFocus
-                  ? 'header-searchField header-searchFieldPadding'
-                  : 'header-searchField'
+                  ? "header-searchField header-searchFieldPadding"
+                  : "header-searchField"
               }
               placeholder="Search"
               onFocus={() => {
@@ -122,10 +125,12 @@ const Header = () => {
               <div className="header-optionsBell" onClick={handlenotify}>
                 {bellIcon}
               </div>
-              <div className="header-settings" onClick={handleSetting}>{settingsIcon}</div>
+              <div className="header-settings" onClick={handleSetting}>
+                {settingsIcon}
+              </div>
               <div className="header-profilePic">
                 <img
-                  src={require('../../../assets/images/dhoni.png')}
+                  src={require("../../../assets/images/dhoni.png")}
                   alt="Profile Pic"
                   onClick={(e: any) => {
                     e.stopPropagation();
@@ -146,16 +151,20 @@ const Header = () => {
                       <div className="header-profileOptiontext">My Course</div>
                     </div>
 
-                    <div className="header-profileOption  header-profileOptionBorder" onClick={handleProfileClick}>
-                      <div className="header-profileOptionIcon">{profileIcon}</div>
-                      <div className="header-profileOptiontext"
-                      >My Profile</div>
+                    <div
+                      className="header-profileOption  header-profileOptionBorder"
+                      onClick={handleProfileClick}
+                    >
+                      <div className="header-profileOptionIcon">
+                        {profileIcon}
+                      </div>
+                      <div className="header-profileOptiontext">My Profile</div>
                     </div>
 
                     <div
                       className="header-profileOption"
                       onClick={() => {
-                        localStorage.setItem('auth', 'false');
+                        localStorage.setItem("auth", "false");
                         window.location.reload();
                       }}
                     >
@@ -238,23 +247,16 @@ const Header = () => {
           enableOverlay={false}
           style={{
             width: "25rem",
+            zIndex: '9999'
           }}
         >
+          {profileSectionState && <Profile />}
 
-          {
-            profileSectionState && <Profile />
-          }
+          {notificationSectionState && <Notification />}
 
-          {/* {
-            notificationSectionState && <Notification />
-          }
-          
-          {
-            settingsSectionState && <Settings />
-          } */}
-          {/* <Profile /> */}
-          {/* {setting ? <Settings /> : <Profile />} */}
-          {/* <Settings /> */}
+          {settingsSectionState && <Settings />}
+
+          {/* <Terms /> */}
           {/* <PrivacyPolicy/> */}
           {/* <Terms/> */}
           <EditProfile/>

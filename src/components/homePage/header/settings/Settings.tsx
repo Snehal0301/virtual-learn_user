@@ -8,60 +8,122 @@ import {
   chevron_right,
 } from "../../../../utils/svgIcons";
 import { useDispatch, useSelector } from "react-redux";
-import { notificationSection, profileDrawer, profileSection, settingsSection } from "../../../../redux/reducers/headerProfileOptions";
+import { notificationSection, privacySection, profileDrawer, profileSection, settingsSection, termsSection } from "../../../../redux/reducers/headerProfileOptions";
+import Switch from "react-switch";
+import PrivacyPolicy from "../privacypolicy/PrivacyPolicy";
+import Terms from "../terms/Terms";
 
 const Settings = () => {
-    
+  const [checked, setChecked] = useState(false);
+  const [checkedSound,setCheckedSound] = useState(false)
   const dispatch = useDispatch();
+  const privacyPolicyState = useSelector((state: any) => state.headerProfile.privacy)
+  const TermsState = useSelector((state: any) => state.headerProfile.terms)
+  
+  const handleChange = (nextChecked : any) => {
+    setChecked(nextChecked);
+  };
+   const handleChangeSound = (nextChecked: any) => {
+     setCheckedSound(nextChecked);
+   };
+
   const handleClick = () => {
     dispatch(profileDrawer(false))
     dispatch(profileSection(false))
     dispatch(notificationSection(false))
-    dispatch(settingsSection(false))
+    // dispatch(settingsSection(false))
   };
-  
+  const handlePrivacyPolicy = () => {
+    dispatch(privacySection(true))
+  }
+  const handleTermsServices = () => {
+    dispatch(termsSection(true))
+  };
+  const renderElements = () => {
+    if (privacyPolicyState) {
+      return <PrivacyPolicy />
+    }
+    else if (TermsState) {
+      return <Terms />
+    }
+    else {
+      return (
+        <div className="drawer-profile">
+          <div className="drawer-profile-header">
+            <div className="drawer-profile-clear" onClick={handleClick}>
+              {closeProfile}
+            </div>
+            <div className="settings-settings-text">
+              <p>Settings</p>
+            </div>
+          </div>
+
+          <div className="settings-body">
+            <div className="settings-notification">
+              <div className="settings-notification-text-icon">
+                <div>{settings_Icon}</div>
+                <p className="settings-notification-text">
+                  Notification Settings
+                </p>
+              </div>
+              <div className="settings-push-notification">
+                <p>Push Notification</p>
+                <Switch
+                  onChange={handleChange}
+                  checked={checked}
+                  uncheckedIcon={false}
+                  checkedIcon={false}
+                  width={48}
+                  height={22}
+                  className="react-switch-1"
+                />
+              </div>
+              <div className="settings-notification-sound">
+                <p>Notification Sound</p>
+                <Switch
+                  onChange={handleChangeSound}
+                  checked={checkedSound}
+                  uncheckedIcon={false}
+                  checkedIcon={false}
+                  width={48}
+                  height={22}
+                  className="react-switch-2"
+                />
+              </div>
+            </div>
+
+            <div
+              className="settings-privacy-policy"
+              onClick={handlePrivacyPolicy}
+            >
+              <div className="privacy-policy-text-icon">
+                <div>{privacy_icon}</div>
+                <p>Privacy Policy</p>
+              </div>
+              <div className="settings-chevron-right">{chevron_right}</div>
+            </div>
+
+            <div
+              className="settings-terms-services"
+              onClick={handleTermsServices}
+            >
+              <div className="terms-text-icon">
+                <div>{terms_icon}</div>
+                <p>Terms of Services</p>
+              </div>
+              <div className="settings-chevron-right">{chevron_right}</div>
+            </div>
+          </div>
+        </div>
+      );
+    }
+  }
   return (
-    <div className="drawer-profile">
-      <div className="drawer-profile-header">
-        <div className="drawer-profile-clear" onClick={handleClick}>
-          {closeProfile}
-        </div>
-        <div className="settings-settings-text">
-          <p>Settings</p>
-        </div>
-      </div>
-
-      <div className="settings-body">
-        <div className="settings-notification">
-          <div className="settings-notification-text-icon">
-            <div>{settings_Icon}</div>
-            <p className="settings-notification-text">Notification Settings</p>
-          </div>
-          <div className="settings-push-notification">
-            <p>Push Notification</p>
-          </div>
-          <div className="settings-notification-sound">
-            <p>Notification Sound</p>
-          </div>
-        </div>
-
-        <div className="settings-privacy-policy">
-          <div className="privacy-policy-text-icon">
-            <div>{privacy_icon}</div>
-            <p>Privacy Policy</p>
-          </div>
-          <div className="settings-chevron-right">{chevron_right}</div>
-        </div>
-
-        <div className="settings-terms-services">
-          <div className="terms-text-icon">
-            <div>{terms_icon}</div>
-            <p>Terms of Services</p>
-          </div>
-          <div className="settings-chevron-right">{chevron_right}</div>
-        </div>
-      </div>
-    </div>
+    <>
+      {
+        renderElements()
+     }
+    </>
   );
 };
 

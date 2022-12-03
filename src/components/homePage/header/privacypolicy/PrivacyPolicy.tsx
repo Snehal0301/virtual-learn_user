@@ -2,13 +2,13 @@ import "./PrivacyPolicy.css";
 import React from "react";
 import { arrowRight } from "../../../../utils/svgIcons";
 import { useDispatch, useSelector } from "react-redux";
-import { profileDrawer } from "../../../../redux/reducers/headerProfileOptions";
+import { privacySection, profileDrawer } from "../../../../redux/reducers/headerProfileOptions";
 
 const PrivacyPolicy = () => {
 
     const dispatch = useDispatch();
     const handleClick = () => {
-      dispatch(profileDrawer(false));
+      dispatch(privacySection(false))
     };
 
     return (
