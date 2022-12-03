@@ -47,7 +47,7 @@ const PersonalDetails = () => {
         </div>
       </div>
       <div className="inputFields">
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} className="personal-details-form">
           <div className="personal-input">
             <input
               type="text"
@@ -58,7 +58,7 @@ const PersonalDetails = () => {
               value={values.mobileNumber}
               onChange={handleChange}
               onBlur={handleBlur}
-              // maxLength={10}
+            // maxLength={10}
             />
             <label htmlFor="mobileNumber">Mobile Number</label>
             {errors.mobileNumber && touched.mobileNumber ? (
@@ -147,7 +147,7 @@ const PersonalDetails = () => {
               <div
                 data-tip="React-tooltip"
                 data-for="sadFace"
-                className="tooltip"
+                className="personalDetailtooltip"
               >
                 {info_btn}
               </div>
@@ -194,7 +194,7 @@ const PersonalDetails = () => {
             ) : null}
           </div>
 
-          <button type="submit">Verify</button>
+          <button type="submit" className='persondetails-button'>Verify</button>
         </form>
       </div>
     </div>

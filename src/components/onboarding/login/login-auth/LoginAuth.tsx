@@ -14,7 +14,7 @@ const LoginAuth = () => {
   const dispatch = useDispatch();
   const loginResponse = useSelector((state: any) => state.login);
 
-  const showError = (msg: any) =>
+  const showError = (msg: any) =>{
     toast(
       <div className="loginAuth-showError">
         <div className="loginAuth-showErrorIcon">
@@ -33,6 +33,9 @@ const LoginAuth = () => {
         draggable: true,
       }
     );
+  }
+  
+  // showError()
 
   const submitHandler = (e: any) => {
     e.preventDefault();

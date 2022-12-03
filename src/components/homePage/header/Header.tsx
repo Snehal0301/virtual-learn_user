@@ -15,6 +15,7 @@ import {
 } from '../../../utils/svgIcons';
 import { useDispatch, useSelector } from 'react-redux';
 import {
+  editProfileSection,
   headerProfile,
   modalFilter,
   notificationSection,
@@ -31,6 +32,7 @@ import Terms from './terms/Terms';
 import Notification from './notification/Notification';
 import { searchFocus } from '../../../redux/reducers/headerProfileOptions';
 import EditProfile from './edit-profile/EditProfile';
+import ChangePassword from './changePassword/ChangePassword';
 
 const Header = () => {
   const [onChange, setOnChange] = useState('');
@@ -102,17 +104,22 @@ const Header = () => {
     dispatch(profileSection(true));
   };
 
+
   const handlenotify = () => {
     dispatch(profileDrawer(true));
     dispatch(headerProfile(false));
-    dispatch(notificationSection(true));
+    dispatch(profileSection(false))
+    dispatch(notificationSection(true))
   };
 
   const handleSetting = () => {
     dispatch(profileDrawer(true));
+    dispatch(profileSection(false))
+    dispatch(notificationSection(false))
     dispatch(headerProfile(false));
     dispatch(settingsSection(true));
   };
+
   const dispatch = useDispatch();
   const headerOptions = useSelector((state: any) => state.headerProfile.value);
 
@@ -143,7 +150,7 @@ const Header = () => {
     <>
       <div className="header-parent">
         <div
-          className={searchFieldFocus ? 'header headerSearchFocus' : 'header'}
+          className={searchFieldFocus ? "header headerSearchFocus" : "header"}
         >
           <div className="header-logo">{headerLogo}</div>
           <form className="header-search">
@@ -151,8 +158,8 @@ const Header = () => {
               type="text"
               className={
                 searchFieldFocus
-                  ? 'header-searchField header-searchFieldPadding'
-                  : 'header-searchField'
+                  ? "header-searchField header-searchFieldPadding"
+                  : "header-searchField"
               }
               placeholder="Search"
               onFocus={() => {
@@ -178,7 +185,7 @@ const Header = () => {
               </div>
               <div className="header-profilePic">
                 <img
-                  src={require('../../../assets/images/dhoni.png')}
+                  src={require("../../../assets/images/dhoni.png")}
                   alt="Profile Pic"
                   onClick={(e: any) => {
                     e.stopPropagation();
@@ -212,7 +219,7 @@ const Header = () => {
                     <div
                       className="header-profileOption"
                       onClick={() => {
-                        localStorage.setItem('auth', 'false');
+                        localStorage.setItem("auth", "false");
                         window.location.reload();
                       }}
                     >
@@ -446,6 +453,36 @@ const Header = () => {
           </div>
         </aside>
       )}
+      {/* </div>
+      </div > */}
+      <div className="overlay">
+        <Drawer
+          open={profileDrawerState}
+          onClose={handleProfileClick}
+          direction="right"
+          enableOverlay={false}
+          style={{
+            width: "25rem",
+            zIndex: '9999'
+          }}
+        >
+          {profileSectionState && <Profile />}
+
+          {notificationSectionState && <Notification />}
+
+          {settingsSectionState && <Settings />}
+
+          {/* <Terms /> */}
+          {/* <PrivacyPolicy/> */}
+          {/* <Terms/> */}
+          {/* <EditProfile /> */}
+          {/* {
+          notifydata ? <Notification /> : <Profile />
+        } */}
+
+
+        </Drawer>
+      </div>
     </>
   );
 };

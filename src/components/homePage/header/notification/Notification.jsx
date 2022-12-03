@@ -11,7 +11,7 @@ const Notification = () => {
     const handleClick = () => {
         dispatch(profileDrawer(false))
         dispatch(profileSection(false))
-        dispatch(notificationSection(false))
+        // dispatch(notificationSection(false))
         dispatch(settingsSection(false))
     }
 
