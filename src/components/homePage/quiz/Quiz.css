@@ -47,3 +47,112 @@
 .quiz-bodyQuestionForm > div > :first-child {
   display: none !important;
 }
+
+.quiz-bodyQuestionForm {
+  margin-top: 72px;
+}
+
+.quiz-question {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 30px;
+  line-height: 24px;
+  color: var(--filterChipFontClr);
+  margin-bottom: 40px;
+}
+
+.quiz-questionNum {
+  color: var(--indexClr);
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 24px;
+  margin-bottom: 30px;
+}
+
+.quiz-options {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  width: max-content;
+  min-width: calc(50vw - 10%);
+  align-items: flex-start;
+}
+
+.quiz-eachOption {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  background: #ffffff;
+  border: 1px solid #f0f0f0;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.04);
+  border-radius: 6px;
+  padding: 23px 20px;
+}
+
+.quiz-eachOption > .quiz-eachOption > input {
+  cursor: pointer;
+}
+
+.quiz-eachOptionBox {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 24px;
+  color: var(--filterChipFontClr);
+}
+
+/* radio */
+
+.quiz-eachOption > input,
+label {
+  cursor: pointer;
+}
+
+label,
+small {
+  margin-top: 0.1em;
+}
+
+.quiz-eachOption > input[type='radio'] {
+  height: 1.2rem;
+  width: 1.2rem;
+  margin-right: 0.5rem;
+}
+
+#accent:checked::after {
+  content: url('../../../assets/icons/checkedIconRed.png');
+}
+
+.custom-radio:checked {
+  /* hiding browser el */
+  appearance: none;
+  /* Safari support */
+  -webkit-appearance: none;
+  border: 0.2rem solid rgb(125, 70, 254);
+  background-color: #3113b9;
+  border-radius: 50%;
+}
+
+/* keyboard navigation focus appearance */
+.custom-radio:focus-visible {
+  outline-offset: 0;
+}
+
+/* radio*/
+
+.quiz-buttons {
+  display: flex;
+}
+
+.quiz-footer {
+  display: flex;
+  align-items: center;
+  gap: 60px;
+  margin-top: 64px;
+  background-color: var(--blueFont);
+  width: max-content;
+  padding: 26px 30px;
+  border-radius: 6px;
+}

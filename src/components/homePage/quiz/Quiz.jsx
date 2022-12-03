@@ -1,7 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import Countdown from 'react-countdown';
 import { MultiStepForm, Step } from 'react-multi-form';
-import { closeIcon, timerIcon } from '../../../utils/svgIcons';
+import {
+  closeIcon,
+  nextIcon,
+  previousIcon,
+  timerIcon,
+} from '../../../utils/svgIcons';
 import './Quiz.css';
 
 const Quiz = () => {
@@ -62,18 +67,26 @@ const Quiz = () => {
                 return (
                   <div key={i}>
                     <Step label={i}>
+                      <div className="quiz-questionNum">
+                        {' '}
+                        Question {i + 1} of {items.length}
+                      </div>
+
                       <div className="quiz-question">{ele.question}</div>
                       <div className="quiz-options">
                         {ele.answers.map((option) => {
+                          console.log(ele);
                           return (
-                            <>
+                            <div className="quiz-eachOption">
                               <input
                                 type="radio"
                                 name={ele.questionId}
                                 value={option}
+                                id="accent"
                               />
-                              {option}
-                            </>
+
+                              <div className="quiz-eachOptionBox">{option}</div>
+                            </div>
                           );
                         })}
                       </div>
@@ -82,18 +95,30 @@ const Quiz = () => {
                 );
               })}
           </MultiStepForm>
+        </div>
+        <div className="quiz-footer">
+          <div className="quiz-footerText">
+            <div className="quiz-footerChapter">Chapter 3</div>
+            <div className="quiz-footerChapterTitle">
+              Setting up a new project
+            </div>
+          </div>
+          <div className="quiz-buttons">
+            <button
+              onClick={() => setActive(active - 1)}
+              disabled={active === 1}
+            >
+              {previousIcon}
+            </button>
 
-          <button onClick={() => setActive(active - 1)} disabled={active === 1}>
-            Previous
-          </button>
-
-          <button
-            onClick={() => setActive(active + 1)}
-            style={{ float: 'right' }}
-            disabled={active === items.length}
-          >
-            Next
-          </button>
+            <button
+              onClick={() => setActive(active + 1)}
+              style={{ float: 'right' }}
+              disabled={active === items.length}
+            >
+              {nextIcon}
+            </button>
+          </div>
         </div>
       </div>
     </div>
