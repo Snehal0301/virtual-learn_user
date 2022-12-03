@@ -6,11 +6,13 @@ import thunk from 'redux-thunk';
 import { showHeaderProfile } from '../reducers/headerProfileOptions';
 import showLoginConditions from '../reducers/Conditions';
 import loginSlice from '../reducers/loginSlice';
+import myCourseReducer from '../reducers/myCourseReducer';
 
 const reducers = combineReducers({
   headerProfile: showHeaderProfile.reducer,
   loginConditions: showLoginConditions.reducer,
   login: loginSlice.reducer,
+  mycourse: myCourseReducer
 });
 
 const persistConfig = {

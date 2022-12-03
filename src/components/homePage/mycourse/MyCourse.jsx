@@ -1,5 +1,6 @@
 import React from 'react'
 import './MyCourse.css'
+import OngoingOverview from './ongoing-overview/OngoingOverview'
 
 const MyCourse = () => {
     return (
@@ -12,6 +13,7 @@ const MyCourse = () => {
 
             <div className="mycourse-body">
                 {/* start writing code here */}
+                <OngoingOverview/>
             </div>
         </div>
     )

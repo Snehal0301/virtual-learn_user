@@ -40,11 +40,16 @@
   --filterChipFontClr:#2B2B2B
   --black: #000000;
   --chipBorder: #e4e4e4;
+  --videoCatgryClr:#FCBE4B;
 }
 
 body {
   min-height: 100vh;
   z-index: -9999;
+}
+
+a{
+  text-decoration: none;
 }
 
 .app {
