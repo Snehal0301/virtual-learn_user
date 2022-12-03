@@ -108,7 +108,10 @@ const Quiz = () => {
               onClick={() => setActive(active - 1)}
               disabled={active === 1}
             >
-              {previousIcon}
+              <img
+                src={require('../../../assets/icons/previousIcon.png')}
+                alt="previous"
+              />
             </button>
 
             <button
@@ -116,7 +119,10 @@ const Quiz = () => {
               style={{ float: 'right' }}
               disabled={active === items.length}
             >
-              {nextIcon}
+              <img
+                src={require('../../../assets/icons/nextIcon.png')}
+                alt="next"
+              ></img>
             </button>
           </div>
         </div>
