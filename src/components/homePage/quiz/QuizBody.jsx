@@ -1,6 +1,7 @@
 import './Quiz.css';
 import { MultiStepForm, Step } from 'react-multi-form';
 import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
 
 const QuizBody = () => {
   const [active, setActive] = useState(1);
@@ -26,7 +27,7 @@ const QuizBody = () => {
   return (
     <div className="quiz-body">
       <div className="quiz-bodyQuestionForm">
-        <MultiStepForm activeStep={active} className="hi">
+        <MultiStepForm activeStep={active}>
           {items &&
             items.map((ele, i) => {
               return (

@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Countdown from 'react-countdown';
+import { useDispatch, useSelector } from 'react-redux';
+import { showQuizModal } from '../../../redux/reducers/Conditions';
 
 import {
   closeIcon,
@@ -9,15 +11,23 @@ import {
 } from '../../../utils/svgIcons';
 import './Quiz.css';
 import QuizBody from './QuizBody';
+import QuizModal from './QuizModal';
 
 const Quiz = () => {
+  const dispatch = useDispatch();
+
+  const quizModal = useSelector((state) => state.loginConditions.quizModal);
+
   const renderer = ({ minutes, seconds, completed }) => {
     if (completed) {
       alert('time up');
       return <div>Completed</div>;
     } else {
-      // Render a countdown
-      return <span>{minutes}</span>;
+      return (
+        <span>
+          {minutes}:{seconds}
+        </span>
+      );
     }
   };
 
@@ -40,9 +50,17 @@ const Quiz = () => {
             mins remaining
           </div>
         </div>
-        <div className="quiz-HeaderCloseIcon">{closeIcon}</div>
+        <div
+          className="quiz-HeaderCloseIcon"
+          onClick={() => {
+            dispatch(showQuizModal(true));
+          }}
+        >
+          {closeIcon}
+        </div>
       </div>
       <QuizBody />
+      <QuizModal time={0} />
     </div>
   );
 };

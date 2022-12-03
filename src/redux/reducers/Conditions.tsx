@@ -7,6 +7,7 @@ const initialState: any = {
   otpReg: false,
   personalDetails: false,
   successReg: false,
+  quizModal: false,
 };
 
 export const showLoginConditions = createSlice({
@@ -31,6 +32,9 @@ export const showLoginConditions = createSlice({
     registerSuccess: (state, action) => {
       state.successReg = action.payload;
     },
+    showQuizModal: (state, action) => {
+      state.quizModal = action.payload;
+    },
   },
 });
 
@@ -42,6 +46,7 @@ export const {
   registerOtp,
   registerPersonalDetails,
   registerSuccess,
+  showQuizModal,
 } = showLoginConditions.actions;
 
 export default showLoginConditions;

@@ -199,3 +199,17 @@ small {
   margin-top: 10px;
   color: var(--primaryFontClr);
 }
+
+.quiz-HeaderCloseIcon {
+  cursor: pointer;
+}
+
+.quizModal-text {
+  text-align: center;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 22px;
+  text-align: center;
+  color: var(--black);
+}
