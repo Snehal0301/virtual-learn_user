@@ -1,5 +1,6 @@
 import Header from '../../components/homePage/header/Header';
 import MyCourse from '../../components/homePage/mycourse/MyCourse';
+import Categories from '../../components/homePage/start/categories/Categories';
 import Start from '../../components/homePage/start/start';
 import './HomePage.css';
 
@@ -11,7 +12,8 @@ const HomePage = () => {
       </div>
       <div className="homePageBody">
         {/* <Start /> */}
-        <MyCourse/>
+        <Categories/>
+        {/* <MyCourse/> */}
       </div>
     </div>
   );

@@ -108,10 +108,3 @@ font-size: 20px;
 text-align: center;
 color: var(--greyFont)
 }
-.ongoing-tab{
-     background-color: #01447e;
-}
-.active{
-    color: #ffff;
-    background-color: #01447e;
-}

@@ -1,0 +1,70 @@
+ul.breadcrumb-categories {
+  padding: 30px 0 30px 0;
+  list-style: none;
+}
+
+ul.breadcrumb-categories li {
+  display: inline;
+  font-size: 18px;
+}
+
+ul.breadcrumb-categories li + li:before {
+  padding: 8px;
+  color: var(--greyFont);
+  content: "/\00a0";
+}
+
+ul.breadcrumb-categories li a {
+  color: var(--greyFont);
+  text-decoration: none;
+  font-family: Biko;
+}
+
+ul.breadcrumb-categories li a:hover {
+  color: #01447e;
+  /* text-decoration: underline; */
+}
+.categories-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.categories-body-choose {
+  font-family: "Proxima Nova Soft";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 30px;
+  text-align: center;
+  color: #747474;
+}
+
+.categories-body-display {
+  display: grid;
+  grid-template-columns: auto auto auto auto auto;
+  /* background-color: red; */
+  width: 100%;
+  gap: 10px;
+  margin-top: 3em;
+  justify-content: center;
+}
+.categoriesDisplay-home-parent {
+  color: var(--chipFontclr);
+  background-color: var(--primaryFontClr);
+  border-radius: 6px;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width:9rem;
+  height: 100px;
+  /* height: auto; */
+  gap:15px;
+}
+.categories-home-chipBorder {
+  border: 1px solid var(--chipBorder);
+  color: var(--filterChipFontClr) !important;
+}
