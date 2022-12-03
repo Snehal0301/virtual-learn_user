@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import './Header.css';
 import {
   bellIcon,
+  closeIcon,
   closeProfile,
   design,
   filterIcon,
@@ -83,6 +84,15 @@ const Header = () => {
       chapters: '7 Chapter',
       cat: 'Design',
     },
+  ];
+
+  const Duration = [
+    '5/10 Chapters',
+    '5/10 Chapters',
+    '10/20 Chapters',
+    '20/30 Chapters',
+    '30/40 Chapters',
+    '40/50 Chapters',
   ];
 
   const [notifydata, setnotifydata] = useState(false);
@@ -367,7 +377,65 @@ const Header = () => {
               e.stopPropagation();
             }}
           >
-            <div className="headerSearch-filterModalBody">hello</div>
+            <div className="headerSearch-filterModalBody">
+              <div className="headerSearch-filterModalBodyTitle">
+                Search Fillters
+              </div>
+              <div className="headerSearch-filterModalCategory">
+                {' '}
+                <div className="headerSearch-filterModalCategoryTitle">
+                  Search from Categories
+                </div>
+                <div className="headerSearch-filterModalCategoryBody">
+                  {topCategories.map((ele: any, i: any) => {
+                    return (
+                      <div
+                        className="headerSearchCategoriesTopSearchesParent"
+                        key={i}
+                      >
+                        <div className="headerSearchCategoriesTopSearchesIcon">
+                          {design}
+                        </div>
+                        <div className="headerSearchCategoriesTopSearchesName">
+                          {ele}
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+              <div className="headerSearch-filterModalDuration">
+                <div className="headerSearch-filterModalCategoryTitle">
+                  Duration
+                </div>
+                <div className="headerSearch-filterModalCategoryBody">
+                  {Duration.map((ele: any, i: any) => {
+                    return (
+                      <div
+                        className="headerSearchCategoriesTopSearchesParent"
+                        key={i}
+                      >
+                        <div className="headerSearchCategoriesTopSearchesIcon">
+                          {design}
+                        </div>
+                        <div className="headerSearchCategoriesTopSearchesName">
+                          {ele}
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+              <div className="headerSearch-filterModalButtons"></div>
+            </div>
+            <div
+              className="headerSearch-filterModalBodyCloseIcon"
+              onClick={() => {
+                dispatch(modalFilter(false));
+              }}
+            >
+              {closeIcon}
+            </div>
           </div>
         </aside>
       )}

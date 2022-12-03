@@ -873,7 +873,7 @@ export const chevron_right = (
     />
     <mask
       id="mask0_184_4536-516454"
-      style={{ maskType: "alpha" }}
+      style={{ maskType: 'alpha' }}
       maskUnits="userSpaceOnUse"
       x="0"
       y="0"
@@ -905,3 +905,19 @@ export const arrowRight = (
   </svg>
 );
 
+export const closeIcon = (
+  <svg width={26} height={26} fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path
+      fillRule="evenodd"
+      clipRule="evenodd"
+      d="M20.743 5.257a.61.61 0 010 .861L6.118 20.743a.61.61 0 11-.861-.861L19.882 5.257a.61.61 0 01.861 0z"
+      fill="#000"
+    />
+    <path
+      fillRule="evenodd"
+      clipRule="evenodd"
+      d="M5.257 5.257a.61.61 0 01.861 0l14.625 14.625a.61.61 0 11-.861.861L5.257 6.118a.61.61 0 010-.861z"
+      fill="#000"
+    />
+  </svg>
+);
