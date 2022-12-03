@@ -1,6 +1,7 @@
 import Header from '../../components/homePage/header/Header';
 import Start from '../../components/homePage/start/start';
 import './HomePage.css';
+import ChoiceYourCourse from './../../components/homePage/choiceYour-course/ChoiceYourCourse';
 
 const HomePage = () => {
   return (
@@ -9,7 +10,8 @@ const HomePage = () => {
         <Header />
       </div>
       <div className="homePageBody">
-        <Start />
+        {/* <Start /> */}
+        <ChoiceYourCourse/>
       </div>
     </div>
   );
