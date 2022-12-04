@@ -60,7 +60,6 @@ const Quiz = () => {
         </div>
       </div>
       <QuizBody />
-      <QuizModal time={0} />
     </div>
   );
 };

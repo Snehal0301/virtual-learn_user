@@ -52,7 +52,10 @@ const QuizModal = () => {
                 >
                   Cancel
                 </button>
-                <button className="headerSearch-applyFilterButton">
+                <button
+                  type="submit"
+                  className="headerSearch-applyFilterButton"
+                >
                   Submit
                 </button>
               </div>

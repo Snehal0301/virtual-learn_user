@@ -1,10 +1,13 @@
 import './Quiz.css';
 import { MultiStepForm, Step } from 'react-multi-form';
 import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { showQuizModal } from '../../../redux/reducers/Conditions';
+import QuizModal from './QuizModal';
 
 const QuizBody = () => {
   const [active, setActive] = useState(1);
+  const dispatch = useDispatch();
 
   const items = [
     {
@@ -24,8 +27,24 @@ const QuizBody = () => {
     },
   ];
 
+  const submitQuizHandler = (e) => {
+    e.preventDefault();
+    var form = document.getElementById('quiz');
+
+    console.log('selected answers');
+
+    items.forEach((element) => {
+      console.log(
+        element.questionId,
+        ':',
+        form.elements[element.questionId].value
+      );
+    });
+    dispatch(showQuizModal(false));
+  };
+
   return (
-    <div className="quiz-body">
+    <form className="quiz-body" onSubmit={submitQuizHandler} id="quiz">
       <div className="quiz-bodyQuestionForm">
         <MultiStepForm activeStep={active}>
           {items &&
@@ -41,7 +60,6 @@ const QuizBody = () => {
                     <div className="quiz-question">{ele.question}</div>
                     <div className="quiz-options">
                       {ele.answers.map((option) => {
-                        console.log(ele);
                         return (
                           <div className="quiz-eachOption">
                             <input
@@ -78,7 +96,11 @@ const QuizBody = () => {
           </div>
         </div>
         <div className="quiz-buttons">
-          <button onClick={() => setActive(active - 1)} disabled={active === 1}>
+          <button
+            onClick={() => setActive(active - 1)}
+            disabled={active === 1}
+            type="button"
+          >
             <img
               src={require('../../../assets/icons/previousIcon.png')}
               alt="previous"
@@ -86,18 +108,31 @@ const QuizBody = () => {
           </button>
 
           <button
+            type="button"
             onClick={() => setActive(active + 1)}
             style={{ float: 'right' }}
+            className={active === items.length ? 'quiz-buttonsSubmit' : ''}
             disabled={active === items.length}
           >
-            <img
-              src={require('../../../assets/icons/nextIcon.png')}
-              alt="next"
-            ></img>
+            {active === items.length ? (
+              <span
+                onClick={() => {
+                  dispatch(showQuizModal(true));
+                }}
+              >
+                submit
+              </span>
+            ) : (
+              <img
+                src={require('../../../assets/icons/nextIcon.png')}
+                alt="next"
+              ></img>
+            )}
           </button>
         </div>
       </div>
-    </div>
+      <QuizModal time={0} />
+    </form>
   );
 };
 

@@ -165,9 +165,10 @@ small {
 }
 
 .quiz-buttons button {
-  background: none;
+  background-color: transparent;
   border: none;
   outline: none;
+  cursor: pointer;
 }
 
 .quiz-footer {
@@ -212,4 +213,15 @@ small {
   line-height: 22px;
   text-align: center;
   color: var(--black);
+}
+
+.quiz-buttonsSubmit {
+  background-color: var(--secondaryClr) !important;
+  padding: 8px 12px;
+  color: var(--primaryFontClr);
+  border-radius: 6px;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 24px;
 }
