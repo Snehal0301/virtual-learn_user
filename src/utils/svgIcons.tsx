@@ -1073,3 +1073,19 @@ export const correctOptionEllipse = (
     />
   </svg>
 );
+
+export const downloadIcon = (
+  <svg width={32} height={32} fill="none" xmlns="http://www.w3.org/2000/svg">
+    <g clipPath="url(#prefix__clip0_309_10431)">
+      <path
+        d="M23.999 20v4h-16v-4H5.332v4c0 1.467 1.2 2.667 2.667 2.667h16c1.466 0 2.666-1.2 2.666-2.667v-4H24zm-1.334-5.333l-1.88-1.88-3.453 3.44V5.333h-2.667v10.894l-3.453-3.44-1.88 1.88 6.667 6.666 6.666-6.666z"
+        fill="#fff"
+      />
+    </g>
+    <defs>
+      <clipPath id="prefix__clip0_309_10431">
+        <path fill="#fff" d="M0 0h32v32H0z" />
+      </clipPath>
+    </defs>
+  </svg>
+);

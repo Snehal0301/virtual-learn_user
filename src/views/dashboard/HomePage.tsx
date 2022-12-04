@@ -1,4 +1,5 @@
 import Header from '../../components/homePage/header/Header';
+import CourseCompleted from '../../components/homePage/quiz/courseCompleted/CourseCompleted';
 import Quiz from '../../components/homePage/quiz/Quiz';
 import QuizResults from '../../components/homePage/quiz/quizResults/QuizResults';
 import QuizSuccess from '../../components/homePage/quiz/quizSuccessPage/quizSuccess';
@@ -17,7 +18,8 @@ const HomePage = () => {
         {/* <Start /> */}
         {/* <Quiz /> */}
         {/* <QuizSuccess /> */}
-        <QuizResults />
+        {/* <QuizResults /> */}
+        <CourseCompleted />
       </div>
     </div>
   );
