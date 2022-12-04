@@ -1042,3 +1042,34 @@ export const showAnsIcon = (
     </g>
   </svg>
 );
+
+export const optionEllipse = (
+  <svg width={20} height={20} fill="none" xmlns="http://www.w3.org/2000/svg">
+    <circle
+      cx={10}
+      cy={10}
+      r={9.5}
+      fill="#7A7A7A"
+      fillOpacity={0.03}
+      stroke="#C5C5C5"
+    />
+  </svg>
+);
+
+export const wrongOptionEllipse = (
+  <svg width={8} height={8} fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path
+      d="M.563 7.492a.664.664 0 00.938 0l2.566-2.565 2.569 2.569a.664.664 0 00.938 0 .654.654 0 000-.93l-2.57-2.57 2.567-2.565a.654.654 0 000-.931.654.654 0 00-.932 0L4.074 3.065 1.505.497a.654.654 0 00-.93 0 .654.654 0 000 .93l2.568 2.569L.578 6.562a.641.641 0 00-.015.93z"
+      fill="#EA2626"
+    />
+  </svg>
+);
+
+export const correctOptionEllipse = (
+  <svg width={10} height={7} fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path
+      d="M9.48.597L9.038.14a.46.46 0 00-.663 0L3.74 4.92 1.312 2.419a.46.46 0 00-.663 0l-.442.456a.496.496 0 000 .684l3.2 3.3a.455.455 0 00.66 0L9.475 1.28A.492.492 0 009.48.597z"
+      fill="#1EAB0D"
+    />
+  </svg>
+);

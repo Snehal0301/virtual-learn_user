@@ -1,20 +1,55 @@
 import React from 'react';
-import { showAnsIcon } from '../../../../utils/svgIcons';
+import { closeIcon, showAnsIcon } from '../../../../utils/svgIcons';
 import './QuizResults.css';
+import Drawer from 'react-modern-drawer';
+import { useDispatch } from 'react-redux';
+import { quizAnswer } from '../../../../redux/reducers/result';
+import QuizAns from '../quizAnswers/QuizAns';
 
 const QuizResults = () => {
+  const dispatch = useDispatch();
+
   const results: any = [
-    { question: 'Question1', answer: 'Correct Answer' },
-    { question: 'Question2', answer: 'Correct Answer' },
-    { question: 'Question3', answer: 'Wrong Answer' },
-    { question: 'Question4', answer: 'Correct Answer' },
-    { question: 'Question5', answer: 'Wrong Answer' },
-    { question: 'Question6', answer: 'Wrong Answer' },
-    { question: 'Question7', answer: 'Wrong Answer' },
-    { question: 'Question8', answer: 'Correct Answer' },
-    { question: 'Question9', answer: 'Correct Answer' },
-    { question: 'Question10', answer: 'Correct Answer' },
+    {
+      question: 'Question1',
+      answer: 'Correct Answer',
+      ques: 'Who invented JavaScript?',
+      answers: ['Douglas Crockford', 'Sheryl Sandberg', 'Brendan Eich'],
+      questionId: 'a',
+      sel: 'Douglas Crockford',
+      cor: 'Douglas Crockford',
+    },
+    {
+      question: 'Question2',
+      answer: 'Correct Answer',
+      ques: 'Which one of these is a JavaScript package manager?',
+      answers: ['Node.js', 'TypeScript', 'npm'],
+      questionId: 'b',
+      sel: 'npm',
+      cor: 'npm',
+    },
+    {
+      question: 'Question3',
+      answer: 'Wrong Answer',
+      ques: 'Which tool can you use to ensure code quality?',
+      answers: ['Angular', 'jQuery', 'RequireJS', 'ESLint'],
+      questionId: 'c',
+      sel: 'Angular',
+      cor: 'ESLint',
+    },
+    // { question: 'Question4', answer: 'Correct Answer' },
+    // { question: 'Question5', answer: 'Wrong Answer' },
+    // { question: 'Question6', answer: 'Wrong Answer' },
+    // { question: 'Question7', answer: 'Wrong Answer' },
+    // { question: 'Question8', answer: 'Correct Answer' },
+    // { question: 'Question9', answer: 'Correct Answer' },
+    // { question: 'Question10', answer: 'Correct Answer' },
   ];
+
+  const [isOpen, setIsOpen] = React.useState(false);
+  const toggleDrawer = () => {
+    setIsOpen((prevState) => !prevState);
+  };
 
   return (
     <div className="quizResults">
@@ -78,13 +113,40 @@ const QuizResults = () => {
                     {ele.answer}
                   </div>
                 </div>
-                <div className="quizResults-bodyListItemDrawer">
+                <div
+                  className="quizResults-bodyListItemDrawer"
+                  onClick={() => {
+                    toggleDrawer();
+                    dispatch(quizAnswer(ele));
+                  }}
+                >
                   {showAnsIcon}
                 </div>
               </div>
             );
           })}
         </div>
+      </div>
+      <div className="quizDrawerOverlay">
+        {' '}
+        <Drawer
+          open={isOpen}
+          onClose={toggleDrawer}
+          direction="right"
+          className="quizResults-Drawer"
+        >
+          <div className="quizResults-DrawerBody">
+            <QuizAns />
+          </div>
+          <div
+            className="quizDrawerCloseIcon"
+            onClick={() => {
+              toggleDrawer();
+            }}
+          >
+            {closeIcon}
+          </div>
+        </Drawer>
       </div>
     </div>
   );
