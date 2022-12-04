@@ -35,7 +35,7 @@ const QuizModal = () => {
                 Do you want to end the test?
               </div>
               <div className="quizModal-text">
-                You still have 50 seconds remaining
+                You still have {localStorage.getItem('timer')} seconds remaining
                 <br />
                 <br />
                 If you want to check your answer again, press cancel button. If

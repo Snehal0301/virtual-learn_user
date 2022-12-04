@@ -21,18 +21,18 @@ const Quiz = () => {
 
   const quizModal = useSelector((state) => state.loginConditions.quizModal);
 
-  const renderer = ({ minutes, seconds, completed }) => {
-    if (completed) {
-      alert('time up');
-      return <div>Completed</div>;
-    } else {
-      return (
-        <span>
-          {minutes}:{seconds}
-        </span>
-      );
-    }
-  };
+  // const renderer = ({ minutes, seconds, completed }) => {
+  //   if (completed) {
+  //     alert('time up');
+  //     return <div>Completed</div>;
+  //   } else {
+  //     return (
+  //       <span>
+  //         {minutes}:{seconds}
+  //       </span>
+  //     );
+  //   }
+  // };
 
   return (
     <div className="quiz">
@@ -42,14 +42,12 @@ const Quiz = () => {
           <div className="quizHeaderTimeIcon">{timerIcon}</div>
           <div className="quiz-HeaderTimeText">
             <Timer />
-            {
-              <Countdown
+            {/* <Countdown
                 date={Date.now() + 480000}
                 intervalDelay={0}
                 precision={3}
                 renderer={renderer}
-              />
-            }
+              /> */}
             mins remaining
           </div>
         </div>

@@ -225,3 +225,8 @@ small {
   font-size: 18px;
   line-height: 24px;
 }
+
+.quiz-HeaderTimeText {
+  display: flex;
+  gap: 6px;
+}
