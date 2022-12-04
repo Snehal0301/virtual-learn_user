@@ -98,6 +98,7 @@
   align-items: center;
   justify-content: space-between;
   padding: 20px 0;
+  border-bottom: 0.5px solid var(--indexClr);
 }
 .quizResults-headerBodyContentsResultsBodyTitle {
   font-style: normal;
