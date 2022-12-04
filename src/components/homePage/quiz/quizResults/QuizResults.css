@@ -1,19 +1,24 @@
 .quizResults {
   position: absolute;
   top: -4px;
+  display: flex;
   left: 0;
   right: 0;
+  flex-direction: column;
+  align-items: center;
+  /* width: 100vw; */
 }
 
 .quizResults-header {
-  position: relative;
+  position: fixed;
   background: var(--primaryClr);
   padding: 50px 10%;
   display: flex;
   flex-direction: column;
   gap: 18px;
+  width: 100%;
+  z-index: 99;
 }
-
 .quizResults-headerTitle {
   font-family: 'Biko';
   font-style: normal;
@@ -101,4 +106,32 @@
   line-height: 30px;
   text-align: center;
   color: var(--blueFont);
+}
+
+.quizResults-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: max-content;
+  position: relative;
+  /* top: 64px; */
+  /* position: absolute; */
+  top: 300px;
+}
+
+.container {
+  height: 256px;
+  position: relative;
+}
+.inner {
+  height: 100%;
+  overflow: scroll;
+}
+.full-height {
+  position: absolute;
+  left: 0;
+  width: 20%;
+  top: 0;
+  height: 100%;
 }
