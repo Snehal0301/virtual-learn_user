@@ -43,6 +43,8 @@
   --blueFont: #2bb5f4;
   --indexClr: #7a7a7a;
   --selectedRed: #ec5d52;
+  --yellowClr: #fcbe4b;
+  --resultFontClr: #111111;
 }
 
 body {
