@@ -1,5 +1,6 @@
 import Header from '../../components/homePage/header/Header';
 import Quiz from '../../components/homePage/quiz/Quiz';
+import QuizResults from '../../components/homePage/quiz/quizResults/QuizResults';
 import QuizSuccess from '../../components/homePage/quiz/quizSuccessPage/quizSuccess';
 
 import Start from '../../components/homePage/start/start';
@@ -15,7 +16,8 @@ const HomePage = () => {
       <div className="homePageBody">
         {/* <Start /> */}
         {/* <Quiz /> */}
-        <QuizSuccess />
+        {/* <QuizSuccess /> */}
+        <QuizResults />
       </div>
     </div>
   );

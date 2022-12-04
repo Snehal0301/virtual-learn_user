@@ -14,9 +14,9 @@ const QuizSuccess = () => {
         <div className="successText">Congratulations!</div>
         <div className="successDesc">
           You have completed{' '}
-          <strong style={{ fontWeight: '900' }}>
+          <span style={{ fontWeight: '900' }}>
             Chapter 3 - Setting up a new project
-          </strong>{' '}
+          </span>{' '}
           from Course: Learn Figma - UI/UX Design Essential Training
         </div>
         <div className="getStarted" style={{ cursor: 'pointer' }}>
