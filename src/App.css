@@ -31,6 +31,7 @@
   --labelClr: #617fb6;
   --error: #ea2626;
   --success: #12a73b;
+  --correctGreen: #1eab0d;
   --inputBlue: #123779;
   --blueFont: #6e8fca;
   --drawerBlueClr: #042c5c;
@@ -68,7 +69,7 @@ body {
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: var(--blueFont);
+  background: #c4c4c4;
   width: 24px !important;
   z-index: 100;
 }

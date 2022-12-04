@@ -1,4 +1,5 @@
 import React from 'react';
+import { showAnsIcon } from '../../../../utils/svgIcons';
 import './QuizResults.css';
 
 const QuizResults = () => {
@@ -67,11 +68,19 @@ const QuizResults = () => {
                   <div className="quizResults-bodyListItemContentQuestion">
                     {ele.question}
                   </div>
-                  <div className="quizResults-bodyListItemContentAnswer">
+                  <div
+                    className={
+                      ele.answer === 'Correct Answer'
+                        ? 'quizResults-bodyListItemContentAnswer quizResults-bodyListItemContentAnswerGreen'
+                        : 'quizResults-bodyListItemContentAnswer quizResults-bodyListItemContentAnswerRed'
+                    }
+                  >
                     {ele.answer}
                   </div>
                 </div>
-                <div className="quizResults-bodyListItemDrawer">{'>'}</div>
+                <div className="quizResults-bodyListItemDrawer">
+                  {showAnsIcon}
+                </div>
               </div>
             );
           })}
