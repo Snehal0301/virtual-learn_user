@@ -9,12 +9,15 @@ import {
   previousIcon,
   timerIcon,
 } from '../../../utils/svgIcons';
+import Timer from '../../../utils/Timer';
 import './Quiz.css';
 import QuizBody from './QuizBody';
 import QuizModal from './QuizModal';
 
 const Quiz = () => {
   const dispatch = useDispatch();
+
+  const [time, setTime] = useState(0);
 
   const quizModal = useSelector((state) => state.loginConditions.quizModal);
 
@@ -38,7 +41,7 @@ const Quiz = () => {
         <div className="quizHeaderTime">
           <div className="quizHeaderTimeIcon">{timerIcon}</div>
           <div className="quiz-HeaderTimeText">
-            {' '}
+            <Timer />
             {
               <Countdown
                 date={Date.now() + 480000}

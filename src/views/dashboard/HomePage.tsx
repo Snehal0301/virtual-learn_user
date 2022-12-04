@@ -16,10 +16,10 @@ const HomePage = () => {
 
       <div className="homePageBody">
         {/* <Start /> */}
-        {/* <Quiz /> */}
+        <Quiz />
         {/* <QuizSuccess /> */}
         {/* <QuizResults /> */}
-        <CourseCompleted />
+        {/* <CourseCompleted /> */}
       </div>
     </div>
   );
