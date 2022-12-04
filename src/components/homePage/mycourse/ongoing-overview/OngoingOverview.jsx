@@ -2,17 +2,81 @@ import './OngoingOverview.css'
 import React, { useState } from 'react'
 import ReactPlayer from 'react-player'
 import { useDispatch, useSelector } from 'react-redux'
-import { tabToggleState } from '../../../../redux/reducers/myCourseReducer'
+import { accordianState, accordianToggleState, tabToggleState } from '../../../../redux/reducers/myCourseReducer'
 import { courseAccessIcon, courseCertIcon, courseFileIcon, courseHourIcon, courseMediumAccess, courseTestIcon, learnCheckMark } from '../../../../utils/svgIcons'
 import instructorImage from '../../../../assets/images/instructorImage.jpg'
+import Accordian from '../accordian/Accordian'
+
+
+import Box from '@mui/material/Box';
+import Stepper from '@mui/material/Stepper';
+import Step from '@mui/material/Step';
+import StepLabel from '@mui/material/StepLabel';
+import StepContent from '@mui/material/StepContent';
+import Button from '@mui/material/Button';
+import Paper from '@mui/material/Paper';
+import Typography from '@mui/material/Typography';
+
+const steps = [
+    {
+        label: 'Select campaign settings',
+        description: `For each ad campaign that you create, you can control how much
+              you're willing to spend on clicks and conversions, which networks
+              and geographical locations you want your ads to show on, and more.`,
+    },
+    {
+        label: 'Create an ad group',
+        description:
+            'An ad group contains one or more ads which target a shared set of keywords.',
+    },
+    {
+        label: 'Create an ad',
+        description: `Try out different ad text to see what brings in the most customers,
+              and learn how to enhance your ads using features like ad extensions.
+              If you run into any problems with your ads, find out how to tell if
+              they're running and how to resolve approval issues.`,
+    },
+];
+
+
 const OngoingOverview = () => {
+
+    const [activeStep, setActiveStep] = useState(0);
+
+    const handleNext = () => {
+        setActiveStep((prevActiveStep) => prevActiveStep + 1);
+    };
+
+    const handleBack = () => {
+        setActiveStep((prevActiveStep) => prevActiveStep - 1);
+    };
+
+    const handleReset = () => {
+        setActiveStep(0);
+    };
+
+
+
+
+    const [active, setActive] = useState(0)
 
     const [tabs, setTabs] = useState(1)
 
+    const dispatch = useDispatch();
+
     const tabToggle = (id) => {
-        setTabs(id)
+        // setTabs(id)
+        dispatch(tabToggleState(id))
     }
 
+
+    const tabState = useSelector((state) => state.mycourse.tab)
+
+    const accordianToggle = (id) => {
+        // setTabs(id)
+        dispatch(accordianToggleState(id))
+    }
+    const accordianState = useSelector((state) => state.mycourse.accordian)
 
     return (
         <div className='ongoing-overview'>
@@ -35,24 +99,27 @@ const OngoingOverview = () => {
                     </div>
                 </div>
 
-                <div className="ongoing-course-desc">
-                    <div className="ongoing-course-desc-title">
-                        <p>Learn how to design a beautiful and engaging mobile app with Figma. Learn-by-doing approach. Learn how to design a beautiful and engaging mobile app with Figma. Learn-by-doing approach.</p>
+                {
+                    tabState === 1 &&
+                    <div className="ongoing-course-desc">
+                        <div className="ongoing-course-desc-title">
+                            <p>Learn how to design a beautiful and engaging mobile app with Figma. Learn-by-doing approach. Learn how to design a beautiful and engaging mobile app with Figma. Learn-by-doing approach.</p>
+                        </div>
+                        <div className="ongoing-course-desc-content">
+                            <input type="checkbox" id="expanded"></input>
+                            <p>Figma is a very powerful application that runs online. There are virtually no platform boundaries when it comes to using figma because you can design within a web browser or using their desktop application made for windows and macs. Figma is similar to Sketch and Adobe XD but is the more powerful of the three when it comes. Figma is a very powerful application that runs online. There are virtually no platform boundaries when it comes to using figma because you can design within a web browser or using their desktop application made for windows and macs. Figma is a very powerful application that runs online. There are virtually no platform boundaries when it comes to using figma because you can design within a web browser or using their desktop application made for windows and macs. Figma is similar to Sketch and Adobe XD but is the more powerful of the three when it comes. Figma is a very powerful application that runs online. There are virtually no platform boundaries when it comes to using figma because you can design within a web browser or using their desktop application made for windows and macs</p>
+                            <label for="expanded" role="button">SHOW MORE</label>
+                        </div>
                     </div>
-                    <div className="ongoing-course-desc-content">
-                        <input type="checkbox" id="expanded"></input>
-                        <p>Figma is a very powerful application that runs online. There are virtually no platform boundaries when it comes to using figma because you can design within a web browser or using their desktop application made for windows and macs. Figma is similar to Sketch and Adobe XD but is the more powerful of the three when it comes. Figma is a very powerful application that runs online. There are virtually no platform boundaries when it comes to using figma because you can design within a web browser or using their desktop application made for windows and macs. Figma is a very powerful application that runs online. There are virtually no platform boundaries when it comes to using figma because you can design within a web browser or using their desktop application made for windows and macs. Figma is similar to Sketch and Adobe XD but is the more powerful of the three when it comes. Figma is a very powerful application that runs online. There are virtually no platform boundaries when it comes to using figma because you can design within a web browser or using their desktop application made for windows and macs</p>
-                        <label for="expanded" role="button">SHOW MORE</label>
-                    </div>
-                </div>
+                }
             </div>
             <div className="ongoing-section-2">
                 <div className="ongoing-container-1">
                     <div className="tabs">
-                        <div className={tabs === 1 ? 'tab active-tab' : 'tab'} onClick={() => tabToggle(1)}>Overview</div>
-                        <div className={tabs === 2 ? 'tab active-tab' : 'tab'} onClick={() => tabToggle(2)}>Chapters</div>
+                        <div className={tabState === 1 ? 'tab active-tab' : 'tab'} onClick={() => tabToggle(1)}>Overview</div>
+                        <div className={tabState === 2 ? 'tab active-tab' : 'tab'} onClick={() => tabToggle(2)}>Chapters</div>
                     </div>
-                    <div className={tabs === 1 ? 'tab-content-1' : 'tab-content-none'}>
+                    <div className={tabState === 1 ? 'tab-content-1' : 'tab-content-none'}>
                         <div className="tab-1-all">
                             <div className="overview-content">
                                 <p className='overview-content-title'>Course Includes</p>
@@ -151,8 +218,115 @@ const OngoingOverview = () => {
                         </div>
                         <button className='join-course'>Join Course</button>
                     </div>
-                    <div className={tabs === 2 ? 'tab-content-2' : 'tab-content-none'}>
-                        Hello tab content 2
+                    <div className={tabState === 2 ? 'tab-content-2' : 'tab-content-none'}>
+                        <div className="tab-2-all">
+                            <div className="course-contents">
+                                <p className="course-content-title">Course Content</p>
+                                <p className="course-content-desc">7 Chapter | 46 lessons | 6 Assignment Test | 3.5h
+                                    total length</p>
+                            </div>
+                            <div className="course-sections">
+                                <div className="course-accordian" onClick={() => accordianToggle(1)}>
+                                    <div className="course-accordian-heading">
+                                        <div className="course-accordian-container">
+                                            <p className='course-accordian-container-title'>Chapter 1 - Introduction to the course   </p>
+                                            <p className='course-accordian-container-state'>
+                                                {
+                                                    accordianState === 1 ? "+" : "-"
+                                                }
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div className={(accordianState === 1 ? "accordian-show" : "") + " course-accordian-content"}>
+                                        <div className="course-accordian-container-body">
+                                            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quas deserunt aperiam, dolorem porro laudantium illum praesentium delectus voluptate. Nobis ullam harum molestiae architecto minus necessitatibus explicabo beatae corporis magni officiis dignissimos dolore cumque voluptates, libero eius laboriosam, nihil nam aut facilis mollitia consequuntur illum est! Harum suscipit assumenda at magnam.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="course-accordian" onClick={() => accordianToggle(2)}>
+                                    <div className="course-accordian-heading">
+                                        <div className="course-accordian-container">
+                                            <p className='course-accordian-container-title'>Chapter 2 - Introduction to the course   </p>
+                                            <p className='course-accordian-container-state'>
+                                                {
+                                                    accordianState === 2 ? "+" : "-"
+                                                }
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div className={(accordianState === 2 ? "accordian-show" : "") + " course-accordian-content"}>
+                                        <div className="course-accordian-container-body">
+                                            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quas deserunt aperiam, dolorem porro laudantium illum praesentium delectus voluptate. Nobis ullam harum molestiae architecto minus necessitatibus explicabo beatae corporis magni officiis dignissimos dolore cumque voluptates, libero eius laboriosam, nihil nam aut facilis mollitia consequuntur illum est! Harum suscipit assumenda at magnam.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="course-accordian" onClick={() => accordianToggle(3)}>
+                                    <div className="course-accordian-heading">
+                                        <div className="course-accordian-container">
+                                            <p className='course-accordian-container-title'>Chapter 3 - Introduction to the course   </p>
+                                            <p className='course-accordian-container-state'>
+                                                {
+                                                    accordianState === 3 ? "+" : "-"
+                                                }
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div className={(accordianState === 3 ? "accordian-show" : "") + " course-accordian-content"}>
+                                        <div className="course-accordian-container-body">
+                                            <Box sx={{ maxWidth: 400 }}>
+                                                <Stepper activeStep={activeStep} orientation="vertical">
+                                                    {steps.map((step, index) => (
+                                                        <Step key={step.label}>
+                                                            <StepLabel
+                                                                optional={
+                                                                    index === 2 ? (
+                                                                        <Typography variant="caption">Last step</Typography>
+                                                                    ) : null
+                                                                }
+                                                                icon="o"
+                                                            >
+                                                                {step.label}
+                                                            </StepLabel>
+                                                            <StepContent>
+                                                                <Typography>{step.description}</Typography>
+                                                                <Box sx={{ mb: 2 }}>
+                                                                    <div>
+                                                                        <Button
+                                                                            variant="contained"
+                                                                            onClick={handleNext}
+                                                                            sx={{ mt: 1, mr: 1 }}
+                                                                        >
+                                                                            {index === steps.length - 1 ? 'Finish' : 'Continue'}
+                                                                        </Button>
+                                                                        <Button
+                                                                            disabled={index === 0}
+                                                                            onClick={handleBack}
+                                                                            sx={{ mt: 1, mr: 1 }}
+                                                                        >
+                                                                            Back
+                                                                        </Button>
+                                                                    </div>
+                                                                </Box>
+                                                            </StepContent>
+                                                        </Step>
+                                                    ))}
+                                                </Stepper>
+                                                {activeStep === steps.length && (
+                                                    <Paper square elevation={0} sx={{ p: 3 }}>
+                                                        <Typography>All steps completed - you&apos;re finished</Typography>
+                                                        <Button onClick={handleReset} sx={{ mt: 1, mr: 1 }}>
+                                                            Reset
+                                                        </Button>
+                                                    </Paper>
+                                                )}
+                                            </Box>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
                     </div>
                 </div>
 
