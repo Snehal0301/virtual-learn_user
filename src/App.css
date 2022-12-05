@@ -41,6 +41,7 @@
   --filterChipFontClr: #2b2b2b;
   --black: #000000;
   --chipBorder: #e4e4e4;
+  --videoCatgryClr:#FCBE4B;
   --blueFont: #2bb5f4;
   --indexClr: #7a7a7a;
   --selectedRed: #ec5d52;
@@ -51,6 +52,10 @@
 body {
   min-height: 100vh;
   z-index: -9999;
+}
+
+a{
+  text-decoration: none;
 }
 
 .app {
