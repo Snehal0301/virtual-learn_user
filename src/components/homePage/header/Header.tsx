@@ -455,12 +455,13 @@ const Header = () => {
       )}
       {/* </div>
       </div > */}
-      <div className="overlay">
+      
+
         <Drawer
           open={profileDrawerState}
           onClose={handleProfileClick}
           direction="right"
-          enableOverlay={false}
+          enableOverlay={true}
           style={{
             width: "25rem",
             zIndex: '9999'
@@ -482,7 +483,7 @@ const Header = () => {
 
 
         </Drawer>
-      </div>
+
     </>
   );
 };
