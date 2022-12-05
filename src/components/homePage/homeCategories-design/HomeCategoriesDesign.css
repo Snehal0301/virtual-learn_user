@@ -18,21 +18,7 @@
     gap: 30px;
 }
 
-.start-course1-first {
-    display: flex;
-    /* justify-content: space-between; */
-    flex: 100%;
-    gap: 30px;
-}
-
 .start-course1-image img {
-    height: 100%;
-    margin: 0;
-    width: 100%;
-    border-radius: 5px;
-}
-
-.start-course1-image-first img {
     height: 100%;
     margin: 0;
     width: 100%;
@@ -45,21 +31,7 @@
 
 }
 
-.start-course1-image-first {
-    position: relative;
-    flex-basis: 33.3%;
-
-}
-
-.start-card {
-    padding-top: 20px;
-}
-
-.start-card-first {
-    padding-top: 20px;
-}
-
-.start-card1 {
+.home-categories-card {
     padding-top: 20px;
 }
 
@@ -75,28 +47,18 @@
     color: #FFFFFF;
     z-index: 1;
 }
-
-.start-course-title-first {
-    /* position: absolute; */
-    /* top: 144px; */
-    left: 20px;
-    bottom: 19px;
-    font-family: 'Biko';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 20px;
-    color: #FFFFFF;
-    z-index: 1;
-
+.homecategoriesdesign a {
+    text-decoration: none;
+    color:  #7A7A7A;
 }
 
-.start-course-section2 {
+.home-categories-section2 {
     display: flex;
     justify-content: space-between;
-    padding-top: 70px;
+    padding-top:50px;
 }
 
-.start-ongoing-courses {
+.home-categories-courses-started{
     font-family: 'Biko';
     font-style: normal;
     font-weight: 400;
@@ -106,7 +68,7 @@
 
 }
 
-.start-seeall {
+.home-categories-seeall {
     font-family: 'Proxima Nova Soft';
     font-style: normal;
     font-weight: 400;
@@ -159,7 +121,7 @@
     color: #FFFFFF;
 }
 
-.start-course-categories-Body {
+.home-categories-Body {
 
     display: flex;
     gap: 24px;
@@ -169,7 +131,7 @@
     align-items: center;
 }
 
-.start-course-categories-Parent {
+.home-categories-Parent {
     display: flex;
     mix-blend-mode: normal;
     border: 1px solid #E4E4E4;
@@ -177,8 +139,8 @@
     padding: 0.5rem 0.5rem;
 }
 
-.start-course-categories-Name {
-    padding-left: 1rem;
+.home-categories-Name{
+    /* padding-left: 1rem; */
 }
 
 .start-choice-course-subcategory {
@@ -190,7 +152,7 @@
     padding: 1rem;
 }
 
-.start-choice-subcategory-image img {
+.home-categories-subcategory-image img {
     height: 100%;
     margin: 0;
     width: 100%;
@@ -198,7 +160,7 @@
 
 }
 
-.start-choice-subcategory-image {
+.home-categories-subcategory-image {
     background: #FFFFFF;
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
     border-radius: 6px;
@@ -207,13 +169,13 @@
     flex-basis: 25%;
 }
 
-.start-choice1 {
+.home-categories-choice1{
     display: flex;
     flex: 100%;
     gap: 10px;
 }
 
-.start-choice-subcategory-title {
+.home-categories-subcategory-title{
     font-family: 'Proxima Nova Soft';
     font-style: normal;
     font-weight: 400;
@@ -222,24 +184,31 @@
     padding-left: 1rem;
     padding-top: 0.8rem;
     /* or 144% */
-
-
     color: #111111;
 }
 
-.start-choice-chapter {
+.home-categories-titleBtn {
+    /* position: relative; */
+    padding: 0.5rem;
+    height: auto;
+    display: flex;
+    justify-content: space-between;
+    /* text-align: center; */
+    /* align-items: center; */
+}
+
+.home-categories-chapter {
     font-family: 'Proxima Nova Soft';
     font-style: normal;
     font-weight: 400;
     font-size: 16px;
     line-height: 26px;
     color: #7A7A7A;
-    padding-left: 1rem;
-    padding-bottom: 1rem;
-
+    padding-left: 0.5rem;
+    /* padding-bottom: 1rem; */
 }
 
-.start-chapter-time {
+.home-categories-time {
     display: flex;
     text-align: center;
     align-items: center;
@@ -259,63 +228,37 @@
 
 }
 
-.start-image-pause {
+.home-categories-image-pause {
     position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-.start-pauseIcon {
+.home-categories-pauseIcon {
     position: absolute;
     /* top: 77px; */
     /* left: 121px; */
-
+    
 }
 
-.start-designbtn {
-    position: absolute;
-    right: 12px;
-    bottom: 14px;
+.home-categories-designbtn {
+    /* position: absolute; */
+    /* right: 12px; */
+    /* bottom: 14px; */
     background: #FCBE4B;
     mix-blend-mode: normal;
     border-radius: 6px;
     border: none;
     padding: 0.5rem 1rem;
 }
-
-.start-course-overlay {
+.home-categories-overlay {
     position: absolute;
     top: 0;
     right: 0;
-    bottom: 0;
+    bottom:0;
     left: 0;
     background-color: #0000003b;
     /* opacity: 0.2; */
-    border-radius: 6px;
-}
-
-.start-course-overlay-2 {
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    background-color: #0000003b;
-    /* opacity: 0.2; */
-    border-radius: 6px;
-}
-
-.start-map-image {
-    margin: 0 20px;
-}
-
-.react-carousel-responsive__track {
-
-    gap: 20px !important;
-}
-
-.start-map-image>img {
-    width: 100%;
     border-radius: 6px;
 }
