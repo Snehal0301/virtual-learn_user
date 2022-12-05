@@ -27,7 +27,7 @@ const Categories = () => {
         <p className="categories-body-choose">
           Please choose a topic on which you want to start a course.
         </p>
-        <div className="categories-body-display">
+        <d iv className="categories-body-display">
           {CategoriesHome.map((ele, i) => {
             return (
               <div
@@ -39,7 +39,7 @@ const Categories = () => {
               </div>
             );
           })}
-        </div>
+        </d>
       </div>
     </div>
   );
