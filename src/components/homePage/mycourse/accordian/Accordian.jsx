@@ -2,7 +2,7 @@ import React from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { accordianToggleState } from '../../../../redux/reducers/myCourseReducer';
 import './Accordian.css'
-const Accordian = ({ accId, accChapter }) => {
+const Accordian = ({ accId }) => {
     const dispatch = useDispatch();
     const accordianToggle = (id) => {
         // setTabs(id)
