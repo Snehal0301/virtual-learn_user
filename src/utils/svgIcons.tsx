@@ -606,29 +606,6 @@ export const passwordChanged = (
   </svg>
 );
 
-const settings_close = (
-  <svg
-    width="28"
-    height="28"
-    viewBox="0 0 28 28"
-    fill="none"
-    xmlns="http://www.w3.org/2000/svg"
-  >
-    <path
-      fill-rule="evenodd"
-      clip-rule="evenodd"
-      d="M22.339 5.66096C22.5953 5.91724 22.5953 6.33276 22.339 6.58904L6.58904 22.339C6.33276 22.5953 5.91724 22.5953 5.66096 22.339C5.40468 22.0828 5.40468 21.6672 5.66096 21.411L21.411 5.66096C21.6672 5.40468 22.0828 5.40468 22.339 5.66096Z"
-      fill="white"
-    />
-    <path
-      fill-rule="evenodd"
-      clip-rule="evenodd"
-      d="M5.66096 5.66096C5.91724 5.40468 6.33276 5.40468 6.58904 5.66096L22.339 21.411C22.5953 21.6672 22.5953 22.0828 22.339 22.339C22.0828 22.5953 21.6672 22.5953 21.411 22.339L5.66096 6.58904C5.40468 6.33276 5.40468 5.91724 5.66096 5.66096Z"
-      fill="white"
-    />
-  </svg>
-);
-
 export const closeProfile = (
   <svg
     width="26"
@@ -725,7 +702,7 @@ export const filterIcon = (
     <mask
       id="prefix__a"
       style={{
-        maskType: 'alpha',
+        maskType: "alpha",
       }}
       maskUnits="userSpaceOnUse"
       x={0}
@@ -873,7 +850,7 @@ export const chevron_right = (
     />
     <mask
       id="mask0_184_4536-516454"
-      style={{ maskType: 'alpha' }}
+      style={{ maskType: "alpha" }}
       maskUnits="userSpaceOnUse"
       x="0"
       y="0"

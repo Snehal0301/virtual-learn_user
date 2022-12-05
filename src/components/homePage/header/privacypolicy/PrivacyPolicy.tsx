@@ -17,7 +17,7 @@ const PrivacyPolicy = () => {
           <div className="drawer-profile-clear" onClick={handleClick}>
             {arrowRight}
           </div>
-          <div className="settings-settings-text">
+          <div className="privacy-policy-text">
             <p>Privacy Policy</p>
           </div>
         </div>
