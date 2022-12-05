@@ -5,6 +5,7 @@ import QuizResults from '../../components/homePage/quiz/quizResults/QuizResults'
 import QuizSuccess from '../../components/homePage/quiz/quizSuccessPage/quizSuccess';
 
 import MyCourse from '../../components/homePage/mycourse/MyCourse';
+import Categories from '../../components/homePage/start/categories/Categories';
 import Start from '../../components/homePage/start/start';
 import './HomePage.css';
 
@@ -17,6 +18,7 @@ const HomePage = () => {
 
       <div className="homePageBody">
         {/* <Start /> */}
+        {/* <Categories/> */}
         {/* <Quiz /> */}
         {/* <QuizSuccess /> */}
         {/* <QuizResults /> */}
