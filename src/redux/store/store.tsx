@@ -7,12 +7,14 @@ import { showHeaderProfile } from '../reducers/headerProfileOptions';
 import showLoginConditions from '../reducers/Conditions';
 import loginSlice from '../reducers/loginSlice';
 import myCourseReducer from '../reducers/myCourseReducer';
+import { quizAnswerSlice } from '../reducers/result';
 
 const reducers = combineReducers({
   headerProfile: showHeaderProfile.reducer,
   loginConditions: showLoginConditions.reducer,
   login: loginSlice.reducer,
-  mycourse: myCourseReducer
+  mycourse: myCourseReducer,
+  quizAnswer: quizAnswerSlice.reducer,
 });
 
 const persistConfig = {
