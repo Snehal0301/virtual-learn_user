@@ -87,16 +87,39 @@ const OngoingOverview = () => {
         dispatch(accordianToggleState(id))
     }
     const accordianState = useSelector((state) => state.mycourse.accordian)
+    const [pause, setPause] = useState(false)
+    const [playing, setPlaying] = useState(false)
+    const [played, setPlayed] = useState(false)
 
+    const onPause = () => {
+        console.log("Paused")
+        setPause(true)
+    }
+    const onPlay = () => {
+        console.log("Paused")
+        setPause(false)
+        setPlaying(true)
+    }
+
+    console.log(played);
     return (
         <div className='ongoing-overview'>
             <div className="ongoing-section-1">
+                {
+                    pause &&
+                    <div className="onpause-modal">
+                        <p className='onpause-modal-title'>Your lesson paused at 1.21
+                            Do you want to continue watching?</p>
+                            <button className='onpause-button' onClick={onPlay}>Continue Watching</button>
+                        <button className='onpause-button beginning'>Watch from beginning</button>
+                    </div>
+                }
                 <div className="ongoing-section-video-player">
                     <ReactPlayer url='https://youtu.be/Tn6-PIqc4UM' controls='true' className='react-player' width='100%'
-                        height='100%' />
-
+                        height='100%' onPause={onPause} playing={playing} onProgress={(progress) => {
+                            setPlayed(progress.playedSeconds);
+                        }}/>
                 </div>
-
                 <div className="ongoing-video-title-section">
                     <div className="ongoing-video-title">
                         <p className='video-title'>Learn Figma - UI/UX Design Essential Training</p>
