@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import ReactPlayer from 'react-player'
 import { useDispatch, useSelector } from 'react-redux'
 import { accordianState, accordianToggleState, tabToggleState } from '../../../../redux/reducers/myCourseReducer'
-import { courseAccessIcon, courseCertIcon, courseFileIcon, courseHourIcon, courseMediumAccess, courseTestIcon, learnCheckMark } from '../../../../utils/svgIcons'
+import { courseAccessIcon, courseCertIcon, courseFileIcon, courseHourIcon, courseMediumAccess, courseTestIcon, downloadIcon, learnCheckMark, videoPlayActive, whiteStepperIcon } from '../../../../utils/svgIcons'
 import instructorImage from '../../../../assets/images/instructorImage.jpg'
 import Accordian from '../accordian/Accordian'
 
@@ -36,6 +36,18 @@ const steps = [
               If you run into any problems with your ads, find out how to tell if
               they're running and how to resolve approval issues.`,
     },
+    {
+        label: 'Create an ad group',
+        description:
+            'An ad group contains one or more ads which target a shared set of keywords.',
+    },
+    {
+        label: 'Create an ad',
+        description: `Try out different ad text to see what brings in the most customers,
+              and learn how to enhance your ads using features like ad extensions.
+              If you run into any problems with your ads, find out how to tell if
+              they're running and how to resolve approval issues.`,
+    },
 ];
 
 
@@ -54,8 +66,6 @@ const OngoingOverview = () => {
     const handleReset = () => {
         setActiveStep(0);
     };
-
-
 
 
     const [active, setActive] = useState(0)
@@ -100,18 +110,57 @@ const OngoingOverview = () => {
                 </div>
 
                 {
-                    tabState === 1 &&
-                    <div className="ongoing-course-desc">
-                        <div className="ongoing-course-desc-title">
-                            <p>Learn how to design a beautiful and engaging mobile app with Figma. Learn-by-doing approach. Learn how to design a beautiful and engaging mobile app with Figma. Learn-by-doing approach.</p>
+                    tabState === 1 ?
+                        <div className="ongoing-course-desc">
+                            <div className="ongoing-course-desc-title">
+                                <p>Learn how to design a beautiful and engaging mobile app with Figma. Learn-by-doing approach. Learn how to design a beautiful and engaging mobile app with Figma. Learn-by-doing approach.</p>
+                            </div>
+                            <div className="ongoing-course-desc-content">
+                                <input type="checkbox" id="expanded"></input>
+                                <p>Figma is a very powerful application that runs online. There are virtually no platform boundaries when it comes to using figma because you can design within a web browser or using their desktop application made for windows and macs. Figma is similar to Sketch and Adobe XD but is the more powerful of the three when it comes. Figma is a very powerful application that runs online. There are virtually no platform boundaries when it comes to using figma because you can design within a web browser or using their desktop application made for windows and macs. Figma is a very powerful application that runs online. There are virtually no platform boundaries when it comes to using figma because you can design within a web browser or using their desktop application made for windows and macs. Figma is similar to Sketch and Adobe XD but is the more powerful of the three when it comes. Figma is a very powerful application that runs online. There are virtually no platform boundaries when it comes to using figma because you can design within a web browser or using their desktop application made for windows and macs</p>
+                                <label for="expanded" role="button">SHOW MORE</label>
+                            </div>
                         </div>
-                        <div className="ongoing-course-desc-content">
-                            <input type="checkbox" id="expanded"></input>
-                            <p>Figma is a very powerful application that runs online. There are virtually no platform boundaries when it comes to using figma because you can design within a web browser or using their desktop application made for windows and macs. Figma is similar to Sketch and Adobe XD but is the more powerful of the three when it comes. Figma is a very powerful application that runs online. There are virtually no platform boundaries when it comes to using figma because you can design within a web browser or using their desktop application made for windows and macs. Figma is a very powerful application that runs online. There are virtually no platform boundaries when it comes to using figma because you can design within a web browser or using their desktop application made for windows and macs. Figma is similar to Sketch and Adobe XD but is the more powerful of the three when it comes. Figma is a very powerful application that runs online. There are virtually no platform boundaries when it comes to using figma because you can design within a web browser or using their desktop application made for windows and macs</p>
-                            <label for="expanded" role="button">SHOW MORE</label>
+                        :
+                        <div className="course-completion">
+                            <div className="course-completion-section-1">
+                                <div className="completion-section-1-main">
+
+                                    <p className='completion-section-1-main-title'>Course Result</p>
+                                    <p className='completion-section-1-main-per'>90%</p>
+                                    <p className='completion-section-1-main-apr'>approval rate</p>
+                                </div>
+                            </div>
+                            <div className="course-completion-section-2">
+                                <div className="completion-section-2-main">
+                                    <div className="cmain-1">
+                                        <p>Joined</p>
+                                        <p className='cmain-1-date'>02/04/2021</p>
+                                    </div>
+                                    <div className="cmain-2">
+                                        <p>Completed</p>
+                                        <p className='cmain-1-date'>02/04/2021</p>
+                                    </div>
+                                    <div className="cmain-3">
+                                        <p>Duration</p>
+                                        <p className='cmain-1-date'>4h 30m</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="course-completion-section-3">
+                                <div className="completion-section-3-main">
+                                    <div className="cs3-main-1">
+                                        <p className='cs3-main-1-title'>Course Certificate</p>
+                                        <div className='download-icon-image'>{downloadIcon}</div>
+                                    </div>
+                                    <div className="cs3-main-2">
+                                        <img src={require('../../../../assets/images/certicon.png')} alt="" />
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                    </div>
                 }
+
             </div>
             <div className="ongoing-section-2">
                 <div className="ongoing-container-1">
@@ -232,7 +281,7 @@ const OngoingOverview = () => {
                                             <p className='course-accordian-container-title'>Chapter 1 - Introduction to the course   </p>
                                             <p className='course-accordian-container-state'>
                                                 {
-                                                    accordianState === 1 ? "+" : "-"
+                                                    accordianState === 1 ? "-" : "+"
                                                 }
                                             </p>
                                         </div>
@@ -249,7 +298,7 @@ const OngoingOverview = () => {
                                             <p className='course-accordian-container-title'>Chapter 2 - Introduction to the course   </p>
                                             <p className='course-accordian-container-state'>
                                                 {
-                                                    accordianState === 2 ? "+" : "-"
+                                                    accordianState === 2 ? "-" : "+"
                                                 }
                                             </p>
                                         </div>
@@ -266,29 +315,33 @@ const OngoingOverview = () => {
                                             <p className='course-accordian-container-title'>Chapter 3 - Introduction to the course   </p>
                                             <p className='course-accordian-container-state'>
                                                 {
-                                                    accordianState === 3 ? "+" : "-"
+                                                    accordianState === 3 ? "-" : "+"
                                                 }
                                             </p>
                                         </div>
                                     </div>
                                     <div className={(accordianState === 3 ? "accordian-show" : "") + " course-accordian-content"}>
                                         <div className="course-accordian-container-body">
-                                            <Box sx={{ maxWidth: 400 }}>
+                                            <Box sx={{ maxWidth: '100%' }}>
                                                 <Stepper activeStep={activeStep} orientation="vertical">
                                                     {steps.map((step, index) => (
                                                         <Step key={step.label}>
                                                             <StepLabel
-                                                                optional={
-                                                                    index === 2 ? (
-                                                                        <Typography variant="caption">Last step</Typography>
-                                                                    ) : null
-                                                                }
-                                                                icon="o"
+                                                                icon="⬤"
                                                             >
-                                                                {step.label}
+                                                                {/* {step.label} */}
+                                                                <div className="course-video">
+                                                                    <div className="video-index">20</div>
+                                                                    <div className="vide-desc">
+                                                                        <p className='video-title'>Creating a New Project and File</p>
+                                                                        <p className="video-duration">01.38 mins</p>
+                                                                    </div>
+                                                                    <div className="video-play-btn">{videoPlayActive}</div>
+                                                                </div>
+
                                                             </StepLabel>
                                                             <StepContent>
-                                                                <Typography>{step.description}</Typography>
+                                                                {/* <Typography>{step.description}</Typography> */}
                                                                 <Box sx={{ mb: 2 }}>
                                                                     <div>
                                                                         <Button
@@ -307,6 +360,7 @@ const OngoingOverview = () => {
                                                                         </Button>
                                                                     </div>
                                                                 </Box>
+
                                                             </StepContent>
                                                         </Step>
                                                     ))}
