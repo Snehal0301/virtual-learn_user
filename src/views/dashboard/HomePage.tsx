@@ -19,7 +19,6 @@ const HomePage = () => {
       <div className="homePageBody">
         {/* <Start /> */}
         {/* <Categories/> */}
-        {/* <MyCourse/> */}
         {/* <Quiz /> */}
         {/* <QuizSuccess /> */}
         {/* <QuizResults /> */}

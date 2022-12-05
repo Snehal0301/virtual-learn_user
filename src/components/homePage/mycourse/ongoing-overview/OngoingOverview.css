@@ -3,6 +3,50 @@
     gap: 52px;
 }
 
+.onpause-modal{
+    background-color: white;
+    width: 550px;
+    height: 340px;
+    position: absolute;
+    z-index: 1;
+    top: 17%;
+    bottom: 0%;
+    left: 22%;
+    right: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 30px 50px;
+    border-radius: 6px;
+}
+
+.onpause-modal-title{
+    font-size: 22px;
+    font-weight: 400;
+    text-align: center;
+    margin-bottom: 25px;
+    margin-top: 40px;
+}
+
+.onpause-button{
+    width: 100%;
+    margin-bottom: 20px;
+    padding: 15px;
+    border-radius: 6px;
+    outline: none;
+    border: none;
+    height: 60px;
+    font-size: 22px;
+    font-weight: 500;
+    cursor: pointer;
+    background-color: #EC5D52;
+    color: white;
+}
+
+.beginning{
+    background-color: #072D5B;
+}
+
 
 .ongoing-section-1 {
     flex: 2;
@@ -319,3 +363,112 @@ p:not(.truncated)~label {
 }
 
 
+.course-video{
+    background-color: #F9F9F9;
+    display: flex;
+    align-items: center;
+    padding: 10px 20px;
+    justify-content: space-between;
+    border-radius: 6px;
+}
+
+.video-index{
+    font-size: 30px;
+    font-weight: 700;
+}
+
+.video-title{
+    color: #042C5C;
+    padding-top: 5px;
+    padding-bottom: 0;
+    font-size: 18px;
+    font-weight: 700;
+    width: 90%;
+}
+
+.video-play-btn{
+    cursor: pointer;
+}
+
+.course-completion{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 30px 30px;
+    background-color: #042C5C;
+    margin-top: 30px;
+    border-radius: 6px;
+}
+
+.course-completion-section-1{
+    flex: 1;
+}
+.completion-section-1-main{
+    display: flex;
+    flex-direction: column;
+    border-right: 1px solid rgba(255, 255, 255, 0.418);
+}
+
+.completion-section-1-main-title,.completion-section-1-main-apr{
+    font-size: 20px;
+    font-weight: 600;
+    color: white;
+}
+
+.completion-section-1-main-per{
+    color: #1EAB0D;
+    font-size: 60px;
+    font-weight: 600;
+}
+
+.course-completion-section-2{
+    flex: 3;
+    padding:0 15px;
+    border-right: 1px solid rgba(255, 255, 255, 0.399);
+}
+
+.completion-section-2-main{
+    background-color: white;
+    border-radius: 6px;
+    display: flex;
+    justify-content: space-between;
+    padding: 40px;
+}
+
+.cmain-1,.cmain-2,.cmain-3{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.cmain-1-date{
+    color: #2BB5F4;
+    font-weight: 600;
+    font-size: 20px;
+    margin-top: 10px;
+}
+
+.course-completion-section-3{
+    flex: 1;
+    padding: 15px;
+}
+.cs3-main-2 img{
+    height: 160px;
+    width: 300px;
+}
+
+.cs3-main-1{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+.cs3-main-1-title{
+    color: white;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.download-icon-image{
+    cursor: pointer;
+}

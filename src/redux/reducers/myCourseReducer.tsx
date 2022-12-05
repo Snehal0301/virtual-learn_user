@@ -2,7 +2,8 @@ import { createSlice } from '@reduxjs/toolkit'
 
 const initialState: any = {
     tab: 1,
-    accordian:1
+    accordian: 1,
+    mycoursetab:1,
 };
 
 export const mycourseReducer = createSlice({
@@ -12,11 +13,14 @@ export const mycourseReducer = createSlice({
         tabToggleState: (state, { payload }) => {
             state.tab = payload
         },
+        mycoursetabToggleState: (state, { payload }) => {
+            state.mycoursetab = payload
+        },
         accordianToggleState: (state, { payload }) => {
             state.accordian = payload
         }
     },
 });
 
-export const { tabToggleState, accordianToggleState } = mycourseReducer.actions; 
+export const { tabToggleState, accordianToggleState, mycoursetabToggleState } = mycourseReducer.actions; 
 export default mycourseReducer.reducer;
