@@ -1,14 +1,14 @@
-.drawer-profile {
+.drawer-profile-terms {
   height: 100%;
   display: flex;
   flex-direction: column;
 }
 
-.drawer-profile-header {
+.drawer-profile-header-terms {
   background-color: var(--drawerBlueClr);
   padding: 30px;
 }
-.drawer-profile-clear {
+.drawer-profile-clear-terms {
   cursor: pointer;
 }
 .terms-services-text p {

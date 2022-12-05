@@ -1,6 +1,6 @@
 import React from "react";
 import "./MyCourse.css";
-import { emptyPageImg, design } from "../../../utils/svgIcons";
+import {  design } from "../../../utils/svgIcons";
 import Ongoing from "./ongoing/Ongoing";
 import { NavLink, Route, Routes } from "react-router-dom";
 import Completed from "./completed/Completed";
@@ -30,7 +30,7 @@ const MyCourse = () => {
 
       <div className="mycourse-body">
         <div className="mycourse-emptyImg-section">
-          <div className="mycourse-imgSection">{emptyPageImg}</div>
+          <div className="mycourse-imgSection">{}</div>
           <div className="mycourse-imgText">
             <p>What will you learn first?</p>
           </div>
@@ -71,7 +71,7 @@ const MyCourse = () => {
         </NavLink>
       </div> */}
       {/* <Ongoing /> */}
-      <Completed />
+      {/* <Completed /> */}
     </div>
   );
 };
