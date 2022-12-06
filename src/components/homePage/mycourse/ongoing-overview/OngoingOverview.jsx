@@ -94,6 +94,7 @@ const OngoingOverview = () => {
     const onPause = () => {
         console.log("Paused")
         setPause(true)
+        setPlaying(false)
     }
     const onPlay = () => {
         console.log("Paused")
