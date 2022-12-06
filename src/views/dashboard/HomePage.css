@@ -1,7 +1,7 @@
-.homePage{
-  min-height: 100vh;
-  z-index: 0;
-  position: relative;
+.homePage {
+    min-height: 100vh;
+    z-index: 0;
+    position: relative;
 }
 
 
@@ -27,4 +27,17 @@
     min-height: 100vh;
     z-index: 0;
     position: relative;
+}
+
+
+@media only screen and (max-width: 1200px) {
+    .homePageBody {
+        padding: 25px 2%;
+    }
+}
+
+@media only screen and (max-width: 770px) {
+    .homePageBody {
+        padding: 0 2%;
+    }
 }

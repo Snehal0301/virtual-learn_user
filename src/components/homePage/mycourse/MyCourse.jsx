@@ -4,10 +4,13 @@ import { design } from "../../../utils/svgIcons";
 import Ongoing from "./ongoing/Ongoing";
 import { NavLink, Route, Routes } from "react-router-dom";
 import Completed from "./completed/Completed";
-import { useSelector } from 'react-redux'
+import {
+    useSelector, useDispatch
+} from 'react-redux'
 import OngoingOverview from './ongoing-overview/OngoingOverview'
-
+import { mycoursetabToggleState } from "../../../redux/reducers/myCourseReducer";
 const MyCourse = () => {
+    const dispatch = useDispatch();
     const Categories = [
         "Design",
         "Development",
@@ -21,6 +24,7 @@ const MyCourse = () => {
         "Photography",
     ];
     const tabState = useSelector((state) => state.mycourse.tab)
+    const mycoursetabState = useSelector((state) => state.mycourse.mycoursetab)
     return (
         <div className='mycourse'>
             <div className="breadcrumbs">
@@ -37,6 +41,7 @@ const MyCourse = () => {
             </div>
 
             <div className="mycourse-body">
+                {/* Case if array length = 0 */}
                 {/* <div className="mycourse-emptyImg-section">
                     <div className="mycourse-imgSection">{ }</div>
                     <div className="mycourse-imgText">
@@ -46,12 +51,8 @@ const MyCourse = () => {
                         <p>Your courses will go here</p>
                     </div>
 
-                </div> */}
-                <div className="mycourse-body">
-                    {/* start writing code here */}
-                    <OngoingOverview />
                 </div>
-                {/* <div className="mycourse-categoriesSection">
+                <div className="mycourse-categoriesSection">
                     <div className="categories-heading">
                         <p>Categories</p>
                     </div>
@@ -69,22 +70,21 @@ const MyCourse = () => {
                         })}
                     </div>
                 </div> */}
+                {/* --------------------------- */}
+                
+                {/* <div className="mycourse-tabs">
+                    <div className={mycoursetabState === 1 ? "mycourse-tab-active" : "mycourse-tab"} onClick={() => dispatch(mycoursetabToggleState(1))}>Ongoing</div>
+                    <div className={mycoursetabState === 2 ? "mycourse-tab-active" : "mycourse-tab"} onClick={() => dispatch(mycoursetabToggleState(2))}>Completed</div>
+                </div>
+                {
+                    mycoursetabState === 1
+                        ?
+                        <Ongoing />
+                        :
+                        <Completed />
+                } */}
+                <OngoingOverview /> 
             </div>
-
-            {/* <Routes>
-        <Route path="/ongoing" element={<Ongoing/>}></Route>
-        <Route path="/completed" element={<Completed/>}></Route>
-      </Routes> */}
-            {/* <div className="nav-links">
-        <NavLink to="/ongoing" className="ongoing-tab">
-          <p>Ongoing</p>
-        </NavLink>
-        <NavLink to="/completed">
-          <p>Completed</p>
-        </NavLink>
-      </div> */}
-            {/* <Ongoing /> */}
-            {/* <Completed /> */}
         </div>
     );
 };
