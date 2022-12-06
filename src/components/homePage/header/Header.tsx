@@ -342,35 +342,6 @@ const Header = () => {
           )}
         </div>
       </div>
-      <div className="overlay">
-        <Drawer
-          open={profileDrawerState}
-          onClose={handleProfileClick}
-          direction="right"
-          enableOverlay={false}
-          style={{
-            width: '25rem',
-          }}
-        >
-          {profileSectionState && <Profile />}
-
-          {
-            notificationSectionState && <Notification />
-          }
-          
-          {
-            settingsSectionState && <Settings />
-          }
-          {/* <Profile /> */}
-          {/* {setting ? <Settings /> : <Profile />} */}
-          {/* <Settings /> */}
-          {/* <PrivacyPolicy/> */}
-          {/* <Terms /> */}
-          {/* {
-          notifydata ? <Notification /> : <Profile />
-        } */}
-        </Drawer>
-      </div>
       {modalFilterStatus && (
         <aside
           className="headerSearch-filterModal"
@@ -462,10 +433,11 @@ const Header = () => {
           onClose={handleProfileClick}
           direction="right"
           enableOverlay={true}
+          overlayOpacity={0.7}
           style={{
             width: "25rem",
             zIndex: '9999'
-          }}
+        }}
         >
           {profileSectionState && <Profile />}
 
