@@ -188,4 +188,7 @@ form {
   .personal-details-form input:not(:placeholder-shown) + label {
     color: var(--greyFont);
   }
+  .persondetails-button {
+    margin-top: 48px;
+  }
 }
