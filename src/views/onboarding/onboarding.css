@@ -132,6 +132,7 @@ button.nav.default-nav {
     }
     .onboarding-detailsBody {
         width: 100%;
+        margin-top: 10px;
     }
 }
 

@@ -113,6 +113,10 @@ button.welcome-btn:hover {
     }
     .welconescreen-landingIllustration {
         display: flex;
+        width: 100%;
+    }
+    .welconescreen-landingIllustration>img {
+        width: 100%;
     }
     .welcomeScreen {
         padding: 0 24%;
