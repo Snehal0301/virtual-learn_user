@@ -354,18 +354,18 @@ const Header = () => {
         >
           {profileSectionState && <Profile />}
 
-          {/* {
+          {
             notificationSectionState && <Notification />
           }
           
           {
             settingsSectionState && <Settings />
-          } */}
+          }
           {/* <Profile /> */}
           {/* {setting ? <Settings /> : <Profile />} */}
           {/* <Settings /> */}
           {/* <PrivacyPolicy/> */}
-          <Terms />
+          {/* <Terms /> */}
           {/* {
           notifydata ? <Notification /> : <Profile />
         } */}

@@ -7,7 +7,6 @@ import { courseAccessIcon, courseCertIcon, courseFileIcon, courseHourIcon, cours
 import instructorImage from '../../../../assets/images/instructorImage.jpg'
 import Accordian from '../accordian/Accordian'
 
-
 import Box from '@mui/material/Box';
 import Stepper from '@mui/material/Stepper';
 import Step from '@mui/material/Step';
@@ -67,7 +66,6 @@ const OngoingOverview = () => {
         setActiveStep(0);
     };
 
-
     const [active, setActive] = useState(0)
 
     const [tabs, setTabs] = useState(1)
@@ -75,15 +73,12 @@ const OngoingOverview = () => {
     const dispatch = useDispatch();
 
     const tabToggle = (id) => {
-        // setTabs(id)
         dispatch(tabToggleState(id))
     }
-
 
     const tabState = useSelector((state) => state.mycourse.tab)
 
     const accordianToggle = (id) => {
-        // setTabs(id)
         dispatch(accordianToggleState(id))
     }
     const accordianState = useSelector((state) => state.mycourse.accordian)
@@ -92,34 +87,31 @@ const OngoingOverview = () => {
     const [played, setPlayed] = useState(false)
 
     const onPause = () => {
-        console.log("Paused")
         setPause(true)
         setPlaying(false)
     }
     const onPlay = () => {
-        console.log("Paused")
         setPause(false)
         setPlaying(true)
     }
 
-    console.log(played);
     return (
         <div className='ongoing-overview'>
             <div className="ongoing-section-1">
-                {
-                    pause &&
-                    <div className="onpause-modal">
-                        <p className='onpause-modal-title'>Your lesson paused at 1.21
-                            Do you want to continue watching?</p>
-                            <button className='onpause-button' onClick={onPlay}>Continue Watching</button>
-                        <button className='onpause-button beginning'>Watch from beginning</button>
-                    </div>
-                }
                 <div className="ongoing-section-video-player">
+                    {
+                        pause &&
+                        <div className="onpause-modal">
+                            <p className='onpause-modal-title'>Your lesson paused at 1.21
+                                Do you want to continue watching?</p>
+                            <button className='onpause-button' onClick={onPlay}>Continue Watching</button>
+                            <button className='onpause-button beginning'>Watch from beginning</button>
+                        </div>
+                    }
                     <ReactPlayer url='https://youtu.be/Tn6-PIqc4UM' controls='true' className='react-player' width='100%'
                         height='100%' onPause={onPause} playing={playing} onProgress={(progress) => {
                             setPlayed(progress.playedSeconds);
-                        }}/>
+                        }} />
                 </div>
                 <div className="ongoing-video-title-section">
                     <div className="ongoing-video-title">
@@ -146,43 +138,44 @@ const OngoingOverview = () => {
                             </div>
                         </div>
                         :
-                        <div className="course-completion">
-                            <div className="course-completion-section-1">
-                                <div className="completion-section-1-main">
+                        // <div className="course-completion">
+                        //     <div className="course-completion-section-1">
+                        //         <div className="completion-section-1-main">
 
-                                    <p className='completion-section-1-main-title'>Course Result</p>
-                                    <p className='completion-section-1-main-per'>90%</p>
-                                    <p className='completion-section-1-main-apr'>approval rate</p>
-                                </div>
-                            </div>
-                            <div className="course-completion-section-2">
-                                <div className="completion-section-2-main">
-                                    <div className="cmain-1">
-                                        <p>Joined</p>
-                                        <p className='cmain-1-date'>02/04/2021</p>
-                                    </div>
-                                    <div className="cmain-2">
-                                        <p>Completed</p>
-                                        <p className='cmain-1-date'>02/04/2021</p>
-                                    </div>
-                                    <div className="cmain-3">
-                                        <p>Duration</p>
-                                        <p className='cmain-1-date'>4h 30m</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="course-completion-section-3">
-                                <div className="completion-section-3-main">
-                                    <div className="cs3-main-1">
-                                        <p className='cs3-main-1-title'>Course Certificate</p>
-                                        <div className='download-icon-image'>{downloadIcon}</div>
-                                    </div>
-                                    <div className="cs3-main-2">
-                                        <img src={require('../../../../assets/images/certicon.png')} alt="" />
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        //             <p className='completion-section-1-main-title'>Course Result</p>
+                        //             <p className='completion-section-1-main-per'>90%</p>
+                        //             <p className='completion-section-1-main-apr'>approval rate</p>
+                        //         </div>
+                        //     </div>
+                        //     <div className="course-completion-section-2">
+                        //         <div className="completion-section-2-main">
+                        //             <div className="cmain-1">
+                        //                 <p>Joined</p>
+                        //                 <p className='cmain-1-date'>02/04/2021</p>
+                        //             </div>
+                        //             <div className="cmain-2">
+                        //                 <p>Completed</p>
+                        //                 <p className='cmain-1-date'>02/04/2021</p>
+                        //             </div>
+                        //             <div className="cmain-3">
+                        //                 <p>Duration</p>
+                        //                 <p className='cmain-1-date'>4h 30m</p>
+                        //             </div>
+                        //         </div>
+                        //     </div>
+                        //     <div className="course-completion-section-3">
+                        //         <div className="completion-section-3-main">
+                        //             <div className="cs3-main-1">
+                        //                 <p className='cs3-main-1-title'>Course Certificate</p>
+                        //                 <div className='download-icon-image'>{downloadIcon}</div>
+                        //             </div>
+                        //             <div className="cs3-main-2">
+                        //                 <img src={require('../../../../assets/images/certicon.png')} alt="" />
+                        //             </div>
+                        //         </div>
+                        //     </div>
+                        // </div>
+                        ""
                 }
 
             </div>
@@ -194,6 +187,27 @@ const OngoingOverview = () => {
                     </div>
                     <div className={tabState === 1 ? 'tab-content-1' : 'tab-content-none'}>
                         <div className="tab-1-all">
+                            <div className="ongoing-course-desc-mobile">
+                                <div className="ongoing-course-desc-title-mobile">
+                                    <p>Learn how to design a beautiful and engaging mobile app with Figma. Learn-by-doing approach. Learn how to design a beautiful and engaging mobile app with Figma. Learn-by-doing approach.</p>
+                                </div>
+                                <div className="ongoing-course-desc-content-mobile">
+                                    <p>Preview this Course</p>
+                                    <div className="mobile-video-link">
+                                        <div className="mobile-video-section-1">
+                                            <img src={require("../../../../assets/images/icn_play_orange.png")} alt="" className='video-logo' />
+                                            <div className="mobile-video-desc">
+                                                <div className="mobile-video-title">Introduction</div>
+                                                <div className="mobile-video-dur">3 Min</div>
+                                            </div>
+                                        </div>
+                                        <img src={require("../../../../assets/images/icn_previewgo.png")} alt="" className='right-icon' />
+                                    </div>
+                                    <input type="checkbox" id="expanded"></input>
+                                    <p className='mobile-video-description'>Figma is a very powerful application that runs online. There are virtually no platform boundaries when it comes to using figma because you can design within a web browser or using their desktop application made for windows and macs. Figma is similar to Sketch and Adobe XD but is the more powerful of the three when it comes. Figma is a very powerful application that runs online. There are virtually no platform boundaries when it comes to using figma because you can design within a web browser or using their desktop application made for windows and macs. Figma is a very powerful application that runs online. There are virtually no platform boundaries when it comes to using figma because you can design within a web browser or using their desktop application made for windows and macs. Figma is similar to Sketch and Adobe XD but is the more powerful of the three when it comes. Figma is a very powerful application that runs online. There are virtually no platform boundaries when it comes to using figma because you can design within a web browser or using their desktop application made for windows and macs</p>
+                                    <label for="expanded" role="button">SHOW MORE</label>
+                                </div>
+                            </div>
                             <div className="overview-content">
                                 <p className='overview-content-title'>Course Includes</p>
                                 <div className="course-points">
@@ -357,7 +371,7 @@ const OngoingOverview = () => {
                                                                 <div className="course-video">
                                                                     <div className="video-index">20</div>
                                                                     <div className="vide-desc">
-                                                                        <p className='video-title'>Creating a New Project and File</p>
+                                                                        <p className='videosection-title'>Creating a New Project and File</p>
                                                                         <p className="video-duration">01.38 mins</p>
                                                                     </div>
                                                                     <div className="video-play-btn">{videoPlayActive}</div>
