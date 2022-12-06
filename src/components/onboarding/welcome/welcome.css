@@ -82,12 +82,29 @@ button.welcome-btn:hover {
         padding-bottom: 5px;
     }
     .welcome-text {
-        color: #7a7a7a;
+        color: var(--greyFont);
         font-size: 16px;
         letter-spacing: 0;
         line-height: 20px;
         width: 100%;
         text-align: left;
         padding-bottom: 55px;
+    }
+    .welcome-footer {
+        font-size: 14px;
+        letter-spacing: 0;
+        color: var(--chipFontclr);
+        line-height: 20px;
+        text-align: center;
+    }
+    .welcome-btns {
+        color: var(--chipFontclr);
+        font-size: 14px;
+        letter-spacing: 0;
+        line-height: 20px;
+        gap: 20px;
+    }
+    .welcome-footer a {
+        color: var(--blueFont);
     }
 }
