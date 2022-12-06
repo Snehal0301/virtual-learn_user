@@ -30,7 +30,7 @@ export const onboardingLogo = (
       </clipPath>
     </defs>
   </svg>
-)
+);
 
 export const info_btn = (
   <svg
@@ -47,14 +47,14 @@ export const info_btn = (
       fill="#FCBE4B"
     />
   </svg>
-)
+);
 
 export const success_Image = (
   <img
     src="data:image/svg+xml,%3Csvg width='300' height='341' viewBox='0 0 390 441' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M0 120.152L0.833071 121.296L6.91756 116.873L9.42385 125.099L16.6067 120.613L19.4202 128.87L26.8357 124.378L29.7484 131.778L31.0667 131.26L27.5381 122.298L20.1929 126.748L17.3713 118.465L10.2399 122.92L7.69257 114.56L0 120.152Z' fill='%23EE504F'/%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M365.908 281.194L369.906 289.157L376.251 284.485L379.516 291.824L385.664 287.165L388.313 293.682L389.625 293.15L386.281 284.921L380.083 289.618L376.828 282.301L370.418 287.022L367.174 280.559L365.908 281.194Z' fill='%23197A83'/%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M40.9762 267.375L32.4473 264.884L32.8442 263.526L39.5999 265.499L39.7641 257.789L47.5478 259.789L47.8239 251.917L56.5516 253.731L56.2627 255.117L49.18 253.644L48.901 261.598L41.1419 259.604L40.9762 267.375Z' fill='%236D68E0'/%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M327.006 115.011L318.477 112.521L318.874 111.163L325.629 113.135L325.793 105.425L333.577 107.425L333.853 99.5527L342.581 101.367L342.292 102.753L335.209 101.281L334.93 109.234L327.171 107.24L327.006 115.011Z' fill='%236D68E0'/%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M100.127 186.017L104.215 194.295L113.356 195.622L106.742 202.066L108.303 211.165L100.127 206.869L91.9511 211.165L93.5125 202.066L86.8984 195.622L96.0391 194.295L100.127 186.017Z' fill='%23E8315D'/%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M312.887 221.617L318.102 232.176L329.761 233.869L321.324 242.088L323.316 253.693L312.887 248.214L302.459 253.693L304.451 242.088L296.014 233.869L307.673 232.176L312.887 221.617Z' fill='%23F1884F'/%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M281.62 392.496L262.74 281.171L264.136 280.935L283.016 392.259L281.62 392.496Z' fill='%23373133'/%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M260.616 421.033L252.592 373.39L253.988 373.155L262.012 420.798L260.616 421.033Z' fill='%23373133'/%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M132.707 392.731L140.73 440.374L142.127 440.139L134.103 392.495L132.707 392.731Z' fill='%23373133'/%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M209.641 411.602L204.449 381.412L205.845 381.172L211.037 411.362L209.641 411.602Z' fill='%23373133'/%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M135.755 117.745L132.701 141.808L117.286 135.849L98.5949 128.623C94.7953 127.156 92.4071 123.368 92.728 119.307L96.0131 77.263C94.1015 74.5931 93.7192 67.3329 93.7192 67.3329L117.413 65.5781C117.413 71.6868 110.536 76.4988 110.536 76.4988L112.826 111.636L122.19 114.132L135.755 117.745Z' fill='%23FCBB9D'/%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M277.494 119.642L262.48 126.345L248.212 132.718L244.389 108.655L254.551 105.839L258.147 104.839L254.06 62.8283C254.06 62.8283 246.3 59.3895 245.153 53.2803L268.083 50.9883C268.083 50.9883 269.994 57.097 269.23 62.4462L282.21 109.669C283.314 113.703 281.313 117.939 277.494 119.642' fill='%23FCBB9D'/%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M135.752 117.745L132.699 141.808L117.283 135.85L122.187 114.132L135.752 117.745Z' fill='%23E6A68A'/%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M262.48 126.345L248.212 132.718L244.389 108.655L254.551 105.839L262.48 126.345Z' fill='%23E6A68A'/%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M93.5377 323.191L90.9322 342.145L80.0292 337.555L73.5156 334.814L76.0597 316.304L88.1522 321.069L93.5377 323.191Z' fill='%23FCBB9D'/%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M84.3116 318.839C84.3116 318.839 75.6019 325.791 77.2492 336.66C77.2492 336.66 60.0827 352.691 55.8541 355.461C53.1359 357.241 49.6988 354.589 50.7334 351.51L65.4776 312.166C66.2271 309.935 68.8783 309.007 70.856 310.283L84.3116 318.839Z' fill='%234F216C'/%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M163.682 319.71L161.077 338.663L151.745 334.734L143.66 331.333L146.204 312.822L159.08 317.898L163.682 319.71Z' fill='%23FCBB9D'/%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M93.5397 323.191L90.9343 342.145L80.0312 337.555L88.1543 321.068L93.5397 323.191Z' fill='%23E6A68A'/%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M163.681 319.71L161.075 338.663L151.744 334.734L159.079 317.898L163.681 319.71Z' fill='%23E6A68A'/%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M154.452 315.359C154.452 315.359 145.743 322.311 147.39 333.18C147.39 333.18 130.223 349.211 125.995 351.981C123.277 353.761 119.839 351.109 120.874 348.03L135.619 308.686C136.368 306.455 139.019 305.528 140.997 306.804L154.452 315.359Z' fill='%23311547'/%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M243.725 219.004L253.298 345.103C254.07 355.27 245.385 363.623 235.25 362.463L157.381 353.552L170.315 321.94L212.702 323.719L191.111 233.229L243.725 219.004Z' fill='%23311547'/%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M239.861 223.286L193.601 367.876C191.086 375.735 182.87 380.265 174.877 378.199L81.1211 353.967L90.6516 321.244L159.867 331.599L172.207 239.195L239.861 223.286Z' fill='%234F216C'/%3E%3Cmask id='mask0_70_26-143937' style='mask-type:alpha' maskUnits='userSpaceOnUse' x='28' y='0' width='350' height='74'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M28.8555 0H377.83V73.8167H28.8555V0Z' fill='white'/%3E%3C/mask%3E%3Cg mask='url(%23mask0_70_26-143937)'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M32.1832 68.5554L28.8783 31.2518C28.597 28.0776 30.9443 25.2761 34.1203 24.995L316.589 -0.000244141L377.83 18.9764L324.146 47.1033L320.912 48.7986L38.4433 73.7938C35.2677 74.075 32.4645 71.7296 32.1832 68.5554' fill='%23F1884F'/%3E%3C/g%3E%3Cmask id='mask1_70_26-883279' style='mask-type:alpha' maskUnits='userSpaceOnUse' x='316' y='0' width='62' height='49'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M316.492 0H377.831V48.807H316.492V0Z' fill='white'/%3E%3C/mask%3E%3Cg mask='url(%23mask1_70_26-883279)'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M320.816 48.8071L316.492 0.00871844L316.589 -0.000244141L351.627 10.8577L377.831 18.9764L354.642 31.1263L353.477 31.7367L320.913 48.7986L320.816 48.8071Z' fill='%23FCBB9D'/%3E%3C/g%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M353.475 31.7362L351.625 10.8572L377.828 18.9759L353.475 31.7362Z' fill='%23373133'/%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M102.359 68.138L100.23 43.7358L322.091 23.9082L324.146 47.1034L320.912 48.7987L102.359 68.138Z' fill='%23D87245'/%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M320.817 48.8071L318.639 24.2143L353.855 21.0981L354.643 31.1263L353.479 31.7367L320.915 48.7986L320.817 48.8071Z' fill='%23DBA18A'/%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M353.477 31.7362L352.545 21.2132L377.831 18.9758L353.477 31.7362Z' fill='%23161415'/%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M32.1832 68.5555L28.8783 31.2518C28.597 28.0777 30.9443 25.2762 34.1203 24.995L68.0903 21.9893L72.4133 70.7877L38.4433 73.7939C35.2677 74.075 32.4645 71.7297 32.1832 68.5555' fill='%23EE504F'/%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M71.4465 70.8734L67.123 22.075L100.644 19.1089L104.967 67.9073L71.4465 70.8734Z' fill='%23373133'/%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M32.183 68.5555L30.5391 50.0001L70.2603 46.4854L72.413 70.7876L38.4431 73.7938C35.2675 74.075 32.4643 71.7296 32.183 68.5555' fill='%23CE4646'/%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M71.4443 70.8736L69.291 46.5709L102.812 43.6047L104.965 67.9075L71.4443 70.8736Z' fill='%23161415'/%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M208.64 112.92L211.958 121.679L187.197 126.278C186.825 126.033 183.615 97.5513 183.615 97.5513C183.615 97.5513 176.389 95.3295 174.977 89.2019C174.619 87.659 174.85 86.0646 176.884 84.3056L175.907 73.8755L207.441 67.4795C207.441 67.4795 225.519 104.448 206.412 107.042L206.474 107.207L208.64 112.92Z' fill='%23FCBB9D'/%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M184.322 89.162C184.322 89.162 181.415 80.5297 175.534 85.7978C175.534 85.7978 170.072 82.4019 174.082 78.3711C174.082 78.3711 167 68.8689 177.943 65.6839C177.943 65.6839 174.89 58.5817 204.696 53.1763C204.696 53.1763 209.151 52.916 210.222 59.7766C210.222 59.7766 210.42 63.9187 207.207 65.5362C207.207 65.5362 211.98 68.4283 208.4 71.4067C204.82 74.3856 192.502 72.3808 192.502 72.3808C192.502 72.3808 195.971 73.6072 195.294 75.0318C194.617 76.4555 184.777 75.5568 184.777 75.5568L186.921 89.2781L184.322 89.162Z' fill='%23373133'/%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M209.654 115.34C209.654 115.34 212.711 130.999 184.433 116.868L155.772 119.16L127.038 114.541L124.363 145.476L161.122 154.679C161.122 154.679 170.293 191.343 170.293 208.147C170.293 224.951 165.325 248.63 165.325 248.63C165.325 248.63 229.908 250.922 252.072 220.75C252.072 220.75 237.933 197.453 236.022 184.849C234.112 172.247 231.436 143.221 231.436 143.221L255.548 136.346L250.007 106.099L209.654 115.34Z' fill='%235CC2AD'/%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M162.564 161.802L156.566 144.01L157.908 143.558L163.905 161.35L162.564 161.802Z' fill='%23373133'/%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M230.923 150.227L229.93 136.05L231.342 135.951L232.335 150.129L230.923 150.227Z' fill='%23373133'/%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M208.64 112.919C196.92 111.089 193.692 101.664 193.588 101.338C197.312 105.707 202.249 107.037 206.473 107.207L208.64 112.919Z' fill='%23E6A68A'/%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M206.326 95.1972L213.406 92.8386C213.406 92.8386 214.35 99.4426 206.326 95.1972' fill='white'/%3E%3C/svg%3E%0A"
     alt="img"
   ></img>
-)
+);
 
 export const facebookIcon = (
   <svg width={12} height={22} fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -65,7 +65,7 @@ export const facebookIcon = (
       fill="#3B5998"
     />
   </svg>
-)
+);
 
 export const googleIcon = (
   <svg width={22} height={22} fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -86,7 +86,7 @@ export const googleIcon = (
       fill="#F14336"
     />
   </svg>
-)
+);
 
 export const headerLogo = (
   <svg width={176} height={35} fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -110,7 +110,7 @@ export const headerLogo = (
     />
     <path d="M117.863 25.544h-11.874v-3.973h7.854V9h4.02v16.544z" fill="#fff" />
   </svg>
-)
+);
 
 export const searchIcon = (
   <svg width={26} height={26} fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -127,7 +127,7 @@ export const searchIcon = (
       fill="#fff"
     />
   </svg>
-)
+);
 
 export const bellIcon = (
   <svg width={24} height={24} fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -146,7 +146,7 @@ export const bellIcon = (
       strokeLinejoin="round"
     />
   </svg>
-)
+);
 
 export const settingsIcon = (
   <svg width={23} height={23} fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -165,7 +165,7 @@ export const settingsIcon = (
       strokeLinejoin="round"
     />
   </svg>
-)
+);
 
 export const graduationCapIcon = (
   <svg width={30} height={28} fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -191,7 +191,7 @@ export const graduationCapIcon = (
       strokeLinejoin="round"
     />
   </svg>
-)
+);
 
 export const profileIcon = (
   <svg width={28} height={28} fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -210,7 +210,7 @@ export const profileIcon = (
       strokeLinejoin="round"
     />
   </svg>
-)
+);
 
 export const logoutIcon = (
   <svg width={28} height={28} fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -222,7 +222,7 @@ export const logoutIcon = (
       strokeLinejoin="round"
     />
   </svg>
-)
+);
 
 export const passwordChanged = (
   <svg
@@ -604,7 +604,7 @@ export const passwordChanged = (
       fill="#F1884F"
     />
   </svg>
-)
+);
 
 export const closeProfile = (
   <svg
@@ -627,7 +627,7 @@ export const closeProfile = (
       fill="white"
     />
   </svg>
-)
+);
 
 export const editProfile = (
   <svg
@@ -644,7 +644,7 @@ export const editProfile = (
       fill="white"
     />
   </svg>
-)
+);
 
 export const privacyIcon = (
   <svg
@@ -664,7 +664,7 @@ export const privacyIcon = (
       fill="#2BB5F4"
     />
   </svg>
-)
+);
 
 export const rightArrowPrivacy = (
   <svg
@@ -695,7 +695,7 @@ export const rightArrowPrivacy = (
     </mask>
     <g mask="url(#mask0_156_2404-938981)"></g>
   </svg>
-)
+);
 
 export const filterIcon = (
   <svg width={26} height={26} fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -721,7 +721,7 @@ export const filterIcon = (
       />
     </g>
   </svg>
-)
+);
 
 export const design = (
   <svg width={21} height={22} fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -794,7 +794,7 @@ export const design = (
     />
     <path d="M1.1 18.006h18.7v.898H1.1v-.898z" fill="#2B2B2B" />
   </svg>
-)
+);
 
 export const settings_Icon = (
   <svg
@@ -819,21 +819,21 @@ export const settings_Icon = (
       stroke-linejoin="round"
     />
   </svg>
-)
+);
 
 export const privacy_icon = (
   <img
     src="data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cmask id='mask0_355_5248-359815' style='mask-type:alpha' maskUnits='userSpaceOnUse' x='0' y='0' width='24' height='24'%3E%3Crect width='24' height='24' fill='%23C4C4C4'/%3E%3C/mask%3E%3Cg mask='url(%23mask0_355_5248-359815)'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M7.91958 4.47092C8.87402 3.52376 10.1437 3.00141 11.4998 3L11.4999 3.04048C11.4995 3.27974 11.4975 4.49831 11.4964 4.49831C10.5494 4.49921 9.65934 4.86541 8.99035 5.52932C8.32137 6.19322 7.95345 7.07544 7.9544 8.01339V10.6733H15.0454V8.01339C15.0463 7.07544 14.6784 6.19322 14.0094 5.52932C13.3404 4.86541 12.4504 4.49921 11.5034 4.49831C11.5023 4.49831 11.5003 3.27974 11.4999 3.04048L11.5 3C12.8561 3.00141 14.1258 3.52376 15.0802 4.47092C16.0346 5.41812 16.5595 6.67674 16.5582 8.01412V10.6733H17.5228C18.8887 10.6733 20 11.7739 20 13.1268V19.0918C20 20.4446 18.8887 21.5452 17.5228 21.5452H5.47723C4.11129 21.5452 3 20.4446 3 19.0918V13.1268C3 11.7739 4.11129 10.6733 5.47723 10.6733H6.44162V8.01412C6.44023 6.67674 6.96515 5.41812 7.91958 4.47092ZM17.5228 20.0473C18.0546 20.0473 18.4872 19.6189 18.4872 19.0922H18.4872V13.1271C18.4872 12.6005 18.0546 12.172 17.5228 12.172H5.47723V12.172C4.94547 12.172 4.51282 12.6005 4.51282 13.1272V19.0922C4.51282 19.6188 4.94543 20.0473 5.47723 20.0473H17.5228Z' fill='%23373737'/%3E%3C/g%3E%3C/svg%3E%0A"
     alt="img"
   ></img>
-)
+);
 
 export const terms_icon = (
   <img
     src="data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cmask id='mask0_355_5257-968845' style='mask-type:alpha' maskUnits='userSpaceOnUse' x='0' y='0' width='24' height='24'%3E%3Crect width='24' height='24' fill='%23C4C4C4'/%3E%3C/mask%3E%3Cg mask='url(%23mask0_355_5257-968845)'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M19.7808 9.00227L13.8743 3.21751C13.7396 3.08326 13.5521 3 13.3447 3C13.5416 3 13.7304 3.07661 13.8696 3.21298L13.8743 3.21751C14.0059 3.34872 14.0871 3.52862 14.0871 3.7271V5.48237L13.0372 4.4541H12.6023V3.7271C12.6023 3.32555 12.9347 3.00001 13.3447 3H7.43178C6.09088 3 5 4.06843 5 5.3817V18.6183C5 19.9316 6.09092 21 7.43182 21H17.5682C18.9091 21 20 19.9316 20 18.6183V9.51811C20 9.50508 19.9996 9.49208 19.9989 9.47913C19.9889 9.29301 19.9074 9.12545 19.7808 9.00227ZM19.7808 9.00227L19.7825 9.00398C19.9124 9.13114 19.9891 9.30053 19.9989 9.47913C19.9996 9.49204 20 9.50503 20 9.51811C20 9.91966 19.6676 10.2452 19.2576 10.2452H18.5152V9.81919L17.4654 8.79101H19.2576C19.4617 8.79101 19.6466 8.87169 19.7808 9.00227ZM18.5152 10.2452V18.6182H18.5152C18.5152 19.1296 18.0904 19.5456 17.5682 19.5456H7.43184C6.90966 19.5456 6.48486 19.1296 6.48486 18.6182V5.38156C6.48486 4.87014 6.90969 4.4541 7.43184 4.4541H12.6023V9.51811C12.6023 9.91966 12.9347 10.2452 13.3447 10.2452H18.5152ZM17.4654 8.79101H14.0871V5.48237L17.4654 8.79101Z' fill='%23373737'/%3E%3Cmask id='mask1_355_5257-754984' style='mask-type:alpha' maskUnits='userSpaceOnUse' x='5' y='3' width='15' height='18'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M13.8757 3.21891L13.8696 3.21298C13.7304 3.07661 13.5416 3.00001 13.3447 3C13.5528 3 13.7409 3.08384 13.8757 3.21891ZM19.7783 8.99982L13.8757 3.21891C14.0065 3.35 14.0871 3.52933 14.0871 3.7271V5.48236L13.0372 4.45407H12.6023V3.7271C12.6023 3.32555 12.9347 3.00001 13.3447 3M18.5152 10.2452V18.6181H18.5152C18.5152 19.1296 18.0904 19.5456 17.5683 19.5456H7.43185C6.90967 19.5456 6.48488 19.1295 6.48488 18.6181V5.38153C6.48488 4.87011 6.90971 4.45407 7.43185 4.45407H12.6023V9.51811C12.6023 9.91966 12.9347 10.2452 13.3447 10.2452H18.5152ZM20 9.52015C19.9989 9.92077 19.6669 10.2452 19.2576 10.2452H18.5152V9.81916L17.4654 8.79101H19.2576C19.4605 8.79101 19.6443 8.87068 19.7783 8.99982L19.7825 9.00398C19.9218 9.14036 20 9.32531 20 9.51811V9.52015ZM20 9.51811C20 9.31521 19.9151 9.13171 19.7783 8.99982ZM20 9.51811C20 9.51879 20 9.51947 20 9.52015V18.6183C20 19.9316 18.9091 21 17.5682 21H7.43182C6.09092 21 5 19.9316 5 18.6183V5.3817C5 4.06843 6.09088 3 7.43178 3H13.3447C13.3447 3 13.3447 3 13.3447 3M17.4654 8.79101H14.0871V5.48236L17.4654 8.79101Z' fill='white'/%3E%3C/mask%3E%3Cg mask='url(%23mask1_355_5257-754984)'%3E%3C/g%3E%3C/g%3E%3C/svg%3E%0A"
     alt="img"
   ></img>
-)
+);
 
 export const chevron_right = (
   <svg
@@ -865,7 +865,7 @@ export const chevron_right = (
     </mask>
     <g mask="url(#mask0_184_4536-516454)"></g>
   </svg>
-)
+);
 
 export const arrowRight = (
   <svg
@@ -880,7 +880,7 @@ export const arrowRight = (
       fill="white"
     />
   </svg>
-)
+);
 
 export const closeIcon = (
   <svg width={26} height={26} fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -897,7 +897,7 @@ export const closeIcon = (
       fill="#000"
     />
   </svg>
-)
+);
 
 export const warningIcon = (
   <svg
@@ -914,7 +914,7 @@ export const warningIcon = (
       fill="white"
     />
   </svg>
-)
+);
 
 export const timerIcon = (
   <svg width={26} height={27} fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -933,7 +933,7 @@ export const timerIcon = (
       strokeWidth={0.3}
     />
   </svg>
-)
+);
 
 export const previousIcon = (
   <svg width={32} height={26} fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -961,7 +961,7 @@ export const previousIcon = (
       />
     </g>
   </svg>
-)
+);
 
 export const nextIcon = (
   <svg width={30} height={25} fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -989,7 +989,7 @@ export const nextIcon = (
       />
     </g>
   </svg>
-)
+);
 
 export const showAnsIcon = (
   <svg width={18} height={28} fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -1018,7 +1018,7 @@ export const showAnsIcon = (
       />
     </g>
   </svg>
-)
+);
 
 export const optionEllipse = (
   <svg width={20} height={20} fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -1031,7 +1031,7 @@ export const optionEllipse = (
       stroke="#C5C5C5"
     />
   </svg>
-)
+);
 
 export const wrongOptionEllipse = (
   <svg width={8} height={8} fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -1040,7 +1040,7 @@ export const wrongOptionEllipse = (
       fill="#EA2626"
     />
   </svg>
-)
+);
 
 export const correctOptionEllipse = (
   <svg width={10} height={7} fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -1049,7 +1049,7 @@ export const correctOptionEllipse = (
       fill="#1EAB0D"
     />
   </svg>
-)
+);
 
 export const courseHourIcon = (
   <svg width={32} height={32} fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -1071,7 +1071,7 @@ export const courseHourIcon = (
       </clipPath>
     </defs>
   </svg>
-)
+);
 
 export const courseFileIcon = (
   <svg width={32} height={32} fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -1093,7 +1093,7 @@ export const courseFileIcon = (
       </clipPath>
     </defs>
   </svg>
-)
+);
 
 export const courseTestIcon = (
   <svg width={32} height={32} fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -1117,7 +1117,7 @@ export const courseTestIcon = (
       </clipPath>
     </defs>
   </svg>
-)
+);
 
 export const courseAccessIcon = (
   <svg width={32} height={32} fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -1139,7 +1139,7 @@ export const courseAccessIcon = (
       </clipPath>
     </defs>
   </svg>
-)
+);
 
 export const courseMediumAccess = (
   <svg width={32} height={32} fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -1161,7 +1161,7 @@ export const courseMediumAccess = (
       </clipPath>
     </defs>
   </svg>
-)
+);
 export const courseCertIcon = (
   <svg width={32} height={32} fill="none" xmlns="http://www.w3.org/2000/svg">
     <g clipPath="url(#prefix__clip0_309_12477)">
@@ -1180,7 +1180,7 @@ export const courseCertIcon = (
       </clipPath>
     </defs>
   </svg>
-)
+);
 
 export const downloadIcon = (
   <svg width={32} height={32} fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -1196,7 +1196,7 @@ export const downloadIcon = (
       </clipPath>
     </defs>
   </svg>
-)
+);
 
 export const learnCheckMark = (
   <svg width={18} height={18} fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -1223,7 +1223,7 @@ export const learnCheckMark = (
       />
     </g>
   </svg>
-)
+);
 
 export const videoPlayActive = (
   <svg
@@ -1259,7 +1259,7 @@ export const videoPlayActive = (
       />
     </g>
   </svg>
-)
+);
 
 export const whiteStepperIcon = (
   <svg
@@ -1271,7 +1271,7 @@ export const whiteStepperIcon = (
   >
     <circle cx="4" cy="4" r="4" fill="white" />
   </svg>
-)
+);
 
 export const virtualLearn_logo = (
   <svg width={176} height={35} fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -1298,4 +1298,28 @@ export const virtualLearn_logo = (
       fill="#253157"
     />
   </svg>
-)
+);
+
+export const mobileBackBtn = (
+  <svg width={28} height={28} fill="none" xmlns="http://www.w3.org/2000/svg">
+    <mask
+      id="prefix__a"
+      style={{
+        maskType: 'alpha',
+      }}
+      maskUnits="userSpaceOnUse"
+      x={0}
+      y={0}
+      width={28}
+      height={28}
+    >
+      <path fill="#C4C4C4" d="M0 0h28v28H0z" />
+    </mask>
+    <g mask="url(#prefix__a)">
+      <path
+        d="M24.048 13.023H6.25l4.247-4.356a.994.994 0 000-1.38.935.935 0 00-1.347 0L3.28 13.308a.994.994 0 000 1.382l5.872 6.023a.937.937 0 001.347 0 .994.994 0 000-1.381L6.25 14.977h17.797A.965.965 0 0025 14a.965.965 0 00-.952-.977z"
+        fill="#373737"
+      />
+    </g>
+  </svg>
+);
