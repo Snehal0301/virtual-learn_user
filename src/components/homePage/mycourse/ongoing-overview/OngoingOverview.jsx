@@ -138,43 +138,44 @@ const OngoingOverview = () => {
                             </div>
                         </div>
                         :
-                        <div className="course-completion">
-                            <div className="course-completion-section-1">
-                                <div className="completion-section-1-main">
+                        // <div className="course-completion">
+                        //     <div className="course-completion-section-1">
+                        //         <div className="completion-section-1-main">
 
-                                    <p className='completion-section-1-main-title'>Course Result</p>
-                                    <p className='completion-section-1-main-per'>90%</p>
-                                    <p className='completion-section-1-main-apr'>approval rate</p>
-                                </div>
-                            </div>
-                            <div className="course-completion-section-2">
-                                <div className="completion-section-2-main">
-                                    <div className="cmain-1">
-                                        <p>Joined</p>
-                                        <p className='cmain-1-date'>02/04/2021</p>
-                                    </div>
-                                    <div className="cmain-2">
-                                        <p>Completed</p>
-                                        <p className='cmain-1-date'>02/04/2021</p>
-                                    </div>
-                                    <div className="cmain-3">
-                                        <p>Duration</p>
-                                        <p className='cmain-1-date'>4h 30m</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="course-completion-section-3">
-                                <div className="completion-section-3-main">
-                                    <div className="cs3-main-1">
-                                        <p className='cs3-main-1-title'>Course Certificate</p>
-                                        <div className='download-icon-image'>{downloadIcon}</div>
-                                    </div>
-                                    <div className="cs3-main-2">
-                                        <img src={require('../../../../assets/images/certicon.png')} alt="" />
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        //             <p className='completion-section-1-main-title'>Course Result</p>
+                        //             <p className='completion-section-1-main-per'>90%</p>
+                        //             <p className='completion-section-1-main-apr'>approval rate</p>
+                        //         </div>
+                        //     </div>
+                        //     <div className="course-completion-section-2">
+                        //         <div className="completion-section-2-main">
+                        //             <div className="cmain-1">
+                        //                 <p>Joined</p>
+                        //                 <p className='cmain-1-date'>02/04/2021</p>
+                        //             </div>
+                        //             <div className="cmain-2">
+                        //                 <p>Completed</p>
+                        //                 <p className='cmain-1-date'>02/04/2021</p>
+                        //             </div>
+                        //             <div className="cmain-3">
+                        //                 <p>Duration</p>
+                        //                 <p className='cmain-1-date'>4h 30m</p>
+                        //             </div>
+                        //         </div>
+                        //     </div>
+                        //     <div className="course-completion-section-3">
+                        //         <div className="completion-section-3-main">
+                        //             <div className="cs3-main-1">
+                        //                 <p className='cs3-main-1-title'>Course Certificate</p>
+                        //                 <div className='download-icon-image'>{downloadIcon}</div>
+                        //             </div>
+                        //             <div className="cs3-main-2">
+                        //                 <img src={require('../../../../assets/images/certicon.png')} alt="" />
+                        //             </div>
+                        //         </div>
+                        //     </div>
+                        // </div>
+                        ""
                 }
 
             </div>
@@ -186,6 +187,27 @@ const OngoingOverview = () => {
                     </div>
                     <div className={tabState === 1 ? 'tab-content-1' : 'tab-content-none'}>
                         <div className="tab-1-all">
+                            <div className="ongoing-course-desc-mobile">
+                                <div className="ongoing-course-desc-title-mobile">
+                                    <p>Learn how to design a beautiful and engaging mobile app with Figma. Learn-by-doing approach. Learn how to design a beautiful and engaging mobile app with Figma. Learn-by-doing approach.</p>
+                                </div>
+                                <div className="ongoing-course-desc-content-mobile">
+                                    <p>Preview this Course</p>
+                                    <div className="mobile-video-link">
+                                        <div className="mobile-video-section-1">
+                                            <img src={require("../../../../assets/images/icn_play_orange.png")} alt="" className='video-logo' />
+                                            <div className="mobile-video-desc">
+                                                <div className="mobile-video-title">Introduction</div>
+                                                <div className="mobile-video-dur">3 Min</div>
+                                            </div>
+                                        </div>
+                                        <img src={require("../../../../assets/images/icn_previewgo.png")} alt="" className='right-icon' />
+                                    </div>
+                                    <input type="checkbox" id="expanded"></input>
+                                    <p className='mobile-video-description'>Figma is a very powerful application that runs online. There are virtually no platform boundaries when it comes to using figma because you can design within a web browser or using their desktop application made for windows and macs. Figma is similar to Sketch and Adobe XD but is the more powerful of the three when it comes. Figma is a very powerful application that runs online. There are virtually no platform boundaries when it comes to using figma because you can design within a web browser or using their desktop application made for windows and macs. Figma is a very powerful application that runs online. There are virtually no platform boundaries when it comes to using figma because you can design within a web browser or using their desktop application made for windows and macs. Figma is similar to Sketch and Adobe XD but is the more powerful of the three when it comes. Figma is a very powerful application that runs online. There are virtually no platform boundaries when it comes to using figma because you can design within a web browser or using their desktop application made for windows and macs</p>
+                                    <label for="expanded" role="button">SHOW MORE</label>
+                                </div>
+                            </div>
                             <div className="overview-content">
                                 <p className='overview-content-title'>Course Includes</p>
                                 <div className="course-points">
@@ -349,7 +371,7 @@ const OngoingOverview = () => {
                                                                 <div className="course-video">
                                                                     <div className="video-index">20</div>
                                                                     <div className="vide-desc">
-                                                                        <p className='video-title'>Creating a New Project and File</p>
+                                                                        <p className='videosection-title'>Creating a New Project and File</p>
                                                                         <p className="video-duration">01.38 mins</p>
                                                                     </div>
                                                                     <div className="video-play-btn">{videoPlayActive}</div>
