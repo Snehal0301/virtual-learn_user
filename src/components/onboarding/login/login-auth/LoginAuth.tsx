@@ -1,18 +1,18 @@
-import './LoginAuth.css'
-import { useNavigate } from 'react-router-dom'
-import { ToastContainer, toast } from 'react-toastify'
-import 'react-toastify/dist/ReactToastify.css'
-import { facebookIcon, googleIcon } from '../../../../utils/svgIcons'
-import { useDispatch, useSelector } from 'react-redux'
-import { login } from '../../../../redux/reducers/loginSlice'
-import { useEffect, useState } from 'react'
+import './LoginAuth.css';
+import { useNavigate } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { facebookIcon, googleIcon } from '../../../../utils/svgIcons';
+import { useDispatch, useSelector } from 'react-redux';
+import { login } from '../../../../redux/reducers/loginSlice';
+import { useEffect, useState } from 'react';
 
 const LoginAuth = () => {
-  const [submitted, setSubmitted] = useState(false)
+  const [submitted, setSubmitted] = useState(false);
 
-  const navigate = useNavigate()
-  const dispatch = useDispatch()
-  const loginResponse = useSelector((state: any) => state.login)
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const loginResponse = useSelector((state: any) => state.login);
 
   const showError = (msg: any) => {
     toast(
@@ -31,55 +31,55 @@ const LoginAuth = () => {
         hideProgressBar: true,
         pauseOnHover: true,
         draggable: true,
-      },
-    )
-  }
+      }
+    );
+  };
 
   // showError()
 
   const submitHandler = (e: any) => {
-    e.preventDefault()
+    e.preventDefault();
     const credentials = {
       userName: e.target.username.value,
       password: e.target.password.value,
-    }
+    };
 
     if (e.target.username.value !== '' && e.target.password.value !== '') {
-      console.log('credentials', credentials)
-      dispatch(login(credentials))
+      console.log('credentials', credentials);
+      dispatch(login(credentials));
       // localStorage.setItem('auth', 'true')
       // navigate('/')
       // window.location.reload()
-      setSubmitted(true)
+      setSubmitted(true);
     }
-  }
+  };
 
   useEffect(() => {
-    responseFunction()
-  }, [loginResponse && loginResponse.isRejected && loginResponse.message])
+    responseFunction();
+  }, [loginResponse && loginResponse.isRejected && loginResponse.message]);
 
   useEffect(() => {
     console.log(
       'login message',
-      loginResponse && loginResponse.data && loginResponse.data.data,
-    )
+      loginResponse && loginResponse.data && loginResponse.data.data
+    );
     localStorage.setItem(
       'Token',
       loginResponse &&
         loginResponse.data &&
         loginResponse.data.data &&
-        loginResponse.data.data.jwtToken,
-    )
-  }, [loginResponse && loginResponse.isSuccess && loginResponse.data])
+        loginResponse.data.data.jwtToken
+    );
+  }, [loginResponse && loginResponse.isSuccess && loginResponse.data]);
 
   const responseFunction = () => {
     if (loginResponse && loginResponse.message && loginResponse.message.error) {
-      showError(loginResponse.message.error)
+      showError(loginResponse.message.error);
     }
     if (loginResponse && submitted && !loginResponse.message) {
-      showError('Server Error')
+      showError('Server Error');
     }
-  }
+  };
 
   return (
     <div className="loginAuth">
@@ -131,7 +131,7 @@ const LoginAuth = () => {
             <span
               className="loginAuth-regLink"
               onClick={() => {
-                navigate('/onboarding/forgotPassword')
+                navigate('/onboarding/forgotPassword');
               }}
             >
               Forgot password?{' '}
@@ -144,7 +144,7 @@ const LoginAuth = () => {
           <span
             className="loginAuth-regLink"
             onClick={() => {
-              navigate('/onboarding/register')
+              navigate('/onboarding/register');
             }}
           >
             Register
@@ -154,7 +154,7 @@ const LoginAuth = () => {
       {/* onClick={showError} to call error */}
       <ToastContainer />
     </div>
-  )
-}
+  );
+};
 
-export default LoginAuth
+export default LoginAuth;
