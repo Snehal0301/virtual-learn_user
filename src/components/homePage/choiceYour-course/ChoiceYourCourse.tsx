@@ -29,6 +29,14 @@ const ChoiceYourCourse = () => {
       time: "2:23:24",
       btntext: "Design"
     },
+    {
+      id: 3,
+      image: require('../../../assets/images/start-courses-image/What-Are-The-Most-Effective-Digital-Marketing-Strategies-_blog 1.png'),
+      title: "Digital Marketing Strategies",
+      chapter: '2 chapter',
+      time: "2:23:24",
+      btntext: "Design"
+    },
 
   ]
 

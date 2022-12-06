@@ -68,13 +68,7 @@ const Start = () => {
             <div className='start-map-image'><img src={item.image} alt="" /></div>
           ))
         }
-        {/* <div className="slide">1</div>
-        <div className="slide">2</div>
-        <div className="slide">3</div>
-        <div className="slide">4</div>
-        <div className="slide">5</div>
-        <div className="slide">6</div>
-        <div className="slide">7</div> */}
+     
       </Slider>
       <div className='start-course-section2'>
         <div className='start-ongoing-courses'>Ongoing courses</div>
