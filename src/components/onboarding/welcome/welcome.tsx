@@ -6,6 +6,12 @@ const WelcomeScreen = () => {
 
   return (
     <div className="welcomeScreen">
+      <div className="welconescreen-landingIllustration">
+        <img
+          src={require('../../../assets/images/img_landing_illustration.png')}
+          alt="landing illustration"
+        />
+      </div>
       <div className="welcome-title">Welcome</div>
       <div className="welcome-text">
         Are you ready to study easily in a virtual way?

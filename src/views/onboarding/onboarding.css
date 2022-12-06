@@ -17,6 +17,10 @@
     justify-content: center;
 }
 
+.onboarding-detailsMobileLogo {
+    display: none;
+}
+
 .onboarding-entryMessageTitle {
     display: flex;
     align-items: center;
@@ -93,4 +97,47 @@ button.nav.default-nav {
     margin-top: 60px;
     height: auto;
     overflow-y: auto;
+}
+
+@media screen and (max-width: 940px) {
+    .onboarding-detailsMobileLogo {
+        display: flex;
+        float: inherit;
+        width: 100%;
+        padding: 0 24%;
+    }
+    .onboarding-detailsMobileLogoIcon {
+        transform: scale(0.7);
+        position: absolute;
+        top: 30px;
+        left: 30px;
+    }
+    .onboarding-detailsMobileLogoText {
+        transform: scale(0.7);
+        /* display: flex; */
+        position: absolute;
+        /* justify-content: flex-start; */
+        top: 60px;
+        left: 58px;
+    }
+    .onboarding-detailsLogo {
+        display: none;
+    }
+    .onboarding-entryMessage {
+        display: none;
+    }
+    .onboarding-detailsContainer {
+        width: 100%;
+        background: #ffffff;
+    }
+    .onboarding-detailsBody {
+        width: 100%;
+        margin-top: 10px;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .onboarding-detailsMobileLogo {
+        padding: 0 10%;
+    }
 }
