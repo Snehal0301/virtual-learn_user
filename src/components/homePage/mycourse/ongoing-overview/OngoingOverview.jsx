@@ -7,7 +7,6 @@ import { courseAccessIcon, courseCertIcon, courseFileIcon, courseHourIcon, cours
 import instructorImage from '../../../../assets/images/instructorImage.jpg'
 import Accordian from '../accordian/Accordian'
 
-
 import Box from '@mui/material/Box';
 import Stepper from '@mui/material/Stepper';
 import Step from '@mui/material/Step';
@@ -67,7 +66,6 @@ const OngoingOverview = () => {
         setActiveStep(0);
     };
 
-
     const [active, setActive] = useState(0)
 
     const [tabs, setTabs] = useState(1)
@@ -75,15 +73,12 @@ const OngoingOverview = () => {
     const dispatch = useDispatch();
 
     const tabToggle = (id) => {
-        // setTabs(id)
         dispatch(tabToggleState(id))
     }
-
 
     const tabState = useSelector((state) => state.mycourse.tab)
 
     const accordianToggle = (id) => {
-        // setTabs(id)
         dispatch(accordianToggleState(id))
     }
     const accordianState = useSelector((state) => state.mycourse.accordian)
@@ -92,33 +87,31 @@ const OngoingOverview = () => {
     const [played, setPlayed] = useState(false)
 
     const onPause = () => {
-        console.log("Paused")
         setPause(true)
+        setPlaying(false)
     }
     const onPlay = () => {
-        console.log("Paused")
         setPause(false)
         setPlaying(true)
     }
 
-    console.log(played);
     return (
         <div className='ongoing-overview'>
             <div className="ongoing-section-1">
-                {
-                    pause &&
-                    <div className="onpause-modal">
-                        <p className='onpause-modal-title'>Your lesson paused at 1.21
-                            Do you want to continue watching?</p>
-                            <button className='onpause-button' onClick={onPlay}>Continue Watching</button>
-                        <button className='onpause-button beginning'>Watch from beginning</button>
-                    </div>
-                }
                 <div className="ongoing-section-video-player">
+                    {
+                        pause &&
+                        <div className="onpause-modal">
+                            <p className='onpause-modal-title'>Your lesson paused at 1.21
+                                Do you want to continue watching?</p>
+                            <button className='onpause-button' onClick={onPlay}>Continue Watching</button>
+                            <button className='onpause-button beginning'>Watch from beginning</button>
+                        </div>
+                    }
                     <ReactPlayer url='https://youtu.be/Tn6-PIqc4UM' controls='true' className='react-player' width='100%'
                         height='100%' onPause={onPause} playing={playing} onProgress={(progress) => {
                             setPlayed(progress.playedSeconds);
-                        }}/>
+                        }} />
                 </div>
                 <div className="ongoing-video-title-section">
                     <div className="ongoing-video-title">
