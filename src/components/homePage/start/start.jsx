@@ -32,11 +32,28 @@ const Start = () => {
     {
       id: 3,
       image: require('../../../assets/images/start-courses-image/What-Are-The-Most-Effective-Digital-Marketing-Strategies-_blog 1.png'),
-      title: "Digital Marketing Strategies",
+      title: "Digital Strategies",
       chapter: '2 chapter',
       time: "2:23:24",
       btntext: "Design"
     },
+    {
+      id: 2,
+      image: require('../../../assets/images/start-courses-image/banner-42 1.png'),
+      title: "Marketing Courses",
+      chapter: '2 chapter',
+      time: "2:23:24",
+      btntext: "Marketing"
+    },
+    {
+      id: 3,
+      image: require('../../../assets/images/start-courses-image/What-Are-The-Most-Effective-Digital-Marketing-Strategies-_blog 1.png'),
+      title: "Digital Strategies",
+      chapter: '2 chapter',
+      time: "2:23:24",
+      btntext: "Design"
+    },
+    
     
 
   ]

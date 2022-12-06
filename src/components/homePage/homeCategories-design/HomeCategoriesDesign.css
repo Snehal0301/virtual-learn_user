@@ -33,6 +33,7 @@
 
 .home-categories-card {
     padding-top: 20px;
+    display: flex;
 }
 
 .start-course-title {
@@ -164,15 +165,15 @@
     background: #FFFFFF;
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
     border-radius: 6px;
-    /* height: 183px; */
-    /* width: 291px; */
-    flex-basis: 25%;
+    flex-basis: 24%;
+    margin-bottom: 30px;
 }
 
 .home-categories-choice1{
     display: flex;
-    flex: 100%;
-    gap: 10px;
+    flex: 100% 1;
+    gap: 1%;
+    flex-wrap: wrap;
 }
 
 .home-categories-subcategory-title{
