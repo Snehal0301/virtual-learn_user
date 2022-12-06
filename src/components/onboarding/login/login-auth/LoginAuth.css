@@ -255,3 +255,5 @@ button.Toastify__close-button.Toastify__close-button--light {
 .loginAuth-formSubmit:disabled {
     cursor: no-drop;
 }
+
+@media screen and (max-width: 500px) {}
