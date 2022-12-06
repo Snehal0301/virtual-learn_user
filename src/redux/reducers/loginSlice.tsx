@@ -5,6 +5,7 @@ import type { AxiosError } from 'axios';
 const initialState = {
   message: '',
   data: [],
+  headers: [],
   isSuccess: false,
   isRejected: false,
   loading: false,
@@ -43,6 +44,7 @@ export const loginSlice = createSlice({
     builder.addCase(login.fulfilled, (state, action) => {
       state.loading = false;
       state.data = action.payload;
+      state.headers = action;
       state.isSuccess = true;
     });
     builder.addCase(login.rejected, (state, action) => {
