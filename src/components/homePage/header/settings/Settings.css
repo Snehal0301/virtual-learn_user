@@ -1,14 +1,14 @@
-.drawer-profile {
+.drawer-profile-settings {
   height: 100%;
   display: flex;
   flex-direction: column;
 }
 
-.drawer-profile-header {
+.drawer-profile-header-settings {
   background-color: var(--drawerBlueClr);
   padding: 30px;
 }
-.drawer-profile-clear {
+.drawer-profile-clear-settings {
   cursor: pointer;
 }
 .settings-settings-text {
@@ -28,6 +28,8 @@
 }
 .settings-notification-text-icon {
   display: flex;
+  padding-bottom: 1em;
+  cursor: pointer;
 }
 .settings-notification-text {
   font-family: "Proxima Nova Soft";
