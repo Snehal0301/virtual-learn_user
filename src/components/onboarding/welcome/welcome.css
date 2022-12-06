@@ -68,6 +68,10 @@ button.welcome-btn:hover {
     color: var(--blueFontClr);
 }
 
+.welconescreen-landingIllustration {
+    display: none;
+}
+
 @media screen and (max-width: 940px) {
     .welcome-title {
         font-family: Biko;
@@ -106,5 +110,17 @@ button.welcome-btn:hover {
     }
     .welcome-footer a {
         color: var(--blueFont);
+    }
+    .welconescreen-landingIllustration {
+        display: flex;
+    }
+    .welcomeScreen {
+        padding: 0 24%;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .welcomeScreen {
+        padding: 0 10%;
     }
 }

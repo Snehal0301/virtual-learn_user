@@ -101,9 +101,10 @@ button.nav.default-nav {
 
 @media screen and (max-width: 940px) {
     .onboarding-detailsMobileLogo {
-        display: block;
-        align-items: center;
-        gap: 10px;
+        display: flex;
+        float: inherit;
+        width: 100%;
+        padding: 0 24%;
     }
     .onboarding-detailsMobileLogoIcon {
         transform: scale(0.7);
@@ -128,5 +129,14 @@ button.nav.default-nav {
     .onboarding-detailsContainer {
         width: 100%;
         background: #ffffff;
+    }
+    .onboarding-detailsBody {
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .onboarding-detailsMobileLogo {
+        padding: 0 10%;
     }
 }

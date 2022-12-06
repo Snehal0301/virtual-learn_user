@@ -1,10 +1,6 @@
 import './onboarding.css'
 import { Slide } from 'react-slideshow-image'
-import {
-  onboardingLogo,
-  virtualLearn_logoIcon,
-  virtualLearn_logoText,
-} from '../../utils/svgIcons'
+import { onboardingLogo, virtualLearn_logo } from '../../utils/svgIcons'
 import { Outlet } from 'react-router-dom'
 import WelcomeScreen from '../../components/onboarding/welcome/welcome'
 import LoginVerfication from '../../components/onboarding/login/login-verification/login-otp/LoginOtp'
@@ -74,14 +70,7 @@ const Onboarding = () => {
       </div>
       <div className="onboarding-detailsContainer">
         <div className="onboarding-detailsLogo">{onboardingLogo}</div>
-        <div className="onboarding-detailsMobileLogo">
-          <div className="onboarding-detailsMobileLogoIcon">
-            {virtualLearn_logoIcon}
-          </div>
-          <div className="onboarding-detailsMobileLogoText">
-            {virtualLearn_logoText}
-          </div>
-        </div>
+        <div className="onboarding-detailsMobileLogo">{virtualLearn_logo}</div>
         <div className="onboarding-detailsBody">
           {/* <WelcomeScreen /> */}
           {/* <LoginVerfication/> */}
