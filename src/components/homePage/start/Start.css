@@ -326,3 +326,9 @@
     width: 100%;
     border-radius: 6px;
 }
+@media only screen and (max-width: 800px) {
+    .start-card2{
+        overflow: scroll;
+    }
+  
+  }

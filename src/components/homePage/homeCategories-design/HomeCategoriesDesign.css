@@ -9,11 +9,7 @@
 }
 
 .start-course1 {
-    /* display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 30px; */
     display: flex;
-    /* justify-content: space-between; */
     flex: 100%;
     gap: 30px;
 }
@@ -32,13 +28,12 @@
 }
 
 .home-categories-card {
-    padding-top: 20px;
+    /* padding-top: 20px; */
     display: flex;
 }
 
 .start-course-title {
     position: absolute;
-    /* top: 144px; */
     left: 20px;
     bottom: 19px;
     font-family: 'Biko';
@@ -48,18 +43,19 @@
     color: #FFFFFF;
     z-index: 1;
 }
+
 .homecategoriesdesign a {
     text-decoration: none;
-    color:  #7A7A7A;
+    color: #7A7A7A;
 }
 
 .home-categories-section2 {
     display: flex;
     justify-content: space-between;
-    padding-top:50px;
+    padding-top: 22px;
 }
 
-.home-categories-courses-started{
+.home-categories-courses-started {
     font-family: 'Biko';
     font-style: normal;
     font-weight: 400;
@@ -83,7 +79,6 @@
     position: absolute;
     display: flex;
     flex-direction: row;
-    /* top: 125px; */
     bottom: 13px;
     text-align: center;
     align-items: center;
@@ -106,7 +101,6 @@
     font-style: normal;
     font-weight: 600;
     font-size: 20px;
-    /* line-height: 50px; */
     color: #FFFFFF;
 }
 
@@ -140,7 +134,7 @@
     padding: 0.5rem 0.5rem;
 }
 
-.home-categories-Name{
+.home-categories-Name {
     /* padding-left: 1rem; */
 }
 
@@ -161,6 +155,14 @@
 
 }
 
+.home-categories-subcategory-allcourse-image img {
+    height: 100%;
+    margin: 0;
+    width: 100%;
+    border-radius: 5px;
+
+}
+
 .home-categories-subcategory-image {
     background: #FFFFFF;
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
@@ -169,34 +171,63 @@
     margin-bottom: 30px;
 }
 
-.home-categories-choice1{
+.home-categories-subcategory-allcourse-image {
+    background: #FFFFFF;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 6px;
+    flex-basis: 24%;
+    margin-bottom: 30px;
+}
+
+
+.home-categories-choice1 {
     display: flex;
-    flex: 100% 1;
+    flex: 100%;
     gap: 1%;
     flex-wrap: wrap;
 }
 
-.home-categories-subcategory-title{
+.home-categories-choice1-allcourse {
+    display: flex;
+    flex: 100%;
+    gap: 1%;
+    flex-wrap: wrap;
+}
+
+.home-categories-subcategory-title {
     font-family: 'Proxima Nova Soft';
     font-style: normal;
     font-weight: 400;
     font-size: 16px;
-    /* line-height: 26px; */
     padding-left: 1rem;
     padding-top: 0.8rem;
-    /* or 144% */
+    color: #111111;
+}
+
+.home-categories-subcategory-allcourse-title {
+    font-family: 'Proxima Nova Soft';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    padding-left: 1rem;
+    padding-top: 0.8rem;
     color: #111111;
 }
 
 .home-categories-titleBtn {
-    /* position: relative; */
     padding: 0.5rem;
     height: auto;
     display: flex;
     justify-content: space-between;
-    /* text-align: center; */
-    /* align-items: center; */
 }
+
+.home-categories-allcourse-titleBtn {
+    padding: 0.5rem;
+    height: auto;
+    display: flex;
+    justify-content: space-between;
+}
+
 
 .home-categories-chapter {
     font-family: 'Proxima Nova Soft';
@@ -206,7 +237,16 @@
     line-height: 26px;
     color: #7A7A7A;
     padding-left: 0.5rem;
-    /* padding-bottom: 1rem; */
+}
+
+.home-categories-allcourse-chapter {
+    font-family: 'Proxima Nova Soft';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 26px;
+    color: #7A7A7A;
+    padding-left: 0.5rem;
 }
 
 .home-categories-time {
@@ -221,9 +261,6 @@
     font-weight: 400;
     font-size: 14px;
     line-height: 26px;
-    /* identical to box height, or 162% */
-
-
     color: #7A7A7A;
 
 
@@ -236,30 +273,136 @@
     justify-content: center;
 }
 
+.home-categories-image-allcourse-pause {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 .home-categories-pauseIcon {
     position: absolute;
-    /* top: 77px; */
-    /* left: 121px; */
-    
+
 }
 
 .home-categories-designbtn {
-    /* position: absolute; */
-    /* right: 12px; */
-    /* bottom: 14px; */
     background: #FCBE4B;
     mix-blend-mode: normal;
     border-radius: 6px;
     border: none;
     padding: 0.5rem 1rem;
 }
+
+.home-categories-allcourse-designbtn {
+    background: #FCBE4B;
+    mix-blend-mode: normal;
+    border-radius: 6px;
+    border: none;
+    padding: 0.2rem 1rem;
+}
+
+
 .home-categories-overlay {
     position: absolute;
     top: 0;
     right: 0;
-    bottom:0;
+    bottom: 0;
     left: 0;
     background-color: #0000003b;
-    /* opacity: 0.2; */
     border-radius: 6px;
+}
+
+.home-categories-overlay-allcourse {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: #0000003b;
+    border-radius: 6px;
+}
+
+.home-categories-card-allcourse {
+    /* padding-top: 20px; */
+    display: flex;
+}
+
+@media only screen and (max-width: 800px) {
+    .home-categories-choice1 {
+        overflow-x: scroll;
+        flex-basis: 40%;
+        flex-wrap: nowrap;
+        gap: 20px;
+
+    }
+
+    ::-webkit-scrollbar {
+        display: none;
+    }
+
+    .home-categories-subcategory-image {
+        /* background-color: red; */
+        flex-basis: 34%;
+
+    }
+
+    .home-categories-subcategory-image img {
+        width: 400px;
+    }
+
+    .home-categories-subcategory-allcourse-image {
+        display: flex;
+        flex-direction: row;
+        /* width: 100%; */
+        height: 30px;
+        box-shadow: none;
+    }
+    .home-categories-subcategory-image {
+        box-shadow: none;
+    }
+
+
+    .home-categories-choice1-allcourse {
+        flex-wrap: nowrap;
+        flex-direction: column;
+    }
+
+    .home-categories-allcourse-titleBtn {
+
+        flex-direction: column; 
+    }
+
+    .home-categories-subcategory-allcourse-image img {
+        height: 80px;
+        width: 90px;
+        
+    }
+
+    .home-categories-overlay-allcourse {
+        display: none;
+    }
+
+    .home-categories-allcourse-designbtn {
+       /* padding: unset; */
+       width: 90px;
+       margin-left: 10px;
+       margin-top: 10px;
+     
+    }
+    .home-categories-seeall
+    {
+        display: none;
+    }
+    .home-categories-Body 
+    {
+        overflow-x: scroll;
+        flex-wrap: nowrap;
+    }
+    .home-categories-section2 ,
+    .home-categories-Body
+    {
+        padding: unset;
+    }
+
+
 }
