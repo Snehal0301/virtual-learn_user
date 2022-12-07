@@ -68,7 +68,7 @@
   opacity: 0.3;
 }
 
-.header-profilePic > img {
+.header-profilePic>img {
   width: 40px;
   height: 40px;
   border-radius: 50%;
@@ -359,7 +359,7 @@
   color: var(--filterChipFontClr) !important;
 }
 
-.headerSearch-filterModalButtons > button {
+.headerSearch-filterModalButtons>button {
   position: relative !important;
   margin: 0;
   display: flex;
@@ -374,6 +374,7 @@
   font-weight: 700;
   font-size: 18px;
   line-height: 35px;
+  border-radius: 6px;
   padding: 4px 38px !important;
 }
 
@@ -395,4 +396,21 @@
   justify-content: center;
   gap: 24px;
   margin-top: 40px;
+}
+
+    .drawer-profile-body {
+      position: relative;
+      overflow: scroll;
+    }
+
+
+/* custom styleing */
+
+@media only screen and (max-width:760px) {
+
+  nav.EZDrawer__container {
+    width: 100vw !important;
+  }
+
+
 }

@@ -5,6 +5,7 @@ import type { AxiosError } from 'axios';
 const initialState = {
   message: '',
   data: [],
+  headers: [],
   isSuccess: false,
   isRejected: false,
   loading: false,
@@ -15,8 +16,8 @@ export const login: any = createAsyncThunk(
   async (arg: any, { rejectWithValue }) => {
     try {
       const fetchedData: any = await axios.request({
-        method: 'PUT',
-        url: 'https://virtual-learning-app-java.herokuapp.com/login',
+        method: 'post',
+        url: 'http://virtuallearnapp2-env.eba-wrr2p8zk.ap-south-1.elasticbeanstalk.com/login',
         data: arg,
       });
 
@@ -43,6 +44,7 @@ export const loginSlice = createSlice({
     builder.addCase(login.fulfilled, (state, action) => {
       state.loading = false;
       state.data = action.payload;
+      state.headers = action;
       state.isSuccess = true;
     });
     builder.addCase(login.rejected, (state, action) => {

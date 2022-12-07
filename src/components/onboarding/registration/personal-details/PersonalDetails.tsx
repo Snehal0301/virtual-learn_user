@@ -58,7 +58,7 @@ const PersonalDetails = () => {
               value={values.mobileNumber}
               onChange={handleChange}
               onBlur={handleBlur}
-            // maxLength={10}
+              // maxLength={10}
             />
             <label htmlFor="mobileNumber">Mobile Number</label>
             {errors.mobileNumber && touched.mobileNumber ? (
@@ -194,7 +194,9 @@ const PersonalDetails = () => {
             ) : null}
           </div>
 
-          <button type="submit" className='persondetails-button'>Verify</button>
+          <button type="submit" className="persondetails-button">
+            Register
+          </button>
         </form>
       </div>
     </div>

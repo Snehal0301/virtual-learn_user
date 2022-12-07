@@ -72,11 +72,6 @@
 
 .notifyContent {
     width: 100%;
-    
-}
-
-.notifycontainer {
-    
 }
 
 .notifyImage {
@@ -109,16 +104,14 @@
     line-height: 21px;
     color: #373737;
 }
-.notificationrect
-{
+
+.notificationrect {
     margin-bottom: 10px;
     background-color: rgba(240, 248, 255, 0.53);
     display: flex;
-   
-
 }
-.notifyImage >img 
-{
+
+.notifyImage>img {
     border-radius: 50%;
     height: 43px;
     width: 43px;

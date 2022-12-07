@@ -27,14 +27,20 @@ const ChangePassword = () => {
                 </div>
                 <div className="privacy-policy-phrases">
                     <form className='change-password-form'>
-                        <input type="text" id="fullName" name="fullName" placeholder=" " />
-                        <label for="fullName">Current Password</label>
-                        <input type="email" id="email" name="email" placeholder=" " />
-                        <label for="email">New Password</label>
-                        <input type="password" id="password" name="password" placeholder=" " />
-                        <label for="password">Confirm Password</label>
+                        <input className='change-password-form-input' type="password" id="fullName" name="fullName" placeholder=" " />
+                        <label className='change-password-form-label' for="fullName">Current Password</label>
+                        <input className='change-password-form-input' type="password" id="email" name="email" placeholder=" " />
+                        <label className='change-password-form-label' for="email">New Password</label>
+                        <input className='change-password-form-input' type="password" id="password" name="password" placeholder=" " />
+                        <label className='change-password-form-label' for="password">Confirm Password</label>
                         <button type='button' className='change-password-reset-btn'>Reset Password</button>
                     </form>
+                    {/* <form className='change-password-form'>
+                        <input type="password" placeholder='Current Password' />
+                        <input type="password" placeholder='New Password' />
+                        <input type="password" placeholder='Confirm Password' />
+                        <button type='button' className='change-password-reset-btn'>Reset Password</button>
+                    </form> */}
                 </div>
                 {/* <div className="toast">
                     <div className="warning-content">
