@@ -1261,8 +1261,6 @@ export const videoPlayActive = (
   </svg>
 );
 
-<<<<<<< HEAD
-)
 export const start_timeIcon = (
   <svg width="11" height="12" viewBox="0 0 26 27" fill="none" xmlns="http://www.w3.org/2000/svg">
     <path opacity="0.5" d="M19.9071 3.45433L22.6684 5.72879C22.8585 5.88544 23.0895 5.96188 23.3192 5.96188C23.6105 5.96188 23.8996 5.83893 24.1007 5.60072C24.4604 5.17468 24.4024 4.54126 23.971 4.18599L21.2097 1.91148C20.7784 1.5562 20.1371 1.6135 19.7773 2.0396C19.4176 2.46564 19.4757 3.099 19.9071 3.45433Z" fill="#7A7A7A" stroke="#7A7A7A" stroke-width="0.3" />
@@ -1284,7 +1282,6 @@ export const start_pauseIcon = (
   </svg>
 
 )
-=======
 export const whiteStepperIcon = (
   <svg
     width="8"
@@ -1296,7 +1293,6 @@ export const whiteStepperIcon = (
     <circle cx="4" cy="4" r="4" fill="white" />
   </svg>
 );
->>>>>>> a268ec1b452dde871a93374252632a430a089628
 
 export const virtualLearn_logo = (
   <svg width={176} height={35} fill="none" xmlns="http://www.w3.org/2000/svg">
