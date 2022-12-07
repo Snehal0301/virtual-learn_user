@@ -15,18 +15,18 @@ const Terms = () => {
         <div className="drawer-profile-clear" onClick={handleClick}>
           {arrowRight}
         </div>
-        <div className="settings-settings-text">
+        <div className="terms-services-text">
           <p>Terms of Services</p>
         </div>
       </div>
-      <div className="privacy-policy-phrases">
-        <div className="para-1">
+      <div className="terms-phrases">
+        <div className="terms-para-1">
           <p>
             These Terms of Services ("Terms") were last updated on September 16,
             2020.
           </p>
         </div>
-        <div className="para-2">
+        <div className="terms-para-2">
           <p>
             VirtualLearn’s mission is to improve lives through learning. We
             enable anyone anywhere to create and share educational courses
@@ -39,7 +39,7 @@ const Terms = () => {
             services (“Services”).
           </p>
         </div>
-        <div className="para-3">
+        <div className="terms-para-3">
           <p>
             If you publish a course on the VirtualLearn platform, you must also
             agree to the Instructor Terms. We also provide details regarding our

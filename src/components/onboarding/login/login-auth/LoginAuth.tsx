@@ -9,12 +9,11 @@ import { useEffect, useState } from 'react';
 
 const LoginAuth = () => {
   const [submitted, setSubmitted] = useState(false);
-
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const loginResponse = useSelector((state: any) => state.login);
 
-  const showError = (msg: any) =>{
+  const showError = (msg: any) => {
     toast(
       <div className="loginAuth-showError">
         <div className="loginAuth-showErrorIcon">
@@ -33,8 +32,8 @@ const LoginAuth = () => {
         draggable: true,
       }
     );
-  }
-  
+  };
+
   // showError()
 
   const submitHandler = (e: any) => {
@@ -47,6 +46,7 @@ const LoginAuth = () => {
     if (e.target.username.value !== '' && e.target.password.value !== '') {
       console.log('credentials', credentials);
       dispatch(login(credentials));
+
       // localStorage.setItem('auth', 'true')
       // navigate('/')
       // window.location.reload()
@@ -59,16 +59,26 @@ const LoginAuth = () => {
   }, [loginResponse && loginResponse.isRejected && loginResponse.message]);
 
   useEffect(() => {
-    console.log(
-      'login message',
-      loginResponse && loginResponse.data && loginResponse.data.data
-    );
+    console.log('login message', loginResponse && loginResponse.data.headers);
+
+    if (
+      loginResponse &&
+      loginResponse.data &&
+      loginResponse.data.data &&
+      loginResponse.data.data.status &&
+      loginResponse.data.data.status === 'Login successfully'
+    ) {
+      localStorage.setItem('auth', 'true');
+      navigate('/');
+      // window.location.reload();
+    }
+
     localStorage.setItem(
       'Token',
       loginResponse &&
         loginResponse.data &&
         loginResponse.data.data &&
-        loginResponse.data.data.jwtToken
+        loginResponse.data.headers.jwtToken
     );
   }, [loginResponse && loginResponse.isSuccess && loginResponse.data]);
 

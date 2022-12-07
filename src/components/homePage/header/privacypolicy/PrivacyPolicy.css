@@ -11,7 +11,7 @@
 .drawer-profile-clear {
   cursor: pointer;
 }
-.settings-settings-text p {
+.privacy-policy-text p {
   font-family: "Proxima Nova Soft";
   font-style: normal;
   font-weight: 700;
@@ -21,6 +21,7 @@
 }
 .privacy-policy-phrases{
     margin: 6% 6%;
+    overflow: scroll;
 }
 
 .para-1{

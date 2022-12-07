@@ -1,0 +1,232 @@
+.quizResults {
+  position: absolute;
+  top: -4px;
+  display: flex;
+  left: 0;
+  right: 0;
+  flex-direction: column;
+  align-items: center;
+  /* width: 100vw; */
+}
+
+.quizResults-header {
+  position: fixed;
+  background: var(--primaryClr);
+  padding: 50px 10%;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  width: 100%;
+  z-index: 99;
+}
+.quizResults-headerTitle {
+  font-family: 'Biko';
+  font-style: normal;
+
+  font-size: 16px;
+  line-height: 30px;
+  color: var(--primaryFontClr);
+}
+
+.quizResults-headerBody {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 20px;
+}
+
+.quizResults-headerBodyResultMarks {
+  padding: 20px;
+  background-color: var(--yellowClr);
+  border-radius: 4px;
+  font-family: 'Biko';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 36px;
+  line-height: 40px;
+  color: var(--primaryFontClr);
+}
+
+.quizResults-headerBodyContentsChapterName {
+  font-style: normal;
+  font-weight: 700;
+  font-size: 30px;
+  line-height: 26px;
+  color: var(--primaryFontClr);
+  padding-bottom: 10px;
+}
+
+.quizResults-headerBodyContentsUnitName {
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 20px;
+  color: var(--primaryFontClr);
+}
+
+.quizResults-headerBodyContentsResults {
+  display: flex;
+  flex: 100%;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 20px 24px;
+  background: var(--primaryFontClr);
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.07);
+  border-radius: 6px;
+  position: absolute;
+  right: 0;
+  left: 0;
+  top: 130%;
+}
+
+.quizResults-headerBodyContentsResultsBody {
+  flex-basis: 33.33%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+.quizResults-bodyList {
+  width: 100%;
+  padding: 0px 16% 34px 16%;
+}
+
+.quizResults-bodyListItem {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 0;
+  border-bottom: 0.5px solid var(--indexClr);
+}
+.quizResults-headerBodyContentsResultsBodyTitle {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  text-align: center;
+  color: var(--resultFontClr);
+}
+.quizResults-headerBodyContents {
+  position: relative;
+}
+.quizResults-headerBodyContentsResultsBodyResult {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 30px;
+  text-align: center;
+  color: var(--blueFont);
+}
+
+.quizResults-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  width: max-content;
+  position: relative;
+  /* top: 64px; */
+  /* position: absolute; */
+  top: 300px;
+  width: 100%;
+  padding: 0 10%;
+}
+
+.container {
+  height: 256px;
+  position: relative;
+}
+.inner {
+  height: 100%;
+  overflow: scroll;
+}
+.full-height {
+  position: absolute;
+  left: 0;
+  width: 20%;
+  top: 0;
+  height: 100%;
+}
+
+.quizResults-bodyListTitle {
+  font-style: normal;
+  font-weight: 500;
+  padding: 0 16%;
+  font-size: 20px;
+  line-height: 24px;
+  color: var(--indexClr);
+  margin-bottom: 30px;
+}
+
+.quizResults-bodyListItemDrawer {
+  cursor: pointer;
+}
+
+.quizResults-bodyListItemContent {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.quizResults-bodyListItemContentQuestion {
+  font-style: normal;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 24px;
+  color: var(--filterChipFontClr);
+}
+
+.quizResults-bodyListItemContentAnswer {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 24px;
+}
+
+.quizResults-bodyListItemContentAnswerGreen {
+  color: var(--correctGreen);
+}
+.quizResults-bodyListItemContentAnswerRed {
+  color: var(--error);
+}
+
+.quizResults-Drawer {
+  width: 50vw !important;
+  z-index: 999999 !important;
+  padding-top: 100px;
+}
+
+.quizDrawerCloseIcon {
+  cursor: pointer;
+  position: absolute;
+  right: 50px;
+  top: 0;
+  top: 100px;
+}
+
+.quizResults-DrawerBody {
+  padding: 10% 12%;
+}
+
+.quizAns-bodyOptionIconCorrect {
+  background-color: var(--correctGreen);
+  color: var(--primaryFontClr);
+}
+
+.quizAns-bodyOptionIconWrong {
+  background-color: var(--error);
+  color: var(--primaryFontClr);
+}
+
+.quizAns-bodyOptionIcon {
+  background: var(--primaryFontClr);
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  border: 1px solid #c5c5c5;
+  justify-content: center;
+}
