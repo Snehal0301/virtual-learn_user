@@ -1,35 +1,47 @@
-import '../login-auth/LoginAuth.css'
-import * as yup from 'yup'
-import 'yup-phone'
-import { useState } from 'react'
-import { useDispatch } from 'react-redux'
-import { otpPage } from '../../../../redux/reducers/Conditions'
-import { useNavigate } from 'react-router-dom'
+import '../login-auth/LoginAuth.css';
+import * as yup from 'yup';
+import 'yup-phone';
+import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { otpPage } from '../../../../redux/reducers/Conditions';
+import { useNavigate } from 'react-router-dom';
+import { mobileBackBtn } from '../../../../utils/svgIcons';
 
 const LoginForgotPW = () => {
-  const [invalidPhone, setInvalidPhone] = useState(false)
-  const [mobileNum, setMobileNum] = useState('')
+  const [invalidPhone, setInvalidPhone] = useState(false);
+  const [mobileNum, setMobileNum] = useState('');
 
-  const dispatch = useDispatch()
-  const navigate = useNavigate()
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-  const phoneSchema = yup.string().phone().required()
+  const phoneSchema = yup.string().phone().required();
   const phoneNumValidation = (e: any) => {
-    setMobileNum(e.target.value)
-    ;(async () => {
-      setInvalidPhone(await phoneSchema.isValid(e.target.value)) // → true
-    })()
-  }
+    setMobileNum(e.target.value);
+    (async () => {
+      setInvalidPhone(await phoneSchema.isValid(e.target.value)); // → true
+    })();
+  };
 
   const submitHandler = (e: any) => {
-    e.preventDefault()
-    const mobileNum = e.target.mobileNum.value
-    console.log('mobile no', mobileNum)
-    dispatch(otpPage(true))
-    navigate('/onboarding/otpVerification')
-  }
+    e.preventDefault();
+    const mobileNum = e.target.mobileNum.value;
+    console.log('mobile no', mobileNum);
+    dispatch(otpPage(true));
+    navigate('/onboarding/otpVerification');
+  };
   return (
     <div className="loginAuth">
+      <div className="loginAuth-backButton">
+        <div
+          onClick={() => {
+            navigate('login');
+          }}
+          style={{ width: '28px', cursor: 'pointer' }}
+        >
+          {' '}
+          {mobileBackBtn}
+        </div>
+      </div>
       <div className="loginAuth-title">Forgot Password</div>
       <div className="loginAuth-text">
         Please enter your phone number. You will receive a code to create a new
@@ -65,7 +77,7 @@ const LoginForgotPW = () => {
         </form>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default LoginForgotPW
+export default LoginForgotPW;

@@ -1,17 +1,17 @@
-import './onboarding.css'
-import { Slide } from 'react-slideshow-image'
-import { onboardingLogo, virtualLearn_logo } from '../../utils/svgIcons'
-import { Outlet } from 'react-router-dom'
-import WelcomeScreen from '../../components/onboarding/welcome/welcome'
-import LoginVerfication from '../../components/onboarding/login/login-verification/login-otp/LoginOtp'
-import LoginPassword from '../../components/onboarding/login/login-verification/login-password/LoginPassword'
-import LoginAuth from '../../components/onboarding/login/login-auth/LoginAuth'
-import LoginForgotPW from '../../components/onboarding/login/login-forgotPW/LoginForgotPW'
-import PersonalDetails from '../../components/onboarding/registration/personal-details/PersonalDetails'
-import RegistrationForm from '../../components/onboarding/registration/registrationform/RegistrationForm'
+import './onboarding.css';
+import { Slide } from 'react-slideshow-image';
+import { onboardingLogo, virtualLearn_logo } from '../../utils/svgIcons';
+import { Outlet } from 'react-router-dom';
+import WelcomeScreen from '../../components/onboarding/welcome/welcome';
+import LoginVerfication from '../../components/onboarding/login/login-verification/login-otp/LoginOtp';
+import LoginPassword from '../../components/onboarding/login/login-verification/login-password/LoginPassword';
+import LoginAuth from '../../components/onboarding/login/login-auth/LoginAuth';
+import LoginForgotPW from '../../components/onboarding/login/login-forgotPW/LoginForgotPW';
+import PersonalDetails from '../../components/onboarding/registration/personal-details/PersonalDetails';
+import RegistrationForm from '../../components/onboarding/registration/registrationform/RegistrationForm';
 
 const Onboarding = () => {
-  const indicators = () => <div className="indicator"></div>
+  const indicators = () => <div className="indicator"></div>;
   return (
     <div className="onboarding">
       <div className="onboarding-entryMessage">
@@ -70,7 +70,7 @@ const Onboarding = () => {
       </div>
       <div className="onboarding-detailsContainer">
         <div className="onboarding-detailsLogo">{onboardingLogo}</div>
-        <div className="onboarding-detailsMobileLogo">{virtualLearn_logo}</div>
+
         <div className="onboarding-detailsBody">
           {/* <WelcomeScreen /> */}
           {/* <LoginVerfication/> */}
@@ -83,7 +83,7 @@ const Onboarding = () => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Onboarding
+export default Onboarding;
