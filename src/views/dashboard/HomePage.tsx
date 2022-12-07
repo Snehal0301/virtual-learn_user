@@ -24,11 +24,11 @@ const HomePage = () => {
         {/* <HomeCategoriesDesign/> */}
         {/* <Start /> */}
 
-        <Quiz />
+        {/* <Quiz /> */}
         {/* <QuizSuccess /> */}
-        {/* <QuizResults /> */}
+        <QuizResults />
         {/* <CourseCompleted /> */}
-        <MyCourse />
+        {/* <MyCourse /> */}
       </div>
     </div>
   );
