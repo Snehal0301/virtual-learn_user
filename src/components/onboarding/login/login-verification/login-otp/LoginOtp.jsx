@@ -58,7 +58,6 @@ const LoginVerfication = () => {
         if (res.message === "Verified") {
           dispatch(registerPersonalDetails(true));
           navigate("/onboarding/personalDetails");
-          dispatch(registerOtp(false));
         } else if (res.message === "Input field is incorrect") {
           dispatch(registerPersonalDetails(false));
           showError(res.message);
