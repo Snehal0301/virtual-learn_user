@@ -8,7 +8,7 @@ ul.breadcrumb-categories li {
   font-size: 18px;
 }
 
-ul.breadcrumb-categories li + li:before {
+ul.breadcrumb-categories li+li:before {
   padding: 8px;
   color: var(--greyFont);
   content: "/\00a0";
@@ -24,29 +24,34 @@ ul.breadcrumb-categories li a:hover {
   color: #01447e;
   /* text-decoration: underline; */
 }
+
 .categories-body {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
+
 .categories-body-choose {
   font-family: "Proxima Nova Soft";
   font-style: normal;
   font-weight: 400;
-  font-size: 30px;
-  text-align: center;
+  font-size: 26px;
+  /* text-align: center; */
   color: #747474;
 }
 
 .categories-body-display {
-  display: grid;
-  grid-template-columns: auto auto auto auto auto;
+  /* display: grid; */
+  display: flex;
+  /* grid-template-columns: auto auto auto auto auto; */
   /* background-color: red; */
   width: 100%;
   gap: 10px;
   margin-top: 3em;
-  justify-content: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
 }
+
 .categoriesDisplay-home-parent {
   color: var(--chipFontclr);
   background-color: var(--primaryFontClr);
@@ -59,12 +64,43 @@ ul.breadcrumb-categories li a:hover {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width:9rem;
-  height: 100px;
+  width: 9rem;
+  height: 125px;
   /* height: auto; */
-  gap:15px;
+  gap: 15px;
 }
+
 .categories-home-chipBorder {
   border: 1px solid var(--chipBorder);
   color: var(--filterChipFontClr) !important;
+  flex-basis: 19%;
+}
+
+.categories-home-Names {
+  width: max-content;
+}
+
+@media only screen and (max-width: 800px) {
+
+  .categories-body-display {}
+
+  .categories-home-chipBorder {
+    flex-basis: 31%;
+  }
+
+  ul.breadcrumb-categories li a {
+    
+    color: #2B2B2B;
+    font-family: Biko;
+    font-size: 26px;
+    font-weight: bold;
+    letter-spacing: 0;
+    line-height: 35px;
+  }
+  .categories-body-choose 
+  {
+    font-size: 20px;
+  }
+
+
 }
