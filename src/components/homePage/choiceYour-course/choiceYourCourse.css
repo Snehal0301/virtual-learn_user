@@ -43,6 +43,7 @@
 
 .choice-your-coursecategories-Name {
     padding-left: 0.5rem;
+    width: max-content;
 }
 
 .choice-your-course-allcourse {
@@ -141,6 +142,17 @@
     ::-webkit-scrollbar {
         display: none;
     }
+    .choice-your-course-choice1
+    {
+        flex-wrap: nowrap;
+        overflow-x: scroll;
+    }
+    .choice-your-coursesubcategory-image img 
+    {
+        width: 290px;
+    }
+
+
 
 
 }
