@@ -21,14 +21,14 @@ const LoginVerfication = () => {
   const changePass = useSelector((state) => state.loginConditions.passChange);
 
   const submitHandler = (e) => {
+    console.log("otp", OTP);
     e.preventDefault();
     if (location.pathname === "/onboarding/registerOtp") {
-      dispatch(registerPersonalDetails(true));
-
-      navigate("/onboarding/personalDetails");
+      // dispatch(registerPersonalDetails(true));
+      // navigate("/onboarding/personalDetails");
     } else {
-      dispatch(changePassword(true));
-      navigate("/onboarding/changePassword");
+      // dispatch(changePassword(true));
+      // navigate("/onboarding/changePassword");
     }
   };
 
