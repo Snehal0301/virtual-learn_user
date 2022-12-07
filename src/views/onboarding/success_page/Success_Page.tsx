@@ -10,7 +10,7 @@ const Success_Page = () => {
   const navigate = useNavigate()
 
   useEffect(() => {
-    dispatch(registerSuccess(true))
+    dispatch(registerSuccess(false))
   }, [])
   return (
     <div className="succesContainer">

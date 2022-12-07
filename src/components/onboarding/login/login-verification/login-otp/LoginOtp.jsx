@@ -30,9 +30,10 @@ const LoginVerfication = () => {
       }
       // dispatch(registerPersonalDetails(true));
       // navigate("/onboarding/personalDetails");
-    } else {
+    } else if (location.pathname === "/onboarding/otpVerification") {
       // dispatch(changePassword(true));
       // navigate("/onboarding/changePassword");
+      sendOtpServer(OTP, "/resetPassword");
     }
   };
 
@@ -55,12 +56,23 @@ const LoginVerfication = () => {
       .then((res) => res.json())
       .then((res) => {
         console.log("response", res);
-        if (res.message === "Verified") {
-          dispatch(registerPersonalDetails(true));
-          navigate("/onboarding/personalDetails");
-        } else if (res.message === "Input field is incorrect") {
-          dispatch(registerPersonalDetails(false));
-          showError(res.message);
+        if (location.pathname === "/onboarding/registerOtp") {
+          if (res && res.message === "Verified") {
+            dispatch(registerPersonalDetails(true));
+            navigate("/onboarding/personalDetails");
+          } else if (res.message === "Input field is incorrect") {
+            dispatch(registerPersonalDetails(false));
+            showError(res.message);
+          }
+        }
+        if (location.pathname === "/onboarding/otpVerification") {
+          if (res && res.message === "Verified") {
+            dispatch(changePassword(true));
+            navigate("/onboarding/changePassword");
+          } else {
+            dispatch(registerPersonalDetails(false));
+            showError(res.message);
+          }
         }
       });
   };
