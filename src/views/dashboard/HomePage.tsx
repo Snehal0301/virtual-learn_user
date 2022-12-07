@@ -22,8 +22,8 @@ const HomePage = () => {
         {/* <Start /> */}
         {/* <ChoiceYourCourse/> */}
         {/* <HomeCategoriesDesign/> */}
-        {/* <Start /> */}
-        <Categories/>
+        <Start />
+        {/* <Categories/> */}
         {/* <Quiz /> */}
         {/* <QuizSuccess /> */}
         {/* <QuizResults /> */}
