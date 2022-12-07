@@ -11,6 +11,8 @@ import {
   registerPersonalDetails,
   registerSuccess,
 } from '../../../../redux/reducers/Conditions'
+import { ToastContainer, toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 
 const PersonalDetails = () => {
   const [personaldata, setpersonaldata] = useState({})
@@ -36,17 +38,71 @@ const PersonalDetails = () => {
     },
     validationSchema: signupSchema,
     onSubmit: (values: any, action: any) => {
-      // console.log(values)
+      console.log(values)
       setpersonaldata(values)
       action.resetForm()
-      dispatch(registerSuccess(true))
-      navigate('/accountCreatedSuccessfully')
+      // dispatch(registerSuccess(false))
+      // navigate('/accountCreatedSuccessfully')
+      const data = {
+        mobileNumber: values.mobileNumber,
+        fullName: values.fullName,
+        userName: values.UserName,
+        email: values.email,
+        password: values.password,
+      }
+
+      sendUserdata(data)
     },
   })
 
   useEffect(() => {
     dispatch(registerOtp(false))
   }, [])
+
+  const sendUserdata = (data: any) => {
+    fetch(
+      `http://virtuallearnapp2-env.eba-wrr2p8zk.ap-south-1.elasticbeanstalk.com/newUser/register`,
+      {
+        method: 'POST',
+        headers: {
+          Accept: 'application/json, text/plain, */*',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      },
+    )
+      .then((res) => res.json())
+      .then((res) => {
+        console.log('res', res)
+        if (res.message !== 'User Created') {
+          showError(res.message)
+        } else if (res.message === 'User Created') {
+          dispatch(registerSuccess(true))
+          navigate('/accountCreatedSuccessfully')
+        }
+      })
+  }
+
+  const showError = (msg: any) => {
+    toast(
+      <div className="loginAuth-showError">
+        <div className="loginAuth-showErrorIcon">
+          <img
+            src={require('../../../../assets/icons/icn_invalid error.png')}
+            alt="invalid"
+          />
+        </div>
+        <div className="loginAuth-showErrorMessage">{msg}</div>
+      </div>,
+      {
+        position: 'bottom-right',
+        autoClose: 5000,
+        hideProgressBar: true,
+        pauseOnHover: true,
+        draggable: true,
+      },
+    )
+  }
 
   return (
     <div className="personaldetails-outerRectangle">
@@ -210,6 +266,7 @@ const PersonalDetails = () => {
           </button>
         </form>
       </div>
+      <ToastContainer />
     </div>
   )
 }
