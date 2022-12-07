@@ -204,9 +204,9 @@
 .quizDrawerCloseIcon {
   cursor: pointer;
   position: absolute;
-  right: 50px;
+  right: 17px;
   top: 0;
-  top: 100px;
+  top: 13px;
 }
 
 .quizResults-DrawerBody {
@@ -286,19 +286,27 @@
     padding: 15px;
   }
   .quizResults-DrawerBody {
-    padding: 10% 12%;
+    padding: 12% 10%;
     overflow: auto;
     height: 100%;
   }
   .quizAns-bodyQuestion {
-    font-weight: 600;
-    font-size: 22px;
+    font-weight: 600 !important;
+    font-size: 22px !important;
   }
   .quizAns-bodyOptionText {
-    font-size: 18px;
+    font-size: 18px !important;
   }
   .quizAns-bodyOptions {
-    padding: 16px 14px;
-    margin-bottom: 17px;
+    padding: 16px 14px !important;
+    margin-bottom: 17px !important;
+  }
+  .quizResults-Drawer {
+    height: 50vh !important;
+
+    width: 100vw !important;
+    top: 50% !important;
+    padding-top: 0 !important;
+    border-radius: 10px 10px 0 0 !important;
   }
 }
