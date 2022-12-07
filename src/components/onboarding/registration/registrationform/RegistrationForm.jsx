@@ -49,7 +49,7 @@ const RegistrationForm = () => {
           showError(res.message);
         } else {
           dispatch(registerOtp(false));
-          navigate("/onboarding");
+          showError(res.message);
         }
       });
   };
