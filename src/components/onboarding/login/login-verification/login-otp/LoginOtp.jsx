@@ -33,7 +33,7 @@ const LoginVerfication = () => {
     } else if (location.pathname === "/onboarding/otpVerification") {
       // dispatch(changePassword(true));
       // navigate("/onboarding/changePassword");
-      sendOtpServer(OTP, "/resetPassword");
+      sendOtpServer(OTP, "/newUser/verify");
     }
   };
 
@@ -133,10 +133,12 @@ const LoginVerfication = () => {
           />
           {/* <ResendOTP onResendClick={() => console.log("Resend clicked")} /> */}
           <p className="resend-otp">
-            Didn’t receive a code? <span> Resend</span>
+            Didn’t receive a code? <span onClick={() => {}}> Resend</span>
           </p>
         </div>
-        <button className="verify-otp-button">Verify</button>
+        <button className="verify-otp-button" onClic>
+          Verify
+        </button>
       </form>
       <ToastContainer />
     </div>
