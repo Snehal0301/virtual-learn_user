@@ -1,11 +1,13 @@
-import '../registrationform/RegistrationForm.css';
-import React from 'react';
-import { Formik, useFormik } from 'formik';
-import { useNavigate } from 'react-router-dom';
-import { facebook, google } from '../../../../utils/svg';
-import { mobilenumberSchema } from './schema/MobileSchema';
-import { useDispatch } from 'react-redux';
-import { registerOtp } from '../../../../redux/reducers/Conditions';
+import "../registrationform/RegistrationForm.css";
+import React from "react";
+import { Formik, useFormik } from "formik";
+import { useNavigate } from "react-router-dom";
+import { facebook, google } from "../../../../utils/svg";
+import { mobilenumberSchema } from "./schema/MobileSchema";
+import { useDispatch } from "react-redux";
+import { registerOtp } from "../../../../redux/reducers/Conditions";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const RegistrationForm = () => {
   const navigate = useNavigate();
@@ -18,12 +20,60 @@ const RegistrationForm = () => {
       },
       validationSchema: mobilenumberSchema,
       onSubmit: (values, action) => {
-        console.log(values);
         action.resetForm();
-        dispatch(registerOtp(true));
-        navigate('/onboarding/registerOtp');
+        mobileReg(values.Mobilenumber);
       },
     });
+
+  const mobileReg = (mobileNum) => {
+    fetch(
+      "http://virtuallearnapp2-env.eba-wrr2p8zk.ap-south-1.elasticbeanstalk.com/newUser/continue",
+      {
+        method: "POST",
+        headers: {
+          Accept: "application/json, text/plain, */*",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ mobileNumber: mobileNum }),
+      }
+    )
+      .then((res) => res.json())
+      .then((res) => {
+        console.log("response", res);
+        if (res.message === "OTP Valid For 2 Minutes") {
+          dispatch(registerOtp(true));
+          navigate("/onboarding/registerOtp");
+          localStorage.setItem("regMobileNum", mobileNum);
+        } else if (res.message === "Please Enter Valid Phone Number") {
+          dispatch(registerOtp(false));
+          showError(res.message);
+        } else {
+          dispatch(registerOtp(false));
+          showError(res.message);
+        }
+      });
+  };
+
+  const showError = (msg) => {
+    toast(
+      <div className="loginAuth-showError">
+        <div className="loginAuth-showErrorIcon">
+          <img
+            src={require("../../../../assets/icons/icn_invalid error.png")}
+            alt="invalid"
+          />
+        </div>
+        <div className="loginAuth-showErrorMessage">{msg}</div>
+      </div>,
+      {
+        position: "bottom-right",
+        autoClose: 5000,
+        hideProgressBar: true,
+        pauseOnHover: true,
+        draggable: true,
+      }
+    );
+  };
 
   return (
     <div className="registration-form">
@@ -68,10 +118,10 @@ const RegistrationForm = () => {
           <span
             className="login-text"
             onClick={() => {
-              navigate('/onboarding/login');
+              navigate("/onboarding/login");
             }}
           >
-            {' '}
+            {" "}
             Login
           </span>
         </span>
@@ -80,6 +130,7 @@ const RegistrationForm = () => {
           <button className="google-button">{google}</button>
         </div>
       </div>
+      <ToastContainer />
     </div>
   );
 };
