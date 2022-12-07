@@ -43,6 +43,7 @@ const RegistrationForm = () => {
         if (res.message === "OTP Valid For 2 Minutes") {
           dispatch(registerOtp(true));
           navigate("/onboarding/registerOtp");
+          localStorage.setItem("regMobileNum", mobileNum);
         } else if (res.message === "Please Enter Valid Phone Number") {
           dispatch(registerOtp(false));
           showError(res.message);
