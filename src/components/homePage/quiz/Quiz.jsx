@@ -48,7 +48,7 @@ const Quiz = () => {
                 precision={3}
                 renderer={renderer}
               /> */}
-            mins remaining
+            remaining
           </div>
         </div>
         <div

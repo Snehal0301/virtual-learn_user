@@ -19,11 +19,11 @@ const HomePage = () => {
       <div className="homePageBody">
         {/* <Start /> */}
         {/* <Categories/> */}
-        {/* <Quiz /> */}
+        <Quiz />
         {/* <QuizSuccess /> */}
         {/* <QuizResults /> */}
         {/* <CourseCompleted /> */}
-        <MyCourse/>
+        {/* <MyCourse /> */}
       </div>
     </div>
   );
