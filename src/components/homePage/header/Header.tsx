@@ -431,7 +431,7 @@ const Header = () => {
         <Drawer
           open={profileDrawerState}
           onClose={handleProfileClick}
-          direction="right"
+        direction="right"
           enableOverlay={true}
           overlayOpacity={0.7}
           style={{
