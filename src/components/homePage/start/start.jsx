@@ -10,8 +10,14 @@ import 'react-carousel-responsive/dist/styles.css';
 
 
 const Start = () => {
+  const [alldata, setalldata] = useState(false)
 
-  const startCourseData = [
+  const handleTabClick = (id) =>
+  {
+    setalldata(true)
+  }
+
+  const startCourseData = [ 
     {
 
       id: 1,
@@ -53,7 +59,8 @@ const Start = () => {
       time: "2:23:24",
       btntext: "Design"
     },
-    
+  
+  
     
 
   ]
@@ -71,7 +78,7 @@ const Start = () => {
     'Photography',
 
   ];
-  const [activeSlide, setActiveSlide] = useState(0);
+
 
   const indicators = () => <div className="indicator"></div>
   return (
@@ -87,7 +94,7 @@ const Start = () => {
         }
      
       </Slider>
-      <div className='start-course-section2'>
+      <div className='start-course-section2-first'>
         <div className='start-ongoing-courses'>Ongoing courses</div>
         <div className='start-seeall'>See All</div>
       </div>
@@ -97,7 +104,10 @@ const Start = () => {
             startCourseData.map(item =>
             (
               <div className='start-course1-image'>
+                <div className='start-image-ongoing'>
                 <img src={item.image} alt="" />
+                <div className='start-image-sub'>ongoing</div>
+                </div>
                 <div className='start-course-overlay'></div>
                 <div className='start-title-container'>
                   <div className='start-title-chapter'>
@@ -146,10 +156,18 @@ const Start = () => {
         <div className='start-seeall'>See All</div>
       </div>
       <div className='start-choice-course-subcategory'>
-        <div className='start-subcategory-all'>All</div>
-        <div className='start-subcategory-all'>Popular</div>
-        <div className='start-subcategory-all'>Newest</div>
+        <Tabs>
+          <TabList>
+           <Tab onClick={()=>handleTabClick(1)}><div className='start-subcategory-all'>All</div></Tab>
+           <Tab><div className='start-subcategory-all'>Popular</div></Tab>
+           <Tab><div className='start-subcategory-all'>Newest</div></Tab>
+        </TabList>
+        </Tabs>
       </div>
+      {alldata ?
+      (
+
+      <div>
       <div className='start-card'>
         <div className='start-choice1'>
           {
@@ -173,6 +191,10 @@ const Start = () => {
           }
         </div>
       </div>
+      </div>
+      ):
+      null
+}
       <div className='start-course-section2'>
         <div className='start-ongoing-courses'>Top courses in Business</div>
         <div className='start-seeall'>See All</div>

@@ -56,6 +56,7 @@
     padding-top: 15px;
     display: flex;
 }
+
 .start-card2 {
     display: flex;
 }
@@ -96,6 +97,11 @@
 }
 
 .start-course-section2 {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 70px;
+}
+.start-course-section2-first {
     display: flex;
     justify-content: space-between;
     padding-top: 70px;
@@ -184,6 +190,7 @@
 
 .start-course-categories-Name {
     padding-left: 1rem;
+    width: max-content;
 }
 
 .start-choice-course-subcategory {
@@ -319,16 +326,129 @@
 
 .react-carousel-responsive__track {
 
-    gap: 20px !important;
+    gap: 0px !important;
 }
 
 .start-map-image>img {
     width: 100%;
     border-radius: 6px;
 }
+
+.start-image-sub {
+    display: none;
+}
+.start-image-ongoing
+{
+    position: relative;
+}
+.start-image-sub
+{
+    position: absolute;
+    top: 8px;
+    color: var(--primaryFontClr);
+    z-index: 1;
+    left: 19px;
+    display: none;
+    font-size: 14px;
+    font-weight: 500;
+}
+.react-tabs__tab-list {
+    /* border-bottom: 1px solid #aaa; */
+    margin: 0 0 10px;
+    padding: 0;
+    border-bottom: none;
+}
+
 @media only screen and (max-width: 800px) {
-    .start-card2{
-        overflow: scroll;
+    .start-course1,
+    .start-choice1
+     {
+        flex-wrap: nowrap;
+        overflow-x: scroll;
+        /* flex-basis: 40%; */
+        gap: 20px;
+       
+    }
+    .start-choice1
+    {
+        /* padding-top: 34px; */
+    }
+
+    ::-webkit-scrollbar {
+        display: none;
+    }
+
+    .start-course1-image img
+    {
+        height: 150px;
+        width: 250px;
+    }
+    .start-choice-subcategory-image img 
+
+     {
+        height: 150px;
+        width: 250px;
+    }
+
+    .start-map-image>img {
+        height: 150px;
+        width: 190px;
+    }
+
+    .start-title-container {
+        flex-direction: column;
+        padding: unset;
+        padding-left: 20px;
+        width: 100%;
+        justify-content: unset;
+        text-align: end;
+        align-items: flex-start;
+    }
+
+    .start-course-section2-title {
+        font-size: 14px;
+    }
+    
+
+    .start-course-button ,
+    .start-designbtn
+    {
+        margin-top: 10px;
+        padding: unset;
+        width: 70px;
+        height: 20px;
+        border-radius: 4px;
+    }
+
+    .start-course-section2 {
+        padding: unset;
+
+    }
+    .start-course-section2-first 
+    {
+        display: none;
     }
   
-  }
+    .start-image-sub {
+        display: flex;
+    }
+    .react-carousel-responsive__track
+    {
+        gap: 104px !important;
+    }
+    .start-course-categories-Body 
+    {
+        flex-wrap: nowrap;
+        overflow-x: scroll;
+    }
+    .react-carousel-responsive__inner {
+       
+        margin-bottom: 19px;
+    }
+
+
+
+
+
+
+}

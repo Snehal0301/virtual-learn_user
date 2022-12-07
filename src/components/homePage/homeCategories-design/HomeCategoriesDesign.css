@@ -347,14 +347,14 @@
     }
 
     .home-categories-subcategory-image img {
-        width: 400px;
+        width: 350px;
     }
 
     .home-categories-subcategory-allcourse-image {
         display: flex;
         flex-direction: row;
         /* width: 100%; */
-        height: 30px;
+        height: 30px; 
         box-shadow: none;
     }
     .home-categories-subcategory-image {
@@ -402,6 +402,7 @@
     .home-categories-Body
     {
         padding: unset;
+        
     }
 
 
