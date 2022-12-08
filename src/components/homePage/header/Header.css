@@ -459,7 +459,7 @@
 /* custom styleing */
 
 @media only screen and (max-width: 760px) {
-    form {
+    .mobile-header-search {
         padding: 1rem 0rem !important;
     }
 
@@ -483,10 +483,12 @@
 
     .header-search {
         transform: translateY(-100px);
+        padding: unset;
     }
 
     .header {
         background-color: white;
+        padding: 15px;
     }
 
     .mobile-logo,
