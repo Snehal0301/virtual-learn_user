@@ -1,16 +1,26 @@
-import './LoginPassword.css';
-import React from 'react';
-import { useFormik } from 'formik';
-import * as Yup from 'yup';
-import { useDispatch } from 'react-redux';
-import { passChangeSuccess } from '../../../../../redux/reducers/Conditions';
-import { useNavigate } from 'react-router-dom';
+import "./LoginPassword.css";
+import React, { useEffect } from "react";
+import { useFormik } from "formik";
+import * as Yup from "yup";
+import { useDispatch } from "react-redux";
+import {
+  changePassword,
+  otpPage,
+  passChangeSuccess,
+} from "../../../../../redux/reducers/Conditions";
+import { useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const initialValues = {
-  password: '',
-  cpassword: '',
+  password: "",
+  cpassword: "",
 };
 const LoginPassword = () => {
+  useEffect(() => {
+    dispatch(otpPage(false));
+  }, []);
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -18,24 +28,75 @@ const LoginPassword = () => {
     initialValues,
     validationSchema: Yup.object({
       password: Yup.string()
-        .min(6, 'Password must be 6 characters long')
-        .matches(/[0-9]/, 'Password must contain a number')
-        .matches(/[a-z]/, 'Password must contain a lowercase letter')
-        .matches(/[A-Z]/, 'Password must contain an uppercase letter')
-        .matches(/[^\w]/, 'Password must contain a special symbol')
-        .required('Please Enter your password'),
+        .min(6, "Password must be 6 characters long")
+        .matches(/[0-9]/, "Password must contain a number")
+        .matches(/[a-z]/, "Password must contain a lowercase letter")
+        .matches(/[A-Z]/, "Password must contain an uppercase letter")
+        .matches(/[^\w]/, "Password must contain a special symbol")
+        .required("Please Enter your password"),
       cpassword: Yup.string()
         .oneOf(
-          [Yup.ref('password  '), null],
+          [Yup.ref("password  "), null],
           'Must match "password" field value'
         )
-        .required('Please Enter your password'),
+        .required("Please Enter your password"),
     }),
     onSubmit: (values) => {
-      dispatch(passChangeSuccess(true));
-      navigate('/passwordChangedSuccessfully');
+      // dispatch(passChangeSuccess(true));
+      // navigate("/passwordChangedSuccessfully");
+
+      changePW(values);
     },
   });
+
+  const changePW = (data) => {
+    console.log("data", data);
+    fetch(
+      `http://virtuallearnapp2-env.eba-wrr2p8zk.ap-south-1.elasticbeanstalk.com/resetPassword`,
+      {
+        method: "POST",
+        headers: {
+          Accept: "application/json, text/plain, */*",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          mobileNumber: localStorage.getItem("regMobileNum"),
+          oneTimePassword: data.password,
+        }),
+      }
+    )
+      .then((res) => res.json())
+      .then((res) => {
+        console.log(res);
+        if (res.message === "Password Changed Successfully") {
+          dispatch(passChangeSuccess(true));
+          navigate("/passwordChangedSuccessfully");
+        } else {
+          showError(res.message);
+        }
+      });
+  };
+
+  const showError = (msg) => {
+    toast(
+      <div className="loginAuth-showError">
+        <div className="loginAuth-showErrorIcon">
+          <img
+            src={require("../../../../../assets/icons/icn_invalid error.png")}
+            alt="invalid"
+          />
+        </div>
+        <div className="loginAuth-showErrorMessage">{msg}</div>
+      </div>,
+      {
+        position: "bottom-right",
+        autoClose: 5000,
+        hideProgressBar: true,
+        pauseOnHover: true,
+        draggable: true,
+      }
+    );
+  };
 
   return (
     <div className="login-password">
@@ -61,7 +122,7 @@ const LoginPassword = () => {
           </label>
           {formik.touched.password && formik.errors.password ? (
             <>
-              <div className="error-line"></div>
+              <div className="error-line error-line-underline"></div>
               <p className="password-error">{formik.errors.password}</p>
             </>
           ) : null}
@@ -83,7 +144,7 @@ const LoginPassword = () => {
           </label>
           {formik.touched.cpassword && formik.errors.cpassword ? (
             <>
-              <div className="error-line"></div>
+              <div className="error-line error-line-underline"></div>
               <p className="password-error">{formik.errors.cpassword}</p>
             </>
           ) : null}
@@ -92,6 +153,7 @@ const LoginPassword = () => {
           Reset Password
         </button>
       </form>
+      <ToastContainer />
     </div>
   );
 };

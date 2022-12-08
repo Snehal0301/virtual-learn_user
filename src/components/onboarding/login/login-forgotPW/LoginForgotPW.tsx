@@ -1,40 +1,89 @@
-import '../login-auth/LoginAuth.css';
-import * as yup from 'yup';
-import 'yup-phone';
-import { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { otpPage } from '../../../../redux/reducers/Conditions';
-import { useNavigate } from 'react-router-dom';
-import { mobileBackBtn } from '../../../../utils/svgIcons';
+import '../login-auth/LoginAuth.css'
+import * as yup from 'yup'
+import 'yup-phone'
+import { useState } from 'react'
+import { useDispatch } from 'react-redux'
+import { otpPage } from '../../../../redux/reducers/Conditions'
+import { useNavigate } from 'react-router-dom'
+import { mobileBackBtn } from '../../../../utils/svgIcons'
+import { ToastContainer, toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 
 const LoginForgotPW = () => {
-  const [invalidPhone, setInvalidPhone] = useState(false);
-  const [mobileNum, setMobileNum] = useState('');
+  const [invalidPhone, setInvalidPhone] = useState(false)
+  const [mobileNum, setMobileNum] = useState('')
 
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
 
-  const phoneSchema = yup.string().phone().required();
+  const phoneSchema = yup.string().phone().required()
   const phoneNumValidation = (e: any) => {
-    setMobileNum(e.target.value);
-    (async () => {
-      setInvalidPhone(await phoneSchema.isValid(e.target.value)); // → true
-    })();
-  };
+    setMobileNum(e.target.value)
+    ;(async () => {
+      setInvalidPhone(await phoneSchema.isValid(e.target.value)) // → true
+    })()
+  }
 
   const submitHandler = (e: any) => {
-    e.preventDefault();
-    const mobileNum = e.target.mobileNum.value;
-    console.log('mobile no', mobileNum);
-    dispatch(otpPage(true));
-    navigate('/onboarding/otpVerification');
-  };
+    e.preventDefault()
+    const mobileNum = e.target.mobileNum.value
+    // dispatch(otpPage(true));
+    // navigate('/onboarding/otpVerification');
+    forgotPW(mobileNum)
+  }
+
+  const forgotPW = (mobileNum: any) => {
+    fetch(
+      `http://virtuallearnapp2-env.eba-wrr2p8zk.ap-south-1.elasticbeanstalk.com/send`,
+      {
+        method: 'POST',
+        headers: {
+          Accept: 'application/json, text/plain, */*',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ mobileNumber: mobileNum }),
+      },
+    )
+      .then((res) => res.json())
+      .then((res) => {
+        console.log(res)
+        if (res.message === 'OTP Valid For 2 Minutes') {
+          localStorage.setItem('regMobileNum', mobileNum)
+          dispatch(otpPage(true))
+          navigate('/onboarding/otpVerification')
+        } else {
+          showError(res.message)
+        }
+      })
+  }
+
+  const showError = (msg: any) => {
+    toast(
+      <div className="loginAuth-showError">
+        <div className="loginAuth-showErrorIcon">
+          <img
+            src={require('../../../../assets/icons/icn_invalid error.png')}
+            alt="invalid"
+          />
+        </div>
+        <div className="loginAuth-showErrorMessage">{msg}</div>
+      </div>,
+      {
+        position: 'bottom-right',
+        autoClose: 5000,
+        hideProgressBar: true,
+        pauseOnHover: true,
+        draggable: true,
+      },
+    )
+  }
+
   return (
     <div className="loginAuth">
       <div className="loginAuth-backButton">
         <div
           onClick={() => {
-            navigate('login');
+            navigate('login')
           }}
           style={{ width: '28px', cursor: 'pointer' }}
         >
@@ -76,8 +125,9 @@ const LoginForgotPW = () => {
           </button>
         </form>
       </div>
+      <ToastContainer />
     </div>
-  );
-};
+  )
+}
 
-export default LoginForgotPW;
+export default LoginForgotPW

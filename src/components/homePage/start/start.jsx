@@ -1,23 +1,27 @@
 import React, { useState } from 'react';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
-import { Slide } from 'react-slideshow-image';
 import 'react-slideshow-image/dist/styles.css';
 import 'react-tabs/style/react-tabs.css';
 import './Start.css';
 import { design, start_pauseIcon, start_timeIcon } from '../../../utils/svgIcons';
 import Slider from 'react-carousel-responsive';
 import 'react-carousel-responsive/dist/styles.css';
+import { useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
+import { homeTabToggleState } from '../../../redux/reducers/myCourseReducer';
 
 
 const Start = () => {
-  const [alldata, setalldata] = useState(false)
 
-  const handleTabClick = (id) =>
-  {
-    setalldata(true)
+  const dispatch = useDispatch();
+  const homeTabState = useSelector((state) => state.mycourse.hometab)
+
+  const handleTabClick = (id) => {
+    console.log(id);
+    dispatch(homeTabToggleState(id))
   }
 
-  const startCourseData = [ 
+  const startCourseData = [
     {
 
       id: 1,
@@ -59,9 +63,9 @@ const Start = () => {
       time: "2:23:24",
       btntext: "Design"
     },
-  
-  
-    
+
+
+
 
   ]
 
@@ -92,7 +96,7 @@ const Start = () => {
             <div className='start-map-image'><img src={item.image} alt="" /></div>
           ))
         }
-     
+
       </Slider>
       <div className='start-course-section2-first'>
         <div className='start-ongoing-courses'>Ongoing courses</div>
@@ -105,8 +109,8 @@ const Start = () => {
             (
               <div className='start-course1-image'>
                 <div className='start-image-ongoing'>
-                <img src={item.image} alt="" />
-                <div className='start-image-sub'>ongoing</div>
+                  <img src={item.image} alt="" />
+                  <div className='start-image-sub'>ongoing</div>
                 </div>
                 <div className='start-course-overlay'></div>
                 <div className='start-title-container'>
@@ -156,19 +160,51 @@ const Start = () => {
         <div className='start-seeall'>See All</div>
       </div>
       <div className='start-choice-course-subcategory'>
-        <Tabs>
+        {/* <Tabs>
           <TabList>
            <Tab onClick={()=>handleTabClick(1)}><div className='start-subcategory-all'>All</div></Tab>
            <Tab><div className='start-subcategory-all'>Popular</div></Tab>
            <Tab><div className='start-subcategory-all'>Newest</div></Tab>
         </TabList>
-        </Tabs>
+        </Tabs> */}
+        <div className="all-tabs-home">
+          <div className={homeTabState === 1 ? "home-tab-1-active" : "home-tab-1"} onClick={() => handleTabClick(1)}>All</div>
+          <div className={homeTabState === 2 ? "home-tab-1-active" : "home-tab-1"} onClick={() => handleTabClick(2)}>Popular</div>
+          <div className={homeTabState === 3 ? "home-tab-1-active" : "home-tab-1"} onClick={() => handleTabClick(3)}>Newest</div>
+        </div>
       </div>
-      {alldata ?
-      (
 
-      <div>
-      <div className='start-card'>
+      {
+
+        homeTabState === 1 &&
+          <div className='start-card'>
+            <div className='start-choice1'>
+              {
+                startCourseData.map(item =>
+                (
+                  <div className='start-choice-subcategory-image'>
+
+                    <div className='start-image-pause'>
+
+                      <img src={item.image} alt="" />
+                      <div className='start-course-overlay-2'></div>
+
+                      <button className='start-designbtn'>{item.btntext}</button>
+                    </div>
+
+                    <div className='start-choice-subcategory-title'>{item.title}</div>
+                    <div className='start-choice-chapter'>{item.chapter}</div>
+                  </div>
+
+                ))
+              }
+            </div>
+          </div>
+
+      }
+      {
+        homeTabState === 2 && 
+        <div className='start-card'>
         <div className='start-choice1'>
           {
             startCourseData.map(item =>
@@ -191,10 +227,11 @@ const Start = () => {
           }
         </div>
       </div>
-      </div>
-      ):
-      null
-}
+      }
+      {
+        homeTabState === 3 && 
+        <h1>Newest</h1>
+      }
       <div className='start-course-section2'>
         <div className='start-ongoing-courses'>Top courses in Business</div>
         <div className='start-seeall'>See All</div>
