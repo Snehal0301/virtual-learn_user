@@ -16,7 +16,7 @@ export const login: any = createAsyncThunk(
   async (arg: any, { rejectWithValue }) => {
     try {
       const fetchedData: any = await axios.request({
-        method: 'post',
+        method: 'put',
         url: 'http://virtuallearnapp2-env.eba-wrr2p8zk.ap-south-1.elasticbeanstalk.com/login',
         data: arg,
       });
