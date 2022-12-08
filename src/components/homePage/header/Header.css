@@ -403,12 +403,281 @@
     overflow: scroll;
 }
 
+/* mobile header */
+.mobile-header {
+    display: flex;
+    background-color: white;
+    justify-content: space-between;
+    padding: 20px 6%;
+}
+
+.mobile-logo,
+.mobile-search {
+    display: none;
+}
+
+.mobile-form-with-filter {
+    display: none;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.mobile-header-search {
+    width: 90%;
+    position: relative;
+}
+
+.mobile-header-search .header-searchField {
+    background-color: white;
+    color: black;
+    border-radius: 6px;
+    border: 1px solid black;
+}
+
+.mobile-header-search .header-searchField::placeholder {
+    color: black;
+}
+
+.mobile-form-with-filter .header-filterButton {
+    position: relative !important;
+    background: none;
+    border: none;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    top: unset;
+    right: unset;
+    width: 55px;
+    border-radius: 50%;
+    /* width: unset !important; */
+    background-color: var(--secondaryClr);
+    height: 55px;
+    cursor: pointer;
+}
 
 /* custom styleing */
 
 @media only screen and (max-width: 760px) {
+    .mobile-header-search {
+        padding: 1rem 0rem !important;
+    }
+
     nav.EZDrawer__container {
         width: 100vw !important;
+    }
+
+    .mobile-form-with-filter {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .header-logo {
+        display: none;
+    }
+
+    .header-options {
+        display: none;
+    }
+
+    .header-search {
+        transform: translateY(-100px);
+        padding: unset;
+    }
+
+    .header {
+        background-color: white;
+        padding: 15px;
+    }
+
+    .mobile-logo,
+    .mobile-search {
+        display: unset;
+    }
+
+    .mobile-form-with-filter .header-filterButton {
+        position: relative !important;
+        background: none;
+        border: none;
+        margin: 0 0 0 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        top: unset;
+        right: unset;
+        width: 50px;
+        border-radius: 10px;
+        background-color: var(--secondaryClr);
+        height: 45px;
+        cursor: pointer;
+    }
+
+    .header-categoryContents {
+        align-items: baseline;
+        justify-content: center;
+        position: absolute;
+        top: 76px;
+        right: 0;
+        left: 0;
+        bottom: 0;
+        padding: 0px 10% 4%;
+        min-height: 92vh;
+        overflow: auto;
+        color: white;
+        background-color: white;
+    }
+
+    .headerSearchCategoriesTopSearchBody {
+        gap: 10px;
+    }
+
+    .headerSearchCategoriesTopSearchesParent-orange {
+        color: var(--chipFontclr);
+        background-color: #FCBE4B;
+        border-radius: 4px;
+        padding: 6px 20px;
+        cursor: pointer;
+        display: flex;
+        gap: 10px;
+        align-items: center;
+        font-style: normal;
+        font-weight: 700;
+        font-size: 12px;
+        line-height: 26px;
+    }
+
+    .headerSearchCategoriesTopSearchesParent {
+        color: var(--chipFontclr);
+        border: 1px solid rgba(128, 128, 128, 0.388);
+        border-radius: 4px;
+        padding: 6px 10px;
+        cursor: pointer;
+        display: flex;
+        gap: 10px;
+        align-items: center;
+        font-style: normal;
+        font-weight: 700;
+        font-size: 12px;
+        line-height: 26px;
+    }
+
+    .headerSearchCategoriesTopSearchTitle {
+        color: black;
+    }
+
+    .headerSearch-filterModalBody {
+        position: fixed;
+        width: 100%;
+        z-index: 10000;
+        height: auto;
+        max-height: 56vh;
+        overflow: scroll;
+        border-radius: 0;
+        border-top-left-radius: 20px;
+        border-top-right-radius: 20px;
+        left: 0;
+        right: 0px;
+        bottom: 0;
+    }
+
+    .headerSearch-filterModalBodyCloseIcon {
+        position: fixed;
+        right: 30px;
+        top: 47.8%;
+        bottom: 10px;
+        z-index: 99999;
+        cursor: pointer;
+    }
+
+    .headerSearch-filterModalBodyTitle {
+        font-size: 18px;
+        position: fixed;
+        /* bottom: 15px; */
+        top: 44%;
+        width: 100%;
+        height: 75px;
+        background: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-top-right-radius: 20px;
+        border-top-left-radius: 20px;
+    }
+
+    .headerSearch-filterModalCategoryBody {
+        gap: 10px;
+    }
+
+    .headerSearch-filterModalButtons>button {
+        position: relative !important;
+        margin: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        top: unset;
+        right: unset;
+        cursor: pointer;
+        height: auto;
+        width: auto;
+        font-style: normal;
+        font-weight: 700;
+        font-size: 13px;
+        line-height: 28px;
+        border-radius: 6px;
+        padding: 4px 38px !important;
+    }
+
+    .header-searchIcon {
+        position: absolute;
+        left: 5px;
+        top: 25px;
+        color: red;
+        filter: invert(1);
+    }
+
+    .header-searchFieldPadding {
+        padding-left: 35px !important;
+    }
+
+    .headersearch-responseBody {
+        display: flex;
+        padding: unset;
+        min-width: unset;
+        gap: unset;
+        border-bottom: unset;
+        margin-bottom: 15px;
+    }
+
+    .headerSearch-response {
+        display: flex;
+        flex-direction: column;
+        margin: unset;
+        align-items: center;
+        width: unset;
+        align-items: stretch;
+    }
+
+    .headerSearch-responsePic img {
+        transform: scale(0.8);
+    }
+
+    .headerSearch-responseContainer {
+        color: black;
+        gap: unset;
+    }
+
+    .headerSearch-responseChapters {
+        color: black;
+        font-size: 10px;
+    }
+
+    .headerSearch-responseTitle {
+        font-size: 11px;
+    }
+
+    .headerSearch-responseCategory {
+        padding: unset;
     }
 }
 
