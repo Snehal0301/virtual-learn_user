@@ -104,11 +104,11 @@ const QuizBody = () => {
 
     console.log('selected answers');
 
-    items.forEach((element) => {
+    quizData.questions.forEach((element) => {
       console.log(
         element.questionId,
         ':',
-        form.elements[element.questionId].value
+        form.elements[`Id${element.questionId}`].value
       );
     });
     dispatch(showQuizModal(false));
@@ -118,40 +118,79 @@ const QuizBody = () => {
     <form className="quiz-body" onSubmit={submitQuizHandler} id="quiz">
       <div className="quiz-bodyQuestionForm">
         <MultiStepForm activeStep={active}>
-          {items &&
-            items.map((ele, i) => {
+          {quizData &&
+            quizData.questions &&
+            quizData.questions.map((ele, i) => {
               return (
                 <div key={i}>
                   <Step label={i}>
                     <div className="quiz-questionNum">
                       {' '}
-                      Question {i + 1} of {items.length}
+                      Question {i + 1} of {quizData.questions.length}
                     </div>
 
-                    <div className="quiz-question">{ele.question}</div>
+                    <div className="quiz-question">{ele.questionName}</div>
                     <div className="quiz-options">
-                      {ele.answers.map((option) => {
-                        return (
-                          <div className="quiz-eachOption">
-                            <input
-                              type="radio"
-                              name={ele.questionId}
-                              value={option}
-                              id="accent"
-                            />
-                            <label
-                              htmlFor="accent"
-                              className="quiz-eachOptionBox"
-                            >
-                              {option}
-                            </label>
-                            <label
-                              htmlFor="accent"
-                              className="quiz-accentLabel"
-                            ></label>
-                          </div>
-                        );
-                      })}
+                      <div className="quiz-eachOption">
+                        <input
+                          type="radio"
+                          name={`Id${ele.questionId}`}
+                          value={ele.option_1}
+                          id="accent"
+                        />
+                        <label htmlFor="accent" className="quiz-eachOptionBox">
+                          {ele.option_1}
+                        </label>
+                        <label
+                          htmlFor="accent"
+                          className="quiz-accentLabel"
+                        ></label>
+                      </div>
+                      <div className="quiz-eachOption">
+                        <input
+                          type="radio"
+                          name={`Id${ele.questionId}`}
+                          value={ele.option_2}
+                          id="accent"
+                        />
+                        <label htmlFor="accent" className="quiz-eachOptionBox">
+                          {ele.option_2}
+                        </label>
+                        <label
+                          htmlFor="accent"
+                          className="quiz-accentLabel"
+                        ></label>
+                      </div>
+                      <div className="quiz-eachOption">
+                        <input
+                          type="radio"
+                          name={`Id${ele.questionId}`}
+                          value={ele.option_3}
+                          id="accent"
+                        />
+                        <label htmlFor="accent" className="quiz-eachOptionBox">
+                          {ele.option_3}
+                        </label>
+                        <label
+                          htmlFor="accent"
+                          className="quiz-accentLabel"
+                        ></label>
+                      </div>
+                      <div className="quiz-eachOption">
+                        <input
+                          type="radio"
+                          name={`Id${ele.questionId}`}
+                          value={ele.option_4}
+                          id="accent"
+                        />
+                        <label htmlFor="accent" className="quiz-eachOptionBox">
+                          {ele.option_4}
+                        </label>
+                        <label
+                          htmlFor="accent"
+                          className="quiz-accentLabel"
+                        ></label>
+                      </div>
                     </div>
                   </Step>
                 </div>
@@ -159,49 +198,59 @@ const QuizBody = () => {
             })}
         </MultiStepForm>
       </div>
-      <div className="quiz-footer">
-        <div className="quiz-footerText">
-          <div className="quiz-footerChapter">Chapter 3</div>
-          <div className="quiz-footerChapterTitle">
-            Setting up a new project
+      {quizData && (
+        <div className="quiz-footer">
+          <div className="quiz-footerText">
+            <div className="quiz-footerChapter">
+              Chapter {quizData.chapterNumber}
+            </div>
+            <div className="quiz-footerChapterTitle">
+              {quizData.chapterName}
+            </div>
+          </div>
+          <div className="quiz-buttons">
+            <button
+              onClick={() => setActive(active - 1)}
+              disabled={active === 1}
+              type="button"
+            >
+              <img
+                src={require('../../../assets/icons/previousIcon.png')}
+                alt="previous"
+              />
+            </button>
+
+            <button
+              type="button"
+              onClick={() => setActive(active + 1)}
+              style={{ float: 'right' }}
+              className={
+                active === (quizData.questions && quizData.questions.length)
+                  ? 'quiz-buttonsSubmit'
+                  : ''
+              }
+              disabled={
+                active === (quizData.questions && quizData.questions.length)
+              }
+            >
+              {active === (quizData.questions && quizData.questions.length) ? (
+                <span
+                  onClick={() => {
+                    dispatch(showQuizModal(true));
+                  }}
+                >
+                  submit
+                </span>
+              ) : (
+                <img
+                  src={require('../../../assets/icons/nextIcon.png')}
+                  alt="next"
+                ></img>
+              )}
+            </button>
           </div>
         </div>
-        <div className="quiz-buttons">
-          <button
-            onClick={() => setActive(active - 1)}
-            disabled={active === 1}
-            type="button"
-          >
-            <img
-              src={require('../../../assets/icons/previousIcon.png')}
-              alt="previous"
-            />
-          </button>
-
-          <button
-            type="button"
-            onClick={() => setActive(active + 1)}
-            style={{ float: 'right' }}
-            className={active === items.length ? 'quiz-buttonsSubmit' : ''}
-            disabled={active === items.length}
-          >
-            {active === items.length ? (
-              <span
-                onClick={() => {
-                  dispatch(showQuizModal(true));
-                }}
-              >
-                submit
-              </span>
-            ) : (
-              <img
-                src={require('../../../assets/icons/nextIcon.png')}
-                alt="next"
-              ></img>
-            )}
-          </button>
-        </div>
-      </div>
+      )}
       <QuizModal time={0} />
     </form>
   );
