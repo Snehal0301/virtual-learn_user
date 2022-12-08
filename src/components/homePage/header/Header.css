@@ -517,7 +517,7 @@
         align-items: baseline;
         justify-content: center;
         position: absolute;
-        top: 76px;
+        top: 74px;
         right: 0;
         left: 0;
         bottom: 0;
@@ -585,7 +585,6 @@
         position: fixed;
         right: 30px;
         top: 47.8%;
-        bottom: 10px;
         z-index: 99999;
         cursor: pointer;
     }

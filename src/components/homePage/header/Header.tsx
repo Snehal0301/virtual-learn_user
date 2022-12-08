@@ -109,6 +109,11 @@ const Header = () => {
     // dispatch(privacySection(false))
   };
 
+  const handleCloseDrawer = () => {
+    dispatch(profileDrawer(false));
+    dispatch(headerProfile(false));
+  }
+
   const handlenotify = () => {
     dispatch(profileDrawer(true));
     dispatch(headerProfile(false));
@@ -160,7 +165,13 @@ const Header = () => {
     dispatch(searchFocus(false))
   }
 
+  const handleMobileDrawer = () => {
+    setLeftdrawer(true)
+    dispatch(searchFocus(false))
+  }
+
   const [arrow, setArrow] = useState(false)
+  const [leftdrawer, setLeftdrawer] = useState(false)
   return (
     <>
       <div className="header-parent">
@@ -256,12 +267,7 @@ const Header = () => {
                   )}
                 </div>
               </div>
-              <div className="mobile-search" style={{ filter: 'invert(1)' }} onClick={() => {
-                {
-                  dispatch(searchFocus(true))
-                  setArrow(true)
-                }
-              }}>{searchIcon}</div>
+              <div className="mobile-search" style={{ filter: 'invert(1)' }} onClick={toggleMobileHeader}>{searchIcon}</div>
             </>
           ) : (
             <div className="header-options">
@@ -487,7 +493,7 @@ const Header = () => {
 
       <Drawer
         open={profileDrawerState}
-        onClose={handleProfileClick}
+        onClose={handleCloseDrawer}
         direction="right"
         enableOverlay={true}
         overlayOpacity={0.7}
@@ -511,6 +517,29 @@ const Header = () => {
         } */}
       </Drawer>
 
+      {/* mobile drawer */}
+      {/* {
+        leftdrawer &&
+
+        <Drawer
+          open={handleMobileDrawer}
+          onClose={handleCloseDrawer}
+          direction="left"
+          enableOverlay={true}
+          overlayOpacity={0.7}
+          style={{
+            width: "25rem",
+            zIndex: '9999'
+          }}
+        >
+          {profileSectionState && <Profile />}
+
+          {notificationSectionState && <Notification />}
+
+          {settingsSectionState && <Settings />}
+
+        </Drawer>
+      } */}
     </>
   );
 };
