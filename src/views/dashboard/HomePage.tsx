@@ -6,10 +6,10 @@ import QuizSuccess from '../../components/homePage/quiz/quizSuccessPage/quizSucc
 
 import MyCourse from '../../components/homePage/mycourse/MyCourse';
 import Categories from '../../components/homePage/start/categories/Categories';
-import Start from '../../components/homePage/start/start';
 import './HomePage.css';
 import ChoiceYourCourse from './../../components/homePage/choiceYour-course/ChoiceYourCourse';
 import HomeCategoriesDesign from '../../components/homePage/homeCategories-design/HomeCategoriesDesign';
+import Start from '../../components/homePage/start/start';
 
 const HomePage = () => {
   return (
