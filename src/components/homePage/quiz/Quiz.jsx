@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Countdown from 'react-countdown';
 import { useDispatch, useSelector } from 'react-redux';
 import { showQuizModal } from '../../../redux/reducers/Conditions';
+import { test } from '../../../redux/reducers/testSlice';
 
 import {
   closeIcon,
@@ -33,6 +34,10 @@ const Quiz = () => {
   //     );
   //   }
   // };
+
+  useEffect(() => {
+    dispatch(test());
+  }, []);
 
   return (
     <div className="quiz">
