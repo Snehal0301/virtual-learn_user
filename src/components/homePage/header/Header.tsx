@@ -151,6 +151,16 @@ const Header = () => {
     setOnChange(e.target.value);
   };
 
+  const toggleMobileHeader = () => {
+    setArrow(true)
+    dispatch(searchFocus(true))
+  }
+  const closeMobileHeader = () => {
+    setArrow(false)
+    dispatch(searchFocus(false))
+  }
+
+  const [arrow, setArrow] = useState(false)
   return (
     <>
       <div className="header-parent">
@@ -158,6 +168,14 @@ const Header = () => {
           className={searchFieldFocus ? "header headerSearchFocus" : "header"}
         >
           <div className="header-logo">{headerLogo}</div>
+          {
+            arrow ?
+              <img className="mobile-logo" src={require('../../../assets/images/right_arrow.png')} alt="" onClick={closeMobileHeader} />
+
+              :
+
+              <img className="mobile-logo" src={require('../../../assets/images/burger-mobile-icon.png')} alt="" />
+          }
           <form className="header-search">
             <input
               type="text"
@@ -181,62 +199,70 @@ const Header = () => {
           </form>
 
           {!searchFieldFocus ? (
-            <div className="header-options">
-              <div className="header-optionsBell" onClick={handlenotify}>
-                {bellIcon}
-              </div>
-              <div className="header-settings" onClick={handleSetting}>
-                {settingsIcon}
-              </div>
-              <div className="header-profilePic">
-                <img
-                  src={require("../../../assets/images/dhoni.png")}
-                  alt="Profile Pic"
-                  onClick={(e: any) => {
-                    e.stopPropagation();
-                    dispatch(headerProfile(!headerOptions));
-                  }}
-                />
-                {headerOptions && (
-                  <div
-                    className="header-profileOptions"
+            <>
+              <div className="header-options">
+                <div className="header-optionsBell" onClick={handlenotify}>
+                  {bellIcon}
+                </div>
+                <div className="header-settings" onClick={handleSetting}>
+                  {settingsIcon}
+                </div>
+                <div className="header-profilePic">
+                  <img
+                    src={require("../../../assets/images/dhoni.png")}
+                    alt="Profile Pic"
                     onClick={(e: any) => {
                       e.stopPropagation();
+                      dispatch(headerProfile(!headerOptions));
                     }}
-                  >
-                    <div className="header-profileOption header-profileOptionBorder">
-                      <div className="header-profileOptionIcon">
-                        {graduationCapIcon}
-                      </div>
-                      <div className="header-profileOptiontext">My Course</div>
-                    </div>
-
+                  />
+                  {headerOptions && (
                     <div
-                      className="header-profileOption  header-profileOptionBorder"
-                      onClick={handleProfileClick}
-                    >
-                      <div className="header-profileOptionIcon">
-                        {profileIcon}
-                      </div>
-                      <div className="header-profileOptiontext">My Profile</div>
-                    </div>
-
-                    <div
-                      className="header-profileOption"
-                      onClick={() => {
-                        localStorage.setItem("auth", "false");
-                        window.location.reload();
+                      className="header-profileOptions"
+                      onClick={(e: any) => {
+                        e.stopPropagation();
                       }}
                     >
-                      <div className="header-profileOptionIcon">
-                        {logoutIcon}
+                      <div className="header-profileOption header-profileOptionBorder">
+                        <div className="header-profileOptionIcon">
+                          {graduationCapIcon}
+                        </div>
+                        <div className="header-profileOptiontext">My Course</div>
                       </div>
-                      <div className="header-profileOptiontext">Logout</div>
+
+                      <div
+                        className="header-profileOption  header-profileOptionBorder"
+                        onClick={handleProfileClick}
+                      >
+                        <div className="header-profileOptionIcon">
+                          {profileIcon}
+                        </div>
+                        <div className="header-profileOptiontext">My Profile</div>
+                      </div>
+
+                      <div
+                        className="header-profileOption"
+                        onClick={() => {
+                          localStorage.setItem("auth", "false");
+                          window.location.reload();
+                        }}
+                      >
+                        <div className="header-profileOptionIcon">
+                          {logoutIcon}
+                        </div>
+                        <div className="header-profileOptiontext">Logout</div>
+                      </div>
                     </div>
-                  </div>
-                )}
+                  )}
+                </div>
               </div>
-            </div>
+              <div className="mobile-search" style={{ filter: 'invert(1)' }} onClick={() => {
+                {
+                  dispatch(searchFocus(true))
+                  setArrow(true)
+                }
+              }}>{searchIcon}</div>
+            </>
           ) : (
             <div className="header-options">
               {searchFieldFocus && (
@@ -261,10 +287,36 @@ const Header = () => {
           )}
           {searchFieldFocus && (
             <div className="header-categoryContents">
+              <div className="mobile-form-with-filter">
+                <form className="mobile-header-search">
+                  <input
+                    type="text"
+                    className={
+                      searchFieldFocus
+                        ? "header-searchField header-searchFieldPadding"
+                        : "header-searchField"
+                    }
+                    placeholder="Search"
+                    onFocus={() => {
+                      dispatch(searchFocus(true));
+                    }}
+                    onChange={changeHandler}
+                  />
+                  <div className="header-searchIcon">{searchIcon}</div>
+                </form>
+                <button
+                  className="header-filterButton"
+                  onClick={() => {
+                    dispatch(modalFilter(true));
+                  }}
+                >
+                  {filterIcon}
+                </button>
+              </div>
               {!(onChange.length > 1) ? (
                 <>
                   {!(onChange.length > 0) ? (
-                    <div className="headerSearchCategoriesTopSearch">
+                    <div className="headerSearchCategoriesTopSearch ">
                       <div className="headerSearchCategoriesTopSearchTitle">
                         Top Search
                       </div>
@@ -272,7 +324,7 @@ const Header = () => {
                         {topSearch.map((ele: any, i: any) => {
                           return (
                             <div
-                              className="headerSearchCategoriesTopSearchesParent"
+                              className="headerSearchCategoriesTopSearchesParent headerSearchCategoriesTopSearchesParent-orange"
                               key={i}
                             >
                               <div className="headerSearchCategoriesTopSearchesName">
@@ -362,7 +414,7 @@ const Header = () => {
           >
             <div className="headerSearch-filterModalBody">
               <div className="headerSearch-filterModalBodyTitle">
-                Search Fillters
+                Search Filters
               </div>
               <div className="headerSearch-filterModalCategory">
                 {" "}
@@ -431,33 +483,33 @@ const Header = () => {
       )}
       {/* </div>
       </div > */}
-      
 
-        <Drawer
-          open={profileDrawerState}
-          onClose={handleProfileClick}
+
+      <Drawer
+        open={profileDrawerState}
+        onClose={handleProfileClick}
         direction="right"
-          enableOverlay={true}
-          overlayOpacity={0.7}
-          style={{
-            width: "25rem",
-            zIndex: '9999'
+        enableOverlay={true}
+        overlayOpacity={0.7}
+        style={{
+          width: "25rem",
+          zIndex: '9999'
         }}
-        >
-          {profileSectionState && <Profile />}
+      >
+        {profileSectionState && <Profile />}
 
-          {notificationSectionState && <Notification />}
+        {notificationSectionState && <Notification />}
 
-          {settingsSectionState && <Settings />}
+        {settingsSectionState && <Settings />}
 
-          {/* <Terms /> */}
-          {/* <PrivacyPolicy/> */}
-          {/* <Terms/> */}
-          {/* <EditProfile /> */}
-          {/* {
+        {/* <Terms /> */}
+        {/* <PrivacyPolicy/> */}
+        {/* <Terms/> */}
+        {/* <EditProfile /> */}
+        {/* {
           notifydata ? <Notification /> : <Profile />
         } */}
-        </Drawer>
+      </Drawer>
 
     </>
   );
