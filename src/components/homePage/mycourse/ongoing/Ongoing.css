@@ -1,9 +1,22 @@
+.ongoing-section{
+  display: flex;
+flex-wrap: wrap;
+  gap: 1rem;
+}
 .ongoing-parent {
-  /* background-color: red; */
   margin-top: 1em;
 }
 .ongoing-images {
   position: relative;
+}
+.ong-overlay {
+  background-color: rgba(0, 0, 0, 0.261);
+  position: absolute;
+  top: 0;
+  bottom: 4px;
+  left: 0;
+  right: 0;
+  border-radius: 10px;
 }
 .ong-img {
   border-radius: 10px;

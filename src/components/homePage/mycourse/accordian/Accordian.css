@@ -1,0 +1,53 @@
+.course-accordian {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+}
+
+.course-accordian-heading {
+    cursor: pointer;
+}
+
+.course-accordian-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 30px;
+}
+
+.course-accordian-container-title {
+    color: #1EAB0D;
+}
+
+.course-accordian-container-state {
+    font-size: 30px;
+    color: var(--secondaryClr);
+    animation: rotate 0.3s;
+}
+
+@keyframes rotate {
+    0% {
+        transform: rotate(0);
+    }
+
+    100% {
+        transform: rotate(90deg);
+    }
+}
+
+.course-accordian-content {
+    overflow: hidden;
+    transition: all 0.3s ease-in-out;
+    height: 0;
+    opacity: 0;
+}
+
+.accordian-show {
+    height: auto;
+    opacity: 1;
+}
+
+.course-accordian-container-body {
+    text-align: justify;
+    margin-top: 10px;
+}
