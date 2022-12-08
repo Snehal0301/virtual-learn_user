@@ -1,6 +1,8 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { start_pauseIcon } from '../../../utils/svgIcons'
 import { start_timeIcon } from '../../../utils/svgIcons'
+
+import axios from 'axios'
 import './HomeCategoriesDesign.css'
 
 const HomeCategoriesDesign = () => {
@@ -38,7 +40,7 @@ const HomeCategoriesDesign = () => {
       time: "2:23:24",
       btntext: "Design"
     },
-    
+
 
   ]
   const startCategories = [
@@ -54,6 +56,22 @@ const HomeCategoriesDesign = () => {
     'Photography',
 
   ];
+
+
+
+  useEffect(() => {
+
+    axios.get(
+
+      `http://virtuallearnapp2-env.eba-wrr2p8zk.ap-south-1.elasticbeanstalk.com/user/home/course/all`, { headers: { "Authorization": `Bearer ` } }
+
+    ).then((res) => { console.log(res) })
+
+
+
+
+  }, [])
+
   return (
     <div className='homecategoriesdesign'>
       <a href="#"> Design</a>
@@ -151,13 +169,13 @@ const HomeCategoriesDesign = () => {
                   <div className='home-categories-overlay-allcourse'></div>
                 </div>
                 <div className='home-categories-allcourse-ttlchapbtn'>
-                <div className='home-categories-subcategory-allcourse-title'>{item.title}</div>
-                <div className="home-categories-allcourse-titleBtn">
-                <div className='home-categories-allcourse-chapter'>{item.chapter}</div>
-                <button className='home-categories-allcourse-designbtn'>{item.btntext}</button>
+                  <div className='home-categories-subcategory-allcourse-title'>{item.title}</div>
+                  <div className="home-categories-allcourse-titleBtn">
+                    <div className='home-categories-allcourse-chapter'>{item.chapter}</div>
+                    <button className='home-categories-allcourse-designbtn'>{item.btntext}</button>
+                  </div>
                 </div>
-                </div>
-              
+
               </div>
 
             ))
