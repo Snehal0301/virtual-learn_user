@@ -112,6 +112,7 @@ const Header = () => {
   const handleCloseDrawer = () => {
     dispatch(profileDrawer(false));
     dispatch(headerProfile(false));
+    setLeftdrawer(false)
   }
 
   const handlenotify = () => {
@@ -167,7 +168,6 @@ const Header = () => {
 
   const handleMobileDrawer = () => {
     setLeftdrawer(true)
-    dispatch(searchFocus(false))
   }
 
   const [arrow, setArrow] = useState(false)
@@ -185,7 +185,7 @@ const Header = () => {
 
               :
 
-              <img className="mobile-logo" src={require('../../../assets/images/burger-mobile-icon.png')} alt="" />
+              <img className="mobile-logo" src={require('../../../assets/images/burger-mobile-icon.png')} alt="" onClick={handleMobileDrawer} />
           }
           <form className="header-search">
             <input
@@ -518,28 +518,66 @@ const Header = () => {
       </Drawer>
 
       {/* mobile drawer */}
-      {/* {
-        leftdrawer &&
 
-        <Drawer
-          open={handleMobileDrawer}
-          onClose={handleCloseDrawer}
-          direction="left"
-          enableOverlay={true}
-          overlayOpacity={0.7}
-          style={{
-            width: "25rem",
-            zIndex: '9999'
-          }}
-        >
-          {profileSectionState && <Profile />}
+      <Drawer
+        open={leftdrawer}
+        onClose={handleCloseDrawer}
+        direction="left"
+        enableOverlay={true}
+        overlayOpacity={0.7}
+        style={{
+          width: "25rem",
+          zIndex: '9999'
+        }}
+      >
+        <div className="left-drawer">
+          <div className="left-drawer-header">
+            <div className="left-drawer-profile-logo-name">
+              <div className="left-drawer-profile-img-frame">
+                <img
+                  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQZea5hmBriu2GpLrDCzJoBnAFqT2hzJTuTBZ_oNRUJ5lztiO3Ujs8NngJ2BWiTqjmvfx8&usqp=CAU"
+                  alt=""
+                />
+              </div>
+              <div className="left-drawer-profile-image-name">
+                <p className="left-drawer-name">Mahendra Singh Dhoni</p>
+                <p className="left-drawer-role">UX/UI Designer</p>
+              </div>
+            </div>
+          </div>
+          <div className="left-drawer-body">
+            <div className="left-drawer-links">
+              <div className="left-drawer-link">
+                <img src={require('../../../assets/icons/icn_home_menu-Home.png')} alt="" />
+                <p>Home</p>
+              </div>
+              <div className="left-drawer-link">
+                <img src={require('../../../assets/icons/icn_course_menu-Briefcase.png')} alt="My Course" />
+                <p>My Course</p>
+              </div>
+              <div className="left-drawer-link">
+                <img src={require('../../../assets/icons/icn_profile_menu.png')} alt="Profile" />
+                <p>My Profile</p>
+              </div>
+              <div className="left-drawer-link">
+                <img src={require('../../../assets/icons/icn_notification_menu.png')} alt="Notifications" />
+                <p>Notifications</p>
+                <span>11</span>
+              </div>
+              <div className="left-drawer-link">
+                <img src={require('../../../assets/icons/icn_settings_menu-Settings.png')} alt="Settings" />
+                <p>Settings</p>
+              </div>
+              <div className="left-drawer-link">
+                <img src={require('../../../assets/icons/icn_logout_menu-Power buttom.png')} alt="Logout" />
+                <p>Logout</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <p onClick={handleCloseDrawer} className="left-drawer-close">X</p>
 
-          {notificationSectionState && <Notification />}
-
-          {settingsSectionState && <Settings />}
-
-        </Drawer>
-      } */}
+      </Drawer>
     </>
   );
 };
