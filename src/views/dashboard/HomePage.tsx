@@ -22,13 +22,13 @@ const HomePage = () => {
         {/* <Start /> */}
         {/* <ChoiceYourCourse/> */}
         {/* <HomeCategoriesDesign/> */}
-        <Start />
+        {/* <Start /> */}
         {/* <Categories/> */}
         {/* <Quiz /> */}
         {/* <QuizSuccess /> */}
         {/* <QuizResults /> */}
         {/* <CourseCompleted /> */}
-        {/* <MyCourse/> */}
+        <MyCourse/>
       </div>
     </div>
   );
