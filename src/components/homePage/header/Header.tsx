@@ -444,19 +444,12 @@ const Header = () => {
             zIndex: '9999'
         }}
         >
-          {profileSectionState && <Profile />}
+          {profileSectionState && <Profile/>}
 
-          {notificationSectionState && <Notification />}
+          {notificationSectionState && <Notification/>}
 
-          {settingsSectionState && <Settings />}
+          {settingsSectionState && <Settings/>}
 
-          {/* <Terms /> */}
-          {/* <PrivacyPolicy/> */}
-          {/* <Terms/> */}
-          {/* <EditProfile /> */}
-          {/* {
-          notifydata ? <Notification /> : <Profile />
-        } */}
         </Drawer>
 
     </>

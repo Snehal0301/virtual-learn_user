@@ -28,7 +28,8 @@
 }
 .settings-notification-text-icon {
   display: flex;
-  padding-bottom: 1em;
+  padding-left: 0.5em;
+  padding-bottom: 0.5em;
   cursor: pointer;
 }
 .settings-notification-text {
@@ -42,7 +43,7 @@
 .settings-push-notification {
   display: flex;
   justify-content: space-between;
-  margin-left: 2.3em;
+  margin-left: 2.7em;
   margin-top: 1em;
 }
 .settings-push-notification p {
@@ -64,7 +65,7 @@
 .settings-notification-sound {
   display: flex;
   justify-content: space-between;
-  margin-left: 2.3em;
+  margin-left: 2.7em;
   margin-top: 1em;
   margin-bottom: 1.3em;
 }
@@ -85,7 +86,7 @@
   cursor: pointer;
 }
 .privacy-policy-text-icon {
-  width: 45%;
+  width: 47%;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -98,7 +99,7 @@
   color: var(--notificationFont);
 }
 .terms-text-icon {
-  width: 55%;
+  width: 57%;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -119,41 +120,117 @@
   padding: 0.5em;
   cursor: pointer;
 }
-
+.mobile-arrow-left{
+  display: none;
+}
+.mobile-arrow-left-privacy{
+  display: none;
+}
+ .mobile-arrow-left-terms{
+  display: none;
+ }
 @media screen and (max-width: 760px) {
   nav.EZDrawer__container {
     width: 100vw !important;
   }
   .settings-notification {
     border-bottom: none;
-     margin: 0.5em 1.5em 0.5em 2.7em;
+    margin: 0.5em 1.5em 0.5em 2em;
   }
-  .settings-notification-text-icon{
-    padding-bottom: 0;  }
+  .settings-notification-text-icon {
+    padding-bottom: 0;
+  }
+  .settings-icon{
+    margin-right:0.5em;
+  }
   .settings-privacy-policy {
     border-bottom: none;
   }
   .settings-terms-services {
     border-bottom: none;
+    margin: 0.5em 1.5em 0.5em 2em;
   }
-  .settings-notification-text{
+  .settings-notification-text {
     margin-left: 0;
+    font-size: 16px;
   }
-.settings-settings-text p{
-      color: #000;
-    margin: 0.5em 1.5em 0.5em 0.7em;
+ .settings-settings-text p {
+    color: #000;
+    margin-left: 0.5em;
 }
-
-.drawer-profile-header-settings{
-  background-color: unset;
-}
+  .drawer-profile-header-settings {
+    background-color: unset;
+  }
   .privacy-policy-text-icon {
     justify-content: unset;
+    width: 51%;
+}
+.privacy-policy-text-icon p {
+    font-size: 16px;
+}
+.terms-text-icon p {
+    font-size: 16px;
+}
+  .privacy_icon{
+    margin-right:0.5em;
   }
-  .terms-text-icon {
+ .terms-text-icon {
     justify-content: unset;
+    width: 62%;
+}
+  .terms_icon{
+    margin-right:0.5em;
   }
   .settings-chevron-right {
     display: none;
   }
+  .drawer-profile-clear-settings{
+    display: none;
+  }
+  .mobile-arrow-left{
+    display: flex;
+    position: relative;
+  }
+  .arrow-left-long{
+    position: absolute;
+    top: 15px;
+    left: 12px;
+  }
+  .mobile-arrow-left-privacy{
+    display: flex;
+    position: relative;
+  }
+  .arrow-left-long-privacy{
+    position: absolute;
+    top: 0px;
+    left: 0px;
+  }
+  .mobile-arrow-left-terms{
+display: flex;
+    position: relative;
+  }
+  .arrow-left-long-terms{
+     position: absolute;
+    top: 0px;
+    left: 0px;
+  }
+  .drawer-profile-clear-privacy{
+    display: none;
+  }
+  .drawer-profile-clear-terms{
+    display: none;
+  }
+  .drawer-profile-header-privacy{
+    background-color: unset !important;
+  }
+  .drawer-profile-header-terms{
+ background-color: unset !important;
+  }
+  
+.privacy-policy-text p{
+  color: #2B2B2B !important;
+}
+.terms-services-text p{
+  color: #2B2B2B !important;
+}
 }
