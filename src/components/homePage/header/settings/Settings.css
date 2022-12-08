@@ -76,7 +76,7 @@
   color: var(--notificationFont);
 }
 .settings-privacy-policy {
-margin:0.5em 1.5em 0.5em 2em;
+  margin: 0.5em 1.5em 0.5em 2em;
   padding: 0.5em;
   display: flex;
   border-bottom: 1px solid #042c5c60;
@@ -118,4 +118,42 @@ margin:0.5em 1.5em 0.5em 2em;
   align-items: center;
   padding: 0.5em;
   cursor: pointer;
+}
+
+@media screen and (max-width: 760px) {
+  nav.EZDrawer__container {
+    width: 100vw !important;
+  }
+  .settings-notification {
+    border-bottom: none;
+     margin: 0.5em 1.5em 0.5em 2.7em;
+  }
+  .settings-notification-text-icon{
+    padding-bottom: 0;  }
+  .settings-privacy-policy {
+    border-bottom: none;
+  }
+  .settings-terms-services {
+    border-bottom: none;
+  }
+  .settings-notification-text{
+    margin-left: 0;
+  }
+.settings-settings-text p{
+      color: #000;
+    margin: 0.5em 1.5em 0.5em 0.7em;
+}
+
+.drawer-profile-header-settings{
+  background-color: unset;
+}
+  .privacy-policy-text-icon {
+    justify-content: unset;
+  }
+  .terms-text-icon {
+    justify-content: unset;
+  }
+  .settings-chevron-right {
+    display: none;
+  }
 }
