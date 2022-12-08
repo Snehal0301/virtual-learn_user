@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import './Header.css';
+import React, { useState } from "react";
+import "./Header.css";
 import {
   bellIcon,
   closeIcon,
@@ -12,89 +12,91 @@ import {
   profileIcon,
   searchIcon,
   settingsIcon,
-} from '../../../utils/svgIcons';
-import { useDispatch, useSelector } from 'react-redux';
+} from "../../../utils/svgIcons";
+import { useDispatch, useSelector } from "react-redux";
 import {
   editProfileSection,
   headerProfile,
   modalFilter,
   notificationSection,
+  privacySection,
   profileDrawer,
   profileSection,
   settingsSection,
-} from '../../../redux/reducers/headerProfileOptions';
-import Drawer from 'react-modern-drawer';
-import 'react-modern-drawer/dist/index.css';
-import Profile from './profile/Profile';
-import Settings from './settings/Settings';
-import PrivacyPolicy from './privacypolicy/PrivacyPolicy';
-import Terms from './terms/Terms';
-import Notification from './notification/Notification';
-import { searchFocus } from '../../../redux/reducers/headerProfileOptions';
-import EditProfile from './edit-profile/EditProfile';
-import ChangePassword from './changePassword/ChangePassword';
+  termsSection,
+} from "../../../redux/reducers/headerProfileOptions";
+import Drawer from "react-modern-drawer";
+import "react-modern-drawer/dist/index.css";
+import Profile from "./profile/Profile";
+import Settings from "./settings/Settings";
+import PrivacyPolicy from "./privacypolicy/PrivacyPolicy";
+import Terms from "./terms/Terms";
+import Notification from "./notification/Notification";
+import { searchFocus } from "../../../redux/reducers/headerProfileOptions";
+import EditProfile from "./edit-profile/EditProfile";
+import ChangePassword from "./changePassword/ChangePassword";
 
 const Header = () => {
-  const [onChange, setOnChange] = useState('');
+  const [onChange, setOnChange] = useState("");
 
   const topSearch = [
-    'Python',
-    'Java',
-    'Javascript',
-    'Leadership',
-    'Photoshop',
-    'React',
-    'Communication',
+    "Python",
+    "Java",
+    "Javascript",
+    "Leadership",
+    "Photoshop",
+    "React",
+    "Communication",
   ];
 
   const topCategories = [
-    'Design',
-    'Development',
-    'Business',
-    'Finance',
-    'Health & Fitness',
-    'Music',
-    'IT & Software',
-    'Marketing',
-    'Lifestyle',
-    'Photography',
-    'Teaching',
+    "Design",
+    "Development",
+    "Business",
+    "Finance",
+    "Health & Fitness",
+    "Music",
+    "IT & Software",
+    "Marketing",
+    "Lifestyle",
+    "Photography",
+    "Teaching",
   ];
 
   const searchdata: any = [
     {
-      title: 'User Experience Design Fundamentals',
-      img: require('../../../assets/images/dummy/1.png'),
-      chapters: '14 Chapter',
-      cat: 'Design',
+      title: "User Experience Design Fundamentals",
+      img: require("../../../assets/images/dummy/1.png"),
+      chapters: "14 Chapter",
+      cat: "Design",
     },
     {
-      title: 'Digital Marketing for 2021 Masterclass',
-      img: require('../../../assets/images/dummy/2.png'),
-      chapters: '21 Chapter',
-      cat: 'Design',
+      title: "Digital Marketing for 2021 Masterclass",
+      img: require("../../../assets/images/dummy/2.png"),
+      chapters: "21 Chapter",
+      cat: "Design",
     },
     {
-      title: 'Graphic Design Masterclass - Learn GREAT Design',
-      img: require('../../../assets/images/dummy/3.png'),
-      chapters: '11 Chapter',
-      cat: 'Design',
+      title: "Graphic Design Masterclass - Learn GREAT Design",
+      img: require("../../../assets/images/dummy/3.png"),
+      chapters: "11 Chapter",
+      cat: "Design",
     },
     {
-      title: 'Study on Design Principles and 7 features ',
-      img: require('../../../assets/images/dummy/4.png'),
-      chapters: '7 Chapter',
-      cat: 'Design',
+      title: "Study on Design Principles and 7 features ",
+      img: require("../../../assets/images/dummy/4.png"),
+      chapters: "7 Chapter",
+      cat: "Design",
     },
   ];
 
   const Duration = [
-    '5/10 Chapters',
-    '5/10 Chapters',
-    '10/20 Chapters',
-    '20/30 Chapters',
-    '30/40 Chapters',
-    '50+ Chapters',
+    "5/10 Chapters",
+    "5/10 Chapters",
+    "10/20 Chapters",
+    "20/30 Chapters",
+    "30/40 Chapters",
+    "50+ Chapters",
   ];
 
   const [notifydata, setnotifydata] = useState(false);
@@ -102,20 +104,23 @@ const Header = () => {
     dispatch(profileDrawer(true));
     dispatch(headerProfile(false));
     dispatch(profileSection(true));
+    // dispatch(notificationSection(false))
+    // dispatch(termsSection(false))
+    // dispatch(privacySection(false))
   };
-
 
   const handlenotify = () => {
     dispatch(profileDrawer(true));
     dispatch(headerProfile(false));
-    dispatch(profileSection(false))
-    dispatch(notificationSection(true))
+    dispatch(profileSection(false));
+    dispatch(notificationSection(true));
+    dispatch(settingsSection(false))
   };
 
   const handleSetting = () => {
     dispatch(profileDrawer(true));
-    dispatch(profileSection(false))
-    dispatch(notificationSection(false))
+    dispatch(profileSection(false));
+    dispatch(notificationSection(false));
     dispatch(headerProfile(false));
     dispatch(settingsSection(true));
   };
@@ -282,7 +287,7 @@ const Header = () => {
                     <div className="headerSearchcategories-nosearchResults">
                       <div
                         className="headerSearchCategoriesTopSearchTitle"
-                        style={{ fontSize: '32px' }}
+                        style={{ fontSize: "32px" }}
                       >
                         No matching course
                       </div>
@@ -360,7 +365,7 @@ const Header = () => {
                 Search Fillters
               </div>
               <div className="headerSearch-filterModalCategory">
-                {' '}
+                {" "}
                 <div className="headerSearch-filterModalCategoryTitle">
                   Search from Categories
                 </div>
@@ -452,8 +457,6 @@ const Header = () => {
           {/* {
           notifydata ? <Notification /> : <Profile />
         } */}
-
-
         </Drawer>
 
     </>
