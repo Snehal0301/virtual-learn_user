@@ -12,9 +12,9 @@ const PrivacyPolicy = () => {
     };
 
     return (
-      <div className="drawer-profile">
-        <div className="drawer-profile-header">
-          <div className="drawer-profile-clear" onClick={handleClick}>
+      <div className="drawer-profile-privacy">
+        <div className="drawer-profile-header-privacy ">
+          <div className="drawer-profile-clear-privacy" onClick={handleClick}>
             {arrowRight}
           </div>
           <div className="privacy-policy-text">

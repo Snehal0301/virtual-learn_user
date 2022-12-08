@@ -10,9 +10,9 @@ const Terms = () => {
       dispatch(termsSection(false));
     };
   return (
-    <div className="drawer-profile">
-      <div className="drawer-profile-header">
-        <div className="drawer-profile-clear" onClick={handleClick}>
+    <div className="drawer-profile-terms">
+      <div className="drawer-profile-header-terms">
+        <div className="drawer-profile-clear-terms" onClick={handleClick}>
           {arrowRight}
         </div>
         <div className="terms-services-text">

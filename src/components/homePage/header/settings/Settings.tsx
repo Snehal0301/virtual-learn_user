@@ -15,7 +15,8 @@ import Terms from "../terms/Terms";
 
 const Settings = () => {
   const [checked, setChecked] = useState(false);
-  const [checkedSound,setCheckedSound] = useState(false)
+  const [checkedSound, setCheckedSound] = useState(false)
+  const [toggleSetnotify, settoggleSetnotify] = useState(false)
   const dispatch = useDispatch();
   const privacyPolicyState = useSelector((state: any) => state.headerProfile.privacy)
   const TermsState = useSelector((state: any) => state.headerProfile.terms)
@@ -39,6 +40,9 @@ const Settings = () => {
   const handleTermsServices = () => {
     dispatch(termsSection(true))
   };
+  const handleSetNotify = () => {
+    settoggleSetnotify(!toggleSetnotify)
+  }
   const renderElements = () => {
     if (privacyPolicyState) {
       return <PrivacyPolicy />
@@ -48,9 +52,12 @@ const Settings = () => {
     }
     else {
       return (
-        <div className="drawer-profile">
-          <div className="drawer-profile-header">
-            <div className="drawer-profile-clear" onClick={handleClick}>
+        <div className="drawer-profile-settings">
+          <div className="drawer-profile-header-settings">
+            <div
+              className="drawer-profile-clear-settings"
+              onClick={handleClick}
+            >
               {closeProfile}
             </div>
             <div className="settings-settings-text">
@@ -62,34 +69,43 @@ const Settings = () => {
             <div className="settings-notification">
               <div className="settings-notification-text-icon">
                 <div>{settings_Icon}</div>
-                <p className="settings-notification-text">
+                <p
+                  className="settings-notification-text"
+                  onClick={handleSetNotify}
+                >
                   Notification Settings
                 </p>
               </div>
-              <div className="settings-push-notification">
-                <p>Push Notification</p>
-                <Switch
-                  onChange={handleChange}
-                  checked={checked}
-                  uncheckedIcon={false}
-                  checkedIcon={false}
-                  width={48}
-                  height={22}
-                  className="react-switch-1"
-                />
-              </div>
-              <div className="settings-notification-sound">
-                <p>Notification Sound</p>
-                <Switch
-                  onChange={handleChangeSound}
-                  checked={checkedSound}
-                  uncheckedIcon={false}
-                  checkedIcon={false}
-                  width={48}
-                  height={22}
-                  className="react-switch-2"
-                />
-              </div>
+              {toggleSetnotify ? (
+                <div className="settings-notification-container">
+                  <div className="settings-push-notification">
+                    <p>Push Notification</p>
+                    <Switch
+                      onChange={handleChange}
+                      checked={checked}
+                      uncheckedIcon={false}
+                      checkedIcon={false}
+                      width={48}
+                      height={22}
+                      className="react-switch-1"
+                    />
+                  </div>
+                  <div className="settings-notification-sound">
+                    <p>Notification Sound</p>
+                    <Switch
+                      onChange={handleChangeSound}
+                      checked={checkedSound}
+                      uncheckedIcon={false}
+                      checkedIcon={false}
+                      width={48}
+                      height={22}
+                      className="react-switch-2"
+                    />
+                  </div>
+                </div>
+              ) : (
+                ""
+              )}
             </div>
 
             <div
