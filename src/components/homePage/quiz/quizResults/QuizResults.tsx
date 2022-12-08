@@ -55,6 +55,7 @@ const QuizResults = () => {
     <div className="quizResults">
       <div className="quizResults-header">
         <div className="quizResults-headerTitle">Module Test 2</div>
+        <div className="quizResults-closeicon">{closeIcon}</div>
         <div className="quizResults-headerBody">
           <div className="quizResults-headerBodyResultMarks">80</div>
           <div className="quizResults-headerBodyContents">

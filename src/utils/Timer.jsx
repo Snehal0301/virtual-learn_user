@@ -21,9 +21,13 @@ const Timer = () => {
     return () => window.clearTimeout(timeoutId.current);
   }, [timer, countTimer]);
 
-  var minutes = Math.floor(timer / 60);
+  var minutes = timer > 60 ? Math.floor(timer / 60) : timer;
 
-  return <div align="center">{minutes}</div>;
+  return (
+    <div align="center">
+      {minutes} {timer > 60 ? 'mins' : 'sec'}
+    </div>
+  );
 };
 
 export default Timer;

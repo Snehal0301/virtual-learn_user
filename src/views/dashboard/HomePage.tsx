@@ -23,7 +23,6 @@ const HomePage = () => {
         {/* <ChoiceYourCourse/> */}
         {/* <HomeCategoriesDesign/> */}
         {/* <Start /> */}
-        {/* <Categories/> */}
         {/* <Quiz /> */}
         {/* <QuizSuccess /> */}
         {/* <QuizResults /> */}

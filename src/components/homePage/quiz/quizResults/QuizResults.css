@@ -119,6 +119,9 @@
   text-align: center;
   color: var(--blueFont);
 }
+.quizResults-closeicon {
+  display: none;
+}
 
 .quizResults-body {
   display: flex;
@@ -201,9 +204,9 @@
 .quizDrawerCloseIcon {
   cursor: pointer;
   position: absolute;
-  right: 50px;
+  right: 17px;
   top: 0;
-  top: 100px;
+  top: 13px;
 }
 
 .quizResults-DrawerBody {
@@ -229,4 +232,81 @@
   align-items: center;
   border: 1px solid #c5c5c5;
   justify-content: center;
+}
+
+@media screen and (max-width: 940px) {
+  .quizResults-closeicon {
+    display: block;
+    filter: invert(1);
+  }
+  .quizResults-headerTitle {
+    display: none;
+  }
+  .quizResults-header {
+    padding: 50px 6% 82px 6%;
+  }
+  .quizResults-headerBodyContentsResults {
+    left: -98px !important;
+  }
+  .quizResults-headerBodyContentsChapterName {
+    font-family: Biko;
+    font-size: 26px;
+    font-weight: 300;
+    letter-spacing: 0;
+    line-height: 30px;
+  }
+  .quizResults-headerBodyContentsUnitName {
+    font-size: 16px;
+    font-weight: 300;
+    letter-spacing: 0;
+    line-height: 17px;
+    padding-bottom: 14px;
+  }
+  .quizResults-bodyListTitle {
+    font-size: 18px;
+    font-weight: 500;
+    letter-spacing: 0;
+    line-height: 17px;
+    padding: 0;
+  }
+  .quizResults-bodyList {
+    padding: 0;
+  }
+  .quizResults-body {
+    top: 364px;
+    padding-bottom: 92px;
+  }
+  .quizResults-bodyListItemContentQuestion {
+    font-size: 16px;
+  }
+  .quizResults-bodyListItemContentAnswer {
+    font-size: 14px;
+  }
+  .quizResults-bodyListItem {
+    padding: 15px;
+  }
+  .quizResults-DrawerBody {
+    padding: 12% 10%;
+    overflow: auto;
+    height: 100%;
+  }
+  .quizAns-bodyQuestion {
+    font-weight: 600 !important;
+    font-size: 22px !important;
+  }
+  .quizAns-bodyOptionText {
+    font-size: 18px !important;
+  }
+  .quizAns-bodyOptions {
+    padding: 16px 14px !important;
+    margin-bottom: 17px !important;
+  }
+  .quizResults-Drawer {
+    height: 50vh !important;
+
+    width: 100vw !important;
+    top: 50% !important;
+    padding-top: 0 !important;
+    border-radius: 14px 14px 0 0 !important;
+  }
 }
