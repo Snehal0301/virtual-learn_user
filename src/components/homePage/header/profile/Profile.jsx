@@ -43,21 +43,21 @@ const Profile = () => {
   );
   const editState = useSelector((state) => state.headerProfile.editSection);
   
-  // useEffect(() => {
-  //  axios
-  //    .get(
-  //      `http://virtuallearnapp2-env.eba-wrr2p8zk.ap-south-1.elasticbeanstalk.com/user/myProfile`,
-  //      {
-  //        headers:
-  //        {
-  //          Authorization:`Bearer ${localStorage.getItem("Token")}`
-  //        }
-  //      }
-  //    )
-  //    .then((res) => {
-  //      console.log(res);
-  //    });
-  // }, [])
+  useEffect(() => {
+   axios
+     .get(
+       `http://virtuallearnapp2-env.eba-wrr2p8zk.ap-south-1.elasticbeanstalk.com/user/myProfile`,
+       {
+         headers:
+         {
+           Authorization:`Bearer ${localStorage.getItem("Token")}`
+         }
+       }
+     )
+     .then((res) => {
+       console.log(res);
+     });
+  }, [])
   
   const renderElement = () => {
     if (changePasswordState) {

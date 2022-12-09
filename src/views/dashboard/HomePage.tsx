@@ -27,8 +27,8 @@ const HomePage = () => {
         {/* <QuizSuccess /> */}
         {/* <QuizResults /> */}
         {/* <CourseCompleted /> */}
-        {/* <MyCourse /> */}
-        <Categories/>
+        <MyCourse />
+        {/* <Categories/> */}
       </div>
     </div>
   );
