@@ -63,7 +63,14 @@ ul.breadcrumb li a:hover {
     text-align: center;
     color: var(--greyFont)
 }
-
+.mobile-myCourse p {
+    color: #2B2B2B;
+    font-family:'Proxima Nova Soft';
+    font-size: 26px;
+    font-weight: bold;
+    margin-left: 10px;
+    margin-bottom: 38px;
+}
 .mycourse-categoriesSection {
     /* background-color: pink; */
 }

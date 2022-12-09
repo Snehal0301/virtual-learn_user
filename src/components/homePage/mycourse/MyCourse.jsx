@@ -41,6 +41,9 @@ const MyCourse = () => {
           )}
         </ul>
       </div>
+      <div className="mobile-myCourse">
+        <p>My Course</p>
+      </div>
       {/* <div className="mycourse-body">
         <div className="mycourse-emptyImg-section">
           <div className="mycourse-imgSection">
