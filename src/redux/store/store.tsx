@@ -9,6 +9,8 @@ import loginSlice from '../reducers/loginSlice';
 import myCourseReducer from '../reducers/myCourseReducer';
 import { quizAnswerSlice } from '../reducers/result';
 import testSlice from '../reducers/testSlice';
+import allcourseReducer from '../reducers/allcourseSlice';
+import categoryReducer from '../reducers/categorySlice';
 
 const reducers = combineReducers({
   headerProfile: showHeaderProfile.reducer,
@@ -17,6 +19,8 @@ const reducers = combineReducers({
   mycourse: myCourseReducer,
   quizAnswer: quizAnswerSlice.reducer,
   test: testSlice.reducer,
+  allcourse:allcourseReducer,
+  categorydata:categoryReducer
 });
 
 const persistConfig = {

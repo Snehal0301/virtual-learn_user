@@ -157,10 +157,11 @@
 }
 
 .home-categories-subcategory-allcourse-image img {
-    height: 100%;
-    margin: 0;
-    width: 100%;
-    border-radius: 5px;
+        /* height: 100%; */
+        margin: 0;
+        width: 100%;
+        border-radius: 5px;
+        height: 175px;
 
 }
 

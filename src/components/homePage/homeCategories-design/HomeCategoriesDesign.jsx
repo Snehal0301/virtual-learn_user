@@ -4,6 +4,7 @@ import { start_timeIcon } from '../../../utils/svgIcons'
 
 import axios from 'axios'
 import './HomeCategoriesDesign.css'
+import { useSelector } from 'react-redux';
 
 const HomeCategoriesDesign = () => {
   const startCourseData = [
@@ -57,14 +58,9 @@ const HomeCategoriesDesign = () => {
 
   ];
 
-  useEffect(() => {
-    fetch(
-      `http://virtuallearnapp2-env.eba-wrr2p8zk.ap-south-1.elasticbeanstalk.com/user/home/course/all`, { headers: { "Authorization": `Bearer ${localStorage.getItem("Token")}` } }
+  const allcourseItem = useSelector((state)=>state.allcourse.value)
+  console.log(allcourseItem);
 
-    ).then((res) => { console.log(res) })
-  }, [])
-
-  
   return (
     <div className='homecategoriesdesign'>
       <a href="#"> Design</a>
@@ -129,7 +125,7 @@ const HomeCategoriesDesign = () => {
       <div className="home-categories">
 
         <div className="home-categories-Body">
-          {startCategories.map((ele: any, i: any) => {
+          {startCategories.map((ele, i) => {
             return (
               <div
                 className="home-categories-Parent"
@@ -153,19 +149,19 @@ const HomeCategoriesDesign = () => {
       <div className='home-categories-card-allcourse'>
         <div className='home-categories-choice1-allcourse'>
           {
-            startCourseData.map(item =>
+            allcourseItem.map(item =>
             (
               <div className='home-categories-subcategory-allcourse-image'>
 
                 <div className='home-categories-image-allcourse-pause'>
-                  <img src={item.image} alt="" />
+                  <img src={item.coursePhoto} alt="" />
                   <div className='home-categories-overlay-allcourse'></div>
                 </div>
                 <div className='home-categories-allcourse-ttlchapbtn'>
-                  <div className='home-categories-subcategory-allcourse-title'>{item.title}</div>
+                  <div className='home-categories-subcategory-allcourse-title'>{item.categoryName}</div>
                   <div className="home-categories-allcourse-titleBtn">
-                    <div className='home-categories-allcourse-chapter'>{item.chapter}</div>
-                    <button className='home-categories-allcourse-designbtn'>{item.btntext}</button>
+                    <div className='home-categories-allcourse-chapter'>{item.chapterCount} chapter</div>
+                    <button className='home-categories-allcourse-designbtn'>{item.categoryName}</button>
                   </div>
                 </div>
 
