@@ -19,6 +19,7 @@ import {
 } from "../../../../redux/reducers/headerProfileOptions";
 import ChangePassword from "../changePassword/ChangePassword";
 import EditProfile from "../edit-profile/EditProfile";
+import profileData from '../../../../api-results/ProfileResults.json'
 import axios from "axios";
 
 const Profile = () => {
@@ -30,6 +31,7 @@ const Profile = () => {
     dispatch(termsSection(false));
     dispatch(privacySection(false));
   };
+
 
   const showChangePassword = () => {
     dispatch(showChangePasswordSection(true));
