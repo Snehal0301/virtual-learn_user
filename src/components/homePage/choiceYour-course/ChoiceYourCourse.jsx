@@ -1,6 +1,7 @@
 import React from 'react'
 import { design } from '../../../utils/svgIcons';
 import './choiceYourCourse.css'
+import { useSelector } from 'react-redux';
 
 const ChoiceYourCourse = () => {
   const choiceCourseData = [
@@ -62,6 +63,12 @@ const ChoiceYourCourse = () => {
     'Lifestyle',
     'Photography',
   ];
+
+  const obtainedcourse = useSelector((state)=>state.allcourse.value)
+  const obtainedcategory = useSelector((state)=>state.categorydata.value)
+  console.log(obtainedcategory)
+
+  console.log("obtainedcourse",obtainedcourse)
   return (
     <div className='choice-your-course'>
       <div className='choice-your-course-heading'>Choice your course</div>
@@ -72,17 +79,18 @@ const ChoiceYourCourse = () => {
       <div className="choice-your-course-categories">
 
         <div className="choice-your-course-categories-Body">
-          {choiceCategories.map((ele: any, i: any) => {
+          {obtainedcategory.map((ele, i) => {
             return (
               <div
                 className="choice-your-coursecategories-Parent"
                 key={i}
               >
                 <div className="choice-your-coursecategories-Icon">
-                  {design}
+                  <img src={ele.categoryPhoto} alt="" />
                 </div>
                 <div className="choice-your-coursecategories-Name">
-                  {ele}
+                  {ele.categoryName
+}
                 </div>
               </div>
             );
@@ -93,18 +101,18 @@ const ChoiceYourCourse = () => {
       <div className='choice-your-course-card'>
         <div className='choice-your-course-choice1'>
           {
-            choiceCourseData.map(item =>
+            obtainedcourse.map(item =>
             (
               <div className='choice-your-coursesubcategory-image'>
 
 
-                <img src={item.image} alt="" />
+                <img src={item.coursePhoto} alt="" />
 
 
-                <div className='choice-your-coursesubcategory-title'>{item.title}</div>
+                <div className='choice-your-coursesubcategory-title'>{item.categoryName}</div>
                 <div className='choice-your-cahpbtn'>
-                  <div className='choice-your-coursechapter'>{item.chapter}</div>
-                  <button className='choice-yourcourse-designbtn'>{item.btntext}</button>
+                  <div className='choice-your-coursechapter'>{item.chapterCount} chapters</div>
+                  <button className='choice-yourcourse-designbtn'>{item.categoryName}</button>
                 </div>
               </div>
 
