@@ -9,6 +9,17 @@ import QuizAns from '../quizAnswers/QuizAns';
 const QuizResults = () => {
   const dispatch = useDispatch();
 
+  const resultsHeaderData = {
+    chapterNumber: 6,
+    chapterName: 'Conclusion',
+    chapterTestPercentage: 60.0,
+    courseName: 'UI-UX Design For Complete Beginners',
+    passingGrade: 75,
+    correctAnswers: 3,
+    wrongAnswers: 2,
+    totalNumberOfQuestions: 5,
+  };
+
   const results: any = [
     {
       question: 'Question1',
@@ -46,6 +57,64 @@ const QuizResults = () => {
     // { question: 'Question10', answer: 'Correct Answer' },
   ];
 
+  const resultAnswers = [
+    {
+      questionId: 20,
+      questionName: 'How many letters are there in Tamil alphabets ',
+      option_1: '49',
+      option_2: '40',
+      option_3: '43',
+      option_4: '48',
+      correctAnswer: '48',
+      userAnswer: '43',
+      userAnswerStatus: '0',
+    },
+    {
+      questionId: 25,
+      questionName: 'How many letters are there in Tamil alphabets ',
+      option_1: '49',
+      option_2: '40',
+      option_3: '43',
+      option_4: '48',
+      correctAnswer: '48',
+      userAnswer: '43',
+      userAnswerStatus: '0',
+    },
+    {
+      questionId: 40,
+      questionName: 'What isa 0*2',
+      option_1: '9',
+      option_2: '2',
+      option_3: '0',
+      option_4: '0.2',
+      correctAnswer: '0',
+      userAnswer: '0',
+      userAnswerStatus: '1',
+    },
+    {
+      questionId: 50,
+      questionName: 'What isa UI',
+      option_1: 'User Interface',
+      option_2: 'User Intraface',
+      option_3: 'User Interior',
+      option_4: 'User Inter Data',
+      correctAnswer: 'User Interface',
+      userAnswer: 'User Interface',
+      userAnswerStatus: '1',
+    },
+    {
+      questionId: 60,
+      questionName: 'What isa API',
+      option_1: 'Application Programming Interface',
+      option_2: 'Application Programming Intraface',
+      option_3: 'Application Programming Interior',
+      option_4: 'Application Inter Data',
+      correctAnswer: 'Application Programming Interface',
+      userAnswer: 'Application Programming Interface',
+      userAnswerStatus: '1',
+    },
+  ];
+
   const [isOpen, setIsOpen] = React.useState(false);
   const toggleDrawer = () => {
     setIsOpen((prevState) => !prevState);
@@ -53,65 +122,76 @@ const QuizResults = () => {
 
   return (
     <div className="quizResults">
-      <div className="quizResults-header">
-        <div className="quizResults-headerTitle">Module Test 2</div>
-        <div className="quizResults-closeicon">{closeIcon}</div>
-        <div className="quizResults-headerBody">
-          <div className="quizResults-headerBodyResultMarks">80</div>
-          <div className="quizResults-headerBodyContents">
-            <div className="quizResults-headerBodyContentsChapterName">
-              Chapter 3: Setting up a new project
+      {resultsHeaderData && (
+        <div className="quizResults-header">
+          <div className="quizResults-headerTitle">
+            Module Test {resultsHeaderData.chapterNumber}
+          </div>
+          <div className="quizResults-closeicon">{closeIcon}</div>
+          <div className="quizResults-headerBody">
+            <div className="quizResults-headerBodyResultMarks">
+              {resultsHeaderData.chapterTestPercentage}
             </div>
-            <div className="quizResults-headerBodyContentsUnitName">
-              Course: Learn Figma - UI/UX Design Essential Training
-            </div>
-            <div className="quizResults-headerBodyContentsResults">
-              <div className="quizResults-headerBodyContentsResultsBody">
-                <div className="quizResults-headerBodyContentsResultsBodyTitle">
-                  Passing Grade
-                </div>
-                <div className="quizResults-headerBodyContentsResultsBodyResult">
-                  75/100
-                </div>
+            <div className="quizResults-headerBodyContents">
+              <div className="quizResults-headerBodyContentsChapterName">
+                Chapter {resultsHeaderData.chapterNumber}:{' '}
+                {resultsHeaderData.chapterName}
               </div>
-              <div className="quizResults-headerBodyContentsResultsBody">
-                <div className="quizResults-headerBodyContentsResultsBodyTitle">
-                  Correct
-                </div>
-                <div className="quizResults-headerBodyContentsResultsBodyResult">
-                  20/25
-                </div>
+              <div className="quizResults-headerBodyContentsUnitName">
+                Course: {resultsHeaderData.courseName}
               </div>
-              <div className="quizResults-headerBodyContentsResultsBody">
-                <div className="quizResults-headerBodyContentsResultsBodyTitle">
-                  Wrong
+              <div className="quizResults-headerBodyContentsResults">
+                <div className="quizResults-headerBodyContentsResultsBody">
+                  <div className="quizResults-headerBodyContentsResultsBodyTitle">
+                    Passing Grade
+                  </div>
+                  <div className="quizResults-headerBodyContentsResultsBodyResult">
+                    {resultsHeaderData.passingGrade}/100
+                  </div>
                 </div>
-                <div className="quizResults-headerBodyContentsResultsBodyResult">
-                  05/25
+                <div className="quizResults-headerBodyContentsResultsBody">
+                  <div className="quizResults-headerBodyContentsResultsBodyTitle">
+                    Correct
+                  </div>
+                  <div className="quizResults-headerBodyContentsResultsBodyResult">
+                    {resultsHeaderData.correctAnswers}/
+                    {resultsHeaderData.totalNumberOfQuestions}
+                  </div>
+                </div>
+                <div className="quizResults-headerBodyContentsResultsBody">
+                  <div className="quizResults-headerBodyContentsResultsBodyTitle">
+                    Wrong
+                  </div>
+                  <div className="quizResults-headerBodyContentsResultsBodyResult">
+                    {resultsHeaderData.wrongAnswers}/
+                    {resultsHeaderData.totalNumberOfQuestions}
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
+      )}
       <div className="quizResults-body">
         <div className="quizResults-bodyListTitle">List of Questions</div>
         <div className="quizResults-bodyList">
-          {results.map((ele: any, i: any) => {
+          {resultAnswers.map((ele: any, i: any) => {
             return (
               <div className="quizResults-bodyListItem" key={i}>
                 <div className="quizResults-bodyListItemContent">
                   <div className="quizResults-bodyListItemContentQuestion">
-                    {ele.question}
+                    Question {i + 1}
                   </div>
                   <div
                     className={
-                      ele.answer === 'Correct Answer'
+                      ele.correctAnswer === ele.userAnswer
                         ? 'quizResults-bodyListItemContentAnswer quizResults-bodyListItemContentAnswerGreen'
                         : 'quizResults-bodyListItemContentAnswer quizResults-bodyListItemContentAnswerRed'
                     }
                   >
-                    {ele.answer}
+                    {ele.correctAnswer === ele.userAnswer
+                      ? 'Correct Answer'
+                      : 'Wrong Answer'}
                   </div>
                 </div>
                 <div
