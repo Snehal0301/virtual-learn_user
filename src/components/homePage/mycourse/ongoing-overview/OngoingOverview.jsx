@@ -6,6 +6,7 @@ import {
   accordianState,
   accordianToggleState,
   tabToggleState,
+  videoLinkState,
 } from "../../../../redux/reducers/myCourseReducer";
 import {
   courseAccessIcon,
@@ -67,46 +68,31 @@ const steps = [
 const OngoingOverview = () => {
   const [activeStep, setActiveStep] = useState(0);
 
-  const handleNext = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep + 1);
-  };
-
-  const handleBack = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep - 1);
-  };
-
-  const handleReset = () => {
-    setActiveStep(0);
-  };
-
-  const [active, setActive] = useState(0);
-
-  const [tabs, setTabs] = useState(1);
-
-  const dispatch = useDispatch();
-
-  const tabToggle = (id) => {
-    dispatch(tabToggleState(id));
-  };
-
-  const tabState = useSelector((state) => state.mycourse.tab);
-
-  const accordianToggle = (id) => {
-    dispatch(accordianToggleState(id));
-  };
-  const accordianState = useSelector((state) => state.mycourse.accordian);
-  const [pause, setPause] = useState(false);
-  const [playing, setPlaying] = useState(false);
-  const [played, setPlayed] = useState(false);
+  const [chapter, setChapter] = useState();
+  const [video, setVideo] = useState('https://youtu.be/Tn6-PIqc4UM');
   const [overviewData, setOverviewData] = useState();
-  const onPause = () => {
-    setPause(true);
-    setPlaying(false);
-  };
-  const onPlay = () => {
-    setPause(false);
-    setPlaying(true);
-  };
+  // api call for chapter section
+  useEffect(() => {
+    axios
+      .get(
+        `http://virtuallearnapp2-env.eba-wrr2p8zk.ap-south-1.elasticbeanstalk.com/user/courseChapterResponse?courseId=24`,
+        {
+          headers:
+          {
+            Authorization: `Bearer ${localStorage.getItem("Token")}`
+          }
+        }
+      )
+      .then((res) => {
+        console.log(res.data);
+        setChapter(res.data)
+      }).catch((err) => {
+        console.log(err);
+      });
+  }, [])
+
+  console.log("chapter", chapter)
+
   useEffect(() => {
     axios
       .get(
@@ -124,38 +110,77 @@ const OngoingOverview = () => {
         console.log(err);
       });
   }, []);
-  console.log("OverviewData", overviewData);
+
+  const handleNext = () => {
+    setActiveStep((prevActiveStep) => prevActiveStep + 1);
+  };
+
+  const handleBack = () => {
+    setActiveStep((prevActiveStep) => prevActiveStep - 1);
+  };
+
+  const handleReset = () => {
+    setActiveStep(0);
+  };
+
+  const dispatch = useDispatch();
+
+  const tabToggle = (id) => {
+    dispatch(tabToggleState(id))
+  }
+
+  const tabState = useSelector((state) => state.mycourse.tab)
+
+  const accordianToggle = (id) => {
+    dispatch(accordianToggleState(id))
+  }
+  const accordianState = useSelector((state) => state.mycourse.accordian)
+  const [pause, setPause] = useState(false)
+  const [playing, setPlaying] = useState(false)
+  const [played, setPlayed] = useState(false)
+
+  const onPause = () => {
+    setPause(true)
+    setPlaying(false)
+  }
+  const onPlay = () => {
+    setPause(false)
+    setPlaying(true)
+  }
+
+  const videoLink = useSelector((state) => state.mycourse.videoLink)
+
+  console.log(video)
+
   return (
-    <div className="ongoing-overview">
+    <div className='ongoing-overview'>
       <div className="ongoing-section-1">
         <div className="ongoing-section-video-player">
-          {pause && (
+          {
+            pause &&
             <div className="onpause-modal">
-              <p className="onpause-modal-title">
-                Your lesson paused at 1.21 Do you want to continue watching?
-              </p>
-              <button className="onpause-button" onClick={onPlay}>
-                Continue Watching
-              </button>
-              <button className="onpause-button beginning">
-                Watch from beginning
-              </button>
+              <p className='onpause-modal-title'>Your lesson paused at 1.21
+                Do you want to continue watching?</p>
+              <button className='onpause-button' onClick={onPlay}>Continue Watching</button>
+              <button className='onpause-button beginning'>Watch from beginning</button>
             </div>
-          )}
-          <ReactPlayer
-            url="https://firebasestorage.googleapis.com/v0/b/drivelistfilesapplication.appspot.com/o/1669889441661-UI-UX-Design1%2800-00-29%29.mp4?alt=media"
-            controls="true"
-            className="react-player"
-            width="100%"
-            height="100%"
-            onPause={onPause}
-            playing={playing}
-            onProgress={(progress) => {
+          }
+          <ReactPlayer url={videoLink} controls='true' className='react-player' width='100%'
+            height='100%' onPause={onPause} playing={playing} onProgress={(progress) => {
               setPlayed(progress.playedSeconds);
-            }}
-          />
+            }} />
         </div>
-
+        {/* <div className="ongoing-video-title-section">
+                    <div className="ongoing-video-title">
+                        <p className='video-title'>Learn Figma - UI/UX Design Essential Training</p>
+                        <p className='video-chapters'>7 Chapter | 46 lessons</p>
+                    </div>
+                    <div className="ongoing-video-category">
+                        <div className="catgry">
+                            <p>Design</p>
+                        </div>
+                    </div>
+                </div> */}
         {overviewData ? (
           <div className="ongoing-video-title-section">
             <div className="ongoing-video-title">
@@ -174,83 +199,74 @@ const OngoingOverview = () => {
         ) : (
           <h3>Loading</h3>
         )}
-        {tabState === 1 ? (
-          <>
-            {overviewData ? (
-              <div className="ongoing-course-desc">
-                <div className="ongoing-course-desc-title">
-                  <p>{overviewData.courseTagLine}</p>
+        {
+          tabState === 1 ? (
+            <>
+              {overviewData ? (
+                <div className="ongoing-course-desc">
+                  <div className="ongoing-course-desc-title">
+                    <p>{overviewData.courseTagLine}</p>
+                  </div>
+                  <div className="ongoing-course-desc-content">
+                    <input type="checkbox" id="expanded"></input>
+                    <p>{overviewData.description}</p>
+                    <label for="expanded" role="button">
+                      SHOW MORE
+                    </label>
+                  </div>
                 </div>
-                <div className="ongoing-course-desc-content">
-                  <input type="checkbox" id="expanded"></input>
-                  <p>{overviewData.description}</p>
-                  <label for="expanded" role="button">
-                    SHOW MORE
-                  </label>
-                </div>
-              </div>
-            ) : (
-              <h3>Loading</h3>
-            )}
-          </>
-        ) : (
-          // <div className="course-completion">
-          //     <div className="course-completion-section-1">
-          //         <div className="completion-section-1-main">
+              ) : (
+                <h3>Loading</h3>
+              )}
+            </>
+          ) : (
+            // <div className="course-completion">
+            //     <div className="course-completion-section-1">
+            //         <div className="completion-section-1-main">
 
-          //             <p className='completion-section-1-main-title'>Course Result</p>
-          //             <p className='completion-section-1-main-per'>90%</p>
-          //             <p className='completion-section-1-main-apr'>approval rate</p>
-          //         </div>
-          //     </div>
-          //     <div className="course-completion-section-2">
-          //         <div className="completion-section-2-main">
-          //             <div className="cmain-1">
-          //                 <p>Joined</p>
-          //                 <p className='cmain-1-date'>02/04/2021</p>
-          //             </div>
-          //             <div className="cmain-2">
-          //                 <p>Completed</p>
-          //                 <p className='cmain-1-date'>02/04/2021</p>
-          //             </div>
-          //             <div className="cmain-3">
-          //                 <p>Duration</p>
-          //                 <p className='cmain-1-date'>4h 30m</p>
-          //             </div>
-          //         </div>
-          //     </div>
-          //     <div className="course-completion-section-3">
-          //         <div className="completion-section-3-main">
-          //             <div className="cs3-main-1">
-          //                 <p className='cs3-main-1-title'>Course Certificate</p>
-          //                 <div className='download-icon-image'>{downloadIcon}</div>
-          //             </div>
-          //             <div className="cs3-main-2">
-          //                 <img src={require('../../../../assets/images/certicon.png')} alt="" />
-          //             </div>
-          //         </div>
-          //     </div>
-          // </div>
-          ""
-        )}
+            //             <p className='completion-section-1-main-title'>Course Result</p>
+            //             <p className='completion-section-1-main-per'>90%</p>
+            //             <p className='completion-section-1-main-apr'>approval rate</p>
+            //         </div>
+            //     </div>
+            //     <div className="course-completion-section-2">
+            //         <div className="completion-section-2-main">
+            //             <div className="cmain-1">
+            //                 <p>Joined</p>
+            //                 <p className='cmain-1-date'>02/04/2021</p>
+            //             </div>
+            //             <div className="cmain-2">
+            //                 <p>Completed</p>
+            //                 <p className='cmain-1-date'>02/04/2021</p>
+            //             </div>
+            //             <div className="cmain-3">
+            //                 <p>Duration</p>
+            //                 <p className='cmain-1-date'>4h 30m</p>
+            //             </div>
+            //         </div>
+            //     </div>
+            //     <div className="course-completion-section-3">
+            //         <div className="completion-section-3-main">
+            //             <div className="cs3-main-1">
+            //                 <p className='cs3-main-1-title'>Course Certificate</p>
+            //                 <div className='download-icon-image'>{downloadIcon}</div>
+            //             </div>
+            //             <div className="cs3-main-2">
+            //                 <img src={require('../../../../assets/images/certicon.png')} alt="" />
+            //             </div>
+            //         </div>
+            //     </div>
+            // </div>
+            ""
+          )
+        }
       </div>
       <div className="ongoing-section-2">
         <div className="ongoing-container-1">
           <div className="tabs">
-            <div
-              className={tabState === 1 ? "tab active-tab" : "tab"}
-              onClick={() => tabToggle(1)}
-            >
-              Overview
-            </div>
-            <div
-              className={tabState === 2 ? "tab active-tab" : "tab"}
-              onClick={() => tabToggle(2)}
-            >
-              Chapters
-            </div>
+            <div className={tabState === 1 ? 'tab active-tab' : 'tab'} onClick={() => tabToggle(1)}>Overview</div>
+            <div className={tabState === 2 ? 'tab active-tab' : 'tab'} onClick={() => tabToggle(2)}>Chapters</div>
           </div>
-          {/*MAmatha*/}
           <div
             className={tabState === 1 ? "tab-content-1" : "tab-content-none"}
           >
@@ -455,170 +471,106 @@ const OngoingOverview = () => {
             </div>
             <button className="join-course">Join Course</button>
           </div>
+          <div className={tabState === 2 ? 'tab-content-2' : 'tab-content-none'}>
+            {
+              chapter
+                ?
+                <div className="tab-2-all">
 
-          <div
-            className={tabState === 2 ? "tab-content-2" : "tab-content-none"}
-          >
-            <div className="tab-2-all">
-              <div className="course-contents">
-                <p className="course-content-title">Course Content</p>
-                <p className="course-content-desc">
-                  7 Chapter | 46 lessons | 6 Assignment Test | 3.5h total length
-                </p>
-              </div>
-              <div className="course-sections">
-                <div
-                  className="course-accordian"
-                  onClick={() => accordianToggle(1)}
-                >
-                  <div className="course-accordian-heading">
-                    <div className="course-accordian-container">
-                      <p className="course-accordian-container-title">
-                        Chapter 1 - Introduction to the course{" "}
-                      </p>
-                      <p className="course-accordian-container-state">
-                        {accordianState === 1 ? "-" : "+"}
-                      </p>
-                    </div>
+                  <div className="course-contents">
+                    <p className="course-content-title">Course Content</p>
+                    <p className="course-content-desc">{chapter.chapterCount} Chapter | {chapter.lessonCount} lessons | {chapter.testCount} Assignment Test | {chapter.totalDuration}h
+                      Total length</p>
                   </div>
-                  <div
-                    className={
-                      (accordianState === 1 ? "accordian-show" : "") +
-                      " course-accordian-content"
-                    }
-                  >
-                    <div className="course-accordian-container-body">
-                      <p>
-                        Lorem ipsum, dolor sit amet consectetur adipisicing
-                        elit. Quas deserunt aperiam, dolorem porro laudantium
-                        illum praesentium delectus voluptate. Nobis ullam harum
-                        molestiae architecto minus necessitatibus explicabo
-                        beatae corporis magni officiis dignissimos dolore cumque
-                        voluptates, libero eius laboriosam, nihil nam aut
-                        facilis mollitia consequuntur illum est! Harum suscipit
-                        assumenda at magnam.
-                      </p>
-                    </div>
-                  </div>
-                </div>
-                <div
-                  className="course-accordian"
-                  onClick={() => accordianToggle(2)}
-                >
-                  <div className="course-accordian-heading">
-                    <div className="course-accordian-container">
-                      <p className="course-accordian-container-title">
-                        Chapter 2 - Introduction to the course{" "}
-                      </p>
-                      <p className="course-accordian-container-state">
-                        {accordianState === 2 ? "-" : "+"}
-                      </p>
-                    </div>
-                  </div>
-                  <div
-                    className={
-                      (accordianState === 2 ? "accordian-show" : "") +
-                      " course-accordian-content"
-                    }
-                  >
-                    <div className="course-accordian-container-body">
-                      <p>
-                        Lorem ipsum, dolor sit amet consectetur adipisicing
-                        elit. Quas deserunt aperiam, dolorem porro laudantium
-                        illum praesentium delectus voluptate. Nobis ullam harum
-                        molestiae architecto minus necessitatibus explicabo
-                        beatae corporis magni officiis dignissimos dolore cumque
-                        voluptates, libero eius laboriosam, nihil nam aut
-                        facilis mollitia consequuntur illum est! Harum suscipit
-                        assumenda at magnam.
-                      </p>
-                    </div>
-                  </div>
-                </div>
-                <div
-                  className="course-accordian"
-                  onClick={() => accordianToggle(3)}
-                >
-                  <div className="course-accordian-heading">
-                    <div className="course-accordian-container">
-                      <p className="course-accordian-container-title">
-                        Chapter 3 - Introduction to the course{" "}
-                      </p>
-                      <p className="course-accordian-container-state">
-                        {accordianState === 3 ? "-" : "+"}
-                      </p>
-                    </div>
-                  </div>
-                  <div
-                    className={
-                      (accordianState === 3 ? "accordian-show" : "") +
-                      " course-accordian-content"
-                    }
-                  >
-                    <div className="course-accordian-container-body">
-                      <Box sx={{ maxWidth: "100%" }}>
-                        <Stepper activeStep={activeStep} orientation="vertical">
-                          {steps.map((step, index) => (
-                            <Step key={step.label}>
-                              <StepLabel icon="⬤">
-                                {/* {step.label} */}
-                                <div className="course-video">
-                                  <div className="video-index">20</div>
-                                  <div className="vide-desc">
-                                    <p className="videosection-title">
-                                      Creating a New Project and File
-                                    </p>
-                                    <p className="video-duration">01.38 mins</p>
-                                  </div>
-                                  <div className="video-play-btn">
-                                    {videoPlayActive}
-                                  </div>
+
+                  <div className="course-sections">
+                    {
+                      chapter.chapterResponses.map((ele, id) => {
+                        return (
+                          <>
+                            {/* <Accordian /> */}
+                            <div div className="course-accordian" onClick={() => accordianToggle(id)}>
+                              <div className="course-accordian-heading">
+                                <div className="course-accordian-container">
+                                  <p className='course-accordian-container-title'>Chapter {ele.chapterNumber} - {ele.chapterName}   </p>
+                                  <p className='course-accordian-container-state'>
+                                    {
+                                      accordianState === id ? "-" : "+"
+                                    }
+                                  </p>
                                 </div>
-                              </StepLabel>
-                              <StepContent>
-                                {/* <Typography>{step.description}</Typography> */}
-                                <Box sx={{ mb: 2 }}>
-                                  <div>
-                                    <Button
-                                      variant="contained"
-                                      onClick={handleNext}
-                                      sx={{ mt: 1, mr: 1 }}
-                                    >
-                                      {index === steps.length - 1
-                                        ? "Finish"
-                                        : "Continue"}
-                                    </Button>
-                                    <Button
-                                      disabled={index === 0}
-                                      onClick={handleBack}
-                                      sx={{ mt: 1, mr: 1 }}
-                                    >
-                                      Back
-                                    </Button>
-                                  </div>
-                                </Box>
-                              </StepContent>
-                            </Step>
-                          ))}
-                        </Stepper>
-                        {activeStep === steps.length && (
-                          <Paper square elevation={0} sx={{ p: 3 }}>
-                            <Typography>
-                              All steps completed - you&apos;re finished
-                            </Typography>
-                            <Button onClick={handleReset} sx={{ mt: 1, mr: 1 }}>
-                              Reset
-                            </Button>
-                          </Paper>
-                        )}
-                      </Box>
-                    </div>
+                              </div>
+                              <div className={(accordianState === id ? "accordian-show" : "") + " course-accordian-content"}>
+                                <div className="course-accordian-container-body">
+                                  <Box sx={{ maxWidth: '100%' }}>
+                                    <Stepper activeStep={activeStep} orientation="vertical">
+                                      {ele.lessonResponses.map((courseele, index) => (
+                                        <Step key={index}>
+                                          <StepLabel
+                                            icon="⬤"
+                                          >
+                                            {/* {step.label} */}
+                                            <div className="course-video" >
+                                              <div className="video-index">{courseele.lessonNumber}</div>
+                                              <div className="vide-desc">
+                                                <p className='videosection-title'>{courseele.lessonName}</p>
+                                                <p className="video-duration">{courseele.lessonDuration}</p>
+                                              </div>
+                                              <div className="video-play-btn"
+                                                // onClick={() => { setVideo(courseele.videoLink) }}
+                                                onClick={() => { dispatch(videoLinkState(courseele.videoLink)) }}
+                                              >{videoPlayActive}
+                                              </div>
+                                            </div>
+
+                                          </StepLabel>
+                                          <StepContent>
+                                            <Box sx={{ mb: 2 }}>
+                                              <div>
+                                                <Button
+                                                  variant="contained"
+                                                  onClick={handleNext}
+                                                  sx={{ mt: 1, mr: 1 }}
+                                                >
+                                                  {index === steps.length - 1 ? 'Finish' : 'Continue'}
+                                                </Button>
+                                                <Button
+                                                  disabled={index === 0}
+                                                  onClick={handleBack}
+                                                  sx={{ mt: 1, mr: 1 }}
+                                                >
+                                                  Back
+                                                </Button>
+                                              </div>
+                                            </Box>
+
+                                          </StepContent>
+                                        </Step>
+                                      ))}
+                                    </Stepper>
+                                    {activeStep === steps.length && (
+                                      <Paper square elevation={0} sx={{ p: 3 }}>
+                                        <Typography>All steps completed - you&apos;re finished</Typography>
+                                        <Button onClick={handleReset} sx={{ mt: 1, mr: 1 }}>
+                                          Reset
+                                        </Button>
+                                      </Paper>
+                                    )}
+                                  </Box>
+                                </div>
+                              </div>
+                            </div>
+                          </>
+                        )
+                      })
+
+                    }
+
                   </div>
                 </div>
-
-                {/* <Accordian /> */}
-              </div>
-            </div>
+                :
+                <h1>Loading</h1>
+            }
           </div>
         </div>
       </div>
