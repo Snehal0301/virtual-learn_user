@@ -6,11 +6,12 @@ import { useDispatch, useSelector } from 'react-redux'
 import { quizAnswer } from '../../../../redux/reducers/result'
 import QuizAns from '../quizAnswers/QuizAns'
 import { answerHeader } from '../../../../redux/reducers/testAnswerHeader'
+import { answer } from '../../../../redux/reducers/testAnswer'
 
 const QuizResults = () => {
   const dispatch = useDispatch()
 
-  const resultsHeaderData = {
+  const resultsHeaderDataOne = {
     chapterNumber: 6,
     chapterName: 'Conclusion',
     chapterTestPercentage: 60.0,
@@ -22,49 +23,16 @@ const QuizResults = () => {
   }
 
   useEffect(() => {
-    dispatch(answerHeader('resultAnswers?testId=17'))
+    dispatch(answerHeader('resultHeader?testId=17'))
+    dispatch(answer('resultAnswers?testId=17'))
   }, [])
 
-  const answers = useSelector
+  const resultsHeaderData = useSelector((state: any) => state.answerHeader.data)
+  const resultAnswers = useSelector((state: any) => state.answer.data)
 
-  const results: any = [
-    {
-      question: 'Question1',
-      answer: 'Correct Answer',
-      ques: 'Who invented JavaScript?',
-      answers: ['Douglas Crockford', 'Sheryl Sandberg', 'Brendan Eich'],
-      questionId: 'a',
-      sel: 'Douglas Crockford',
-      cor: 'Douglas Crockford',
-    },
-    {
-      question: 'Question2',
-      answer: 'Correct Answer',
-      ques: 'Which one of these is a JavaScript package manager?',
-      answers: ['Node.js', 'TypeScript', 'npm'],
-      questionId: 'b',
-      sel: 'npm',
-      cor: 'npm',
-    },
-    {
-      question: 'Question3',
-      answer: 'Wrong Answer',
-      ques: 'Which tool can you use to ensure code quality?',
-      answers: ['Angular', 'jQuery', 'RequireJS', 'ESLint'],
-      questionId: 'c',
-      sel: 'Angular',
-      cor: 'ESLint',
-    },
-    // { question: 'Question4', answer: 'Correct Answer' },
-    // { question: 'Question5', answer: 'Wrong Answer' },
-    // { question: 'Question6', answer: 'Wrong Answer' },
-    // { question: 'Question7', answer: 'Wrong Answer' },
-    // { question: 'Question8', answer: 'Correct Answer' },
-    // { question: 'Question9', answer: 'Correct Answer' },
-    // { question: 'Question10', answer: 'Correct Answer' },
-  ]
+  console.log('first', resultAnswers)
 
-  const resultAnswers = [
+  const resultAnswersOne = [
     {
       questionId: 20,
       questionName: 'How many letters are there in Tamil alphabets ',
@@ -129,23 +97,23 @@ const QuizResults = () => {
 
   return (
     <div className="quizResults">
-      {resultsHeaderData && (
+      {resultsHeaderData.data && (
         <div className="quizResults-header">
           <div className="quizResults-headerTitle">
-            Module Test {resultsHeaderData.chapterNumber}
+            Module Test {resultsHeaderData.data.chapterNumber}
           </div>
           <div className="quizResults-closeicon">{closeIcon}</div>
           <div className="quizResults-headerBody">
             <div className="quizResults-headerBodyResultMarks">
-              {resultsHeaderData.chapterTestPercentage}
+              {resultsHeaderData.data.chapterTestPercentage}
             </div>
             <div className="quizResults-headerBodyContents">
               <div className="quizResults-headerBodyContentsChapterName">
-                Chapter {resultsHeaderData.chapterNumber}:{' '}
-                {resultsHeaderData.chapterName}
+                Chapter {resultsHeaderData.data.chapterNumber}:{' '}
+                {resultsHeaderData.data.chapterName}
               </div>
               <div className="quizResults-headerBodyContentsUnitName">
-                Course: {resultsHeaderData.courseName}
+                Course: {resultsHeaderData.data.courseName}
               </div>
               <div className="quizResults-headerBodyContentsResults">
                 <div className="quizResults-headerBodyContentsResultsBody">
@@ -153,7 +121,7 @@ const QuizResults = () => {
                     Passing Grade
                   </div>
                   <div className="quizResults-headerBodyContentsResultsBodyResult">
-                    {resultsHeaderData.passingGrade}/100
+                    {resultsHeaderData.data.passingGrade}/100
                   </div>
                 </div>
                 <div className="quizResults-headerBodyContentsResultsBody">
@@ -161,8 +129,8 @@ const QuizResults = () => {
                     Correct
                   </div>
                   <div className="quizResults-headerBodyContentsResultsBodyResult">
-                    {resultsHeaderData.correctAnswers}/
-                    {resultsHeaderData.totalNumberOfQuestions}
+                    {resultsHeaderData.data.correctAnswers}/
+                    {resultsHeaderData.data.totalNumberOfQuestions}
                   </div>
                 </div>
                 <div className="quizResults-headerBodyContentsResultsBody">
@@ -170,8 +138,8 @@ const QuizResults = () => {
                     Wrong
                   </div>
                   <div className="quizResults-headerBodyContentsResultsBodyResult">
-                    {resultsHeaderData.wrongAnswers}/
-                    {resultsHeaderData.totalNumberOfQuestions}
+                    {resultsHeaderData.data.wrongAnswers}/
+                    {resultsHeaderData.data.totalNumberOfQuestions}
                   </div>
                 </div>
               </div>
@@ -179,42 +147,44 @@ const QuizResults = () => {
           </div>
         </div>
       )}
-      <div className="quizResults-body">
-        <div className="quizResults-bodyListTitle">List of Questions</div>
-        <div className="quizResults-bodyList">
-          {resultAnswers.map((ele: any, i: any) => {
-            return (
-              <div className="quizResults-bodyListItem" key={i}>
-                <div className="quizResults-bodyListItemContent">
-                  <div className="quizResults-bodyListItemContentQuestion">
-                    Question {i + 1}
+      {resultAnswers && resultAnswers.data && (
+        <div className="quizResults-body">
+          <div className="quizResults-bodyListTitle">List of Questions</div>
+          <div className="quizResults-bodyList">
+            {resultAnswers.data.map((ele: any, i: any) => {
+              return (
+                <div className="quizResults-bodyListItem" key={i}>
+                  <div className="quizResults-bodyListItemContent">
+                    <div className="quizResults-bodyListItemContentQuestion">
+                      Question {i + 1}
+                    </div>
+                    <div
+                      className={
+                        ele.correctAnswer === ele.userAnswer
+                          ? 'quizResults-bodyListItemContentAnswer quizResults-bodyListItemContentAnswerGreen'
+                          : 'quizResults-bodyListItemContentAnswer quizResults-bodyListItemContentAnswerRed'
+                      }
+                    >
+                      {ele.correctAnswer === ele.userAnswer
+                        ? 'Correct Answer'
+                        : 'Wrong Answer'}
+                    </div>
                   </div>
                   <div
-                    className={
-                      ele.correctAnswer === ele.userAnswer
-                        ? 'quizResults-bodyListItemContentAnswer quizResults-bodyListItemContentAnswerGreen'
-                        : 'quizResults-bodyListItemContentAnswer quizResults-bodyListItemContentAnswerRed'
-                    }
+                    className="quizResults-bodyListItemDrawer"
+                    onClick={() => {
+                      toggleDrawer()
+                      dispatch(quizAnswer(ele))
+                    }}
                   >
-                    {ele.correctAnswer === ele.userAnswer
-                      ? 'Correct Answer'
-                      : 'Wrong Answer'}
+                    {showAnsIcon}
                   </div>
                 </div>
-                <div
-                  className="quizResults-bodyListItemDrawer"
-                  onClick={() => {
-                    toggleDrawer()
-                    dispatch(quizAnswer(ele))
-                  }}
-                >
-                  {showAnsIcon}
-                </div>
-              </div>
-            )
-          })}
+              )
+            })}
+          </div>
         </div>
-      </div>
+      )}
       <div className="quizDrawerOverlay">
         {' '}
         <Drawer

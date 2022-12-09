@@ -10,6 +10,7 @@ import myCourseReducer from '../reducers/myCourseReducer'
 import { quizAnswerSlice } from '../reducers/result'
 import testSlice from '../reducers/testSlice'
 import answerHeaderSlice from '../reducers/testAnswerHeader'
+import answerSlice from '../reducers/testAnswer'
 
 const reducers = combineReducers({
   headerProfile: showHeaderProfile.reducer,
@@ -19,6 +20,7 @@ const reducers = combineReducers({
   quizAnswer: quizAnswerSlice.reducer,
   test: testSlice.reducer,
   answerHeader: answerHeaderSlice.reducer,
+  answer: answerSlice.reducer,
 })
 
 const persistConfig = {
