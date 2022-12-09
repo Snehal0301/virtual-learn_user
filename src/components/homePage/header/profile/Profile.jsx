@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import "./Profile.css";
 import {
   closeProfile,
@@ -19,6 +19,7 @@ import {
 } from "../../../../redux/reducers/headerProfileOptions";
 import ChangePassword from "../changePassword/ChangePassword";
 import EditProfile from "../edit-profile/EditProfile";
+import axios from "axios";
 
 const Profile = () => {
   const dispatch = useDispatch();
@@ -41,7 +42,23 @@ const Profile = () => {
     (state) => state.headerProfile.showChangePassword
   );
   const editState = useSelector((state) => state.headerProfile.editSection);
-
+  
+  // useEffect(() => {
+  //  axios
+  //    .get(
+  //      `http://virtuallearnapp2-env.eba-wrr2p8zk.ap-south-1.elasticbeanstalk.com/user/myProfile`,
+  //      {
+  //        headers:
+  //        {
+  //          Authorization:`Bearer ${localStorage.getItem("Token")}`
+  //        }
+  //      }
+  //    )
+  //    .then((res) => {
+  //      console.log(res);
+  //    });
+  // }, [])
+  
   const renderElement = () => {
     if (changePasswordState) {
       return <ChangePassword />;
