@@ -57,21 +57,14 @@ const HomeCategoriesDesign = () => {
 
   ];
 
-
-
   useEffect(() => {
-
-    axios.get(
-
-      `http://virtuallearnapp2-env.eba-wrr2p8zk.ap-south-1.elasticbeanstalk.com/user/home/course/all`, { headers: { "Authorization": `Bearer ` } }
+    fetch(
+      `http://virtuallearnapp2-env.eba-wrr2p8zk.ap-south-1.elasticbeanstalk.com/user/home/course/all`, { headers: { "Authorization": `Bearer ${localStorage.getItem("Token")}` } }
 
     ).then((res) => { console.log(res) })
-
-
-
-
   }, [])
 
+  
   return (
     <div className='homecategoriesdesign'>
       <a href="#"> Design</a>
