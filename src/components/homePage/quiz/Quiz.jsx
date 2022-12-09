@@ -1,18 +1,19 @@
-import React, { useEffect, useState } from 'react';
-import Countdown from 'react-countdown';
-import { useDispatch, useSelector } from 'react-redux';
-import { showQuizModal } from '../../../redux/reducers/Conditions';
+import React, { useEffect, useState } from "react";
+import Countdown from "react-countdown";
+import { useDispatch, useSelector } from "react-redux";
+import { showQuizModal } from "../../../redux/reducers/Conditions";
+import { test } from "../../../redux/reducers/testSlice";
 
 import {
   closeIcon,
   nextIcon,
   previousIcon,
   timerIcon,
-} from '../../../utils/svgIcons';
-import Timer from '../../../utils/Timer';
-import './Quiz.css';
-import QuizBody from './QuizBody';
-import QuizModal from './QuizModal';
+} from "../../../utils/svgIcons";
+import Timer from "../../../utils/Timer";
+import "./Quiz.css";
+import QuizBody from "./QuizBody";
+import QuizModal from "./QuizModal";
 
 const Quiz = () => {
   const dispatch = useDispatch();
@@ -34,10 +35,18 @@ const Quiz = () => {
   //   }
   // };
 
+  useEffect(() => {
+    dispatch(test("moduleTest?testId=17"));
+  }, []);
+
+  const testQuestions = useSelector((state) => state.test.data.data);
+
   return (
     <div className="quiz">
       <div className="quiz-header">
-        <div className="quizHeaderTitle">Module Test 2</div>
+        <div className="quizHeaderTitle">
+          Module Test {testQuestions && testQuestions.chapterNumber}
+        </div>
         <div className="quizHeaderTime">
           <div className="quizHeaderTimeIcon">{timerIcon}</div>
           <div className="quiz-HeaderTimeText">

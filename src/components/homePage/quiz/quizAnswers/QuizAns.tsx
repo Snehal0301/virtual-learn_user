@@ -19,16 +19,18 @@ const QuizAns = () => {
         <div className="quizAns">
           <div className="quizAns-header">
             <div className="quizAns-headerQuesNum">
-              {answers && answers.question}
+              {answers && answers.questionName}
             </div>
             <div
               className={
-                answers.answer === 'Correct Answer'
+                answers.correctAnswer === answers.userAnswer
                   ? 'quizAns-headerQuesResult correctAns'
                   : 'quizAns-headerQuesResult wrongAns'
               }
             >
-              {answers && answers.answer}
+              {answers.correctAnswer === answers.userAnswer
+                ? 'Correct Answer'
+                : 'Wrong Answer'}
             </div>
           </div>
           <div className="quizAns-Body">
@@ -36,32 +38,86 @@ const QuizAns = () => {
               {answers && answers.ques}
             </div>
             <div className="quizAnz-bodyQuestionOptions">
-              {answers &&
-                answers.answers.map((ele: any, i: any) => {
-                  console.log('ele', ele);
-
-                  return (
-                    <div
-                      className={
-                        ele === answers.cor
-                          ? 'quizAns-bodyOptions quizAns-bodyOptionIconCorrect'
-                          : ele !== answers.cor && ele === answers.sel
-                          ? 'quizAns-bodyOptions quizAns-bodyOptionIconWrong'
-                          : 'quizAns-bodyOptions'
-                      }
-                      key={i}
-                    >
-                      <div className="quizAns-bodyOptionIcon">
-                        {ele === answers.cor
-                          ? correctOptionEllipse
-                          : ele !== answers.cor && ele === answers.sel
-                          ? wrongOptionEllipse
-                          : optionEllipse}
-                      </div>
-                      <div className="quizAns-bodyOptionText">{ele}</div>
-                    </div>
-                  );
-                })}
+              <div
+                className={
+                  answers.option_1 === answers.correctAnswer
+                    ? 'quizAns-bodyOptions quizAns-bodyOptionIconCorrect'
+                    : answers.option_1 !== answers.correctAnswer &&
+                      answers.option_1 === answers.userAnswer
+                    ? 'quizAns-bodyOptions quizAns-bodyOptionIconWrong'
+                    : 'quizAns-bodyOptions'
+                }
+              >
+                <div className="quizAns-bodyOptionIcon">
+                  {answers.option_1 === answers.correctAnswer
+                    ? correctOptionEllipse
+                    : answers.option_1 !== answers.correctAnswer &&
+                      answers.option_1 === answers.userAnswer
+                    ? wrongOptionEllipse
+                    : optionEllipse}
+                </div>
+                <div className="quizAns-bodyOptionText">{answers.option_1}</div>
+              </div>
+              <div
+                className={
+                  answers.option_2 === answers.correctAnswer
+                    ? 'quizAns-bodyOptions quizAns-bodyOptionIconCorrect'
+                    : answers.option_2 !== answers.correctAnswer &&
+                      answers.option_2 === answers.userAnswer
+                    ? 'quizAns-bodyOptions quizAns-bodyOptionIconWrong'
+                    : 'quizAns-bodyOptions'
+                }
+              >
+                <div className="quizAns-bodyOptionIcon">
+                  {answers.option_2 === answers.correctAnswer
+                    ? correctOptionEllipse
+                    : answers.option_2 !== answers.correctAnswer &&
+                      answers.option_2 === answers.userAnswer
+                    ? wrongOptionEllipse
+                    : optionEllipse}
+                </div>
+                <div className="quizAns-bodyOptionText">{answers.option_2}</div>
+              </div>
+              <div
+                className={
+                  answers.option_3 === answers.correctAnswer
+                    ? 'quizAns-bodyOptions quizAns-bodyOptionIconCorrect'
+                    : answers.option_3 !== answers.correctAnswer &&
+                      answers.option_3 === answers.userAnswer
+                    ? 'quizAns-bodyOptions quizAns-bodyOptionIconWrong'
+                    : 'quizAns-bodyOptions'
+                }
+              >
+                <div className="quizAns-bodyOptionIcon">
+                  {answers.option_3 === answers.correctAnswer
+                    ? correctOptionEllipse
+                    : answers.option_3 !== answers.correctAnswer &&
+                      answers.option_3 === answers.userAnswer
+                    ? wrongOptionEllipse
+                    : optionEllipse}
+                </div>
+                <div className="quizAns-bodyOptionText">{answers.option_3}</div>
+              </div>
+              <div
+                className={
+                  answers.option_4 === answers.correctAnswer
+                    ? 'quizAns-bodyOptions quizAns-bodyOptionIconCorrect'
+                    : answers.option_4 !== answers.correctAnswer &&
+                      answers.option_4 === answers.userAnswer
+                    ? 'quizAns-bodyOptions quizAns-bodyOptionIconWrong'
+                    : 'quizAns-bodyOptions'
+                }
+              >
+                <div className="quizAns-bodyOptionIcon">
+                  {answers.option_4 === answers.correctAnswer
+                    ? correctOptionEllipse
+                    : answers.option_4 !== answers.correctAnswer &&
+                      answers.option_4 === answers.userAnswer
+                    ? wrongOptionEllipse
+                    : optionEllipse}
+                </div>
+                <div className="quizAns-bodyOptionText">{answers.option_4}</div>
+              </div>
             </div>
           </div>
         </div>
