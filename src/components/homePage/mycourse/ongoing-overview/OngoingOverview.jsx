@@ -384,7 +384,7 @@ const OngoingOverview = () => {
                                                                                             <div className="video-play-btn"
                                                                                                 // onClick={() => { setVideo(courseele.videoLink) }}
                                                                                                 onClick={() => { dispatch(videoLinkState(courseele.videoLink)) }}
-                                                                                            >{videoPlayActive} chegceg
+                                                                                            >{videoPlayActive}
                                                                                             </div>
                                                                                         </div>
 
