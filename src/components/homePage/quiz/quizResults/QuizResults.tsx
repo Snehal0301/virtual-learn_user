@@ -1,13 +1,14 @@
-import React from 'react';
-import { closeIcon, showAnsIcon } from '../../../../utils/svgIcons';
-import './QuizResults.css';
-import Drawer from 'react-modern-drawer';
-import { useDispatch } from 'react-redux';
-import { quizAnswer } from '../../../../redux/reducers/result';
-import QuizAns from '../quizAnswers/QuizAns';
+import React, { useEffect } from 'react'
+import { closeIcon, showAnsIcon } from '../../../../utils/svgIcons'
+import './QuizResults.css'
+import Drawer from 'react-modern-drawer'
+import { useDispatch, useSelector } from 'react-redux'
+import { quizAnswer } from '../../../../redux/reducers/result'
+import QuizAns from '../quizAnswers/QuizAns'
+import { answerHeader } from '../../../../redux/reducers/testAnswerHeader'
 
 const QuizResults = () => {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
 
   const resultsHeaderData = {
     chapterNumber: 6,
@@ -18,7 +19,13 @@ const QuizResults = () => {
     correctAnswers: 3,
     wrongAnswers: 2,
     totalNumberOfQuestions: 5,
-  };
+  }
+
+  useEffect(() => {
+    dispatch(answerHeader('resultAnswers?testId=17'))
+  }, [])
+
+  const answers = useSelector
 
   const results: any = [
     {
@@ -55,7 +62,7 @@ const QuizResults = () => {
     // { question: 'Question8', answer: 'Correct Answer' },
     // { question: 'Question9', answer: 'Correct Answer' },
     // { question: 'Question10', answer: 'Correct Answer' },
-  ];
+  ]
 
   const resultAnswers = [
     {
@@ -113,12 +120,12 @@ const QuizResults = () => {
       userAnswer: 'Application Programming Interface',
       userAnswerStatus: '1',
     },
-  ];
+  ]
 
-  const [isOpen, setIsOpen] = React.useState(false);
+  const [isOpen, setIsOpen] = React.useState(false)
   const toggleDrawer = () => {
-    setIsOpen((prevState) => !prevState);
-  };
+    setIsOpen((prevState) => !prevState)
+  }
 
   return (
     <div className="quizResults">
@@ -197,14 +204,14 @@ const QuizResults = () => {
                 <div
                   className="quizResults-bodyListItemDrawer"
                   onClick={() => {
-                    toggleDrawer();
-                    dispatch(quizAnswer(ele));
+                    toggleDrawer()
+                    dispatch(quizAnswer(ele))
                   }}
                 >
                   {showAnsIcon}
                 </div>
               </div>
-            );
+            )
           })}
         </div>
       </div>
@@ -222,7 +229,7 @@ const QuizResults = () => {
           <div
             className="quizDrawerCloseIcon"
             onClick={() => {
-              toggleDrawer();
+              toggleDrawer()
             }}
           >
             {closeIcon}
@@ -230,7 +237,7 @@ const QuizResults = () => {
         </Drawer>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default QuizResults;
+export default QuizResults
