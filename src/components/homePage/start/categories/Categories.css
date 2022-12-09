@@ -81,9 +81,6 @@ ul.breadcrumb-categories li a:hover {
 }
 
 @media only screen and (max-width: 800px) {
-
-  .categories-body-display {}
-
   .categories-home-chipBorder {
     flex-basis: 31%;
   }
@@ -97,10 +94,27 @@ ul.breadcrumb-categories li a:hover {
     letter-spacing: 0;
     line-height: 35px;
   }
+  ul.breadcrumb-categories
+  {
+    padding: 5px 0 15px 0;
+  }
+
   .categories-body-choose 
   {
     font-size: 20px;
   }
+  .categories-body-display
+  {
+    margin-top: 2em;
+  }
+  .categoriesDisplay-home-parent
+  {
+    height: 103px;
+  }
+
+
+ 
+
 
 
 }

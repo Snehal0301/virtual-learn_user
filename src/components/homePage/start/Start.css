@@ -32,6 +32,22 @@
     border-radius: 5px;
 }
 
+.start-image-title {
+    position: relative;
+}
+
+.start-title-text {
+    position: absolute;
+    bottom: 18px;
+    left: 36px;
+    font-family: 'Biko';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    /* line-height: 50px; */
+    color: var(--primaryFontClr);
+}
+
 .start-course1-image-first img {
     height: 100%;
     margin: 0;
@@ -99,7 +115,7 @@
 .start-course-section2 {
     display: flex;
     justify-content: space-between;
-    padding-top: 70px;
+    padding-top: 20px;
 }
 
 .start-course-section2-first {
@@ -192,6 +208,9 @@
 .start-course-categories-Name {
     padding-left: 1rem;
     width: max-content;
+    text-align: center;
+    display: flex;
+    align-items: center;
 }
 
 .start-choice-course-subcategory {
@@ -204,7 +223,7 @@
 }
 
 .start-choice-subcategory-image img {
-    height: 100%;
+    height: 184px;
     margin: 0;
     width: 100%;
     border-radius: 5px;
@@ -320,6 +339,16 @@
     /* opacity: 0.2; */
     border-radius: 6px;
 }
+.start-course-overlay-header {
+    position: absolute;
+    top: 0px;
+    right: 20px;
+    bottom: 5px;
+    left: 20px;
+    background-color: #0000003b;
+    /* opacity: 0.2; */
+    border-radius: 6px;
+}
 
 .start-map-image {
     margin: 0 20px;
@@ -332,6 +361,8 @@
 
 .start-map-image>img {
     width: 100%;
+   
+    height: 224px;
     border-radius: 6px;
 }
 

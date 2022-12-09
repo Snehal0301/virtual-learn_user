@@ -136,6 +136,7 @@
 
 .home-categories-Name {
     /* padding-left: 1rem; */
+    width: max-content;
 }
 
 .start-choice-course-subcategory {
@@ -156,10 +157,11 @@
 }
 
 .home-categories-subcategory-allcourse-image img {
-    height: 100%;
-    margin: 0;
-    width: 100%;
-    border-radius: 5px;
+        /* height: 100%; */
+        margin: 0;
+        width: 100%;
+        border-radius: 5px;
+        height: 175px;
 
 }
 
@@ -347,7 +349,7 @@
     }
 
     .home-categories-subcategory-image img {
-        width: 350px;
+        width: 320px;
     }
 
     .home-categories-subcategory-allcourse-image {
@@ -404,6 +406,17 @@
         padding: unset;
         
     }
+    .homecategoriesdesign a 
+    {
+        
+        color: #2B2B2B;
+        font-family: Biko;
+        font-size: 26px;
+        font-weight: bold;
+        line-height: 35px;
+    }
+
+
 
 
 }
