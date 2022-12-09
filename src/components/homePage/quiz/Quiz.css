@@ -320,6 +320,9 @@ small {
     letter-spacing: -0.39px;
     line-height: 24.2px;
     text-align: center;
+    position: unset !important;
+    width: unset !important;
+    height: unset !important;
   }
   .quizModal-text {
     font-size: 16px !important;
@@ -330,7 +333,4 @@ small {
 }
 
 @media screen and (max-width: 500px) {
-  .headerSearch-filterModalBody {
-    width: 87vw;
-  }
 }
