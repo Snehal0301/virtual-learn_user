@@ -1,14 +1,16 @@
-import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit'
-import storage from 'redux-persist/lib/storage'
-import { combineReducers } from 'redux'
-import { persistReducer } from 'redux-persist'
-import thunk from 'redux-thunk'
-import { showHeaderProfile } from '../reducers/headerProfileOptions'
-import showLoginConditions from '../reducers/Conditions'
-import loginSlice from '../reducers/loginSlice'
-import myCourseReducer from '../reducers/myCourseReducer'
-import { quizAnswerSlice } from '../reducers/result'
-import testSlice from '../reducers/testSlice'
+import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
+import storage from 'redux-persist/lib/storage';
+import { combineReducers } from 'redux';
+import { persistReducer } from 'redux-persist';
+import thunk from 'redux-thunk';
+import { showHeaderProfile } from '../reducers/headerProfileOptions';
+import showLoginConditions from '../reducers/Conditions';
+import loginSlice from '../reducers/loginSlice';
+import myCourseReducer from '../reducers/myCourseReducer';
+import { quizAnswerSlice } from '../reducers/result';
+import testSlice from '../reducers/testSlice';
+import allcourseReducer from '../reducers/allcourseSlice';
+import categoryReducer from '../reducers/categorySlice';
 import answerHeaderSlice from '../reducers/testAnswerHeader'
 import answerSlice from '../reducers/testAnswer'
 
@@ -21,7 +23,9 @@ const reducers = combineReducers({
   test: testSlice.reducer,
   answerHeader: answerHeaderSlice.reducer,
   answer: answerSlice.reducer,
-})
+  allcourse:allcourseReducer,
+  categorydata:categoryReducer
+});
 
 const persistConfig = {
   key: 'root',
