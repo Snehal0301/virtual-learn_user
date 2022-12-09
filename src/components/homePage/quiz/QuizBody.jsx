@@ -1,47 +1,31 @@
-import './Quiz.css';
-import { MultiStepForm, Step } from 'react-multi-form';
-import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { showQuizModal } from '../../../redux/reducers/Conditions';
-import QuizModal from './QuizModal';
+import "./Quiz.css";
+import { MultiStepForm, Step } from "react-multi-form";
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { showQuizModal } from "../../../redux/reducers/Conditions";
+import QuizModal from "./QuizModal";
 
 const QuizBody = () => {
   const [active, setActive] = useState(1);
   const dispatch = useDispatch();
 
-  const items = [
-    {
-      question: 'Who invented JavaScript?',
-      answers: ['Douglas Crockford', 'Sheryl Sandberg', 'Brendan Eich'],
-      questionId: 'a',
-    },
-    {
-      question: 'Which one of these is a JavaScript package manager?',
-      answers: ['Node.js', 'TypeScript', 'npm'],
-      questionId: 'b',
-    },
-    {
-      question: 'Which tool can you use to ensure code quality?',
-      answers: ['Angular', 'jQuery', 'RequireJS', 'ESLint'],
-      questionId: 'c',
-    },
-  ];
+  const quizData = useSelector((state) => state.test.data.data);
 
-  const quizData = {
+  const quizDataOne = {
     testId: 17,
     chapterNumber: 6,
-    chapterName: 'Conclusion',
-    testName: 'Final Test',
-    testDuration: '00:06:00',
+    chapterName: "Conclusion",
+    testName: "Final Test",
+    testDuration: "00:06:00",
     questionsCount: 5,
     questions: [
       {
         questionId: 20,
-        questionName: 'How many letters are there in Tamil alphabets ',
-        option_1: '49',
-        option_2: '40',
-        option_3: '43',
-        option_4: '48',
+        questionName: "How many letters are there in Tamil alphabets ",
+        option_1: "49",
+        option_2: "40",
+        option_3: "43",
+        option_4: "48",
         state1: false,
         state2: false,
         state3: false,
@@ -49,11 +33,11 @@ const QuizBody = () => {
       },
       {
         questionId: 25,
-        questionName: 'How many letters are there in Tamil alphabets ',
-        option_1: '49',
-        option_2: '40',
-        option_3: '43',
-        option_4: '48',
+        questionName: "How many letters are there in Tamil alphabets ",
+        option_1: "49",
+        option_2: "40",
+        option_3: "43",
+        option_4: "48",
         state1: false,
         state2: false,
         state3: false,
@@ -61,11 +45,11 @@ const QuizBody = () => {
       },
       {
         questionId: 40,
-        questionName: 'What isa 0*2',
-        option_1: '9',
-        option_2: '2',
-        option_3: '0',
-        option_4: '0.2',
+        questionName: "What isa 0*2",
+        option_1: "9",
+        option_2: "2",
+        option_3: "0",
+        option_4: "0.2",
         state1: false,
         state2: false,
         state3: false,
@@ -73,11 +57,11 @@ const QuizBody = () => {
       },
       {
         questionId: 50,
-        questionName: 'What isa UI',
-        option_1: 'User Interface',
-        option_2: 'User Intraface',
-        option_3: 'User Interior',
-        option_4: 'User Inter Data',
+        questionName: "What isa UI",
+        option_1: "User Interface",
+        option_2: "User Intraface",
+        option_3: "User Interior",
+        option_4: "User Inter Data",
         state1: false,
         state2: false,
         state3: false,
@@ -85,11 +69,11 @@ const QuizBody = () => {
       },
       {
         questionId: 60,
-        questionName: 'What isa API',
-        option_1: 'Application Programming Interface',
-        option_2: 'Application Programming Intraface',
-        option_3: 'Application Programming Interior',
-        option_4: 'Application Inter Data',
+        questionName: "What isa API",
+        option_1: "Application Programming Interface",
+        option_2: "Application Programming Intraface",
+        option_3: "Application Programming Interior",
+        option_4: "Application Inter Data",
         state1: false,
         state2: false,
         state3: false,
@@ -100,14 +84,14 @@ const QuizBody = () => {
 
   const submitQuizHandler = (e) => {
     e.preventDefault();
-    var form = document.getElementById('quiz');
+    var form = document.getElementById("quiz");
 
-    console.log('selected answers');
+    console.log("selected answers");
 
     quizData.questions.forEach((element) => {
       console.log(
         element.questionId,
-        ':',
+        ":",
         form.elements[`Id${element.questionId}`].value
       );
     });
@@ -125,7 +109,7 @@ const QuizBody = () => {
                 <div key={i}>
                   <Step label={i}>
                     <div className="quiz-questionNum">
-                      {' '}
+                      {" "}
                       Question {i + 1} of {quizData.questions.length}
                     </div>
 
@@ -215,7 +199,7 @@ const QuizBody = () => {
               type="button"
             >
               <img
-                src={require('../../../assets/icons/previousIcon.png')}
+                src={require("../../../assets/icons/previousIcon.png")}
                 alt="previous"
               />
             </button>
@@ -223,11 +207,11 @@ const QuizBody = () => {
             <button
               type="button"
               onClick={() => setActive(active + 1)}
-              style={{ float: 'right' }}
+              style={{ float: "right" }}
               className={
                 active === (quizData.questions && quizData.questions.length)
-                  ? 'quiz-buttonsSubmit'
-                  : ''
+                  ? "quiz-buttonsSubmit"
+                  : ""
               }
               disabled={
                 active === (quizData.questions && quizData.questions.length)
@@ -243,7 +227,7 @@ const QuizBody = () => {
                 </span>
               ) : (
                 <img
-                  src={require('../../../assets/icons/nextIcon.png')}
+                  src={require("../../../assets/icons/nextIcon.png")}
                   alt="next"
                 ></img>
               )}

@@ -23,9 +23,9 @@ const HomePage = () => {
         {/* <ChoiceYourCourse/> */}
         {/* <HomeCategoriesDesign/> */}
         {/* <Start /> */}
-        {/* <Quiz /> */}
+        <Quiz />
         {/* <QuizSuccess /> */}
-        <QuizResults />
+        {/* <QuizResults /> */}
         {/* <CourseCompleted /> */}
         {/* <MyCourse /> */}
       </div>
