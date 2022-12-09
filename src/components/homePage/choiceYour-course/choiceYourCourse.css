@@ -44,6 +44,9 @@
 .choice-your-coursecategories-Name {
     padding-left: 0.5rem;
     width: max-content;
+    display: flex;
+    /* text-align: center; */
+    align-items: center;
 }
 
 .choice-your-course-allcourse {
@@ -113,6 +116,7 @@
 
 .choice-your-coursesubcategory-image img {
     width: 100%;
+    height: 188px;
     border-radius: 5px;
 
 }

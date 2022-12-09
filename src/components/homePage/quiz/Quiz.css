@@ -230,3 +230,107 @@ small {
   display: flex;
   gap: 6px;
 }
+
+.quizHeaderTimeIcon {
+  display: flex;
+  align-items: center;
+}
+@media screen and (max-width: 940px) {
+  .quiz-HeaderCloseIcon {
+    position: absolute;
+  }
+  .quizHeaderTitle {
+    color: var(--blackFontClr);
+    font-family: 'Biko';
+    padding-top: 44px;
+    font-size: 26px;
+    font-weight: bold;
+    letter-spacing: 0;
+    line-height: 35px;
+  }
+  .quizHeaderTime {
+    color: var(--blueFont);
+    position: absolute;
+    right: 6%;
+    top: 88px;
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: 0.27px;
+    line-height: 28px;
+  }
+  .quiz-options {
+    width: 100%;
+    gap: 20px;
+  }
+
+  .quiz-questionNum {
+    font-size: 16px;
+  }
+  .quiz-question {
+    font-size: 20px;
+    font-weight: 600;
+    letter-spacing: 0;
+    line-height: 26px;
+  }
+  .quiz-eachOption {
+    padding: 15px 20px;
+  }
+
+  .quiz-eachOptionBox {
+    font-size: 16px;
+    font-weight: 500;
+    letter-spacing: 0;
+    line-height: 20px;
+  }
+  .quiz-footer {
+    width: unset;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    border-radius: 0;
+    justify-content: space-between;
+  }
+  form#quiz {
+    padding: 0;
+  }
+  .quiz {
+    padding: 0 6%;
+    height: max-content;
+    overflow: auto;
+    padding-bottom: 136px;
+  }
+
+  .quiz-footerChapter {
+    font-size: 20px;
+  }
+  .quiz-footerChapterTitle {
+    font-style: normal;
+    font-weight: 100;
+    font-size: 14px;
+    line-height: unset;
+    margin-top: 10px;
+  }
+  .headerSearch-filterModalBodyCloseIcon {
+    display: none;
+  }
+  .headerSearch-filterModalBodyTitle {
+    font-size: 20px !important;
+    font-weight: 600;
+    letter-spacing: -0.39px;
+    line-height: 24.2px;
+    text-align: center;
+    position: unset !important;
+    width: unset !important;
+    height: unset !important;
+  }
+  .quizModal-text {
+    font-size: 16px !important;
+    letter-spacing: -0.07px;
+    line-height: 17.6px;
+    text-align: center;
+  }
+}
+
+@media screen and (max-width: 500px) {
+}

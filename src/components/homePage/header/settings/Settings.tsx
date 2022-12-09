@@ -60,6 +60,12 @@ const Settings = () => {
             >
               {closeProfile}
             </div>
+            <div className="mobile-arrow-left">
+              <i
+                className="fa-solid fa-arrow-left-long arrow-left-long"
+                onClick={handleClick}
+              ></i>
+            </div>
             <div className="settings-settings-text">
               <p>Settings</p>
             </div>
@@ -68,7 +74,7 @@ const Settings = () => {
           <div className="settings-body">
             <div className="settings-notification">
               <div className="settings-notification-text-icon">
-                <div>{settings_Icon}</div>
+                <div className="settings-icon">{settings_Icon}</div>
                 <p
                   className="settings-notification-text"
                   onClick={handleSetNotify}
@@ -113,7 +119,7 @@ const Settings = () => {
               onClick={handlePrivacyPolicy}
             >
               <div className="privacy-policy-text-icon">
-                <div>{privacy_icon}</div>
+                <div className="privacy_icon">{privacy_icon}</div>
                 <p>Privacy Policy</p>
               </div>
               <div className="settings-chevron-right">{chevron_right}</div>
@@ -124,7 +130,7 @@ const Settings = () => {
               onClick={handleTermsServices}
             >
               <div className="terms-text-icon">
-                <div>{terms_icon}</div>
+                <div className="terms_icon">{terms_icon}</div>
                 <p>Terms of Services</p>
               </div>
               <div className="settings-chevron-right">{chevron_right}</div>
