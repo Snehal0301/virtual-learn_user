@@ -21,11 +21,11 @@ const HomePage = () => {
       <div className="homePageBody">
         {/* <Start /> */}
         {/* <ChoiceYourCourse/> */}
-        <HomeCategoriesDesign/>
+        {/* <HomeCategoriesDesign/> */}
         {/* <Start /> */}
         {/* <Quiz /> */}
         {/* <QuizSuccess /> */}
-        <QuizResults />
+        {/* <QuizResults /> */}
         {/* <CourseCompleted /> */}
         {/* <MyCourse /> */}
         {/* <Categories/> */}
