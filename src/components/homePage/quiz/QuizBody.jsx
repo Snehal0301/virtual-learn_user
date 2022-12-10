@@ -75,6 +75,7 @@ const QuizBody = () => {
           alert('You have not met the minimum passing grade');
           dispatch(testShow(false));
           dispatch(testSuccess());
+          dispatch(testisSuccess());
         } else {
           alert(res.message);
           dispatch(testShow(false));
