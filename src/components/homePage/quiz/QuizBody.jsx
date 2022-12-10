@@ -25,6 +25,8 @@ const QuizBody = () => {
     (state) => state.loginConditions.successTest
   );
 
+  console.log('quizz data', quizData.testName);
+
   useEffect(() => {
     // showTestSuccesPage && dispatch(testShow(false));
     showTestSuccesPage && navigate('/testSuccess');
@@ -52,7 +54,9 @@ const QuizBody = () => {
     console.log('submit', submitData);
 
     fetch(
-      `http://virtuallearnapp2-env.eba-wrr2p8zk.ap-south-1.elasticbeanstalk.com/user/submit`,
+      `http://virtuallearnapp2-env.eba-wrr2p8zk.ap-south-1.elasticbeanstalk.com/user/${
+        quizData.testName === 'Final Test' ? 'finalSubmit' : 'submit'
+      }`,
       {
         method: 'POST',
         headers: {
@@ -77,9 +81,10 @@ const QuizBody = () => {
           dispatch(testSuccess());
           dispatch(testisSuccess());
         } else {
-          alert(res.message);
+          alert('Some error occured');
           dispatch(testShow(false));
           dispatch(testSuccess());
+          dispatch(testisSuccess());
         }
       });
 

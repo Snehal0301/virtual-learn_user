@@ -42,7 +42,7 @@ const Router = () => {
   );
   const showTest = useSelector((state: any) => state.loginConditions.showTest);
   const showTestSuccesPage = useSelector(
-    (state: any) => state.loginConditions.successTest
+    (state: any) => state.testSuccessRed.value
   );
 
   return (

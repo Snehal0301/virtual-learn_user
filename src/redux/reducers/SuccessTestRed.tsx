@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState: any = {
-  value: {},
+  value: false,
 };
 
 export const testSuccessRedSlice = createSlice({
