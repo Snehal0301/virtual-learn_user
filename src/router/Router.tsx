@@ -49,7 +49,11 @@ const Router = () => {
     (state: any) => state.showSuccessPage.value
   );
 
-  console.log('test successs', showResultPage);
+  const showFinalResult = useSelector(
+    (state: any) => state.finaltestShowPage.value
+  );
+
+  console.log('test successs', showFinalResult);
 
   return (
     <>
@@ -178,7 +182,7 @@ const Router = () => {
           <Route
             path="finalResult"
             element={
-              <HomeProtected redirectTo="/" condition={true}>
+              <HomeProtected redirectTo="/" condition={showFinalResult}>
                 <CourseCompleted />
               </HomeProtected>
             }
