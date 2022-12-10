@@ -3,7 +3,11 @@ import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-slideshow-image/dist/styles.css';
 import 'react-tabs/style/react-tabs.css';
 import './Start.css';
-import { design, start_pauseIcon, start_timeIcon } from '../../../utils/svgIcons';
+import {
+  design,
+  start_pauseIcon,
+  start_timeIcon,
+} from '../../../utils/svgIcons';
 import Slider from 'react-carousel-responsive';
 import 'react-carousel-responsive/dist/styles.css';
 import { useDispatch } from 'react-redux';
@@ -12,73 +16,69 @@ import { homeTabToggleState } from '../../../redux/reducers/myCourseReducer';
 import axios from 'axios';
 import { array } from 'yup/lib/locale';
 import { coursedata } from '../../../redux/reducers/allcourseSlice';
-import {categorydata} from '../../../redux/reducers/categorySlice';
-
+import { categorydata } from '../../../redux/reducers/categorySlice';
+import { useNavigate } from 'react-router-dom';
 
 const Start = () => {
-
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const homeTabState = useSelector((state) => state.mycourse.hometab);
 
-   const handleTabClick = (id) => {
+  const handleTabClick = (id) => {
     console.log(id);
-    dispatch(homeTabToggleState(id))
-  }
+    dispatch(homeTabToggleState(id));
+  };
 
-  const [headerdata, setheaderdata] = useState([])
-  const [allcourseData, setallcourseData] = useState([])
-  const [popular, setpopular] = useState([])
-  const [newestData, setnewestData] = useState([])
-  const [topcourseData, setTopcourseData] = useState([])
-  const [categoryData, setcategoryData] = useState([])
+  const [headerdata, setheaderdata] = useState([]);
+  const [allcourseData, setallcourseData] = useState([]);
+  const [popular, setpopular] = useState([]);
+  const [newestData, setnewestData] = useState([]);
+  const [topcourseData, setTopcourseData] = useState([]);
+  const [categoryData, setcategoryData] = useState([]);
 
   const startCourseData = [
     {
-
       id: 1,
       image: require('../../../assets/images/start-courses-image/What-Are-The-Most-Effective-Digital-Marketing-Strategies-_blog 1.png'),
-      title: "Digital Marketing",
+      title: 'Digital Marketing',
       chapter: '2 chapter',
-      time: "2:23:24",
-      btntext: "Design"
+      time: '2:23:24',
+      btntext: 'Design',
     },
     {
       id: 2,
       image: require('../../../assets/images/start-courses-image/banner-42 1.png'),
-      title: "Marketing Courses",
+      title: 'Marketing Courses',
       chapter: '2 chapter',
-      time: "2:23:24",
-      btntext: "Marketing"
+      time: '2:23:24',
+      btntext: 'Marketing',
     },
     {
       id: 3,
       image: require('../../../assets/images/start-courses-image/What-Are-The-Most-Effective-Digital-Marketing-Strategies-_blog 1.png'),
-      title: "Digital Strategies",
+      title: 'Digital Strategies',
       chapter: '2 chapter',
-      time: "2:23:24",
-      btntext: "Design"
+      time: '2:23:24',
+      btntext: 'Design',
     },
     {
       id: 2,
       image: require('../../../assets/images/start-courses-image/banner-42 1.png'),
-      title: "Marketing Courses",
+      title: 'Marketing Courses',
       chapter: '2 chapter',
-      time: "2:23:24",
-      btntext: "Marketing"
+      time: '2:23:24',
+      btntext: 'Marketing',
     },
     {
       id: 3,
       image: require('../../../assets/images/start-courses-image/What-Are-The-Most-Effective-Digital-Marketing-Strategies-_blog 1.png'),
-      title: "Digital Strategies",
+      title: 'Digital Strategies',
       chapter: '2 chapter',
-      time: "2:23:24",
-      btntext: "Design"
+      time: '2:23:24',
+      btntext: 'Design',
     },
-
-
-
-
-  ]
+  ];
 
   const startCategories = [
     'Design',
@@ -91,309 +91,326 @@ const Start = () => {
     'Marketing',
     'Lifestyle',
     'Photography',
-
   ];
 
   //Fetching api for slider
 
   useEffect(() => {
-    axios.get(
-      `http://virtuallearnapp2-env.eba-wrr2p8zk.ap-south-1.elasticbeanstalk.com/user/home/course`, { headers: { "Authorization": `Bearer ${localStorage.getItem("Token")}` } }
-
-    ).then((res) => { setheaderdata(res.data) }).catch((err) => {
-      console.error(err)
-    })
-  }, [])
-
+    axios
+      .get(
+        `http://virtuallearnapp2-env.eba-wrr2p8zk.ap-south-1.elasticbeanstalk.com/user/home/course`,
+        {
+          headers: { Authorization: `Bearer ${localStorage.getItem('Token')}` },
+        }
+      )
+      .then((res) => {
+        setheaderdata(res.data);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  }, []);
 
   //fetching data for all course
 
   useEffect(() => {
-    axios.get(
-      `http://virtuallearnapp2-env.eba-wrr2p8zk.ap-south-1.elasticbeanstalk.com/user/home/course/all`, { headers: { "Authorization": `Bearer ${localStorage.getItem("Token")}` } }
-
-    ).then((res) => { setallcourseData(res.data) }).catch((err) => {
-      console.error(err)
-    })
-
-
-  }, [])
-  dispatch(coursedata(allcourseData))
-
-
-
+    axios
+      .get(
+        `http://virtuallearnapp2-env.eba-wrr2p8zk.ap-south-1.elasticbeanstalk.com/user/home/course/all`,
+        {
+          headers: { Authorization: `Bearer ${localStorage.getItem('Token')}` },
+        }
+      )
+      .then((res) => {
+        setallcourseData(res.data);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  }, []);
+  dispatch(coursedata(allcourseData));
 
   //fetching data for popular courses
   useEffect(() => {
-    axios.get(
-      `http://virtuallearnapp2-env.eba-wrr2p8zk.ap-south-1.elasticbeanstalk.com/user/home/course/popular`, { headers: { "Authorization": `Bearer ${localStorage.getItem("Token")}` } }
-
-    ).then((res) => { setpopular(res.data) }).catch((err) => {
-      console.error(err)
-    })
-
-
-  }, [])
-
-
+    axios
+      .get(
+        `http://virtuallearnapp2-env.eba-wrr2p8zk.ap-south-1.elasticbeanstalk.com/user/home/course/popular`,
+        {
+          headers: { Authorization: `Bearer ${localStorage.getItem('Token')}` },
+        }
+      )
+      .then((res) => {
+        setpopular(res.data);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  }, []);
 
   //fetching data for newest courses
 
   useEffect(() => {
-    axios.get(
-      `http://virtuallearnapp2-env.eba-wrr2p8zk.ap-south-1.elasticbeanstalk.com/user/home/course/newest`, { headers: { "Authorization": `Bearer ${localStorage.getItem("Token")}` } }
-
-    ).then((res) => { setnewestData(res.data) }).catch((err) => {
-      console.error(err)
-    })
-
-
-  }, [])
+    axios
+      .get(
+        `http://virtuallearnapp2-env.eba-wrr2p8zk.ap-south-1.elasticbeanstalk.com/user/home/course/newest`,
+        {
+          headers: { Authorization: `Bearer ${localStorage.getItem('Token')}` },
+        }
+      )
+      .then((res) => {
+        setnewestData(res.data);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  }, []);
 
   //fetching api for top courses
 
   useEffect(() => {
-    axios.get(
-      `http://virtuallearnapp2-env.eba-wrr2p8zk.ap-south-1.elasticbeanstalk.com/user/home/course/category`, { headers: { "Authorization": `Bearer ${localStorage.getItem("Token")}` } }
-
-    ).then((res) => { setTopcourseData(res.data) }).catch((err) => {
-      console.error(err)
-    })
-
-
-  }, [])
+    axios
+      .get(
+        `http://virtuallearnapp2-env.eba-wrr2p8zk.ap-south-1.elasticbeanstalk.com/user/home/course/category`,
+        {
+          headers: { Authorization: `Bearer ${localStorage.getItem('Token')}` },
+        }
+      )
+      .then((res) => {
+        setTopcourseData(res.data);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  }, []);
 
   // fetching data for categories
 
   useEffect(() => {
-    axios.get(
-      `http://virtuallearnapp2-env.eba-wrr2p8zk.ap-south-1.elasticbeanstalk.com/user/categoriesWP`, { headers: { "Authorization": `Bearer ${localStorage.getItem("Token")}` } }
-
-    ).then((res) => { setcategoryData(res.data) }).catch((err) => {
-      console.error(err)
-    })
-
-
-  }, [])
+    axios
+      .get(
+        `http://virtuallearnapp2-env.eba-wrr2p8zk.ap-south-1.elasticbeanstalk.com/user/categoriesWP`,
+        {
+          headers: { Authorization: `Bearer ${localStorage.getItem('Token')}` },
+        }
+      )
+      .then((res) => {
+        setcategoryData(res.data);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  }, []);
   // console.log(categoryData);
-  dispatch(categorydata(categoryData))
+  dispatch(categorydata(categoryData));
 
-
-
-
-  const indicators = () => <div className="indicator"></div>
+  const indicators = () => <div className="indicator"></div>;
   return (
     <div className="start">
       <div className="start-greeting">Hello!</div>
       <div className="start-username">Mahendra Singh Dhoni</div>
       <Slider autoplay={true} autoplaySpeed={10000} slidesToShow={3}>
-        {
-          headerdata.map(item =>
-          (
-            <div className='start-image-title'>
-
-
-              <div className='start-map-image'><img src={item.coursePhoto} alt="" /></div>
-              <div className='start-course-overlay-header'></div>
-              <div className='start-title-text'>{item.courseName}</div>
+        {headerdata.map((item) => (
+          <div className="start-image-title">
+            <div className="start-map-image">
+              <img src={item.coursePhoto} alt="" />
             </div>
-
-
-          ))
-        }
-
+            <div className="start-course-overlay-header"></div>
+            <div className="start-title-text">{item.courseName}</div>
+          </div>
+        ))}
       </Slider>
-      <div className='start-course-section2-first'>
-        <div className='start-ongoing-courses'>Ongoing courses</div>
-        <div className='start-seeall'>See All</div>
+      <div className="start-course-section2-first">
+        <div className="start-ongoing-courses">Ongoing courses</div>
+        <div className="start-seeall">See All</div>
       </div>
-      <div className='start-card2'>
-        <div className='start-course1'>
-          {
-            startCourseData.map(item =>
-            (
-              <div className='start-course1-image'>
-                <div className='start-image-ongoing'>
-                  <img src={item.image} alt="" />
-                  <div className='start-image-sub'>ongoing</div>
-                </div>
-                <div className='start-course-overlay'></div>
-                <div className='start-title-container'>
-                  <div className='start-title-chapter'>
-                    <div className='start-course-section2-title'>{item.title}</div>
-                    <div className='start-course-chapter'>{item.chapter}</div>
-                  </div>
-
-                  <button className='start-course-button'>Continue</button>
-
-                </div>
+      <div className="start-card2">
+        <div className="start-course1">
+          {startCourseData.map((item) => (
+            <div className="start-course1-image">
+              <div className="start-image-ongoing">
+                <img src={item.image} alt="" />
+                <div className="start-image-sub">ongoing</div>
               </div>
+              <div className="start-course-overlay"></div>
+              <div className="start-title-container">
+                <div className="start-title-chapter">
+                  <div className="start-course-section2-title">
+                    {item.title}
+                  </div>
+                  <div className="start-course-chapter">{item.chapter}</div>
+                </div>
 
-
-            ))
-          }
+                <button className="start-course-button">Continue</button>
+              </div>
+            </div>
+          ))}
         </div>
       </div>
-      <div className='start-course-section2'>
-        <div className='start-ongoing-courses'>Categories</div>
-        <div className='start-seeall'>See All</div>
+      <div className="start-course-section2">
+        <div className="start-ongoing-courses">Categories</div>
+        <div className="start-seeall">See All</div>
       </div>
 
       <div className="start-course-categories">
-
         <div className="start-course-categories-Body">
-          {categoryData.map(ele => 
-             (
-              <div
-                className="start-course-categories-Parent"
-                
-              >
-                <div className="start-course-categories-Icon">
-                  <img src={ele.categoryPhoto} alt="" />
-                </div>
-                <div className="start-course-categories-Name">
-                  {ele.categoryName}
-                </div>
+          {categoryData.map((ele) => (
+            <div className="start-course-categories-Parent">
+              <div className="start-course-categories-Icon">
+                <img src={ele.categoryPhoto} alt="" />
               </div>
-            )
-          )}
-        </div>
-      </div>
-
-      <div className='start-course-section2'>
-        <div className='start-ongoing-courses'>Choice your course</div>
-        <div className='start-seeall'>See All</div>
-      </div>
-      <div className='start-choice-course-subcategory'>
-
-        <div className="all-tabs-home">
-          <div className={homeTabState === 1 ? "home-tab-1-active" : "home-tab-1"} onClick={() => handleTabClick(1)}>All</div>
-          <div className={homeTabState === 2 ? "home-tab-1-active" : "home-tab-1"} onClick={() => handleTabClick(2)}>Popular</div>
-          <div className={homeTabState === 3 ? "home-tab-1-active" : "home-tab-1"} onClick={() => handleTabClick(3)}>Newest</div>
-        </div>
-      </div>
-
-
-      {
-
-        homeTabState === 1 &&
-        <div className='start-card'>
-          <div className='start-choice1'>
-            {
-              allcourseData.slice(0, 4).map(item =>
-              (
-                <div className='start-choice-subcategory-image'>
-
-                  <div className='start-image-pause'>
-
-                    <img src={item.coursePhoto} alt="" />
-                    <div className='start-course-overlay-2'></div>
-
-                    <button className='start-designbtn'>{item.categoryName}</button>
-                  </div>
-
-                  <div className='start-choice-subcategory-title'>{item.courseName}</div>
-                  <div className='start-choice-chapter'>{item.chapterCount} chapters</div>
-                </div>
-
-              ))
-            }
-          </div>
-        </div>
-
-      }
-      {
-        homeTabState === 2 &&
-        <div className='start-card'>
-          <div className='start-choice1'>
-            {
-              popular.map(item =>
-              (
-                <div className='start-choice-subcategory-image'>
-
-                  <div className='start-image-pause'>
-
-                    <img src={item.coursePhoto} alt="" />
-                    <div className='start-course-overlay-2'></div>
-
-                    <button className='start-designbtn'>{item.categoryName}</button>
-                  </div>
-
-                  <div className='start-choice-subcategory-title'>{item.courseName}</div>
-                  <div className='start-choice-chapter'>{item.chapterCount} chapters</div>
-                </div>
-
-              ))
-            }
-          </div>
-        </div>
-      }
-      {
-        homeTabState === 3 &&
-        <div className='start-card'>
-          <div className='start-choice1'>
-            {
-              newestData.slice(0, 4).map(item =>
-              (
-                <div className='start-choice-subcategory-image'>
-
-                  <div className='start-image-pause'>
-
-                    <img src={item.coursePhoto} alt="" />
-                    <div className='start-course-overlay-2'></div>
-
-                    <button className='start-designbtn'>{item.categoryName}</button>
-                  </div>
-
-                  <div className='start-choice-subcategory-title'>{item.courseName}</div>
-                  <div className='start-choice-chapter'>{item.chapterCount} chapters</div>
-                </div>
-
-              ))
-            }
-          </div>
-        </div>
-      }
-      <div>
-        {
-          topcourseData.map(item =>
-          (
-            <div>
-              <div className='start-course-section2'>
-                <div className='start-ongoing-courses'>Top courses in {item.categoryName}</div>
-                <div className='start-seeall'>See All</div>
-              </div>
-
-              <div className='start-card'>
-                <div className='start-choice1'>
-                  {
-                    item.popularCourseInEachCategoryList.slice(0,4).map(ele =>
-                    (
-                      <div className='start-choice-subcategory-image'>
-                        <div className='start-image-pause'>
-                          <div className='start-course-overlay-2'></div>
-                          <img src={ele.coursePhoto} alt="" />
-                          <div className='start-pauseIcon'>{start_pauseIcon}</div>
-                        </div>
-
-                        <div className='start-choice-subcategory-title'>{ele.courseName}</div>
-                        <div className='start-chapter-time'>
-                          <div className='start-choice-chapter2'>{ele.chapterCount} chapters</div>
-                          <div>{start_timeIcon}</div>{ele.courseDuration}
-                        </div>
-                      </div>
-
-                    ))
-                  }
-                </div>
+              <div className="start-course-categories-Name">
+                {ele.categoryName}
               </div>
             </div>
+          ))}
+        </div>
+      </div>
 
-          ))
-        }
+      <div className="start-course-section2">
+        <div className="start-ongoing-courses">Choice your course</div>
+        <div
+          className="start-seeall"
+          onClick={() => {
+            navigate('courseChoice');
+          }}
+        >
+          See All
+        </div>
+      </div>
+      <div className="start-choice-course-subcategory">
+        <div className="all-tabs-home">
+          <div
+            className={homeTabState === 1 ? 'home-tab-1-active' : 'home-tab-1'}
+            onClick={() => handleTabClick(1)}
+          >
+            All
+          </div>
+          <div
+            className={homeTabState === 2 ? 'home-tab-1-active' : 'home-tab-1'}
+            onClick={() => handleTabClick(2)}
+          >
+            Popular
+          </div>
+          <div
+            className={homeTabState === 3 ? 'home-tab-1-active' : 'home-tab-1'}
+            onClick={() => handleTabClick(3)}
+          >
+            Newest
+          </div>
+        </div>
+      </div>
 
+      {homeTabState === 1 && (
+        <div className="start-card">
+          <div className="start-choice1">
+            {allcourseData.slice(0, 4).map((item) => (
+              <div className="start-choice-subcategory-image">
+                <div className="start-image-pause">
+                  <img src={item.coursePhoto} alt="" />
+                  <div className="start-course-overlay-2"></div>
 
+                  <button className="start-designbtn">
+                    {item.categoryName}
+                  </button>
+                </div>
 
+                <div className="start-choice-subcategory-title">
+                  {item.courseName}
+                </div>
+                <div className="start-choice-chapter">
+                  {item.chapterCount} chapters
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+      {homeTabState === 2 && (
+        <div className="start-card">
+          <div className="start-choice1">
+            {popular.map((item) => (
+              <div className="start-choice-subcategory-image">
+                <div className="start-image-pause">
+                  <img src={item.coursePhoto} alt="" />
+                  <div className="start-course-overlay-2"></div>
+
+                  <button className="start-designbtn">
+                    {item.categoryName}
+                  </button>
+                </div>
+
+                <div className="start-choice-subcategory-title">
+                  {item.courseName}
+                </div>
+                <div className="start-choice-chapter">
+                  {item.chapterCount} chapters
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+      {homeTabState === 3 && (
+        <div className="start-card">
+          <div className="start-choice1">
+            {newestData.slice(0, 4).map((item) => (
+              <div className="start-choice-subcategory-image">
+                <div className="start-image-pause">
+                  <img src={item.coursePhoto} alt="" />
+                  <div className="start-course-overlay-2"></div>
+
+                  <button className="start-designbtn">
+                    {item.categoryName}
+                  </button>
+                </div>
+
+                <div className="start-choice-subcategory-title">
+                  {item.courseName}
+                </div>
+                <div className="start-choice-chapter">
+                  {item.chapterCount} chapters
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+      <div>
+        {topcourseData.map((item) => (
+          <div>
+            <div className="start-course-section2">
+              <div className="start-ongoing-courses">
+                Top courses in {item.categoryName}
+              </div>
+              <div className="start-seeall">See All</div>
+            </div>
+
+            <div className="start-card">
+              <div className="start-choice1">
+                {item.popularCourseInEachCategoryList.slice(0, 4).map((ele) => (
+                  <div className="start-choice-subcategory-image">
+                    <div className="start-image-pause">
+                      <div className="start-course-overlay-2"></div>
+                      <img src={ele.coursePhoto} alt="" />
+                      <div className="start-pauseIcon">{start_pauseIcon}</div>
+                    </div>
+
+                    <div className="start-choice-subcategory-title">
+                      {ele.courseName}
+                    </div>
+                    <div className="start-chapter-time">
+                      <div className="start-choice-chapter2">
+                        {ele.chapterCount} chapters
+                      </div>
+                      <div>{start_timeIcon}</div>
+                      {ele.courseDuration}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        ))}
       </div>
       {/* <div className='start-course-section2'>
         <div className='start-ongoing-courses'>Top courses in Design</div>
@@ -423,9 +440,7 @@ const Start = () => {
         </div>
       </div> */}
     </div>
-
-
   );
 };
 
-export default Start
+export default Start;

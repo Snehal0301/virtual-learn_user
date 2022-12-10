@@ -15,6 +15,7 @@ import { useSelector } from 'react-redux';
 import PersonalDetails from '../components/onboarding/registration/personal-details/PersonalDetails';
 import Success_Page from '../views/onboarding/success_page/Success_Page';
 import Start from '../components/homePage/start/start';
+import ChoiceYourCourse from '../components/homePage/choiceYour-course/ChoiceYourCourse';
 const Router = () => {
   const showOtp = useSelector((state: any) => state.loginConditions.value);
   const changePass = useSelector(
@@ -123,6 +124,7 @@ const Router = () => {
           }
         >
           <Route path="" element={<Start />} />
+          <Route path="courseChoice" element={<ChoiceYourCourse />} />
         </Route>
       </Routes>
     </>
