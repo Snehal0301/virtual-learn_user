@@ -12,12 +12,6 @@ const QuizModal = () => {
     (state: any) => state.loginConditions.quizModal
   );
 
-  const testSubmitHandler = () => {
-    dispatch(testShow(false));
-    dispatch(testSuccess());
-    dispatch(showQuizModal(false));
-  };
-
   return (
     <>
       {quizModal && (
@@ -62,9 +56,6 @@ const QuizModal = () => {
                 <button
                   type="submit"
                   className="headerSearch-applyFilterButton"
-                  onClick={() => {
-                    testSubmitHandler();
-                  }}
                 >
                   Submit
                 </button>

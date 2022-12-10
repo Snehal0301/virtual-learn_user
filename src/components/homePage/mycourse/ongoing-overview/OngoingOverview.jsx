@@ -97,8 +97,6 @@ const OngoingOverview = () => {
       });
   }, []);
 
-  console.log('chapter', chapter);
-
   useEffect(() => {
     axios
       .get(
@@ -159,7 +157,6 @@ const OngoingOverview = () => {
   console.log(video);
 
   const testQuestions = useSelector((state) => state.test);
-  console.log('test questions', testQuestions);
 
   useEffect(() => {
     testQuestions.isSuccess && dispatch(testShow(true));
@@ -526,8 +523,6 @@ const OngoingOverview = () => {
 
                 <div className="course-sections">
                   {chapter.chapterResponses.map((ele, id) => {
-                    console.log('hemraj elements', ele);
-
                     return (
                       <>
                         {/* <Accordian /> */}
