@@ -3,11 +3,16 @@ import './Certificate.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { showCertificate } from '../../../../redux/reducers/Conditions';
 import { closeIcon, downloadIcon } from '../../../../utils/svgIcons';
+import { saveAs } from 'file-saver';
 
 const Certificate = (props: any) => {
   const dispatch = useDispatch();
   const showCert = useSelector((state: any) => state.loginConditions.quizModal);
   console.log('cerificate url', props);
+
+  const downloadImage = () => {
+    saveAs(props.certificate, props.name);
+  };
   return (
     <>
       {' '}
@@ -27,7 +32,10 @@ const Certificate = (props: any) => {
           >
             <div className="certificate-header">
               <div className="certificate-headerTitle">Course Certificate</div>
-              <button className="certificate-headerDownload">
+              <button
+                className="certificate-headerDownload"
+                onClick={downloadImage}
+              >
                 {downloadIcon}{' '}
               </button>
             </div>

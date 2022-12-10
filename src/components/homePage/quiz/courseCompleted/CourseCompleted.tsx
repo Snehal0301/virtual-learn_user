@@ -60,6 +60,11 @@ const CourseCompleted = () => {
             certificate={
               finalResult && finalResult.data && finalResult.data.certificateUrl
             }
+            name={
+              finalResult &&
+              finalResult.data &&
+              finalResult.data.congratulations
+            }
           />
         </div>
       )}
