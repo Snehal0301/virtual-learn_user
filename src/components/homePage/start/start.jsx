@@ -221,7 +221,14 @@ const Start = () => {
       </Slider>
       <div className="start-course-section2-first">
         <div className="start-ongoing-courses">Ongoing courses</div>
-        <div className="start-seeall">See All</div>
+        <div
+          className="start-seeall"
+          onClick={() => {
+            navigate('myCourses');
+          }}
+        >
+          See All
+        </div>
       </div>
       <div className="start-card2">
         <div className="start-course1">
