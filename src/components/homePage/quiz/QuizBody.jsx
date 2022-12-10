@@ -25,8 +25,6 @@ const QuizBody = () => {
     (state) => state.loginConditions.successTest
   );
 
-  console.log('quizz data', quizData.testName);
-
   useEffect(() => {
     // showTestSuccesPage && dispatch(testShow(false));
     showTestSuccesPage && navigate('/testSuccess');
@@ -75,6 +73,7 @@ const QuizBody = () => {
           dispatch(answer(`resultAnswers?testId=${quizData.testId}`));
           dispatch(testSuccess(true));
           dispatch(testisSuccess());
+          testSuccessRed(true);
         } else if (res && res.chapterTestPercentage === 0) {
           alert('You have not met the minimum passing grade');
           dispatch(testShow(false));

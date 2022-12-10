@@ -18,10 +18,15 @@ import { array } from 'yup/lib/locale';
 import { coursedata } from '../../../redux/reducers/allcourseSlice';
 import { categorydata } from '../../../redux/reducers/categorySlice';
 import { useNavigate } from 'react-router-dom';
+import { testShow } from '../../../redux/reducers/Conditions';
 
 const Start = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    dispatch(testShow(false));
+  }, []);
 
   const homeTabState = useSelector((state) => state.mycourse.hometab);
 
