@@ -36,6 +36,7 @@ import { test, testisSuccess } from '../../../../redux/reducers/testSlice';
 import { testShow, testSuccess } from '../../../../redux/reducers/Conditions';
 import { testSuccessRed } from '../../../../redux/reducers/SuccessTestRed';
 import { showSuccessPage } from '../../../../redux/reducers/showSuccesspage';
+import { finaltestShowPage } from '../../../../redux/reducers/finalTestSuccess';
 
 const steps = [
   {
@@ -84,6 +85,7 @@ const OngoingOverview = () => {
     dispatch(testisSuccess());
     dispatch(testSuccessRed(false));
     dispatch(showSuccessPage(false));
+    dispatch(finaltestShowPage(false));
   }, []);
 
   // api call for chapter section
@@ -532,6 +534,8 @@ const OngoingOverview = () => {
 
                 <div className="course-sections">
                   {chapter.chapterResponses.map((ele, id) => {
+                    console.log('hello ji', ele);
+
                     return (
                       <>
                         {/* <Accordian /> */}
@@ -625,7 +629,11 @@ const OngoingOverview = () => {
                                       onClick={() => {
                                         dispatch(
                                           test(
-                                            `moduleTest?testId=${ele.testId}`
+                                            `${
+                                              ele.testName === 'Final Test'
+                                                ? 'finalTest'
+                                                : 'moduleTest'
+                                            }?testId=${ele.testId}`
                                           )
                                         );
                                       }}

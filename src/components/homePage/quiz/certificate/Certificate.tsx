@@ -4,10 +4,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { showCertificate } from '../../../../redux/reducers/Conditions';
 import { closeIcon, downloadIcon } from '../../../../utils/svgIcons';
 
-const Certificate = () => {
+const Certificate = (props: any) => {
   const dispatch = useDispatch();
   const showCert = useSelector((state: any) => state.loginConditions.quizModal);
-
+  console.log('cerificate url', props);
   return (
     <>
       {' '}
@@ -32,10 +32,7 @@ const Certificate = () => {
               </button>
             </div>
             <div className="certificate">
-              <img
-                src={require('../../../../assets/images/dummy/certificate-of-completion-_Virtuallearn2 1.png')}
-                alt="Certificate"
-              />
+              <img src={props.certificate} alt="Certificate" />
             </div>
             <div
               className="headerSearch-filterModalBodyCloseIcon"

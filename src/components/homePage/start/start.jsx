@@ -22,6 +22,7 @@ import { testShow, testSuccess } from '../../../redux/reducers/Conditions';
 import { testisSuccess } from '../../../redux/reducers/testSlice';
 import { testSuccessRed } from '../../../redux/reducers/SuccessTestRed';
 import { showSuccessPage } from '../../../redux/reducers/showSuccesspage';
+import { finaltestShowPage } from '../../../redux/reducers/finalTestSuccess';
 
 const Start = () => {
   const dispatch = useDispatch();
@@ -33,6 +34,7 @@ const Start = () => {
     dispatch(testisSuccess());
     dispatch(testSuccessRed(false));
     dispatch(showSuccessPage(false));
+    dispatch(finaltestShowPage(false));
   }, []);
 
   const homeTabState = useSelector((state) => state.mycourse.hometab);

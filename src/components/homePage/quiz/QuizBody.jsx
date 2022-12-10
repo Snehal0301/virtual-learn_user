@@ -15,6 +15,8 @@ import { answer } from '../../../redux/reducers/testAnswer';
 import { testisSuccess } from '../../../redux/reducers/testSlice';
 import { testSuccessRed } from '../../../redux/reducers/SuccessTestRed';
 import { showSuccessPage } from '../../../redux/reducers/showSuccesspage';
+import { finaltestShowPage } from '../../../redux/reducers/finalTestSuccess';
+import { FinalResult } from '../../../redux/reducers/finalResult';
 
 const QuizBody = () => {
   const [active, setActive] = useState(1);
@@ -25,6 +27,12 @@ const QuizBody = () => {
   const showTestSuccesPage = useSelector(
     (state) => state.loginConditions.successTest
   );
+
+  const finaltestShow = useSelector((state) => state.finaltestShowPage.value);
+
+  useEffect(() => {
+    finaltestShow && navigate('/finalResult');
+  }, [finaltestShow]);
 
   useEffect(() => {
     // showTestSuccesPage && dispatch(testShow(false));
@@ -68,11 +76,17 @@ const QuizBody = () => {
     )
       .then((res) => res.json())
       .then((res) => {
-        console.log(res);
+        console.log('resppp', res);
         if (res && res.chapterTestPercentage > 0) {
-          dispatch(answerHeader(`resultHeader?testId=${quizData.testId}`));
-          dispatch(answer(`resultAnswers?testId=${quizData.testId}`));
-          dispatch(testSuccess(true));
+          if (quizData.testName === 'Final Test') {
+            dispatch(finaltestShowPage(true));
+            dispatch(FinalResult(`result?testId=${quizData.testId}`));
+          } else {
+            dispatch(testSuccess(true));
+            dispatch(answerHeader(`resultHeader?testId=${quizData.testId}`));
+            dispatch(answer(`resultAnswers?testId=${quizData.testId}`));
+          }
+
           dispatch(testisSuccess());
           dispatch(showSuccessPage(true));
         } else if (res && res.chapterTestPercentage === 0) {
@@ -82,6 +96,7 @@ const QuizBody = () => {
           dispatch(testisSuccess());
         } else {
           alert('Some error occured');
+
           dispatch(testShow(false));
           dispatch(testSuccess());
           dispatch(testisSuccess());
