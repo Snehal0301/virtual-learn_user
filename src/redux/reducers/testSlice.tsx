@@ -37,7 +37,7 @@ export const testSlice = createSlice({
   name: 'test',
   initialState,
   reducers: {
-    testSuccess: (state) => {
+    testisSuccess: (state) => {
       state.isSuccess = false;
     },
   },
@@ -61,6 +61,6 @@ export const testSlice = createSlice({
   },
 });
 
-export const { testSuccess } = testSlice.actions;
+export const { testisSuccess } = testSlice.actions;
 
 export default testSlice;

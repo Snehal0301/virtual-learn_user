@@ -1,8 +1,13 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Navigate, useNavigate } from 'react-router-dom';
-import { resultShow, testShow } from '../../../../redux/reducers/Conditions';
-import { testSuccess } from '../../../../redux/reducers/testSlice';
+import {
+  resultShow,
+  testShow,
+  testSuccess,
+} from '../../../../redux/reducers/Conditions';
+import { testSuccessRed } from '../../../../redux/reducers/SuccessTestRed';
+import { testisSuccess } from '../../../../redux/reducers/testSlice';
 import '../../../../views/onboarding/success_page/Success_Page.css';
 
 const QuizSuccess = () => {
@@ -11,12 +16,11 @@ const QuizSuccess = () => {
 
   useEffect(() => {
     dispatch(testShow(false));
-    dispatch(testSuccess());
+    dispatch(testisSuccess());
+    dispatch(testSuccess(false));
   }, []);
 
-  const showResults = useSelector(
-    (state: any) => state.loginConditions.showResults
-  );
+  const showResults = useSelector((state: any) => state.testSuccessRed.value);
 
   useEffect(() => {
     showResults && navigate('/testResults');
@@ -43,7 +47,7 @@ const QuizSuccess = () => {
           className="getStarted"
           style={{ cursor: 'pointer' }}
           onClick={() => {
-            dispatch(resultShow(true));
+            dispatch(testSuccessRed(true));
           }}
         >
           Result

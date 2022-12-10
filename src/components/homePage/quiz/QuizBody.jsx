@@ -2,12 +2,18 @@ import './Quiz.css';
 import { MultiStepForm, Step } from 'react-multi-form';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { showQuizModal, testShow } from '../../../redux/reducers/Conditions';
+import {
+  showQuizModal,
+  testShow,
+  testSuccess,
+} from '../../../redux/reducers/Conditions';
 import QuizModal from './QuizModal';
-import { testSuccess } from '../../../redux/reducers/Conditions';
+
 import { Navigate, useNavigate } from 'react-router-dom';
 import { answerHeader } from '../../../redux/reducers/testAnswerHeader';
 import { answer } from '../../../redux/reducers/testAnswer';
+import { testisSuccess } from '../../../redux/reducers/testSlice';
+import { testSuccessRed } from '../../../redux/reducers/SuccessTestRed';
 
 const QuizBody = () => {
   const [active, setActive] = useState(1);
@@ -20,8 +26,13 @@ const QuizBody = () => {
   );
 
   useEffect(() => {
+    // showTestSuccesPage && dispatch(testShow(false));
     showTestSuccesPage && navigate('/testSuccess');
   }, [showTestSuccesPage]);
+
+  useEffect(() => {
+    dispatch(testSuccessRed(false));
+  }, []);
 
   let userAnswer = [];
 
@@ -55,12 +66,11 @@ const QuizBody = () => {
       .then((res) => res.json())
       .then((res) => {
         console.log(res);
-        if (res && res.chapterTestPercentage >= 0) {
-          dispatch(testShow(false));
-          dispatch(testSuccess());
-          dispatch(testSuccess(true));
+        if (res && res.chapterTestPercentage > 0) {
           dispatch(answerHeader(`resultHeader?testId=${quizData.testId}`));
           dispatch(answer(`resultAnswers?testId=${quizData.testId}`));
+          dispatch(testSuccess(true));
+          dispatch(testisSuccess());
         } else if (res && res.chapterTestPercentage === 0) {
           alert('You have not met the minimum passing grade');
           dispatch(testShow(false));

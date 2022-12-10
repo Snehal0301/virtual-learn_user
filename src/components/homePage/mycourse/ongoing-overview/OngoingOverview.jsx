@@ -32,8 +32,8 @@ import Button from '@mui/material/Button';
 import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
 import { Navigate, useNavigate } from 'react-router-dom';
-import { test } from '../../../../redux/reducers/testSlice';
-import { testShow } from '../../../../redux/reducers/Conditions';
+import { test, testisSuccess } from '../../../../redux/reducers/testSlice';
+import { testShow, testSuccess } from '../../../../redux/reducers/Conditions';
 
 const steps = [
   {
@@ -76,6 +76,11 @@ const OngoingOverview = () => {
   const [overviewData, setOverviewData] = useState();
 
   const navigate = useNavigate();
+
+  useEffect(() => {
+    dispatch(testSuccess(false));
+    dispatch(testisSuccess());
+  }, []);
 
   // api call for chapter section
   useEffect(() => {
