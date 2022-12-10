@@ -1,37 +1,38 @@
-import React from 'react'
-import HomePage from '../views/dashboard/HomePage'
-import Onboarding from '../views/onboarding/onboarding'
-import { Routes, Route, Navigate } from 'react-router-dom'
-import RequireAuth from './ProtectedRoute'
-import LoginAuth from '../components/onboarding/login/login-auth/LoginAuth'
-import WelcomeScreen from '../components/onboarding/welcome/welcome'
-import RegistrationForm from '../components/onboarding/registration/registrationform/RegistrationForm'
-import LoginProtected from './loginProtected'
-import LoginForgotPW from '../components/onboarding/login/login-forgotPW/LoginForgotPW'
-import LoginVerfication from '../components/onboarding/login/login-verification/login-otp/LoginOtp'
-import LoginPassword from '../components/onboarding/login/login-verification/login-password/LoginPassword'
-import PasswordChanged from '../views/onboarding/password-changed/PasswordChanged'
-import { useSelector } from 'react-redux'
-import PersonalDetails from '../components/onboarding/registration/personal-details/PersonalDetails'
-import Success_Page from '../views/onboarding/success_page/Success_Page'
+import React from 'react';
+import HomePage from '../views/dashboard/HomePage';
+import Onboarding from '../views/onboarding/onboarding';
+import { Routes, Route, Navigate } from 'react-router-dom';
+import RequireAuth from './ProtectedRoute';
+import LoginAuth from '../components/onboarding/login/login-auth/LoginAuth';
+import WelcomeScreen from '../components/onboarding/welcome/welcome';
+import RegistrationForm from '../components/onboarding/registration/registrationform/RegistrationForm';
+import LoginProtected from './loginProtected';
+import LoginForgotPW from '../components/onboarding/login/login-forgotPW/LoginForgotPW';
+import LoginVerfication from '../components/onboarding/login/login-verification/login-otp/LoginOtp';
+import LoginPassword from '../components/onboarding/login/login-verification/login-password/LoginPassword';
+import PasswordChanged from '../views/onboarding/password-changed/PasswordChanged';
+import { useSelector } from 'react-redux';
+import PersonalDetails from '../components/onboarding/registration/personal-details/PersonalDetails';
+import Success_Page from '../views/onboarding/success_page/Success_Page';
+import Start from '../components/homePage/start/start';
 const Router = () => {
-  const showOtp = useSelector((state: any) => state.loginConditions.value)
+  const showOtp = useSelector((state: any) => state.loginConditions.value);
   const changePass = useSelector(
-    (state: any) => state.loginConditions.passChange,
-  )
+    (state: any) => state.loginConditions.passChange
+  );
   const changePassSuccess = useSelector(
-    (state: any) => state.loginConditions.successPassChange,
-  )
+    (state: any) => state.loginConditions.successPassChange
+  );
 
-  const otpReg = useSelector((state: any) => state.loginConditions.otpReg)
+  const otpReg = useSelector((state: any) => state.loginConditions.otpReg);
   const personalDetails = useSelector(
-    (state: any) => state.loginConditions.personalDetails,
-  )
+    (state: any) => state.loginConditions.personalDetails
+  );
   const successReg = useSelector(
-    (state: any) => state.loginConditions.successReg,
-  )
+    (state: any) => state.loginConditions.successReg
+  );
 
-  console.log('pd', personalDetails)
+  console.log('pd', personalDetails);
 
   return (
     <>
@@ -120,10 +121,12 @@ const Router = () => {
               <HomePage />
             </RequireAuth>
           }
-        ></Route>
+        >
+          <Route path="" element={<Start />} />
+        </Route>
       </Routes>
     </>
-  )
-}
+  );
+};
 
-export default Router
+export default Router;
