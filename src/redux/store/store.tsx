@@ -14,6 +14,7 @@ import categoryReducer from '../reducers/categorySlice';
 import answerHeaderSlice from '../reducers/testAnswerHeader';
 import answerSlice from '../reducers/testAnswer';
 import { testSuccessRedSlice } from '../reducers/SuccessTestRed';
+import { showSuccessPageSlice } from '../reducers/showSuccesspage';
 
 const reducers = combineReducers({
   headerProfile: showHeaderProfile.reducer,
@@ -27,12 +28,13 @@ const reducers = combineReducers({
   allcourse: allcourseReducer,
   categorydata: categoryReducer,
   testSuccessRed: testSuccessRedSlice.reducer,
+  showSuccessPage: showSuccessPageSlice.reducer,
 });
 
 const persistConfig = {
   key: 'root',
   storage,
-  blacklist: ['login', 'test', 'testSuccessRed'],
+  blacklist: ['login', 'test', 'testSuccessRed', 'showSuccessPage'],
 };
 
 const persistedReducer = persistReducer(persistConfig, reducers);

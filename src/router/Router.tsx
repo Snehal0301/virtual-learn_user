@@ -41,9 +41,14 @@ const Router = () => {
     (state: any) => state.loginConditions.successReg
   );
   const showTest = useSelector((state: any) => state.loginConditions.showTest);
-  const showTestSuccesPage = useSelector(
+  const showResultPage = useSelector(
     (state: any) => state.testSuccessRed.value
   );
+  const showSuccessPage = useSelector(
+    (state: any) => state.showSuccessPage.value
+  );
+
+  console.log('test successs', showResultPage);
 
   return (
     <>
@@ -156,7 +161,7 @@ const Router = () => {
           <Route
             path="testSuccess"
             element={
-              <HomeProtected redirectTo="/" condition={true}>
+              <HomeProtected redirectTo="/" condition={showSuccessPage}>
                 <QuizSuccess />
               </HomeProtected>
             }
@@ -164,7 +169,7 @@ const Router = () => {
           <Route
             path="testResults"
             element={
-              <HomeProtected redirectTo="/" condition={true}>
+              <HomeProtected redirectTo="/" condition={showResultPage}>
                 <QuizResults />
               </HomeProtected>
             }

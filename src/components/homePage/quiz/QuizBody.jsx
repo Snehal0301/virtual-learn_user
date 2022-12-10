@@ -14,6 +14,7 @@ import { answerHeader } from '../../../redux/reducers/testAnswerHeader';
 import { answer } from '../../../redux/reducers/testAnswer';
 import { testisSuccess } from '../../../redux/reducers/testSlice';
 import { testSuccessRed } from '../../../redux/reducers/SuccessTestRed';
+import { showSuccessPage } from '../../../redux/reducers/showSuccesspage';
 
 const QuizBody = () => {
   const [active, setActive] = useState(1);
@@ -73,7 +74,7 @@ const QuizBody = () => {
           dispatch(answer(`resultAnswers?testId=${quizData.testId}`));
           dispatch(testSuccess(true));
           dispatch(testisSuccess());
-          testSuccessRed(true);
+          dispatch(showSuccessPage(true));
         } else if (res && res.chapterTestPercentage === 0) {
           alert('You have not met the minimum passing grade');
           dispatch(testShow(false));
