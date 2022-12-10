@@ -20,6 +20,8 @@ import Categories from '../components/homePage/start/categories/Categories';
 import HomeCategoriesDesign from '../components/homePage/homeCategories-design/HomeCategoriesDesign';
 import MyCourse from '../components/homePage/mycourse/MyCourse';
 import OngoingOverview from '../components/homePage/mycourse/ongoing-overview/OngoingOverview';
+import HomeProtected from './homeProtected';
+import Quiz from '../components/homePage/quiz/Quiz';
 const Router = () => {
   const showOtp = useSelector((state: any) => state.loginConditions.value);
   const changePass = useSelector(
@@ -36,8 +38,7 @@ const Router = () => {
   const successReg = useSelector(
     (state: any) => state.loginConditions.successReg
   );
-
-  console.log('pd', personalDetails);
+  const showTest = useSelector((state: any) => state.loginConditions.showTest);
 
   return (
     <>
@@ -135,9 +136,17 @@ const Router = () => {
             element={<HomeCategoriesDesign />}
           />
           <Route path="myCourses" element={<MyCourse />} />
+          <Route path="myCourses/ongoingCourse" element={<OngoingOverview />} />
           <Route
-            path="myCourses/ongoingOverview"
-            element={<OngoingOverview />}
+            path="myCourses/ongoingCourse/moduleTest"
+            element={
+              <HomeProtected
+                redirectTo="/myCourses/ongoingCourse"
+                condition={showTest}
+              >
+                <Quiz />
+              </HomeProtected>
+            }
           />
         </Route>
       </Routes>

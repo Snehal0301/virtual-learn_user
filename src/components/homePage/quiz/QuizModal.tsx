@@ -1,6 +1,7 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { showQuizModal } from '../../../redux/reducers/Conditions';
+import { showQuizModal, testShow } from '../../../redux/reducers/Conditions';
+import { testSuccess } from '../../../redux/reducers/testSlice';
 
 import { closeIcon } from '../../../utils/svgIcons';
 import './Quiz.css';
@@ -10,6 +11,12 @@ const QuizModal = () => {
   const quizModal = useSelector(
     (state: any) => state.loginConditions.quizModal
   );
+
+  const testSubmitHandler = () => {
+    dispatch(testShow(false));
+    dispatch(testSuccess());
+    dispatch(showQuizModal(false));
+  };
 
   return (
     <>
@@ -55,6 +62,9 @@ const QuizModal = () => {
                 <button
                   type="submit"
                   className="headerSearch-applyFilterButton"
+                  onClick={() => {
+                    testSubmitHandler();
+                  }}
                 >
                   Submit
                 </button>
