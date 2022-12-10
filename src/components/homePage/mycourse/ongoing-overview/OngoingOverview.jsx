@@ -34,6 +34,8 @@ import Typography from '@mui/material/Typography';
 import { Navigate, useNavigate } from 'react-router-dom';
 import { test, testisSuccess } from '../../../../redux/reducers/testSlice';
 import { testShow, testSuccess } from '../../../../redux/reducers/Conditions';
+import { testSuccessRed } from '../../../../redux/reducers/SuccessTestRed';
+import { showSuccessPage } from '../../../../redux/reducers/showSuccesspage';
 
 const steps = [
   {
@@ -80,6 +82,8 @@ const OngoingOverview = () => {
   useEffect(() => {
     dispatch(testSuccess(false));
     dispatch(testisSuccess());
+    dispatch(testSuccessRed(false));
+    dispatch(showSuccessPage(false));
   }, []);
 
   // api call for chapter section
