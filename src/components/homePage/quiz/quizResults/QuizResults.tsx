@@ -1,15 +1,16 @@
-import React, { useEffect } from 'react'
-import { closeIcon, showAnsIcon } from '../../../../utils/svgIcons'
-import './QuizResults.css'
-import Drawer from 'react-modern-drawer'
-import { useDispatch, useSelector } from 'react-redux'
-import { quizAnswer } from '../../../../redux/reducers/result'
-import QuizAns from '../quizAnswers/QuizAns'
-import { answerHeader } from '../../../../redux/reducers/testAnswerHeader'
-import { answer } from '../../../../redux/reducers/testAnswer'
+import React, { useEffect } from 'react';
+import { closeIcon, showAnsIcon } from '../../../../utils/svgIcons';
+import './QuizResults.css';
+import Drawer from 'react-modern-drawer';
+import { useDispatch, useSelector } from 'react-redux';
+import { quizAnswer } from '../../../../redux/reducers/result';
+import QuizAns from '../quizAnswers/QuizAns';
+import { answerHeader } from '../../../../redux/reducers/testAnswerHeader';
+import { answer } from '../../../../redux/reducers/testAnswer';
+import { testSuccess } from '../../../../redux/reducers/Conditions';
 
 const QuizResults = () => {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   const resultsHeaderDataOne = {
     chapterNumber: 6,
@@ -20,17 +21,21 @@ const QuizResults = () => {
     correctAnswers: 3,
     wrongAnswers: 2,
     totalNumberOfQuestions: 5,
-  }
+  };
 
   useEffect(() => {
-    dispatch(answerHeader('resultHeader?testId=17'))
-    dispatch(answer('resultAnswers?testId=17'))
-  }, [])
+    // dispatch(answerHeader('resultHeader?testId=17'))
+    // dispatch(answer('resultAnswers?testId=17'))
+    dispatch(testSuccess(false));
+    dispatch(testSuccess(false));
+  }, []);
 
-  const resultsHeaderData = useSelector((state: any) => state.answerHeader.data)
-  const resultAnswers = useSelector((state: any) => state.answer.data)
+  const resultsHeaderData = useSelector(
+    (state: any) => state.answerHeader.data
+  );
+  const resultAnswers = useSelector((state: any) => state.answer.data);
 
-  console.log('first', resultAnswers)
+  console.log('header data', resultsHeaderData, resultAnswers);
 
   const resultAnswersOne = [
     {
@@ -88,12 +93,12 @@ const QuizResults = () => {
       userAnswer: 'Application Programming Interface',
       userAnswerStatus: '1',
     },
-  ]
+  ];
 
-  const [isOpen, setIsOpen] = React.useState(false)
+  const [isOpen, setIsOpen] = React.useState(false);
   const toggleDrawer = () => {
-    setIsOpen((prevState) => !prevState)
-  }
+    setIsOpen((prevState) => !prevState);
+  };
 
   return (
     <div className="quizResults">
@@ -173,14 +178,14 @@ const QuizResults = () => {
                   <div
                     className="quizResults-bodyListItemDrawer"
                     onClick={() => {
-                      toggleDrawer()
-                      dispatch(quizAnswer(ele))
+                      toggleDrawer();
+                      dispatch(quizAnswer(ele));
                     }}
                   >
                     {showAnsIcon}
                   </div>
                 </div>
-              )
+              );
             })}
           </div>
         </div>
@@ -199,7 +204,7 @@ const QuizResults = () => {
           <div
             className="quizDrawerCloseIcon"
             onClick={() => {
-              toggleDrawer()
+              toggleDrawer();
             }}
           >
             {closeIcon}
@@ -207,7 +212,7 @@ const QuizResults = () => {
         </Drawer>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default QuizResults
+export default QuizResults;

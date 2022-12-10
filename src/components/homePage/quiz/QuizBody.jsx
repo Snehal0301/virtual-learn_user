@@ -1,16 +1,27 @@
 import './Quiz.css';
 import { MultiStepForm, Step } from 'react-multi-form';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { showQuizModal, testShow } from '../../../redux/reducers/Conditions';
 import QuizModal from './QuizModal';
-import { testSuccess } from '../../../redux/reducers/testSlice';
+import { testSuccess } from '../../../redux/reducers/Conditions';
+import { Navigate, useNavigate } from 'react-router-dom';
+import { answerHeader } from '../../../redux/reducers/testAnswerHeader';
+import { answer } from '../../../redux/reducers/testAnswer';
 
 const QuizBody = () => {
   const [active, setActive] = useState(1);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const quizData = useSelector((state) => state.test.data.data);
+  const showTestSuccesPage = useSelector(
+    (state) => state.loginConditions.successTest
+  );
+
+  useEffect(() => {
+    showTestSuccesPage && navigate('/testSuccess');
+  }, [showTestSuccesPage]);
 
   let userAnswer = [];
 
@@ -29,12 +40,44 @@ const QuizBody = () => {
 
     console.log('submit', submitData);
 
+    fetch(
+      `http://virtuallearnapp2-env.eba-wrr2p8zk.ap-south-1.elasticbeanstalk.com/user/submit`,
+      {
+        method: 'POST',
+        headers: {
+          Accept: 'application/json, text/plain, */*',
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${localStorage.getItem('Token')}`,
+        },
+        body: JSON.stringify(submitData),
+      }
+    )
+      .then((res) => res.json())
+      .then((res) => {
+        console.log(res);
+        if (res && res.chapterTestPercentage >= 0) {
+          dispatch(testShow(false));
+          dispatch(testSuccess());
+          dispatch(testSuccess(true));
+          dispatch(answerHeader(`resultHeader?testId=${quizData.testId}`));
+          dispatch(answer(`resultAnswers?testId=${quizData.testId}`));
+        } else if (res && res.chapterTestPercentage === 0) {
+          alert('You have not met the minimum passing grade');
+          dispatch(testShow(false));
+          dispatch(testSuccess());
+        } else {
+          alert(res.message);
+          dispatch(testShow(false));
+          dispatch(testSuccess());
+        }
+      });
+
     dispatch(showQuizModal(false));
-    dispatch(testShow(false));
-    dispatch(testSuccess());
+    // dispatch(testShow(false));
+
     dispatch(showQuizModal(false));
   };
-
+  // dispatch(testShow(false));
   return (
     <form className="quiz-body" onSubmit={submitQuizHandler} id="quiz">
       <div className="quiz-bodyQuestionForm">

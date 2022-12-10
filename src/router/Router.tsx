@@ -22,6 +22,8 @@ import MyCourse from '../components/homePage/mycourse/MyCourse';
 import OngoingOverview from '../components/homePage/mycourse/ongoing-overview/OngoingOverview';
 import HomeProtected from './homeProtected';
 import Quiz from '../components/homePage/quiz/Quiz';
+import QuizSuccess from '../components/homePage/quiz/quizSuccessPage/quizSuccess';
+import QuizResults from '../components/homePage/quiz/quizResults/QuizResults';
 const Router = () => {
   const showOtp = useSelector((state: any) => state.loginConditions.value);
   const changePass = useSelector(
@@ -39,7 +41,9 @@ const Router = () => {
     (state: any) => state.loginConditions.successReg
   );
   const showTest = useSelector((state: any) => state.loginConditions.showTest);
-
+  const showTestSuccesPage = useSelector(
+    (state: any) => state.loginConditions.successTest
+  );
   return (
     <>
       <Routes>
@@ -145,6 +149,22 @@ const Router = () => {
                 condition={showTest}
               >
                 <Quiz />
+              </HomeProtected>
+            }
+          />
+          <Route
+            path="testSuccess"
+            element={
+              <HomeProtected redirectTo="/" condition={showTestSuccesPage}>
+                <QuizSuccess />
+              </HomeProtected>
+            }
+          />
+          <Route
+            path="testResults"
+            element={
+              <HomeProtected redirectTo="/" condition={true}>
+                <QuizResults />
               </HomeProtected>
             }
           />
