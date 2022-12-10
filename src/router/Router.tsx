@@ -16,6 +16,9 @@ import PersonalDetails from '../components/onboarding/registration/personal-deta
 import Success_Page from '../views/onboarding/success_page/Success_Page';
 import Start from '../components/homePage/start/start';
 import ChoiceYourCourse from '../components/homePage/choiceYour-course/ChoiceYourCourse';
+import Categories from '../components/homePage/start/categories/Categories';
+import HomeCategoriesDesign from '../components/homePage/homeCategories-design/HomeCategoriesDesign';
+import MyCourse from '../components/homePage/mycourse/MyCourse';
 const Router = () => {
   const showOtp = useSelector((state: any) => state.loginConditions.value);
   const changePass = useSelector(
@@ -125,7 +128,13 @@ const Router = () => {
         >
           <Route path="" element={<Start />} />
           <Route path="courseChoice" element={<ChoiceYourCourse />} />
+          <Route path="categories" element={<Categories />} />
+          <Route
+            path={`categories/design`}
+            element={<HomeCategoriesDesign />}
+          />
         </Route>
+        <Route path="myCourses" element={<MyCourse />} />
       </Routes>
     </>
   );

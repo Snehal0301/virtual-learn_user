@@ -248,7 +248,14 @@ const Start = () => {
       </div>
       <div className="start-course-section2">
         <div className="start-ongoing-courses">Categories</div>
-        <div className="start-seeall">See All</div>
+        <div
+          className="start-seeall"
+          onClick={() => {
+            navigate('categories/design');
+          }}
+        >
+          See All
+        </div>
       </div>
 
       <div className="start-course-categories">
