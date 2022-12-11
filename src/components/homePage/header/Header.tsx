@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import "./Header.css";
+import React, { useState } from 'react';
+import './Header.css';
 import {
   bellIcon,
   closeIcon,
@@ -12,8 +12,8 @@ import {
   profileIcon,
   searchIcon,
   settingsIcon,
-} from "../../../utils/svgIcons";
-import { useDispatch, useSelector } from "react-redux";
+} from '../../../utils/svgIcons';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   editProfileSection,
   headerProfile,
@@ -24,79 +24,82 @@ import {
   profileSection,
   settingsSection,
   termsSection,
-} from "../../../redux/reducers/headerProfileOptions";
-import Drawer from "react-modern-drawer";
-import "react-modern-drawer/dist/index.css";
-import Profile from "./profile/Profile";
-import Settings from "./settings/Settings";
-import PrivacyPolicy from "./privacypolicy/PrivacyPolicy";
-import Terms from "./terms/Terms";
-import Notification from "./notification/Notification";
-import { searchFocus } from "../../../redux/reducers/headerProfileOptions";
-import EditProfile from "./edit-profile/EditProfile";
-import ChangePassword from "./changePassword/ChangePassword";
+} from '../../../redux/reducers/headerProfileOptions';
+import Drawer from 'react-modern-drawer';
+import 'react-modern-drawer/dist/index.css';
+import Profile from './profile/Profile';
+import Settings from './settings/Settings';
+import PrivacyPolicy from './privacypolicy/PrivacyPolicy';
+import Terms from './terms/Terms';
+import Notification from './notification/Notification';
+import { searchFocus } from '../../../redux/reducers/headerProfileOptions';
+import EditProfile from './edit-profile/EditProfile';
+import ChangePassword from './changePassword/ChangePassword';
+import { useNavigate } from 'react-router-dom';
 
 const Header = () => {
-  const [onChange, setOnChange] = useState("");
+  const [onChange, setOnChange] = useState('');
+
+  const navigate = useNavigate();
 
   const topSearch = [
-    "Python",
-    "Java",
-    "Javascript",
-    "Leadership",
-    "Photoshop",
-    "React",
-    "Communication",
+    'Python',
+    'Java',
+    'Javascript',
+    'Leadership',
+    'Photoshop',
+    'React',
+    'Communication',
   ];
 
   const topCategories = [
-    "Design",
-    "Development",
-    "Business",
-    "Finance",
-    "Health & Fitness",
-    "Music",
-    "IT & Software",
-    "Marketing",
-    "Lifestyle",
-    "Photography",
-    "Teaching",
+    'Design',
+    'Development',
+    'Business',
+    'Finance',
+    'Health & Fitness',
+    'Music',
+    'IT & Software',
+    'Marketing',
+    'Lifestyle',
+    'Photography',
+    'Teaching',
   ];
 
   const searchdata: any = [
     {
-      title: "User Experience Design Fundamentals",
-      img: require("../../../assets/images/dummy/1.png"),
-      chapters: "14 Chapter",
-      cat: "Design",
+      title: 'User Experience Design Fundamentals',
+      img: require('../../../assets/images/dummy/1.png'),
+      chapters: '14 Chapter',
+      cat: 'Design',
     },
     {
-      title: "Digital Marketing for 2021 Masterclass",
-      img: require("../../../assets/images/dummy/2.png"),
-      chapters: "21 Chapter",
-      cat: "Design",
+      title: 'Digital Marketing for 2021 Masterclass',
+      img: require('../../../assets/images/dummy/2.png'),
+      chapters: '21 Chapter',
+      cat: 'Design',
     },
     {
-      title: "Graphic Design Masterclass - Learn GREAT Design",
-      img: require("../../../assets/images/dummy/3.png"),
-      chapters: "11 Chapter",
-      cat: "Design",
+      title: 'Graphic Design Masterclass - Learn GREAT Design',
+      img: require('../../../assets/images/dummy/3.png'),
+      chapters: '11 Chapter',
+      cat: 'Design',
     },
     {
-      title: "Study on Design Principles and 7 features ",
-      img: require("../../../assets/images/dummy/4.png"),
-      chapters: "7 Chapter",
-      cat: "Design",
+      title: 'Study on Design Principles and 7 features ',
+      img: require('../../../assets/images/dummy/4.png'),
+      chapters: '7 Chapter',
+      cat: 'Design',
     },
   ];
 
   const Duration = [
-    "5/10 Chapters",
-    "5/10 Chapters",
-    "10/20 Chapters",
-    "20/30 Chapters",
-    "30/40 Chapters",
-    "50+ Chapters",
+    '5/10 Chapters',
+    '5/10 Chapters',
+    '10/20 Chapters',
+    '20/30 Chapters',
+    '30/40 Chapters',
+    '50+ Chapters',
   ];
 
   const [notifydata, setnotifydata] = useState(false);
@@ -112,15 +115,15 @@ const Header = () => {
   const handleCloseDrawer = () => {
     dispatch(profileDrawer(false));
     dispatch(headerProfile(false));
-    setLeftdrawer(false)
-  }
+    setLeftdrawer(false);
+  };
 
   const handlenotify = () => {
     dispatch(profileDrawer(true));
     dispatch(headerProfile(false));
     dispatch(profileSection(false));
     dispatch(notificationSection(true));
-    dispatch(settingsSection(false))
+    dispatch(settingsSection(false));
   };
 
   const handleSetting = () => {
@@ -158,42 +161,56 @@ const Header = () => {
   };
 
   const toggleMobileHeader = () => {
-    setArrow(true)
-    dispatch(searchFocus(true))
-  }
+    setArrow(true);
+    dispatch(searchFocus(true));
+  };
   const closeMobileHeader = () => {
-    setArrow(false)
-    dispatch(searchFocus(false))
-  }
+    setArrow(false);
+    dispatch(searchFocus(false));
+  };
 
   const handleMobileDrawer = () => {
-    setLeftdrawer(true)
-  }
+    setLeftdrawer(true);
+  };
 
-  const [arrow, setArrow] = useState(false)
-  const [leftdrawer, setLeftdrawer] = useState(false)
+  const [arrow, setArrow] = useState(false);
+  const [leftdrawer, setLeftdrawer] = useState(false);
   return (
     <>
       <div className="header-parent">
         <div
-          className={searchFieldFocus ? "header headerSearchFocus" : "header"}
+          className={searchFieldFocus ? 'header headerSearchFocus' : 'header'}
         >
-          <div className="header-logo">{headerLogo}</div>
-          {
-            arrow ?
-              <img className="mobile-logo" src={require('../../../assets/images/right_arrow.png')} alt="" onClick={closeMobileHeader} />
-
-              :
-
-              <img className="mobile-logo" src={require('../../../assets/images/burger-mobile-icon.png')} alt="" onClick={handleMobileDrawer} />
-          }
+          <div
+            className="header-logo"
+            onClick={() => {
+              navigate('/');
+            }}
+          >
+            {headerLogo}
+          </div>
+          {arrow ? (
+            <img
+              className="mobile-logo"
+              src={require('../../../assets/images/right_arrow.png')}
+              alt=""
+              onClick={closeMobileHeader}
+            />
+          ) : (
+            <img
+              className="mobile-logo"
+              src={require('../../../assets/images/burger-mobile-icon.png')}
+              alt=""
+              onClick={handleMobileDrawer}
+            />
+          )}
           <form className="header-search">
             <input
               type="text"
               className={
                 searchFieldFocus
-                  ? "header-searchField header-searchFieldPadding"
-                  : "header-searchField"
+                  ? 'header-searchField header-searchFieldPadding'
+                  : 'header-searchField'
               }
               placeholder="Search"
               onFocus={() => {
@@ -220,7 +237,7 @@ const Header = () => {
                 </div>
                 <div className="header-profilePic">
                   <img
-                    src={require("../../../assets/images/dhoni.png")}
+                    src={require('../../../assets/images/dhoni.png')}
                     alt="Profile Pic"
                     onClick={(e: any) => {
                       e.stopPropagation();
@@ -238,7 +255,9 @@ const Header = () => {
                         <div className="header-profileOptionIcon">
                           {graduationCapIcon}
                         </div>
-                        <div className="header-profileOptiontext">My Course</div>
+                        <div className="header-profileOptiontext">
+                          My Course
+                        </div>
                       </div>
 
                       <div
@@ -248,13 +267,15 @@ const Header = () => {
                         <div className="header-profileOptionIcon">
                           {profileIcon}
                         </div>
-                        <div className="header-profileOptiontext">My Profile</div>
+                        <div className="header-profileOptiontext">
+                          My Profile
+                        </div>
                       </div>
 
                       <div
                         className="header-profileOption"
                         onClick={() => {
-                          localStorage.setItem("auth", "false");
+                          localStorage.setItem('auth', 'false');
                           window.location.reload();
                         }}
                       >
@@ -267,7 +288,13 @@ const Header = () => {
                   )}
                 </div>
               </div>
-              <div className="mobile-search" style={{ filter: 'invert(1)' }} onClick={toggleMobileHeader}>{searchIcon}</div>
+              <div
+                className="mobile-search"
+                style={{ filter: 'invert(1)' }}
+                onClick={toggleMobileHeader}
+              >
+                {searchIcon}
+              </div>
             </>
           ) : (
             <div className="header-options">
@@ -299,8 +326,8 @@ const Header = () => {
                     type="text"
                     className={
                       searchFieldFocus
-                        ? "header-searchField header-searchFieldPadding"
-                        : "header-searchField"
+                        ? 'header-searchField header-searchFieldPadding'
+                        : 'header-searchField'
                     }
                     placeholder="Search"
                     onFocus={() => {
@@ -345,7 +372,7 @@ const Header = () => {
                     <div className="headerSearchcategories-nosearchResults">
                       <div
                         className="headerSearchCategoriesTopSearchTitle"
-                        style={{ fontSize: "32px" }}
+                        style={{ fontSize: '32px' }}
                       >
                         No matching course
                       </div>
@@ -423,7 +450,7 @@ const Header = () => {
                 Search Filters
               </div>
               <div className="headerSearch-filterModalCategory">
-                {" "}
+                {' '}
                 <div className="headerSearch-filterModalCategoryTitle">
                   Search from Categories
                 </div>
@@ -490,7 +517,6 @@ const Header = () => {
       {/* </div>
       </div > */}
 
-
       <Drawer
         open={profileDrawerState}
         onClose={handleCloseDrawer}
@@ -498,8 +524,8 @@ const Header = () => {
         enableOverlay={true}
         overlayOpacity={0.7}
         style={{
-          width: "25rem",
-          zIndex: '9999'
+          width: '25rem',
+          zIndex: '9999',
         }}
       >
         {profileSectionState && <Profile />}
@@ -526,8 +552,8 @@ const Header = () => {
         enableOverlay={true}
         overlayOpacity={0.7}
         style={{
-          width: "25rem",
-          zIndex: '9999'
+          width: '25rem',
+          zIndex: '9999',
         }}
       >
         <div className="left-drawer">
@@ -548,35 +574,54 @@ const Header = () => {
           <div className="left-drawer-body">
             <div className="left-drawer-links">
               <div className="left-drawer-link">
-                <img src={require('../../../assets/icons/icn_home_menu-Home.png')} alt="" />
+                <img
+                  src={require('../../../assets/icons/icn_home_menu-Home.png')}
+                  alt=""
+                />
                 <p>Home</p>
               </div>
               <div className="left-drawer-link">
-                <img src={require('../../../assets/icons/icn_course_menu-Briefcase.png')} alt="My Course" />
+                <img
+                  src={require('../../../assets/icons/icn_course_menu-Briefcase.png')}
+                  alt="My Course"
+                />
                 <p>My Course</p>
               </div>
               <div className="left-drawer-link">
-                <img src={require('../../../assets/icons/icn_profile_menu.png')} alt="Profile" />
+                <img
+                  src={require('../../../assets/icons/icn_profile_menu.png')}
+                  alt="Profile"
+                />
                 <p>My Profile</p>
               </div>
               <div className="left-drawer-link">
-                <img src={require('../../../assets/icons/icn_notification_menu.png')} alt="Notifications" />
+                <img
+                  src={require('../../../assets/icons/icn_notification_menu.png')}
+                  alt="Notifications"
+                />
                 <p>Notifications</p>
                 <span>11</span>
               </div>
               <div className="left-drawer-link">
-                <img src={require('../../../assets/icons/icn_settings_menu-Settings.png')} alt="Settings" />
+                <img
+                  src={require('../../../assets/icons/icn_settings_menu-Settings.png')}
+                  alt="Settings"
+                />
                 <p>Settings</p>
               </div>
               <div className="left-drawer-link">
-                <img src={require('../../../assets/icons/icn_logout_menu-Power buttom.png')} alt="Logout" />
+                <img
+                  src={require('../../../assets/icons/icn_logout_menu-Power buttom.png')}
+                  alt="Logout"
+                />
                 <p>Logout</p>
               </div>
             </div>
           </div>
         </div>
-        <p onClick={handleCloseDrawer} className="left-drawer-close">X</p>
-
+        <p onClick={handleCloseDrawer} className="left-drawer-close">
+          X
+        </p>
       </Drawer>
     </>
   );
