@@ -233,7 +233,31 @@ const Header = () => {
     )
       .then((res) => res.json())
       .then((res) => {
-        console.log('response', res);
+        setSearchedCourse(res);
+        dispatch(modalFilter(false));
+      })
+      .catch((err) => {
+        setSearchedCourse([]);
+        dispatch(modalFilter(false));
+      });
+  };
+
+  const topSearchKeyword = (keyword: string) => {
+    setShowFilter(true);
+    fetch(
+      `http://virtuallearnapp2-env.eba-wrr2p8zk.ap-south-1.elasticbeanstalk.com/user/searchByKeyword?keyword=${keyword}`,
+      {
+        method: 'GET',
+        headers: {
+          Accept: 'application/json, text/plain, */*',
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${localStorage.getItem('Token')}`,
+        },
+      }
+    )
+      .then((res) => res.json())
+      .then((res) => {
+        console.log('top', res);
         setSearchedCourse(res);
       })
       .catch((err) => {
@@ -270,7 +294,12 @@ const Header = () => {
               onClick={handleMobileDrawer}
             />
           )}
-          <form className="header-search">
+          <form
+            className="header-search"
+            onSubmit={(e: any) => {
+              e.preventDefault();
+            }}
+          >
             <input
               type="text"
               className={
@@ -383,6 +412,7 @@ const Header = () => {
               <div
                 onClick={() => {
                   dispatch(searchFocus(false));
+                  setShowFilter(false);
                 }}
                 className="header-optionsCloseIcon"
               >
@@ -393,7 +423,12 @@ const Header = () => {
           {searchFieldFocus && (
             <div className="header-categoryContents">
               <div className="mobile-form-with-filter">
-                <form className="mobile-header-search">
+                <form
+                  className="mobile-header-search"
+                  onSubmit={(e: any) => {
+                    e.preventDefault();
+                  }}
+                >
                   <input
                     type="text"
                     className={
@@ -438,7 +473,7 @@ const Header = () => {
                                 className="headerSearchCategoriesTopSearchesParent headerSearchCategoriesTopSearchesParent-orange"
                                 key={i}
                                 onClick={() => {
-                                  alert(ele.keyWord);
+                                  topSearchKeyword(ele.keyWord);
                                 }}
                               >
                                 <div className="headerSearchCategoriesTopSearchesName">
