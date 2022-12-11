@@ -12,10 +12,16 @@ export const filterSlice = createSlice({
   name: 'filter',
   initialState,
   reducers: {
-    filter: (state, action) => {
-      state.value.categoryId.push(action.payload.catId);
-      state.value.chapterStartCount.push(action.payload.start);
-      state.value.chapterEndCount.push(action.payload.end);
+    setfilter: (state, action) => {
+      !state.value.categoryId.includes(action.payload.catId) &&
+        state.value.categoryId.push(action.payload.catId);
+    },
+    setChapterCount: (state, action) => {
+      !state.value.categoryId.includes(action.payload.start) &&
+        state.value.chapterStartCount.push(action.payload.start);
+      !state.value.categoryId.includes(action.payload.end) &&
+        action.payload.end &&
+        state.value.chapterEndCount.push(action.payload.end);
     },
     clearFilter: (state) => {
       state.value.categoryId = [];
@@ -26,6 +32,6 @@ export const filterSlice = createSlice({
 });
 
 // Action creators are generated for each case reducer function
-export const { filter, clearFilter } = filterSlice.actions;
+export const { setfilter, clearFilter, setChapterCount } = filterSlice.actions;
 
 export default filterSlice.reducer;

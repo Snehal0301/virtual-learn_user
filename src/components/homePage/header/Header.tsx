@@ -36,6 +36,11 @@ import { searchFocus } from '../../../redux/reducers/headerProfileOptions';
 import EditProfile from './edit-profile/EditProfile';
 import ChangePassword from './changePassword/ChangePassword';
 import { useNavigate } from 'react-router-dom';
+import filter, {
+  clearFilter,
+  setChapterCount,
+  setfilter,
+} from '../../../redux/reducers/filter';
 
 const Header = () => {
   const [onChange, setOnChange] = useState('');
@@ -44,6 +49,8 @@ const Header = () => {
   const [searchedCourse, setSearchedCourse] = useState([]);
 
   const navigate = useNavigate();
+
+  const filterData = useSelector((state: any) => state.filter.value);
 
   useEffect(() => {
     fetch(
@@ -108,12 +115,12 @@ const Header = () => {
   ];
 
   const Duration = [
-    '5/10 Chapters',
-    '5/10 Chapters',
-    '10/20 Chapters',
-    '20/30 Chapters',
-    '30/40 Chapters',
-    '50+ Chapters',
+    { start: 0, end: 5 },
+    { start: 5, end: 10 },
+    { start: 10, end: 20 },
+    { start: 20, end: 30 },
+    { start: 30, end: 40 },
+    { start: 50 },
   ];
 
   const [notifydata, setnotifydata] = useState(false);
@@ -519,8 +526,19 @@ const Header = () => {
                     topCategories.map((ele: any, i: any) => {
                       return (
                         <div
-                          className="headerSearchCategoriesTopSearchesParent headerSearchCategories-chpBorder"
+                          className={
+                            filterData.categoryId.includes(ele.categoryId)
+                              ? 'headerSearchCategoriesTopSearchesParent headerSearchCategories-chpBorder chipBackgroundYellow'
+                              : 'headerSearchCategoriesTopSearchesParent headerSearchCategories-chpBorder '
+                          }
                           key={i}
+                          onClick={() => {
+                            dispatch(
+                              setfilter({
+                                catId: ele.categoryId,
+                              })
+                            );
+                          }}
                         >
                           <div className="headerSearchCategoriesTopSearchesIcon">
                             {' '}
@@ -547,14 +565,26 @@ const Header = () => {
                   {Duration.map((ele: any, i: any) => {
                     return (
                       <div
-                        className="headerSearchCategoriesTopSearchesParent  headerSearchCategories-chpBorder"
+                        className={
+                          filterData.chapterStartCount.includes(ele.start)
+                            ? 'headerSearchCategoriesTopSearchesParent  headerSearchCategories-chpBorder chipBackgroundYellow'
+                            : 'headerSearchCategoriesTopSearchesParent  headerSearchCategories-chpBorder'
+                        }
                         key={i}
                       >
-                        <div className="headerSearchCategoriesTopSearchesIcon">
-                          {design}
-                        </div>
-                        <div className="headerSearchCategoriesTopSearchesName">
-                          {ele}
+                        <div
+                          className="headerSearchCategoriesTopSearchesName"
+                          onClick={() => {
+                            dispatch(
+                              setChapterCount({
+                                start: ele.start,
+                                end: ele.end,
+                              })
+                            );
+                          }}
+                        >
+                          {ele.start}
+                          {ele.end ? `/${ele.end}` : '+'} Chapters
                         </div>
                       </div>
                     );
@@ -565,7 +595,12 @@ const Header = () => {
                 <button className="headerSearch-applyFilterButton">
                   Apply Filter
                 </button>
-                <button className="headerSearch-clearAllButton">
+                <button
+                  className="headerSearch-clearAllButton"
+                  onClick={() => {
+                    dispatch(clearFilter());
+                  }}
+                >
                   Clear All
                 </button>
               </div>
