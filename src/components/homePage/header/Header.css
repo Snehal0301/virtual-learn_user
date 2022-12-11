@@ -569,6 +569,13 @@
 
 /* custom styleing */
 
+.headerSearch-responsePic > img {
+  height: 98px;
+  width: 98px;
+  background-size: cover;
+  object-fit: cover;
+  border-radius: 6px;
+}
 @media only screen and (max-width: 760px) {
   .mobile-header-search {
     padding: 1rem 0rem !important;

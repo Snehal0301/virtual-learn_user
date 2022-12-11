@@ -41,6 +41,7 @@ const Header = () => {
   const [onChange, setOnChange] = useState('');
   const [topSearch, setTopSearch] = useState([]);
   const [topCategories, setTopCategories] = useState([]);
+  const [searchedCourse, setSearchedCourse] = useState([]);
 
   const navigate = useNavigate();
 
@@ -78,20 +79,6 @@ const Header = () => {
         setTopCategories(res);
       });
   }, []);
-
-  const topCategoriesOne = [
-    'Design',
-    'Development',
-    'Business',
-    'Finance',
-    'Health & Fitness',
-    'Music',
-    'IT & Software',
-    'Marketing',
-    'Lifestyle',
-    'Photography',
-    'Teaching',
-  ];
 
   const searchdata: any = [
     {
@@ -189,6 +176,21 @@ const Header = () => {
 
   const changeHandler = (e: any) => {
     setOnChange(e.target.value);
+    fetch(
+      `http://virtuallearnapp2-env.eba-wrr2p8zk.ap-south-1.elasticbeanstalk.com/user/search?searchKey=${e.target.value}`,
+      {
+        headers: {
+          Accept: 'application/json, text/plain, */*',
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${localStorage.getItem('Token')}`,
+        },
+      }
+    )
+      .then((res) => res.json())
+      .then((res) => {
+        console.log('response', res);
+        setSearchedCourse(res);
+      });
   };
 
   const toggleMobileHeader = () => {
@@ -382,7 +384,11 @@ const Header = () => {
                   {filterIcon}
                 </button>
               </div>
-              {!(onChange.length > 1) ? (
+              {!(
+                onChange.length > 0 &&
+                searchedCourse &&
+                searchedCourse.length > 0
+              ) ? (
                 <>
                   {!(onChange.length > 0) ? (
                     <div className="headerSearchCategoriesTopSearch ">
@@ -455,26 +461,27 @@ const Header = () => {
                 </>
               ) : (
                 <div className="headerSearch-response">
-                  {searchdata.map((ele: any, i: number) => {
-                    return (
-                      <div className="headersearch-responseBody" key={i}>
-                        <div className="headerSearch-responsePic">
-                          <img src={ele.img} alt={ele.title} />
+                  {searchedCourse &&
+                    searchedCourse.map((ele: any, i: number) => {
+                      return (
+                        <div className="headersearch-responseBody" key={i}>
+                          <div className="headerSearch-responsePic">
+                            <img src={ele.coursePhoto} alt={ele.courseName} />
+                          </div>
+                          <div className="headerSearch-responseContainer">
+                            <div className="headerSearch-responseTitle">
+                              {ele.courseName}
+                            </div>
+                            <div className="headerSearch-responseChapters">
+                              {ele.chapterCount} chapters
+                            </div>
+                            <div className="headerSearch-responseCategory">
+                              {ele.categoryName}
+                            </div>
+                          </div>
                         </div>
-                        <div className="headerSearch-responseContainer">
-                          <div className="headerSearch-responseTitle">
-                            {ele.title}
-                          </div>
-                          <div className="headerSearch-responseChapters">
-                            {ele.chapters}
-                          </div>
-                          <div className="headerSearch-responseCategory">
-                            {ele.cat}
-                          </div>
-                        </div>
-                      </div>
-                    );
-                  })}
+                      );
+                    })}
                 </div>
               )}
             </div>
