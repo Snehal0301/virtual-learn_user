@@ -68,7 +68,7 @@
   opacity: 0.3;
 }
 
-.header-profilePic>img {
+.header-profilePic > img {
   width: 40px;
   height: 40px;
   border-radius: 50%;
@@ -223,7 +223,7 @@
   height: 20px;
 }
 
-.headerSearchCategoriesTopSearchesName{
+.headerSearchCategoriesTopSearchesName {
   text-transform: capitalize;
 }
 
@@ -353,6 +353,10 @@
   text-align: center;
 }
 
+.headerSearchCategoriesTopSearchesIcon > img {
+  width: 100%;
+}
+
 .headerSearch-filterModalCategoryTitle {
   font-style: normal;
   font-weight: 700;
@@ -368,7 +372,7 @@
   color: var(--filterChipFontClr) !important;
 }
 
-.headerSearch-filterModalButtons>button {
+.headerSearch-filterModalButtons > button {
   position: relative !important;
   margin: 0;
   display: flex;
@@ -558,7 +562,7 @@
   cursor: pointer;
 }
 
-.headerSearch-responsePic-image{
+.headerSearch-responsePic-image {
   width: 100px;
   height: 100px;
 }
@@ -717,7 +721,7 @@
     gap: 10px;
   }
 
-  .headerSearch-filterModalButtons>button {
+  .headerSearch-filterModalButtons > button {
     position: relative !important;
     margin: 0;
     display: flex;
@@ -767,10 +771,9 @@
     align-items: stretch;
   }
 
-  .headerSearch-responsePic img{
+  .headerSearch-responsePic img {
     transform: scale(0.8);
   }
-  
 
   .headerSearch-responseContainer {
     color: black;
