@@ -41,10 +41,12 @@ import filter, {
   setChapterCount,
   setfilter,
 } from '../../../redux/reducers/filter';
+import Loading from '../../../utils/loading/Loading';
 
 const Header = () => {
   const [onChange, setOnChange] = useState('');
   const [showFilter, setShowFilter] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [topSearch, setTopSearch] = useState([]);
   const [topCategories, setTopCategories] = useState([]);
   const [searchedCourse, setSearchedCourse] = useState([]);
@@ -87,33 +89,6 @@ const Header = () => {
         setTopCategories(res);
       });
   }, []);
-
-  const searchdata: any = [
-    {
-      title: 'User Experience Design Fundamentals',
-      img: require('../../../assets/images/dummy/1.png'),
-      chapters: '14 Chapter',
-      cat: 'Design',
-    },
-    {
-      title: 'Digital Marketing for 2021 Masterclass',
-      img: require('../../../assets/images/dummy/2.png'),
-      chapters: '21 Chapter',
-      cat: 'Design',
-    },
-    {
-      title: 'Graphic Design Masterclass - Learn GREAT Design',
-      img: require('../../../assets/images/dummy/3.png'),
-      chapters: '11 Chapter',
-      cat: 'Design',
-    },
-    {
-      title: 'Study on Design Principles and 7 features ',
-      img: require('../../../assets/images/dummy/4.png'),
-      chapters: '7 Chapter',
-      cat: 'Design',
-    },
-  ];
 
   const Duration = [
     { start: 0, end: 5 },
@@ -218,6 +193,7 @@ const Header = () => {
   const [leftdrawer, setLeftdrawer] = useState(false);
 
   const filterHandler = () => {
+    setLoading(true);
     setShowFilter(true);
     fetch(
       `http://virtuallearnapp2-env.eba-wrr2p8zk.ap-south-1.elasticbeanstalk.com/user/applyFilter`,
@@ -235,14 +211,17 @@ const Header = () => {
       .then((res) => {
         setSearchedCourse(res);
         dispatch(modalFilter(false));
+        setLoading(false);
       })
       .catch((err) => {
         setSearchedCourse([]);
+        setLoading(false);
         dispatch(modalFilter(false));
       });
   };
 
   const topSearchKeyword = (keyword: string) => {
+    setLoading(true);
     setShowFilter(true);
     fetch(
       `http://virtuallearnapp2-env.eba-wrr2p8zk.ap-south-1.elasticbeanstalk.com/user/searchByKeyword?keyword=${keyword}`,
@@ -258,13 +237,16 @@ const Header = () => {
       .then((res) => res.json())
       .then((res) => {
         setSearchedCourse(res);
+        setLoading(false);
       })
       .catch((err) => {
         setSearchedCourse([]);
+        setLoading(false);
       });
   };
 
   const categorySearch = (catId: any) => {
+    setLoading(true);
     setShowFilter(true);
     fetch(
       `http://virtuallearnapp2-env.eba-wrr2p8zk.ap-south-1.elasticbeanstalk.com/user/allCoursesOfCategory?categoryId=${catId}`,
@@ -281,9 +263,11 @@ const Header = () => {
       .then((res) => {
         console.log('category', res);
         setSearchedCourse(res);
+        setLoading(false);
       })
       .catch((err) => {
         setSearchedCourse([]);
+        setLoading(false);
       });
   };
 
@@ -708,7 +692,6 @@ const Header = () => {
       )}
       {/* </div>
       </div > */}
-
       <Drawer
         open={profileDrawerState}
         onClose={handleCloseDrawer}
@@ -734,9 +717,7 @@ const Header = () => {
           notifydata ? <Notification /> : <Profile />
         } */}
       </Drawer>
-
       {/* mobile drawer */}
-
       <Drawer
         open={leftdrawer}
         onClose={handleCloseDrawer}
@@ -852,6 +833,7 @@ const Header = () => {
           X
         </p>
       </Drawer>
+      {loading && <Loading />}
     </>
   );
 };
