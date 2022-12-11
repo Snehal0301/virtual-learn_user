@@ -118,6 +118,10 @@ const Header = () => {
     setLeftdrawer(false);
   };
 
+  const handleCloseDrawerMobile = () => {
+    setLeftdrawer(false);
+  };
+
   const handlenotify = () => {
     dispatch(profileDrawer(true));
     dispatch(headerProfile(false));
@@ -573,28 +577,52 @@ const Header = () => {
           </div>
           <div className="left-drawer-body">
             <div className="left-drawer-links">
-              <div className="left-drawer-link">
+              <div
+                className="left-drawer-link"
+                onClick={() => {
+                  navigate('/');
+                  handleCloseDrawerMobile();
+                }}
+              >
                 <img
                   src={require('../../../assets/icons/icn_home_menu-Home.png')}
                   alt=""
                 />
                 <p>Home</p>
               </div>
-              <div className="left-drawer-link">
+              <div
+                className="left-drawer-link"
+                onClick={() => {
+                  navigate('/myCourses');
+                  handleCloseDrawerMobile();
+                }}
+              >
                 <img
                   src={require('../../../assets/icons/icn_course_menu-Briefcase.png')}
                   alt="My Course"
                 />
                 <p>My Course</p>
               </div>
-              <div className="left-drawer-link">
+              <div
+                className="left-drawer-link"
+                onClick={() => {
+                  handleProfileClick();
+                  handleCloseDrawerMobile();
+                }}
+              >
                 <img
                   src={require('../../../assets/icons/icn_profile_menu.png')}
                   alt="Profile"
                 />
                 <p>My Profile</p>
               </div>
-              <div className="left-drawer-link">
+              <div
+                className="left-drawer-link"
+                onClick={() => {
+                  handlenotify();
+                  handleCloseDrawerMobile();
+                }}
+              >
                 <img
                   src={require('../../../assets/icons/icn_notification_menu.png')}
                   alt="Notifications"
@@ -602,14 +630,27 @@ const Header = () => {
                 <p>Notifications</p>
                 <span>11</span>
               </div>
-              <div className="left-drawer-link">
+              <div
+                className="left-drawer-link"
+                onClick={() => {
+                  handleSetting();
+                  handleCloseDrawerMobile();
+                }}
+              >
                 <img
                   src={require('../../../assets/icons/icn_settings_menu-Settings.png')}
                   alt="Settings"
                 />
                 <p>Settings</p>
               </div>
-              <div className="left-drawer-link">
+              <div
+                className="left-drawer-link"
+                onClick={() => {
+                  handleCloseDrawerMobile();
+                  localStorage.clear();
+                  window.location.reload();
+                }}
+              >
                 <img
                   src={require('../../../assets/icons/icn_logout_menu-Power buttom.png')}
                   alt="Logout"
