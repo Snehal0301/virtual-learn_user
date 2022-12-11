@@ -504,21 +504,29 @@ const Header = () => {
                   Search from Categories
                 </div>
                 <div className="headerSearch-filterModalCategoryBody">
-                  {topCategories.map((ele: any, i: any) => {
-                    return (
-                      <div
-                        className="headerSearchCategoriesTopSearchesParent headerSearchCategories-chpBorder"
-                        key={i}
-                      >
-                        <div className="headerSearchCategoriesTopSearchesIcon">
-                          {design}
+                  {topCategories &&
+                    topCategories.length > 0 &&
+                    topCategories.map((ele: any, i: any) => {
+                      return (
+                        <div
+                          className="headerSearchCategoriesTopSearchesParent headerSearchCategories-chpBorder"
+                          key={i}
+                        >
+                          <div className="headerSearchCategoriesTopSearchesIcon">
+                            {' '}
+                            <img
+                              src={
+                                ele && ele.categoryPhoto && ele.categoryPhoto
+                              }
+                              alt={ele && ele.categoryName && ele.categoryName}
+                            />
+                          </div>
+                          <div className="headerSearchCategoriesTopSearchesName">
+                            {ele && ele.categoryName && ele.categoryName}
+                          </div>
                         </div>
-                        <div className="headerSearchCategoriesTopSearchesName">
-                          {ele}
-                        </div>
-                      </div>
-                    );
-                  })}
+                      );
+                    })}
                 </div>
               </div>
               <div className="headerSearch-filterModalDuration">
