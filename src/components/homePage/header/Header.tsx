@@ -44,6 +44,7 @@ import filter, {
 
 const Header = () => {
   const [onChange, setOnChange] = useState('');
+  const [showFilter, setShowFilter] = useState(false);
   const [topSearch, setTopSearch] = useState([]);
   const [topCategories, setTopCategories] = useState([]);
   const [searchedCourse, setSearchedCourse] = useState([]);
@@ -217,8 +218,7 @@ const Header = () => {
   const [leftdrawer, setLeftdrawer] = useState(false);
 
   const filterHandler = () => {
-    console.log('filtered category', filterData);
-    setOnChange('Filter Search');
+    setShowFilter(true);
     fetch(
       `http://virtuallearnapp2-env.eba-wrr2p8zk.ap-south-1.elasticbeanstalk.com/user/applyFilter`,
       {
@@ -235,6 +235,9 @@ const Header = () => {
       .then((res) => {
         console.log('response', res);
         setSearchedCourse(res);
+      })
+      .catch((err) => {
+        setSearchedCourse([]);
       });
   };
 
@@ -416,12 +419,12 @@ const Header = () => {
                 </button>
               </div>
               {!(
-                onChange.length > 0 &&
+                (onChange.length > 0 || showFilter) &&
                 searchedCourse &&
                 searchedCourse.length > 0
               ) ? (
                 <>
-                  {!(onChange.length > 0) ? (
+                  {!(onChange.length > 0 || showFilter) ? (
                     <div className="headerSearchCategoriesTopSearch ">
                       <div className="headerSearchCategoriesTopSearchTitle">
                         Top Search
