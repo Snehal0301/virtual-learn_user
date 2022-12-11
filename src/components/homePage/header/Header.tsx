@@ -403,6 +403,9 @@ const Header = () => {
                               <div
                                 className="headerSearchCategoriesTopSearchesParent headerSearchCategoriesTopSearchesParent-orange"
                                 key={i}
+                                onClick={() => {
+                                  alert(ele.keyWord);
+                                }}
                               >
                                 <div className="headerSearchCategoriesTopSearchesName">
                                   {ele && ele.keyWord && ele.keyWord}
