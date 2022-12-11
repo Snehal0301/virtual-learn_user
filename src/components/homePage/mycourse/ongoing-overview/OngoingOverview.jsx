@@ -534,8 +534,6 @@ const OngoingOverview = () => {
 
                 <div className="course-sections">
                   {chapter.chapterResponses.map((ele, id) => {
-                    console.log('hello ji', ele);
-
                     return (
                       <>
                         {/* <Accordian /> */}
@@ -627,6 +625,22 @@ const OngoingOverview = () => {
                                   {ele.testId && (
                                     <h2
                                       onClick={() => {
+                                        let a =
+                                          ele &&
+                                          ele.testDuration &&
+                                          ele.testDuration.split(':');
+
+                                        if (a) {
+                                          let seconds =
+                                            +a[0] * 60 * 60 +
+                                            +a[1] * 60 +
+                                            +a[2];
+
+                                          localStorage.setItem(
+                                            'timer',
+                                            seconds
+                                          );
+                                        }
                                         dispatch(
                                           test(
                                             `${
