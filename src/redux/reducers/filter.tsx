@@ -19,6 +19,7 @@ export const filterSlice = createSlice({
     setChapterCount: (state, action) => {
       !state.value.categoryId.includes(action.payload.start) &&
         state.value.chapterStartCount.push(action.payload.start);
+
       !state.value.categoryId.includes(action.payload.end) &&
         action.payload.end &&
         state.value.chapterEndCount.push(action.payload.end);

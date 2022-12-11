@@ -215,6 +215,29 @@ const Header = () => {
 
   const [arrow, setArrow] = useState(false);
   const [leftdrawer, setLeftdrawer] = useState(false);
+
+  const filterHandler = () => {
+    console.log('filtered category', filterData);
+    setOnChange('Filter Search');
+    fetch(
+      `http://virtuallearnapp2-env.eba-wrr2p8zk.ap-south-1.elasticbeanstalk.com/user/applyFilter`,
+      {
+        method: 'POST',
+        headers: {
+          Accept: 'application/json, text/plain, */*',
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${localStorage.getItem('Token')}`,
+        },
+        body: JSON.stringify(filterData),
+      }
+    )
+      .then((res) => res.json())
+      .then((res) => {
+        console.log('response', res);
+        setSearchedCourse(res);
+      });
+  };
+
   return (
     <>
       <div className="header-parent">
@@ -257,6 +280,7 @@ const Header = () => {
                 dispatch(searchFocus(true));
               }}
               onChange={changeHandler}
+              value={onChange}
             />
             {!searchFieldFocus && (
               <div className="header-searchIcon">{searchIcon}</div>
@@ -592,7 +616,10 @@ const Header = () => {
                 </div>
               </div>
               <div className="headerSearch-filterModalButtons">
-                <button className="headerSearch-applyFilterButton">
+                <button
+                  className="headerSearch-applyFilterButton"
+                  onClick={filterHandler}
+                >
                   Apply Filter
                 </button>
                 <button
