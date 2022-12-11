@@ -255,7 +255,12 @@ const Header = () => {
                         e.stopPropagation();
                       }}
                     >
-                      <div className="header-profileOption header-profileOptionBorder">
+                      <div
+                        className="header-profileOption header-profileOptionBorder"
+                        onClick={() => {
+                          navigate('/myCourses');
+                        }}
+                      >
                         <div className="header-profileOptionIcon">
                           {graduationCapIcon}
                         </div>
@@ -279,7 +284,7 @@ const Header = () => {
                       <div
                         className="header-profileOption"
                         onClick={() => {
-                          localStorage.setItem('auth', 'false');
+                          localStorage.clear();
                           window.location.reload();
                         }}
                       >

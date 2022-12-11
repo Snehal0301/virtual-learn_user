@@ -246,7 +246,7 @@ const Start = () => {
       </div>
       <div className="start-card2">
         <div className="start-course1">
-          {startCourseData.map((item) => (
+          {startCourseData.slice(0, 3).map((item) => (
             <div className="start-course1-image">
               <div className="start-image-ongoing">
                 <img src={item.image} alt="" />
