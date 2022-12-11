@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./Header.css";
 import {
   bellIcon,
@@ -35,9 +35,12 @@ import Notification from "./notification/Notification";
 import { searchFocus } from "../../../redux/reducers/headerProfileOptions";
 import EditProfile from "./edit-profile/EditProfile";
 import ChangePassword from "./changePassword/ChangePassword";
+import axios from "axios";
+import { searchDataValueState, topsearchData } from "../../../redux/reducers/categorySlice";
 
 const Header = () => {
   const [onChange, setOnChange] = useState("");
+  const [searchValue, setsearchValue] = useState("");
 
   const topSearch = [
     "Python",
@@ -153,9 +156,31 @@ const Header = () => {
     (state: any) => state.headerProfile.filterModal
   );
 
+  const [searchCollection, setSearchCollection] = useState([])
+
+
   const changeHandler = (e: any) => {
-    setOnChange(e.target.value);
+    e.preventDefault();
+    setsearchValue(e.target.value);
+    if (e.target.value.length > 0) {
+
+      axios.get(
+        `http://virtuallearnapp2-env.eba-wrr2p8zk.ap-south-1.elasticbeanstalk.com/user/search?searchKey=${searchValue}`,
+        {
+          headers:
+            { "Authorization": `Bearer ${localStorage.getItem("Token")}` }
+        }
+
+      ).then((res) => {
+        console.log(res.data)
+        setSearchCollection(res.data)
+        // dispatch(searchDataState(res.data))
+      }).catch((err) => {
+        console.log(err);
+      })
+    }
   };
+
 
   const toggleMobileHeader = () => {
     setArrow(true)
@@ -170,8 +195,37 @@ const Header = () => {
     setLeftdrawer(true)
   }
 
+  const categorySearches = useSelector((state: any) => state.categorydata.value)
+  const allSearchData = useSelector((state: any) => state.categorydata.allSearchDataValue)
+
+  // const categorySearches:any = false
+
+
   const [arrow, setArrow] = useState(false)
   const [leftdrawer, setLeftdrawer] = useState(false)
+
+  useEffect(() => {
+    const getTopSearches = () => {
+      axios.get(
+        `http://virtuallearnapp2-env.eba-wrr2p8zk.ap-south-1.elasticbeanstalk.com/user/topSearches`,
+        {
+          headers:
+            { "Authorization": `Bearer ${localStorage.getItem("Token")}` }
+        }
+
+      ).then((res) => {
+        dispatch(topsearchData(res.data))
+      }).catch((err) => {
+        console.log(err);
+      })
+    }
+
+    getTopSearches();
+  }, [])
+
+  const topSearches = useSelector((state: any) => state.categorydata.topsearch)
+
+
   return (
     <>
       <div className="header-parent">
@@ -187,7 +241,7 @@ const Header = () => {
 
               <img className="mobile-logo" src={require('../../../assets/images/burger-mobile-icon.png')} alt="" onClick={handleMobileDrawer} />
           }
-          <form className="header-search">
+          <form className="header-search" >
             <input
               type="text"
               className={
@@ -200,6 +254,8 @@ const Header = () => {
                 dispatch(searchFocus(true));
               }}
               onChange={changeHandler}
+              value={searchValue}
+
             />
             {!searchFieldFocus && (
               <div className="header-searchIcon">{searchIcon}</div>
@@ -277,6 +333,7 @@ const Header = () => {
                   onClick={() => {
                     dispatch(modalFilter(true));
                   }}
+
                 >
                   {filterIcon}
                 </button>
@@ -307,6 +364,7 @@ const Header = () => {
                       dispatch(searchFocus(true));
                     }}
                     onChange={changeHandler}
+                    value={searchValue}
                   />
                   <div className="header-searchIcon">{searchIcon}</div>
                 </form>
@@ -319,22 +377,22 @@ const Header = () => {
                   {filterIcon}
                 </button>
               </div>
-              {!(onChange.length > 1) ? (
+              {!(searchValue.length > 1) ? (
                 <>
-                  {!(onChange.length > 0) ? (
+                  {!(searchValue.length > 0) ? (
                     <div className="headerSearchCategoriesTopSearch ">
                       <div className="headerSearchCategoriesTopSearchTitle">
                         Top Search
                       </div>
                       <div className="headerSearchCategoriesTopSearchBody">
-                        {topSearch.map((ele: any, i: any) => {
+                        {topSearches.map((ele: any, i: any) => {
                           return (
                             <div
                               className="headerSearchCategoriesTopSearchesParent headerSearchCategoriesTopSearchesParent-orange"
                               key={i}
                             >
                               <div className="headerSearchCategoriesTopSearchesName">
-                                {ele}
+                                {ele.keyWord}
                               </div>
                             </div>
                           );
@@ -358,42 +416,52 @@ const Header = () => {
                     <div className="headerSearchCategoriesTopSearchTitle">
                       Search from Categories
                     </div>
-                    <div className="headerSearchCategoriesTopSearchBody">
-                      {topCategories.map((ele: any, i: any) => {
-                        return (
-                          <div
-                            className="headerSearchCategoriesTopSearchesParent"
-                            key={i}
-                          >
-                            <div className="headerSearchCategoriesTopSearchesIcon">
-                              {design}
-                            </div>
-                            <div className="headerSearchCategoriesTopSearchesName">
-                              {ele}
-                            </div>
-                          </div>
-                        );
-                      })}
-                    </div>
+
+                    {
+                      categorySearches
+                        ?
+                        <div className="headerSearchCategoriesTopSearchBody">
+                          {
+                            categorySearches.map((ele: any, i: any) => {
+                              return (
+                                <div
+                                  className="headerSearchCategoriesTopSearchesParent"
+                                  key={i}
+                                >
+                                  <img src={ele.categoryPhoto} className="headerSearchCategoriesTopSearchesIcon" alt="" />
+                                  <div className="headerSearchCategoriesTopSearchesName">
+                                    {ele.categoryName}
+                                  </div>
+                                </div>
+                              );
+                            })
+                          }
+                        </div>
+                        :
+                        <p>Loading</p>
+                    }
+
                   </div>
                 </>
-              ) : (
+              )
+                :
+                (
                 <div className="headerSearch-response">
-                  {searchdata.map((ele: any, i: number) => {
+                  {searchCollection.map((ele: any, i: number) => {
                     return (
-                      <div className="headersearch-responseBody" key={i}>
+                      <div className="headersearch-responseBody" key={ele.courseId}>
                         <div className="headerSearch-responsePic">
-                          <img src={ele.img} alt={ele.title} />
+                          <img src={ele.coursePhoto} alt={ele.title} className="headerSearch-responsePic-image" />
                         </div>
                         <div className="headerSearch-responseContainer">
                           <div className="headerSearch-responseTitle">
-                            {ele.title}
+                            {ele.courseName}
                           </div>
                           <div className="headerSearch-responseChapters">
-                            {ele.chapters}
+                            {ele.chapterCount}
                           </div>
                           <div className="headerSearch-responseCategory">
-                            {ele.cat}
+                            {ele.categoryName}
                           </div>
                         </div>
                       </div>
@@ -405,88 +473,100 @@ const Header = () => {
           )}
         </div>
       </div>
-      {modalFilterStatus && (
-        <aside
-          className="headerSearch-filterModal"
-          onClick={() => {
-            dispatch(modalFilter(false));
-          }}
-        >
-          <div
-            className="headerSearch-filterActualModal"
-            onClick={(e: any) => {
-              e.stopPropagation();
+      {
+        modalFilterStatus && (
+          <aside
+            className="headerSearch-filterModal"
+            onClick={() => {
+              dispatch(modalFilter(false));
             }}
           >
-            <div className="headerSearch-filterModalBody">
-              <div className="headerSearch-filterModalBodyTitle">
-                Search Filters
-              </div>
-              <div className="headerSearch-filterModalCategory">
-                {" "}
-                <div className="headerSearch-filterModalCategoryTitle">
-                  Search from Categories
-                </div>
-                <div className="headerSearch-filterModalCategoryBody">
-                  {topCategories.map((ele: any, i: any) => {
-                    return (
-                      <div
-                        className="headerSearchCategoriesTopSearchesParent headerSearchCategories-chpBorder"
-                        key={i}
-                      >
-                        <div className="headerSearchCategoriesTopSearchesIcon">
-                          {design}
-                        </div>
-                        <div className="headerSearchCategoriesTopSearchesName">
-                          {ele}
-                        </div>
-                      </div>
-                    );
-                  })}
-                </div>
-              </div>
-              <div className="headerSearch-filterModalDuration">
-                <div className="headerSearch-filterModalCategoryTitle">
-                  Duration
-                </div>
-                <div className="headerSearch-filterModalCategoryBody">
-                  {Duration.map((ele: any, i: any) => {
-                    return (
-                      <div
-                        className="headerSearchCategoriesTopSearchesParent  headerSearchCategories-chpBorder"
-                        key={i}
-                      >
-                        <div className="headerSearchCategoriesTopSearchesIcon">
-                          {design}
-                        </div>
-                        <div className="headerSearchCategoriesTopSearchesName">
-                          {ele}
-                        </div>
-                      </div>
-                    );
-                  })}
-                </div>
-              </div>
-              <div className="headerSearch-filterModalButtons">
-                <button className="headerSearch-applyFilterButton">
-                  Apply Filter
-                </button>
-                <button className="headerSearch-clearAllButton">
-                  Clear All
-                </button>
-              </div>
-            </div>
             <div
-              className="headerSearch-filterModalBodyCloseIcon"
-              onClick={() => {
-                dispatch(modalFilter(false));
+              className="headerSearch-filterActualModal"
+              onClick={(e: any) => {
+                e.stopPropagation();
               }}
             >
-              {closeIcon}
+              <div className="headerSearch-filterModalBody">
+                <div className="headerSearch-filterModalBodyTitle">
+                  Search Filters
+                </div>
+                <div className="headerSearch-filterModalCategory">
+                  {" "}
+                  <div className="headerSearch-filterModalCategoryTitle">
+                    Search from Categories
+                  </div>
+                  {
+                    categorySearches ?
+                      <div className="headerSearch-filterModalCategoryBody">
+                        {
+                          categorySearches.map((ele: any, i: any) => {
+                            return (
+                              <div
+                                className="headerSearchCategoriesTopSearchesParent headerSearchCategories-chpBorder"
+                                key={i}
+                              >
+                                {/* <div className="headerSearchCategoriesTopSearchesIcon">
+                                  {design}
+                                </div> */}
+                                <img src={ele.categoryPhoto} alt="" className="headerSearchCategoriesTopSearchesIcon" />
+                                <div className="headerSearchCategoriesTopSearchesName">
+                                  {ele.categoryName}
+                                </div>
+                              </div>
+                            );
+                          })
+                        }
+                      </div>
+                      :
+                      <p>Loading</p>
+                  }
+
+
+                </div>
+                <div className="headerSearch-filterModalDuration">
+                  <div className="headerSearch-filterModalCategoryTitle">
+                    Duration
+                  </div>
+                  <div className="headerSearch-filterModalCategoryBody">
+                    {Duration.map((ele: any, i: any) => {
+                      return (
+                        <div
+                          className="headerSearchCategoriesTopSearchesParent  headerSearchCategories-chpBorder"
+                          key={i}
+                        >
+                          <div className="headerSearchCategoriesTopSearchesIcon">
+                            {design}
+                          </div>
+                          <div className="headerSearchCategoriesTopSearchesName">
+                            {ele}
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+                <div className="headerSearch-filterModalButtons">
+                  <button className="headerSearch-applyFilterButton">
+                    Apply Filter
+                  </button>
+                  <button className="headerSearch-clearAllButton">
+                    Clear All
+                  </button>
+                </div>
+              </div>
+              <div
+                className="headerSearch-filterModalBodyCloseIcon"
+                onClick={() => {
+                  dispatch(modalFilter(false));
+                }}
+              >
+                {closeIcon}
+              </div>
             </div>
-          </div>
-        </aside>
-      )}
+          </aside>
+        )
+      }
       {/* </div>
       </div > */}
 

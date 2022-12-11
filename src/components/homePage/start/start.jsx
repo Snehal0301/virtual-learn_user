@@ -175,9 +175,8 @@ const Start = () => {
 
 
   }, [])
-  // console.log(categoryData);
-  dispatch(categorydata(categoryData))
 
+  dispatch(categorydata(categoryData))
 
 
 

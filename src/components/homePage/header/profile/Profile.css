@@ -52,6 +52,7 @@
 .profile-image-name .name {
   font-weight: 700;
   font-size: 22px;
+  text-transform: capitalize;
 }
 
 .profile-image-name .role {
@@ -132,6 +133,7 @@
   color: #7a7a7a;
   font-weight: 700;
   font-size: 20px;
+  text-transform: capitalize;
 }
 
 .pd-value {

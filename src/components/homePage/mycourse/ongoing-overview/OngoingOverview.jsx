@@ -156,7 +156,7 @@ const OngoingOverview = () => {
     <div className='ongoing-overview'>
       <div className="ongoing-section-1">
         <div className="ongoing-section-video-player">
-          {
+          {/* {
             pause &&
             <div className="onpause-modal">
               <p className='onpause-modal-title'>Your lesson paused at 1.21
@@ -164,7 +164,7 @@ const OngoingOverview = () => {
               <button className='onpause-button' onClick={onPlay}>Continue Watching</button>
               <button className='onpause-button beginning'>Watch from beginning</button>
             </div>
-          }
+          } */}
           <ReactPlayer url={videoLink} controls='true' className='react-player' width='100%'
             height='100%' onPause={onPause} playing={playing} onProgress={(progress) => {
               setPlayed(progress.playedSeconds);
