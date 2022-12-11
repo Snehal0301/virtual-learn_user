@@ -257,7 +257,29 @@ const Header = () => {
     )
       .then((res) => res.json())
       .then((res) => {
-        console.log('top', res);
+        setSearchedCourse(res);
+      })
+      .catch((err) => {
+        setSearchedCourse([]);
+      });
+  };
+
+  const categorySearch = (catId: any) => {
+    setShowFilter(true);
+    fetch(
+      `http://virtuallearnapp2-env.eba-wrr2p8zk.ap-south-1.elasticbeanstalk.com/user/allCoursesOfCategory?categoryId=${catId}`,
+      {
+        method: 'GET',
+        headers: {
+          Accept: 'application/json, text/plain, */*',
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${localStorage.getItem('Token')}`,
+        },
+      }
+    )
+      .then((res) => res.json())
+      .then((res) => {
+        console.log('category', res);
         setSearchedCourse(res);
       })
       .catch((err) => {
@@ -509,6 +531,9 @@ const Header = () => {
                             <div
                               className="headerSearchCategoriesTopSearchesParent"
                               key={i}
+                              onClick={() => {
+                                categorySearch(ele.categoryId);
+                              }}
                             >
                               <div className="headerSearchCategoriesTopSearchesIcon">
                                 <img
