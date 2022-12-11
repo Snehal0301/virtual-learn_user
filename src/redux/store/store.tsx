@@ -11,8 +11,12 @@ import { quizAnswerSlice } from '../reducers/result';
 import testSlice from '../reducers/testSlice';
 import allcourseReducer from '../reducers/allcourseSlice';
 import categoryReducer from '../reducers/categorySlice';
-import answerHeaderSlice from '../reducers/testAnswerHeader'
-import answerSlice from '../reducers/testAnswer'
+import answerHeaderSlice from '../reducers/testAnswerHeader';
+import answerSlice from '../reducers/testAnswer';
+import { testSuccessRedSlice } from '../reducers/SuccessTestRed';
+import { showSuccessPageSlice } from '../reducers/showSuccesspage';
+import { finaltestShowPageSlice } from '../reducers/finalTestSuccess';
+import FinalResultSlice from '../reducers/finalResult';
 
 const reducers = combineReducers({
   headerProfile: showHeaderProfile.reducer,
@@ -23,25 +27,29 @@ const reducers = combineReducers({
   test: testSlice.reducer,
   answerHeader: answerHeaderSlice.reducer,
   answer: answerSlice.reducer,
-  allcourse:allcourseReducer,
-  categorydata:categoryReducer
+  allcourse: allcourseReducer,
+  categorydata: categoryReducer,
+  testSuccessRed: testSuccessRedSlice.reducer,
+  showSuccessPage: showSuccessPageSlice.reducer,
+  finaltestShowPage: finaltestShowPageSlice.reducer,
+  FinalResult: FinalResultSlice.reducer,
 });
 
 const persistConfig = {
   key: 'root',
   storage,
-  blacklist: ['login'],
-}
+  blacklist: ['login', 'test', 'answerHeader', 'answer', ' FinalResult'],
+};
 
-const persistedReducer = persistReducer(persistConfig, reducers)
+const persistedReducer = persistReducer(persistConfig, reducers);
 
 export const store = configureStore({
   reducer: persistedReducer,
   devTools: process.env.NODE_ENV !== 'production',
   middleware: [thunk],
-})
+});
 
 // Infer the `RootState` and `AppDispatch` types from the store itself
-export type RootState = ReturnType<typeof store.getState>
+export type RootState = ReturnType<typeof store.getState>;
 // Inferred type: {posts: PostsState, comments: CommentsState, users: UsersState}
-export type AppDispatch = typeof store.dispatch
+export type AppDispatch = typeof store.dispatch;

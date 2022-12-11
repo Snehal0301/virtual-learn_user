@@ -1,7 +1,31 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Navigate, useNavigate } from 'react-router-dom';
+import {
+  resultShow,
+  testShow,
+  testSuccess,
+} from '../../../../redux/reducers/Conditions';
+import { testSuccessRed } from '../../../../redux/reducers/SuccessTestRed';
+import { testisSuccess } from '../../../../redux/reducers/testSlice';
 import '../../../../views/onboarding/success_page/Success_Page.css';
 
 const QuizSuccess = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    dispatch(testShow(false));
+    dispatch(testisSuccess());
+    dispatch(testSuccess(false));
+  }, []);
+
+  const showResults = useSelector((state: any) => state.testSuccessRed.value);
+
+  useEffect(() => {
+    showResults && navigate('/testResults');
+  }, [showResults]);
+
   return (
     <div className="succesContainer">
       <div className="successContent">
@@ -19,7 +43,13 @@ const QuizSuccess = () => {
           </span>{' '}
           from Course: Learn Figma - UI/UX Design Essential Training
         </div>
-        <div className="getStarted" style={{ cursor: 'pointer' }}>
+        <div
+          className="getStarted"
+          style={{ cursor: 'pointer' }}
+          onClick={() => {
+            dispatch(testSuccessRed(true));
+          }}
+        >
           Result
         </div>
       </div>
