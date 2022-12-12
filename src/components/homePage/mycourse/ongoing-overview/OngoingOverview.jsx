@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import {
   accordianState,
   accordianToggleState,
+  firstVideoState,
   tabToggleState,
   videoLinkState,
 } from '../../../../redux/reducers/myCourseReducer';
@@ -18,6 +19,9 @@ import {
   downloadIcon,
   inactiveIcon,
   learnCheckMark,
+  start_pauseIcon,
+  start_pauseIconVideo,
+  testImage,
   videoPlayActive,
   whiteStepperIcon,
 } from '../../../../utils/svgIcons';
@@ -39,45 +43,12 @@ import { testSuccessRed } from '../../../../redux/reducers/SuccessTestRed';
 import { showSuccessPage } from '../../../../redux/reducers/showSuccesspage';
 import { finaltestShowPage } from '../../../../redux/reducers/finalTestSuccess';
 
-const steps = [
-  {
-    label: 'Select campaign settings',
-    description: `For each ad campaign that you create, you can control how much
-              you're willing to spend on clicks and conversions, which networks
-              and geographical locations you want your ads to show on, and more.`,
-  },
-  {
-    label: 'Create an ad group',
-    description:
-      'An ad group contains one or more ads which target a shared set of keywords.',
-  },
-  {
-    label: 'Create an ad',
-    description: `Try out different ad text to see what brings in the most customers,
-              and learn how to enhance your ads using features like ad extensions.
-              If you run into any problems with your ads, find out how to tell if
-              they're running and how to resolve approval issues.`,
-  },
-  {
-    label: 'Create an ad group',
-    description:
-      'An ad group contains one or more ads which target a shared set of keywords.',
-  },
-  {
-    label: 'Create an ad',
-    description: `Try out different ad text to see what brings in the most customers,
-              and learn how to enhance your ads using features like ad extensions.
-              If you run into any problems with your ads, find out how to tell if
-              they're running and how to resolve approval issues.`,
-  },
-];
 
 const OngoingOverview = () => {
   const [activeStep, setActiveStep] = useState(0);
-
   const [chapter, setChapter] = useState();
-  const [video, setVideo] = useState('https://youtu.be/Tn6-PIqc4UM');
   const [overviewData, setOverviewData] = useState();
+  const [defaultvideo, setDefaultVideo] = useState('');
 
   const navigate = useNavigate();
 
@@ -87,13 +58,14 @@ const OngoingOverview = () => {
     dispatch(testSuccessRed(false));
     dispatch(showSuccessPage(false));
     dispatch(finaltestShowPage(false));
+
   }, []);
 
   // api call for chapter section
   useEffect(() => {
     axios
       .get(
-        `http://virtuallearnapp2-env.eba-wrr2p8zk.ap-south-1.elasticbeanstalk.com/user/courseChapterResponse?courseId=24`,
+        `http://virtuallearnapp2-env.eba-wrr2p8zk.ap-south-1.elasticbeanstalk.com/user/courseChapterResponse?courseId=23`,
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem('Token')}`,
@@ -103,11 +75,21 @@ const OngoingOverview = () => {
       .then((res) => {
         console.log(res.data);
         setChapter(res.data);
+        setDefaultVideo(res.data.chapterResponses[0].lessonResponses[0].videoLink)
       })
       .catch((err) => {
         console.log(err);
       });
   }, []);
+
+  useEffect(() => {
+
+    dispatch(firstVideoState(defaultvideo))
+  }, [defaultvideo])
+
+
+  const defaultVideoState = useSelector((state) => state.mycourse.firstVideo)
+  console.log("defaultVideoState", defaultVideoState);
 
   useEffect(() => {
     axios
@@ -166,8 +148,6 @@ const OngoingOverview = () => {
 
   const videoLink = useSelector((state) => state.mycourse.videoLink);
 
-  console.log(video);
-
   const testQuestions = useSelector((state) => state.test);
 
   useEffect(() => {
@@ -184,7 +164,7 @@ const OngoingOverview = () => {
     <div className="ongoing-overview">
       <div className="ongoing-section-1">
         <div className="ongoing-section-video-player">
-          {pause && (
+          {/* {pause && (
             <div className="onpause-modal">
               <p className="onpause-modal-title">
                 Your lesson paused at 1.21 Do you want to continue watching?
@@ -196,7 +176,7 @@ const OngoingOverview = () => {
                 Watch from beginning
               </button>
             </div>
-          )}
+          )} */}
           <ReactPlayer
             url={videoLink}
             controls="true"
@@ -209,6 +189,10 @@ const OngoingOverview = () => {
               setPlayed(progress.playedSeconds);
             }}
           />
+          {
+            pause &&
+            <div className="pause-button" onClick={onPlay}>{start_pauseIconVideo}</div>
+          }
         </div>
         {/* <div className="ongoing-video-title-section">
                     <div className="ongoing-video-title">
@@ -561,54 +545,97 @@ const OngoingOverview = () => {
                           >
                             <div className="course-accordian-container-body">
                               <div className="accordian-items">
-                                <div className="accordian-item">
-                                  <div className="accordian-item-icon">{inactiveIcon}</div>
-                                  <div className="accordian-item-section-2">
-                                    <p>20</p>
-                                    <div className="accordian-item-section-2-para">
-                                      <p>Creating a New Project and
-                                        File</p>
-                                      <p>01.38 mins</p>
-                                    </div>
-                                    <div
-                                      className="video-play-btn"
-                                    // onClick={() => { setVideo(courseele.videoLink) }}
-                                    // onClick={() => {
-                                    //   dispatch(
-                                    //     videoLinkState(
-                                    //       courseele.videoLink
-                                    //     )
-                                    //   );
-                                    // }}
+                                {
+                                  ele.lessonResponses.map((itemele) => {
+                                    return (
+                                      <>
+                                        <div className="accordian-item">
+                                          <div className="accordian-item-icon">{inactiveIcon}</div>
+                                          <div className="accordian-item-section-2">
+                                            <div className="accordian-item-section-2-part-1">
+                                              <p className='accordian-item-chapter-number'>{itemele.lessonNumber}</p>
+                                              <div className="accordian-item-section-2-para">
+                                                <p className='accordian-item-chapter-title'>{itemele.lessonName}</p>
+                                                <p className='accordian-item-chapter-duration'>{itemele.lessonDuration}</p>
+                                              </div>
+                                            </div>
+                                            <div
+                                              className="video-play-btn"
+                                              // onClick={() => { setVideo(courseele.videoLink) }}
+                                              onClick={() => {
+                                                dispatch(
+                                                  videoLinkState(
+                                                    itemele.videoLink
+                                                  )
+                                                );
+                                              }}
+                                            >
+                                              {videoPlayActive}
+                                            </div>
+                                          </div>
+                                        </div>
+
+                                      </>
+                                    )
+                                  })
+                                }
+                                {
+                                  ele.testId &&
+                                  <div className="accordian-item">
+                                    <div className="accordian-item-icon">{inactiveIcon}</div>
+                                    <div className="accordian-item-section-2 test-section"
+                                      onClick={() => {
+                                        let a =
+                                          ele &&
+                                          ele.testDuration &&
+                                          ele.testDuration.split(':');
+
+                                        if (a) {
+                                          let seconds =
+                                            +a[0] * 60 * 60 +
+                                            +a[1] * 60 +
+                                            +a[2];
+
+                                          localStorage.setItem(
+                                            'timer',
+                                            seconds
+                                          );
+                                        }
+                                        dispatch(
+                                          test(
+                                            `${ele.testName === 'Final Test'
+                                              ? 'finalTest'
+                                              : 'moduleTest'
+                                            }?testId=${ele.testId}`
+                                          )
+                                        );
+                                      }}
                                     >
-                                      {videoPlayActive}
-                                    </div>
-                                  </div>
-                                </div>
-                                <div className="accordian-item">
-                                  <img src="" alt="" />
-                                  <div className="accordian-item-section-2">
-                                    <p>20</p>
-                                    <div className="accordian-item-section-2-para">
-                                      <p>Creating a New Project and
-                                        File</p>
-                                      <p>01.38 mins</p>
+                                      <div className="accordian-item-section-2-part-1" >
+                                        <p className='accordian-item-chapter-number'>{testImage}</p>
+                                        <div className="accordian-item-section-2-para">
+                                          <p className='accordian-item-chapter-title'>{ele.testName}</p>
+                                          <p className='accordian-item-chapter-duration'>10 min | {ele.questionCount} questions</p>
+                                        </div>
+                                      </div>
                                       <div
                                         className="video-play-btn"
                                       // onClick={() => { setVideo(courseele.videoLink) }}
                                       // onClick={() => {
                                       //   dispatch(
                                       //     videoLinkState(
-                                      //       courseele.videoLink
+                                      //       itemele.videoLink
                                       //     )
                                       //   );
                                       // }}
                                       >
-                                        {videoPlayActive}
+                                        80%
                                       </div>
                                     </div>
                                   </div>
-                                </div>
+                                }
+
+
                               </div>
                             </div>
                           </div>

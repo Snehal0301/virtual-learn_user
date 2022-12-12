@@ -59,6 +59,13 @@
 
 }
 
+.pause-button{
+    position: absolute;
+    top: 40%;
+    right: 45%;
+    cursor: pointer;
+}
+
 .ongoing-video-title-section {
     margin: 30px 0 20px 0;
     display: flex;
@@ -554,8 +561,38 @@ p:not(.truncated)~label {
     width: 100%;
     border-radius: 6px;
     display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
 }
 
+.accordian-item-section-2-part-1{
+    display: flex;
+    align-items: center;
+}
+
+.accordian-item-chapter-number{
+    font-size: 30px;
+    font-weight: 700;
+    padding-right: 15px;
+}
+
+.accordian-item-chapter-title{
+    font-size: 18px;
+    color: #042C5C;
+}
+
+.accordian-item-chapter-duration{
+    color: #7A7A7A;
+    font-size: 14px;
+}
+
+.test-section{
+    cursor: pointer;
+}
+
+
+/* new custom stepper */
 @media only screen and (max-width: 1300px) {
     .ongoing-overview {
         display: flex;
