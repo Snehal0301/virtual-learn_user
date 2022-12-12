@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './Header.css';
 import {
   bellIcon,
@@ -36,70 +36,67 @@ import { searchFocus } from '../../../redux/reducers/headerProfileOptions';
 import EditProfile from './edit-profile/EditProfile';
 import ChangePassword from './changePassword/ChangePassword';
 import { useNavigate } from 'react-router-dom';
+import filter, {
+  clearFilter,
+  setChapterCount,
+  setfilter,
+} from '../../../redux/reducers/filter';
+import Loading from '../../../utils/loading/Loading';
 
 const Header = () => {
   const [onChange, setOnChange] = useState('');
+  const [showFilter, setShowFilter] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [topSearch, setTopSearch] = useState([]);
+  const [topCategories, setTopCategories] = useState([]);
+  const [searchedCourse, setSearchedCourse] = useState([]);
 
   const navigate = useNavigate();
 
-  const topSearch = [
-    'Python',
-    'Java',
-    'Javascript',
-    'Leadership',
-    'Photoshop',
-    'React',
-    'Communication',
-  ];
+  const filterData = useSelector((state: any) => state.filter.value);
 
-  const topCategories = [
-    'Design',
-    'Development',
-    'Business',
-    'Finance',
-    'Health & Fitness',
-    'Music',
-    'IT & Software',
-    'Marketing',
-    'Lifestyle',
-    'Photography',
-    'Teaching',
-  ];
+  useEffect(() => {
+    fetch(
+      `http://virtuallearnapp2-env.eba-wrr2p8zk.ap-south-1.elasticbeanstalk.com/user/topSearches`,
+      {
+        headers: {
+          Accept: 'application/json, text/plain, */*',
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${localStorage.getItem('Token')}`,
+        },
+      }
+    )
+      .then((res) => res.json())
+      .then((res) => {
+        console.log('Top Search', res);
+        setTopSearch(res);
+      });
+  }, []);
 
-  const searchdata: any = [
-    {
-      title: 'User Experience Design Fundamentals',
-      img: require('../../../assets/images/dummy/1.png'),
-      chapters: '14 Chapter',
-      cat: 'Design',
-    },
-    {
-      title: 'Digital Marketing for 2021 Masterclass',
-      img: require('../../../assets/images/dummy/2.png'),
-      chapters: '21 Chapter',
-      cat: 'Design',
-    },
-    {
-      title: 'Graphic Design Masterclass - Learn GREAT Design',
-      img: require('../../../assets/images/dummy/3.png'),
-      chapters: '11 Chapter',
-      cat: 'Design',
-    },
-    {
-      title: 'Study on Design Principles and 7 features ',
-      img: require('../../../assets/images/dummy/4.png'),
-      chapters: '7 Chapter',
-      cat: 'Design',
-    },
-  ];
+  useEffect(() => {
+    fetch(
+      `http://virtuallearnapp2-env.eba-wrr2p8zk.ap-south-1.elasticbeanstalk.com/user/categoriesWP`,
+      {
+        headers: {
+          Accept: 'application/json, text/plain, */*',
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${localStorage.getItem('Token')}`,
+        },
+      }
+    )
+      .then((res) => res.json())
+      .then((res) => {
+        setTopCategories(res);
+      });
+  }, []);
 
   const Duration = [
-    '5/10 Chapters',
-    '5/10 Chapters',
-    '10/20 Chapters',
-    '20/30 Chapters',
-    '30/40 Chapters',
-    '50+ Chapters',
+    { start: 0, end: 5 },
+    { start: 5, end: 10 },
+    { start: 10, end: 20 },
+    { start: 20, end: 30 },
+    { start: 30, end: 40 },
+    { start: 50 },
   ];
 
   const [notifydata, setnotifydata] = useState(false);
@@ -162,6 +159,21 @@ const Header = () => {
 
   const changeHandler = (e: any) => {
     setOnChange(e.target.value);
+    fetch(
+      `http://virtuallearnapp2-env.eba-wrr2p8zk.ap-south-1.elasticbeanstalk.com/user/search?searchKey=${e.target.value}`,
+      {
+        headers: {
+          Accept: 'application/json, text/plain, */*',
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${localStorage.getItem('Token')}`,
+        },
+      }
+    )
+      .then((res) => res.json())
+      .then((res) => {
+        console.log('response', res);
+        setSearchedCourse(res);
+      });
   };
 
   const toggleMobileHeader = () => {
@@ -179,6 +191,86 @@ const Header = () => {
 
   const [arrow, setArrow] = useState(false);
   const [leftdrawer, setLeftdrawer] = useState(false);
+
+  const filterHandler = () => {
+    setLoading(true);
+    setShowFilter(true);
+    fetch(
+      `http://virtuallearnapp2-env.eba-wrr2p8zk.ap-south-1.elasticbeanstalk.com/user/applyFilter`,
+      {
+        method: 'POST',
+        headers: {
+          Accept: 'application/json, text/plain, */*',
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${localStorage.getItem('Token')}`,
+        },
+        body: JSON.stringify(filterData),
+      }
+    )
+      .then((res) => res.json())
+      .then((res) => {
+        setSearchedCourse(res);
+        dispatch(modalFilter(false));
+        setLoading(false);
+      })
+      .catch((err) => {
+        setSearchedCourse([]);
+        setLoading(false);
+        dispatch(modalFilter(false));
+      });
+  };
+
+  const topSearchKeyword = (keyword: string) => {
+    setLoading(true);
+    setShowFilter(true);
+    fetch(
+      `http://virtuallearnapp2-env.eba-wrr2p8zk.ap-south-1.elasticbeanstalk.com/user/searchByKeyword?keyword=${keyword}`,
+      {
+        method: 'GET',
+        headers: {
+          Accept: 'application/json, text/plain, */*',
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${localStorage.getItem('Token')}`,
+        },
+      }
+    )
+      .then((res) => res.json())
+      .then((res) => {
+        setSearchedCourse(res);
+        setLoading(false);
+      })
+      .catch((err) => {
+        setSearchedCourse([]);
+        setLoading(false);
+      });
+  };
+
+  const categorySearch = (catId: any) => {
+    setLoading(true);
+    setShowFilter(true);
+    fetch(
+      `http://virtuallearnapp2-env.eba-wrr2p8zk.ap-south-1.elasticbeanstalk.com/user/allCoursesOfCategory?categoryId=${catId}`,
+      {
+        method: 'GET',
+        headers: {
+          Accept: 'application/json, text/plain, */*',
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${localStorage.getItem('Token')}`,
+        },
+      }
+    )
+      .then((res) => res.json())
+      .then((res) => {
+        console.log('category', res);
+        setSearchedCourse(res);
+        setLoading(false);
+      })
+      .catch((err) => {
+        setSearchedCourse([]);
+        setLoading(false);
+      });
+  };
+
   return (
     <>
       <div className="header-parent">
@@ -208,7 +300,12 @@ const Header = () => {
               onClick={handleMobileDrawer}
             />
           )}
-          <form className="header-search">
+          <form
+            className="header-search"
+            onSubmit={(e: any) => {
+              e.preventDefault();
+            }}
+          >
             <input
               type="text"
               className={
@@ -221,6 +318,7 @@ const Header = () => {
                 dispatch(searchFocus(true));
               }}
               onChange={changeHandler}
+              value={onChange}
             />
             {!searchFieldFocus && (
               <div className="header-searchIcon">{searchIcon}</div>
@@ -320,6 +418,7 @@ const Header = () => {
               <div
                 onClick={() => {
                   dispatch(searchFocus(false));
+                  setShowFilter(false);
                 }}
                 className="header-optionsCloseIcon"
               >
@@ -330,7 +429,12 @@ const Header = () => {
           {searchFieldFocus && (
             <div className="header-categoryContents">
               <div className="mobile-form-with-filter">
-                <form className="mobile-header-search">
+                <form
+                  className="mobile-header-search"
+                  onSubmit={(e: any) => {
+                    e.preventDefault();
+                  }}
+                >
                   <input
                     type="text"
                     className={
@@ -355,26 +459,35 @@ const Header = () => {
                   {filterIcon}
                 </button>
               </div>
-              {!(onChange.length > 1) ? (
+              {!(
+                (onChange.length > 0 || showFilter) &&
+                searchedCourse &&
+                searchedCourse.length > 0
+              ) ? (
                 <>
-                  {!(onChange.length > 0) ? (
+                  {!(onChange.length > 0 || showFilter) ? (
                     <div className="headerSearchCategoriesTopSearch ">
                       <div className="headerSearchCategoriesTopSearchTitle">
                         Top Search
                       </div>
                       <div className="headerSearchCategoriesTopSearchBody">
-                        {topSearch.map((ele: any, i: any) => {
-                          return (
-                            <div
-                              className="headerSearchCategoriesTopSearchesParent headerSearchCategoriesTopSearchesParent-orange"
-                              key={i}
-                            >
-                              <div className="headerSearchCategoriesTopSearchesName">
-                                {ele}
+                        {topSearch &&
+                          topSearch.length > 0 &&
+                          topSearch.map((ele: any, i: any) => {
+                            return (
+                              <div
+                                className="headerSearchCategoriesTopSearchesParent headerSearchCategoriesTopSearchesParent-orange"
+                                key={i}
+                                onClick={() => {
+                                  topSearchKeyword(ele.keyWord);
+                                }}
+                              >
+                                <div className="headerSearchCategoriesTopSearchesName">
+                                  {ele && ele.keyWord && ele.keyWord}
+                                </div>
                               </div>
-                            </div>
-                          );
-                        })}
+                            );
+                          })}
                       </div>
                     </div>
                   ) : (
@@ -395,46 +508,61 @@ const Header = () => {
                       Search from Categories
                     </div>
                     <div className="headerSearchCategoriesTopSearchBody">
-                      {topCategories.map((ele: any, i: any) => {
-                        return (
-                          <div
-                            className="headerSearchCategoriesTopSearchesParent"
-                            key={i}
-                          >
-                            <div className="headerSearchCategoriesTopSearchesIcon">
-                              {design}
+                      {topCategories &&
+                        topCategories.length > 0 &&
+                        topCategories.map((ele: any, i: any) => {
+                          return (
+                            <div
+                              className="headerSearchCategoriesTopSearchesParent"
+                              key={i}
+                              onClick={() => {
+                                categorySearch(ele.categoryId);
+                              }}
+                            >
+                              <div className="headerSearchCategoriesTopSearchesIcon">
+                                <img
+                                  src={
+                                    ele &&
+                                    ele.categoryPhoto &&
+                                    ele.categoryPhoto
+                                  }
+                                  alt={
+                                    ele && ele.categoryName && ele.categoryName
+                                  }
+                                />
+                              </div>
+                              <div className="headerSearchCategoriesTopSearchesName">
+                                {ele && ele.categoryName && ele.categoryName}
+                              </div>
                             </div>
-                            <div className="headerSearchCategoriesTopSearchesName">
-                              {ele}
-                            </div>
-                          </div>
-                        );
-                      })}
+                          );
+                        })}
                     </div>
                   </div>
                 </>
               ) : (
                 <div className="headerSearch-response">
-                  {searchdata.map((ele: any, i: number) => {
-                    return (
-                      <div className="headersearch-responseBody" key={i}>
-                        <div className="headerSearch-responsePic">
-                          <img src={ele.img} alt={ele.title} />
+                  {searchedCourse &&
+                    searchedCourse.map((ele: any, i: number) => {
+                      return (
+                        <div className="headersearch-responseBody" key={i}>
+                          <div className="headerSearch-responsePic">
+                            <img src={ele.coursePhoto} alt={ele.courseName} />
+                          </div>
+                          <div className="headerSearch-responseContainer">
+                            <div className="headerSearch-responseTitle">
+                              {ele.courseName}
+                            </div>
+                            <div className="headerSearch-responseChapters">
+                              {ele.chapterCount} chapters
+                            </div>
+                            <div className="headerSearch-responseCategory">
+                              {ele.categoryName}
+                            </div>
+                          </div>
                         </div>
-                        <div className="headerSearch-responseContainer">
-                          <div className="headerSearch-responseTitle">
-                            {ele.title}
-                          </div>
-                          <div className="headerSearch-responseChapters">
-                            {ele.chapters}
-                          </div>
-                          <div className="headerSearch-responseCategory">
-                            {ele.cat}
-                          </div>
-                        </div>
-                      </div>
-                    );
-                  })}
+                      );
+                    })}
                 </div>
               )}
             </div>
@@ -464,21 +592,40 @@ const Header = () => {
                   Search from Categories
                 </div>
                 <div className="headerSearch-filterModalCategoryBody">
-                  {topCategories.map((ele: any, i: any) => {
-                    return (
-                      <div
-                        className="headerSearchCategoriesTopSearchesParent headerSearchCategories-chpBorder"
-                        key={i}
-                      >
-                        <div className="headerSearchCategoriesTopSearchesIcon">
-                          {design}
+                  {topCategories &&
+                    topCategories.length > 0 &&
+                    topCategories.map((ele: any, i: any) => {
+                      return (
+                        <div
+                          className={
+                            filterData.categoryId.includes(ele.categoryId)
+                              ? 'headerSearchCategoriesTopSearchesParent headerSearchCategories-chpBorder chipBackgroundYellow'
+                              : 'headerSearchCategoriesTopSearchesParent headerSearchCategories-chpBorder '
+                          }
+                          key={i}
+                          onClick={() => {
+                            dispatch(
+                              setfilter({
+                                catId: ele.categoryId,
+                              })
+                            );
+                          }}
+                        >
+                          <div className="headerSearchCategoriesTopSearchesIcon">
+                            {' '}
+                            <img
+                              src={
+                                ele && ele.categoryPhoto && ele.categoryPhoto
+                              }
+                              alt={ele && ele.categoryName && ele.categoryName}
+                            />
+                          </div>
+                          <div className="headerSearchCategoriesTopSearchesName">
+                            {ele && ele.categoryName && ele.categoryName}
+                          </div>
                         </div>
-                        <div className="headerSearchCategoriesTopSearchesName">
-                          {ele}
-                        </div>
-                      </div>
-                    );
-                  })}
+                      );
+                    })}
                 </div>
               </div>
               <div className="headerSearch-filterModalDuration">
@@ -489,14 +636,26 @@ const Header = () => {
                   {Duration.map((ele: any, i: any) => {
                     return (
                       <div
-                        className="headerSearchCategoriesTopSearchesParent  headerSearchCategories-chpBorder"
+                        className={
+                          filterData.chapterStartCount.includes(ele.start)
+                            ? 'headerSearchCategoriesTopSearchesParent  headerSearchCategories-chpBorder chipBackgroundYellow'
+                            : 'headerSearchCategoriesTopSearchesParent  headerSearchCategories-chpBorder'
+                        }
                         key={i}
                       >
-                        <div className="headerSearchCategoriesTopSearchesIcon">
-                          {design}
-                        </div>
-                        <div className="headerSearchCategoriesTopSearchesName">
-                          {ele}
+                        <div
+                          className="headerSearchCategoriesTopSearchesName"
+                          onClick={() => {
+                            dispatch(
+                              setChapterCount({
+                                start: ele.start,
+                                end: ele.end,
+                              })
+                            );
+                          }}
+                        >
+                          {ele.start}
+                          {ele.end ? `/${ele.end}` : '+'} Chapters
                         </div>
                       </div>
                     );
@@ -504,10 +663,18 @@ const Header = () => {
                 </div>
               </div>
               <div className="headerSearch-filterModalButtons">
-                <button className="headerSearch-applyFilterButton">
+                <button
+                  className="headerSearch-applyFilterButton"
+                  onClick={filterHandler}
+                >
                   Apply Filter
                 </button>
-                <button className="headerSearch-clearAllButton">
+                <button
+                  className="headerSearch-clearAllButton"
+                  onClick={() => {
+                    dispatch(clearFilter());
+                  }}
+                >
                   Clear All
                 </button>
               </div>
@@ -525,7 +692,6 @@ const Header = () => {
       )}
       {/* </div>
       </div > */}
-
       <Drawer
         open={profileDrawerState}
         onClose={handleCloseDrawer}
@@ -551,9 +717,7 @@ const Header = () => {
           notifydata ? <Notification /> : <Profile />
         } */}
       </Drawer>
-
       {/* mobile drawer */}
-
       <Drawer
         open={leftdrawer}
         onClose={handleCloseDrawer}
@@ -669,6 +833,7 @@ const Header = () => {
           X
         </p>
       </Drawer>
+      {loading && <Loading />}
     </>
   );
 };
