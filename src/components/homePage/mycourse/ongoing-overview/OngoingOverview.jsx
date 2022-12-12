@@ -16,6 +16,7 @@ import {
   courseMediumAccess,
   courseTestIcon,
   downloadIcon,
+  inactiveIcon,
   learnCheckMark,
   videoPlayActive,
   whiteStepperIcon,
@@ -559,118 +560,56 @@ const OngoingOverview = () => {
                             }
                           >
                             <div className="course-accordian-container-body">
-                              <Box sx={{ maxWidth: '100%' }}>
-                                <Stepper
-                                  activeStep={activeStep}
-                                  orientation="vertical"
-                                >
-                                  {ele.lessonResponses.map(
-                                    (courseele, index) => (
-                                      <Step key={index}>
-                                        <StepLabel icon="⬤">
-                                          {/* {step.label} */}
-                                          <div className="course-video">
-                                            <div className="video-index">
-                                              {courseele.lessonNumber}
-                                            </div>
-                                            <div className="vide-desc">
-                                              <p className="videosection-title">
-                                                {courseele.lessonName}
-                                              </p>
-                                              <p className="video-duration">
-                                                {courseele.lessonDuration}
-                                              </p>
-                                            </div>
-                                            <div
-                                              className="video-play-btn"
-                                              // onClick={() => { setVideo(courseele.videoLink) }}
-                                              onClick={() => {
-                                                dispatch(
-                                                  videoLinkState(
-                                                    courseele.videoLink
-                                                  )
-                                                );
-                                              }}
-                                            >
-                                              {videoPlayActive}
-                                            </div>
-                                          </div>
-                                        </StepLabel>
-                                        <StepContent>
-                                          <Box sx={{ mb: 2 }}>
-                                            <div>
-                                              <Button
-                                                variant="contained"
-                                                onClick={handleNext}
-                                                sx={{ mt: 1, mr: 1 }}
-                                              >
-                                                {index === steps.length - 1
-                                                  ? 'Finish'
-                                                  : 'Continue'}
-                                              </Button>
-                                              <Button
-                                                disabled={index === 0}
-                                                onClick={handleBack}
-                                                sx={{ mt: 1, mr: 1 }}
-                                              >
-                                                Back
-                                              </Button>
-                                            </div>
-                                          </Box>
-                                        </StepContent>
-                                      </Step>
-                                    )
-                                  )}
-                                  {/* hemraj module test link */}
-                                  {ele.testId && (
-                                    <h2
-                                      onClick={() => {
-                                        let a =
-                                          ele &&
-                                          ele.testDuration &&
-                                          ele.testDuration.split(':');
-
-                                        if (a) {
-                                          let seconds =
-                                            +a[0] * 60 * 60 +
-                                            +a[1] * 60 +
-                                            +a[2];
-
-                                          localStorage.setItem(
-                                            'timer',
-                                            seconds
-                                          );
-                                        }
-                                        dispatch(
-                                          test(
-                                            `${
-                                              ele.testName === 'Final Test'
-                                                ? 'finalTest'
-                                                : 'moduleTest'
-                                            }?testId=${ele.testId}`
-                                          )
-                                        );
-                                      }}
+                              <div className="accordian-items">
+                                <div className="accordian-item">
+                                  <div className="accordian-item-icon">{inactiveIcon}</div>
+                                  <div className="accordian-item-section-2">
+                                    <p>20</p>
+                                    <div className="accordian-item-section-2-para">
+                                      <p>Creating a New Project and
+                                        File</p>
+                                      <p>01.38 mins</p>
+                                    </div>
+                                    <div
+                                      className="video-play-btn"
+                                    // onClick={() => { setVideo(courseele.videoLink) }}
+                                    // onClick={() => {
+                                    //   dispatch(
+                                    //     videoLinkState(
+                                    //       courseele.videoLink
+                                    //     )
+                                    //   );
+                                    // }}
                                     >
-                                      {ele.testName} id:{ele.testId}
-                                    </h2>
-                                  )}
-                                  {/* hemraj module test link*/}
-                                </Stepper>
-                                {activeStep === steps.length && (
-                                  <Paper square elevation={0} sx={{ p: 3 }}>
-                                    <Typography>
-                                      All steps completed - you&apos;re finished
-                                    </Typography>
-                                    <Button
-                                      onClick={handleReset}
-                                      sx={{ mt: 1, mr: 1 }}
-                                    >
-                                      Reset
-                                    </Button>
-                                  </Paper>
-                                )}
-                              </Box>
+                                      {videoPlayActive}
+                                    </div>
+                                  </div>
+                                </div>
+                                <div className="accordian-item">
+                                  <img src="" alt="" />
+                                  <div className="accordian-item-section-2">
+                                    <p>20</p>
+                                    <div className="accordian-item-section-2-para">
+                                      <p>Creating a New Project and
+                                        File</p>
+                                      <p>01.38 mins</p>
+                                      <div
+                                        className="video-play-btn"
+                                      // onClick={() => { setVideo(courseele.videoLink) }}
+                                      // onClick={() => {
+                                      //   dispatch(
+                                      //     videoLinkState(
+                                      //       courseele.videoLink
+                                      //     )
+                                      //   );
+                                      // }}
+                                      >
+                                        {videoPlayActive}
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
                             </div>
                           </div>
                         </div>
@@ -684,8 +623,8 @@ const OngoingOverview = () => {
             )}
           </div>
         </div>
-      </div>
-    </div>
+      </div >
+    </div >
   );
 };
 
