@@ -70,11 +70,9 @@ const EditProfile = () => {
           {arrowRight}
         </div>
         <div className="editprofiletext">Edit Profile</div>
-        {EditProfileData.map((item) => (
-          <div className="editProfileImage">
-            <img src={item.image} alt="" />
-          </div>
-        ))}
+        <div className="editProfileImage">
+          <img src={editProfileData && editProfileData.profilePhoto} alt="" />
+        </div>
       </div>
       <div className="EditForm">
         <form action="" className="editProfileForm" onSubmit={handleSubmit}>
