@@ -1,103 +1,114 @@
-import "./Quiz.css";
-import { MultiStepForm, Step } from "react-multi-form";
-import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { showQuizModal } from "../../../redux/reducers/Conditions";
-import QuizModal from "./QuizModal";
+import './Quiz.css';
+import { MultiStepForm, Step } from 'react-multi-form';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  showQuizModal,
+  testShow,
+  testSuccess,
+} from '../../../redux/reducers/Conditions';
+import QuizModal from './QuizModal';
+
+import { Navigate, useNavigate } from 'react-router-dom';
+import { answerHeader } from '../../../redux/reducers/testAnswerHeader';
+import { answer } from '../../../redux/reducers/testAnswer';
+import { testisSuccess } from '../../../redux/reducers/testSlice';
+import { testSuccessRed } from '../../../redux/reducers/SuccessTestRed';
+import { showSuccessPage } from '../../../redux/reducers/showSuccesspage';
+import { finaltestShowPage } from '../../../redux/reducers/finalTestSuccess';
+import { FinalResult } from '../../../redux/reducers/finalResult';
 
 const QuizBody = () => {
   const [active, setActive] = useState(1);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const quizData = useSelector((state) => state.test.data.data);
+  const showTestSuccesPage = useSelector(
+    (state) => state.loginConditions.successTest
+  );
 
-  const quizDataOne = {
-    testId: 17,
-    chapterNumber: 6,
-    chapterName: "Conclusion",
-    testName: "Final Test",
-    testDuration: "00:06:00",
-    questionsCount: 5,
-    questions: [
-      {
-        questionId: 20,
-        questionName: "How many letters are there in Tamil alphabets ",
-        option_1: "49",
-        option_2: "40",
-        option_3: "43",
-        option_4: "48",
-        state1: false,
-        state2: false,
-        state3: false,
-        state4: false,
-      },
-      {
-        questionId: 25,
-        questionName: "How many letters are there in Tamil alphabets ",
-        option_1: "49",
-        option_2: "40",
-        option_3: "43",
-        option_4: "48",
-        state1: false,
-        state2: false,
-        state3: false,
-        state4: false,
-      },
-      {
-        questionId: 40,
-        questionName: "What isa 0*2",
-        option_1: "9",
-        option_2: "2",
-        option_3: "0",
-        option_4: "0.2",
-        state1: false,
-        state2: false,
-        state3: false,
-        state4: false,
-      },
-      {
-        questionId: 50,
-        questionName: "What isa UI",
-        option_1: "User Interface",
-        option_2: "User Intraface",
-        option_3: "User Interior",
-        option_4: "User Inter Data",
-        state1: false,
-        state2: false,
-        state3: false,
-        state4: false,
-      },
-      {
-        questionId: 60,
-        questionName: "What isa API",
-        option_1: "Application Programming Interface",
-        option_2: "Application Programming Intraface",
-        option_3: "Application Programming Interior",
-        option_4: "Application Inter Data",
-        state1: false,
-        state2: false,
-        state3: false,
-        state4: false,
-      },
-    ],
-  };
+  const finaltestShow = useSelector((state) => state.finaltestShowPage.value);
+
+  useEffect(() => {
+    finaltestShow && navigate('/finalResult');
+  }, [finaltestShow]);
+
+  useEffect(() => {
+    // showTestSuccesPage && dispatch(testShow(false));
+    showTestSuccesPage && navigate('/testSuccess');
+  }, [showTestSuccesPage]);
+
+  useEffect(() => {
+    dispatch(testSuccessRed(false));
+  }, []);
+
+  let userAnswer = [];
 
   const submitQuizHandler = (e) => {
     e.preventDefault();
-    var form = document.getElementById("quiz");
-
-    console.log("selected answers");
+    var form = document.getElementById('quiz');
 
     quizData.questions.forEach((element) => {
-      console.log(
-        element.questionId,
-        ":",
-        form.elements[`Id${element.questionId}`].value
-      );
+      userAnswer.push({
+        questionId: element.questionId,
+        correctAnswer: form.elements[`Id${element.questionId}`].value,
+      });
     });
+
+    const submitData = { testId: quizData.testId, userAnswers: userAnswer };
+
+    console.log('submit', submitData);
+
+    fetch(
+      `http://virtuallearnapp2-env.eba-wrr2p8zk.ap-south-1.elasticbeanstalk.com/user/${
+        quizData.testName === 'Final Test' ? 'finalSubmit' : 'submit'
+      }`,
+      {
+        method: 'POST',
+        headers: {
+          Accept: 'application/json, text/plain, */*',
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${localStorage.getItem('Token')}`,
+        },
+        body: JSON.stringify(submitData),
+      }
+    )
+      .then((res) => res.json())
+      .then((res) => {
+        console.log('resppp', res);
+        if (res && res.chapterTestPercentage > 0) {
+          if (quizData.testName === 'Final Test') {
+            dispatch(finaltestShowPage(true));
+            dispatch(FinalResult(`result?testId=${quizData.testId}`));
+          } else {
+            dispatch(testSuccess(true));
+            dispatch(answerHeader(`resultHeader?testId=${quizData.testId}`));
+            dispatch(answer(`resultAnswers?testId=${quizData.testId}`));
+          }
+
+          dispatch(testisSuccess());
+          dispatch(showSuccessPage(true));
+        } else if (res && res.chapterTestPercentage === 0) {
+          alert('You have not met the minimum passing grade');
+          dispatch(testShow(false));
+          dispatch(testSuccess());
+          dispatch(testisSuccess());
+        } else {
+          alert('Some error occured');
+
+          dispatch(testShow(false));
+          dispatch(testSuccess());
+          dispatch(testisSuccess());
+        }
+      });
+
+    dispatch(showQuizModal(false));
+    // dispatch(testShow(false));
+
     dispatch(showQuizModal(false));
   };
-
+  // dispatch(testShow(false));
   return (
     <form className="quiz-body" onSubmit={submitQuizHandler} id="quiz">
       <div className="quiz-bodyQuestionForm">
@@ -109,7 +120,7 @@ const QuizBody = () => {
                 <div key={i}>
                   <Step label={i}>
                     <div className="quiz-questionNum">
-                      {" "}
+                      {' '}
                       Question {i + 1} of {quizData.questions.length}
                     </div>
 
@@ -199,7 +210,7 @@ const QuizBody = () => {
               type="button"
             >
               <img
-                src={require("../../../assets/icons/previousIcon.png")}
+                src={require('../../../assets/icons/previousIcon.png')}
                 alt="previous"
               />
             </button>
@@ -207,11 +218,11 @@ const QuizBody = () => {
             <button
               type="button"
               onClick={() => setActive(active + 1)}
-              style={{ float: "right" }}
+              style={{ float: 'right' }}
               className={
                 active === (quizData.questions && quizData.questions.length)
-                  ? "quiz-buttonsSubmit"
-                  : ""
+                  ? 'quiz-buttonsSubmit'
+                  : ''
               }
               disabled={
                 active === (quizData.questions && quizData.questions.length)
@@ -227,7 +238,7 @@ const QuizBody = () => {
                 </span>
               ) : (
                 <img
-                  src={require("../../../assets/icons/nextIcon.png")}
+                  src={require('../../../assets/icons/nextIcon.png')}
                   alt="next"
                 ></img>
               )}
