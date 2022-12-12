@@ -354,7 +354,14 @@ const Start = () => {
         <div className="start-card">
           <div className="start-choice1">
             {allcourseData.slice(0, 4).map((item) => (
-              <div className="start-choice-subcategory-image">
+              <div
+                className="start-choice-subcategory-image"
+                onClick={() => {
+                  dispatch(courseOverview(item.courseId));
+                  dispatch(chapterResponse(item.courseId));
+                  navigate('/myCourses/ongoingCourse');
+                }}
+              >
                 <div className="start-image-pause">
                   <img src={item.coursePhoto} alt="" />
                   <div className="start-course-overlay-2"></div>
@@ -379,7 +386,14 @@ const Start = () => {
         <div className="start-card">
           <div className="start-choice1">
             {popular.map((item) => (
-              <div className="start-choice-subcategory-image">
+              <div
+                className="start-choice-subcategory-image"
+                onClick={() => {
+                  dispatch(courseOverview(item.courseId));
+                  dispatch(chapterResponse(item.courseId));
+                  navigate('/myCourses/ongoingCourse');
+                }}
+              >
                 <div className="start-image-pause">
                   <img src={item.coursePhoto} alt="" />
                   <div className="start-course-overlay-2"></div>
@@ -404,7 +418,14 @@ const Start = () => {
         <div className="start-card">
           <div className="start-choice1">
             {newestData.slice(0, 4).map((item) => (
-              <div className="start-choice-subcategory-image">
+              <div
+                className="start-choice-subcategory-image"
+                onClick={() => {
+                  dispatch(courseOverview(item.courseId));
+                  dispatch(chapterResponse(item.courseId));
+                  navigate('/myCourses/ongoingCourse');
+                }}
+              >
                 <div className="start-image-pause">
                   <img src={item.coursePhoto} alt="" />
                   <div className="start-course-overlay-2"></div>
@@ -457,7 +478,14 @@ const Start = () => {
             <div className="start-card">
               <div className="start-choice1">
                 {item.popularCourseInEachCategoryList.slice(0, 4).map((ele) => (
-                  <div className="start-choice-subcategory-image">
+                  <div
+                    className="start-choice-subcategory-image"
+                    onClick={() => {
+                      dispatch(courseOverview(ele.courseId));
+                      dispatch(chapterResponse(ele.courseId));
+                      navigate('/myCourses/ongoingCourse');
+                    }}
+                  >
                     <div className="start-image-pause">
                       <div className="start-course-overlay-2"></div>
                       <img src={ele.coursePhoto} alt="" />

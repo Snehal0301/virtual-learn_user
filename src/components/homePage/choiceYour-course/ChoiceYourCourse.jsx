@@ -9,6 +9,8 @@ import {
 import { advancedCourse } from './../../../redux/reducers/advancedCourse';
 import { subCategories } from './../../../redux/reducers/subCategories';
 import { useNavigate } from 'react-router-dom';
+import { courseOverview } from '../../../redux/reducers/courseOverview';
+import { chapterResponse } from '../../../redux/reducers/chapterResponses';
 
 const ChoiceYourCourse = () => {
   const dispatch = useDispatch();
@@ -63,7 +65,14 @@ const ChoiceYourCourse = () => {
       <div className="choice-your-course-card">
         <div className="choice-your-course-choice1">
           {obtainedcourse.map((item) => (
-            <div className="choice-your-coursesubcategory-image">
+            <div
+              className="choice-your-coursesubcategory-image"
+              onClick={() => {
+                dispatch(courseOverview(item.courseId));
+                dispatch(chapterResponse(item.courseId));
+                navigate('/myCourses/ongoingCourse');
+              }}
+            >
               <img src={item.coursePhoto} alt="" />
 
               <div className="choice-your-coursesubcategory-title">
