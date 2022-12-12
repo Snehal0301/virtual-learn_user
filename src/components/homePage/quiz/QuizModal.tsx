@@ -1,6 +1,7 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { showQuizModal } from '../../../redux/reducers/Conditions';
+import { showQuizModal, testShow } from '../../../redux/reducers/Conditions';
+import { testisSuccess } from '../../../redux/reducers/testSlice';
 
 import { closeIcon } from '../../../utils/svgIcons';
 import './Quiz.css';

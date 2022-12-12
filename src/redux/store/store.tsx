@@ -11,6 +11,12 @@ import { quizAnswerSlice } from '../reducers/result';
 import testSlice from '../reducers/testSlice';
 import allcourseReducer from '../reducers/allcourseSlice';
 import categoryReducer from '../reducers/categorySlice';
+import answerHeaderSlice from '../reducers/testAnswerHeader';
+import answerSlice from '../reducers/testAnswer';
+import { testSuccessRedSlice } from '../reducers/SuccessTestRed';
+import { showSuccessPageSlice } from '../reducers/showSuccesspage';
+import { finaltestShowPageSlice } from '../reducers/finalTestSuccess';
+import FinalResultSlice from '../reducers/finalResult';
 
 const reducers = combineReducers({
   headerProfile: showHeaderProfile.reducer,
@@ -19,14 +25,20 @@ const reducers = combineReducers({
   mycourse: myCourseReducer,
   quizAnswer: quizAnswerSlice.reducer,
   test: testSlice.reducer,
-  allcourse:allcourseReducer,
-  categorydata:categoryReducer
+  answerHeader: answerHeaderSlice.reducer,
+  answer: answerSlice.reducer,
+  allcourse: allcourseReducer,
+  categorydata: categoryReducer,
+  testSuccessRed: testSuccessRedSlice.reducer,
+  showSuccessPage: showSuccessPageSlice.reducer,
+  finaltestShowPage: finaltestShowPageSlice.reducer,
+  FinalResult: FinalResultSlice.reducer,
 });
 
 const persistConfig = {
   key: 'root',
   storage,
-  blacklist: ['login'],
+  blacklist: ['login', 'test', 'answerHeader', 'answer', ' FinalResult'],
 };
 
 const persistedReducer = persistReducer(persistConfig, reducers);

@@ -1,17 +1,22 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './QuizAns.css';
 import '../Quiz.css';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   correctOptionEllipse,
   optionEllipse,
   wrongOptionEllipse,
 } from '../../../../utils/svgIcons';
+import { testSuccess } from '../../../../redux/reducers/Conditions';
 
 const QuizAns = () => {
   const answers = useSelector((state: any) => state.quizAnswer.value);
+  const dispatch = useDispatch();
 
   console.log('answers', answers);
+  useEffect(() => {
+    dispatch(testSuccess(false));
+  });
 
   return (
     <>
