@@ -42,6 +42,7 @@ import filter, {
   setfilter,
 } from '../../../redux/reducers/filter';
 import Loading from '../../../utils/loading/Loading';
+import axios from 'axios';
 
 const Header = () => {
   const [onChange, setOnChange] = useState('');
@@ -50,6 +51,7 @@ const Header = () => {
   const [topSearch, setTopSearch] = useState([]);
   const [topCategories, setTopCategories] = useState([]);
   const [searchedCourse, setSearchedCourse] = useState([]);
+  const [profileData, setprofileData] = useState<any>({});
 
   const navigate = useNavigate();
 
@@ -89,6 +91,26 @@ const Header = () => {
         setTopCategories(res);
       });
   }, []);
+
+  useEffect(() => {
+    axios
+      .get(
+        `http://virtuallearnapp2-env.eba-wrr2p8zk.ap-south-1.elasticbeanstalk.com/user/menu`,
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('Token')}`,
+          },
+        }
+      )
+      .then((res) => {
+        setprofileData(res.data);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  }, []);
+
+  console.log('profile data', profileData);
 
   const Duration = [
     { start: 0, end: 5 },
@@ -734,13 +756,24 @@ const Header = () => {
             <div className="left-drawer-profile-logo-name">
               <div className="left-drawer-profile-img-frame">
                 <img
-                  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQZea5hmBriu2GpLrDCzJoBnAFqT2hzJTuTBZ_oNRUJ5lztiO3Ujs8NngJ2BWiTqjmvfx8&usqp=CAU"
+                  src={
+                    profileData &&
+                    profileData.profilePhoto &&
+                    profileData.profilePhoto
+                  }
                   alt=""
                 />
               </div>
               <div className="left-drawer-profile-image-name">
-                <p className="left-drawer-name">Mahendra Singh Dhoni</p>
-                <p className="left-drawer-role">UX/UI Designer</p>
+                <p className="left-drawer-name">
+                  {profileData && profileData.fullName && profileData.fullName}
+                </p>
+                <p className="left-drawer-role">
+                  {' '}
+                  {profileData &&
+                    profileData.occupation &&
+                    profileData.occupation}
+                </p>
               </div>
             </div>
           </div>
@@ -797,7 +830,11 @@ const Header = () => {
                   alt="Notifications"
                 />
                 <p>Notifications</p>
-                <span>11</span>
+                <span>
+                  {profileData &&
+                    profileData.notificationCount &&
+                    profileData.notificationCount}
+                </span>
               </div>
               <div
                 className="left-drawer-link"
