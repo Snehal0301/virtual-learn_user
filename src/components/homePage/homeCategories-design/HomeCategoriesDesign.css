@@ -14,12 +14,12 @@
     gap: 30px;
 }
 
-.start-course1-image img {
+/* .start-course1-image img {
     height: 100%;
     margin: 0;
     width: 100%;
     border-radius: 5px;
-}
+} */
 
 .start-course1-image {
     position: relative;
@@ -149,19 +149,25 @@
 }
 
 .home-categories-subcategory-image img {
-    height: 100%;
+
+    height: 181px;
     margin: 0;
     width: 100%;
-    border-radius: 5px;
+    /* border-radius: 5px; */
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+
 
 }
 
 .home-categories-subcategory-allcourse-image img {
-        /* height: 100%; */
-        margin: 0;
-        width: 100%;
-        border-radius: 5px;
-        height: 175px;
+    /* height: 100%; */
+    margin: 0;
+    width: 100%;
+    /* border-radius: 5px; */
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+    height: 175px;
 
 }
 
@@ -311,7 +317,9 @@
     bottom: 0;
     left: 0;
     background-color: #0000003b;
-    border-radius: 6px;
+    /* border-radius: 6px; */
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
 }
 
 .home-categories-overlay-allcourse {
@@ -321,11 +329,30 @@
     bottom: 0;
     left: 0;
     background-color: #0000003b;
-    border-radius: 6px;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
 }
 
 .home-categories-card-allcourse {
     /* padding-top: 20px; */
+    display: flex;
+}
+
+.homeCategoriesHead {
+    font-family: 'Biko';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    color: #2BB5F4;
+
+}
+
+/* .homeCategories-sidearrow
+{
+    transform: rotateY(180deg);
+
+} */
+.homeCategories-head-link {
     display: flex;
 }
 
@@ -348,17 +375,31 @@
 
     }
 
-    .home-categories-subcategory-image img {
+    .home-categories-subcategory-image img,
+    .home-categories-overlay {
         width: 320px;
+        border-radius: 6px;
     }
+    .home-categories-overlay-allcourse
+    {
+        border-radius: 6px;
+    }
+    
 
     .home-categories-subcategory-allcourse-image {
         display: flex;
         flex-direction: row;
         /* width: 100%; */
-        height: 30px; 
+        /* height: 30px; */
         box-shadow: none;
+        background: #FFFFFF;
+        /* box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); */
+        border-radius: 6px;
+        flex-basis: 24%;
+        margin-bottom: 3px;
     }
+    
+
     .home-categories-subcategory-image {
         box-shadow: none;
     }
@@ -371,13 +412,15 @@
 
     .home-categories-allcourse-titleBtn {
 
-        flex-direction: column; 
+        flex-direction: column;
+        padding: unset;
     }
 
     .home-categories-subcategory-allcourse-image img {
-        height: 80px;
-        width: 90px;
-        
+        height: 72px;
+        width: 84px;
+        border-radius: 6px;
+
     }
 
     .home-categories-overlay-allcourse {
@@ -385,35 +428,53 @@
     }
 
     .home-categories-allcourse-designbtn {
-       /* padding: unset; */
-       width: 90px;
-       margin-left: 10px;
-       margin-top: 10px;
-     
+        /* padding: unset; */
+        width: 107px;
+        margin-left: 10px;
+        margin-top: 10px;
+
     }
-    .home-categories-seeall
-    {
+
+    .home-categories-seeall {
         display: none;
     }
-    .home-categories-Body 
-    {
+
+    .home-categories-Body {
         overflow-x: scroll;
         flex-wrap: nowrap;
     }
-    .home-categories-section2 ,
-    .home-categories-Body
-    {
+
+    .home-categories-section2,
+    .home-categories-Body {
         padding: unset;
-        
+        margin-top: 10px;
+
     }
-    .homecategoriesdesign a 
-    {
-        
+
+    .homecategoriesdesign a {
+
         color: #2B2B2B;
         font-family: Biko;
         font-size: 26px;
         font-weight: bold;
         line-height: 35px;
+    }
+
+    .home-categories-allcourse-chapter {
+
+        padding-left: 15.5px;
+    }
+
+    .home-categories-allcourse-designbtn {
+        /* padding: unset; */
+
+        margin-left: 15px;
+        /* margin-top: 10px; */
+    }
+    .home-categories-subcategory-title,
+    .home-categories-time
+    {
+        padding-left: unset;
     }
 
 

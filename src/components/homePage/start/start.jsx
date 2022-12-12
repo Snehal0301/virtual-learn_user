@@ -50,6 +50,7 @@ const Start = () => {
   const [newestData, setnewestData] = useState([]);
   const [topcourseData, setTopcourseData] = useState([]);
   const [categoryData, setcategoryData] = useState([]);
+  const [ongoing, setOngoing] = useState([])
 
   const startCourseData = [
     {
@@ -94,18 +95,23 @@ const Start = () => {
     },
   ];
 
-  const startCategories = [
-    'Design',
-    'Development',
-    'Business',
-    'Music',
-    'Finance',
-    'Health & Fitness',
-    'IT & Software',
-    'Marketing',
-    'Lifestyle',
-    'Photography',
-  ];
+useEffect(() => {
+  axios
+  .get(
+    `http://virtuallearnapp2-env.eba-wrr2p8zk.ap-south-1.elasticbeanstalk.com/user/ongoingCourses`,
+    {
+      headers: { Authorization: `Bearer ${localStorage.getItem('Token')}` },
+    }
+  )
+  .then((res) => {
+    setOngoing(res.data);
+  })
+  .catch((err) => {
+    console.error(err);
+  });
+}, [])
+
+console.log('ongoing data',ongoing)
 
   //Fetching api for slider
 
@@ -246,19 +252,20 @@ const Start = () => {
       </div>
       <div className="start-card2">
         <div className="start-course1">
-          {startCourseData.slice(0, 3).map((item) => (
+          {ongoing && ongoing.slice(0, 3).map((item) => (
             <div className="start-course1-image">
               <div className="start-image-ongoing">
-                <img src={item.image} alt="" />
+                <img src={item.coursePhoto} alt="" />
                 <div className="start-image-sub">ongoing</div>
               </div>
               <div className="start-course-overlay"></div>
               <div className="start-title-container">
                 <div className="start-title-chapter">
                   <div className="start-course-section2-title">
-                    {item.title}
+                    {item.courseName
+}
                   </div>
-                  <div className="start-course-chapter">{item.chapter}</div>
+                  <div className="start-course-chapter">{item.completedChapter}/{item.totalChapter} Chapters</div>
                 </div>
 
                 <button className="start-course-button">Continue</button>
@@ -272,7 +279,7 @@ const Start = () => {
         <div
           className="start-seeall"
           onClick={() => {
-            navigate('categories/design');
+            navigate('/categories');
           }}
         >
           See All

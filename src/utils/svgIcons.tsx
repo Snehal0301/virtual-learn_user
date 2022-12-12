@@ -1344,3 +1344,6 @@ export const mobileBackBtn = (
     </g>
   </svg>
 );
+export const homeCategory_sideArrow =(
+  <img src="data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cg clip-path='url(%23clip0_421_7411-694803)'%3E%3Cpath d='M12 8L6 14L7.41 15.41L12 10.83L16.59 15.41L18 14L12 8Z' fill='black'/%3E%3C/g%3E%3Cdefs%3E%3CclipPath id='clip0_421_7411-694803'%3E%3Crect width='24' height='24' fill='white'/%3E%3C/clipPath%3E%3C/defs%3E%3C/svg%3E%0A" alt="img"></img>
+)

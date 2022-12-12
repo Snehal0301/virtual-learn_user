@@ -811,7 +811,9 @@
     width: 90vw;
   }
   .ong-img {
-    width: 100%;
+    border-radius: 10px;
+    height: 234px;
+    width: 350px;
   }
   .completed-images {
     width: 90vw;

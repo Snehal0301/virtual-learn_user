@@ -48,7 +48,7 @@ ul.breadcrumb-categories li a:hover {
   width: 100%;
   gap: 10px;
   margin-top: 3em;
-  justify-content: space-between;
+  justify-content: center;
   flex-wrap: wrap;
 }
 
@@ -106,6 +106,7 @@ ul.breadcrumb-categories li a:hover {
   .categories-body-display
   {
     margin-top: 2em;
+    justify-content: space-between;
   }
   .categoriesDisplay-home-parent
   {

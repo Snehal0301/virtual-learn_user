@@ -5,9 +5,12 @@ import { start_timeIcon } from '../../../utils/svgIcons'
 import axios from 'axios'
 import './HomeCategoriesDesign.css'
 import { useSelector } from 'react-redux';
+import { basicCourse } from './../../../redux/reducers/basicCourses';
+import { subCategories } from './../../../redux/reducers/subCategories';
+import { homeCategory_sideArrow } from '../../../utils/svgIcons'
 
 const HomeCategoriesDesign = () => {
-  const startCourseData = [
+  const startCourseData1 = [
     {
 
       id: 1,
@@ -44,26 +47,24 @@ const HomeCategoriesDesign = () => {
 
 
   ]
-  const startCategories = [
-    'Design',
-    'Development',
-    'Business',
-    'Music',
-    'Finance',
-    'Health & Fitness',
-    'IT & Software',
-    'Marketing',
-    'Lifestyle',
-    'Photography',
+  
 
-  ];
+  const allcourseItem = useSelector((state) => state.allcourse.value)
+  // console.log(allcourseItem);
 
-  const allcourseItem = useSelector((state)=>state.allcourse.value)
-  console.log(allcourseItem);
+  const basicCoursedata = useSelector((state) => state.basicCourse.data)
+  const advancedCoursedata = useSelector((state) => state.advancedCourse.data)
+  const subCategoriesdata = useSelector((state) => state.subCategories.data)
+
+
+  const categoryName = useSelector((state) => state.basicCourse.category)
 
   return (
     <div className='homecategoriesdesign'>
-      <a href="#"> Design</a>
+      <div className='homeCategories-head-link'>
+        {/* <div className='homeCategoriesHead'> Categories </div> */}
+        <a href="#"> {categoryName}</a>
+      </div>
       <div className='home-categories-section2'>
         <div className='home-categories-courses-started'>Courses to get you started</div>
         <div className='home-categories-seeall'>See All</div>
@@ -71,19 +72,21 @@ const HomeCategoriesDesign = () => {
       <div className='home-categories-card'>
         <div className='home-categories-choice1'>
           {
-            startCourseData.map(item =>
+            basicCoursedata && basicCoursedata.data && basicCoursedata.data.slice(0, 4).map(item =>
             (
               <div className='home-categories-subcategory-image'>
                 <div className='home-categories-image-pause'>
                   <div className='home-categories-overlay'></div>
-                  <img src={item.image} alt="" />
+                  <img src={item.coursePhoto} alt="" />
                   <div className='home-categories-pauseIcon'>{start_pauseIcon}</div>
 
                 </div>
-                <div className='home-categories-subcategory-title'>{item.title}</div>
+                <div className='home-categories-subcategory-title'>{item.courseName
+                }</div>
                 <div className='home-categories-time'>
-                  <div className='home-categories-chapter2'>{item.chapter}</div>
-                  <div>{start_timeIcon}</div>{item.time}
+                  <div className='home-categories-chapter2'>{item.chapterCount} Chapters</div>
+                  <div>{start_timeIcon}</div>{item.courseDuration
+                  }
                 </div>
               </div>
 
@@ -98,19 +101,19 @@ const HomeCategoriesDesign = () => {
       <div className='home-categories-card'>
         <div className='home-categories-choice1'>
           {
-            startCourseData.map(item =>
+            advancedCoursedata && advancedCoursedata.data && advancedCoursedata.data.slice(0, 4).map(item =>
             (
               <div className='home-categories-subcategory-image'>
                 <div className='home-categories-image-pause'>
                   <div className='home-categories-overlay'></div>
-                  <img src={item.image} alt="" />
+                  <img src={item.coursePhoto} alt="" />
                   <div className='home-categories-pauseIcon'>{start_pauseIcon}</div>
 
                 </div>
-                <div className='home-categories-subcategory-title'>{item.title}</div>
+                <div className='home-categories-subcategory-title'>{item.courseName}</div>
                 <div className='home-categories-time'>
-                  <div className='home-categories-chapter2'>{item.chapter}</div>
-                  <div>{start_timeIcon}</div>{item.time}
+                  <div className='home-categories-chapter2'>{item.chapterCount} Chapters</div>
+                  <div>{start_timeIcon}</div>{item.courseDuration}
                 </div>
               </div>
 
@@ -125,7 +128,7 @@ const HomeCategoriesDesign = () => {
       <div className="home-categories">
 
         <div className="home-categories-Body">
-          {startCategories.map((ele, i) => {
+          {subCategoriesdata && subCategoriesdata.data && subCategoriesdata.data.map((ele, i) => {
             return (
               <div
                 className="home-categories-Parent"
@@ -135,7 +138,7 @@ const HomeCategoriesDesign = () => {
           {design}
         </div> */}
                 <div className="home-categories-Name">
-                  {ele}
+                  {ele.subCategoryName}
                 </div>
               </div>
             );
@@ -158,9 +161,9 @@ const HomeCategoriesDesign = () => {
                   <div className='home-categories-overlay-allcourse'></div>
                 </div>
                 <div className='home-categories-allcourse-ttlchapbtn'>
-                  <div className='home-categories-subcategory-allcourse-title'>{item.categoryName}</div>
+                  <div className='home-categories-subcategory-allcourse-title'>{item.courseName}</div>
                   <div className="home-categories-allcourse-titleBtn">
-                    <div className='home-categories-allcourse-chapter'>{item.chapterCount} chapter</div>
+                    <div className='home-categories-allcourse-chapter'>{item.chapterCount} Chapters</div>
                     <button className='home-categories-allcourse-designbtn'>{item.categoryName}</button>
                   </div>
                 </div>

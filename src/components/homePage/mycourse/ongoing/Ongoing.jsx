@@ -1,4 +1,5 @@
-import React from "react";
+import React,{useState,useEffect} from "react";
+import axios from "axios";
 import "./Ongoing.css";
 
 const Ongoing = () => {
@@ -27,23 +28,42 @@ const Ongoing = () => {
         chapters: "15/20 Chapters",
       },
     ];
+
+    const [ongoingData, setongoingData] = useState([])
+    useEffect(() => {
+      axios
+      .get(
+        `http://virtuallearnapp2-env.eba-wrr2p8zk.ap-south-1.elasticbeanstalk.com/user/ongoingCourses`,
+        {
+          headers: { Authorization: `Bearer ${localStorage.getItem('Token')}` },
+        }
+      )
+      .then((res) => {
+        setongoingData(res.data);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+    }, [])
+
+    console.log(ongoingData);
   return (
       <div className="ongoing-section">
-     { ongoingCourses.map((ele,i)=>{
+     { ongoingData.map((ele,i)=>{
         return(
       <div className="ongoing-parent" key={i}>
             <div className="ongoing-images">
               <div className="ong-overlay"></div>
           <img
-            src={ele.image}
+            src={ele.coursePhoto}
             alt=""
             className="ong-img"
           />
           <div className="chap-progress">
             <p className="Ongoing-text">Ongoing</p>
             <div className="chap-descp">
-              <p>{ele.title}</p>
-              <p>{ele.chapters}</p>
+              <p>{ele.courseName}</p>
+              <p>{ele.completedChapter}/{ele.totalChapter} Chapters</p>
             </div>
           </div>
           <button className="btn-continue-ongoing">Continue</button>
