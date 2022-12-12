@@ -11,8 +11,8 @@ const initialState = {
   loading: false,
 };
 
-export const test: any = createAsyncThunk(
-  'test/test',
+export const FinalResult: any = createAsyncThunk(
+  'FinalResult/FinalResult',
   async (arg: any, { rejectWithValue }) => {
     try {
       const fetchedData: any = await axios.request({
@@ -33,27 +33,23 @@ export const test: any = createAsyncThunk(
   }
 );
 
-export const testSlice = createSlice({
-  name: 'test',
+export const FinalResultSlice = createSlice({
+  name: 'FinalResult',
   initialState,
-  reducers: {
-    testisSuccess: (state) => {
-      state.isSuccess = false;
-    },
-  },
+  reducers: {},
   extraReducers: (builder) => {
     // Add reducers for additional action types here, and handle loading state as needed
-    builder.addCase(test.pending, (state, action) => {
+    builder.addCase(FinalResult.pending, (state, action) => {
       // Add user to the state array
       state.loading = true;
     });
-    builder.addCase(test.fulfilled, (state, action) => {
+    builder.addCase(FinalResult.fulfilled, (state, action) => {
       state.loading = false;
       state.data = action.payload;
       state.headers = action;
       state.isSuccess = true;
     });
-    builder.addCase(test.rejected, (state, action) => {
+    builder.addCase(FinalResult.rejected, (state, action) => {
       state.message = action.payload;
       state.loading = false;
       state.isRejected = true;
@@ -61,6 +57,4 @@ export const testSlice = createSlice({
   },
 });
 
-export const { testisSuccess } = testSlice.actions;
-
-export default testSlice;
+export default FinalResultSlice;

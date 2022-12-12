@@ -1,12 +1,13 @@
-import "./OngoingOverview.css";
-import React, { useState, useEffect } from "react";
-import ReactPlayer from "react-player";
-import { useDispatch, useSelector } from "react-redux";
+import './OngoingOverview.css';
+import React, { useState, useEffect } from 'react';
+import ReactPlayer from 'react-player';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   accordianState,
   accordianToggleState,
   tabToggleState,
-} from "../../../../redux/reducers/myCourseReducer";
+  videoLinkState,
+} from '../../../../redux/reducers/myCourseReducer';
 import {
   courseAccessIcon,
   courseCertIcon,
@@ -18,45 +19,51 @@ import {
   learnCheckMark,
   videoPlayActive,
   whiteStepperIcon,
-} from "../../../../utils/svgIcons";
-import instructorImage from "../../../../assets/images/instructorImage.jpg";
-import Accordian from "../accordian/Accordian";
-import axios from "axios";
-import Box from "@mui/material/Box";
-import Stepper from "@mui/material/Stepper";
-import Step from "@mui/material/Step";
-import StepLabel from "@mui/material/StepLabel";
-import StepContent from "@mui/material/StepContent";
-import Button from "@mui/material/Button";
-import Paper from "@mui/material/Paper";
-import Typography from "@mui/material/Typography";
+} from '../../../../utils/svgIcons';
+import instructorImage from '../../../../assets/images/instructorImage.jpg';
+import Accordian from '../accordian/Accordian';
+import axios from 'axios';
+import Box from '@mui/material/Box';
+import Stepper from '@mui/material/Stepper';
+import Step from '@mui/material/Step';
+import StepLabel from '@mui/material/StepLabel';
+import StepContent from '@mui/material/StepContent';
+import Button from '@mui/material/Button';
+import Paper from '@mui/material/Paper';
+import Typography from '@mui/material/Typography';
+import { Navigate, useNavigate } from 'react-router-dom';
+import { test, testisSuccess } from '../../../../redux/reducers/testSlice';
+import { testShow, testSuccess } from '../../../../redux/reducers/Conditions';
+import { testSuccessRed } from '../../../../redux/reducers/SuccessTestRed';
+import { showSuccessPage } from '../../../../redux/reducers/showSuccesspage';
+import { finaltestShowPage } from '../../../../redux/reducers/finalTestSuccess';
 
 const steps = [
   {
-    label: "Select campaign settings",
+    label: 'Select campaign settings',
     description: `For each ad campaign that you create, you can control how much
               you're willing to spend on clicks and conversions, which networks
               and geographical locations you want your ads to show on, and more.`,
   },
   {
-    label: "Create an ad group",
+    label: 'Create an ad group',
     description:
-      "An ad group contains one or more ads which target a shared set of keywords.",
+      'An ad group contains one or more ads which target a shared set of keywords.',
   },
   {
-    label: "Create an ad",
+    label: 'Create an ad',
     description: `Try out different ad text to see what brings in the most customers,
               and learn how to enhance your ads using features like ad extensions.
               If you run into any problems with your ads, find out how to tell if
               they're running and how to resolve approval issues.`,
   },
   {
-    label: "Create an ad group",
+    label: 'Create an ad group',
     description:
-      "An ad group contains one or more ads which target a shared set of keywords.",
+      'An ad group contains one or more ads which target a shared set of keywords.',
   },
   {
-    label: "Create an ad",
+    label: 'Create an ad',
     description: `Try out different ad text to see what brings in the most customers,
               and learn how to enhance your ads using features like ad extensions.
               If you run into any problems with your ads, find out how to tell if
@@ -66,6 +73,58 @@ const steps = [
 
 const OngoingOverview = () => {
   const [activeStep, setActiveStep] = useState(0);
+
+  const [chapter, setChapter] = useState();
+  const [video, setVideo] = useState('https://youtu.be/Tn6-PIqc4UM');
+  const [overviewData, setOverviewData] = useState();
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    dispatch(testSuccess(false));
+    dispatch(testisSuccess());
+    dispatch(testSuccessRed(false));
+    dispatch(showSuccessPage(false));
+    dispatch(finaltestShowPage(false));
+  }, []);
+
+  // api call for chapter section
+  useEffect(() => {
+    axios
+      .get(
+        `http://virtuallearnapp2-env.eba-wrr2p8zk.ap-south-1.elasticbeanstalk.com/user/courseChapterResponse?courseId=24`,
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('Token')}`,
+          },
+        }
+      )
+      .then((res) => {
+        console.log(res.data);
+        setChapter(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+
+  useEffect(() => {
+    axios
+      .get(
+        `http://virtuallearnapp2-env.eba-wrr2p8zk.ap-south-1.elasticbeanstalk.com/user/courseOverView?courseId=33`,
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('Token')}`,
+          },
+        }
+      )
+      .then((res) => {
+        setOverviewData(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
 
   const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
@@ -78,10 +137,6 @@ const OngoingOverview = () => {
   const handleReset = () => {
     setActiveStep(0);
   };
-
-  const [active, setActive] = useState(0);
-
-  const [tabs, setTabs] = useState(1);
 
   const dispatch = useDispatch();
 
@@ -98,7 +153,7 @@ const OngoingOverview = () => {
   const [pause, setPause] = useState(false);
   const [playing, setPlaying] = useState(false);
   const [played, setPlayed] = useState(false);
-  const [overviewData, setOverviewData] = useState();
+
   const onPause = () => {
     setPause(true);
     setPlaying(false);
@@ -107,24 +162,23 @@ const OngoingOverview = () => {
     setPause(false);
     setPlaying(true);
   };
+
+  const videoLink = useSelector((state) => state.mycourse.videoLink);
+
+  console.log(video);
+
+  const testQuestions = useSelector((state) => state.test);
+
   useEffect(() => {
-    axios
-      .get(
-        `http://virtuallearnapp2-env.eba-wrr2p8zk.ap-south-1.elasticbeanstalk.com/user/courseOverView?courseId=33`,
-        {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("Token")}`,
-          },
-        }
-      )
-      .then((res) => {
-        setOverviewData(res.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, []);
-  console.log("OverviewData", overviewData);
+    testQuestions.isSuccess && dispatch(testShow(true));
+  }, [testQuestions]);
+
+  const showTest = useSelector((state) => state.loginConditions.showTest);
+
+  useEffect(() => {
+    showTest && navigate('/myCourses/ongoingCourse/moduleTest');
+  }, [showTest]);
+
   return (
     <div className="ongoing-overview">
       <div className="ongoing-section-1">
@@ -143,7 +197,7 @@ const OngoingOverview = () => {
             </div>
           )}
           <ReactPlayer
-            url="https://firebasestorage.googleapis.com/v0/b/drivelistfilesapplication.appspot.com/o/1669889441661-UI-UX-Design1%2800-00-29%29.mp4?alt=media"
+            url={videoLink}
             controls="true"
             className="react-player"
             width="100%"
@@ -155,13 +209,23 @@ const OngoingOverview = () => {
             }}
           />
         </div>
-
+        {/* <div className="ongoing-video-title-section">
+                    <div className="ongoing-video-title">
+                        <p className='video-title'>Learn Figma - UI/UX Design Essential Training</p>
+                        <p className='video-chapters'>7 Chapter | 46 lessons</p>
+                    </div>
+                    <div className="ongoing-video-category">
+                        <div className="catgry">
+                            <p>Design</p>
+                        </div>
+                    </div>
+                </div> */}
         {overviewData ? (
           <div className="ongoing-video-title-section">
             <div className="ongoing-video-title">
               <p className="video-title">{overviewData.courseName}</p>
               <p className="video-chapters">
-                {overviewData.chapterCount} Chapter | {overviewData.lessonCount}{" "}
+                {overviewData.chapterCount} Chapter | {overviewData.lessonCount}{' '}
                 lessons
               </p>
             </div>
@@ -231,28 +295,27 @@ const OngoingOverview = () => {
           //         </div>
           //     </div>
           // </div>
-          ""
+          ''
         )}
       </div>
       <div className="ongoing-section-2">
         <div className="ongoing-container-1">
           <div className="tabs">
             <div
-              className={tabState === 1 ? "tab active-tab" : "tab"}
+              className={tabState === 1 ? 'tab active-tab' : 'tab'}
               onClick={() => tabToggle(1)}
             >
               Overview
             </div>
             <div
-              className={tabState === 2 ? "tab active-tab" : "tab"}
+              className={tabState === 2 ? 'tab active-tab' : 'tab'}
               onClick={() => tabToggle(2)}
             >
               Chapters
             </div>
           </div>
-          {/*MAmatha*/}
           <div
-            className={tabState === 1 ? "tab-content-1" : "tab-content-none"}
+            className={tabState === 1 ? 'tab-content-1' : 'tab-content-none'}
           >
             <div className="tab-1-all">
               {/*Mobile Screen*/}
@@ -288,6 +351,11 @@ const OngoingOverview = () => {
                     <label for="expanded" role="button">
                       SHOW MORE
                     </label>
+                    <img
+                      src={require('../../../../assets/images/icn_previewgo.png')}
+                      alt=""
+                      className="right-icon"
+                    />
                   </div>
                 </div>
               ) : (
@@ -391,170 +459,170 @@ const OngoingOverview = () => {
             </div>
             <button className="join-course">Join Course</button>
           </div>
-
           <div
-            className={tabState === 2 ? "tab-content-2" : "tab-content-none"}
+            className={tabState === 2 ? 'tab-content-2' : 'tab-content-none'}
           >
-            <div className="tab-2-all">
-              <div className="course-contents">
-                <p className="course-content-title">Course Content</p>
-                <p className="course-content-desc">
-                  7 Chapter | 46 lessons | 6 Assignment Test | 3.5h total length
-                </p>
-              </div>
-              <div className="course-sections">
-                <div
-                  className="course-accordian"
-                  onClick={() => accordianToggle(1)}
-                >
-                  <div className="course-accordian-heading">
-                    <div className="course-accordian-container">
-                      <p className="course-accordian-container-title">
-                        Chapter 1 - Introduction to the course{" "}
-                      </p>
-                      <p className="course-accordian-container-state">
-                        {accordianState === 1 ? "-" : "+"}
-                      </p>
-                    </div>
-                  </div>
-                  <div
-                    className={
-                      (accordianState === 1 ? "accordian-show" : "") +
-                      " course-accordian-content"
-                    }
-                  >
-                    <div className="course-accordian-container-body">
-                      <p>
-                        Lorem ipsum, dolor sit amet consectetur adipisicing
-                        elit. Quas deserunt aperiam, dolorem porro laudantium
-                        illum praesentium delectus voluptate. Nobis ullam harum
-                        molestiae architecto minus necessitatibus explicabo
-                        beatae corporis magni officiis dignissimos dolore cumque
-                        voluptates, libero eius laboriosam, nihil nam aut
-                        facilis mollitia consequuntur illum est! Harum suscipit
-                        assumenda at magnam.
-                      </p>
-                    </div>
-                  </div>
-                </div>
-                <div
-                  className="course-accordian"
-                  onClick={() => accordianToggle(2)}
-                >
-                  <div className="course-accordian-heading">
-                    <div className="course-accordian-container">
-                      <p className="course-accordian-container-title">
-                        Chapter 2 - Introduction to the course{" "}
-                      </p>
-                      <p className="course-accordian-container-state">
-                        {accordianState === 2 ? "-" : "+"}
-                      </p>
-                    </div>
-                  </div>
-                  <div
-                    className={
-                      (accordianState === 2 ? "accordian-show" : "") +
-                      " course-accordian-content"
-                    }
-                  >
-                    <div className="course-accordian-container-body">
-                      <p>
-                        Lorem ipsum, dolor sit amet consectetur adipisicing
-                        elit. Quas deserunt aperiam, dolorem porro laudantium
-                        illum praesentium delectus voluptate. Nobis ullam harum
-                        molestiae architecto minus necessitatibus explicabo
-                        beatae corporis magni officiis dignissimos dolore cumque
-                        voluptates, libero eius laboriosam, nihil nam aut
-                        facilis mollitia consequuntur illum est! Harum suscipit
-                        assumenda at magnam.
-                      </p>
-                    </div>
-                  </div>
-                </div>
-                <div
-                  className="course-accordian"
-                  onClick={() => accordianToggle(3)}
-                >
-                  <div className="course-accordian-heading">
-                    <div className="course-accordian-container">
-                      <p className="course-accordian-container-title">
-                        Chapter 3 - Introduction to the course{" "}
-                      </p>
-                      <p className="course-accordian-container-state">
-                        {accordianState === 3 ? "-" : "+"}
-                      </p>
-                    </div>
-                  </div>
-                  <div
-                    className={
-                      (accordianState === 3 ? "accordian-show" : "") +
-                      " course-accordian-content"
-                    }
-                  >
-                    <div className="course-accordian-container-body">
-                      <Box sx={{ maxWidth: "100%" }}>
-                        <Stepper activeStep={activeStep} orientation="vertical">
-                          {steps.map((step, index) => (
-                            <Step key={step.label}>
-                              <StepLabel icon="⬤">
-                                {/* {step.label} */}
-                                <div className="course-video">
-                                  <div className="video-index">20</div>
-                                  <div className="vide-desc">
-                                    <p className="videosection-title">
-                                      Creating a New Project and File
-                                    </p>
-                                    <p className="video-duration">01.38 mins</p>
-                                  </div>
-                                  <div className="video-play-btn">
-                                    {videoPlayActive}
-                                  </div>
-                                </div>
-                              </StepLabel>
-                              <StepContent>
-                                {/* <Typography>{step.description}</Typography> */}
-                                <Box sx={{ mb: 2 }}>
-                                  <div>
-                                    <Button
-                                      variant="contained"
-                                      onClick={handleNext}
-                                      sx={{ mt: 1, mr: 1 }}
-                                    >
-                                      {index === steps.length - 1
-                                        ? "Finish"
-                                        : "Continue"}
-                                    </Button>
-                                    <Button
-                                      disabled={index === 0}
-                                      onClick={handleBack}
-                                      sx={{ mt: 1, mr: 1 }}
-                                    >
-                                      Back
-                                    </Button>
-                                  </div>
-                                </Box>
-                              </StepContent>
-                            </Step>
-                          ))}
-                        </Stepper>
-                        {activeStep === steps.length && (
-                          <Paper square elevation={0} sx={{ p: 3 }}>
-                            <Typography>
-                              All steps completed - you&apos;re finished
-                            </Typography>
-                            <Button onClick={handleReset} sx={{ mt: 1, mr: 1 }}>
-                              Reset
-                            </Button>
-                          </Paper>
-                        )}
-                      </Box>
-                    </div>
-                  </div>
+            {chapter ? (
+              <div className="tab-2-all">
+                <div className="course-contents">
+                  <p className="course-content-title">Course Content</p>
+                  <p className="course-content-desc">
+                    {chapter.chapterCount} Chapter | {chapter.lessonCount}{' '}
+                    lessons | {chapter.testCount} Assignment Test |{' '}
+                    {chapter.totalDuration}h Total length
+                  </p>
                 </div>
 
-                {/* <Accordian /> */}
+                <div className="course-sections">
+                  {chapter.chapterResponses.map((ele, id) => {
+                    return (
+                      <>
+                        {/* <Accordian /> */}
+                        <div
+                          div
+                          className="course-accordian"
+                          onClick={() => accordianToggle(id)}
+                        >
+                          <div className="course-accordian-heading">
+                            <div className="course-accordian-container">
+                              <p className="course-accordian-container-title">
+                                Chapter {ele.chapterNumber} - {ele.chapterName}{' '}
+                              </p>
+                              <p className="course-accordian-container-state">
+                                {accordianState === id ? '-' : '+'}
+                              </p>
+                            </div>
+                          </div>
+                          <div
+                            className={
+                              (accordianState === id ? 'accordian-show' : '') +
+                              ' course-accordian-content'
+                            }
+                          >
+                            <div className="course-accordian-container-body">
+                              <Box sx={{ maxWidth: '100%' }}>
+                                <Stepper
+                                  activeStep={activeStep}
+                                  orientation="vertical"
+                                >
+                                  {ele.lessonResponses.map(
+                                    (courseele, index) => (
+                                      <Step key={index}>
+                                        <StepLabel icon="⬤">
+                                          {/* {step.label} */}
+                                          <div className="course-video">
+                                            <div className="video-index">
+                                              {courseele.lessonNumber}
+                                            </div>
+                                            <div className="vide-desc">
+                                              <p className="videosection-title">
+                                                {courseele.lessonName}
+                                              </p>
+                                              <p className="video-duration">
+                                                {courseele.lessonDuration}
+                                              </p>
+                                            </div>
+                                            <div
+                                              className="video-play-btn"
+                                              // onClick={() => { setVideo(courseele.videoLink) }}
+                                              onClick={() => {
+                                                dispatch(
+                                                  videoLinkState(
+                                                    courseele.videoLink
+                                                  )
+                                                );
+                                              }}
+                                            >
+                                              {videoPlayActive}
+                                            </div>
+                                          </div>
+                                        </StepLabel>
+                                        <StepContent>
+                                          <Box sx={{ mb: 2 }}>
+                                            <div>
+                                              <Button
+                                                variant="contained"
+                                                onClick={handleNext}
+                                                sx={{ mt: 1, mr: 1 }}
+                                              >
+                                                {index === steps.length - 1
+                                                  ? 'Finish'
+                                                  : 'Continue'}
+                                              </Button>
+                                              <Button
+                                                disabled={index === 0}
+                                                onClick={handleBack}
+                                                sx={{ mt: 1, mr: 1 }}
+                                              >
+                                                Back
+                                              </Button>
+                                            </div>
+                                          </Box>
+                                        </StepContent>
+                                      </Step>
+                                    )
+                                  )}
+                                  {/* hemraj module test link */}
+                                  {ele.testId && (
+                                    <h2
+                                      onClick={() => {
+                                        let a =
+                                          ele &&
+                                          ele.testDuration &&
+                                          ele.testDuration.split(':');
+
+                                        if (a) {
+                                          let seconds =
+                                            +a[0] * 60 * 60 +
+                                            +a[1] * 60 +
+                                            +a[2];
+
+                                          localStorage.setItem(
+                                            'timer',
+                                            seconds
+                                          );
+                                        }
+                                        dispatch(
+                                          test(
+                                            `${
+                                              ele.testName === 'Final Test'
+                                                ? 'finalTest'
+                                                : 'moduleTest'
+                                            }?testId=${ele.testId}`
+                                          )
+                                        );
+                                      }}
+                                    >
+                                      {ele.testName} id:{ele.testId}
+                                    </h2>
+                                  )}
+                                  {/* hemraj module test link*/}
+                                </Stepper>
+                                {activeStep === steps.length && (
+                                  <Paper square elevation={0} sx={{ p: 3 }}>
+                                    <Typography>
+                                      All steps completed - you&apos;re finished
+                                    </Typography>
+                                    <Button
+                                      onClick={handleReset}
+                                      sx={{ mt: 1, mr: 1 }}
+                                    >
+                                      Reset
+                                    </Button>
+                                  </Paper>
+                                )}
+                              </Box>
+                            </div>
+                          </div>
+                        </div>
+                      </>
+                    );
+                  })}
+                </div>
               </div>
-            </div>
+            ) : (
+              <h1>Loading</h1>
+            )}
           </div>
         </div>
       </div>
