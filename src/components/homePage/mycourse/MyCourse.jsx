@@ -82,6 +82,17 @@ const MyCourse = () => {
         </div> */}
       {/* --------------------------- */}
 
+      {/* <div className="mycourse-tabs">
+                    <div className={mycoursetabState === 1 ? "mycourse-tab-active" : "mycourse-tab"} onClick={() => dispatch(mycoursetabToggleState(1))}>Ongoing</div>
+                    <div className={mycoursetabState === 2 ? "mycourse-tab-active" : "mycourse-tab"} onClick={() => dispatch(mycoursetabToggleState(2))}>Completed</div>
+                </div>
+                {
+                    mycoursetabState === 1
+                        ?
+                        <Ongoing />
+                        :
+                        <Completed />
+                }  */}
       <div className="mycourse-tabs">
         <div
           className={
