@@ -363,7 +363,7 @@ console.log('ongoing data',ongoing)
       {homeTabState === 2 && (
         <div className="start-card">
           <div className="start-choice1">
-            {popular.map((item) => (
+            {popular.slice(0,4).map((item) => (
               <div className="start-choice-subcategory-image">
                 <div className="start-image-pause">
                   <img src={item.coursePhoto} alt="" />

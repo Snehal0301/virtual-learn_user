@@ -25,11 +25,12 @@
 }
 
 .start-course1-image img {
-  /* height: 100%; */
-  margin: 0;
-  width: 100%;
-  height: 200px;
-  border-radius: 5px;
+    /* height: 100%; */
+    margin: 0;
+    width: 100%;
+    height: 226px;
+    border-radius: 5px;
+    object-fit: cover;
 }
 
 .start-image-title {
@@ -353,8 +354,8 @@
 }
 
 .start-map-image > img {
+  object-fit: cover;
   width: 100%;
-
   height: 224px;
   border-radius: 6px;
 }
