@@ -58,49 +58,6 @@ const Start = () => {
   const [categoryData, setcategoryData] = useState([]);
   const [ongoing, setOngoing] = useState([]);
 
-  const startCourseData = [
-    {
-      id: 1,
-      image: require('../../../assets/images/start-courses-image/What-Are-The-Most-Effective-Digital-Marketing-Strategies-_blog 1.png'),
-      title: 'Digital Marketing',
-      chapter: '2 chapter',
-      time: '2:23:24',
-      btntext: 'Design',
-    },
-    {
-      id: 2,
-      image: require('../../../assets/images/start-courses-image/banner-42 1.png'),
-      title: 'Marketing Courses',
-      chapter: '2 chapter',
-      time: '2:23:24',
-      btntext: 'Marketing',
-    },
-    {
-      id: 3,
-      image: require('../../../assets/images/start-courses-image/What-Are-The-Most-Effective-Digital-Marketing-Strategies-_blog 1.png'),
-      title: 'Digital Strategies',
-      chapter: '2 chapter',
-      time: '2:23:24',
-      btntext: 'Design',
-    },
-    {
-      id: 2,
-      image: require('../../../assets/images/start-courses-image/banner-42 1.png'),
-      title: 'Marketing Courses',
-      chapter: '2 chapter',
-      time: '2:23:24',
-      btntext: 'Marketing',
-    },
-    {
-      id: 3,
-      image: require('../../../assets/images/start-courses-image/What-Are-The-Most-Effective-Digital-Marketing-Strategies-_blog 1.png'),
-      title: 'Digital Strategies',
-      chapter: '2 chapter',
-      time: '2:23:24',
-      btntext: 'Design',
-    },
-  ];
-
   useEffect(() => {
     axios
       .get(
@@ -440,7 +397,26 @@ const Start = () => {
               <div className="start-ongoing-courses">
                 Top courses in {item.categoryName}
               </div>
-              <div className="start-seeall">See All</div>
+              <div
+                className="start-seeall"
+                onClick={() => {
+                  dispatch(categoryName(item.categoryName));
+                  dispatch(
+                    basicCourse(`basicCourses?categoryId=${item.categoryId}`)
+                  );
+                  dispatch(
+                    advancedCourse(
+                      `advanceCourses?categoryId=${item.categoryId}`
+                    )
+                  );
+                  dispatch(
+                    subCategories(`subCategories?categoryId=${item.categoryId}`)
+                  );
+                  navigate('/categories/design');
+                }}
+              >
+                See All
+              </div>
             </div>
 
             <div className="start-card">
