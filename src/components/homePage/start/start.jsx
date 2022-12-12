@@ -57,6 +57,7 @@ const Start = () => {
   const [topcourseData, setTopcourseData] = useState([]);
   const [categoryData, setcategoryData] = useState([]);
   const [ongoing, setOngoing] = useState([]);
+  const [name, setName] = useState('');
 
   useEffect(() => {
     axios
@@ -183,14 +184,30 @@ const Start = () => {
         console.error(err);
       });
   }, []);
+
+  useEffect(() => {
+    axios
+      .get(
+        `http://virtuallearnapp2-env.eba-wrr2p8zk.ap-south-1.elasticbeanstalk.com/user/menu`,
+        {
+          headers: { Authorization: `Bearer ${localStorage.getItem('Token')}` },
+        }
+      )
+      .then((res) => {
+        setName(res.data.fullName);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  }, []);
+
   // console.log(categoryData);
   dispatch(categorydata(categoryData));
 
-  const indicators = () => <div className="indicator"></div>;
   return (
     <div className="start">
       <div className="start-greeting">Hello!</div>
-      <div className="start-username">Mahendra Singh Dhoni</div>
+      <div className="start-username">{name}</div>
       <Slider autoplay={true} autoplaySpeed={10000} slidesToShow={3}>
         {headerdata.map((item) => (
           <div className="start-image-title">
