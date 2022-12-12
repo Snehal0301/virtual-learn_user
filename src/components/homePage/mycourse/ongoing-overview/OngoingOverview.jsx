@@ -42,13 +42,15 @@ import { testShow, testSuccess } from '../../../../redux/reducers/Conditions';
 import { testSuccessRed } from '../../../../redux/reducers/SuccessTestRed';
 import { showSuccessPage } from '../../../../redux/reducers/showSuccesspage';
 import { finaltestShowPage } from '../../../../redux/reducers/finalTestSuccess';
+import Loading from '../../../../utils/loading/Loading';
 
 const OngoingOverview = () => {
   const [activeStep, setActiveStep] = useState(0);
   const [chapter, setChapter] = useState();
   const [overviewData, setOverviewData] = useState();
   const [defaultvideo, setDefaultVideo] = useState('');
-  const [enrollState, setEnrollState] = useState(false);
+  const [chapterLoading, setChapterLoading] = useState(false);
+  const [overviewLoading, setOverviewLoading] = useState(false);
 
   const navigate = useNavigate();
 
@@ -64,6 +66,12 @@ const OngoingOverview = () => {
   const courseOverview = useSelector((state) => state.courseOverview.data);
 
   useEffect(() => {
+    if (chapterResponses.isLoading) {
+      setChapterLoading(true);
+    } else {
+      setChapterLoading(false);
+    }
+
     chapterResponses &&
       chapterResponses.data &&
       setChapter(chapterResponses.data);
@@ -168,8 +176,6 @@ const OngoingOverview = () => {
         console.log(err);
       });
   };
-
-  useEffect(() => {});
 
   return (
     <div className="ongoing-overview">
@@ -780,6 +786,7 @@ const OngoingOverview = () => {
           </div>
         </div>
       </div>
+      {chapterLoading && <Loading />}
     </div>
   );
 };
