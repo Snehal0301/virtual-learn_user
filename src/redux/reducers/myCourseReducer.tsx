@@ -5,8 +5,10 @@ const initialState: any = {
     accordian: 1,
     mycoursetab: 1,
     hometab: 1,
-    videoLink: 'https://youtu.be/Tn6-PIqc4UM'
+    firstVideo:'',
+    videoLink: '',
 };
+
 
 export const mycourseReducer = createSlice({
     name: 'mycourse',
@@ -26,9 +28,13 @@ export const mycourseReducer = createSlice({
         },
         videoLinkState: (state, { payload }) => {
             state.videoLink = payload
+        },
+        firstVideoState: (state, { payload }) => {
+            state.firstVideo = payload
+            state.videoLink = payload
         }
     },
 });
 
-export const { tabToggleState, accordianToggleState, mycoursetabToggleState, homeTabToggleState, videoLinkState } = mycourseReducer.actions;
+export const { tabToggleState, accordianToggleState, mycoursetabToggleState, homeTabToggleState, videoLinkState, firstVideoState } = mycourseReducer.actions;
 export default mycourseReducer.reducer;
