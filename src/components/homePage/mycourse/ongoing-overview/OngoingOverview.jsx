@@ -344,10 +344,10 @@ const OngoingOverview = () => {
                     </div>
 
                     <div className="course-points-title">
-                      {/* Access on mobile, desktop and tv */}
-                      {overviewData.requirements.map((ele, i) => {
+                      Access on mobile, desktop and tv
+                      {/* {overviewData.requirements.map((ele, i) => {
                         return <p>{ele}</p>;
-                      })}
+                      })} */}
                     </div>
                   </div>
                   <div className="course-points">
@@ -362,37 +362,30 @@ const OngoingOverview = () => {
               )}
               <div className="overview-learn">
                 <p className="overview-learn-title">What you’ll learn</p>
-                <div className="learn-points">
-                  <div className="learn-points-img">{learnCheckMark}</div>
-                  <div className="learn-points-title">Design Websites</div>
-                </div>
-                <div className="learn-points">
-                  <div className="learn-points-img">{learnCheckMark}</div>
-                  <div className="learn-points-title">
-                    You will have a fully interactive design and prototype at
-                    the end of this course
-                  </div>
-                </div>
-                <div className="learn-points">
-                  <div className="learn-points-img">{learnCheckMark}</div>
-                  <div className="learn-points-title">
-                    Design mobile and desktop apps
-                  </div>
-                </div>
-                <div className="learn-points">
-                  <div className="learn-points-img">{learnCheckMark}</div>
-                  <div className="learn-points-title">
-                    You will learn how to reuse design elements for future
-                    projects
-                  </div>
-                </div>
+                {overviewData &&
+                  overviewData.learningOutCome &&
+                  overviewData.learningOutCome.map((ele) => {
+                    return (
+                      <div className="learn-points">
+                        <div className="learn-points-img">{learnCheckMark}</div>
+                        <div className="learn-points-title">
+                          {ele}
+                        </div>
+                      </div>
+                    );
+                  })
+                }
+               
               </div>
 
               <div className="overview-req">
                 <p className="overview-req-title">Requirements</p>
                 <ul>
-                  <li>Internet Access</li>
-                  <li>You should know your way around comouter basics</li>
+                  {overviewData &&
+                    overviewData.requirements &&
+                    overviewData.requirements.map((ele) => {
+                      return <li>{ele}</li>;
+                    })}
                 </ul>
               </div>
 
@@ -406,44 +399,14 @@ const OngoingOverview = () => {
                         {overviewData.instructorName}
                       </p>
                       <div className="profile-occupation">
-                        {overviewData.instructorDescription} {overviewData.url}
+                        {overviewData.designation} {""}
+                        {overviewData.url}
                       </div>
                     </div>
                   </div>
                   <div className="instructor-about">
                     <input type="checkbox" id="expanded"></input>
-                    <p>
-                      Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-                      Facilis doloremque fuga nobis consectetur dignissimos ab,
-                      sit necessitatibus alias, explicabo doloribus laudantium
-                      ducimus mollitia quod delectus repudiandae debitis
-                      voluptatem, deserunt fugiat dolore perferendis accusantium
-                      quia numquam! Fugiat, temporibus odio? Voluptates
-                      excepturi autem, error assumenda quia quod ratione modi
-                      tenetur laborum rem!
-                      <br />
-                      <br />
-                      Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                      Nisi et rem hic eum nam exercitationem magnam quae veniam!
-                      Ipsa eaque velit aspernatur minima illum? Expedita nemo
-                      tempore, dolores distinctio molestiae mollitia temporibus
-                      quasi eveniet aliquam sequi laudantium porro qui, quaerat
-                      nam in quos pariatur rerum. Architecto rem repudiandae
-                      error explicabo veniam inventore dolorum cupiditate cum
-                      provident, rerum ipsum corrupti illum sint consectetur
-                      quos, ex perferendis numquam! Fuga minima corrupti nihil
-                      at eligendi quas doloribus quod molestias deserunt,
-                      mollitia exercitationem vitae non, odio ex, voluptate in
-                      quia. Eaque vitae eius esse earum omnis. Rerum odio vero
-                      accusantium deleniti ad modi magni temporibus
-                      reprehenderit similique facere asperiores assumenda,
-                      pariatur odit quidem vel accusamus ab quod vitae nisi? In
-                      sed corporis accusamus sapiente harum, minima repellat
-                      nihil quod veniam rem magnam fuga, ipsam aliquid pariatur
-                      modi repudiandae doloremque recusandae, maiores tenetur
-                      nisi voluptatum explicabo facere. Maiores consequatur vel
-                      consequuntur corporis commodi id optio?
-                    </p>
+                    <p>{overviewData.instructorDescription}</p>
                     <label for="expanded" role="button">
                       SHOW MORE
                     </label>
