@@ -31,6 +31,12 @@ import StepContent from '@mui/material/StepContent';
 import Button from '@mui/material/Button';
 import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
+import { Navigate, useNavigate } from 'react-router-dom';
+import { test, testisSuccess } from '../../../../redux/reducers/testSlice';
+import { testShow, testSuccess } from '../../../../redux/reducers/Conditions';
+import { testSuccessRed } from '../../../../redux/reducers/SuccessTestRed';
+import { showSuccessPage } from '../../../../redux/reducers/showSuccesspage';
+import { finaltestShowPage } from '../../../../redux/reducers/finalTestSuccess';
 
 const steps = [
   {
@@ -71,6 +77,17 @@ const OngoingOverview = () => {
   const [chapter, setChapter] = useState();
   const [video, setVideo] = useState('https://youtu.be/Tn6-PIqc4UM');
   const [overviewData, setOverviewData] = useState();
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    dispatch(testSuccess(false));
+    dispatch(testisSuccess());
+    dispatch(testSuccessRed(false));
+    dispatch(showSuccessPage(false));
+    dispatch(finaltestShowPage(false));
+  }, []);
+
   // api call for chapter section
   useEffect(() => {
     axios
@@ -90,8 +107,6 @@ const OngoingOverview = () => {
         console.log(err);
       });
   }, []);
-
-  console.log('chapter', chapter);
 
   useEffect(() => {
     axios
@@ -152,19 +167,35 @@ const OngoingOverview = () => {
 
   console.log(video);
 
+  const testQuestions = useSelector((state) => state.test);
+
+  useEffect(() => {
+    testQuestions.isSuccess && dispatch(testShow(true));
+  }, [testQuestions]);
+
+  const showTest = useSelector((state) => state.loginConditions.showTest);
+
+  useEffect(() => {
+    showTest && navigate('/myCourses/ongoingCourse/moduleTest');
+  }, [showTest]);
+
   return (
     <div className="ongoing-overview">
       <div className="ongoing-section-1">
         <div className="ongoing-section-video-player">
-          {/* {
-            pause &&
+          {pause && (
             <div className="onpause-modal">
-              <p className='onpause-modal-title'>Your lesson paused at 1.21
-                Do you want to continue watching?</p>
-              <button className='onpause-button' onClick={onPlay}>Continue Watching</button>
-              <button className='onpause-button beginning'>Watch from beginning</button>
+              <p className="onpause-modal-title">
+                Your lesson paused at 1.21 Do you want to continue watching?
+              </p>
+              <button className="onpause-button" onClick={onPlay}>
+                Continue Watching
+              </button>
+              <button className="onpause-button beginning">
+                Watch from beginning
+              </button>
             </div>
-          } */}
+          )}
           <ReactPlayer
             url={videoLink}
             controls="true"
@@ -590,6 +621,41 @@ const OngoingOverview = () => {
                                       </Step>
                                     )
                                   )}
+                                  {/* hemraj module test link */}
+                                  {ele.testId && (
+                                    <h2
+                                      onClick={() => {
+                                        let a =
+                                          ele &&
+                                          ele.testDuration &&
+                                          ele.testDuration.split(':');
+
+                                        if (a) {
+                                          let seconds =
+                                            +a[0] * 60 * 60 +
+                                            +a[1] * 60 +
+                                            +a[2];
+
+                                          localStorage.setItem(
+                                            'timer',
+                                            seconds
+                                          );
+                                        }
+                                        dispatch(
+                                          test(
+                                            `${
+                                              ele.testName === 'Final Test'
+                                                ? 'finalTest'
+                                                : 'moduleTest'
+                                            }?testId=${ele.testId}`
+                                          )
+                                        );
+                                      }}
+                                    >
+                                      {ele.testName} id:{ele.testId}
+                                    </h2>
+                                  )}
+                                  {/* hemraj module test link*/}
                                 </Stepper>
                                 {activeStep === steps.length && (
                                   <Paper square elevation={0} sx={{ p: 3 }}>
