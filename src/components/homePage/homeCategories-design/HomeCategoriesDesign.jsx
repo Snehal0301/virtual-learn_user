@@ -4,12 +4,18 @@ import { start_timeIcon } from '../../../utils/svgIcons';
 
 import axios from 'axios';
 import './HomeCategoriesDesign.css';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { basicCourse } from './../../../redux/reducers/basicCourses';
 import { subCategories } from './../../../redux/reducers/subCategories';
 import { homeCategory_sideArrow } from '../../../utils/svgIcons';
+import { courseOverview } from '../../../redux/reducers/courseOverview';
+import { chapterResponse } from '../../../redux/reducers/chapterResponses';
+import { useNavigate } from 'react-router-dom';
 
 const HomeCategoriesDesign = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const allcourseItem = useSelector((state) => state.allcourse.value);
   // console.log(allcourseItem);
 
@@ -36,7 +42,14 @@ const HomeCategoriesDesign = () => {
           {basicCoursedata &&
             basicCoursedata.data &&
             basicCoursedata.data.slice(0, 4).map((item) => (
-              <div className="home-categories-subcategory-image">
+              <div
+                className="home-categories-subcategory-image"
+                onClick={() => {
+                  dispatch(courseOverview(item.courseId));
+                  dispatch(chapterResponse(item.courseId));
+                  navigate('/myCourses/ongoingCourse');
+                }}
+              >
                 <div className="home-categories-image-pause">
                   <div className="home-categories-overlay"></div>
                   <img src={item.coursePhoto} alt="" />
@@ -67,7 +80,14 @@ const HomeCategoriesDesign = () => {
           {advancedCoursedata &&
             advancedCoursedata.data &&
             advancedCoursedata.data.slice(0, 4).map((item) => (
-              <div className="home-categories-subcategory-image">
+              <div
+                className="home-categories-subcategory-image"
+                onClick={() => {
+                  dispatch(courseOverview(item.courseId));
+                  dispatch(chapterResponse(item.courseId));
+                  navigate('/myCourses/ongoingCourse');
+                }}
+              >
                 <div className="home-categories-image-pause">
                   <div className="home-categories-overlay"></div>
                   <img src={item.coursePhoto} alt="" />
@@ -118,7 +138,14 @@ const HomeCategoriesDesign = () => {
       <div className="home-categories-card-allcourse">
         <div className="home-categories-choice1-allcourse">
           {allcourseItem.map((item) => (
-            <div className="home-categories-subcategory-allcourse-image">
+            <div
+              className="home-categories-subcategory-allcourse-image"
+              onClick={() => {
+                dispatch(courseOverview(item.courseId));
+                dispatch(chapterResponse(item.courseId));
+                navigate('/myCourses/ongoingCourse');
+              }}
+            >
               <div className="home-categories-image-allcourse-pause">
                 <img src={item.coursePhoto} alt="" />
                 <div className="home-categories-overlay-allcourse"></div>
