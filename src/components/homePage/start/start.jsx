@@ -259,7 +259,16 @@ const Start = () => {
                     </div>
                   </div>
 
-                  <button className="start-course-button">Continue</button>
+                  <button
+                    className="start-course-button"
+                    onClick={() => {
+                      dispatch(courseOverview(item.courseId));
+                      dispatch(chapterResponse(item.courseId));
+                      navigate('/myCourses/ongoingCourse');
+                    }}
+                  >
+                    Continue
+                  </button>
                 </div>
               </div>
             ))}
