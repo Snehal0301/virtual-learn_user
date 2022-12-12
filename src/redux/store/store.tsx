@@ -13,6 +13,7 @@ import allcourseReducer from '../reducers/allcourseSlice';
 import categoryReducer from '../reducers/categorySlice';
 import answerHeaderSlice from '../reducers/testAnswerHeader';
 import answerSlice from '../reducers/testAnswer';
+import { filterSlice } from '../reducers/filter';
 import { testSuccessRedSlice } from '../reducers/SuccessTestRed';
 import { showSuccessPageSlice } from '../reducers/showSuccesspage';
 import { finaltestShowPageSlice } from '../reducers/finalTestSuccess';
@@ -32,6 +33,7 @@ const reducers = combineReducers({
   answer: answerSlice.reducer,
   allcourse: allcourseReducer,
   categorydata: categoryReducer,
+  filter: filterSlice.reducer,
   testSuccessRed: testSuccessRedSlice.reducer,
   showSuccessPage: showSuccessPageSlice.reducer,
   finaltestShowPage: finaltestShowPageSlice.reducer,

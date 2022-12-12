@@ -13,26 +13,26 @@ import Start from '../../components/homePage/start/start';
 import { Outlet } from 'react-router-dom';
 
 const HomePage = () => {
-  return (
-    <div className="homePage">
-      <div className="homePageNavbar">
-        <Header />
-      </div>
-      <div className="homePageBody">
-        {/* <Start /> */}
-        {/* <ChoiceYourCourse /> */}
-        {/* <HomeCategoriesDesign /> */}
-        {/* <Start /> */}
-        {/* <Quiz /> */}
+        return (
+                <div className="homePage">
+                        <div className="homePageNavbar">
+                                <Header />
+                        </div>
+                        <div className="homePageBody">
+                                {/* <Start /> */}
+                                {/* <ChoiceYourCourse/> */}
+                                {/* <HomeCategoriesDesign/> */}
+                                {/* <Start /> */}
+                                {/* <Quiz /> */}
 
-        {/* <QuizResults /> */}
-        {/* <CourseCompleted /> */}
-        {/* <MyCourse /> */}
-        {/* <Categories /> */}
-        <Outlet />
-      </div>
-    </div>
-  );
+                                {/* <QuizResults /> */}
+                                {/* <CourseCompleted /> */}
+                                {/* <MyCourse /> */}
+                                {/* <Categories /> */}
+                                <Outlet />
+                        </div>
+                </div>
+        );
 };
 
 export default HomePage;
