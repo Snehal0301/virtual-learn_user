@@ -42,7 +42,7 @@ import { testShow, testSuccess } from '../../../../redux/reducers/Conditions';
 import { testSuccessRed } from '../../../../redux/reducers/SuccessTestRed';
 import { showSuccessPage } from '../../../../redux/reducers/showSuccesspage';
 import { finaltestShowPage } from '../../../../redux/reducers/finalTestSuccess';
-
+import ShowMoreText from "react-show-more-text";
 
 const OngoingOverview = () => {
   const [activeStep, setActiveStep] = useState(0);
@@ -91,7 +91,6 @@ const OngoingOverview = () => {
 
 
   const defaultVideoState = useSelector((state) => state.mycourse.firstVideo)
-  console.log("defaultVideoState", defaultVideoState);
 
   useEffect(() => {
     axios
@@ -276,10 +275,11 @@ const OngoingOverview = () => {
                 </div>
                 <div className="ongoing-course-desc-content">
                   <input type="checkbox" id="expanded"></input>
-                  <p>{overviewData.description}</p>
-                  <label for="expanded" role="button">
+                  <ShowMoreText className="showmore" anchorClass="show-more-style">{overviewData.description}</ShowMoreText>
+                  {/* <ShowMoreText className="showmore" anchorClass="show-more-style">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quis quod ullam, iste quo hic voluptatem, et tempore, modi quaerat placeat cum. Quam eos itaque quo omnis, quae delectus illo quos autem nobis ut possimus in, excepturi et illum sunt perspiciatis accusamus, repellat facilis fuga animi voluptatem pariatur nisi consequatur voluptates! Rem cum nobis itaque consequuntur eveniet a nihil ab quibusdam deleniti dolorum quia libero ullam culpa minima eaque debitis minus aperiam ducimus odio delectus, eius consequatur iusto odit! Nemo quasi corporis velit itaque neque fugit soluta dolores dolorem facere, molestias maxime non consequatur quidem odio totam esse iure, delectus fuga!</ShowMoreText> */}
+                  {/* <label for="expanded" role="button">
                     SHOW MORE
-                  </label>
+                  </label> */}
                 </div>
               </div>
             ) : (
@@ -476,10 +476,8 @@ const OngoingOverview = () => {
                   </div>
                   <div className="instructor-about">
                     <input type="checkbox" id="expanded"></input>
-                    <p>{overviewData.instructorDescription}</p>
-                    <label for="expanded" role="button">
-                      SHOW MORE
-                    </label>
+                    <ShowMoreText lines={5} className="showmore" anchorClass="show-more-style">{overviewData.instructorDescription}</ShowMoreText>
+
                   </div>
                 </div>
               ) : (
