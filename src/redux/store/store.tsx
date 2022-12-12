@@ -18,6 +18,9 @@ import { testSuccessRedSlice } from '../reducers/SuccessTestRed';
 import { showSuccessPageSlice } from '../reducers/showSuccesspage';
 import { finaltestShowPageSlice } from '../reducers/finalTestSuccess';
 import FinalResultSlice from '../reducers/finalResult';
+import basicCourseSlice from '../reducers/basicCourses';
+import advancedCourseSlice, { advancedCourse } from './../reducers/advancedCourse';
+import subCategoriesSlice, { subCategories } from './../reducers/subCategories';
 
 const reducers = combineReducers({
   headerProfile: showHeaderProfile.reducer,
@@ -35,6 +38,9 @@ const reducers = combineReducers({
   showSuccessPage: showSuccessPageSlice.reducer,
   finaltestShowPage: finaltestShowPageSlice.reducer,
   FinalResult: FinalResultSlice.reducer,
+  basicCourse:basicCourseSlice.reducer,
+  advancedCourse:advancedCourseSlice.reducer,
+  subCategories:subCategoriesSlice.reducer
 });
 
 const persistConfig = {
