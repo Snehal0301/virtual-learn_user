@@ -1,20 +1,20 @@
-import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { showCertificate } from '../../../../redux/reducers/Conditions';
-import '../../../../views/onboarding/success_page/Success_Page.css';
-import Certificate from '../certificate/Certificate';
+import React from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { showCertificate } from '../../../../redux/reducers/Conditions'
+import '../../../../views/onboarding/success_page/Success_Page.css'
+import Certificate from '../certificate/Certificate'
 const CourseCompleted = () => {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
 
-  const finalResult = useSelector((state: any) => state.FinalResult.data);
+  const finalResult = useSelector((state: any) => state.FinalResult.data)
 
-  console.log('final result', finalResult.data);
+  console.log('final result', finalResult.data)
 
   return (
     <>
       {finalResult && finalResult.data && (
         <div className="succesContainer">
-          <div className="successContent" style={{ padding: '80px 0' }}>
+          <div className="successContent">
             <div className="successImage" style={{ marginBottom: '60px' }}>
               <img
                 src={require('../../../../assets/images/img_course complete_illustratipon 1.png')}
@@ -50,7 +50,7 @@ const CourseCompleted = () => {
               className="getStarted"
               style={{ cursor: 'pointer', fontSize: '24px' }}
               onClick={() => {
-                dispatch(showCertificate(true));
+                dispatch(showCertificate(true))
               }}
             >
               View certificate
@@ -69,7 +69,7 @@ const CourseCompleted = () => {
         </div>
       )}
     </>
-  );
-};
+  )
+}
 
-export default CourseCompleted;
+export default CourseCompleted
