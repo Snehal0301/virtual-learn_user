@@ -65,13 +65,26 @@ const OngoingOverview = () => {
   const chapterResponses = useSelector((state) => state.chapterResponse.data);
   const courseOverview = useSelector((state) => state.courseOverview.data);
 
+  const chapterLoad = useSelector((state) => state.chapterResponse);
+  const courseLoad = useSelector((state) => state.courseOverview);
+
   useEffect(() => {
-    if (chapterResponses.isLoading) {
+    if (chapterLoad.loading) {
       setChapterLoading(true);
     } else {
       setChapterLoading(false);
     }
+  }, [chapterLoad]);
 
+  useEffect(() => {
+    if (courseLoad.loading) {
+      setOverviewLoading(true);
+    } else {
+      setOverviewLoading(false);
+    }
+  }, [courseLoad]);
+
+  useEffect(() => {
     chapterResponses &&
       chapterResponses.data &&
       setChapter(chapterResponses.data);
@@ -786,7 +799,7 @@ const OngoingOverview = () => {
           </div>
         </div>
       </div>
-      {chapterLoading && <Loading />}
+      {(chapterLoading || overviewLoading) && <Loading />}
     </div>
   );
 };
