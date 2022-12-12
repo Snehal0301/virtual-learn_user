@@ -232,8 +232,9 @@ const OngoingOverview = () => {
             pause &&
             <>
 
-              <div className="pause-overlay"></div>
-              <div className="pause-button" onClick={onPlay}>{start_pauseIconVideo}</div>
+              <div className="pause-overlay" onClick={onPlay}>
+                <div className="pause-button">{start_pauseIconVideo}</div>
+              </div>
             </>
           }
         </div>
