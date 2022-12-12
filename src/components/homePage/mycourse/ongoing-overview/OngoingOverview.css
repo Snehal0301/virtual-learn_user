@@ -61,8 +61,8 @@
 
 .pause-button{
     position: absolute;
-    top: 40%;
-    right: 45%;
+    top: 43%;
+    right: 47.5%;
     cursor: pointer;
 }
 
@@ -591,8 +591,20 @@ p:not(.truncated)~label {
     cursor: pointer;
 }
 
+.pause-overlay{
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 5px;
+    right: 5px;
+    background-color: #7a7a7a76;
+}
 
 /* new custom stepper */
+
+
+/* custom css */
+
 @media only screen and (max-width: 1300px) {
     .ongoing-overview {
         display: flex;
