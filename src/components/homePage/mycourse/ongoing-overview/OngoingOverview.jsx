@@ -256,63 +256,44 @@ const OngoingOverview = () => {
           >
             <div className="tab-1-all">
               {/*Mobile Screen*/}
-              <div className="ongoing-course-desc-mobile">
-                <div className="ongoing-course-desc-title-mobile">
-                  <p>
-                    Learn how to design a beautiful and engaging mobile app with
-                    Figma. Learn-by-doing approach. Learn how to design a
-                    beautiful and engaging mobile app with Figma. Learn-by-doing
-                    approach.
-                  </p>
-                </div>
-                <div className="ongoing-course-desc-content-mobile">
-                  <p>Preview this Course</p>
-                  <div className="mobile-video-link">
-                    <div className="mobile-video-section-1">
-                      <img
-                        src={require("../../../../assets/images/icn_play_orange.png")}
-                        alt=""
-                        className="video-logo"
-                      />
-                      <div className="mobile-video-desc">
-                        <div className="mobile-video-title">Introduction</div>
-                        <div className="mobile-video-dur">3 Min</div>
-                      </div>
-                    </div>
-                    <img
-                      src={require("../../../../assets/images/icn_previewgo.png")}
-                      alt=""
-                      className="right-icon"
-                    />
+              {overviewData ? (
+                <div className="ongoing-course-desc-mobile">
+                  <div className="ongoing-course-desc-title-mobile">
+                    <p>{overviewData.courseTagLine}</p>
                   </div>
-                  <input type="checkbox" id="expanded"></input>
-                  <p className="mobile-video-description">
-                    Figma is a very powerful application that runs online. There
-                    are virtually no platform boundaries when it comes to using
-                    figma because you can design within a web browser or using
-                    their desktop application made for windows and macs. Figma
-                    is similar to Sketch and Adobe XD but is the more powerful
-                    of the three when it comes. Figma is a very powerful
-                    application that runs online. There are virtually no
-                    platform boundaries when it comes to using figma because you
-                    can design within a web browser or using their desktop
-                    application made for windows and macs. Figma is a very
-                    powerful application that runs online. There are virtually
-                    no platform boundaries when it comes to using figma because
-                    you can design within a web browser or using their desktop
-                    application made for windows and macs. Figma is similar to
-                    Sketch and Adobe XD but is the more powerful of the three
-                    when it comes. Figma is a very powerful application that
-                    runs online. There are virtually no platform boundaries when
-                    it comes to using figma because you can design within a web
-                    browser or using their desktop application made for windows
-                    and macs
-                  </p>
-                  <label for="expanded" role="button">
-                    SHOW MORE
-                  </label>
+                  <div className="ongoing-course-desc-content-mobile">
+                    <p>Preview this Course</p>
+                    <div className="mobile-video-link">
+                      <div className="mobile-video-section-1">
+                        <img
+                          src={require("../../../../assets/images/icn_play_orange.png")}
+                          alt=""
+                          className="video-logo"
+                        />
+                        <div className="mobile-video-desc">
+                          <div className="mobile-video-title">Introduction</div>
+                          <div className="mobile-video-dur">3 Min</div>
+                        </div>
+                      </div>
+                      <img
+                        src={require("../../../../assets/images/icn_previewgo.png")}
+                        alt=""
+                        className="right-icon"
+                      />
+                    </div>
+                    <input type="checkbox" id="expanded"></input>
+                    <p className="mobile-video-description">
+                      {overviewData.description}
+                    </p>
+                    <label for="expanded" role="button">
+                      SHOW MORE
+                    </label>
+                  </div>
                 </div>
-              </div>
+              ) : (
+                <h3>Loading.....</h3>
+              )}
+
               {overviewData ? (
                 <div className="overview-content">
                   <p className="overview-content-title">Course Includes</p>
@@ -342,12 +323,8 @@ const OngoingOverview = () => {
                     <div className="course-points-img">
                       {courseMediumAccess}
                     </div>
-
                     <div className="course-points-title">
                       Access on mobile, desktop and tv
-                      {/* {overviewData.requirements.map((ele, i) => {
-                        return <p>{ele}</p>;
-                      })} */}
                     </div>
                   </div>
                   <div className="course-points">
@@ -368,14 +345,10 @@ const OngoingOverview = () => {
                     return (
                       <div className="learn-points">
                         <div className="learn-points-img">{learnCheckMark}</div>
-                        <div className="learn-points-title">
-                          {ele}
-                        </div>
+                        <div className="learn-points-title">{ele}</div>
                       </div>
                     );
-                  })
-                }
-               
+                  })}
               </div>
 
               <div className="overview-req">
