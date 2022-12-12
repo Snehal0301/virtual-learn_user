@@ -43,6 +43,8 @@ import filter, {
 } from '../../../redux/reducers/filter';
 import Loading from '../../../utils/loading/Loading';
 import axios from 'axios';
+import { courseOverview } from '../../../redux/reducers/courseOverview';
+import { chapterResponse } from '../../../redux/reducers/chapterResponses';
 
 const Header = () => {
   const [onChange, setOnChange] = useState('');
@@ -361,7 +363,7 @@ const Header = () => {
                 </div>
                 <div className="header-profilePic">
                   <img
-                    src={require('../../../assets/images/dhoni.png')}
+                    src={profileData && profileData.profilePhoto}
                     alt="Profile Pic"
                     onClick={(e: any) => {
                       e.stopPropagation();
@@ -567,7 +569,17 @@ const Header = () => {
                   {searchedCourse &&
                     searchedCourse.map((ele: any, i: number) => {
                       return (
-                        <div className="headersearch-responseBody" key={i}>
+                        <div
+                          className="headersearch-responseBody"
+                          key={i}
+                          onClick={() => {
+                            dispatch(courseOverview(ele.courseId));
+                            dispatch(chapterResponse(ele.courseId));
+                            navigate('/myCourses/ongoingCourse');
+                            dispatch(searchFocus(false));
+                            setShowFilter(false);
+                          }}
+                        >
                           <div className="headerSearch-responsePic">
                             <img src={ele.coursePhoto} alt={ele.courseName} />
                           </div>
