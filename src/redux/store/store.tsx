@@ -24,6 +24,7 @@ import advancedCourseSlice, {
 } from './../reducers/advancedCourse';
 import subCategoriesSlice, { subCategories } from './../reducers/subCategories';
 import chapterResponseSlice from '../reducers/chapterResponses';
+import courseOverviewSlice from '../reducers/courseOverview';
 
 const reducers = combineReducers({
   headerProfile: showHeaderProfile.reducer,
@@ -45,6 +46,7 @@ const reducers = combineReducers({
   advancedCourse: advancedCourseSlice.reducer,
   subCategories: subCategoriesSlice.reducer,
   chapterResponse: chapterResponseSlice.reducer,
+  courseOverview: courseOverviewSlice.reducer,
 });
 
 const persistConfig = {

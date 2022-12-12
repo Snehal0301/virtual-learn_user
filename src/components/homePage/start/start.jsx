@@ -29,6 +29,8 @@ import {
 } from './../../../redux/reducers/basicCourses';
 import { advancedCourse } from './../../../redux/reducers/advancedCourse';
 import { subCategories } from './../../../redux/reducers/subCategories';
+import { courseOverview } from '../../../redux/reducers/courseOverview';
+import { chapterResponse } from '../../../redux/reducers/chapterResponses';
 
 const Start = () => {
   const dispatch = useDispatch();
@@ -210,7 +212,14 @@ const Start = () => {
       <div className="start-username">{name}</div>
       <Slider autoplay={true} autoplaySpeed={10000} slidesToShow={3}>
         {headerdata.map((item) => (
-          <div className="start-image-title">
+          <div
+            className="start-image-title"
+            onClick={() => {
+              dispatch(courseOverview(item.courseId));
+              dispatch(chapterResponse(item.courseId));
+              navigate('/myCourses/ongoingCourse');
+            }}
+          >
             <div className="start-map-image">
               <img src={item.coursePhoto} alt="" />
             </div>
