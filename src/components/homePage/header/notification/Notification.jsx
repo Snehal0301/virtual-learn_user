@@ -1,74 +1,101 @@
-import React, { useState } from 'react'
-import { closeProfile, editProfile } from '../../../../utils/svgIcons'
-import { useDispatch, useSelector } from 'react-redux'
-import { notificationSection, profileDrawer, profileSection, settingsSection } from '../../../../redux/reducers/headerProfileOptions'
+import React, { useState, useEffect } from "react";
+import { closeProfile, editProfile } from "../../../../utils/svgIcons";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  notificationSection,
+  profileDrawer,
+  profileSection,
+  settingsSection,
+} from "../../../../redux/reducers/headerProfileOptions";
 import Switch from "react-switch";
-import './Notification.css'
-
+import "./Notification.css";
+import axios from "axios";
 const Notification = () => {
-    const dispatch = useDispatch()
+  const [notifyData, setNotifyData] = useState("");
+  const [notId, setNotId] = useState("");
+  const dispatch = useDispatch();
 
-    const handleClick = () => {
-        dispatch(profileDrawer(false))
-        dispatch(profileSection(false))
-        // dispatch(notificationSection(false))
-        dispatch(settingsSection(false))
-    }
+  const handleClick = () => {
+    dispatch(profileDrawer(false));
+    dispatch(profileSection(false));
+    // dispatch(notificationSection(false))
+    dispatch(settingsSection(false));
+  };
 
-    const NotifyData = [
+  useEffect(() => {
+    axios
+      .get(
+        `http://virtuallearnapp2-env.eba-wrr2p8zk.ap-south-1.elasticbeanstalk.com/user/notifications`,
         {
-            id: 1,
-            title: "You scored 80% in Chapter 3 - Setting up a new project, of Course - Learn Figma - UI/UX Design Essential Training.",
-            image: require('../../../../assets/images/dhoni.png'),
-            time: "5 mins ago"
-        },
-        {
-            id: 2,
-            title: "You scored 80% in Chapter 3 - Setting up a new project, of Course - Learn Figma - UI/UX Design Essential Training.",
-            image: require('../../../../assets/images/dhoni.png'),
-            time: "6 mins ago"
-        },
-        {
-            id: 3,
-            title: "Joined a New Course - Art & Illustration ",
-            image: require('../../../../assets/images/dhoni.png'),
-            time: "8 mins ago"
-        },
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("Token")}`,
+          },
+        }
+      )
+      .then((res) => {
+        setNotifyData(res && res.data);
+      });
+  }, [notId]);
 
-    ]
-    return (
-        <div className='drawer-profile'>
-            <div className="drawer-profile-header">
-                <div className="drawer-profile-clear" onClick={handleClick}>
-                    {closeProfile}
-                </div>
-
-                <div className="drawer-profile-name">
-                    <p className='drawer-profile-profile'>Notifications</p>
-                </div>
-            </div>
-            <div className="drawer-profile-body">
-
-                {
-                    NotifyData.map(item =>
-                    (<div className='notificationrect'>
-                        <div className='notifyImage'><img src={item.image} alt="" /></div>
-                        <div className='notifycontainer'>
-                            <div className='notifydata'>{item.title}</div>
-                            <div className='notifiedTime'>{item.time}</div>
-                        </div>
-                    </div>
-
-                    )
-
-                    )
-                }
-
-
-
-            </div>
+  console.log(notifyData);
+  return (
+    <div className="drawer-profile">
+      <div className="drawer-profile-header">
+        <div className="drawer-profile-clear" onClick={handleClick}>
+          {closeProfile}
         </div>
-    )
-}
 
-export default Notification
+        <div className="drawer-profile-name">
+          <p className="drawer-profile-profile">Notifications</p>
+        </div>
+      </div>
+      <div className="drawer-profile-body">
+        {notifyData &&
+          notifyData.map((ele) => {
+            return (
+              <div
+                className={
+                  ele.readStatus ? "notificationRead" : "notificationUnread"
+                }
+                onClick={() => {
+                  axios
+                    .request(
+                      `http://virtuallearnapp2-env.eba-wrr2p8zk.ap-south-1.elasticbeanstalk.com/user/readNotification`,
+                      {
+                        method: "put",
+                        headers: {
+                          Authorization: `Bearer ${localStorage.getItem(
+                            "Token"
+                          )}`,
+                        },
+                        data: {
+                          notificationId: ele.notificationId,
+                        },
+                      }
+                    )
+                    .then((res) => {
+                      if (res.data.message === "Successfully") {
+                        setNotId(ele.notificationId);
+                      }
+                    });
+                }}
+              >
+                <div className="notifyImage">
+                  <img src={ele.notificationUrl} alt="" />
+                </div>
+                <div className="notifycontainer">
+                  <div className="notifydata">{ele.description}</div>
+                  <div className="notifiedTime">{ele.timeStamp}</div>
+                </div>
+                <div
+                  className={ele.readStatus ? "unread-dot-read" : "unread-dot"}
+                ></div>
+              </div>
+            );
+          })}
+      </div>
+    </div>
+  );
+};
+
+export default Notification;

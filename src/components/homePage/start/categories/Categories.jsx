@@ -1,19 +1,22 @@
 import "./Categories.css";
 import React from "react";
 import { design } from "../../../../utils/svgIcons";
+import { useSelector, useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { basicCourse, categoryName } from './../../../../redux/reducers/basicCourses';
+import { advancedCourse } from './../../../../redux/reducers/advancedCourse';
+import { subCategories } from './../../../../redux/reducers/subCategories';
 const Categories = () => {
-  const CategoriesHome = [
-    "Design",
-    "Development",
-    "Business",
-    "Finance",
-    "Health & Fitness",
-    "Music",
-    "IT & Software",
-    "Marketing",
-    "Lifestyle",
-    "Photography",
-  ];
+
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
+
+  const obtainedCategories = useSelector(state => state.categorydata.value)
+
+
+
+
+
   return (
     <div className="categories-homepage">
       <div className="breadcrumbs-categories">
@@ -28,17 +31,26 @@ const Categories = () => {
           Please choose a topic on which you want to start a course.
         </p>
         <div className="categories-body-display">
-          {CategoriesHome.map((ele, i) => {
-            return (
-              <div
-                className="categoriesDisplay-home-parent categories-home-chipBorder"
-                key={i}
-              >
-                <div className="categories-home-Icons">{design}</div>
-                <div className="categories-home-Names">{ele}</div>
-              </div>
-            );
-          })}
+          {obtainedCategories.map((ele, i) => {
+
+            return (<div
+              className="categoriesDisplay-home-parent categories-home-chipBorder"
+              key={i}
+              onClick={() => {
+                
+                dispatch(categoryName(ele.categoryName))
+                dispatch(basicCourse(`basicCourses?categoryId=${ele.categoryId}`))
+                dispatch(advancedCourse(`advanceCourses?categoryId=${ele.categoryId}`))
+                dispatch(subCategories(`subCategories?categoryId=${ele.categoryId}`))
+                navigate('/categories/design')
+              }
+              }
+            >
+              <div className="categories-home-Icons"><img src={ele.categoryPhoto} alt="" /></div>
+              <div className="categories-home-Names">{ele.categoryName}</div>
+            </div>)
+          }
+          )}
         </div>
       </div>
     </div>

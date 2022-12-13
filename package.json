@@ -33,6 +33,7 @@
         "react-responsive-carousel": "^3.2.23",
         "react-router-dom": "^6.4.4",
         "react-scripts": "5.0.1",
+        "react-show-more-text": "^1.6.2",
         "react-slideshow-image": "^4.0.5",
         "react-switch": "^7.0.0",
         "react-tabs": "^6.0.0",
