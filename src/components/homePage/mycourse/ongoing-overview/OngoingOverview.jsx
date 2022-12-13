@@ -76,6 +76,14 @@ const OngoingOverview = () => {
   const courseLoad = useSelector((state) => state.courseOverview);
 
 
+  useEffect(() => {
+    console.log("Component mounted");
+    return () => {
+      console.log("Component unmounted")
+    }
+  }, [])
+
+
 
   useEffect(() => {
     if (courseLoad.loading) {
@@ -252,6 +260,7 @@ const OngoingOverview = () => {
             loop={loop}
             onPause={onPause}
             playing={playing}
+            onSeek={()=>{setPause(false);}}
             onProgress={(progress) => {
               setPlayed(progress.playedSeconds);
             }}
@@ -319,7 +328,7 @@ const OngoingOverview = () => {
             )}
           </>
         ) : (
-          // <div className="course-completion">
+          //  <div className="course-completion">
           //     <div className="course-completion-section-1">
           //         <div className="completion-section-1-main">
 
@@ -386,8 +395,8 @@ const OngoingOverview = () => {
                     <p>{overviewData.courseTagLine}</p>
                   </div>
                   <div className="ongoing-course-desc-content-mobile">
-                    <p>Preview this Course</p>
-                    <div className="mobile-video-link">
+                    <p className='ongoing-course-desc-content-mobile-title-desc'>Preview this Course</p>
+                    {/* <div className="mobile-video-link">
                       <div className="mobile-video-section-1">
                         <img
                           src={require("../../../../assets/images/icn_play_orange.png")}
@@ -404,14 +413,12 @@ const OngoingOverview = () => {
                         alt=""
                         className="right-icon"
                       />
-                    </div>
-                    <input type="checkbox" id="expanded"></input>
-                    <p className="mobile-video-description">
+                    </div> */}
+                    <ShowMoreText
+                      anchorClass="show-more-style-mobile">
                       {overviewData.description}
-                    </p>
-                    <label for="expanded" role="button">
-                      SHOW MORE
-                    </label>
+                    </ShowMoreText>
+
                     <img
                       src={require("../../../../assets/images/icn_previewgo.png")}
                       alt=""
@@ -508,7 +515,6 @@ const OngoingOverview = () => {
                     </div>
                   </div>
                   <div className="instructor-about">
-                    <input type="checkbox" id="expanded"></input>
                     <ShowMoreText
                       lines={5}
                       className="showmore"
