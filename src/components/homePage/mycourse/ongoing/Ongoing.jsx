@@ -27,7 +27,7 @@ const Ongoing = () => {
       });
   }, []);
 
-  console.log(ongoingData);
+  // console.log(ongoingData);
   return (
     <div className="ongoing-section">
       {ongoingData.map((ele, i) => {
