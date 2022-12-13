@@ -26,9 +26,11 @@
 
 .course-accordian-container-title {
     color: #494949;
+    text-transform: capitalize;
 }
 .course-accordian-container-title-active {
     color: green;
+    text-transform: capitalize;
 }
 
 .course-accordian-container-state {
