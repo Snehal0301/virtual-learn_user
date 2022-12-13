@@ -4,7 +4,9 @@ flex-wrap: wrap;
   gap: 1rem;
 }
 .ongoing-parent {
+  /* margin-top: 1em; */
   margin-top: 1em;
+    flex-basis: 32.3%;
 }
 .ongoing-images {
   position: relative;
@@ -20,8 +22,10 @@ flex-wrap: wrap;
 }
 .ong-img {
   border-radius: 10px;
-  height: 234px;
-  width: 350px;
+  height: 241px;
+  width: 100%;
+  object-fit: cover;
+  /* width: 350px; */
 }
 .chap-progress {
   display: flex;
@@ -32,7 +36,7 @@ flex-wrap: wrap;
   margin-left: 1em;
 }
 .Ongoing-text {
-  padding-bottom:2.8em;
+  padding-bottom: 4.8em;
   font-family: "Proxima Nova Soft";
   font-style: normal;
   font-weight: 600;
