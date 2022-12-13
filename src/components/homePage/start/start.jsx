@@ -23,6 +23,14 @@ import { testisSuccess } from '../../../redux/reducers/testSlice';
 import { testSuccessRed } from '../../../redux/reducers/SuccessTestRed';
 import { showSuccessPage } from '../../../redux/reducers/showSuccesspage';
 import { finaltestShowPage } from '../../../redux/reducers/finalTestSuccess';
+import {
+  basicCourse,
+  categoryName,
+} from './../../../redux/reducers/basicCourses';
+import { advancedCourse } from './../../../redux/reducers/advancedCourse';
+import { subCategories } from './../../../redux/reducers/subCategories';
+import { courseOverview } from '../../../redux/reducers/courseOverview';
+import { chapterResponse } from '../../../redux/reducers/chapterResponses';
 
 const Start = () => {
   const dispatch = useDispatch();
@@ -50,68 +58,26 @@ const Start = () => {
   const [newestData, setnewestData] = useState([]);
   const [topcourseData, setTopcourseData] = useState([]);
   const [categoryData, setcategoryData] = useState([]);
-  const [ongoing, setOngoing] = useState([])
+  const [ongoing, setOngoing] = useState([]);
+  const [name, setName] = useState('');
 
-  const startCourseData = [
-    {
-      id: 1,
-      image: require('../../../assets/images/start-courses-image/What-Are-The-Most-Effective-Digital-Marketing-Strategies-_blog 1.png'),
-      title: 'Digital Marketing',
-      chapter: '2 chapter',
-      time: '2:23:24',
-      btntext: 'Design',
-    },
-    {
-      id: 2,
-      image: require('../../../assets/images/start-courses-image/banner-42 1.png'),
-      title: 'Marketing Courses',
-      chapter: '2 chapter',
-      time: '2:23:24',
-      btntext: 'Marketing',
-    },
-    {
-      id: 3,
-      image: require('../../../assets/images/start-courses-image/What-Are-The-Most-Effective-Digital-Marketing-Strategies-_blog 1.png'),
-      title: 'Digital Strategies',
-      chapter: '2 chapter',
-      time: '2:23:24',
-      btntext: 'Design',
-    },
-    {
-      id: 2,
-      image: require('../../../assets/images/start-courses-image/banner-42 1.png'),
-      title: 'Marketing Courses',
-      chapter: '2 chapter',
-      time: '2:23:24',
-      btntext: 'Marketing',
-    },
-    {
-      id: 3,
-      image: require('../../../assets/images/start-courses-image/What-Are-The-Most-Effective-Digital-Marketing-Strategies-_blog 1.png'),
-      title: 'Digital Strategies',
-      chapter: '2 chapter',
-      time: '2:23:24',
-      btntext: 'Design',
-    },
-  ];
+  useEffect(() => {
+    axios
+      .get(
+        `http://virtuallearnapp2-env.eba-wrr2p8zk.ap-south-1.elasticbeanstalk.com/user/ongoingCourses`,
+        {
+          headers: { Authorization: `Bearer ${localStorage.getItem('Token')}` },
+        }
+      )
+      .then((res) => {
+        setOngoing(res.data);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  }, []);
 
-useEffect(() => {
-  axios
-  .get(
-    `http://virtuallearnapp2-env.eba-wrr2p8zk.ap-south-1.elasticbeanstalk.com/user/ongoingCourses`,
-    {
-      headers: { Authorization: `Bearer ${localStorage.getItem('Token')}` },
-    }
-  )
-  .then((res) => {
-    setOngoing(res.data);
-  })
-  .catch((err) => {
-    console.error(err);
-  });
-}, [])
-
-console.log('ongoing data',ongoing)
+  console.log('ongoing data', ongoing);
 
   //Fetching api for slider
 
@@ -220,17 +186,40 @@ console.log('ongoing data',ongoing)
         console.error(err);
       });
   }, []);
+
+  useEffect(() => {
+    axios
+      .get(
+        `http://virtuallearnapp2-env.eba-wrr2p8zk.ap-south-1.elasticbeanstalk.com/user/menu`,
+        {
+          headers: { Authorization: `Bearer ${localStorage.getItem('Token')}` },
+        }
+      )
+      .then((res) => {
+        setName(res.data.fullName);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  }, []);
+
   // console.log(categoryData);
   dispatch(categorydata(categoryData));
 
-  const indicators = () => <div className="indicator"></div>;
   return (
     <div className="start">
       <div className="start-greeting">Hello!</div>
-      <div className="start-username">Mahendra Singh Dhoni</div>
+      <div className="start-username">{name}</div>
       <Slider autoplay={true} autoplaySpeed={10000} slidesToShow={3}>
         {headerdata.map((item) => (
-          <div className="start-image-title">
+          <div
+            className="start-image-title"
+            onClick={() => {
+              dispatch(courseOverview(item.courseId));
+              dispatch(chapterResponse(item.courseId));
+              navigate('/myCourses/ongoingCourse');
+            }}
+          >
             <div className="start-map-image">
               <img src={item.coursePhoto} alt="" />
             </div>
@@ -252,26 +241,37 @@ console.log('ongoing data',ongoing)
       </div>
       <div className="start-card2">
         <div className="start-course1">
-          {ongoing && ongoing.slice(0, 3).map((item) => (
-            <div className="start-course1-image">
-              <div className="start-image-ongoing">
-                <img src={item.coursePhoto} alt="" />
-                <div className="start-image-sub">ongoing</div>
-              </div>
-              <div className="start-course-overlay"></div>
-              <div className="start-title-container">
-                <div className="start-title-chapter">
-                  <div className="start-course-section2-title">
-                    {item.courseName
-}
-                  </div>
-                  <div className="start-course-chapter">{item.completedChapter}/{item.totalChapter} Chapters</div>
+          {ongoing &&
+            ongoing.slice(0, 3).map((item) => (
+              <div className="start-course1-image">
+                <div className="start-image-ongoing">
+                  <img src={item.coursePhoto} alt="" />
+                  <div className="start-image-sub">ongoing</div>
                 </div>
+                <div className="start-course-overlay"></div>
+                <div className="start-title-container">
+                  <div className="start-title-chapter">
+                    <div className="start-course-section2-title">
+                      {item.courseName}
+                    </div>
+                    <div className="start-course-chapter">
+                      {item.completedChapter}/{item.totalChapter} Chapters
+                    </div>
+                  </div>
 
-                <button className="start-course-button">Continue</button>
+                  <button
+                    className="start-course-button"
+                    onClick={() => {
+                      dispatch(courseOverview(item.courseId));
+                      dispatch(chapterResponse(item.courseId));
+                      navigate('/myCourses/ongoingCourse');
+                    }}
+                  >
+                    Continue
+                  </button>
+                </div>
               </div>
-            </div>
-          ))}
+            ))}
         </div>
       </div>
       <div className="start-course-section2">
@@ -289,7 +289,22 @@ console.log('ongoing data',ongoing)
       <div className="start-course-categories">
         <div className="start-course-categories-Body">
           {categoryData.map((ele) => (
-            <div className="start-course-categories-Parent">
+            <div
+              className="start-course-categories-Parent"
+              onClick={() => {
+                dispatch(categoryName(ele.categoryName));
+                dispatch(
+                  basicCourse(`basicCourses?categoryId=${ele.categoryId}`)
+                );
+                dispatch(
+                  advancedCourse(`advanceCourses?categoryId=${ele.categoryId}`)
+                );
+                dispatch(
+                  subCategories(`subCategories?categoryId=${ele.categoryId}`)
+                );
+                navigate('/categories/design');
+              }}
+            >
               <div className="start-course-categories-Icon">
                 <img src={ele.categoryPhoto} alt="" />
               </div>
@@ -339,7 +354,14 @@ console.log('ongoing data',ongoing)
         <div className="start-card">
           <div className="start-choice1">
             {allcourseData.slice(0, 4).map((item) => (
-              <div className="start-choice-subcategory-image">
+              <div
+                className="start-choice-subcategory-image"
+                onClick={() => {
+                  dispatch(courseOverview(item.courseId));
+                  dispatch(chapterResponse(item.courseId));
+                  navigate('/myCourses/ongoingCourse');
+                }}
+              >
                 <div className="start-image-pause">
                   <img src={item.coursePhoto} alt="" />
                   <div className="start-course-overlay-2"></div>
@@ -364,7 +386,14 @@ console.log('ongoing data',ongoing)
         <div className="start-card">
           <div className="start-choice1">
             {popular.map((item) => (
-              <div className="start-choice-subcategory-image">
+              <div
+                className="start-choice-subcategory-image"
+                onClick={() => {
+                  dispatch(courseOverview(item.courseId));
+                  dispatch(chapterResponse(item.courseId));
+                  navigate('/myCourses/ongoingCourse');
+                }}
+              >
                 <div className="start-image-pause">
                   <img src={item.coursePhoto} alt="" />
                   <div className="start-course-overlay-2"></div>
@@ -389,7 +418,14 @@ console.log('ongoing data',ongoing)
         <div className="start-card">
           <div className="start-choice1">
             {newestData.slice(0, 4).map((item) => (
-              <div className="start-choice-subcategory-image">
+              <div
+                className="start-choice-subcategory-image"
+                onClick={() => {
+                  dispatch(courseOverview(item.courseId));
+                  dispatch(chapterResponse(item.courseId));
+                  navigate('/myCourses/ongoingCourse');
+                }}
+              >
                 <div className="start-image-pause">
                   <img src={item.coursePhoto} alt="" />
                   <div className="start-course-overlay-2"></div>
@@ -417,13 +453,39 @@ console.log('ongoing data',ongoing)
               <div className="start-ongoing-courses">
                 Top courses in {item.categoryName}
               </div>
-              <div className="start-seeall">See All</div>
+              <div
+                className="start-seeall"
+                onClick={() => {
+                  dispatch(categoryName(item.categoryName));
+                  dispatch(
+                    basicCourse(`basicCourses?categoryId=${item.categoryId}`)
+                  );
+                  dispatch(
+                    advancedCourse(
+                      `advanceCourses?categoryId=${item.categoryId}`
+                    )
+                  );
+                  dispatch(
+                    subCategories(`subCategories?categoryId=${item.categoryId}`)
+                  );
+                  navigate('/categories/design');
+                }}
+              >
+                See All
+              </div>
             </div>
 
             <div className="start-card">
               <div className="start-choice1">
                 {item.popularCourseInEachCategoryList.slice(0, 4).map((ele) => (
-                  <div className="start-choice-subcategory-image">
+                  <div
+                    className="start-choice-subcategory-image"
+                    onClick={() => {
+                      dispatch(courseOverview(ele.courseId));
+                      dispatch(chapterResponse(ele.courseId));
+                      navigate('/myCourses/ongoingCourse');
+                    }}
+                  >
                     <div className="start-image-pause">
                       <div className="start-course-overlay-2"></div>
                       <img src={ele.coursePhoto} alt="" />
