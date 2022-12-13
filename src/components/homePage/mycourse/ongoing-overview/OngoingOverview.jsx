@@ -1,5 +1,5 @@
 import './OngoingOverview.css';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import ReactPlayer from 'react-player';
 import { useDispatch, useSelector } from 'react-redux';
 import {
@@ -45,6 +45,10 @@ import { showSuccessPage } from '../../../../redux/reducers/showSuccesspage';
 import { finaltestShowPage } from '../../../../redux/reducers/finalTestSuccess';
 import Loading from '../../../../utils/loading/Loading';
 import ShowMoreText from "react-show-more-text";
+import { Player } from 'video-react';
+
+
+
 
 const OngoingOverview = () => {
   const [activeStep, setActiveStep] = useState(0);
@@ -160,6 +164,7 @@ const OngoingOverview = () => {
 
   const getVideoState = (itemele) => {
     dispatch(videoLinkState(itemele.videoLink));
+    console.log("videoLink", videoLink)
   };
 
   const enrollCourse = (courseId) => {
@@ -177,7 +182,7 @@ const OngoingOverview = () => {
         }
       )
       .then((res) => {
-        console.log(res)  
+        console.log(res)
           (res.data.message === "Enrolled successfully" && window.location.reload());
       })
       .catch((err) => {
@@ -185,42 +190,52 @@ const OngoingOverview = () => {
       });
   };
 
+  const [accState, setAccState] = useState()
+  const [loop, setLoop] = useState(false)
+  const playerRef = useRef();
+
+
   return (
     <div className="ongoing-overview">
       <div className="ongoing-section-1">
         <div className="ongoing-section-video-player">
-          {/* {pause && (
-            <div className="onpause-modal">
-              <p className="onpause-modal-title">
-                Your lesson paused at 1.21 Do you want to continue watching?
-              </p>
-              <button className="onpause-button" onClick={onPlay}>
-                Continue Watching
-              </button>
-              <button className="onpause-button beginning">
-                Watch from beginning
-              </button>
+          {pause && (
+            <div className="pause-overlay" onClick={onPlay}>
+              <div className="onpause-modal">
+                <p className="onpause-modal-title">
+                  Your lesson paused at <span>{Math.floor(played) / 100}</span> Do you want to continue watching?
+                </p>
+                <button className="onpause-button" onClick={onPlay}>
+                  Continue Watching
+                </button>
+                <button className="onpause-button beginning" onClick={() => { playerRef.current.seekTo(0, 'seconds'); setPause(false); setPlaying(true) }}>
+                  Watch from beginning
+                </button>
+              </div>
             </div>
-          )} */}
+          )}
           <ReactPlayer
             url={videoLink}
+            // url='https://youtu.be/yNYYOGeMXgc'
             controls="true"
             className="react-player"
             width="100%"
             height="100%"
+            ref={playerRef}
+            loop={loop}
             onPause={onPause}
             playing={playing}
             onProgress={(progress) => {
               setPlayed(progress.playedSeconds);
             }}
           />
-          {pause && (
+          {/* {pause && (
             <>
               <div className="pause-overlay" onClick={onPlay}>
                 <div className="pause-button">{start_pauseIconVideo}</div>
               </div>
             </>
-          )}
+          )} */}
         </div>
         {/* <div className="ongoing-video-title-section">
                     <div className="ongoing-video-title">
@@ -495,48 +510,14 @@ const OngoingOverview = () => {
                 </div>
 
                 <div className="course-sections">
-                  {/* <Accordion allowZeroExpanded preExpanded={['1']} allowMultipleExpanded>
-                    <AccordionItem uuid="1">
-                      <AccordionItemHeading>
-                        <AccordionItemButton>
-                          <div className="acc-name">Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae, perspiciatis?</div>
-                          <div className="acc-icon">+</div>
-                        </AccordionItemButton>
-                      </AccordionItemHeading>
-                      <AccordionItemPanel>
-                        <p>
-                          Exercitation in fugiat est ut ad ea cupidatat ut in
-                          cupidatat occaecat ut occaecat consequat est minim minim
-                          esse tempor laborum consequat esse adipisicing eu
-                          reprehenderit enim.
-                        </p>
-                      </AccordionItemPanel>
-                    </AccordionItem>
-                    <AccordionItem uuid="2">
-                      <AccordionItemHeading>
-                        <AccordionItemButton>
-                          <div className="acc-name">Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae, perspiciatis?</div>
-                          <div className="acc-icon">+</div>
-                        </AccordionItemButton>
-                      </AccordionItemHeading>
-                      <AccordionItemPanel>
-                        <p>
-                          Exercitation in fugiat est ut ad ea cupidatat ut in
-                          cupidatat occaecat ut occaecat consequat est minim minim
-                          esse tempor laborum consequat esse adipisicing eu
-                          reprehenderit enim.
-                        </p>
-                      </AccordionItemPanel>
-                    </AccordionItem>
 
-                  </Accordion> */}
                   {chapter.chapterResponses.map((ele, id) => {
                     return (
                       <>
                         {chapter.enrolled ? (
                           <>
                             {/* <Accordian active /> */}
-                            {/* <div
+                            <div
                               div
                               className="course-accordian"
                               onClick={() => accordianToggle(id)}
@@ -595,7 +576,10 @@ const OngoingOverview = () => {
                                                 className="video-play-btn"
                                                 // onClick={() => { setVideo(courseele.videoLink) }}
                                                 onClick={() => {
-                                                  getVideoState(itemele);
+                                                  itemele.lessonStatus ?
+                                                    getVideoState(itemele)
+                                                    :
+                                                    alert('Please finish above video section');
                                                 }}
                                               >
                                                 {itemele.lessonStatus
@@ -633,10 +617,9 @@ const OngoingOverview = () => {
                                             }
                                             dispatch(
                                               test(
-                                                `${
-                                                  ele.testName === 'Final Test'
-                                                    ? 'finalTest'
-                                                    : 'moduleTest'
+                                                `${ele.testName === 'Final Test'
+                                                  ? 'finalTest'
+                                                  : 'moduleTest'
                                                 }?testId=${ele.testId}`
                                               )
                                             );
@@ -651,21 +634,21 @@ const OngoingOverview = () => {
                                                 {ele.testName}
                                               </p>
                                               <p className="accordian-item-chapter-duration">
-                                                10 min | {ele.questionCount}{' '}
+                                                {ele.testDuration} min | {ele.questionCount}{' '}
                                                 questions
                                               </p>
                                             </div>
                                           </div>
                                           <div
                                             className="video-play-btn"
-                                            // onClick={() => { setVideo(courseele.videoLink) }}
-                                            // onClick={() => {
-                                            //   dispatch(
-                                            //     videoLinkState(
-                                            //       itemele.videoLink
-                                            //     )
-                                            //   );
-                                            // }}
+                                          // onClick={() => { setVideo(courseele.videoLink) }}
+                                          // onClick={() => {
+                                          //   dispatch(
+                                          //     videoLinkState(
+                                          //       itemele.videoLink
+                                          //     )
+                                          //   );
+                                          // }}
                                           >
                                             80%
                                           </div>
@@ -675,16 +658,16 @@ const OngoingOverview = () => {
                                   </div>
                                 </div>
                               </div>
-                            </div> */}
-                            <Accordion allowZeroExpanded preExpanded={['1']} allowMultipleExpanded>
-                              <AccordionItem uuid={ele.chapterName}>
+                            </div>
+                            {/* <Accordion  preExpanded={['1']}  onChange={() => setAccState(ele.chapterNumber)}>
+                              <AccordionItem uuid={ele.chapterNumber}>
                                 <AccordionItemHeading>
                                   <AccordionItemButton>
                                     <p className={ele.chapterCompletedStatus ? "course-accordian-container-title-active" : "course-accordian-container-title"}>
                                       Chapter {ele.chapterNumber} - {ele.chapterName}{' '}
                                     </p>
                                     <p className="course-accordian-container-state">
-                                      {accordianState === id ? '-' : '+'}
+                                      {accState === id + 1 ? '-' : '+'}
                                     </p>
                                   </AccordionItemButton>
                                 </AccordionItemHeading>
@@ -777,7 +760,7 @@ const OngoingOverview = () => {
                                   }
                                 </AccordionItemPanel>
                               </AccordionItem>
-                            </Accordion>
+                            </Accordion> */}
                           </>
                         ) : (
                           <>
@@ -839,7 +822,7 @@ const OngoingOverview = () => {
                                               </div>
                                               <div
                                                 className="video-play-btn"
-                                                // onClick={() => { setVideo(courseele.videoLink) }}
+                                              // onClick={() => { setVideo(courseele.videoLink) }}
                                               >
                                                 {ele.chapterNumber === 1
                                                   ? videoPlayActive('red')
@@ -876,10 +859,9 @@ const OngoingOverview = () => {
                                             }
                                             dispatch(
                                               test(
-                                                `${
-                                                  ele.testName === 'Final Test'
-                                                    ? 'finalTest'
-                                                    : 'moduleTest'
+                                                `${ele.testName === 'Final Test'
+                                                  ? 'finalTest'
+                                                  : 'moduleTest'
                                                 }?testId=${ele.testId}`
                                               )
                                             );
@@ -901,14 +883,14 @@ const OngoingOverview = () => {
                                           </div>
                                           <div
                                             className="video-play-btn"
-                                            // onClick={() => { setVideo(courseele.videoLink) }}
-                                            // onClick={() => {
-                                            //   dispatch(
-                                            //     videoLinkState(
-                                            //       itemele.videoLink
-                                            //     )
-                                            //   );
-                                            // }}
+                                          // onClick={() => { setVideo(courseele.videoLink) }}
+                                          // onClick={() => {
+                                          //   dispatch(
+                                          //     videoLinkState(
+                                          //       itemele.videoLink
+                                          //     )
+                                          //   );
+                                          // }}
                                           ></div>
                                         </div>
                                       </div>
@@ -930,8 +912,8 @@ const OngoingOverview = () => {
           </div>
         </div>
       </div>
-      {(chapterLoading || overviewLoading) && <Loading />}
-    </div>
+      { (chapterLoading || overviewLoading) && <Loading /> }
+    </div >
   );
 };
 

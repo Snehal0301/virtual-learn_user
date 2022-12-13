@@ -6,6 +6,15 @@
 
 .course-accordian-heading {
     cursor: pointer;
+    height: 50px;
+    padding: 7px 10px 0 10px;
+    /* display: flex; */
+    align-items: center;
+    /* justify-content: space-between; */
+}
+
+.course-accordian-heading:hover{
+    background-color: #ddd;
 }
 
 .course-accordian-container {
