@@ -13,13 +13,18 @@ import allcourseReducer from '../reducers/allcourseSlice';
 import categoryReducer from '../reducers/categorySlice';
 import answerHeaderSlice from '../reducers/testAnswerHeader';
 import answerSlice from '../reducers/testAnswer';
+import { filterSlice } from '../reducers/filter';
 import { testSuccessRedSlice } from '../reducers/SuccessTestRed';
 import { showSuccessPageSlice } from '../reducers/showSuccesspage';
 import { finaltestShowPageSlice } from '../reducers/finalTestSuccess';
 import FinalResultSlice from '../reducers/finalResult';
 import basicCourseSlice from '../reducers/basicCourses';
-import advancedCourseSlice, { advancedCourse } from './../reducers/advancedCourse';
+import advancedCourseSlice, {
+  advancedCourse,
+} from './../reducers/advancedCourse';
 import subCategoriesSlice, { subCategories } from './../reducers/subCategories';
+import chapterResponseSlice from '../reducers/chapterResponses';
+import courseOverviewSlice from '../reducers/courseOverview';
 
 const reducers = combineReducers({
   headerProfile: showHeaderProfile.reducer,
@@ -32,13 +37,16 @@ const reducers = combineReducers({
   answer: answerSlice.reducer,
   allcourse: allcourseReducer,
   categorydata: categoryReducer,
+  filter: filterSlice.reducer,
   testSuccessRed: testSuccessRedSlice.reducer,
   showSuccessPage: showSuccessPageSlice.reducer,
   finaltestShowPage: finaltestShowPageSlice.reducer,
   FinalResult: FinalResultSlice.reducer,
-  basicCourse:basicCourseSlice.reducer,
-  advancedCourse:advancedCourseSlice.reducer,
-  subCategories:subCategoriesSlice.reducer
+  basicCourse: basicCourseSlice.reducer,
+  advancedCourse: advancedCourseSlice.reducer,
+  subCategories: subCategoriesSlice.reducer,
+  chapterResponse: chapterResponseSlice.reducer,
+  courseOverview: courseOverviewSlice.reducer,
 });
 
 const persistConfig = {

@@ -218,6 +218,15 @@
   line-height: 26px;
 }
 
+.headerSearchCategoriesTopSearchesIcon {
+  width: 20px;
+  height: 20px;
+}
+
+.headerSearchCategoriesTopSearchesName {
+  text-transform: capitalize;
+}
+
 .headerSearchcategories-TryDiffCourse {
   color: var(--secondaryFontClr);
   font-style: normal;
@@ -306,7 +315,6 @@
 .headerSearch-filterModalBody {
   position: relative;
   display: flex;
-  align-items: center;
   flex-direction: column;
   width: 100%;
   z-index: 10000;
@@ -342,6 +350,11 @@
   line-height: 26px;
   color: var(--black);
   margin-bottom: 25px;
+  text-align: center;
+}
+
+.headerSearchCategoriesTopSearchesIcon > img {
+  width: 100%;
 }
 
 .headerSearch-filterModalCategoryTitle {
@@ -524,30 +537,50 @@
   margin-bottom: 35px;
   cursor: pointer;
 }
+
 .left-drawer-link img {
   width: 16px;
   height: 16px;
 }
+
 .left-drawer-link p {
   font-size: 16px;
   margin: 0 10px;
 }
+
 .left-drawer-link span {
   background-color: #e83f3f;
-  width: 30px;
+  /* width: 30px; */
   height: 20px;
   display: flex;
   justify-content: center;
   color: white;
   border-radius: 15px;
+  padding: 0px 7px;
 }
 
 .left-drawer-close {
   cursor: pointer;
 }
 
+.headerSearch-responsePic-image {
+  width: 100px;
+  height: 100px;
+}
+
 /* custom styleing */
 
+.headerSearch-responsePic > img {
+  height: 98px;
+  width: 98px;
+  background-size: cover;
+  object-fit: cover;
+  border-radius: 6px;
+}
+
+.chipBackgroundYellow {
+  background-color: var(--videoCatgryClr);
+}
 @media only screen and (max-width: 760px) {
   .mobile-header-search {
     padding: 1rem 0rem !important;
@@ -674,16 +707,18 @@
   .headerSearch-filterModalBodyCloseIcon {
     position: fixed;
     right: 30px;
-    top: 47.8%;
+    top: 52.8%;
     z-index: 99999;
     cursor: pointer;
+    display: none;
   }
 
   .headerSearch-filterModalBodyTitle {
     font-size: 18px;
-    position: fixed;
+    /* position: fixed; */
     /* bottom: 15px; */
-    top: 44%;
+    top: 50%;
+    right: 0;
     width: 100%;
     height: 75px;
     background: white;
@@ -774,28 +809,35 @@
     width: 265px;
     height: 237px;
   }
+
   .mycourse-body {
     padding: 0 15px;
   }
+
   .categories-eachCategories {
     gap: 10px !important;
     padding-bottom: 1em;
   }
+
   .mycourse-categoriesSection {
     margin-top: 40px !important;
   }
+
   .mycourse-imgText p {
     font-weight: 600 !important;
     font-size: 18px !important;
   }
+
   .mycourse-Desc p {
     font-weight: 600 !important;
     font-size: 14px !important;
   }
+
   .categories-heading p {
     font-weight: 600 !important;
     font-size: 18px !important;
   }
+
   .ongoing-section {
     padding: 0 10px;
   }
@@ -803,22 +845,33 @@
   .mycourse-tabs {
     padding: 0 10px;
     margin-top: 30px;
-}
+  }
+
   .completed-section {
     padding: 0 10px;
   }
+
   .ongoing-images {
     width: 90vw;
   }
+
   .ong-img {
     border-radius: 10px;
     height: 234px;
     width: 350px;
   }
+
   .completed-images {
     width: 90vw;
   }
+
   .comp-img {
     width: 100%;
   }
 }
+
+/* @media only screen and (max-width:360px){
+.chap-progress {
+    top: 5px; 
+}
+} */

@@ -59,6 +59,13 @@
 
 }
 
+.pause-button{
+    position: absolute;
+    top: 43%;
+    right: 47.5%;
+    cursor: pointer;
+}
+
 .ongoing-video-title-section {
     margin: 30px 0 20px 0;
     display: flex;
@@ -125,11 +132,8 @@
     text-align: justify;
 }
 
-.ongoing-course-desc-content p {
-    display: -webkit-box;
-    -webkit-line-clamp: 5;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
+.ongoing-course-desc-content .showmore {
+
 }
 
 .ongoing-course-desc-content label {
@@ -490,9 +494,16 @@ p:not(.truncated)~label {
     /* font-size: 14px; */
 }
 
-.ongoing-course-desc-content-mobile p {
+.ongoing-course-desc-content-mobile .showmore {
     font-size: 20px;
     margin-top: 20px;
+    text-align: justify;
+}
+
+.show-more-style{
+    color: red;
+    cursor: pointer;
+    text-transform: uppercase;
 }
 
 .mobile-video-link {
@@ -533,6 +544,71 @@ p:not(.truncated)~label {
 .vide-desc {
     margin-left: 10px;
 }
+
+/* new custom stepper */
+.accordian-items{
+    display: flex;
+    flex-direction: column;
+}
+.accordian-item{
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.accordian-item-icon{
+    margin-right: 15px;
+}
+
+.accordian-item-section-2{
+    background-color: #F9F9F9;
+    width: 100%;
+    border-radius: 6px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+}
+
+.accordian-item-section-2-part-1{
+    display: flex;
+    align-items: center;
+}
+
+.accordian-item-chapter-number{
+    font-size: 30px;
+    font-weight: 700;
+    padding-right: 15px;
+}
+
+.accordian-item-chapter-title{
+    font-size: 18px;
+    color: #042C5C;
+}
+
+.accordian-item-chapter-duration{
+    color: #7A7A7A;
+    font-size: 14px;
+}
+
+.test-section{
+    cursor: pointer;
+}
+
+.pause-overlay{
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    border-radius: 6px;
+    background-color: #7a7a7a76;
+}
+
+/* new custom stepper */
+
+
+/* custom css */
 
 @media only screen and (max-width: 1300px) {
     .ongoing-overview {
