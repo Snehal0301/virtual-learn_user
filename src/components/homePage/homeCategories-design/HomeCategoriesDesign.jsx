@@ -35,10 +35,10 @@ const HomeCategoriesDesign = () => {
         <div className="home-categories-courses-started">
           Courses to get you started
         </div>
-        <div className="home-categories-seeall">See All</div>
+        <div className="home-categories-seeall"></div>
       </div>
       <div className="home-categories-card">
-        <div className="home-categories-choice1">
+        <div className="home-categories-choice1" >
           {basicCoursedata &&
             basicCoursedata.data &&
             basicCoursedata.data.slice(0, 4).map((item) => (
@@ -73,7 +73,7 @@ const HomeCategoriesDesign = () => {
       </div>
       <div className="home-categories-section2">
         <div className="home-categories-courses-started">Featured Courses</div>
-        <div className="home-categories-seeall">See All</div>
+        <div className="home-categories-seeall"></div>
       </div>
       <div className="home-categories-card">
         <div className="home-categories-choice1">
@@ -111,7 +111,7 @@ const HomeCategoriesDesign = () => {
       </div>
       <div className="home-categories-section2">
         <div className="home-categories-courses-started">Subcategories</div>
-        <div className="home-categories-seeall">See All</div>
+        <div className="home-categories-seeall"></div>
       </div>
       <div className="home-categories">
         <div className="home-categories-Body">
@@ -133,7 +133,7 @@ const HomeCategoriesDesign = () => {
       </div>
       <div className="home-categories-section2">
         <div className="home-categories-courses-started">All Courses</div>
-        <div className="home-categories-seeall">See All</div>
+        <div className="home-categories-seeall"></div>
       </div>
       <div className="home-categories-card-allcourse">
         <div className="home-categories-choice1-allcourse">

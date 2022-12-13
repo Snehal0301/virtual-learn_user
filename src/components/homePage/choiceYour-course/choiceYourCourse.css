@@ -76,6 +76,7 @@
     width: 100%;
     flex-basis: 24%;
     margin-bottom: 30px;
+    cursor: pointer;
 
 }
 
@@ -124,7 +125,7 @@
 .choice-your-cahpbtn {
     /* position: relative; */
     display: flex;
-    padding: 1rem 1rem;
+    padding: 5px 1rem;
     width: 100%;
     justify-content: space-between;
 }
@@ -136,25 +137,83 @@
     border-radius: 6px;
     border: none;
     padding: 0.5rem 1rem;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    cursor: pointer;
 }
+
 @media only screen and (max-width: 800px) {
-    .choice-your-course-categories-Body 
-    {
+    .choice-your-course-categories-Body {
         flex-wrap: nowrap;
         overflow-x: scroll;
     }
+
     ::-webkit-scrollbar {
         display: none;
     }
-    .choice-your-course-choice1
-    {
+
+    /* .choice-your-course-choice1 {
         flex-wrap: nowrap;
         overflow-x: scroll;
     }
-    .choice-your-coursesubcategory-image img 
-    {
+
+    .choice-your-coursesubcategory-image img {
         width: 290px;
+    }  */
+    
+     .choice-your-coursesubcategory-image
+    {
+        display: flex;
+        flex-direction: row;
     }
+    .choice-your-cahpbtn
+    {
+        flex-direction: column;
+    }
+    .choice-your-course-categories-Body {
+        flex-wrap: nowrap;
+        overflow-x: scroll;
+    } 
+    .choice-your-course-choice1
+    {
+        /* display: flex; */
+        flex-direction: column;
+        flex-wrap: nowrap;
+    }
+    .choice-your-coursesubcategory-image 
+    {
+        box-shadow: none;
+        margin-bottom: 10px;
+    }
+
+    .choice-your-coursesubcategory-image img
+    {
+        width: 90px;
+        height: 90px;
+    }
+    .choice-yourcourse-designbtn {
+        width: 110px;
+        height: 29px;
+        margin-top: 3px;
+    }
+    .choice-your-coursesubcategory-title 
+    {
+        padding-top: unset;
+    }
+    .choice-your-course-heading
+    {
+      
+        color: #2B2B2B;
+        font-family: Biko;
+        font-size: 26px;
+        font-weight: bold;
+        /* letter-spacing: 0; */
+        /* line-height: 35px; */
+    }
+
+
 
 
 

@@ -385,7 +385,7 @@ const Start = () => {
       {homeTabState === 2 && (
         <div className="start-card">
           <div className="start-choice1">
-            {popular.map((item) => (
+            {popular.slice(0,4).map((item) => (
               <div
                 className="start-choice-subcategory-image"
                 onClick={() => {
@@ -509,33 +509,6 @@ const Start = () => {
           </div>
         ))}
       </div>
-      {/* <div className='start-course-section2'>
-        <div className='start-ongoing-courses'>Top courses in Design</div>
-        <div className='start-seeall'>See All</div>
-      </div>
-      <div className='start-card'>
-        <div className='start-choice1'>
-          {
-            startCourseData.map(item =>
-            (
-              <div className='start-choice-subcategory-image'>
-                <div className='start-image-pause'>
-                  <div className='start-course-overlay-2'></div>
-                  <img src={item.image} alt="" />
-                  <div className='start-pauseIcon'>{start_pauseIcon}</div>
-
-                </div>
-                <div className='start-choice-subcategory-title'>{item.title}</div>
-                <div className='start-chapter-time'>
-                  <div className='start-choice-chapter2'>{item.chapter}</div>
-                  <div>{start_timeIcon}</div>{item.time}
-                </div>
-              </div>
-
-            ))
-          }
-        </div>
-      </div> */}
     </div>
   );
 };

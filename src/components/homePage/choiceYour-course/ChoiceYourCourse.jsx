@@ -75,16 +75,19 @@ const ChoiceYourCourse = () => {
             >
               <img src={item.coursePhoto} alt="" />
 
-              <div className="choice-your-coursesubcategory-title">
-                {item.categoryName}
-              </div>
-              <div className="choice-your-cahpbtn">
-                <div className="choice-your-coursechapter">
-                  {item.chapterCount} chapters
+              <div className='choiceYourCourse-title-chaper'>
+
+                <div className="choice-your-coursesubcategory-title">
+                  {item.courseName}
                 </div>
-                <button className="choice-yourcourse-designbtn">
-                  {item.categoryName}
-                </button>
+                <div className="choice-your-cahpbtn">
+                  <div className="choice-your-coursechapter">
+                    {item.chapterCount} chapters
+                  </div>
+                  <button className="choice-yourcourse-designbtn">
+                    {item.categoryName}
+                  </button>
+                </div>
               </div>
             </div>
           ))}
