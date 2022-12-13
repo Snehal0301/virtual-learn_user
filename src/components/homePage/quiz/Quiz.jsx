@@ -1,8 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import Countdown from 'react-countdown';
 import { useDispatch, useSelector } from 'react-redux';
-import { showQuizModal } from '../../../redux/reducers/Conditions';
-import { test } from '../../../redux/reducers/testSlice';
+import {
+  showQuizModal,
+  testShow,
+  testSuccess,
+} from '../../../redux/reducers/Conditions';
+import { test, testisSuccess } from '../../../redux/reducers/testSlice';
 
 import {
   closeIcon,
@@ -17,6 +21,7 @@ import QuizModal from './QuizModal';
 
 const Quiz = () => {
   const dispatch = useDispatch();
+  const [skip, setSkip] = useState(false);
 
   const [time, setTime] = useState(0);
 
@@ -44,35 +49,85 @@ const Quiz = () => {
   console.log(testQuestions);
 
   return (
-    <div className="quiz">
-      <div className="quiz-header">
-        <div className="quizHeaderTitle">
-          {testQuestions && testQuestions.testName}
-        </div>
-        <div className="quizHeaderTime">
-          <div className="quizHeaderTimeIcon">{timerIcon}</div>
-          <div className="quiz-HeaderTimeText">
-            <Timer />
-            {/* <Countdown
+    <>
+      <div className="quiz">
+        <div className="quiz-header">
+          <div className="quizHeaderTitle">
+            {testQuestions && testQuestions.testName}
+          </div>
+          <div className="quizHeaderTime">
+            <div className="quizHeaderTimeIcon">{timerIcon}</div>
+            <div className="quiz-HeaderTimeText">
+              <Timer />
+              {/* <Countdown
                 date={Date.now() + 480000}
                 intervalDelay={0}
                 precision={3}
                 renderer={renderer}
               /> */}
-            remaining
+              remaining
+            </div>
+          </div>
+          <div
+            className="quiz-HeaderCloseIcon"
+            onClick={() => {
+              setSkip(true);
+            }}
+          >
+            {closeIcon}
           </div>
         </div>
-        <div
-          className="quiz-HeaderCloseIcon"
-          onClick={() => {
-            dispatch(showQuizModal(true));
+        <QuizBody />
+      </div>
+      {skip && (
+        <aside
+          className="headerSearch-filterModal"
+          style={{
+            alignItems: 'center',
+            marginTop: 'unset',
           }}
         >
-          {closeIcon}
-        </div>
-      </div>
-      <QuizBody />
-    </div>
+          <div
+            className="headerSearch-filterActualModal"
+            onClick={(e) => {
+              e.stopPropagation();
+            }}
+          >
+            <div className="headerSearch-filterModalBody">
+              <div
+                className="headerSearch-filterModalBodyTitle"
+                style={{ fontSize: '24px' }}
+              >
+                Are you sure you want to quit the exam?
+              </div>
+
+              <div className="headerSearch-filterModalButtons">
+                <button
+                  type="button"
+                  className="headerSearch-clearAllButton"
+                  onClick={() => {
+                    setSkip(false);
+                  }}
+                >
+                  Cancel
+                </button>
+                <button
+                  type="button"
+                  className="headerSearch-applyFilterButton"
+                  onClick={() => {
+                    dispatch(testShow(false));
+                    dispatch(testSuccess());
+                    dispatch(testisSuccess());
+                  }}
+                >
+                  Quit
+                </button>
+              </div>
+            </div>
+          </div>
+        </aside>
+      )}
+    </>
   );
 };
 
