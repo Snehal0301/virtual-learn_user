@@ -1,24 +1,24 @@
-import React from 'react';
-import './Certificate.css';
-import { useDispatch, useSelector } from 'react-redux';
-import { showCertificate } from '../../../../redux/reducers/Conditions';
-import { closeIcon, downloadIcon } from '../../../../utils/svgIcons';
-import { saveAs } from 'file-saver';
+import React from 'react'
+import './Certificate.css'
+import { useDispatch, useSelector } from 'react-redux'
+import { showCertificate } from '../../../../redux/reducers/Conditions'
+import { closeIcon, downloadIcon } from '../../../../utils/svgIcons'
+import { saveAs } from 'file-saver'
 
 const Certificate = (props: any) => {
-  const dispatch = useDispatch();
-  const showCert = useSelector((state: any) => state.loginConditions.quizModal);
-  console.log('cerificate url', props);
+  const dispatch = useDispatch()
+  const showCert = useSelector((state: any) => state.loginConditions.quizModal)
+  console.log('cerificate url', props)
 
   const downloadImage = () => {
-    saveAs(props.certificate, props.name);
-  };
+    saveAs(props.certificate, props.name)
+  }
   return (
     <>
       {' '}
       {showCert && (
         <aside
-          className="headerSearch-filterModal"
+          className="headerSearch-filterModal certificate-modalOverlay"
           style={{
             alignItems: 'center',
             marginTop: 'unset',
@@ -27,7 +27,7 @@ const Certificate = (props: any) => {
           <div
             className="headerSearch-filterActualModal"
             onClick={(e) => {
-              e.stopPropagation();
+              e.stopPropagation()
             }}
           >
             <div className="certificate-header">
@@ -43,12 +43,13 @@ const Certificate = (props: any) => {
               <img src={props.certificate} alt="Certificate" />
             </div>
             <div
-              className="headerSearch-filterModalBodyCloseIcon"
+              className="headerSearch-filterModalBodyCloseIcon certificate-closeIcon"
               onClick={(e) => {
-                dispatch(showCertificate(false));
+                dispatch(showCertificate(false))
               }}
               style={{
                 position: 'fixed',
+                display: 'block',
                 top: '100px',
                 right: '80px',
                 filter: 'invert(1)',
@@ -60,7 +61,7 @@ const Certificate = (props: any) => {
         </aside>
       )}
     </>
-  );
-};
+  )
+}
 
-export default Certificate;
+export default Certificate

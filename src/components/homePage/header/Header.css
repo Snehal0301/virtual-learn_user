@@ -550,12 +550,13 @@
 
 .left-drawer-link span {
   background-color: #e83f3f;
-  width: 30px;
+  /* width: 30px; */
   height: 20px;
   display: flex;
   justify-content: center;
   color: white;
   border-radius: 15px;
+  padding: 0px 7px;
 }
 
 .left-drawer-close {
@@ -855,7 +856,9 @@
   }
 
   .ong-img {
-    width: 100%;
+    border-radius: 10px;
+    height: 234px;
+    width: 350px;
   }
 
   .completed-images {
