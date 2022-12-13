@@ -22,14 +22,13 @@ const HomePage = () => {
         headers: {
           Accept: 'application/json, text/plain, */*',
           'Content-Type': 'application/json',
-          Authorization: `Bearer ${localStorage.getItem('Token')}`,
+          Authorization: `Bearer ${sessionStorage.getItem('Token')}`,
         },
       }
     )
       .then((res) => res.json())
       .then((res) => {
         if (res.jwtToken) {
-          localStorage.setItem('Token', res.jwtToken);
           sessionStorage.setItem('Token', res.jwtToken);
         }
       })

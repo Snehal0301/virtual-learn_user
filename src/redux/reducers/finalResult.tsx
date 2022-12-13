@@ -19,7 +19,7 @@ export const FinalResult: any = createAsyncThunk(
         method: 'get',
         url: `http://virtuallearnapp2-env.eba-wrr2p8zk.ap-south-1.elasticbeanstalk.com/user/${arg}`,
         headers: {
-          Authorization: `Bearer ${localStorage.getItem('Token')}`,
+          Authorization: `Bearer ${sessionStorage.getItem('Token')}`,
         },
       });
 

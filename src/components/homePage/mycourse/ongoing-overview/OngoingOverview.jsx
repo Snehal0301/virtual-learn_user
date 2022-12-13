@@ -170,7 +170,7 @@ const OngoingOverview = () => {
         {
           method: 'post',
           headers: {
-            Authorization: `Bearer ${localStorage.getItem('Token')}`,
+            Authorization: `Bearer ${sessionStorage.getItem('Token')}`,
           },
           data: {
             courseId: courseId,

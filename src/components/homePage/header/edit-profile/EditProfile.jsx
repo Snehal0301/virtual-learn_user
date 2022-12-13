@@ -1,21 +1,21 @@
-import React, { useEffect, useState } from "react";
-import "./EditProfile.css";
-import "../profile/Profile";
+import React, { useEffect, useState } from 'react';
+import './EditProfile.css';
+import '../profile/Profile';
 import {
   editProfileSection,
   profileDrawer,
   showChangePasswordSection,
-} from "../../../../redux/reducers/headerProfileOptions";
-import { useDispatch, useSelector } from "react-redux";
-import { arrowRight } from "../../../../utils/svgIcons";
-import { editProfile } from "./../../../../utils/svgIcons";
-import { type } from "./../../../../redux/store/store";
-import { useFormik } from "formik";
-import { editSchema } from "./edit-schema";
-import axios from "axios";
+} from '../../../../redux/reducers/headerProfileOptions';
+import { useDispatch, useSelector } from 'react-redux';
+import { arrowRight } from '../../../../utils/svgIcons';
+import { editProfile } from './../../../../utils/svgIcons';
+import { type } from './../../../../redux/store/store';
+import { useFormik } from 'formik';
+import { editSchema } from './edit-schema';
+import axios from 'axios';
 
 const EditProfile = () => {
-  const [editProfileData, setEditProfileData] = useState("");
+  const [editProfileData, setEditProfileData] = useState('');
   const dispatch = useDispatch();
   const handleClick = () => {
     dispatch(editProfileSection(false));
@@ -29,10 +29,10 @@ const EditProfile = () => {
       editPEmail: editProfileData.email,
       MobileNo: editProfileData.mobileNumber,
       gender: editProfileData.gender,
-      editPDOB: "",
+      editPDOB: '',
       editPOccupation: editProfileData.occupation,
-      TwitterURL: "",
-      FacebookURL: "",
+      TwitterURL: '',
+      FacebookURL: '',
     },
     validationSchema: editSchema,
     onSubmit: (values, action, e) => {
@@ -47,7 +47,7 @@ const EditProfile = () => {
         `http://virtuallearnapp2-env.eba-wrr2p8zk.ap-south-1.elasticbeanstalk.com/user/myProfile`,
         {
           headers: {
-            Authorization: `Bearer ${localStorage.getItem("Token")}`,
+            Authorization: `Bearer ${sessionStorage.getItem('Token')}`,
           },
         }
       )
@@ -62,9 +62,9 @@ const EditProfile = () => {
       .request(
         ` http://virtuallearnapp2-env.eba-wrr2p8zk.ap-south-1.elasticbeanstalk.com/user/save`,
         {
-          method: "put",
+          method: 'put',
           headers: {
-            Authorization: `Bearer ${localStorage.getItem("Token")}`,
+            Authorization: `Bearer ${sessionStorage.getItem('Token')}`,
           },
           data: {
             gender: e.target.gender,
@@ -78,10 +78,10 @@ const EditProfile = () => {
       .catch((Err) => {
         console.log(Err);
       });
-    alert("Submit Clicked");
+    alert('Submit Clicked');
   };
 
-  console.log("EditData", editProfileData);
+  console.log('EditData', editProfileData);
   return (
     <div className="drawer-profile">
       <div className="drawer-profile-header">

@@ -16,7 +16,9 @@ const Ongoing = () => {
       .get(
         `http://virtuallearnapp2-env.eba-wrr2p8zk.ap-south-1.elasticbeanstalk.com/user/ongoingCourses`,
         {
-          headers: { Authorization: `Bearer ${localStorage.getItem('Token')}` },
+          headers: {
+            Authorization: `Bearer ${sessionStorage.getItem('Token')}`,
+          },
         }
       )
       .then((res) => {

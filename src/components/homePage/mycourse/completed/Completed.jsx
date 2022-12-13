@@ -17,7 +17,9 @@ const Completed = () => {
       .get(
         `http://virtuallearnapp2-env.eba-wrr2p8zk.ap-south-1.elasticbeanstalk.com/user/completedCourses`,
         {
-          headers: { Authorization: `Bearer ${localStorage.getItem('Token')}` },
+          headers: {
+            Authorization: `Bearer ${sessionStorage.getItem('Token')}`,
+          },
         }
       )
       .then((res) => {
@@ -56,7 +58,7 @@ const Completed = () => {
                         `http://virtuallearnapp2-env.eba-wrr2p8zk.ap-south-1.elasticbeanstalk.com/user/pdf?courseId=${ele.courseId}`,
                         {
                           headers: {
-                            Authorization: `Bearer ${localStorage.getItem(
+                            Authorization: `Bearer ${sessionStorage.getItem(
                               'Token'
                             )}`,
                           },

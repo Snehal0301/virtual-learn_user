@@ -75,11 +75,19 @@ const LoginAuth = () => {
       loginResponse.data.data.status === 'Login successfully'
     ) {
       localStorage.setItem('auth', 'true');
+      sessionStorage.setItem('auth', 'true');
       navigate('/');
       // window.location.reload();
     }
 
     localStorage.setItem(
+      'Token',
+      loginResponse &&
+        loginResponse.data &&
+        loginResponse.data.headers &&
+        loginResponse.data.headers['jwt-token']
+    );
+    sessionStorage.setItem(
       'Token',
       loginResponse &&
         loginResponse.data &&

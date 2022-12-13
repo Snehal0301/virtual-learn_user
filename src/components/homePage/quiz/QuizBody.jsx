@@ -1,23 +1,23 @@
-import "./Quiz.css";
-import { MultiStepForm, Step } from "react-multi-form";
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import './Quiz.css';
+import { MultiStepForm, Step } from 'react-multi-form';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   showQuizModal,
   testShow,
   testSuccess,
-} from "../../../redux/reducers/Conditions";
-import QuizModal from "./QuizModal";
+} from '../../../redux/reducers/Conditions';
+import QuizModal from './QuizModal';
 
-import { Navigate, useNavigate } from "react-router-dom";
-import { answerHeader } from "../../../redux/reducers/testAnswerHeader";
-import { answer } from "../../../redux/reducers/testAnswer";
-import { testisSuccess } from "../../../redux/reducers/testSlice";
-import { testSuccessRed } from "../../../redux/reducers/SuccessTestRed";
-import { showSuccessPage } from "../../../redux/reducers/showSuccesspage";
-import { finaltestShowPage } from "../../../redux/reducers/finalTestSuccess";
-import { FinalResult } from "../../../redux/reducers/finalResult";
-import Loading from "../../../utils/loading/Loading";
+import { Navigate, useNavigate } from 'react-router-dom';
+import { answerHeader } from '../../../redux/reducers/testAnswerHeader';
+import { answer } from '../../../redux/reducers/testAnswer';
+import { testisSuccess } from '../../../redux/reducers/testSlice';
+import { testSuccessRed } from '../../../redux/reducers/SuccessTestRed';
+import { showSuccessPage } from '../../../redux/reducers/showSuccesspage';
+import { finaltestShowPage } from '../../../redux/reducers/finalTestSuccess';
+import { FinalResult } from '../../../redux/reducers/finalResult';
+import Loading from '../../../utils/loading/Loading';
 
 const QuizBody = () => {
   const [active, setActive] = useState(1);
@@ -34,13 +34,13 @@ const QuizBody = () => {
 
   useEffect(() => {
     finaltestShow && setLoading(false);
-    finaltestShow && navigate("/finalResult");
+    finaltestShow && navigate('/finalResult');
   }, [finaltestShow]);
 
   useEffect(() => {
     // showTestSuccesPage && dispatch(testShow(false));
     showTestSuccesPage && setLoading(false);
-    showTestSuccesPage && navigate("/testSuccess");
+    showTestSuccesPage && navigate('/testSuccess');
   }, [showTestSuccesPage]);
 
   useEffect(() => {
@@ -52,7 +52,7 @@ const QuizBody = () => {
   const submitQuizHandler = (e) => {
     e.preventDefault();
     setLoading(true);
-    var form = document.getElementById("quiz");
+    var form = document.getElementById('quiz');
 
     quizData.questions.forEach((element) => {
       userAnswer.push({
@@ -63,27 +63,27 @@ const QuizBody = () => {
 
     const submitData = { testId: quizData.testId, userAnswers: userAnswer };
 
-    console.log("submit", submitData);
+    console.log('submit', submitData);
 
     fetch(
       `http://virtuallearnapp2-env.eba-wrr2p8zk.ap-south-1.elasticbeanstalk.com/user/${
-        quizData.testName === "Final Test" ? "finalSubmit" : "submit"
+        quizData.testName === 'Final Test' ? 'finalSubmit' : 'submit'
       }`,
       {
-        method: "POST",
+        method: 'POST',
         headers: {
-          Accept: "application/json, text/plain, */*",
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${localStorage.getItem("Token")}`,
+          Accept: 'application/json, text/plain, */*',
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${sessionStorage.getItem('Token')}`,
         },
         body: JSON.stringify(submitData),
       }
     )
       .then((res) => res.json())
       .then((res) => {
-        console.log("resppp", res);
+        console.log('resppp', res);
         if (res && res.chapterTestPercentage > 0) {
-          if (quizData.testName === "Final Test") {
+          if (quizData.testName === 'Final Test') {
             dispatch(finaltestShowPage(true));
             dispatch(FinalResult(`result?testId=${quizData.testId}`));
           } else {
@@ -95,12 +95,12 @@ const QuizBody = () => {
           dispatch(testisSuccess());
           dispatch(showSuccessPage(true));
         } else if (res && res.chapterTestPercentage === 0) {
-          alert("You have not met the minimum passing grade");
+          alert('You have not met the minimum passing grade');
           dispatch(testShow(false));
           dispatch(testSuccess());
           dispatch(testisSuccess());
         } else {
-          alert("Some error occured");
+          alert('Some error occured');
 
           dispatch(testShow(false));
           dispatch(testSuccess());
@@ -125,7 +125,7 @@ const QuizBody = () => {
                 <div key={i}>
                   <Step label={i}>
                     <div className="quiz-questionNum">
-                      {" "}
+                      {' '}
                       Question {i + 1} of {quizData.questions.length}
                     </div>
 
@@ -215,7 +215,7 @@ const QuizBody = () => {
               type="button"
             >
               <img
-                src={require("../../../assets/icons/previousIcon.png")}
+                src={require('../../../assets/icons/previousIcon.png')}
                 alt="previous"
               />
             </button>
@@ -223,11 +223,11 @@ const QuizBody = () => {
             <button
               type="button"
               onClick={() => setActive(active + 1)}
-              style={{ float: "right" }}
+              style={{ float: 'right' }}
               className={
                 active === (quizData.questions && quizData.questions.length)
-                  ? "quiz-buttonsSubmit"
-                  : ""
+                  ? 'quiz-buttonsSubmit'
+                  : ''
               }
               disabled={
                 active === (quizData.questions && quizData.questions.length)
@@ -243,7 +243,7 @@ const QuizBody = () => {
                 </span>
               ) : (
                 <img
-                  src={require("../../../assets/icons/nextIcon.png")}
+                  src={require('../../../assets/icons/nextIcon.png')}
                   alt="next"
                 ></img>
               )}
