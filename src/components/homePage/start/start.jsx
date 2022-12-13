@@ -210,7 +210,7 @@ const Start = () => {
     <div className="start">
       <div className="start-greeting">Hello!</div>
       <div className="start-username">{name}</div>
-      <Slider autoplay={true} autoplaySpeed={10000} slidesToShow={3}>
+      <Slider autoplay={true} autoplaySpeed={10000} slidesToShow={3} >
         {headerdata.map((item) => (
           <div
             className="start-image-title"

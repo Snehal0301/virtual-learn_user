@@ -75,7 +75,7 @@ const ChoiceYourCourse = () => {
             >
               <img src={item.coursePhoto} alt="" />
 
-              <div className='choiceYourCourse-title-chaper'>
+              <div className='choiceYourCourse-title-chapter'>
 
                 <div className="choice-your-coursesubcategory-title">
                   {item.courseName}

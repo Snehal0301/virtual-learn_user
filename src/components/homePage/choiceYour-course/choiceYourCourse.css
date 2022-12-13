@@ -118,7 +118,9 @@
 .choice-your-coursesubcategory-image img {
     width: 100%;
     height: 188px;
-    border-radius: 5px;
+    /* border-radius: 5px; */
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
 
 }
 
@@ -188,11 +190,11 @@
         margin-bottom: 10px;
     }
 
-    .choice-your-coursesubcategory-image img
-    {
-        width: 90px;
-        height: 90px;
-    }
+    .choice-your-coursesubcategory-image img {
+    width: 90px;
+    height: 90px;
+    border-radius: 6px;
+}
     .choice-yourcourse-designbtn {
         width: 110px;
         height: 29px;

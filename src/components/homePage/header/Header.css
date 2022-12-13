@@ -868,6 +868,15 @@
   .comp-img {
     width: 100%;
   }
+  .completed-parent
+  {
+    flex-basis: none;
+  }
+  .completed-section{
+    flex-wrap: nowrap;
+    flex-direction: column;
+    
+  }
 }
 
 /* @media only screen and (max-width:360px){

@@ -345,16 +345,16 @@
 .start-course-overlay-header {
   position: absolute;
   top: 0px;
-  right: 20px;
+  right: 6px;
   bottom: 5px;
-  left: 20px;
+  left: 6px;
   background-color: #0000003b;
   /* opacity: 0.2; */
   border-radius: 6px;
 }
 
 .start-map-image {
-  margin: 0 20px;
+  margin: 0px 6px;
 }
 
 .react-carousel-responsive__track {
@@ -430,10 +430,10 @@
     border-radius: 6px;
   }
 
-  .start-map-image>img {
+  /* .start-map-image>img {
     height: 150px;
     width: 190px;
-  }
+  } */
 
   .start-title-container {
     flex-direction: column;
@@ -500,15 +500,15 @@
   .start-course-overlay {
     position: absolute;
     top: 0;
-    right: 13px;
-    bottom: 6px;
+    right: 14px;
+    bottom: 3px;
     left: 0;
     background-color: #0000003b;
-    /* opacity: 0.2; */
-    /* border-radius: 6px; */
+    opacity: 2.2;
+    border-radius: 6px;
     border-top-left-radius: 6px;
     border-top-right-radius: 6px;
-  }
+}
 
 }
 
