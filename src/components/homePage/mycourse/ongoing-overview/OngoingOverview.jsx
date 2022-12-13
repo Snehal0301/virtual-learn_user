@@ -66,7 +66,7 @@ const OngoingOverview = () => {
   useEffect(() => {
     axios
       .get(
-        `http://virtuallearnapp2-env.eba-wrr2p8zk.ap-south-1.elasticbeanstalk.com/user/courseChapterResponse?courseId=32`,
+        `http://virtuallearnapp2-env.eba-wrr2p8zk.ap-south-1.elasticbeanstalk.com/user/courseChapterResponse?courseId=41`,
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem('Token')}`,
@@ -96,7 +96,7 @@ const OngoingOverview = () => {
   useEffect(() => {
     axios
       .get(
-        `http://virtuallearnapp2-env.eba-wrr2p8zk.ap-south-1.elasticbeanstalk.com/user/courseOverView?courseId=32`,
+        `http://virtuallearnapp2-env.eba-wrr2p8zk.ap-south-1.elasticbeanstalk.com/user/courseOverView?courseId=41`,
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem('Token')}`,
@@ -186,8 +186,8 @@ const OngoingOverview = () => {
         }
       )
       .then((res) => {
-        console.log(res)
-          (res.data.message === "Enrolled successfully" && window.location.reload);
+        console.log(res)  
+          (res.data.message === "Enrolled successfully" && window.location.reload());
       })
       .catch((err) => {
         console.log(err);
@@ -195,9 +195,6 @@ const OngoingOverview = () => {
 
   }
 
-  useEffect(() => {
-
-  })
 
   return (
     <div className="ongoing-overview">
