@@ -8,7 +8,7 @@ import {
   firstVideoState,
   tabToggleState,
   videoLinkState,
-} from '../../../../redux/reducers/myCourseReducer';
+} from "../../../../redux/reducers/myCourseReducer";
 import {
   courseAccessIcon,
   courseCertIcon,
@@ -54,9 +54,10 @@ const OngoingOverview = () => {
   const [activeStep, setActiveStep] = useState(0);
   const [chapter, setChapter] = useState();
   const [overviewData, setOverviewData] = useState();
-  const [defaultvideo, setDefaultVideo] = useState('');
+  const [defaultvideo, setDefaultVideo] = useState("");
   const [chapterLoading, setChapterLoading] = useState(false);
   const [overviewLoading, setOverviewLoading] = useState(false);
+  const [testLoading, setTestLoading] = useState(false);
 
   const navigate = useNavigate();
 
@@ -101,7 +102,7 @@ const OngoingOverview = () => {
       setOverviewData(courseOverview.data);
   }, [courseOverview]);
 
-  console.log('new data', chapter, overviewData);
+  console.log("new data", chapter, overviewData);
 
   // api call for chapter section
 
@@ -159,7 +160,8 @@ const OngoingOverview = () => {
   const showTest = useSelector((state) => state.loginConditions.showTest);
 
   useEffect(() => {
-    showTest && navigate('/myCourses/ongoingCourse/moduleTest');
+    showTest && navigate("/myCourses/ongoingCourse/moduleTest");
+    showTest && setTestLoading(false);
   }, [showTest]);
 
   const getVideoState = (itemele) => {
@@ -172,9 +174,9 @@ const OngoingOverview = () => {
       .request(
         `http://virtuallearnapp2-env.eba-wrr2p8zk.ap-south-1.elasticbeanstalk.com/user/enroll`,
         {
-          method: 'post',
+          method: "post",
           headers: {
-            Authorization: `Bearer ${localStorage.getItem('Token')}`,
+            Authorization: `Bearer ${localStorage.getItem("Token")}`,
           },
           data: {
             courseId: courseId,
@@ -278,7 +280,7 @@ const OngoingOverview = () => {
             <div className="ongoing-video-title">
               <p className="video-title">{overviewData.courseName}</p>
               <p className="video-chapters">
-                {overviewData.chapterCount} Chapter | {overviewData.lessonCount}{' '}
+                {overviewData.chapterCount} Chapter | {overviewData.lessonCount}{" "}
                 lessons
               </p>
             </div>
@@ -349,27 +351,27 @@ const OngoingOverview = () => {
           //         </div>
           //     </div>
           // </div>
-          ''
+          ""
         )}
       </div>
       <div className="ongoing-section-2">
         <div className="ongoing-container-1">
           <div className="tabs">
             <div
-              className={tabState === 1 ? 'tab active-tab' : 'tab'}
+              className={tabState === 1 ? "tab active-tab" : "tab"}
               onClick={() => tabToggle(1)}
             >
               Overview
             </div>
             <div
-              className={tabState === 2 ? 'tab active-tab' : 'tab'}
+              className={tabState === 2 ? "tab active-tab" : "tab"}
               onClick={() => tabToggle(2)}
             >
               Chapters
             </div>
           </div>
           <div
-            className={tabState === 1 ? 'tab-content-1' : 'tab-content-none'}
+            className={tabState === 1 ? "tab-content-1" : "tab-content-none"}
           >
             <div className="tab-1-all">
               {/*Mobile Screen*/}
@@ -383,7 +385,7 @@ const OngoingOverview = () => {
                     <div className="mobile-video-link">
                       <div className="mobile-video-section-1">
                         <img
-                          src={require('../../../../assets/images/icn_play_orange.png')}
+                          src={require("../../../../assets/images/icn_play_orange.png")}
                           alt=""
                           className="video-logo"
                         />
@@ -393,7 +395,7 @@ const OngoingOverview = () => {
                         </div>
                       </div>
                       <img
-                        src={require('../../../../assets/images/icn_previewgo.png')}
+                        src={require("../../../../assets/images/icn_previewgo.png")}
                         alt=""
                         className="right-icon"
                       />
@@ -406,7 +408,7 @@ const OngoingOverview = () => {
                       SHOW MORE
                     </label>
                     <img
-                      src={require('../../../../assets/images/icn_previewgo.png')}
+                      src={require("../../../../assets/images/icn_previewgo.png")}
                       alt=""
                       className="right-icon"
                     />
@@ -494,7 +496,7 @@ const OngoingOverview = () => {
                         {overviewData.instructorName}
                       </p>
                       <div className="profile-occupation">
-                        {overviewData.designation} {''}
+                        {overviewData.designation} {""}
                         {overviewData.url}
                       </div>
                     </div>
@@ -510,7 +512,7 @@ const OngoingOverview = () => {
               )}
             </div>
             {overviewData && overviewData.enrolled ? (
-              ''
+              ""
             ) : (
               <button
                 className="join-course"
@@ -521,15 +523,15 @@ const OngoingOverview = () => {
             )}
           </div>
           <div
-            className={tabState === 2 ? 'tab-content-2' : 'tab-content-none'}
+            className={tabState === 2 ? "tab-content-2" : "tab-content-none"}
           >
             {chapter ? (
               <div className="tab-2-all">
                 <div className="course-contents">
                   <p className="course-content-title">Course Content</p>
                   <p className="course-content-desc">
-                    {chapter.chapterCount} Chapter | {chapter.lessonCount}{' '}
-                    lessons | {chapter.testCount} Assignment Test |{' '}
+                    {chapter.chapterCount} Chapter | {chapter.lessonCount}{" "}
+                    lessons | {chapter.testCount} Assignment Test |{" "}
                     {chapter.totalDuration}h Total length
                   </p>
                 </div>
@@ -552,24 +554,24 @@ const OngoingOverview = () => {
                                   <p
                                     className={
                                       ele.chapterCompletedStatus
-                                        ? 'course-accordian-container-title-active'
-                                        : 'course-accordian-container-title'
+                                        ? "course-accordian-container-title-active"
+                                        : "course-accordian-container-title"
                                     }
                                   >
-                                    Chapter {ele.chapterNumber} -{' '}
-                                    {ele.chapterName}{' '}
+                                    Chapter {ele.chapterNumber} -{" "}
+                                    {ele.chapterName}{" "}
                                   </p>
 
                                   <p className="course-accordian-container-state">
-                                    {accordianState === id ? '-' : '+'}
+                                    {accordianState === id ? "-" : "+"}
                                   </p>
                                 </div>
                               </div>
                               <div
                                 className={
                                   (accordianState === id
-                                    ? 'accordian-show'
-                                    : '') + ' course-accordian-content'
+                                    ? "accordian-show"
+                                    : "") + " course-accordian-content"
                                 }
                               >
                                 <div className="course-accordian-container-body">
@@ -580,8 +582,8 @@ const OngoingOverview = () => {
                                           <div className="accordian-item">
                                             <div className="accordian-item-icon">
                                               {itemele.lessonStatus
-                                                ? inactiveIcon('green')
-                                                : inactiveIcon('')}
+                                                ? inactiveIcon("green")
+                                                : inactiveIcon("")}
                                             </div>
                                             <div className="accordian-item-section-2">
                                               <div className="accordian-item-section-2-part-1">
@@ -608,8 +610,8 @@ const OngoingOverview = () => {
                                                 }}
                                               >
                                                 {itemele.lessonStatus
-                                                  ? videoPlayActive('red')
-                                                  : videoPlayActive('')}
+                                                  ? videoPlayActive("red")
+                                                  : videoPlayActive("")}
                                               </div>
                                             </div>
                                           </div>
@@ -624,10 +626,11 @@ const OngoingOverview = () => {
                                         <div
                                           className="accordian-item-section-2 test-section"
                                           onClick={() => {
+                                            setTestLoading(true);
                                             let a =
                                               ele &&
                                               ele.testDuration &&
-                                              ele.testDuration.split(':');
+                                              ele.testDuration.split(":");
 
                                             if (a) {
                                               let seconds =
@@ -636,7 +639,7 @@ const OngoingOverview = () => {
                                                 +a[2];
 
                                               localStorage.setItem(
-                                                'timer',
+                                                "timer",
                                                 seconds
                                               );
                                             }
@@ -799,25 +802,25 @@ const OngoingOverview = () => {
                                 <div className="course-accordian-container">
                                   {ele.chapterNumber === 1 ? (
                                     <p className="course-accordian-container-title-active">
-                                      Chapter {ele.chapterNumber} -{' '}
-                                      {ele.chapterName}{' '}
+                                      Chapter {ele.chapterNumber} -{" "}
+                                      {ele.chapterName}{" "}
                                     </p>
                                   ) : (
                                     <p className="course-accordian-container-title">
-                                      Chapter {ele.chapterNumber} -{' '}
-                                      {ele.chapterName}{' '}
+                                      Chapter {ele.chapterNumber} -{" "}
+                                      {ele.chapterName}{" "}
                                     </p>
                                   )}
                                   <p className="course-accordian-container-state">
-                                    {accordianState === id ? '-' : '+'}
+                                    {accordianState === id ? "-" : "+"}
                                   </p>
                                 </div>
                               </div>
                               <div
                                 className={
                                   (accordianState === id
-                                    ? 'accordian-show'
-                                    : '') + ' course-accordian-content'
+                                    ? "accordian-show"
+                                    : "") + " course-accordian-content"
                                 }
                               >
                                 <div className="course-accordian-container-body">
@@ -828,8 +831,8 @@ const OngoingOverview = () => {
                                           <div className="accordian-item">
                                             <div className="accordian-item-icon">
                                               {ele.chapterNumber === 1
-                                                ? inactiveIcon('green')
-                                                : inactiveIcon('')}
+                                                ? inactiveIcon("green")
+                                                : inactiveIcon("")}
                                             </div>
                                             <div className="accordian-item-section-2">
                                               <div className="accordian-item-section-2-part-1">
@@ -850,8 +853,8 @@ const OngoingOverview = () => {
                                               // onClick={() => { setVideo(courseele.videoLink) }}
                                               >
                                                 {ele.chapterNumber === 1
-                                                  ? videoPlayActive('red')
-                                                  : videoPlayActive('')}
+                                                  ? videoPlayActive("red")
+                                                  : videoPlayActive("")}
                                               </div>
                                             </div>
                                           </div>
@@ -869,7 +872,7 @@ const OngoingOverview = () => {
                                             let a =
                                               ele &&
                                               ele.testDuration &&
-                                              ele.testDuration.split(':');
+                                              ele.testDuration.split(":");
 
                                             if (a) {
                                               let seconds =
@@ -878,7 +881,7 @@ const OngoingOverview = () => {
                                                 +a[2];
 
                                               localStorage.setItem(
-                                                'timer',
+                                                "timer",
                                                 seconds
                                               );
                                             }
@@ -901,8 +904,8 @@ const OngoingOverview = () => {
                                                 {ele.testName}
                                               </p>
                                               <p className="accordian-item-chapter-duration">
-                                                10 min | {ele.questionCount}{' '}
-                                                questions
+                                                {ele.testDuration} min |{" "}
+                                                {ele.questionCount} questions
                                               </p>
                                             </div>
                                           </div>
@@ -937,8 +940,8 @@ const OngoingOverview = () => {
           </div>
         </div>
       </div>
-      {(chapterLoading || overviewLoading) && <Loading />}
-    </div >
+      {(chapterLoading || overviewLoading || testLoading) && <Loading />}
+    </div>
   );
 };
 

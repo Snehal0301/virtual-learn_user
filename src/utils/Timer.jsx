@@ -1,25 +1,29 @@
-import * as React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { testShow, testSuccess } from '../redux/reducers/Conditions';
-import { FinalResult } from '../redux/reducers/finalResult';
-import { finaltestShowPage } from '../redux/reducers/finalTestSuccess';
-import { showSuccessPage } from '../redux/reducers/showSuccesspage';
-import { answer } from '../redux/reducers/testAnswer';
-import { answerHeader } from '../redux/reducers/testAnswerHeader';
-import { testisSuccess } from '../redux/reducers/testSlice';
+import * as React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { testShow, testSuccess } from "../redux/reducers/Conditions";
+import { FinalResult } from "../redux/reducers/finalResult";
+import { finaltestShowPage } from "../redux/reducers/finalTestSuccess";
+import { showSuccessPage } from "../redux/reducers/showSuccesspage";
+import { answer } from "../redux/reducers/testAnswer";
+import { answerHeader } from "../redux/reducers/testAnswerHeader";
+import { testisSuccess } from "../redux/reducers/testSlice";
+import Loading from "./loading/Loading";
 
 const Timer = () => {
-  const initialTimer = localStorage.getItem('timer') ?? 480;
+  const initialTimer = localStorage.getItem("timer") ?? 480;
   const timeoutId = React.useRef(null);
   const [timer, setTimer] = React.useState(initialTimer);
+  const [loading, setLoading] = React.useState(false);
+
   const quizData = useSelector((state) => state.test.data.data);
   const dispatch = useDispatch();
   let userAnswer = [];
   const countTimer = React.useCallback(() => {
     if (timer <= 0) {
-      localStorage.removeItem('timer');
-      alert('timeUp');
-      var form = document.getElementById('quiz');
+      localStorage.removeItem("timer");
+      setLoading(true);
+
+      var form = document.getElementById("quiz");
 
       quizData.questions.forEach((element) => {
         userAnswer.push({
@@ -30,27 +34,28 @@ const Timer = () => {
 
       const submitData = { testId: quizData.testId, userAnswers: userAnswer };
 
-      console.log('submit', submitData);
+      console.log("submit", submitData);
 
       fetch(
         `http://virtuallearnapp2-env.eba-wrr2p8zk.ap-south-1.elasticbeanstalk.com/user/${
-          quizData.testName === 'Final Test' ? 'finalSubmit' : 'submit'
+          quizData.testName === "Final Test" ? "finalSubmit" : "submit"
         }`,
         {
-          method: 'POST',
+          method: "POST",
           headers: {
-            Accept: 'application/json, text/plain, */*',
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${localStorage.getItem('Token')}`,
+            Accept: "application/json, text/plain, */*",
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("Token")}`,
           },
           body: JSON.stringify(submitData),
         }
       )
         .then((res) => res.json())
         .then((res) => {
-          console.log('resppp', res);
+          setLoading(false);
+          console.log("resppp", res);
           if (res && res.chapterTestPercentage > 0) {
-            if (quizData.testName === 'Final Test') {
+            if (quizData.testName === "Final Test") {
               dispatch(finaltestShowPage(true));
               dispatch(FinalResult(`result?testId=${quizData.testId}`));
             } else {
@@ -62,12 +67,12 @@ const Timer = () => {
             dispatch(testisSuccess());
             dispatch(showSuccessPage(true));
           } else if (res && res.chapterTestPercentage === 0) {
-            alert('You have not met the minimum passing grade');
+            alert("You have not met the minimum passing grade");
             dispatch(testShow(false));
             dispatch(testSuccess());
             dispatch(testisSuccess());
           } else {
-            alert('Some error occured');
+            alert("Some error occured");
 
             dispatch(testShow(false));
             dispatch(testSuccess());
@@ -76,7 +81,7 @@ const Timer = () => {
         });
     } else {
       setTimer(timer - 1);
-      localStorage.setItem('timer', timer);
+      localStorage.setItem("timer", timer);
     }
   }, [timer]);
 
@@ -89,9 +94,16 @@ const Timer = () => {
   var minutes = timer > 60 ? Math.floor(timer / 60) : timer;
 
   return (
-    <div align="center">
-      {minutes} {timer > 60 ? 'mins' : 'sec'}
-    </div>
+    <>
+      <div align="center">
+        {minutes} {timer > 60 ? "mins" : "sec"}
+      </div>
+      {loading && (
+        <>
+          <Loading message={"Time Up..."} />
+        </>
+      )}
+    </>
   );
 };
 
