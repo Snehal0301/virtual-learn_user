@@ -302,7 +302,12 @@ const OngoingOverview = () => {
                 </div>
                 <div className="ongoing-course-desc-content">
                   <input type="checkbox" id="expanded"></input>
-                  <ShowMoreText className="showmore" anchorClass="show-more-style">{overviewData.description}</ShowMoreText>
+                  <ShowMoreText
+                    className="showmore"
+                    anchorClass="show-more-style"
+                  >
+                    {overviewData.description}
+                  </ShowMoreText>
                   {/* <ShowMoreText className="showmore" anchorClass="show-more-style">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quis quod ullam, iste quo hic voluptatem, et tempore, modi quaerat placeat cum. Quam eos itaque quo omnis, quae delectus illo quos autem nobis ut possimus in, excepturi et illum sunt perspiciatis accusamus, repellat facilis fuga animi voluptatem pariatur nisi consequatur voluptates! Rem cum nobis itaque consequuntur eveniet a nihil ab quibusdam deleniti dolorum quia libero ullam culpa minima eaque debitis minus aperiam ducimus odio delectus, eius consequatur iusto odit! Nemo quasi corporis velit itaque neque fugit soluta dolores dolorem facere, molestias maxime non consequatur quidem odio totam esse iure, delectus fuga!</ShowMoreText> */}
                   {/* <label for="expanded" role="button">
                     SHOW MORE
@@ -461,6 +466,7 @@ const OngoingOverview = () => {
               ) : (
                 <h3>Loading</h3>
               )}
+
               <div className="overview-learn">
                 <p className="overview-learn-title">What you’ll learn</p>
                 {overviewData &&
@@ -503,8 +509,13 @@ const OngoingOverview = () => {
                   </div>
                   <div className="instructor-about">
                     <input type="checkbox" id="expanded"></input>
-                    <ShowMoreText lines={5} className="showmore" anchorClass="show-more-style">{overviewData.instructorDescription}</ShowMoreText>
-
+                    <ShowMoreText
+                      lines={5}
+                      className="showmore"
+                      anchorClass="show-more-style"
+                    >
+                      {overviewData.instructorDescription}
+                    </ShowMoreText>
                   </div>
                 </div>
               ) : (
