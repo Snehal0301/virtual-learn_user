@@ -11,7 +11,7 @@
     z-index: 1;
     top: 17%;
     bottom: 0%;
-    left: 22%;
+    left: 25%;
     right: 0;
     display: flex;
     flex-direction: column;
@@ -132,11 +132,8 @@
     text-align: justify;
 }
 
-.ongoing-course-desc-content p {
-    display: -webkit-box;
-    -webkit-line-clamp: 5;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
+.ongoing-course-desc-content .showmore {
+
 }
 
 .ongoing-course-desc-content label {
@@ -497,9 +494,16 @@ p:not(.truncated)~label {
     /* font-size: 14px; */
 }
 
-.ongoing-course-desc-content-mobile p {
+.ongoing-course-desc-content-mobile .showmore {
     font-size: 20px;
     margin-top: 20px;
+    text-align: justify;
+}
+
+.show-more-style{
+    color: red;
+    cursor: pointer;
+    text-transform: uppercase;
 }
 
 .mobile-video-link {
@@ -599,10 +603,105 @@ p:not(.truncated)~label {
     right: 0;
     border-radius: 6px;
     background-color: #7a7a7a76;
+    z-index: 5;
 }
 
-/* new custom stepper */
+.continue-chapter-pause-button{
+    background-color: var(--secondaryClr);
+    position: absolute;
+    top: 45%;
+    left: 34.8%;
+    padding: 20px;
+    color: white;
+    font-size: 20px;
+    border-radius: 6px;
+    cursor: pointer;
+}
 
+.continue-chapter-pause-button:hover{
+    background-color: #f46c5d;
+}
+
+/* new custom accordian package */
+
+/**
+* ----------------------------------------------
+* Demo styles
+* ----------------------------------------------
+**/
+.accordion {
+    border-radius: 2px;
+}
+
+.accordion__item+.accordion__item {
+    /* border-top: 1px solid rgba(0, 0, 0, 0.1); */
+}
+
+.accordion__button {
+    background-color: white;
+    color: #444;
+    cursor: pointer;
+    padding: 18px;
+    width: 100%;
+    text-align: left;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.acc-name{
+    color: green;
+    width: 70%;
+}
+
+.acc-icon{
+    font-size: 25px;
+    color: #EC5D52;
+}
+
+.accordion__button:hover {
+    background-color: #ddd;
+}
+
+/* .accordion__button:before {
+    display: inline-block;
+    content: '';
+    height: 10px;
+    width: 10px;
+    margin-right: 12px;
+    border-bottom: 2px solid currentColor;
+    border-right: 2px solid currentColor;
+    transform: rotate(-45deg);
+}
+
+.accordion__button[aria-expanded='true']::before,
+.accordion__button[aria-selected='true']::before {
+    transform: rotate(45deg);
+} */
+
+[hidden] {
+    display: none;
+}
+
+.accordion__panel {
+    padding: 20px;
+    animation: fadein 0.35s ease-in;
+}
+
+/* -------------------------------------------------- */
+/* ---------------- Animation part ------------------ */
+/* -------------------------------------------------- */
+
+@keyframes fadein {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
 
 /* custom css */
 
@@ -625,7 +724,7 @@ p:not(.truncated)~label {
     }
 }
 
-@media only screen and (max-width: 940px) {
+@media only screen and (max-width: 1100px) {
     .ongoing-overview {
         display: flex;
         flex-direction: column;

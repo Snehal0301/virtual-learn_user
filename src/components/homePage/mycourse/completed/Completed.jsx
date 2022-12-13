@@ -57,7 +57,7 @@ const Completed = () => {
                     <p className="completed-text">Completed</p>
                     <div className="completed-chap-descp">
                       <p>{ele.courseName}</p>
-                      <p>{ele.coursePercentage}% Approval Rate</p>
+                      <p>{ele.coursePercentage.toFixed(2)}% Approval Rate</p>
                     </div>
                   </div>
                   <button className="btn-continue-completed">View Certificate</button>

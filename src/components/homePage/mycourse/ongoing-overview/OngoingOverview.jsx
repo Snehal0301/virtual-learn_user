@@ -1,7 +1,7 @@
-import "./OngoingOverview.css";
-import React, { useState, useEffect } from "react";
-import ReactPlayer from "react-player";
-import { useDispatch, useSelector } from "react-redux";
+import './OngoingOverview.css';
+import React, { useState, useEffect, useRef } from 'react';
+import ReactPlayer from 'react-player';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   accordianState,
   accordianToggleState,
@@ -24,25 +24,31 @@ import {
   testImage,
   videoPlayActive,
   whiteStepperIcon,
-} from "../../../../utils/svgIcons";
-import instructorImage from "../../../../assets/images/instructorImage.jpg";
-import Accordian from "../accordian/Accordian";
-import axios from "axios";
-import Box from "@mui/material/Box";
-import Stepper from "@mui/material/Stepper";
-import Step from "@mui/material/Step";
-import StepLabel from "@mui/material/StepLabel";
-import StepContent from "@mui/material/StepContent";
-import Button from "@mui/material/Button";
-import Paper from "@mui/material/Paper";
-import Typography from "@mui/material/Typography";
-import { Navigate, useNavigate } from "react-router-dom";
-import { test, testisSuccess } from "../../../../redux/reducers/testSlice";
-import { testShow, testSuccess } from "../../../../redux/reducers/Conditions";
-import { testSuccessRed } from "../../../../redux/reducers/SuccessTestRed";
-import { showSuccessPage } from "../../../../redux/reducers/showSuccesspage";
-import { finaltestShowPage } from "../../../../redux/reducers/finalTestSuccess";
-import Loading from "../../../../utils/loading/Loading";
+} from '../../../../utils/svgIcons';
+import {
+  Accordion,
+  AccordionItem,
+  AccordionItemHeading,
+  AccordionItemButton,
+  AccordionItemPanel,
+} from 'react-accessible-accordion';
+
+
+import instructorImage from '../../../../assets/images/instructorImage.jpg';
+import Accordian from '../accordian/Accordian';
+import axios from 'axios';
+import { Navigate, useNavigate } from 'react-router-dom';
+import { test, testisSuccess } from '../../../../redux/reducers/testSlice';
+import { testShow, testSuccess } from '../../../../redux/reducers/Conditions';
+import { testSuccessRed } from '../../../../redux/reducers/SuccessTestRed';
+import { showSuccessPage } from '../../../../redux/reducers/showSuccesspage';
+import { finaltestShowPage } from '../../../../redux/reducers/finalTestSuccess';
+import Loading from '../../../../utils/loading/Loading';
+import ShowMoreText from "react-show-more-text";
+import { Player } from 'video-react';
+
+
+
 
 const OngoingOverview = () => {
   const [activeStep, setActiveStep] = useState(0);
@@ -69,13 +75,7 @@ const OngoingOverview = () => {
   const chapterLoad = useSelector((state) => state.chapterResponse);
   const courseLoad = useSelector((state) => state.courseOverview);
 
-  useEffect(() => {
-    if (chapterLoad.loading) {
-      setChapterLoading(true);
-    } else {
-      setChapterLoading(false);
-    }
-  }, [chapterLoad]);
+
 
   useEffect(() => {
     if (courseLoad.loading) {
@@ -110,7 +110,7 @@ const OngoingOverview = () => {
     dispatch(firstVideoState(defaultvideo));
   }, [defaultvideo]);
 
-  const defaultVideoState = useSelector((state) => state.mycourse.firstVideo);
+  // const defaultVideoState = useSelector((state) => state.mycourse.firstVideo);
 
   const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
@@ -166,6 +166,7 @@ const OngoingOverview = () => {
 
   const getVideoState = (itemele) => {
     dispatch(videoLinkState(itemele.videoLink));
+    console.log("videoLink", videoLink)
   };
 
   const enrollCourse = (courseId) => {
@@ -183,51 +184,85 @@ const OngoingOverview = () => {
         }
       )
       .then((res) => {
-        console.log(res)(
-          res.data.message === "Enrolled successfully" && window.location.reload
-        );
+        console.log(res)
+          (res.data.message === "Enrolled successfully" && window.location.reload());
       })
       .catch((err) => {
         console.log(err);
       });
   };
 
+  const [accState, setAccState] = useState()
+  const [loop, setLoop] = useState(false)
+  const [nextModal, setNextModal] = useState(false)
+  const [defPause, setDefPause] = useState(false)
+  const [firstPause, setFirstPause] = useState(true)
+  const playerRef = useRef();
+
+
+  const defaultNormalPause = () => {
+    setPause(false);
+    setPlaying(true);
+    setDefPause(true);
+    setNextModal(false);
+    setFirstPause(false);
+  }
   return (
     <div className="ongoing-overview">
       <div className="ongoing-section-1">
         <div className="ongoing-section-video-player">
-          {/* {pause && (
-            <div className="onpause-modal">
-              <p className="onpause-modal-title">
-                Your lesson paused at 1.21 Do you want to continue watching?
-              </p>
-              <button className="onpause-button" onClick={onPlay}>
-                Continue Watching
-              </button>
-              <button className="onpause-button beginning">
-                Watch from beginning
-              </button>
-            </div>
-          )} */}
+
+          {pause && (
+            <>
+              <div className="pause-overlay">
+                {
+                  firstPause &&
+                  <div className="continue-chapter-pause-button" onClick={() => { setNextModal(true) }}>Continue Chapter 3 Lesson 21</div>
+                }
+                {
+                  nextModal &&
+                  <div className="onpause-modal">
+                    <p className="onpause-modal-title">
+                      Your lesson paused at <span>{Math.floor(played) / 100}</span> Do you want to continue watching?
+                    </p>
+                    <button className="onpause-button" onClick={defaultNormalPause}>
+                      Continue Watching
+                    </button>
+                    <button className="onpause-button beginning" onClick={() => { playerRef.current.seekTo(0, 'seconds'); setPause(false); setPlaying(true) }}>
+                      Watch from beginning
+                    </button>
+                  </div>
+                }
+                {
+                  defPause &&
+                  <div className="pause-button" onClick={onPlay}>{start_pauseIconVideo}</div>
+                }
+              </div>
+            </>
+          )}
+
           <ReactPlayer
             url={videoLink}
+            // url='https://youtu.be/yNYYOGeMXgc'
             controls="true"
             className="react-player"
             width="100%"
             height="100%"
+            ref={playerRef}
+            loop={loop}
             onPause={onPause}
             playing={playing}
             onProgress={(progress) => {
               setPlayed(progress.playedSeconds);
             }}
           />
-          {pause && (
+          {/* {pause && (
             <>
               <div className="pause-overlay" onClick={onPlay}>
                 <div className="pause-button">{start_pauseIconVideo}</div>
               </div>
             </>
-          )}
+          )} */}
         </div>
         {/* <div className="ongoing-video-title-section">
                     <div className="ongoing-video-title">
@@ -267,10 +302,11 @@ const OngoingOverview = () => {
                 </div>
                 <div className="ongoing-course-desc-content">
                   <input type="checkbox" id="expanded"></input>
-                  <p>{overviewData.description}</p>
-                  <label for="expanded" role="button">
+                  <ShowMoreText className="showmore" anchorClass="show-more-style">{overviewData.description}</ShowMoreText>
+                  {/* <ShowMoreText className="showmore" anchorClass="show-more-style">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quis quod ullam, iste quo hic voluptatem, et tempore, modi quaerat placeat cum. Quam eos itaque quo omnis, quae delectus illo quos autem nobis ut possimus in, excepturi et illum sunt perspiciatis accusamus, repellat facilis fuga animi voluptatem pariatur nisi consequatur voluptates! Rem cum nobis itaque consequuntur eveniet a nihil ab quibusdam deleniti dolorum quia libero ullam culpa minima eaque debitis minus aperiam ducimus odio delectus, eius consequatur iusto odit! Nemo quasi corporis velit itaque neque fugit soluta dolores dolorem facere, molestias maxime non consequatur quidem odio totam esse iure, delectus fuga!</ShowMoreText> */}
+                  {/* <label for="expanded" role="button">
                     SHOW MORE
-                  </label>
+                  </label> */}
                 </div>
               </div>
             ) : (
@@ -467,10 +503,8 @@ const OngoingOverview = () => {
                   </div>
                   <div className="instructor-about">
                     <input type="checkbox" id="expanded"></input>
-                    <p>{overviewData.instructorDescription}</p>
-                    <label for="expanded" role="button">
-                      SHOW MORE
-                    </label>
+                    <ShowMoreText lines={5} className="showmore" anchorClass="show-more-style">{overviewData.instructorDescription}</ShowMoreText>
+
                   </div>
                 </div>
               ) : (
@@ -503,6 +537,7 @@ const OngoingOverview = () => {
                 </div>
 
                 <div className="course-sections">
+
                   {chapter.chapterResponses.map((ele, id) => {
                     return (
                       <>
@@ -568,7 +603,10 @@ const OngoingOverview = () => {
                                                 className="video-play-btn"
                                                 // onClick={() => { setVideo(courseele.videoLink) }}
                                                 onClick={() => {
-                                                  getVideoState(itemele);
+                                                  itemele.lessonStatus ?
+                                                    getVideoState(itemele)
+                                                    :
+                                                    alert('Please finish above video section');
                                                 }}
                                               >
                                                 {itemele.lessonStatus
@@ -607,10 +645,9 @@ const OngoingOverview = () => {
                                             }
                                             dispatch(
                                               test(
-                                                `${
-                                                  ele.testName === "Final Test"
-                                                    ? "finalTest"
-                                                    : "moduleTest"
+                                                `${ele.testName === 'Final Test'
+                                                  ? 'finalTest'
+                                                  : 'moduleTest'
                                                 }?testId=${ele.testId}`
                                               )
                                             );
@@ -625,21 +662,21 @@ const OngoingOverview = () => {
                                                 {ele.testName}
                                               </p>
                                               <p className="accordian-item-chapter-duration">
-                                                10 min | {ele.questionCount}{" "}
+                                                {ele.testDuration} min | {ele.questionCount}{' '}
                                                 questions
                                               </p>
                                             </div>
                                           </div>
                                           <div
                                             className="video-play-btn"
-                                            // onClick={() => { setVideo(courseele.videoLink) }}
-                                            // onClick={() => {
-                                            //   dispatch(
-                                            //     videoLinkState(
-                                            //       itemele.videoLink
-                                            //     )
-                                            //   );
-                                            // }}
+                                          // onClick={() => { setVideo(courseele.videoLink) }}
+                                          // onClick={() => {
+                                          //   dispatch(
+                                          //     videoLinkState(
+                                          //       itemele.videoLink
+                                          //     )
+                                          //   );
+                                          // }}
                                           >
                                             80%
                                           </div>
@@ -650,6 +687,108 @@ const OngoingOverview = () => {
                                 </div>
                               </div>
                             </div>
+                            {/* <Accordion  preExpanded={['1']}  onChange={() => setAccState(ele.chapterNumber)}>
+                              <AccordionItem uuid={ele.chapterNumber}>
+                                <AccordionItemHeading>
+                                  <AccordionItemButton>
+                                    <p className={ele.chapterCompletedStatus ? "course-accordian-container-title-active" : "course-accordian-container-title"}>
+                                      Chapter {ele.chapterNumber} - {ele.chapterName}{' '}
+                                    </p>
+                                    <p className="course-accordian-container-state">
+                                      {accState === id + 1 ? '-' : '+'}
+                                    </p>
+                                  </AccordionItemButton>
+                                </AccordionItemHeading>
+                                <AccordionItemPanel>
+                                  {
+                                    ele.lessonResponses.map((itemele) => {
+                                      return (
+                                        <>
+                                          <div className="accordian-item">
+                                            <div className="accordian-item-icon">{itemele.lessonStatus ? inactiveIcon('green') : inactiveIcon('')}</div>
+                                            <div className="accordian-item-section-2">
+                                              <div className="accordian-item-section-2-part-1">
+                                                <p className='accordian-item-chapter-number'>{itemele.lessonNumber}</p>
+                                                <div className="accordian-item-section-2-para">
+                                                  <p className='accordian-item-chapter-title'>{itemele.lessonName}</p>
+                                                  <p className='accordian-item-chapter-duration'>{itemele.lessonDuration}</p>
+                                                </div>
+                                              </div>
+                                              <div
+                                                className="video-play-btn"
+                                                // onClick={() => { setVideo(courseele.videoLink) }}
+                                                onClick={
+                                                  () => {
+                                                    getVideoState(itemele)
+                                                  }}
+                                              >
+                                                {itemele.lessonStatus ? videoPlayActive('red') : videoPlayActive('')}
+                                              </div>
+                                            </div>
+                                          </div>
+
+                                        </>
+                                      )
+                                    })
+                                  }
+                                  {
+                                    ele.testId &&
+                                    <div className="accordian-item">
+                                      <div className="accordian-item-icon">{inactiveIcon()}</div>
+                                      <div className="accordian-item-section-2 test-section"
+                                        onClick={() => {
+                                          let a =
+                                            ele &&
+                                            ele.testDuration &&
+                                            ele.testDuration.split(':');
+
+                                          if (a) {
+                                            let seconds =
+                                              +a[0] * 60 * 60 +
+                                              +a[1] * 60 +
+                                              +a[2];
+
+                                            localStorage.setItem(
+                                              'timer',
+                                              seconds
+                                            );
+                                          }
+                                          dispatch(
+                                            test(
+                                              `${ele.testName === 'Final Test'
+                                                ? 'finalTest'
+                                                : 'moduleTest'
+                                              }?testId=${ele.testId}`
+                                            )
+                                          );
+                                        }}
+                                      >
+                                        <div className="accordian-item-section-2-part-1" >
+                                          <p className='accordian-item-chapter-number'>{testImage}</p>
+                                          <div className="accordian-item-section-2-para">
+                                            <p className='accordian-item-chapter-title'>{ele.testName}</p>
+                                            <p className='accordian-item-chapter-duration'>10 min | {ele.questionCount} questions</p>
+                                          </div>
+                                        </div>
+                                        <div
+                                          className="video-play-btn"
+                                        // onClick={() => { setVideo(courseele.videoLink) }}
+                                        // onClick={() => {
+                                        //   dispatch(
+                                        //     videoLinkState(
+                                        //       itemele.videoLink
+                                        //     )
+                                        //   );
+                                        // }}
+                                        >
+                                          80%
+                                        </div>
+                                      </div>
+                                    </div>
+                                  }
+                                </AccordionItemPanel>
+                              </AccordionItem>
+                            </Accordion> */}
                           </>
                         ) : (
                           <>
@@ -711,7 +850,7 @@ const OngoingOverview = () => {
                                               </div>
                                               <div
                                                 className="video-play-btn"
-                                                // onClick={() => { setVideo(courseele.videoLink) }}
+                                              // onClick={() => { setVideo(courseele.videoLink) }}
                                               >
                                                 {ele.chapterNumber === 1
                                                   ? videoPlayActive("red")
@@ -748,10 +887,9 @@ const OngoingOverview = () => {
                                             }
                                             dispatch(
                                               test(
-                                                `${
-                                                  ele.testName === "Final Test"
-                                                    ? "finalTest"
-                                                    : "moduleTest"
+                                                `${ele.testName === 'Final Test'
+                                                  ? 'finalTest'
+                                                  : 'moduleTest'
                                                 }?testId=${ele.testId}`
                                               )
                                             );
@@ -773,14 +911,14 @@ const OngoingOverview = () => {
                                           </div>
                                           <div
                                             className="video-play-btn"
-                                            // onClick={() => { setVideo(courseele.videoLink) }}
-                                            // onClick={() => {
-                                            //   dispatch(
-                                            //     videoLinkState(
-                                            //       itemele.videoLink
-                                            //     )
-                                            //   );
-                                            // }}
+                                          // onClick={() => { setVideo(courseele.videoLink) }}
+                                          // onClick={() => {
+                                          //   dispatch(
+                                          //     videoLinkState(
+                                          //       itemele.videoLink
+                                          //     )
+                                          //   );
+                                          // }}
                                           ></div>
                                         </div>
                                       </div>
