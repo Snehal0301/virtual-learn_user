@@ -192,14 +192,24 @@ const OngoingOverview = () => {
 
   const [accState, setAccState] = useState()
   const [loop, setLoop] = useState(false)
+  const [nextModal, setNextModal] = useState(false)
+  const [defPause, setDefPause] = useState(false)
+  const [firstPause, setFirstPause] = useState(true)
   const playerRef = useRef();
 
 
+  const defaultNormalPause = () => {
+    setPause(false);
+    setPlaying(true);
+    setDefPause(true);
+    setNextModal(false);
+    setFirstPause(false);
+  }
   return (
     <div className="ongoing-overview">
       <div className="ongoing-section-1">
         <div className="ongoing-section-video-player">
-          {pause && (
+          {/* {pause && (
             <div className="pause-overlay" onClick={onPlay}>
               <div className="onpause-modal">
                 <p className="onpause-modal-title">
@@ -213,7 +223,37 @@ const OngoingOverview = () => {
                 </button>
               </div>
             </div>
+          )} */}
+
+          {pause && (
+            <>
+              <div className="pause-overlay">
+                {
+                  firstPause &&
+                  <div className="continue-chapter-pause-button" onClick={() => { setNextModal(true) }}>Continue Chapter 3 Lesson 21</div>
+                }
+                {
+                  nextModal &&
+                  <div className="onpause-modal">
+                    <p className="onpause-modal-title">
+                      Your lesson paused at <span>{Math.floor(played) / 100}</span> Do you want to continue watching?
+                    </p>
+                    <button className="onpause-button" onClick={defaultNormalPause}>
+                      Continue Watching
+                    </button>
+                    <button className="onpause-button beginning" onClick={() => { playerRef.current.seekTo(0, 'seconds'); setPause(false); setPlaying(true) }}>
+                      Watch from beginning
+                    </button>
+                  </div>
+                }
+                {
+                  defPause &&
+                  <div className="pause-button" onClick={onPlay}>{start_pauseIconVideo}</div>
+                }
+              </div>
+            </>
           )}
+
           <ReactPlayer
             url={videoLink}
             // url='https://youtu.be/yNYYOGeMXgc'
@@ -912,7 +952,7 @@ const OngoingOverview = () => {
           </div>
         </div>
       </div>
-      { (chapterLoading || overviewLoading) && <Loading /> }
+      {(chapterLoading || overviewLoading) && <Loading />}
     </div >
   );
 };

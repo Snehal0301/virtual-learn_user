@@ -606,6 +606,22 @@ p:not(.truncated)~label {
     z-index: 5;
 }
 
+.continue-chapter-pause-button{
+    background-color: var(--secondaryClr);
+    position: absolute;
+    top: 45%;
+    left: 34.8%;
+    padding: 20px;
+    color: white;
+    font-size: 20px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.continue-chapter-pause-button:hover{
+    background-color: #f46c5d;
+}
+
 /* new custom accordian package */
 
 /**
