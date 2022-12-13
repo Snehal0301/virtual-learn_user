@@ -42,6 +42,7 @@ const EditProfile = () => {
         TwitterURL: "Meow",
         FacebookURL: "",
       },
+
       validationSchema: editSchema,
       onSubmit: (values, action) => {
         console.log(values);
