@@ -766,8 +766,8 @@ const OngoingOverview = () => {
                                                 {ele.testName}
                                               </p>
                                               <p className="accordian-item-chapter-duration">
-                                                10 min | {ele.questionCount}{" "}
-                                                questions
+                                                {ele.testDuration} min |{" "}
+                                                {ele.questionCount} questions
                                               </p>
                                             </div>
                                           </div>
