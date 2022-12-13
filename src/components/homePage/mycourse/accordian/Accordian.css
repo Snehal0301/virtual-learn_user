@@ -16,7 +16,10 @@
 }
 
 .course-accordian-container-title {
-    color: #1EAB0D;
+    color: #494949;
+}
+.course-accordian-container-title-active {
+    color: green;
 }
 
 .course-accordian-container-state {

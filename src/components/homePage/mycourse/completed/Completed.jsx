@@ -1,4 +1,5 @@
-import React from 'react'
+import React,{useState,useEffect} from 'react'
+import axios from 'axios'
 import './Completed.css'
 const Completed = () => {
   const completedCourses = [
@@ -23,21 +24,40 @@ const Completed = () => {
       chapters: "15/20 Chapters",
     },
   ];
+
+  const [completed, setcompleted] = useState([])
+  useEffect(() => {
+    axios
+    .get(
+      `http://virtuallearnapp2-env.eba-wrr2p8zk.ap-south-1.elasticbeanstalk.com/user/completedCourses`,
+      {
+        headers: { Authorization: `Bearer ${localStorage.getItem('Token')}` },
+      }
+    )
+    .then((res) => {
+      setcompleted(res.data);
+    })
+    .catch((err) => {
+      console.error(err);
+    });
+  }, [])
+
+  console.log(completed);
   return (
     <div className="completed-section">
       {
-        completedCourses.map((ele, i) => {
+        completed.map((ele, i) => {
           return (
             <div className="completed-parent" key={i}>
 
               <div className="completed-images">
                 <div className="comp-overlay"></div>
-                  <img src={ele.image} alt="" className="comp-img" />
+                  <img src={ele.coursePhoto} alt="" className="comp-img" />
                   <div className="completed-chap-progress">
                     <p className="completed-text">Completed</p>
                     <div className="completed-chap-descp">
-                      <p>{ele.title}</p>
-                      <p>{ele.chapters}</p>
+                      <p>{ele.courseName}</p>
+                      <p>{ele.coursePercentage}% Approval Rate</p>
                     </div>
                   </div>
                   <button className="btn-continue-completed">View Certificate</button>

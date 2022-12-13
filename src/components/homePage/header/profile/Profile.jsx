@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React, { useEffect, useState } from "react";
 import "./Profile.css";
 import {
   closeProfile,
@@ -19,7 +19,7 @@ import {
 } from "../../../../redux/reducers/headerProfileOptions";
 import ChangePassword from "../changePassword/ChangePassword";
 import EditProfile from "../edit-profile/EditProfile";
-import profileData from '../../../../api-results/ProfileResults.json'
+import profileData from "../../../../api-results/ProfileResults.json";
 import axios from "axios";
 
 const Profile = () => {
@@ -32,7 +32,7 @@ const Profile = () => {
     dispatch(privacySection(false));
   };
 
-
+  const [profileData, setProfileData] = useState("");
   const showChangePassword = () => {
     dispatch(showChangePasswordSection(true));
   };
@@ -44,9 +44,23 @@ const Profile = () => {
     (state) => state.headerProfile.showChangePassword
   );
   const editState = useSelector((state) => state.headerProfile.editSection);
-  
-  
-  
+
+  useEffect(() => {
+    axios
+      .get(
+        `http://virtuallearnapp2-env.eba-wrr2p8zk.ap-south-1.elasticbeanstalk.com/user/myProfile`,
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("Token")}`,
+          },
+        }
+      )
+      .then((res) => {
+        console.log(profileData);
+        setProfileData(res.data);
+      });
+  }, []);
+
   const renderElement = () => {
     if (changePasswordState) {
       return <ChangePassword />;
@@ -70,29 +84,28 @@ const Profile = () => {
 
             <div className="profile-logo-name">
               <div className="profile-img-frame">
-                <img
-                  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQZea5hmBriu2GpLrDCzJoBnAFqT2hzJTuTBZ_oNRUJ5lztiO3Ujs8NngJ2BWiTqjmvfx8&usqp=CAU"
-                  alt=""
-                />
+                <img src={profileData.profilePhoto} />
               </div>
               <div className="profile-image-name">
-                <p className="name">Mahendra Singh Dhoni</p>
-                <p className="role">UX/UI Designer</p>
+                <p className="name">{profileData.fullName}</p>
+                <p className="role">{profileData.occupation}</p>
               </div>
             </div>
           </div>
           <div className="drawer-profile-body">
             <div className="progress-details">
               <div className="progress-1">
-                <p className="progress-digit">06</p>
+                <p className="progress-digit">{profileData.courseCompleted}</p>
                 <p className="progress-content">Courses</p>
               </div>
               <div className="progress-1">
-                <p className="progress-digit">103</p>
+                <p className="progress-digit">
+                  {profileData.chaptersCompleted}
+                </p>
                 <p className="progress-content">Chapters</p>
               </div>
               <div className="progress-1">
-                <p className="progress-digit">24</p>
+                <p className="progress-digit">{profileData.testsCompleted}</p>
                 <p className="progress-content">Test</p>
               </div>
             </div>
@@ -102,28 +115,30 @@ const Profile = () => {
               <div className="personal-section-1">
                 <div className="personal-detail-section">
                   <p className="pd-title">Name</p>
-                  <p className="pd-value">Mahendra Singh Dhoni</p>
+                  <p className="pd-value">{profileData.fullName}</p>
                 </div>
                 <div className="personal-detail-section">
                   <p className="pd-title">Username</p>
-                  <p className="pd-value">Msdian</p>
+                  <p className="pd-value">{profileData.userName}</p>
                 </div>
                 <div className="personal-detail-section">
                   <p className="pd-title">Email ID</p>
-                  <p className="pd-value">msd07@gmail.com</p>
+                  <p className="pd-value">{profileData.email}</p>
                 </div>
                 <div className="personal-detail-section">
                   <p className="pd-title">Mobile Number</p>
-                  <p className="pd-value">+91 9844635685</p>
+                  <p className="pd-value">{profileData.mobileNumber}</p>
                 </div>
                 <div className="personal-detail-section">
                   <p className="pd-title">Occupation</p>
-                  <p className="pd-value">UX/UI Designer</p>
+                  <p className="pd-value">{profileData.occupation}</p>
                 </div>
-                <div className="personal-detail-section">
-                  <p className="pd-title">Date of Birth</p>
-                  <p className="pd-value">7 July 1981</p>
-                </div>
+                {profileData.dob && (
+                  <div className="personal-detail-section">
+                    <p className="pd-title">Date of Birth</p>
+                    <p className="pd-value">7 July 1981</p>
+                  </div>
+                )}
                 <div
                   className="personal-detail-section  password-chng"
                   onClick={showChangePassword}

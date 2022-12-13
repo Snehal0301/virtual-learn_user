@@ -11,13 +11,13 @@ const initialState = {
   loading: false,
 };
 
-export const test: any = createAsyncThunk(
-  'test/test',
+export const courseOverview: any = createAsyncThunk(
+  'courseOverview/courseOverview',
   async (arg: any, { rejectWithValue }) => {
     try {
       const fetchedData: any = await axios.request({
         method: 'get',
-        url: `http://virtuallearnapp2-env.eba-wrr2p8zk.ap-south-1.elasticbeanstalk.com/user/${arg}`,
+        url: `http://virtuallearnapp2-env.eba-wrr2p8zk.ap-south-1.elasticbeanstalk.com/user/courseOverView?courseId=${arg}`,
         headers: {
           Authorization: `Bearer ${localStorage.getItem('Token')}`,
         },
@@ -33,27 +33,23 @@ export const test: any = createAsyncThunk(
   }
 );
 
-export const testSlice = createSlice({
-  name: 'test',
+export const courseOverviewSlice = createSlice({
+  name: 'courseOverview',
   initialState,
-  reducers: {
-    testisSuccess: (state) => {
-      state.isSuccess = false;
-    },
-  },
+  reducers: {},
   extraReducers: (builder) => {
     // Add reducers for additional action types here, and handle loading state as needed
-    builder.addCase(test.pending, (state, action) => {
+    builder.addCase(courseOverview.pending, (state, action) => {
       // Add user to the state array
       state.loading = true;
     });
-    builder.addCase(test.fulfilled, (state, action) => {
+    builder.addCase(courseOverview.fulfilled, (state, action) => {
       state.loading = false;
       state.data = action.payload;
       state.headers = action;
       state.isSuccess = true;
     });
-    builder.addCase(test.rejected, (state, action) => {
+    builder.addCase(courseOverview.rejected, (state, action) => {
       state.message = action.payload;
       state.loading = false;
       state.isRejected = true;
@@ -61,6 +57,6 @@ export const testSlice = createSlice({
   },
 });
 
-export const { testisSuccess } = testSlice.actions;
+export const {} = courseOverviewSlice.actions;
 
-export default testSlice;
+export default courseOverviewSlice;

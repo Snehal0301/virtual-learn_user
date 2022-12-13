@@ -103,6 +103,7 @@
 .quizResults-headerBodyContentsResultsBodyTitle {
   font-style: normal;
   font-weight: 400;
+  width: max-content;
   font-size: 14px;
   line-height: 20px;
   text-align: center;

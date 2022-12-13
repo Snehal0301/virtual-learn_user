@@ -11,13 +11,13 @@ const initialState = {
   loading: false,
 };
 
-export const test: any = createAsyncThunk(
-  'test/test',
+export const chapterResponse: any = createAsyncThunk(
+  'chapterResponse/chapterResponse',
   async (arg: any, { rejectWithValue }) => {
     try {
       const fetchedData: any = await axios.request({
         method: 'get',
-        url: `http://virtuallearnapp2-env.eba-wrr2p8zk.ap-south-1.elasticbeanstalk.com/user/${arg}`,
+        url: `http://virtuallearnapp2-env.eba-wrr2p8zk.ap-south-1.elasticbeanstalk.com/user/courseChapterResponse?courseId=${arg}`,
         headers: {
           Authorization: `Bearer ${localStorage.getItem('Token')}`,
         },
@@ -33,27 +33,23 @@ export const test: any = createAsyncThunk(
   }
 );
 
-export const testSlice = createSlice({
-  name: 'test',
+export const chapterResponseSlice = createSlice({
+  name: 'chapterResponse',
   initialState,
-  reducers: {
-    testisSuccess: (state) => {
-      state.isSuccess = false;
-    },
-  },
+  reducers: {},
   extraReducers: (builder) => {
     // Add reducers for additional action types here, and handle loading state as needed
-    builder.addCase(test.pending, (state, action) => {
+    builder.addCase(chapterResponse.pending, (state, action) => {
       // Add user to the state array
       state.loading = true;
     });
-    builder.addCase(test.fulfilled, (state, action) => {
+    builder.addCase(chapterResponse.fulfilled, (state, action) => {
       state.loading = false;
       state.data = action.payload;
       state.headers = action;
       state.isSuccess = true;
     });
-    builder.addCase(test.rejected, (state, action) => {
+    builder.addCase(chapterResponse.rejected, (state, action) => {
       state.message = action.payload;
       state.loading = false;
       state.isRejected = true;
@@ -61,6 +57,6 @@ export const testSlice = createSlice({
   },
 });
 
-export const { testisSuccess } = testSlice.actions;
+export const {} = chapterResponseSlice.actions;
 
-export default testSlice;
+export default chapterResponseSlice;

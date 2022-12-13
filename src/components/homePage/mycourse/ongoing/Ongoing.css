@@ -20,6 +20,8 @@ flex-wrap: wrap;
 }
 .ong-img {
   border-radius: 10px;
+  height: 234px;
+  width: 350px;
 }
 .chap-progress {
   display: flex;
