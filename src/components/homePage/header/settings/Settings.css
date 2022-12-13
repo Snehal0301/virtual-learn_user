@@ -129,6 +129,9 @@
 .mobile-arrow-left-terms {
   display: none;
 }
+.mobile-arrow-left-settings {
+  display: none;
+}
 @media screen and (max-width: 760px) {
   nav.EZDrawer__container {
     width: 100vw !important;

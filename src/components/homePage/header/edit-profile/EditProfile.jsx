@@ -29,10 +29,10 @@ const EditProfile = () => {
       editPEmail: editProfileData.email,
       MobileNo: editProfileData.mobileNumber,
       gender: editProfileData.gender,
-      // editPDOB: "",
+      editPDOB: "",
       editPOccupation: editProfileData.occupation,
-      // TwitterURL: "",
-      // FacebookURL: "",
+      TwitterURL: "",
+      FacebookURL: "",
     },
     validationSchema: editSchema,
     onSubmit: (values, action, e) => {
@@ -58,28 +58,26 @@ const EditProfile = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    //     axios
-    //       .request(
-    //         `http://virtuallearnapp2-env.eba-wrr2p8zk.ap-south-1.elasticbeanstalk.com/user/save`,
-    //         {
-    //           method: "put",
-    //           headers: {
-    //             Authorization: `Bearer ${localStorage.getItem("Token")}`,
-    //           },
-    //           data: {
-    //             email:e.target.value,
-    //             fullName:,
-    //             userName:,
-    //             mobileNumber:,
-    //             gender:,
-    // occupation:,
-
-    //           },
-    //         }
-    //       )
-    //       .catch((Err) => {
-    //         console.log(Err);
-    //       });
+    axios
+      .request(
+        ` http://virtuallearnapp2-env.eba-wrr2p8zk.ap-south-1.elasticbeanstalk.com/user/save`,
+        {
+          method: "put",
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("Token")}`,
+          },
+          data: {
+            gender: e.target.gender,
+            occupation: e.target.editPOccupation,
+            dateOfBirth: e.target.editPDOB,
+            twitterLink: e.target.TwitterURL,
+            faceBookLink: e.target.FacebookURL,
+          },
+        }
+      )
+      .catch((Err) => {
+        console.log(Err);
+      });
     alert("Submit Clicked");
   };
 
@@ -94,6 +92,7 @@ const EditProfile = () => {
         <div className="editProfileImage">
           <img src={editProfileData && editProfileData.profilePhoto} alt="" />
         </div>
+        <input type="file" name="" id="" />
       </div>
       <div className="EditForm">
         <form className="editProfileForm" onSubmit={handleSubmit}>
@@ -220,9 +219,9 @@ const EditProfile = () => {
               onChange={handleChange}
               onBlur={handleBlur}
             >
-              {/* <option value="none" selected>
-              Gender
-              </option> */}
+              <option value="none" selected>
+                Gender
+              </option>
               <option value="male">Male</option>
               <option value="female" selected>
                 Female
