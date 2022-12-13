@@ -209,21 +209,6 @@ const OngoingOverview = () => {
     <div className="ongoing-overview">
       <div className="ongoing-section-1">
         <div className="ongoing-section-video-player">
-          {/* {pause && (
-            <div className="pause-overlay" onClick={onPlay}>
-              <div className="onpause-modal">
-                <p className="onpause-modal-title">
-                  Your lesson paused at <span>{Math.floor(played) / 100}</span> Do you want to continue watching?
-                </p>
-                <button className="onpause-button" onClick={onPlay}>
-                  Continue Watching
-                </button>
-                <button className="onpause-button beginning" onClick={() => { playerRef.current.seekTo(0, 'seconds'); setPause(false); setPlaying(true) }}>
-                  Watch from beginning
-                </button>
-              </div>
-            </div>
-          )} */}
 
           {pause && (
             <>
