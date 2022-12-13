@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "./Profile.css";
 import {
   closeProfile,
@@ -19,7 +19,7 @@ import {
 } from "../../../../redux/reducers/headerProfileOptions";
 import ChangePassword from "../changePassword/ChangePassword";
 import EditProfile from "../edit-profile/EditProfile";
-import profileData from '../../../../api-results/ProfileResults.json'
+import profileData from "../../../../api-results/ProfileResults.json";
 import axios from "axios";
 
 const Profile = () => {
@@ -32,7 +32,7 @@ const Profile = () => {
     dispatch(privacySection(false));
   };
 
-
+  const [profileData, setProfileData] = useState("");
   const showChangePassword = () => {
     dispatch(showChangePasswordSection(true));
   };
@@ -45,21 +45,20 @@ const Profile = () => {
   );
   const editState = useSelector((state) => state.headerProfile.editSection);
 
-  // useEffect(() => {
-  //  axios
-  //    .get(
-  //      `http://virtuallearnapp2-env.eba-wrr2p8zk.ap-south-1.elasticbeanstalk.com/user/myProfile`,
-  //      {
-  //        headers:
-  //        {
-  //          Authorization:`Bearer ${localStorage.getItem("Token")}`
-  //        }
-  //      }
-  //    )
-  //    .then((res) => {
-  //      console.log(res);
-  //    });
-  // }, [])
+  useEffect(() => {
+    axios
+      .get(
+        `http://virtuallearnapp2-env.eba-wrr2p8zk.ap-south-1.elasticbeanstalk.com/user/myProfile`,
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("Token")}`,
+          },
+        }
+      )
+      .then((res) => {
+        setProfileData(res.data);
+      });
+  }, []);
 
   const renderElement = () => {
     if (changePasswordState) {
@@ -84,9 +83,7 @@ const Profile = () => {
 
             <div className="profile-logo-name">
               <div className="profile-img-frame">
-                <img
-                  src={profileData.profilePhoto}
-                />
+                <img src={profileData.profilePhoto} />
               </div>
               <div className="profile-image-name">
                 <p className="name">{profileData.fullName}</p>
@@ -101,7 +98,9 @@ const Profile = () => {
                 <p className="progress-content">Courses</p>
               </div>
               <div className="progress-1">
-                <p className="progress-digit">{profileData.chaptersCompleted}</p>
+                <p className="progress-digit">
+                  {profileData.chaptersCompleted}
+                </p>
                 <p className="progress-content">Chapters</p>
               </div>
               <div className="progress-1">
@@ -133,13 +132,12 @@ const Profile = () => {
                   <p className="pd-title">Occupation</p>
                   <p className="pd-value">{profileData.occupation}</p>
                 </div>
-                {
-                  profileData.dob &&
+                {profileData.dob && (
                   <div className="personal-detail-section">
                     <p className="pd-title">Date of Birth</p>
                     <p className="pd-value">7 July 1981</p>
                   </div>
-                }
+                )}
                 <div
                   className="personal-detail-section  password-chng"
                   onClick={showChangePassword}

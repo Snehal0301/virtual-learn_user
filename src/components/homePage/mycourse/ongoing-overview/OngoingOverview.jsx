@@ -42,7 +42,7 @@ import { testShow, testSuccess } from '../../../../redux/reducers/Conditions';
 import { testSuccessRed } from '../../../../redux/reducers/SuccessTestRed';
 import { showSuccessPage } from '../../../../redux/reducers/showSuccesspage';
 import { finaltestShowPage } from '../../../../redux/reducers/finalTestSuccess';
-
+import ShowMoreText from "react-show-more-text";
 
 const OngoingOverview = () => {
   const [activeStep, setActiveStep] = useState(0);
@@ -91,7 +91,6 @@ const OngoingOverview = () => {
 
 
   const defaultVideoState = useSelector((state) => state.mycourse.firstVideo)
-  console.log("defaultVideoState", defaultVideoState);
 
   useEffect(() => {
     axios
@@ -273,10 +272,11 @@ const OngoingOverview = () => {
                 </div>
                 <div className="ongoing-course-desc-content">
                   <input type="checkbox" id="expanded"></input>
-                  <p>{overviewData.description}</p>
-                  <label for="expanded" role="button">
+                  <ShowMoreText className="showmore" anchorClass="show-more-style">{overviewData.description}</ShowMoreText>
+                  {/* <ShowMoreText className="showmore" anchorClass="show-more-style">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quis quod ullam, iste quo hic voluptatem, et tempore, modi quaerat placeat cum. Quam eos itaque quo omnis, quae delectus illo quos autem nobis ut possimus in, excepturi et illum sunt perspiciatis accusamus, repellat facilis fuga animi voluptatem pariatur nisi consequatur voluptates! Rem cum nobis itaque consequuntur eveniet a nihil ab quibusdam deleniti dolorum quia libero ullam culpa minima eaque debitis minus aperiam ducimus odio delectus, eius consequatur iusto odit! Nemo quasi corporis velit itaque neque fugit soluta dolores dolorem facere, molestias maxime non consequatur quidem odio totam esse iure, delectus fuga!</ShowMoreText> */}
+                  {/* <label for="expanded" role="button">
                     SHOW MORE
-                  </label>
+                  </label> */}
                 </div>
               </div>
             ) : (
@@ -345,63 +345,49 @@ const OngoingOverview = () => {
           >
             <div className="tab-1-all">
               {/*Mobile Screen*/}
-              <div className="ongoing-course-desc-mobile">
-                <div className="ongoing-course-desc-title-mobile">
-                  <p>
-                    Learn how to design a beautiful and engaging mobile app with
-                    Figma. Learn-by-doing approach. Learn how to design a
-                    beautiful and engaging mobile app with Figma. Learn-by-doing
-                    approach.
-                  </p>
-                </div>
-                <div className="ongoing-course-desc-content-mobile">
-                  <p>Preview this Course</p>
-                  <div className="mobile-video-link">
-                    <div className="mobile-video-section-1">
-                      <img
-                        src={require('../../../../assets/images/icn_play_orange.png')}
-                        alt=""
-                        className="video-logo"
-                      />
-                      <div className="mobile-video-desc">
-                        <div className="mobile-video-title">Introduction</div>
-                        <div className="mobile-video-dur">3 Min</div>
+              {overviewData ? (
+                <div className="ongoing-course-desc-mobile">
+                  <div className="ongoing-course-desc-title-mobile">
+                    <p>{overviewData.courseTagLine}</p>
+                  </div>
+                  <div className="ongoing-course-desc-content-mobile">
+                    <p>Preview this Course</p>
+                    <div className="mobile-video-link">
+                      <div className="mobile-video-section-1">
+                        <img
+                          src={require("../../../../assets/images/icn_play_orange.png")}
+                          alt=""
+                          className="video-logo"
+                        />
+                        <div className="mobile-video-desc">
+                          <div className="mobile-video-title">Introduction</div>
+                          <div className="mobile-video-dur">3 Min</div>
+                        </div>
                       </div>
+                      <img
+                        src={require("../../../../assets/images/icn_previewgo.png")}
+                        alt=""
+                        className="right-icon"
+                      />
                     </div>
+                    <input type="checkbox" id="expanded"></input>
+                    <p className="mobile-video-description">
+                      {overviewData.description}
+                    </p>
+                    <label for="expanded" role="button">
+                      SHOW MORE
+                    </label>
                     <img
                       src={require('../../../../assets/images/icn_previewgo.png')}
                       alt=""
                       className="right-icon"
                     />
                   </div>
-                  <input type="checkbox" id="expanded"></input>
-                  <p className="mobile-video-description">
-                    Figma is a very powerful application that runs online. There
-                    are virtually no platform boundaries when it comes to using
-                    figma because you can design within a web browser or using
-                    their desktop application made for windows and macs. Figma
-                    is similar to Sketch and Adobe XD but is the more powerful
-                    of the three when it comes. Figma is a very powerful
-                    application that runs online. There are virtually no
-                    platform boundaries when it comes to using figma because you
-                    can design within a web browser or using their desktop
-                    application made for windows and macs. Figma is a very
-                    powerful application that runs online. There are virtually
-                    no platform boundaries when it comes to using figma because
-                    you can design within a web browser or using their desktop
-                    application made for windows and macs. Figma is similar to
-                    Sketch and Adobe XD but is the more powerful of the three
-                    when it comes. Figma is a very powerful application that
-                    runs online. There are virtually no platform boundaries when
-                    it comes to using figma because you can design within a web
-                    browser or using their desktop application made for windows
-                    and macs
-                  </p>
-                  <label for="expanded" role="button">
-                    SHOW MORE
-                  </label>
                 </div>
-              </div>
+              ) : (
+                <h3>Loading.....</h3>
+              )}
+
               {overviewData ? (
                 <div className="overview-content">
                   <p className="overview-content-title">Course Includes</p>
@@ -431,12 +417,8 @@ const OngoingOverview = () => {
                     <div className="course-points-img">
                       {courseMediumAccess}
                     </div>
-
                     <div className="course-points-title">
-                      {/* Access on mobile, desktop and tv */}
-                      {overviewData.requirements.map((ele, i) => {
-                        return <p>{ele}</p>;
-                      })}
+                      Access on mobile, desktop and tv
                     </div>
                   </div>
                   <div className="course-points">
@@ -451,37 +433,26 @@ const OngoingOverview = () => {
               )}
               <div className="overview-learn">
                 <p className="overview-learn-title">What you’ll learn</p>
-                <div className="learn-points">
-                  <div className="learn-points-img">{learnCheckMark}</div>
-                  <div className="learn-points-title">Design Websites</div>
-                </div>
-                <div className="learn-points">
-                  <div className="learn-points-img">{learnCheckMark}</div>
-                  <div className="learn-points-title">
-                    You will have a fully interactive design and prototype at
-                    the end of this course
-                  </div>
-                </div>
-                <div className="learn-points">
-                  <div className="learn-points-img">{learnCheckMark}</div>
-                  <div className="learn-points-title">
-                    Design mobile and desktop apps
-                  </div>
-                </div>
-                <div className="learn-points">
-                  <div className="learn-points-img">{learnCheckMark}</div>
-                  <div className="learn-points-title">
-                    You will learn how to reuse design elements for future
-                    projects
-                  </div>
-                </div>
+                {overviewData &&
+                  overviewData.learningOutCome &&
+                  overviewData.learningOutCome.map((ele) => {
+                    return (
+                      <div className="learn-points">
+                        <div className="learn-points-img">{learnCheckMark}</div>
+                        <div className="learn-points-title">{ele}</div>
+                      </div>
+                    );
+                  })}
               </div>
 
               <div className="overview-req">
                 <p className="overview-req-title">Requirements</p>
                 <ul>
-                  <li>Internet Access</li>
-                  <li>You should know your way around comouter basics</li>
+                  {overviewData &&
+                    overviewData.requirements &&
+                    overviewData.requirements.map((ele) => {
+                      return <li>{ele}</li>;
+                    })}
                 </ul>
               </div>
 
@@ -495,47 +466,15 @@ const OngoingOverview = () => {
                         {overviewData.instructorName}
                       </p>
                       <div className="profile-occupation">
-                        {overviewData.instructorDescription} {overviewData.url}
+                        {overviewData.designation} {""}
+                        {overviewData.url}
                       </div>
                     </div>
                   </div>
                   <div className="instructor-about">
                     <input type="checkbox" id="expanded"></input>
-                    <p>
-                      Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-                      Facilis doloremque fuga nobis consectetur dignissimos ab,
-                      sit necessitatibus alias, explicabo doloribus laudantium
-                      ducimus mollitia quod delectus repudiandae debitis
-                      voluptatem, deserunt fugiat dolore perferendis accusantium
-                      quia numquam! Fugiat, temporibus odio? Voluptates
-                      excepturi autem, error assumenda quia quod ratione modi
-                      tenetur laborum rem!
-                      <br />
-                      <br />
-                      Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                      Nisi et rem hic eum nam exercitationem magnam quae veniam!
-                      Ipsa eaque velit aspernatur minima illum? Expedita nemo
-                      tempore, dolores distinctio molestiae mollitia temporibus
-                      quasi eveniet aliquam sequi laudantium porro qui, quaerat
-                      nam in quos pariatur rerum. Architecto rem repudiandae
-                      error explicabo veniam inventore dolorum cupiditate cum
-                      provident, rerum ipsum corrupti illum sint consectetur
-                      quos, ex perferendis numquam! Fuga minima corrupti nihil
-                      at eligendi quas doloribus quod molestias deserunt,
-                      mollitia exercitationem vitae non, odio ex, voluptate in
-                      quia. Eaque vitae eius esse earum omnis. Rerum odio vero
-                      accusantium deleniti ad modi magni temporibus
-                      reprehenderit similique facere asperiores assumenda,
-                      pariatur odit quidem vel accusamus ab quod vitae nisi? In
-                      sed corporis accusamus sapiente harum, minima repellat
-                      nihil quod veniam rem magnam fuga, ipsam aliquid pariatur
-                      modi repudiandae doloremque recusandae, maiores tenetur
-                      nisi voluptatum explicabo facere. Maiores consequatur vel
-                      consequuntur corporis commodi id optio?
-                    </p>
-                    <label for="expanded" role="button">
-                      SHOW MORE
-                    </label>
+                    <ShowMoreText lines={5} className="showmore" anchorClass="show-more-style">{overviewData.instructorDescription}</ShowMoreText>
+
                   </div>
                 </div>
               ) : (

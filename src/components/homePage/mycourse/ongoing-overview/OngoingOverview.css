@@ -132,11 +132,8 @@
     text-align: justify;
 }
 
-.ongoing-course-desc-content p {
-    display: -webkit-box;
-    -webkit-line-clamp: 5;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
+.ongoing-course-desc-content .showmore {
+
 }
 
 .ongoing-course-desc-content label {
@@ -497,9 +494,16 @@ p:not(.truncated)~label {
     /* font-size: 14px; */
 }
 
-.ongoing-course-desc-content-mobile p {
+.ongoing-course-desc-content-mobile .showmore {
     font-size: 20px;
     margin-top: 20px;
+    text-align: justify;
+}
+
+.show-more-style{
+    color: red;
+    cursor: pointer;
+    text-transform: uppercase;
 }
 
 .mobile-video-link {
