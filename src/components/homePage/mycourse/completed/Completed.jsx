@@ -1,76 +1,93 @@
-import React,{useState,useEffect} from 'react'
-import axios from 'axios'
-import './Completed.css'
-const Completed = () => {
-  const completedCourses = [
-    {
-      image: require("../../../../assets/images/internal-marketing.png"),
-      title: "User Interface with Illustration",
-      chapters: "100% Approval Rate",
-    },
-    {
-      image: require("../../../../assets/images/internal-marketing.png"),
-      title: "Poster Design Tutorial",
-      chapters: "80% Approval Rate",
-    },
-    {
-      image: require("../../../../assets/images/internal-marketing.png"),
-      title: "Graphic Design Part-1",
-      chapters: "90% Approval Rate",
-    },
-    {
-      image: require("../../../../assets/images/internal-marketing.png"),
-      title: "Art & Illustration",
-      chapters: "15/20 Chapters",
-    },
-  ];
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import './Completed.css';
+import Certificate from '../../quiz/certificate/Certificate';
+import { useDispatch } from 'react-redux';
+import { showCertificate } from '../../../../redux/reducers/Conditions';
 
-  const [completed, setcompleted] = useState([])
+const Completed = () => {
+  const [completed, setcompleted] = useState([]);
+  const [certificate, setCertificate] = useState();
+  const [courseName, setCourseName] = useState();
+
+  const dispatch = useDispatch();
+
   useEffect(() => {
     axios
-    .get(
-      `http://virtuallearnapp2-env.eba-wrr2p8zk.ap-south-1.elasticbeanstalk.com/user/completedCourses`,
-      {
-        headers: { Authorization: `Bearer ${localStorage.getItem('Token')}` },
-      }
-    )
-    .then((res) => {
-      setcompleted(res.data);
-    })
-    .catch((err) => {
-      console.error(err);
-    });
-  }, [])
+      .get(
+        `http://virtuallearnapp2-env.eba-wrr2p8zk.ap-south-1.elasticbeanstalk.com/user/completedCourses`,
+        {
+          headers: { Authorization: `Bearer ${localStorage.getItem('Token')}` },
+        }
+      )
+      .then((res) => {
+        setcompleted(res.data);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  }, []);
 
   console.log(completed);
   return (
-    <div className="completed-section">
-      {
-        completed.map((ele, i) => {
+    <>
+      <div className="completed-section">
+        {completed.map((ele, i) => {
           return (
             <div className="completed-parent" key={i}>
-
               <div className="completed-images">
                 <div className="comp-overlay"></div>
-                  <img src={ele.coursePhoto} alt="" className="comp-img" />
-                  <div className="completed-chap-progress">
-                    <p className="completed-text">Completed</p>
-                    <div className="completed-chap-descp">
-                      <p>{ele.courseName}</p>
-                      <p>{ele.coursePercentage.toFixed(2)}% Approval Rate</p>
-                    </div>
+                <img src={ele.coursePhoto} alt="" className="comp-img" />
+                <div className="completed-chap-progress">
+                  <p className="completed-text">Completed</p>
+                  <div className="completed-chap-descp">
+                    <p>{ele.courseName}</p>
+                    <p>{ele.coursePercentage.toFixed(2)}% Approval Rate</p>
                   </div>
-                  <button className="btn-continue-completed">View Certificate</button>
                 </div>
-              </div>
-          )
-        })
-      }
-    </div>
-  );
-}
+                <button
+                  className="btn-continue-completed"
+                  onClick={() => {
+                    dispatch(showCertificate(true));
+                    setCourseName(ele.courseName);
 
-export default Completed
+                    axios
+                      .get(
+                        `http://virtuallearnapp2-env.eba-wrr2p8zk.ap-south-1.elasticbeanstalk.com/user/pdf?courseId=${ele.courseId}`,
+                        {
+                          headers: {
+                            Authorization: `Bearer ${localStorage.getItem(
+                              'Token'
+                            )}`,
+                          },
+                        }
+                      )
+                      .then((res) => {
+                        res &&
+                          res.data &&
+                          res.data.certificate &&
+                          setCertificate(res.data.certificate);
+                      })
+                      .catch((err) => {
+                        console.error(err);
+                      });
+                  }}
+                >
+                  View Certificate
+                </button>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+      {courseName && certificate && (
+        <Certificate certificate={certificate} name={courseName} />
+      )}
+    </>
+  );
+};
+
+export default Completed;
 
 /*
 
