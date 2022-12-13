@@ -868,10 +868,31 @@
   .comp-img {
     width: 100%;
   }
-}
+  .drawer-profile-header-notify {
+    background-color: unset !important;
+    padding: 10px 30px !important;
+  }
 
-/* @media only screen and (max-width:360px){
-.chap-progress {
-    top: 5px; 
+  .drawer-profile-profile-notify {
+    font-size: 26px !important;
+    color: #000000 !important;
+    padding-top: 20px !important;
+  }
+  .drawer-profile-name-notify {
+    margin: 14px 0 20px 0px !important;
+  }
+  .arrow-left-notify-mobile {
+    display: flex !important;
+    position: relative;
+  }
+  .arrow-left-long-notify {
+    position: absolute;
+    top: 10px;
+  }
+  .drawer-profile-clear-notify {
+    display: none !important;
+  }
+  .notificationUnread {
+    margin-bottom: 4px !important;
+  }
 }
-} */

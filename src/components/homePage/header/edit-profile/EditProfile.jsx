@@ -20,35 +20,27 @@ const EditProfile = () => {
   const handleClick = () => {
     dispatch(editProfileSection(false));
   };
-  const EditProfileData = [
-    {
-      id: 1,
-      title:
-        "You scored 80% in Chapter 3 - Setting up a new project, of Course - Learn Figma - UI/UX Design Essential Training.",
-      image: require("../../../../assets/images/dhoni.png"),
-      time: "5 mins ago",
-    },
-  ];
-  const { errors, values, touched, handleChange, handleBlur, handleSubmit } =
-    useFormik({
-      initialValues: {
-        editPfullname: editProfileData.fullName,
-        editPUsername: editProfileData && editProfileData.userName,
-        editPEmail: editProfileData && editProfileData.email,
-        MobileNo: editProfileData && editProfileData.mobileNumber,
-        gender: editProfileData && editProfileData.gender,
-        editPDOB: "",
-        editPOccupation: editProfileData && editProfileData.occupation,
-        TwitterURL: "Meow",
-        FacebookURL: "",
-      },
 
-      validationSchema: editSchema,
-      onSubmit: (values, action) => {
-        console.log(values);
-        action.resetForm();
-      },
-    });
+  const { errors, values, touched, handleChange, handleBlur } = useFormik({
+    enableReinitialize: true,
+    initialValues: {
+      editPfullname: editProfileData.fullName,
+      editPUsername: editProfileData.userName,
+      editPEmail: editProfileData.email,
+      MobileNo: editProfileData.mobileNumber,
+      gender: editProfileData.gender,
+      // editPDOB: "",
+      editPOccupation: editProfileData.occupation,
+      // TwitterURL: "",
+      // FacebookURL: "",
+    },
+    validationSchema: editSchema,
+    onSubmit: (values, action, e) => {
+      e.preventDefault();
+      action.resetForm();
+    },
+  });
+
   useEffect(() => {
     axios
       .get(
@@ -63,6 +55,34 @@ const EditProfile = () => {
         setEditProfileData(res.data);
       });
   }, []);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    //     axios
+    //       .request(
+    //         `http://virtuallearnapp2-env.eba-wrr2p8zk.ap-south-1.elasticbeanstalk.com/user/save`,
+    //         {
+    //           method: "put",
+    //           headers: {
+    //             Authorization: `Bearer ${localStorage.getItem("Token")}`,
+    //           },
+    //           data: {
+    //             email:e.target.value,
+    //             fullName:,
+    //             userName:,
+    //             mobileNumber:,
+    //             gender:,
+    // occupation:,
+
+    //           },
+    //         }
+    //       )
+    //       .catch((Err) => {
+    //         console.log(Err);
+    //       });
+    alert("Submit Clicked");
+  };
+
   console.log("EditData", editProfileData);
   return (
     <div className="drawer-profile">
@@ -76,16 +96,14 @@ const EditProfile = () => {
         </div>
       </div>
       <div className="EditForm">
-        <form action="" className="editProfileForm" onSubmit={handleSubmit}>
+        <form className="editProfileForm" onSubmit={handleSubmit}>
           <div className="edit-error-input">
             <input
               type="text"
               id="editPfullname"
               name="editPfullname"
-              placeholder=" "
+              placeholder=""
               className="editPInput"
-              onChange={handleChange}
-              onBlur={handleBlur}
               value={values.editPfullname}
               autoComplete="off"
             />
@@ -198,14 +216,17 @@ const EditProfile = () => {
             <select
               name="gender"
               id="gender"
+              value={values.gender}
               onChange={handleChange}
               onBlur={handleBlur}
             >
-              <option value="none" selected>
-                Gender
-              </option>
+              {/* <option value="none" selected>
+              Gender
+              </option> */}
               <option value="male">Male</option>
-              <option value="female">Female</option>
+              <option value="female" selected>
+                Female
+              </option>
               <option value="other">other</option>
             </select>
           </div>
@@ -269,7 +290,7 @@ const EditProfile = () => {
             ) : null}
           </div>
           <button type="submit" className="editPbtn">
-            save
+            Save
           </button>
         </form>
       </div>
