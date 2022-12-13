@@ -80,6 +80,14 @@ const OngoingOverview = () => {
   }, [courseLoad]);
 
   useEffect(() => {
+    if (chapterLoad.loading) {
+      setChapterLoading(true);
+    } else {
+      setChapterLoading(false);
+    }
+  }, [chapterLoad]);
+
+  useEffect(() => {
     chapterResponses &&
       chapterResponses.data &&
       setChapter(chapterResponses.data);
