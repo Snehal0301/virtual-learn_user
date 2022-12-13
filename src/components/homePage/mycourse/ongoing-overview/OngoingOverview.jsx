@@ -42,6 +42,7 @@ import { testShow, testSuccess } from '../../../../redux/reducers/Conditions';
 import { testSuccessRed } from '../../../../redux/reducers/SuccessTestRed';
 import { showSuccessPage } from '../../../../redux/reducers/showSuccesspage';
 import { finaltestShowPage } from '../../../../redux/reducers/finalTestSuccess';
+import Loading from '../../../../utils/loading/Loading';
 import ShowMoreText from "react-show-more-text";
 
 const OngoingOverview = () => {
@@ -49,7 +50,8 @@ const OngoingOverview = () => {
   const [chapter, setChapter] = useState();
   const [overviewData, setOverviewData] = useState();
   const [defaultvideo, setDefaultVideo] = useState('');
-  const [enrollState, setEnrollState] = useState(false);
+  const [chapterLoading, setChapterLoading] = useState(false);
+  const [overviewLoading, setOverviewLoading] = useState(false);
 
   const navigate = useNavigate();
 
@@ -59,57 +61,50 @@ const OngoingOverview = () => {
     dispatch(testSuccessRed(false));
     dispatch(showSuccessPage(false));
     dispatch(finaltestShowPage(false));
-
   }, []);
+
+  const chapterResponses = useSelector((state) => state.chapterResponse.data);
+  const courseOverview = useSelector((state) => state.courseOverview.data);
+
+  const chapterLoad = useSelector((state) => state.chapterResponse);
+  const courseLoad = useSelector((state) => state.courseOverview);
+
+
+
+  useEffect(() => {
+    if (courseLoad.loading) {
+      setOverviewLoading(true);
+    } else {
+      setOverviewLoading(false);
+    }
+  }, [courseLoad]);
+
+  useEffect(() => {
+    chapterResponses &&
+      chapterResponses.data &&
+      setChapter(chapterResponses.data);
+    chapterResponses &&
+      chapterResponses.data &&
+      setDefaultVideo(
+        chapterResponses.data.chapterResponses[0].lessonResponses[0].videoLink
+      );
+  }, [chapterResponses]);
+
+  useEffect(() => {
+    courseOverview &&
+      courseOverview.data &&
+      setOverviewData(courseOverview.data);
+  }, [courseOverview]);
+
+  console.log('new data', chapter, overviewData);
 
   // api call for chapter section
-  useEffect(() => {
-    axios
-      .get(
-        `http://virtuallearnapp2-env.eba-wrr2p8zk.ap-south-1.elasticbeanstalk.com/user/courseChapterResponse?courseId=41`,
-        {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem('Token')}`,
-          },
-        }
-      )
-      .then((res) => {
-
-        setChapter(res.data);
-        console.log(res.data)
-        setDefaultVideo(res.data.chapterResponses[0].lessonResponses[0].videoLink)
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, []);
 
   useEffect(() => {
+    dispatch(firstVideoState(defaultvideo));
+  }, [defaultvideo]);
 
-    dispatch(firstVideoState(defaultvideo))
-  }, [defaultvideo])
-
-
-  const defaultVideoState = useSelector((state) => state.mycourse.firstVideo)
-
-  useEffect(() => {
-    axios
-      .get(
-        `http://virtuallearnapp2-env.eba-wrr2p8zk.ap-south-1.elasticbeanstalk.com/user/courseOverView?courseId=41`,
-        {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem('Token')}`,
-          },
-        }
-      )
-      .then((res) => {
-        console.log(res.data);
-        setOverviewData(res.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, []);
+  // const defaultVideoState = useSelector((state) => state.mycourse.firstVideo);
 
   const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
@@ -163,12 +158,8 @@ const OngoingOverview = () => {
   }, [showTest]);
 
   const getVideoState = (itemele) => {
-    dispatch(
-      videoLinkState(
-        itemele.videoLink
-      )
-    );
-  }
+    dispatch(videoLinkState(itemele.videoLink));
+  };
 
   const enrollCourse = (courseId) => {
     axios
@@ -180,8 +171,8 @@ const OngoingOverview = () => {
             Authorization: `Bearer ${localStorage.getItem('Token')}`,
           },
           data: {
-            courseId: courseId
-          }
+            courseId: courseId,
+          },
         }
       )
       .then((res) => {
@@ -191,9 +182,7 @@ const OngoingOverview = () => {
       .catch((err) => {
         console.log(err);
       });
-
-  }
-
+  };
 
   return (
     <div className="ongoing-overview">
@@ -224,15 +213,13 @@ const OngoingOverview = () => {
               setPlayed(progress.playedSeconds);
             }}
           />
-          {
-            pause &&
+          {pause && (
             <>
-
               <div className="pause-overlay" onClick={onPlay}>
                 <div className="pause-button">{start_pauseIconVideo}</div>
               </div>
             </>
-          }
+          )}
         </div>
         {/* <div className="ongoing-video-title-section">
                     <div className="ongoing-video-title">
@@ -355,7 +342,7 @@ const OngoingOverview = () => {
                     <div className="mobile-video-link">
                       <div className="mobile-video-section-1">
                         <img
-                          src={require("../../../../assets/images/icn_play_orange.png")}
+                          src={require('../../../../assets/images/icn_play_orange.png')}
                           alt=""
                           className="video-logo"
                         />
@@ -365,7 +352,7 @@ const OngoingOverview = () => {
                         </div>
                       </div>
                       <img
-                        src={require("../../../../assets/images/icn_previewgo.png")}
+                        src={require('../../../../assets/images/icn_previewgo.png')}
                         alt=""
                         className="right-icon"
                       />
@@ -466,7 +453,7 @@ const OngoingOverview = () => {
                         {overviewData.instructorName}
                       </p>
                       <div className="profile-occupation">
-                        {overviewData.designation} {""}
+                        {overviewData.designation} {''}
                         {overviewData.url}
                       </div>
                     </div>
@@ -481,13 +468,16 @@ const OngoingOverview = () => {
                 <h3>Loading</h3>
               )}
             </div>
-            {
-              overviewData && overviewData.enrolled
-                ?
-                ""
-                : <button className="join-course" onClick={() => enrollCourse(overviewData.courseId)}>Join Course</button>
-            }
-
+            {overviewData && overviewData.enrolled ? (
+              ''
+            ) : (
+              <button
+                className="join-course"
+                onClick={() => enrollCourse(overviewData.courseId)}
+              >
+                Join Course
+              </button>
+            )}
           </div>
           <div
             className={tabState === 2 ? 'tab-content-2' : 'tab-content-none'}
@@ -507,230 +497,131 @@ const OngoingOverview = () => {
                   {chapter.chapterResponses.map((ele, id) => {
                     return (
                       <>
-
-                        {
-                          chapter.enrolled ?
-
-                            <>
-                              {/* <Accordian active /> */}
-                              < div
-                                div
-                                className="course-accordian"
-                                onClick={() => accordianToggle(id)}
-                              >
-                                <div className="course-accordian-heading">
-                                  <div className="course-accordian-container">
-                                    <p className={ele.chapterCompletedStatus ? "course-accordian-container-title-active" : "course-accordian-container-title"}>
-                                      Chapter {ele.chapterNumber} - {ele.chapterName}{' '}
-                                    </p>
-
-                                    <p className="course-accordian-container-state">
-                                      {accordianState === id ? '-' : '+'}
-                                    </p>
-                                  </div>
-                                </div>
-                                <div
-                                  className={
-                                    (accordianState === id ? 'accordian-show' : '') +
-                                    ' course-accordian-content'
-                                  }
-                                >
-                                  <div className="course-accordian-container-body">
-                                    <div className="accordian-items">
-                                      {
-                                        ele.lessonResponses.map((itemele) => {
-                                          return (
-                                            <>
-                                              <div className="accordian-item">
-                                                <div className="accordian-item-icon">{itemele.lessonStatus ? inactiveIcon('green') : inactiveIcon('')}</div>
-                                                <div className="accordian-item-section-2">
-                                                  <div className="accordian-item-section-2-part-1">
-                                                    <p className='accordian-item-chapter-number'>{itemele.lessonNumber}</p>
-                                                    <div className="accordian-item-section-2-para">
-                                                      <p className='accordian-item-chapter-title'>{itemele.lessonName}</p>
-                                                      <p className='accordian-item-chapter-duration'>{itemele.lessonDuration}</p>
-                                                    </div>
-                                                  </div>
-                                                  <div
-                                                    className="video-play-btn"
-                                                    // onClick={() => { setVideo(courseele.videoLink) }}
-                                                    onClick={
-                                                      () => {
-                                                        getVideoState(itemele)
-                                                      }}
-                                                  >
-                                                    {itemele.lessonStatus ? videoPlayActive('red') : videoPlayActive('')}
-                                                  </div>
-                                                </div>
-                                              </div>
-
-                                            </>
-                                          )
-                                        })
-                                      }
-                                      {
-                                        ele.testId &&
-                                        <div className="accordian-item">
-                                          <div className="accordian-item-icon">{inactiveIcon()}</div>
-                                          <div className="accordian-item-section-2 test-section"
-                                            onClick={() => {
-                                              let a =
-                                                ele &&
-                                                ele.testDuration &&
-                                                ele.testDuration.split(':');
-
-                                              if (a) {
-                                                let seconds =
-                                                  +a[0] * 60 * 60 +
-                                                  +a[1] * 60 +
-                                                  +a[2];
-
-                                                localStorage.setItem(
-                                                  'timer',
-                                                  seconds
-                                                );
-                                              }
-                                              dispatch(
-                                                test(
-                                                  `${ele.testName === 'Final Test'
-                                                    ? 'finalTest'
-                                                    : 'moduleTest'
-                                                  }?testId=${ele.testId}`
-                                                )
-                                              );
-                                            }}
-                                          >
-                                            <div className="accordian-item-section-2-part-1" >
-                                              <p className='accordian-item-chapter-number'>{testImage}</p>
-                                              <div className="accordian-item-section-2-para">
-                                                <p className='accordian-item-chapter-title'>{ele.testName}</p>
-                                                <p className='accordian-item-chapter-duration'>10 min | {ele.questionCount} questions</p>
-                                              </div>
-                                            </div>
-                                            <div
-                                              className="video-play-btn"
-                                            // onClick={() => { setVideo(courseele.videoLink) }}
-                                            // onClick={() => {
-                                            //   dispatch(
-                                            //     videoLinkState(
-                                            //       itemele.videoLink
-                                            //     )
-                                            //   );
-                                            // }}
-                                            >
-                                              80%
-                                            </div>
-                                          </div>
-                                        </div>
-                                      }
-
-
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                            </>
-                            :
-                            <>
-                              {/* <Accordian inactive /> */}
-                              < div
-                                div
-                                className="course-accordian"
-                                onClick={() => accordianToggle(id)}
-                              >
-                                <div className="course-accordian-heading">
-                                  <div className="course-accordian-container">
-                                    {
-                                      ele.chapterNumber === 1 ?
-                                        <p className="course-accordian-container-title-active">
-                                          Chapter {ele.chapterNumber} - {ele.chapterName}{' '}
-                                        </p>
-                                        :
-                                        <p className="course-accordian-container-title">
-                                          Chapter {ele.chapterNumber} - {ele.chapterName}{' '}
-                                        </p>
+                        {chapter.enrolled ? (
+                          <>
+                            {/* <Accordian active /> */}
+                            <div
+                              div
+                              className="course-accordian"
+                              onClick={() => accordianToggle(id)}
+                            >
+                              <div className="course-accordian-heading">
+                                <div className="course-accordian-container">
+                                  <p
+                                    className={
+                                      ele.chapterCompletedStatus
+                                        ? 'course-accordian-container-title-active'
+                                        : 'course-accordian-container-title'
                                     }
-                                    <p className="course-accordian-container-state">
-                                      {accordianState === id ? '-' : '+'}
-                                    </p>
-                                  </div>
+                                  >
+                                    Chapter {ele.chapterNumber} -{' '}
+                                    {ele.chapterName}{' '}
+                                  </p>
+
+                                  <p className="course-accordian-container-state">
+                                    {accordianState === id ? '-' : '+'}
+                                  </p>
                                 </div>
-                                <div
-                                  className={
-                                    (accordianState === id ? 'accordian-show' : '') +
-                                    ' course-accordian-content'
-                                  }
-                                >
-                                  <div className="course-accordian-container-body">
-                                    <div className="accordian-items">
-                                      {
-                                        ele.lessonResponses.map((itemele) => {
-                                          return (
-                                            <>
-                                              <div className="accordian-item">
-                                                <div className="accordian-item-icon">{ele.chapterNumber === 1 ? inactiveIcon('green') : inactiveIcon('')}</div>
-                                                <div className="accordian-item-section-2">
-                                                  <div className="accordian-item-section-2-part-1">
-                                                    <p className='accordian-item-chapter-number'>{itemele.lessonNumber}</p>
-                                                    <div className="accordian-item-section-2-para">
-                                                      <p className='accordian-item-chapter-title'>{itemele.lessonName}</p>
-                                                      <p className='accordian-item-chapter-duration'>{itemele.lessonDuration}</p>
-                                                    </div>
-                                                  </div>
-                                                  <div
-                                                    className="video-play-btn"
-                                                  // onClick={() => { setVideo(courseele.videoLink) }}
-                                                  >
-                                                    {ele.chapterNumber === 1 ? videoPlayActive('red') : videoPlayActive('')}
-                                                  </div>
+                              </div>
+                              <div
+                                className={
+                                  (accordianState === id
+                                    ? 'accordian-show'
+                                    : '') + ' course-accordian-content'
+                                }
+                              >
+                                <div className="course-accordian-container-body">
+                                  <div className="accordian-items">
+                                    {ele.lessonResponses.map((itemele) => {
+                                      return (
+                                        <>
+                                          <div className="accordian-item">
+                                            <div className="accordian-item-icon">
+                                              {itemele.lessonStatus
+                                                ? inactiveIcon('green')
+                                                : inactiveIcon('')}
+                                            </div>
+                                            <div className="accordian-item-section-2">
+                                              <div className="accordian-item-section-2-part-1">
+                                                <p className="accordian-item-chapter-number">
+                                                  {itemele.lessonNumber}
+                                                </p>
+                                                <div className="accordian-item-section-2-para">
+                                                  <p className="accordian-item-chapter-title">
+                                                    {itemele.lessonName}
+                                                  </p>
+                                                  <p className="accordian-item-chapter-duration">
+                                                    {itemele.lessonDuration}
+                                                  </p>
                                                 </div>
                                               </div>
-
-                                            </>
-                                          )
-                                        })
-                                      }
-                                      {
-                                        ele.testId &&
-                                        <div className="accordian-item">
-                                          <div className="accordian-item-icon">{inactiveIcon()}</div>
-                                          <div className="accordian-item-section-2 test-section"
-                                            onClick={() => {
-                                              let a =
-                                                ele &&
-                                                ele.testDuration &&
-                                                ele.testDuration.split(':');
-
-                                              if (a) {
-                                                let seconds =
-                                                  +a[0] * 60 * 60 +
-                                                  +a[1] * 60 +
-                                                  +a[2];
-
-                                                localStorage.setItem(
-                                                  'timer',
-                                                  seconds
-                                                );
-                                              }
-                                              dispatch(
-                                                test(
-                                                  `${ele.testName === 'Final Test'
-                                                    ? 'finalTest'
-                                                    : 'moduleTest'
-                                                  }?testId=${ele.testId}`
-                                                )
-                                              );
-                                            }}
-                                          >
-                                            <div className="accordian-item-section-2-part-1" >
-                                              <p className='accordian-item-chapter-number'>{testImage}</p>
-                                              <div className="accordian-item-section-2-para">
-                                                <p className='accordian-item-chapter-title'>{ele.testName}</p>
-                                                <p className='accordian-item-chapter-duration'>10 min | {ele.questionCount} questions</p>
+                                              <div
+                                                className="video-play-btn"
+                                                // onClick={() => { setVideo(courseele.videoLink) }}
+                                                onClick={() => {
+                                                  getVideoState(itemele);
+                                                }}
+                                              >
+                                                {itemele.lessonStatus
+                                                  ? videoPlayActive('red')
+                                                  : videoPlayActive('')}
                                               </div>
                                             </div>
-                                            <div
-                                              className="video-play-btn"
+                                          </div>
+                                        </>
+                                      );
+                                    })}
+                                    {ele.testId && (
+                                      <div className="accordian-item">
+                                        <div className="accordian-item-icon">
+                                          {inactiveIcon()}
+                                        </div>
+                                        <div
+                                          className="accordian-item-section-2 test-section"
+                                          onClick={() => {
+                                            let a =
+                                              ele &&
+                                              ele.testDuration &&
+                                              ele.testDuration.split(':');
+
+                                            if (a) {
+                                              let seconds =
+                                                +a[0] * 60 * 60 +
+                                                +a[1] * 60 +
+                                                +a[2];
+
+                                              localStorage.setItem(
+                                                'timer',
+                                                seconds
+                                              );
+                                            }
+                                            dispatch(
+                                              test(
+                                                `${
+                                                  ele.testName === 'Final Test'
+                                                    ? 'finalTest'
+                                                    : 'moduleTest'
+                                                }?testId=${ele.testId}`
+                                              )
+                                            );
+                                          }}
+                                        >
+                                          <div className="accordian-item-section-2-part-1">
+                                            <p className="accordian-item-chapter-number">
+                                              {testImage}
+                                            </p>
+                                            <div className="accordian-item-section-2-para">
+                                              <p className="accordian-item-chapter-title">
+                                                {ele.testName}
+                                              </p>
+                                              <p className="accordian-item-chapter-duration">
+                                                10 min | {ele.questionCount}{' '}
+                                                questions
+                                              </p>
+                                            </div>
+                                          </div>
+                                          <div
+                                            className="video-play-btn"
                                             // onClick={() => { setVideo(courseele.videoLink) }}
                                             // onClick={() => {
                                             //   dispatch(
@@ -739,20 +630,157 @@ const OngoingOverview = () => {
                                             //     )
                                             //   );
                                             // }}
-                                            >
-
-                                            </div>
+                                          >
+                                            80%
                                           </div>
                                         </div>
-                                      }
-
-
-                                    </div>
+                                      </div>
+                                    )}
                                   </div>
                                 </div>
                               </div>
-                            </>
-                        }
+                            </div>
+                          </>
+                        ) : (
+                          <>
+                            {/* <Accordian inactive /> */}
+                            <div
+                              div
+                              className="course-accordian"
+                              onClick={() => accordianToggle(id)}
+                            >
+                              <div className="course-accordian-heading">
+                                <div className="course-accordian-container">
+                                  {ele.chapterNumber === 1 ? (
+                                    <p className="course-accordian-container-title-active">
+                                      Chapter {ele.chapterNumber} -{' '}
+                                      {ele.chapterName}{' '}
+                                    </p>
+                                  ) : (
+                                    <p className="course-accordian-container-title">
+                                      Chapter {ele.chapterNumber} -{' '}
+                                      {ele.chapterName}{' '}
+                                    </p>
+                                  )}
+                                  <p className="course-accordian-container-state">
+                                    {accordianState === id ? '-' : '+'}
+                                  </p>
+                                </div>
+                              </div>
+                              <div
+                                className={
+                                  (accordianState === id
+                                    ? 'accordian-show'
+                                    : '') + ' course-accordian-content'
+                                }
+                              >
+                                <div className="course-accordian-container-body">
+                                  <div className="accordian-items">
+                                    {ele.lessonResponses.map((itemele) => {
+                                      return (
+                                        <>
+                                          <div className="accordian-item">
+                                            <div className="accordian-item-icon">
+                                              {ele.chapterNumber === 1
+                                                ? inactiveIcon('green')
+                                                : inactiveIcon('')}
+                                            </div>
+                                            <div className="accordian-item-section-2">
+                                              <div className="accordian-item-section-2-part-1">
+                                                <p className="accordian-item-chapter-number">
+                                                  {itemele.lessonNumber}
+                                                </p>
+                                                <div className="accordian-item-section-2-para">
+                                                  <p className="accordian-item-chapter-title">
+                                                    {itemele.lessonName}
+                                                  </p>
+                                                  <p className="accordian-item-chapter-duration">
+                                                    {itemele.lessonDuration}
+                                                  </p>
+                                                </div>
+                                              </div>
+                                              <div
+                                                className="video-play-btn"
+                                                // onClick={() => { setVideo(courseele.videoLink) }}
+                                              >
+                                                {ele.chapterNumber === 1
+                                                  ? videoPlayActive('red')
+                                                  : videoPlayActive('')}
+                                              </div>
+                                            </div>
+                                          </div>
+                                        </>
+                                      );
+                                    })}
+                                    {ele.testId && (
+                                      <div className="accordian-item">
+                                        <div className="accordian-item-icon">
+                                          {inactiveIcon()}
+                                        </div>
+                                        <div
+                                          className="accordian-item-section-2 test-section"
+                                          onClick={() => {
+                                            let a =
+                                              ele &&
+                                              ele.testDuration &&
+                                              ele.testDuration.split(':');
+
+                                            if (a) {
+                                              let seconds =
+                                                +a[0] * 60 * 60 +
+                                                +a[1] * 60 +
+                                                +a[2];
+
+                                              localStorage.setItem(
+                                                'timer',
+                                                seconds
+                                              );
+                                            }
+                                            dispatch(
+                                              test(
+                                                `${
+                                                  ele.testName === 'Final Test'
+                                                    ? 'finalTest'
+                                                    : 'moduleTest'
+                                                }?testId=${ele.testId}`
+                                              )
+                                            );
+                                          }}
+                                        >
+                                          <div className="accordian-item-section-2-part-1">
+                                            <p className="accordian-item-chapter-number">
+                                              {testImage}
+                                            </p>
+                                            <div className="accordian-item-section-2-para">
+                                              <p className="accordian-item-chapter-title">
+                                                {ele.testName}
+                                              </p>
+                                              <p className="accordian-item-chapter-duration">
+                                                10 min | {ele.questionCount}{' '}
+                                                questions
+                                              </p>
+                                            </div>
+                                          </div>
+                                          <div
+                                            className="video-play-btn"
+                                            // onClick={() => { setVideo(courseele.videoLink) }}
+                                            // onClick={() => {
+                                            //   dispatch(
+                                            //     videoLinkState(
+                                            //       itemele.videoLink
+                                            //     )
+                                            //   );
+                                            // }}
+                                          ></div>
+                                        </div>
+                                      </div>
+                                    )}
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </>
+                        )}
                       </>
                     );
                   })}
@@ -763,8 +791,9 @@ const OngoingOverview = () => {
             )}
           </div>
         </div>
-      </div >
-    </div >
+      </div>
+      {(chapterLoading || overviewLoading) && <Loading />}
+    </div>
   );
 };
 
