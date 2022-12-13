@@ -25,17 +25,18 @@ import {
   videoPlayActive,
   whiteStepperIcon,
 } from '../../../../utils/svgIcons';
+import {
+  Accordion,
+  AccordionItem,
+  AccordionItemHeading,
+  AccordionItemButton,
+  AccordionItemPanel,
+} from 'react-accessible-accordion';
+
+
 import instructorImage from '../../../../assets/images/instructorImage.jpg';
 import Accordian from '../accordian/Accordian';
 import axios from 'axios';
-import Box from '@mui/material/Box';
-import Stepper from '@mui/material/Stepper';
-import Step from '@mui/material/Step';
-import StepLabel from '@mui/material/StepLabel';
-import StepContent from '@mui/material/StepContent';
-import Button from '@mui/material/Button';
-import Paper from '@mui/material/Paper';
-import Typography from '@mui/material/Typography';
 import { Navigate, useNavigate } from 'react-router-dom';
 import { test, testisSuccess } from '../../../../redux/reducers/testSlice';
 import { testShow, testSuccess } from '../../../../redux/reducers/Conditions';
@@ -568,6 +569,41 @@ const OngoingOverview = () => {
                 </div>
 
                 <div className="course-sections">
+                  {/* <Accordion allowZeroExpanded preExpanded={['1']} allowMultipleExpanded>
+                    <AccordionItem uuid="1">
+                      <AccordionItemHeading>
+                        <AccordionItemButton>
+                          <div className="acc-name">Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae, perspiciatis?</div>
+                          <div className="acc-icon">+</div>
+                        </AccordionItemButton>
+                      </AccordionItemHeading>
+                      <AccordionItemPanel>
+                        <p>
+                          Exercitation in fugiat est ut ad ea cupidatat ut in
+                          cupidatat occaecat ut occaecat consequat est minim minim
+                          esse tempor laborum consequat esse adipisicing eu
+                          reprehenderit enim.
+                        </p>
+                      </AccordionItemPanel>
+                    </AccordionItem>
+                    <AccordionItem uuid="2">
+                      <AccordionItemHeading>
+                        <AccordionItemButton>
+                          <div className="acc-name">Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae, perspiciatis?</div>
+                          <div className="acc-icon">+</div>
+                        </AccordionItemButton>
+                      </AccordionItemHeading>
+                      <AccordionItemPanel>
+                        <p>
+                          Exercitation in fugiat est ut ad ea cupidatat ut in
+                          cupidatat occaecat ut occaecat consequat est minim minim
+                          esse tempor laborum consequat esse adipisicing eu
+                          reprehenderit enim.
+                        </p>
+                      </AccordionItemPanel>
+                    </AccordionItem>
+
+                  </Accordion> */}
                   {chapter.chapterResponses.map((ele, id) => {
                     return (
                       <>
@@ -577,7 +613,109 @@ const OngoingOverview = () => {
 
                             <>
                               {/* <Accordian active /> */}
-                              < div
+                              <Accordion allowZeroExpanded preExpanded={['1']} allowMultipleExpanded>
+                                <AccordionItem uuid={id}>
+                                  <AccordionItemHeading>
+                                    <AccordionItemButton>
+                                      <p className={ele.chapterCompletedStatus ? "course-accordian-container-title-active" : "course-accordian-container-title"}>
+                                        Chapter {ele.chapterNumber} - {ele.chapterName}{' '}
+                                      </p>
+                                      <p className="course-accordian-container-state">
+                                        {accordianState === id ? '-' : '+'}
+                                      </p>
+                                    </AccordionItemButton>
+                                  </AccordionItemHeading>
+                                  <AccordionItemPanel>
+                                    {
+                                      ele.lessonResponses.map((itemele) => {
+                                        return (
+                                          <>
+                                            <div className="accordian-item">
+                                              <div className="accordian-item-icon">{itemele.lessonStatus ? inactiveIcon('green') : inactiveIcon('')}</div>
+                                              <div className="accordian-item-section-2">
+                                                <div className="accordian-item-section-2-part-1">
+                                                  <p className='accordian-item-chapter-number'>{itemele.lessonNumber}</p>
+                                                  <div className="accordian-item-section-2-para">
+                                                    <p className='accordian-item-chapter-title'>{itemele.lessonName}</p>
+                                                    <p className='accordian-item-chapter-duration'>{itemele.lessonDuration}</p>
+                                                  </div>
+                                                </div>
+                                                <div
+                                                  className="video-play-btn"
+                                                  // onClick={() => { setVideo(courseele.videoLink) }}
+                                                  onClick={
+                                                    () => {
+                                                      getVideoState(itemele)
+                                                    }}
+                                                >
+                                                  {itemele.lessonStatus ? videoPlayActive('red') : videoPlayActive('')}
+                                                </div>
+                                              </div>
+                                            </div>
+
+                                          </>
+                                        )
+                                      })
+                                    }
+                                    {
+                                      ele.testId &&
+                                      <div className="accordian-item">
+                                        <div className="accordian-item-icon">{inactiveIcon()}</div>
+                                        <div className="accordian-item-section-2 test-section"
+                                          onClick={() => {
+                                            let a =
+                                              ele &&
+                                              ele.testDuration &&
+                                              ele.testDuration.split(':');
+
+                                            if (a) {
+                                              let seconds =
+                                                +a[0] * 60 * 60 +
+                                                +a[1] * 60 +
+                                                +a[2];
+
+                                              localStorage.setItem(
+                                                'timer',
+                                                seconds
+                                              );
+                                            }
+                                            dispatch(
+                                              test(
+                                                `${ele.testName === 'Final Test'
+                                                  ? 'finalTest'
+                                                  : 'moduleTest'
+                                                }?testId=${ele.testId}`
+                                              )
+                                            );
+                                          }}
+                                        >
+                                          <div className="accordian-item-section-2-part-1" >
+                                            <p className='accordian-item-chapter-number'>{testImage}</p>
+                                            <div className="accordian-item-section-2-para">
+                                              <p className='accordian-item-chapter-title'>{ele.testName}</p>
+                                              <p className='accordian-item-chapter-duration'>10 min | {ele.questionCount} questions</p>
+                                            </div>
+                                          </div>
+                                          <div
+                                            className="video-play-btn"
+                                          // onClick={() => { setVideo(courseele.videoLink) }}
+                                          // onClick={() => {
+                                          //   dispatch(
+                                          //     videoLinkState(
+                                          //       itemele.videoLink
+                                          //     )
+                                          //   );
+                                          // }}
+                                          >
+                                            80%
+                                          </div>
+                                        </div>
+                                      </div>
+                                    }
+                                  </AccordionItemPanel>
+                                </AccordionItem>
+                              </Accordion>
+                              {/* < div
                                 div
                                 className="course-accordian"
                                 onClick={() => accordianToggle(id)}
@@ -692,7 +830,9 @@ const OngoingOverview = () => {
                                     </div>
                                   </div>
                                 </div>
-                              </div>
+                              </div> */}
+
+                              
                             </>
                             :
                             <>
