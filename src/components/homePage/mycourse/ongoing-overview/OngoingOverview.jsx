@@ -215,7 +215,7 @@ const OngoingOverview = () => {
               <div className="pause-overlay">
                 {
                   firstPause &&
-                  <div className="continue-chapter-pause-button" onClick={() => { setNextModal(true) }}>Continue Chapter 3 Lesson 21</div>
+                  <div className="continue-chapter-pause-button" onClick={() => { setNextModal(true);setFirstPause(false) }}>Continue Chapter 3 Lesson 21</div>
                 }
                 {
                   nextModal &&
