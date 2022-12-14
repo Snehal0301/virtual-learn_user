@@ -40,7 +40,7 @@ const LoginVerfication = () => {
   const sendOtpServer = (otp, url) => {
     console.log("OTP", otp, url);
     fetch(
-      `http://virtuallearnapp2-env.eba-wrr2p8zk.ap-south-1.elasticbeanstalk.com${url}`,
+      `http://virtuallearn-env.eba-6xmym3vf.ap-south-1.elasticbeanstalk.com${url}`,
       {
         method: "POST",
         headers: {

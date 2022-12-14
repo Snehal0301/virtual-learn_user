@@ -25,10 +25,10 @@ const Notification = () => {
   useEffect(() => {
     axios
       .get(
-        `http://virtuallearnapp2-env.eba-wrr2p8zk.ap-south-1.elasticbeanstalk.com/user/notifications`,
+        `http://virtuallearn-env.eba-6xmym3vf.ap-south-1.elasticbeanstalk.com/user/notifications`,
         {
           headers: {
-            Authorization: `Bearer ${localStorage.getItem("Token")}`,
+            Authorization: `Bearer ${sessionStorage.getItem("Token")}`,
           },
         }
       )
@@ -66,11 +66,11 @@ const Notification = () => {
                 onClick={() => {
                   axios
                     .request(
-                      `http://virtuallearnapp2-env.eba-wrr2p8zk.ap-south-1.elasticbeanstalk.com/user/readNotification`,
+                      `http://virtuallearn-env.eba-6xmym3vf.ap-south-1.elasticbeanstalk.com/user/readNotification`,
                       {
                         method: "put",
                         headers: {
-                          Authorization: `Bearer ${localStorage.getItem(
+                          Authorization: `Bearer ${sessionStorage.getItem(
                             "Token"
                           )}`,
                         },

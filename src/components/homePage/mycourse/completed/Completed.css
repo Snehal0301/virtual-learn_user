@@ -7,16 +7,24 @@
 .completed-parent {
   margin-top: 1em;
   display: flex;
+  flex-basis: 32%;
+  width: 100%;
 }
 
 .completed-images {
   position: relative;
+  width: 100%;
+  /* object-fit: cover; */
 }
 
+
 .comp-img {
+  
   border-radius: 10px;
   height: 234px;
-  width: 350px;
+  /* width: 350px; */
+  width: 100%;
+  
 }
 
 .comp-overlay{
@@ -38,7 +46,7 @@
 }
 
 .completed-text {
-  padding-bottom: 2.8em;
+  padding-bottom: 3.5em;
   font-family: "Proxima Nova Soft";
   font-style: normal;
   font-weight: 600;

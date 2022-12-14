@@ -10,7 +10,7 @@ import { subCategories } from './../../../redux/reducers/subCategories';
 import { homeCategory_sideArrow } from '../../../utils/svgIcons';
 import { courseOverview } from '../../../redux/reducers/courseOverview';
 import { chapterResponse } from '../../../redux/reducers/chapterResponses';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const HomeCategoriesDesign = () => {
   const dispatch = useDispatch();
@@ -29,13 +29,22 @@ const HomeCategoriesDesign = () => {
     <div className="homecategoriesdesign">
       <div className="homeCategories-head-link">
         {/* <div className='homeCategoriesHead'> Categories </div> */}
-        <a href="#"> {categoryName}</a>
+        <span>
+          <Link
+            to="/categories"
+            style={{ color: 'var(--blueFont)', cursor: 'pointer' }}
+          >
+            Categories &nbsp; &nbsp; {'>'} &nbsp;
+          </Link>
+          &nbsp;
+        </span>
+        {categoryName}
       </div>
       <div className="home-categories-section2">
         <div className="home-categories-courses-started">
           Courses to get you started
         </div>
-        <div className="home-categories-seeall">See All</div>
+        <div className="home-categories-seeall"></div>
       </div>
       <div className="home-categories-card">
         <div className="home-categories-choice1">
@@ -73,7 +82,7 @@ const HomeCategoriesDesign = () => {
       </div>
       <div className="home-categories-section2">
         <div className="home-categories-courses-started">Featured Courses</div>
-        <div className="home-categories-seeall">See All</div>
+        <div className="home-categories-seeall"></div>
       </div>
       <div className="home-categories-card">
         <div className="home-categories-choice1">
@@ -111,7 +120,7 @@ const HomeCategoriesDesign = () => {
       </div>
       <div className="home-categories-section2">
         <div className="home-categories-courses-started">Subcategories</div>
-        <div className="home-categories-seeall">See All</div>
+        <div className="home-categories-seeall"></div>
       </div>
       <div className="home-categories">
         <div className="home-categories-Body">
@@ -133,7 +142,7 @@ const HomeCategoriesDesign = () => {
       </div>
       <div className="home-categories-section2">
         <div className="home-categories-courses-started">All Courses</div>
-        <div className="home-categories-seeall">See All</div>
+        <div className="home-categories-seeall"></div>
       </div>
       <div className="home-categories-card-allcourse">
         <div className="home-categories-choice1-allcourse">
