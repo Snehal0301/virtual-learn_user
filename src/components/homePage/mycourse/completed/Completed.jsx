@@ -90,7 +90,21 @@ const Completed = () => {
           )}
         </>
       ) : (
-        'No completed course'
+        <div
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            position: 'fixed',
+            top: '90px',
+            right: '0',
+            left: '0',
+            bottom: '0',
+            fontSize: '30px',
+          }}
+        >
+          No completed courses
+        </div>
       )}
     </>
   );
