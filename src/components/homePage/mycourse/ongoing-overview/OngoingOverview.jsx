@@ -10,6 +10,7 @@ import {
   videoLinkState,
 } from "../../../../redux/reducers/myCourseReducer";
 import {
+  completedlessonIcon,
   courseAccessIcon,
   courseCertIcon,
   courseFileIcon,
@@ -278,6 +279,12 @@ const OngoingOverview = () => {
     setDefPause(true);
     setNextModal(false);
     setFirstPause(false);
+  }
+
+  const showChapter = (a, b, c) => {
+    console.log('chapter.courseId', a);
+    console.log('ele.chapterId', b);
+    console.log('itemele.lessonId', c);
   }
   return (
     <>
@@ -688,9 +695,8 @@ const OngoingOverview = () => {
                                           <>
                                             <div className="accordian-item">
                                               <div className="accordian-item-icon">
-                                                {itemele.lessonStatus
-                                                  ? inactiveIcon("green")
-                                                  : inactiveIcon("")}
+                                                {itemele.lessonCompletedStatus ? completedlessonIcon : itemele.lessonStatus ? inactiveIcon("green") : inactiveIcon("")}
+                                                {/* {itemele.lessonCompletedStatus ? completedlessonIcon : itemele.lessonStatus ? inactiveIcon("green")  : inactiveIcon("")} */}
                                               </div>
                                               <div className="accordian-item-section-2">
                                                 <div className="accordian-item-section-2-part-1">
@@ -712,7 +718,9 @@ const OngoingOverview = () => {
                                                   onClick={() => {
                                                     itemele.lessonStatus ?
                                                       getVideoState(itemele)
+                                                      // showChapter(chapter.courseId,ele.chapterId,itemele.lessonId)
                                                       :
+                                                      // showChapter(chapter.courseId, ele.chapterId, itemele.lessonId)
                                                       notify()
                                                   }}
                                                 >
@@ -937,7 +945,7 @@ const OngoingOverview = () => {
                                           <>
                                             <div className="accordian-item">
                                               <div className="accordian-item-icon">
-                                                {ele.chapterNumber === 1
+                                                {ele.chapterNumber === 1 && itemele.lessonStatus
                                                   ? inactiveIcon("green")
                                                   : inactiveIcon("")}
                                               </div>
@@ -958,14 +966,14 @@ const OngoingOverview = () => {
                                                 <div
                                                   className="video-play-btn"
                                                   onClick={() => {
-                                                    ele.chapterNumber === 1 
+                                                    ele.chapterNumber === 1 && itemele.lessonStatus
                                                       ?
                                                       console.log("nothing")
                                                       :
                                                       errorCourse()
                                                   }}
                                                 >
-                                                  {ele.chapterNumber === 1 
+                                                  {ele.chapterNumber === 1 && itemele.lessonStatus
                                                     ? videoPlayActive("red")
                                                     : videoPlayActive("")}
                                                 </div>
@@ -1070,7 +1078,7 @@ const OngoingOverview = () => {
             // },
 
             success: {
-              duration: 3000,
+              duration: 1500,
               style: {
                 border: '1px solid #AAFF00',
                 padding: '10px',
@@ -1079,7 +1087,7 @@ const OngoingOverview = () => {
               },
             },
             error: {
-              duration: 3000,
+              duration: 1500,
               style: {
                 border: '1px solid #ee5c4d',
                 padding: '10px',

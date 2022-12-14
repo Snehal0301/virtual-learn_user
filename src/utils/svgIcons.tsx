@@ -1395,3 +1395,19 @@ export const testImage = (
     />
   </svg>
 )
+
+
+export const completedlessonIcon = (
+  <svg
+    width={24}
+    height={24}
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <circle cx={12} cy={12} r={12} fill="#1EAB0D" />
+    <path
+      d="M18.655 7.781l-.579-.597a.603.603 0 00-.868 0l-6.07 6.261-3.179-3.278a.603.603 0 00-.868 0l-.579.596a.65.65 0 000 .896l4.19 4.32a.596.596 0 00.864 0l7.083-7.302a.644.644 0 00.006-.896z"
+      fill="#fff"
+    />
+  </svg>
+)

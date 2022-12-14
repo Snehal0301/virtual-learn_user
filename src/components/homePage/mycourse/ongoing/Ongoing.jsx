@@ -5,6 +5,7 @@ import { courseOverview } from "../../../../redux/reducers/courseOverview";
 import { chapterResponse } from "../../../../redux/reducers/chapterResponses";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { tabToggleState } from "../../../../redux/reducers/myCourseReducer";
 
 const Ongoing = () => {
   const [ongoingData, setongoingData] = useState([]);
@@ -52,6 +53,7 @@ const Ongoing = () => {
                 onClick={() => {
                   dispatch(courseOverview(ele.courseId));
                   dispatch(chapterResponse(ele.courseId));
+                  dispatch(tabToggleState(2))
                   navigate("/myCourses/ongoingCourse");
                 }}
               >

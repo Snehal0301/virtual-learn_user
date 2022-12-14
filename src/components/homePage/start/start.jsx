@@ -12,7 +12,7 @@ import Slider from "react-carousel-responsive";
 import "react-carousel-responsive/dist/styles.css";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
-import { homeTabToggleState } from "../../../redux/reducers/myCourseReducer";
+import { homeTabToggleState, tabToggleState } from "../../../redux/reducers/myCourseReducer";
 import axios from "axios";
 import { array } from "yup/lib/locale";
 import { coursedata } from "../../../redux/reducers/allcourseSlice";
@@ -280,6 +280,7 @@ const Start = () => {
                     onClick={() => {
                       dispatch(courseOverview(item.courseId));
                       dispatch(chapterResponse(item.courseId));
+                      dispatch(tabToggleState(2))
                       navigate("/myCourses/ongoingCourse");
                     }}
                   >
@@ -375,6 +376,7 @@ const Start = () => {
                 onClick={() => {
                   dispatch(courseOverview(item.courseId));
                   dispatch(chapterResponse(item.courseId));
+                  dispatch(tabToggleState(1))
                   navigate("/myCourses/ongoingCourse");
                 }}
               >
@@ -407,6 +409,7 @@ const Start = () => {
                 onClick={() => {
                   dispatch(courseOverview(item.courseId));
                   dispatch(chapterResponse(item.courseId));
+                  dispatch(tabToggleState(1))
                   navigate("/myCourses/ongoingCourse");
                 }}
               >
@@ -439,6 +442,7 @@ const Start = () => {
                 onClick={() => {
                   dispatch(courseOverview(item.courseId));
                   dispatch(chapterResponse(item.courseId));
+                  dispatch(tabToggleState(1))
                   navigate("/myCourses/ongoingCourse");
                 }}
               >
@@ -499,6 +503,7 @@ const Start = () => {
                     onClick={() => {
                       dispatch(courseOverview(ele.courseId));
                       dispatch(chapterResponse(ele.courseId));
+                      dispatch(tabToggleState(1))
                       navigate("/myCourses/ongoingCourse");
                     }}
                   >
