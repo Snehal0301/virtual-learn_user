@@ -192,6 +192,7 @@ const OngoingOverview = () => {
   const [playing, setPlaying] = useState(false);
   const [played, setPlayed] = useState(false);
   const [joinCourse, setJoinCourse] = useState(false);
+  const [endVideo, setEndVideo] = useState(false);
 
   const onPause = () => {
     setPause(true);
@@ -202,6 +203,10 @@ const OngoingOverview = () => {
     setPlaying(true);
   };
 
+  const onEnd = () => {
+    setEndVideo(true)
+    console.log("Ended")
+  }
   const videoLink = useSelector((state) => state.mycourse.videoLink);
 
   const testQuestions = useSelector((state) => state.test);
@@ -340,9 +345,9 @@ const OngoingOverview = () => {
               width="100%"
               height="100%"
               ref={playerRef}
-              loop={loop}
               onPause={onPause}
               playing={playing}
+              onEnded={onEnd}
               onSeek={() => { setPause(false); }}
               onProgress={(progress) => {
                 setPlayed(progress.playedSeconds);
@@ -953,13 +958,14 @@ const OngoingOverview = () => {
                                                 <div
                                                   className="video-play-btn"
                                                   onClick={() => {
-                                                    ele.chapterNumber === 1 ?
+                                                    ele.chapterNumber === 1 
+                                                      ?
                                                       console.log("nothing")
                                                       :
                                                       errorCourse()
                                                   }}
                                                 >
-                                                  {ele.chapterNumber === 1
+                                                  {ele.chapterNumber === 1 
                                                     ? videoPlayActive("red")
                                                     : videoPlayActive("")}
                                                 </div>
