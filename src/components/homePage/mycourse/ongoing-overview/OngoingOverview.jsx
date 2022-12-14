@@ -49,8 +49,6 @@ import { Player } from 'video-react';
 import toast, { Toaster } from 'react-hot-toast';
 
 
-
-
 const OngoingOverview = () => {
   const [activeStep, setActiveStep] = useState(0);
   const [chapter, setChapter] = useState();
@@ -217,6 +215,7 @@ const OngoingOverview = () => {
   const [nextModal, setNextModal] = useState(false)
   const [defPause, setDefPause] = useState(false)
   const [firstPause, setFirstPause] = useState(true)
+  const [end, setEnd] = useState(false)
   const playerRef = useRef();
 
 
@@ -227,6 +226,24 @@ const OngoingOverview = () => {
     setNextModal(false);
     setFirstPause(false);
   }
+
+  const videoEnded = () => {
+    setEnd(true)
+    setNextModal(false);
+    setFirstPause(false);
+    setDefPause(false)
+  }
+
+  // loader
+
+  // const [filled, setFilled] = useState(0);
+  // const [isRunning, setIsRunning] = useState(false);
+  // useEffect(() => {
+  //   if (filled < 100 && isRunning) {
+  //     setTimeout(() => setFilled(prev => prev += 2), 50)
+  //   }
+  // }, [filled, isRunning])
+
   return (
     <div className="ongoing-overview">
       <div className="ongoing-section-1">
@@ -257,21 +274,28 @@ const OngoingOverview = () => {
                   defPause &&
                   <div className="pause-button" onClick={onPlay}>{start_pauseIconVideo}</div>
                 }
+
+                {
+                  end &&
+                  <div class="loader">
+                      <div className="loader-line"></div>
+                  </div>
+                }
+
               </div>
             </>
           )}
 
           <ReactPlayer
             url={videoLink}
-            // url='https://youtu.be/yNYYOGeMXgc'
             controls="true"
             className="react-player"
             width="100%"
             height="100%"
             ref={playerRef}
-            loop={loop}
             onPause={onPause}
             playing={playing}
+            onEnded={videoEnded}
             onSeek={() => { setPause(false); }}
             onProgress={(progress) => {
               setPlayed(progress.playedSeconds);
@@ -561,7 +585,7 @@ const OngoingOverview = () => {
                   <p className="course-content-desc">
                     {chapter.chapterCount} Chapter | {chapter.lessonCount}{" "}
                     lessons | {chapter.testCount} Assignment Test |{" "}
-                    {chapter.totalDuration}h Total length
+                    {chapter.courseDuration} Total length
                   </p>
                 </div>
 
