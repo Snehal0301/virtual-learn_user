@@ -56,6 +56,7 @@ const Profile = () => {
         }
       )
       .then((res) => {
+        console.log(profileData);
         setProfileData(res.data);
       });
   }, []);

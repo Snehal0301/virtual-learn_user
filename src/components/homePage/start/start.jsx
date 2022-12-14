@@ -1,36 +1,36 @@
-import React, { useState, useEffect } from 'react';
-import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
-import 'react-slideshow-image/dist/styles.css';
-import 'react-tabs/style/react-tabs.css';
-import './Start.css';
+import React, { useState, useEffect } from "react";
+import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
+import "react-slideshow-image/dist/styles.css";
+import "react-tabs/style/react-tabs.css";
+import "./Start.css";
 import {
   design,
   start_pauseIcon,
   start_timeIcon,
-} from '../../../utils/svgIcons';
-import Slider from 'react-carousel-responsive';
-import 'react-carousel-responsive/dist/styles.css';
-import { useDispatch } from 'react-redux';
-import { useSelector } from 'react-redux';
-import { homeTabToggleState } from '../../../redux/reducers/myCourseReducer';
-import axios from 'axios';
-import { array } from 'yup/lib/locale';
-import { coursedata } from '../../../redux/reducers/allcourseSlice';
-import { categorydata } from '../../../redux/reducers/categorySlice';
-import { useNavigate } from 'react-router-dom';
-import { testShow, testSuccess } from '../../../redux/reducers/Conditions';
-import { testisSuccess } from '../../../redux/reducers/testSlice';
-import { testSuccessRed } from '../../../redux/reducers/SuccessTestRed';
-import { showSuccessPage } from '../../../redux/reducers/showSuccesspage';
-import { finaltestShowPage } from '../../../redux/reducers/finalTestSuccess';
+} from "../../../utils/svgIcons";
+import Slider from "react-carousel-responsive";
+import "react-carousel-responsive/dist/styles.css";
+import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
+import { homeTabToggleState } from "../../../redux/reducers/myCourseReducer";
+import axios from "axios";
+import { array } from "yup/lib/locale";
+import { coursedata } from "../../../redux/reducers/allcourseSlice";
+import { categorydata } from "../../../redux/reducers/categorySlice";
+import { useNavigate } from "react-router-dom";
+import { testShow, testSuccess } from "../../../redux/reducers/Conditions";
+import { testisSuccess } from "../../../redux/reducers/testSlice";
+import { testSuccessRed } from "../../../redux/reducers/SuccessTestRed";
+import { showSuccessPage } from "../../../redux/reducers/showSuccesspage";
+import { finaltestShowPage } from "../../../redux/reducers/finalTestSuccess";
 import {
   basicCourse,
   categoryName,
-} from './../../../redux/reducers/basicCourses';
-import { advancedCourse } from './../../../redux/reducers/advancedCourse';
-import { subCategories } from './../../../redux/reducers/subCategories';
-import { courseOverview } from '../../../redux/reducers/courseOverview';
-import { chapterResponse } from '../../../redux/reducers/chapterResponses';
+} from "./../../../redux/reducers/basicCourses";
+import { advancedCourse } from "./../../../redux/reducers/advancedCourse";
+import { subCategories } from "./../../../redux/reducers/subCategories";
+import { courseOverview } from "../../../redux/reducers/courseOverview";
+import { chapterResponse } from "../../../redux/reducers/chapterResponses";
 
 const Start = () => {
   const dispatch = useDispatch();
@@ -59,14 +59,14 @@ const Start = () => {
   const [topcourseData, setTopcourseData] = useState([]);
   const [categoryData, setcategoryData] = useState([]);
   const [ongoing, setOngoing] = useState([]);
-  const [name, setName] = useState('');
+  const [name, setName] = useState("");
 
   useEffect(() => {
     axios
       .get(
         `http://virtuallearnapp2-env.eba-wrr2p8zk.ap-south-1.elasticbeanstalk.com/user/ongoingCourses`,
         {
-          headers: { Authorization: `Bearer ${localStorage.getItem('Token')}` },
+          headers: { Authorization: `Bearer ${localStorage.getItem("Token")}` },
         }
       )
       .then((res) => {
@@ -77,7 +77,7 @@ const Start = () => {
       });
   }, []);
 
-  console.log('ongoing data', ongoing);
+  console.log("ongoing data", ongoing);
 
   //Fetching api for slider
 
@@ -86,7 +86,7 @@ const Start = () => {
       .get(
         `http://virtuallearnapp2-env.eba-wrr2p8zk.ap-south-1.elasticbeanstalk.com/user/home/course`,
         {
-          headers: { Authorization: `Bearer ${localStorage.getItem('Token')}` },
+          headers: { Authorization: `Bearer ${localStorage.getItem("Token")}` },
         }
       )
       .then((res) => {
@@ -104,7 +104,7 @@ const Start = () => {
       .get(
         `http://virtuallearnapp2-env.eba-wrr2p8zk.ap-south-1.elasticbeanstalk.com/user/home/course/all`,
         {
-          headers: { Authorization: `Bearer ${localStorage.getItem('Token')}` },
+          headers: { Authorization: `Bearer ${localStorage.getItem("Token")}` },
         }
       )
       .then((res) => {
@@ -122,7 +122,7 @@ const Start = () => {
       .get(
         `http://virtuallearnapp2-env.eba-wrr2p8zk.ap-south-1.elasticbeanstalk.com/user/home/course/popular`,
         {
-          headers: { Authorization: `Bearer ${localStorage.getItem('Token')}` },
+          headers: { Authorization: `Bearer ${localStorage.getItem("Token")}` },
         }
       )
       .then((res) => {
@@ -140,7 +140,7 @@ const Start = () => {
       .get(
         `http://virtuallearnapp2-env.eba-wrr2p8zk.ap-south-1.elasticbeanstalk.com/user/home/course/newest`,
         {
-          headers: { Authorization: `Bearer ${localStorage.getItem('Token')}` },
+          headers: { Authorization: `Bearer ${localStorage.getItem("Token")}` },
         }
       )
       .then((res) => {
@@ -158,7 +158,7 @@ const Start = () => {
       .get(
         `http://virtuallearnapp2-env.eba-wrr2p8zk.ap-south-1.elasticbeanstalk.com/user/home/course/category`,
         {
-          headers: { Authorization: `Bearer ${localStorage.getItem('Token')}` },
+          headers: { Authorization: `Bearer ${localStorage.getItem("Token")}` },
         }
       )
       .then((res) => {
@@ -176,7 +176,7 @@ const Start = () => {
       .get(
         `http://virtuallearnapp2-env.eba-wrr2p8zk.ap-south-1.elasticbeanstalk.com/user/categoriesWP`,
         {
-          headers: { Authorization: `Bearer ${localStorage.getItem('Token')}` },
+          headers: { Authorization: `Bearer ${localStorage.getItem("Token")}` },
         }
       )
       .then((res) => {
@@ -192,7 +192,7 @@ const Start = () => {
       .get(
         `http://virtuallearnapp2-env.eba-wrr2p8zk.ap-south-1.elasticbeanstalk.com/user/menu`,
         {
-          headers: { Authorization: `Bearer ${localStorage.getItem('Token')}` },
+          headers: { Authorization: `Bearer ${localStorage.getItem("Token")}` },
         }
       )
       .then((res) => {
@@ -217,7 +217,7 @@ const Start = () => {
             onClick={() => {
               dispatch(courseOverview(item.courseId));
               dispatch(chapterResponse(item.courseId));
-              navigate('/myCourses/ongoingCourse');
+              navigate("/myCourses/ongoingCourse");
             }}
           >
             <div className="start-map-image">
@@ -233,7 +233,7 @@ const Start = () => {
         <div
           className="start-seeall"
           onClick={() => {
-            navigate('myCourses');
+            navigate("myCourses");
           }}
         >
           See All
@@ -264,7 +264,7 @@ const Start = () => {
                     onClick={() => {
                       dispatch(courseOverview(item.courseId));
                       dispatch(chapterResponse(item.courseId));
-                      navigate('/myCourses/ongoingCourse');
+                      navigate("/myCourses/ongoingCourse");
                     }}
                   >
                     Continue
@@ -279,7 +279,7 @@ const Start = () => {
         <div
           className="start-seeall"
           onClick={() => {
-            navigate('/categories');
+            navigate("/categories");
           }}
         >
           See All
@@ -302,7 +302,7 @@ const Start = () => {
                 dispatch(
                   subCategories(`subCategories?categoryId=${ele.categoryId}`)
                 );
-                navigate('/categories/design');
+                navigate("/categories/design");
               }}
             >
               <div className="start-course-categories-Icon">
@@ -321,7 +321,7 @@ const Start = () => {
         <div
           className="start-seeall"
           onClick={() => {
-            navigate('courseChoice');
+            navigate("courseChoice");
           }}
         >
           See All
@@ -330,19 +330,19 @@ const Start = () => {
       <div className="start-choice-course-subcategory">
         <div className="all-tabs-home">
           <div
-            className={homeTabState === 1 ? 'home-tab-1-active' : 'home-tab-1'}
+            className={homeTabState === 1 ? "home-tab-1-active" : "home-tab-1"}
             onClick={() => handleTabClick(1)}
           >
             All
           </div>
           <div
-            className={homeTabState === 2 ? 'home-tab-1-active' : 'home-tab-1'}
+            className={homeTabState === 2 ? "home-tab-1-active" : "home-tab-1"}
             onClick={() => handleTabClick(2)}
           >
             Popular
           </div>
           <div
-            className={homeTabState === 3 ? 'home-tab-1-active' : 'home-tab-1'}
+            className={homeTabState === 3 ? "home-tab-1-active" : "home-tab-1"}
             onClick={() => handleTabClick(3)}
           >
             Newest
@@ -359,7 +359,7 @@ const Start = () => {
                 onClick={() => {
                   dispatch(courseOverview(item.courseId));
                   dispatch(chapterResponse(item.courseId));
-                  navigate('/myCourses/ongoingCourse');
+                  navigate("/myCourses/ongoingCourse");
                 }}
               >
                 <div className="start-image-pause">
@@ -391,7 +391,7 @@ const Start = () => {
                 onClick={() => {
                   dispatch(courseOverview(item.courseId));
                   dispatch(chapterResponse(item.courseId));
-                  navigate('/myCourses/ongoingCourse');
+                  navigate("/myCourses/ongoingCourse");
                 }}
               >
                 <div className="start-image-pause">
@@ -423,7 +423,7 @@ const Start = () => {
                 onClick={() => {
                   dispatch(courseOverview(item.courseId));
                   dispatch(chapterResponse(item.courseId));
-                  navigate('/myCourses/ongoingCourse');
+                  navigate("/myCourses/ongoingCourse");
                 }}
               >
                 <div className="start-image-pause">
@@ -468,7 +468,7 @@ const Start = () => {
                   dispatch(
                     subCategories(`subCategories?categoryId=${item.categoryId}`)
                   );
-                  navigate('/categories/design');
+                  navigate("/categories/design");
                 }}
               >
                 See All
@@ -483,7 +483,7 @@ const Start = () => {
                     onClick={() => {
                       dispatch(courseOverview(ele.courseId));
                       dispatch(chapterResponse(ele.courseId));
-                      navigate('/myCourses/ongoingCourse');
+                      navigate("/myCourses/ongoingCourse");
                     }}
                   >
                     <div className="start-image-pause">

@@ -39,17 +39,23 @@ const Notification = () => {
 
   console.log(notifyData);
   return (
-    <div className="drawer-profile">
-      <div className="drawer-profile-header">
-        <div className="drawer-profile-clear" onClick={handleClick}>
+    <div className="drawer-profile-notify">
+      <div className="drawer-profile-header-notify">
+        <div className="drawer-profile-clear-notify" onClick={handleClick}>
           {closeProfile}
         </div>
+        <div className="arrow-left-notify-mobile">
+          <i
+            className="fa-solid fa-arrow-left-long arrow-left-long-notify"
+            onClick={handleClick}
+          ></i>
+        </div>
 
-        <div className="drawer-profile-name">
-          <p className="drawer-profile-profile">Notifications</p>
+        <div className="drawer-profile-name-notify">
+          <p className="drawer-profile-profile-notify">Notifications</p>
         </div>
       </div>
-      <div className="drawer-profile-body">
+      <div className="drawer-profile-body-notify">
         {notifyData &&
           notifyData.map((ele) => {
             return (
