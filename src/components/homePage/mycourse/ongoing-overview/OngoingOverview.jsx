@@ -1,7 +1,7 @@
-import "./OngoingOverview.css";
-import React, { useState, useEffect, useRef } from "react";
-import ReactPlayer from "react-player";
-import { useDispatch, useSelector } from "react-redux";
+import './OngoingOverview.css';
+import React, { useState, useEffect, useRef } from 'react';
+import ReactPlayer from 'react-player';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   accordianState,
   accordianToggleState,
@@ -24,27 +24,32 @@ import {
   testImage,
   videoPlayActive,
   whiteStepperIcon,
-} from "../../../../utils/svgIcons";
+} from '../../../../utils/svgIcons';
 import {
   Accordion,
   AccordionItem,
   AccordionItemHeading,
   AccordionItemButton,
   AccordionItemPanel,
-} from "react-accessible-accordion";
+} from 'react-accessible-accordion';
 
-import instructorImage from "../../../../assets/images/instructorImage.jpg";
-import Accordian from "../accordian/Accordian";
-import axios from "axios";
-import { Link, Navigate, useNavigate } from "react-router-dom";
-import { test, testisSuccess } from "../../../../redux/reducers/testSlice";
-import { testShow, testSuccess } from "../../../../redux/reducers/Conditions";
-import { testSuccessRed } from "../../../../redux/reducers/SuccessTestRed";
-import { showSuccessPage } from "../../../../redux/reducers/showSuccesspage";
-import { finaltestShowPage } from "../../../../redux/reducers/finalTestSuccess";
-import Loading from "../../../../utils/loading/Loading";
+
+import instructorImage from '../../../../assets/images/instructorImage.jpg';
+import Accordian from '../accordian/Accordian';
+import axios from 'axios';
+import { Link, Navigate, useNavigate } from 'react-router-dom';
+import { test, testisSuccess } from '../../../../redux/reducers/testSlice';
+import { testShow, testSuccess } from '../../../../redux/reducers/Conditions';
+import { testSuccessRed } from '../../../../redux/reducers/SuccessTestRed';
+import { showSuccessPage } from '../../../../redux/reducers/showSuccesspage';
+import { finaltestShowPage } from '../../../../redux/reducers/finalTestSuccess';
+import Loading from '../../../../utils/loading/Loading';
 import ShowMoreText from "react-show-more-text";
-import { Player } from "video-react";
+import { Player } from 'video-react';
+import toast, { Toaster } from 'react-hot-toast';
+
+
+
 
 const OngoingOverview = () => {
   const [activeStep, setActiveStep] = useState(0);
@@ -54,6 +59,43 @@ const OngoingOverview = () => {
   const [chapterLoading, setChapterLoading] = useState(false);
   const [overviewLoading, setOverviewLoading] = useState(false);
   const [testLoading, setTestLoading] = useState(false);
+
+  // Toast
+  const notify = () => toast.error((t) => (
+    <div className='toast-div'>
+      Please finish above sections
+      <div className='toast-close' onClick={() => toast.dismiss(t.id)}>
+        X
+      </div>
+    </div>
+  ));
+
+  const successCourse = () => toast.success((t) => (
+    <div className='toast-div'>
+      Course Enrolled succesfully
+      <div className='toast-close' onClick={() => toast.dismiss(t.id)}>
+        X
+      </div>
+    </div>
+  ));
+  const errorCourse = () => toast.error((t) => (
+    <div className='toast-div'>
+      Please enroll to access full course
+      <div className='toast-close' onClick={() => toast.dismiss(t.id)}>
+        X
+      </div>
+    </div>
+  ));
+
+  const alreadyCourse = () => toast.success((t) => (
+    <div className='toast-div'>
+      Already enrolled
+      <div className='toast-close' onClick={() => toast.dismiss(t.id)}>
+        X
+      </div>
+    </div>
+  ));
+  // Toast
 
   const navigate = useNavigate();
 
@@ -70,6 +112,14 @@ const OngoingOverview = () => {
 
   const chapterLoad = useSelector((state) => state.chapterResponse);
   const courseLoad = useSelector((state) => state.courseOverview);
+
+
+  useEffect(() => {
+    console.log("Component mounted");
+    return () => {
+      console.log("Component unmounted")
+    }
+  }, [])
 
   useEffect(() => {
     if (courseLoad.loading) {
@@ -141,6 +191,7 @@ const OngoingOverview = () => {
   const [pause, setPause] = useState(false);
   const [playing, setPlaying] = useState(false);
   const [played, setPlayed] = useState(false);
+  const [joinCourse, setJoinCourse] = useState(false);
 
   const onPause = () => {
     setPause(true);
@@ -168,11 +219,11 @@ const OngoingOverview = () => {
 
   const getVideoState = (itemele) => {
     dispatch(videoLinkState(itemele.videoLink));
-    console.log("videoLink", videoLink);
+    console.log("videoLink", videoLink)
   };
 
-  const enrollCourse = (courseId) => {
-    axios
+  const enrollCourse = async (courseId) => {
+    await axios
       .request(
         `http://virtuallearn-env.eba-6xmym3vf.ap-south-1.elasticbeanstalk.com/user/enroll`,
         {
@@ -186,22 +237,35 @@ const OngoingOverview = () => {
         }
       )
       .then((res) => {
-        console.log(res)(
-          res.data.message === "Enrolled successfully" &&
-            window.location.reload()
-        );
+        console.log(res)
+          (res.data.message === "Enrolled successfully" && navigate('/myCourses'));
       })
+      // .then((res) => {
+      //   (res.data.message === "Already enrolled" && alreadyCourse());
+      // })
       .catch((err) => {
         console.log(err);
       });
+
+    // window.location.reload();
+    setJoinCourse(true)
+    successCourse()
+    console.log('Clicked')
   };
 
-  const [accState, setAccState] = useState();
-  const [loop, setLoop] = useState(false);
-  const [nextModal, setNextModal] = useState(false);
-  const [defPause, setDefPause] = useState(false);
-  const [firstPause, setFirstPause] = useState(true);
+  useEffect(() => {
+    courseOverview &&
+      courseOverview.data &&
+      setOverviewData(courseOverview.data);
+  }, [joinCourse])
+
+  const [accState, setAccState] = useState()
+  const [loop, setLoop] = useState(false)
+  const [nextModal, setNextModal] = useState(false)
+  const [defPause, setDefPause] = useState(false)
+  const [firstPause, setFirstPause] = useState(true)
   const playerRef = useRef();
+
 
   const defaultNormalPause = () => {
     setPause(false);
@@ -209,7 +273,7 @@ const OngoingOverview = () => {
     setDefPause(true);
     setNextModal(false);
     setFirstPause(false);
-  };
+  }
   return (
     <>
       <div className="homeCategories-head-link">
@@ -234,52 +298,36 @@ const OngoingOverview = () => {
         </span>
         {overviewData && overviewData.courseName && overviewData.courseName}
       </div>
+
       <div className="ongoing-overview">
         <div className="ongoing-section-1">
           <div className="ongoing-section-video-player">
+
             {pause && (
               <>
                 <div className="pause-overlay">
-                  {firstPause && (
-                    <div
-                      className="continue-chapter-pause-button"
-                      onClick={() => {
-                        setNextModal(true);
-                      }}
-                    >
-                      Continue Chapter 3 Lesson 21
-                    </div>
-                  )}
-                  {nextModal && (
+                  {
+                    firstPause &&
+                    <div className="continue-chapter-pause-button" onClick={() => { setNextModal(true); setFirstPause(false) }}>Continue Chapter 3 Lesson 21</div>
+                  }
+                  {
+                    nextModal &&
                     <div className="onpause-modal">
                       <p className="onpause-modal-title">
-                        Your lesson paused at{" "}
-                        <span>{Math.floor(played) / 100}</span> Do you want to
-                        continue watching?
+                        Your lesson paused at <span>{Math.floor(played) / 100}</span> Do you want to continue watching?
                       </p>
-                      <button
-                        className="onpause-button"
-                        onClick={defaultNormalPause}
-                      >
+                      <button className="onpause-button" onClick={defaultNormalPause}>
                         Continue Watching
                       </button>
-                      <button
-                        className="onpause-button beginning"
-                        onClick={() => {
-                          playerRef.current.seekTo(0, "seconds");
-                          setPause(false);
-                          setPlaying(true);
-                        }}
-                      >
+                      <button className="onpause-button beginning" onClick={() => { playerRef.current.seekTo(0, 'seconds'); setPause(false); setPlaying(true) }}>
                         Watch from beginning
                       </button>
                     </div>
-                  )}
-                  {defPause && (
-                    <div className="pause-button" onClick={onPlay}>
-                      {start_pauseIconVideo}
-                    </div>
-                  )}
+                  }
+                  {
+                    defPause &&
+                    <div className="pause-button" onClick={onPlay}>{start_pauseIconVideo}</div>
+                  }
                 </div>
               </>
             )}
@@ -295,6 +343,7 @@ const OngoingOverview = () => {
               loop={loop}
               onPause={onPause}
               playing={playing}
+              onSeek={() => { setPause(false); }}
               onProgress={(progress) => {
                 setPlayed(progress.playedSeconds);
               }}
@@ -323,8 +372,8 @@ const OngoingOverview = () => {
               <div className="ongoing-video-title">
                 <p className="video-title">{overviewData.courseName}</p>
                 <p className="video-chapters">
-                  {overviewData.chapterCount} Chapter |{" "}
-                  {overviewData.lessonCount} lessons
+                  {overviewData.chapterCount} Chapter | {overviewData.lessonCount}{" "}
+                  lessons
                 </p>
               </div>
               <div className="ongoing-video-category">
@@ -362,7 +411,7 @@ const OngoingOverview = () => {
               )}
             </>
           ) : (
-            // <div className="course-completion">
+            //  <div className="course-completion">
             //     <div className="course-completion-section-1">
             //         <div className="completion-section-1-main">
 
@@ -429,34 +478,30 @@ const OngoingOverview = () => {
                       <p>{overviewData.courseTagLine}</p>
                     </div>
                     <div className="ongoing-course-desc-content-mobile">
-                      <p>Preview this Course</p>
-                      <div className="mobile-video-link">
-                        <div className="mobile-video-section-1">
-                          <img
-                            src={require("../../../../assets/images/icn_play_orange.png")}
-                            alt=""
-                            className="video-logo"
-                          />
-                          <div className="mobile-video-desc">
-                            <div className="mobile-video-title">
-                              Introduction
-                            </div>
-                            <div className="mobile-video-dur">3 Min</div>
-                          </div>
-                        </div>
+                      <p className='ongoing-course-desc-content-mobile-title-desc'>Preview this Course</p>
+                      {/* <div className="mobile-video-link">
+                      <div className="mobile-video-section-1">
                         <img
-                          src={require("../../../../assets/images/icn_previewgo.png")}
+                          src={require("../../../../assets/images/icn_play_orange.png")}
                           alt=""
-                          className="right-icon"
+                          className="video-logo"
                         />
+                        <div className="mobile-video-desc">
+                          <div className="mobile-video-title">Introduction</div>
+                          <div className="mobile-video-dur">3 Min</div>
+                        </div>
                       </div>
-                      <input type="checkbox" id="expanded"></input>
-                      <p className="mobile-video-description">
+                      <img
+                        src={require("../../../../assets/images/icn_previewgo.png")}
+                        alt=""
+                        className="right-icon"
+                      />
+                    </div> */}
+                      <ShowMoreText
+                        anchorClass="show-more-style-mobile">
                         {overviewData.description}
-                      </p>
-                      <label for="expanded" role="button">
-                        SHOW MORE
-                      </label>
+                      </ShowMoreText>
+
                       <img
                         src={require("../../../../assets/images/icn_previewgo.png")}
                         alt=""
@@ -488,9 +533,7 @@ const OngoingOverview = () => {
                       </div>
                     </div>
                     <div className="course-points">
-                      <div className="course-points-img">
-                        {courseAccessIcon}
-                      </div>
+                      <div className="course-points-img">{courseAccessIcon}</div>
                       <div className="course-points-title">
                         Full lifetime access
                       </div>
@@ -521,9 +564,7 @@ const OngoingOverview = () => {
                     overviewData.learningOutCome.map((ele) => {
                       return (
                         <div className="learn-points">
-                          <div className="learn-points-img">
-                            {learnCheckMark}
-                          </div>
+                          <div className="learn-points-img">{learnCheckMark}</div>
                           <div className="learn-points-title">{ele}</div>
                         </div>
                       );
@@ -557,7 +598,6 @@ const OngoingOverview = () => {
                       </div>
                     </div>
                     <div className="instructor-about">
-                      <input type="checkbox" id="expanded"></input>
                       <ShowMoreText
                         lines={5}
                         className="showmore"
@@ -571,16 +611,18 @@ const OngoingOverview = () => {
                   <h3>Loading</h3>
                 )}
               </div>
-              {overviewData && overviewData.enrolled ? (
-                ""
-              ) : (
-                <button
-                  className="join-course"
-                  onClick={() => enrollCourse(overviewData.courseId)}
-                >
-                  Join Course
-                </button>
-              )}
+              {
+                overviewData && overviewData.enrolled === true ?
+                  (
+                    ""
+                  ) : (
+                    <button
+                      className="join-course"
+                      onClick={() => enrollCourse(overviewData.courseId)}
+                    >
+                      Join Course
+                    </button>
+                  )}
             </div>
             <div
               className={tabState === 2 ? "tab-content-2" : "tab-content-none"}
@@ -592,11 +634,12 @@ const OngoingOverview = () => {
                     <p className="course-content-desc">
                       {chapter.chapterCount} Chapter | {chapter.lessonCount}{" "}
                       lessons | {chapter.testCount} Assignment Test |{" "}
-                      {chapter.totalDuration}h Total length
+                      {chapter.courseDuration} Total length
                     </p>
                   </div>
 
                   <div className="course-sections">
+
                     {chapter.chapterResponses.map((ele, id) => {
                       return (
                         <>
@@ -662,11 +705,10 @@ const OngoingOverview = () => {
                                                   className="video-play-btn"
                                                   // onClick={() => { setVideo(courseele.videoLink) }}
                                                   onClick={() => {
-                                                    itemele.lessonStatus
-                                                      ? getVideoState(itemele)
-                                                      : alert(
-                                                          "Please finish above video section"
-                                                        );
+                                                    itemele.lessonStatus ?
+                                                      getVideoState(itemele)
+                                                      :
+                                                      notify()
                                                   }}
                                                 >
                                                   {itemele.lessonStatus
@@ -705,11 +747,9 @@ const OngoingOverview = () => {
                                               }
                                               dispatch(
                                                 test(
-                                                  `${
-                                                    ele.testName ===
-                                                    "Final Test"
-                                                      ? "finalTest"
-                                                      : "moduleTest"
+                                                  `${ele.testName === 'Final Test'
+                                                    ? 'finalTest'
+                                                    : 'moduleTest'
                                                   }?testId=${ele.testId}`
                                                 )
                                               );
@@ -724,21 +764,21 @@ const OngoingOverview = () => {
                                                   {ele.testName}
                                                 </p>
                                                 <p className="accordian-item-chapter-duration">
-                                                  {ele.testDuration} min |{" "}
-                                                  {ele.questionCount} questions
+                                                  {ele.testDuration} min | {ele.questionCount}{' '}
+                                                  questions
                                                 </p>
                                               </div>
                                             </div>
                                             <div
                                               className="video-play-btn"
-                                              // onClick={() => { setVideo(courseele.videoLink) }}
-                                              // onClick={() => {
-                                              //   dispatch(
-                                              //     videoLinkState(
-                                              //       itemele.videoLink
-                                              //     )
-                                              //   );
-                                              // }}
+                                            // onClick={() => { setVideo(courseele.videoLink) }}
+                                            // onClick={() => {
+                                            //   dispatch(
+                                            //     videoLinkState(
+                                            //       itemele.videoLink
+                                            //     )
+                                            //   );
+                                            // }}
                                             >
                                               80%
                                             </div>
@@ -912,7 +952,12 @@ const OngoingOverview = () => {
                                                 </div>
                                                 <div
                                                   className="video-play-btn"
-                                                  // onClick={() => { setVideo(courseele.videoLink) }}
+                                                  onClick={() => {
+                                                    ele.chapterNumber === 1 ?
+                                                      console.log("nothing")
+                                                      :
+                                                      errorCourse()
+                                                  }}
                                                 >
                                                   {ele.chapterNumber === 1
                                                     ? videoPlayActive("red")
@@ -949,11 +994,9 @@ const OngoingOverview = () => {
                                               }
                                               dispatch(
                                                 test(
-                                                  `${
-                                                    ele.testName ===
-                                                    "Final Test"
-                                                      ? "finalTest"
-                                                      : "moduleTest"
+                                                  `${ele.testName === 'Final Test'
+                                                    ? 'finalTest'
+                                                    : 'moduleTest'
                                                   }?testId=${ele.testId}`
                                                 )
                                               );
@@ -975,14 +1018,14 @@ const OngoingOverview = () => {
                                             </div>
                                             <div
                                               className="video-play-btn"
-                                              // onClick={() => { setVideo(courseele.videoLink) }}
-                                              // onClick={() => {
-                                              //   dispatch(
-                                              //     videoLinkState(
-                                              //       itemele.videoLink
-                                              //     )
-                                              //   );
-                                              // }}
+                                            // onClick={() => { setVideo(courseele.videoLink) }}
+                                            // onClick={() => {
+                                            //   dispatch(
+                                            //     videoLinkState(
+                                            //       itemele.videoLink
+                                            //     )
+                                            //   );
+                                            // }}
                                             ></div>
                                           </div>
                                         </div>
@@ -1004,6 +1047,41 @@ const OngoingOverview = () => {
             </div>
           </div>
         </div>
+        <Toaster
+          containerStyle={{
+            top: 100,
+            left: 20,
+            bottom: 20,
+            right: 20,
+          }}
+          toastOptions={{
+            className: '',
+            // style: {
+            //   border: '1px solid #ee5c4d',
+            //   padding: '10px',
+            //   color: '#ee5c4d',
+            //   width: '500px',
+            // },
+
+            success: {
+              duration: 3000,
+              style: {
+                border: '1px solid #AAFF00',
+                padding: '10px',
+                color: 'green',
+                width: '350px',
+              },
+            },
+            error: {
+              duration: 3000,
+              style: {
+                border: '1px solid #ee5c4d',
+                padding: '10px',
+                color: '#ee5c4d',
+                width: '350px',
+              },
+            }
+          }} />
         {(chapterLoading || overviewLoading || testLoading) && <Loading />}
       </div>
     </>
