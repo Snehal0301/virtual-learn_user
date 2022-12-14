@@ -34,7 +34,7 @@ const LoginForgotPW = () => {
 
   const forgotPW = (mobileNum: any) => {
     fetch(
-      `http://virtuallearnapp2-env.eba-wrr2p8zk.ap-south-1.elasticbeanstalk.com/send`,
+      `http://virtuallearn-env.eba-6xmym3vf.ap-south-1.elasticbeanstalk.com/send`,
       {
         method: 'POST',
         headers: {

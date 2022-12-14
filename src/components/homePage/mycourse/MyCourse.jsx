@@ -1,46 +1,32 @@
-import React from "react";
-import "./MyCourse.css";
-import { design } from "../../../utils/svgIcons";
-import Ongoing from "./ongoing/Ongoing";
-import { NavLink, Route, Routes } from "react-router-dom";
-import Completed from "./completed/Completed";
-import { useSelector, useDispatch } from "react-redux";
-import OngoingOverview from "./ongoing-overview/OngoingOverview";
-import { mycoursetabToggleState } from "../../../redux/reducers/myCourseReducer";
-import emptyCourseImg from "../.../../../../assets/images/start-courses-image/img_my-course_empty.png";
+import React from 'react';
+import './MyCourse.css';
+import { design } from '../../../utils/svgIcons';
+import Ongoing from './ongoing/Ongoing';
+import { NavLink, Route, Routes } from 'react-router-dom';
+import Completed from './completed/Completed';
+import { useSelector, useDispatch } from 'react-redux';
+import OngoingOverview from './ongoing-overview/OngoingOverview';
+import { mycoursetabToggleState } from '../../../redux/reducers/myCourseReducer';
+import emptyCourseImg from '../.../../../../assets/images/start-courses-image/img_my-course_empty.png';
 const MyCourse = () => {
   const dispatch = useDispatch();
   const Categories = [
-    "Design",
-    "Development",
-    "Business",
-    "Finance",
-    "Health & Fitness",
-    "Music",
-    "IT & Software",
-    "Marketing",
-    "Lifestyle",
-    "Photography",
+    'Design',
+    'Development',
+    'Business',
+    'Finance',
+    'Health & Fitness',
+    'Music',
+    'IT & Software',
+    'Marketing',
+    'Lifestyle',
+    'Photography',
   ];
   const tabState = useSelector((state) => state.mycourse.tab);
   const mycoursetabState = useSelector((state) => state.mycourse.mycoursetab);
   return (
     <div className="mycourse">
-      <div className="breadcrumbs">
-        <ul class="breadcrumb">
-          <li>
-            <a href="#">My Course</a>
-          </li>
-          <li>
-            <a href="#">Ongoing</a>
-          </li>
-          {tabState === 2 && (
-            <li>
-              <a href="#">Learn Figma - UI/UX Design Essential Training</a>
-            </li>
-          )}
-        </ul>
-      </div>
+      <div className="homeCategories-head-link">My Course</div>
       <div className="mobile-myCourse">
         <p>My Course</p>
       </div>
@@ -74,21 +60,29 @@ const MyCourse = () => {
             })}
           </div>
         </div> */}
-        {/* --------------------------- */}
+      {/* --------------------------- */}
 
-        <div className="mycourse-tabs">
-                    <div className={mycoursetabState === 1 ? "mycourse-tab-active" : "mycourse-tab"} onClick={() => dispatch(mycoursetabToggleState(1))}>Ongoing</div>
-                    <div className={mycoursetabState === 2 ? "mycourse-tab-active" : "mycourse-tab"} onClick={() => dispatch(mycoursetabToggleState(2))}>Completed</div>
-                </div>
-                {
-                    mycoursetabState === 1
-                        ?
-                        <Ongoing />
-                        :
-                        <Completed />
-                } 
-        {/* <OngoingOverview /> */}
+      <div className="mycourse-tabs">
+        <div
+          className={
+            mycoursetabState === 1 ? 'mycourse-tab-active' : 'mycourse-tab'
+          }
+          onClick={() => dispatch(mycoursetabToggleState(1))}
+        >
+          Ongoing
+        </div>
+        <div
+          className={
+            mycoursetabState === 2 ? 'mycourse-tab-active' : 'mycourse-tab'
+          }
+          onClick={() => dispatch(mycoursetabToggleState(2))}
+        >
+          Completed
+        </div>
       </div>
+      {mycoursetabState === 1 ? <Ongoing /> : <Completed />}
+      {/* <OngoingOverview /> */}
+    </div>
 
     // </div>
   );

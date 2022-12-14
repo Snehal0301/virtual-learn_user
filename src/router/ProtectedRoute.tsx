@@ -1,8 +1,8 @@
-import { Navigate } from 'react-router-dom'
+import { Navigate } from 'react-router-dom';
 
 const RequireAuth = ({ children, redirectTo }: any) => {
-  let isAuthenticated = JSON.parse(localStorage.getItem('auth') || 'false')
-  return isAuthenticated ? children : <Navigate to={redirectTo} />
-}
+  let isAuthenticated = JSON.parse(sessionStorage.getItem('auth') || 'false');
+  return isAuthenticated ? children : <Navigate to={redirectTo} />;
+};
 
-export default RequireAuth
+export default RequireAuth;

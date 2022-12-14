@@ -1,21 +1,24 @@
-import "./Terms.css"
-import { useDispatch, useSelector } from "react-redux";
+import './Terms.css'
+import { useDispatch, useSelector } from 'react-redux'
 import React, { useEffect, useState } from 'react'
-import { arrowRight } from "../../../../utils/svgIcons";
-import { termsSection } from "../../../../redux/reducers/headerProfileOptions";
-import axios from "axios";
+import { arrowRight } from '../../../../utils/svgIcons'
+import { termsSection } from '../../../../redux/reducers/headerProfileOptions'
+import axios from 'axios'
 
 const Terms = () => {
-      const dispatch = useDispatch();
-    const handleClick = () => {
-      dispatch(termsSection(false));
-  };
-  const [termsData, setTermsData] = useState("")
+  const dispatch = useDispatch()
+  const handleClick = () => {
+    dispatch(termsSection(false))
+  }
+  const [termsData, setTermsData] = useState('')
   useEffect(() => {
-    axios.get(
-      `http://virtuallearnapp2-env.eba-wrr2p8zk.ap-south-1.elasticbeanstalk.com/termsAndConditions`
-    ).then((res)=>{setTermsData(res && res.data && res.data.message)})
-    
+    axios
+      .get(
+        `http://virtuallearn-env.eba-6xmym3vf.ap-south-1.elasticbeanstalk.com/termsAndConditions`,
+      )
+      .then((res) => {
+        setTermsData(res && res.data && res.data.message)
+      })
   }, [])
   console.log(termsData)
   return (
@@ -37,7 +40,7 @@ const Terms = () => {
 
       <div className="terms-phrases terms-para">{termsData}</div>
     </div>
-  );
+  )
 }
 
 export default Terms

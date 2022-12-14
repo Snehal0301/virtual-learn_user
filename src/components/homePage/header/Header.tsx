@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import './Header.css';
+import React, { useEffect, useState } from 'react'
+import './Header.css'
 import {
   bellIcon,
   closeIcon,
@@ -12,8 +12,8 @@ import {
   profileIcon,
   searchIcon,
   settingsIcon,
-} from '../../../utils/svgIcons';
-import { useDispatch, useSelector } from 'react-redux';
+} from '../../../utils/svgIcons'
+import { useDispatch, useSelector } from 'react-redux'
 import {
   editProfileSection,
   headerProfile,
@@ -24,95 +24,95 @@ import {
   profileSection,
   settingsSection,
   termsSection,
-} from '../../../redux/reducers/headerProfileOptions';
-import Drawer from 'react-modern-drawer';
-import 'react-modern-drawer/dist/index.css';
-import Profile from './profile/Profile';
-import Settings from './settings/Settings';
-import PrivacyPolicy from './privacypolicy/PrivacyPolicy';
-import Terms from './terms/Terms';
-import Notification from './notification/Notification';
-import { searchFocus } from '../../../redux/reducers/headerProfileOptions';
-import EditProfile from './edit-profile/EditProfile';
-import ChangePassword from './changePassword/ChangePassword';
-import { useNavigate } from 'react-router-dom';
+} from '../../../redux/reducers/headerProfileOptions'
+import Drawer from 'react-modern-drawer'
+import 'react-modern-drawer/dist/index.css'
+import Profile from './profile/Profile'
+import Settings from './settings/Settings'
+import PrivacyPolicy from './privacypolicy/PrivacyPolicy'
+import Terms from './terms/Terms'
+import Notification from './notification/Notification'
+import { searchFocus } from '../../../redux/reducers/headerProfileOptions'
+import EditProfile from './edit-profile/EditProfile'
+import ChangePassword from './changePassword/ChangePassword'
+import { useNavigate } from 'react-router-dom'
 import filter, {
   clearFilter,
   setChapterCount,
   setfilter,
-} from '../../../redux/reducers/filter';
-import Loading from '../../../utils/loading/Loading';
-import axios from 'axios';
-import { courseOverview } from '../../../redux/reducers/courseOverview';
-import { chapterResponse } from '../../../redux/reducers/chapterResponses';
+} from '../../../redux/reducers/filter'
+import Loading from '../../../utils/loading/Loading'
+import axios from 'axios'
+import { courseOverview } from '../../../redux/reducers/courseOverview'
+import { chapterResponse } from '../../../redux/reducers/chapterResponses'
 
 const Header = () => {
-  const [onChange, setOnChange] = useState('');
-  const [showFilter, setShowFilter] = useState(false);
-  const [loading, setLoading] = useState(false);
-  const [topSearch, setTopSearch] = useState([]);
-  const [topCategories, setTopCategories] = useState([]);
-  const [searchedCourse, setSearchedCourse] = useState([]);
-  const [profileData, setprofileData] = useState<any>({});
+  const [onChange, setOnChange] = useState('')
+  const [showFilter, setShowFilter] = useState(false)
+  const [loading, setLoading] = useState(false)
+  const [topSearch, setTopSearch] = useState([])
+  const [topCategories, setTopCategories] = useState([])
+  const [searchedCourse, setSearchedCourse] = useState([])
+  const [profileData, setprofileData] = useState<any>({})
 
-  const navigate = useNavigate();
+  const navigate = useNavigate()
 
-  const filterData = useSelector((state: any) => state.filter.value);
+  const filterData = useSelector((state: any) => state.filter.value)
 
   useEffect(() => {
     fetch(
-      `http://virtuallearnapp2-env.eba-wrr2p8zk.ap-south-1.elasticbeanstalk.com/user/topSearches`,
+      `http://virtuallearn-env.eba-6xmym3vf.ap-south-1.elasticbeanstalk.com/user/topSearches`,
       {
         headers: {
           Accept: 'application/json, text/plain, */*',
           'Content-Type': 'application/json',
-          Authorization: `Bearer ${localStorage.getItem('Token')}`,
+          Authorization: `Bearer ${sessionStorage.getItem('Token')}`,
         },
-      }
+      },
     )
       .then((res) => res.json())
       .then((res) => {
-        console.log('Top Search', res);
-        setTopSearch(res);
-      });
-  }, []);
+        console.log('Top Search', res)
+        setTopSearch(res)
+      })
+  }, [])
 
   useEffect(() => {
     fetch(
-      `http://virtuallearnapp2-env.eba-wrr2p8zk.ap-south-1.elasticbeanstalk.com/user/categoriesWP`,
+      `http://virtuallearn-env.eba-6xmym3vf.ap-south-1.elasticbeanstalk.com/user/categoriesWP`,
       {
         headers: {
           Accept: 'application/json, text/plain, */*',
           'Content-Type': 'application/json',
-          Authorization: `Bearer ${localStorage.getItem('Token')}`,
+          Authorization: `Bearer ${sessionStorage.getItem('Token')}`,
         },
-      }
+      },
     )
       .then((res) => res.json())
       .then((res) => {
-        setTopCategories(res);
-      });
-  }, []);
+        setTopCategories(res)
+      })
+  }, [])
 
   useEffect(() => {
     axios
       .get(
-        `http://virtuallearnapp2-env.eba-wrr2p8zk.ap-south-1.elasticbeanstalk.com/user/menu`,
+        `http://virtuallearn-env.eba-6xmym3vf.ap-south-1.elasticbeanstalk.com/user/menu`,
         {
           headers: {
-            Authorization: `Bearer ${localStorage.getItem('Token')}`,
+            Authorization: `Bearer ${sessionStorage.getItem('Token')}`,
           },
-        }
+        },
       )
       .then((res) => {
-        setprofileData(res.data);
+        setprofileData(res.data)
       })
       .catch((err) => {
-        console.error(err);
-      });
-  }, []);
+        console.error(err)
+      })
+  }, [])
 
-  console.log('profile data', profileData);
+  console.log('profile data', profileData)
 
   const Duration = [
     { start: 0, end: 5 },
@@ -121,179 +121,179 @@ const Header = () => {
     { start: 20, end: 30 },
     { start: 30, end: 40 },
     { start: 50 },
-  ];
+  ]
 
-  const [notifydata, setnotifydata] = useState(false);
+  const [notifydata, setnotifydata] = useState(false)
   const handleProfileClick = () => {
-    dispatch(profileDrawer(true));
-    dispatch(headerProfile(false));
-    dispatch(profileSection(true));
+    dispatch(profileDrawer(true))
+    dispatch(headerProfile(false))
+    dispatch(profileSection(true))
     // dispatch(notificationSection(false))
     // dispatch(termsSection(false))
     // dispatch(privacySection(false))
-  };
+  }
 
   const handleCloseDrawer = () => {
-    dispatch(profileDrawer(false));
-    dispatch(headerProfile(false));
-    setLeftdrawer(false);
-  };
+    dispatch(profileDrawer(false))
+    dispatch(headerProfile(false))
+    setLeftdrawer(false)
+  }
 
   const handleCloseDrawerMobile = () => {
-    setLeftdrawer(false);
-  };
+    setLeftdrawer(false)
+  }
 
   const handlenotify = () => {
-    dispatch(profileDrawer(true));
-    dispatch(headerProfile(false));
-    dispatch(profileSection(false));
-    dispatch(notificationSection(true));
-    dispatch(settingsSection(false));
-  };
+    dispatch(profileDrawer(true))
+    dispatch(headerProfile(false))
+    dispatch(profileSection(false))
+    dispatch(notificationSection(true))
+    dispatch(settingsSection(false))
+  }
 
   const handleSetting = () => {
-    dispatch(profileDrawer(true));
-    dispatch(profileSection(false));
-    dispatch(notificationSection(false));
-    dispatch(headerProfile(false));
-    dispatch(settingsSection(true));
-  };
+    dispatch(profileDrawer(true))
+    dispatch(profileSection(false))
+    dispatch(notificationSection(false))
+    dispatch(headerProfile(false))
+    dispatch(settingsSection(true))
+  }
 
-  const dispatch = useDispatch();
-  const headerOptions = useSelector((state: any) => state.headerProfile.value);
+  const dispatch = useDispatch()
+  const headerOptions = useSelector((state: any) => state.headerProfile.value)
 
   const searchFieldFocus = useSelector(
-    (state: any) => state.headerProfile.searchFocused
-  );
+    (state: any) => state.headerProfile.searchFocused,
+  )
   const profileDrawerState = useSelector(
-    (state: any) => state.headerProfile.drawer
-  );
+    (state: any) => state.headerProfile.drawer,
+  )
   const profileSectionState = useSelector(
-    (state: any) => state.headerProfile.profile
-  );
+    (state: any) => state.headerProfile.profile,
+  )
   const notificationSectionState = useSelector(
-    (state: any) => state.headerProfile.notification
-  );
+    (state: any) => state.headerProfile.notification,
+  )
   const settingsSectionState = useSelector(
-    (state: any) => state.headerProfile.settings
-  );
+    (state: any) => state.headerProfile.settings,
+  )
   const modalFilterStatus = useSelector(
-    (state: any) => state.headerProfile.filterModal
-  );
+    (state: any) => state.headerProfile.filterModal,
+  )
 
   const changeHandler = (e: any) => {
-    setOnChange(e.target.value);
+    setOnChange(e.target.value)
     fetch(
-      `http://virtuallearnapp2-env.eba-wrr2p8zk.ap-south-1.elasticbeanstalk.com/user/search?searchKey=${e.target.value}`,
+      `http://virtuallearn-env.eba-6xmym3vf.ap-south-1.elasticbeanstalk.com/user/search?searchKey=${e.target.value}`,
       {
         headers: {
           Accept: 'application/json, text/plain, */*',
           'Content-Type': 'application/json',
-          Authorization: `Bearer ${localStorage.getItem('Token')}`,
+          Authorization: `Bearer ${sessionStorage.getItem('Token')}`,
         },
-      }
+      },
     )
       .then((res) => res.json())
       .then((res) => {
-        console.log('response', res);
-        setSearchedCourse(res);
-      });
-  };
+        console.log('response', res)
+        setSearchedCourse(res)
+      })
+  }
 
   const toggleMobileHeader = () => {
-    setArrow(true);
-    dispatch(searchFocus(true));
-  };
+    setArrow(true)
+    dispatch(searchFocus(true))
+  }
   const closeMobileHeader = () => {
-    setArrow(false);
-    dispatch(searchFocus(false));
-  };
+    setArrow(false)
+    dispatch(searchFocus(false))
+  }
 
   const handleMobileDrawer = () => {
-    setLeftdrawer(true);
-  };
+    setLeftdrawer(true)
+  }
 
-  const [arrow, setArrow] = useState(false);
-  const [leftdrawer, setLeftdrawer] = useState(false);
+  const [arrow, setArrow] = useState(false)
+  const [leftdrawer, setLeftdrawer] = useState(false)
 
   const filterHandler = () => {
-    setLoading(true);
-    setShowFilter(true);
+    setLoading(true)
+    setShowFilter(true)
     fetch(
-      `http://virtuallearnapp2-env.eba-wrr2p8zk.ap-south-1.elasticbeanstalk.com/user/applyFilter`,
+      `http://virtuallearn-env.eba-6xmym3vf.ap-south-1.elasticbeanstalk.com/user/applyFilter`,
       {
         method: 'POST',
         headers: {
           Accept: 'application/json, text/plain, */*',
           'Content-Type': 'application/json',
-          Authorization: `Bearer ${localStorage.getItem('Token')}`,
+          Authorization: `Bearer ${sessionStorage.getItem('Token')}`,
         },
         body: JSON.stringify(filterData),
-      }
+      },
     )
       .then((res) => res.json())
       .then((res) => {
-        setSearchedCourse(res);
-        dispatch(modalFilter(false));
-        setLoading(false);
+        setSearchedCourse(res)
+        dispatch(modalFilter(false))
+        setLoading(false)
       })
       .catch((err) => {
-        setSearchedCourse([]);
-        setLoading(false);
-        dispatch(modalFilter(false));
-      });
-  };
+        setSearchedCourse([])
+        setLoading(false)
+        dispatch(modalFilter(false))
+      })
+  }
 
   const topSearchKeyword = (keyword: string) => {
-    setLoading(true);
-    setShowFilter(true);
+    setLoading(true)
+    setShowFilter(true)
     fetch(
-      `http://virtuallearnapp2-env.eba-wrr2p8zk.ap-south-1.elasticbeanstalk.com/user/searchByKeyword?keyword=${keyword}`,
+      `http://virtuallearn-env.eba-6xmym3vf.ap-south-1.elasticbeanstalk.com/user/searchByKeyword?keyword=${keyword}`,
       {
         method: 'GET',
         headers: {
           Accept: 'application/json, text/plain, */*',
           'Content-Type': 'application/json',
-          Authorization: `Bearer ${localStorage.getItem('Token')}`,
+          Authorization: `Bearer ${sessionStorage.getItem('Token')}`,
         },
-      }
+      },
     )
       .then((res) => res.json())
       .then((res) => {
-        setSearchedCourse(res);
-        setLoading(false);
+        setSearchedCourse(res)
+        setLoading(false)
       })
       .catch((err) => {
-        setSearchedCourse([]);
-        setLoading(false);
-      });
-  };
+        setSearchedCourse([])
+        setLoading(false)
+      })
+  }
 
   const categorySearch = (catId: any) => {
-    setLoading(true);
-    setShowFilter(true);
+    setLoading(true)
+    setShowFilter(true)
     fetch(
-      `http://virtuallearnapp2-env.eba-wrr2p8zk.ap-south-1.elasticbeanstalk.com/user/allCoursesOfCategory?categoryId=${catId}`,
+      `http://virtuallearn-env.eba-6xmym3vf.ap-south-1.elasticbeanstalk.com/user/allCoursesOfCategory?categoryId=${catId}`,
       {
         method: 'GET',
         headers: {
           Accept: 'application/json, text/plain, */*',
           'Content-Type': 'application/json',
-          Authorization: `Bearer ${localStorage.getItem('Token')}`,
+          Authorization: `Bearer ${sessionStorage.getItem('Token')}`,
         },
-      }
+      },
     )
       .then((res) => res.json())
       .then((res) => {
-        console.log('category', res);
-        setSearchedCourse(res);
-        setLoading(false);
+        console.log('category', res)
+        setSearchedCourse(res)
+        setLoading(false)
       })
       .catch((err) => {
-        setSearchedCourse([]);
-        setLoading(false);
-      });
-  };
+        setSearchedCourse([])
+        setLoading(false)
+      })
+  }
 
   return (
     <>
@@ -304,7 +304,7 @@ const Header = () => {
           <div
             className="header-logo"
             onClick={() => {
-              navigate('/');
+              navigate('/')
             }}
           >
             {headerLogo}
@@ -327,7 +327,7 @@ const Header = () => {
           <form
             className="header-search"
             onSubmit={(e: any) => {
-              e.preventDefault();
+              e.preventDefault()
             }}
           >
             <input
@@ -339,7 +339,7 @@ const Header = () => {
               }
               placeholder="Search"
               onFocus={() => {
-                dispatch(searchFocus(true));
+                dispatch(searchFocus(true))
               }}
               onChange={changeHandler}
               value={onChange}
@@ -366,21 +366,21 @@ const Header = () => {
                     src={profileData && profileData.profilePhoto}
                     alt="Profile Pic"
                     onClick={(e: any) => {
-                      e.stopPropagation();
-                      dispatch(headerProfile(!headerOptions));
+                      e.stopPropagation()
+                      dispatch(headerProfile(!headerOptions))
                     }}
                   />
                   {headerOptions && (
                     <div
                       className="header-profileOptions"
                       onClick={(e: any) => {
-                        e.stopPropagation();
+                        e.stopPropagation()
                       }}
                     >
                       <div
                         className="header-profileOption header-profileOptionBorder"
                         onClick={() => {
-                          navigate('/myCourses');
+                          navigate('/myCourses')
                         }}
                       >
                         <div className="header-profileOptionIcon">
@@ -406,8 +406,8 @@ const Header = () => {
                       <div
                         className="header-profileOption"
                         onClick={() => {
-                          localStorage.clear();
-                          window.location.reload();
+                          sessionStorage.clear()
+                          window.location.reload()
                         }}
                       >
                         <div className="header-profileOptionIcon">
@@ -433,7 +433,7 @@ const Header = () => {
                 <button
                   className="header-filterButton"
                   onClick={() => {
-                    dispatch(modalFilter(true));
+                    dispatch(modalFilter(true))
                   }}
                 >
                   {filterIcon}
@@ -441,8 +441,8 @@ const Header = () => {
               )}
               <div
                 onClick={() => {
-                  dispatch(searchFocus(false));
-                  setShowFilter(false);
+                  dispatch(searchFocus(false))
+                  setShowFilter(false)
                 }}
                 className="header-optionsCloseIcon"
               >
@@ -456,7 +456,7 @@ const Header = () => {
                 <form
                   className="mobile-header-search"
                   onSubmit={(e: any) => {
-                    e.preventDefault();
+                    e.preventDefault()
                   }}
                 >
                   <input
@@ -468,7 +468,7 @@ const Header = () => {
                     }
                     placeholder="Search"
                     onFocus={() => {
-                      dispatch(searchFocus(true));
+                      dispatch(searchFocus(true))
                     }}
                     onChange={changeHandler}
                   />
@@ -477,7 +477,7 @@ const Header = () => {
                 <button
                   className="header-filterButton"
                   onClick={() => {
-                    dispatch(modalFilter(true));
+                    dispatch(modalFilter(true))
                   }}
                 >
                   {filterIcon}
@@ -503,14 +503,14 @@ const Header = () => {
                                 className="headerSearchCategoriesTopSearchesParent headerSearchCategoriesTopSearchesParent-orange"
                                 key={i}
                                 onClick={() => {
-                                  topSearchKeyword(ele.keyWord);
+                                  topSearchKeyword(ele.keyWord)
                                 }}
                               >
                                 <div className="headerSearchCategoriesTopSearchesName">
                                   {ele && ele.keyWord && ele.keyWord}
                                 </div>
                               </div>
-                            );
+                            )
                           })}
                       </div>
                     </div>
@@ -540,7 +540,7 @@ const Header = () => {
                               className="headerSearchCategoriesTopSearchesParent"
                               key={i}
                               onClick={() => {
-                                categorySearch(ele.categoryId);
+                                categorySearch(ele.categoryId)
                               }}
                             >
                               <div className="headerSearchCategoriesTopSearchesIcon">
@@ -559,7 +559,7 @@ const Header = () => {
                                 {ele && ele.categoryName && ele.categoryName}
                               </div>
                             </div>
-                          );
+                          )
                         })}
                     </div>
                   </div>
@@ -573,11 +573,11 @@ const Header = () => {
                           className="headersearch-responseBody"
                           key={i}
                           onClick={() => {
-                            dispatch(courseOverview(ele.courseId));
-                            dispatch(chapterResponse(ele.courseId));
-                            navigate('/myCourses/ongoingCourse');
-                            dispatch(searchFocus(false));
-                            setShowFilter(false);
+                            dispatch(courseOverview(ele.courseId))
+                            dispatch(chapterResponse(ele.courseId))
+                            navigate('/myCourses/ongoingCourse')
+                            dispatch(searchFocus(false))
+                            setShowFilter(false)
                           }}
                         >
                           <div className="headerSearch-responsePic">
@@ -595,7 +595,7 @@ const Header = () => {
                             </div>
                           </div>
                         </div>
-                      );
+                      )
                     })}
                 </div>
               )}
@@ -607,13 +607,13 @@ const Header = () => {
         <aside
           className="headerSearch-filterModal"
           onClick={() => {
-            dispatch(modalFilter(false));
+            dispatch(modalFilter(false))
           }}
         >
           <div
             className="headerSearch-filterActualModal"
             onClick={(e: any) => {
-              e.stopPropagation();
+              e.stopPropagation()
             }}
           >
             <div className="headerSearch-filterModalBody">
@@ -641,8 +641,8 @@ const Header = () => {
                             dispatch(
                               setfilter({
                                 catId: ele.categoryId,
-                              })
-                            );
+                              }),
+                            )
                           }}
                         >
                           <div className="headerSearchCategoriesTopSearchesIcon">
@@ -658,7 +658,7 @@ const Header = () => {
                             {ele && ele.categoryName && ele.categoryName}
                           </div>
                         </div>
-                      );
+                      )
                     })}
                 </div>
               </div>
@@ -684,15 +684,15 @@ const Header = () => {
                               setChapterCount({
                                 start: ele.start,
                                 end: ele.end,
-                              })
-                            );
+                              }),
+                            )
                           }}
                         >
                           {ele.start}
                           {ele.end ? `/${ele.end}` : '+'} Chapters
                         </div>
                       </div>
-                    );
+                    )
                   })}
                 </div>
               </div>
@@ -706,7 +706,7 @@ const Header = () => {
                 <button
                   className="headerSearch-clearAllButton"
                   onClick={() => {
-                    dispatch(clearFilter());
+                    dispatch(clearFilter())
                   }}
                 >
                   Clear All
@@ -716,7 +716,7 @@ const Header = () => {
             <div
               className="headerSearch-filterModalBodyCloseIcon"
               onClick={() => {
-                dispatch(modalFilter(false));
+                dispatch(modalFilter(false))
               }}
             >
               {closeIcon}
@@ -794,8 +794,8 @@ const Header = () => {
               <div
                 className="left-drawer-link"
                 onClick={() => {
-                  navigate('/');
-                  handleCloseDrawerMobile();
+                  navigate('/')
+                  handleCloseDrawerMobile()
                 }}
               >
                 <img
@@ -807,8 +807,8 @@ const Header = () => {
               <div
                 className="left-drawer-link"
                 onClick={() => {
-                  navigate('/myCourses');
-                  handleCloseDrawerMobile();
+                  navigate('/myCourses')
+                  handleCloseDrawerMobile()
                 }}
               >
                 <img
@@ -820,8 +820,8 @@ const Header = () => {
               <div
                 className="left-drawer-link"
                 onClick={() => {
-                  handleProfileClick();
-                  handleCloseDrawerMobile();
+                  handleProfileClick()
+                  handleCloseDrawerMobile()
                 }}
               >
                 <img
@@ -833,8 +833,8 @@ const Header = () => {
               <div
                 className="left-drawer-link"
                 onClick={() => {
-                  handlenotify();
-                  handleCloseDrawerMobile();
+                  handlenotify()
+                  handleCloseDrawerMobile()
                 }}
               >
                 <img
@@ -851,8 +851,8 @@ const Header = () => {
               <div
                 className="left-drawer-link"
                 onClick={() => {
-                  handleSetting();
-                  handleCloseDrawerMobile();
+                  handleSetting()
+                  handleCloseDrawerMobile()
                 }}
               >
                 <img
@@ -864,9 +864,9 @@ const Header = () => {
               <div
                 className="left-drawer-link"
                 onClick={() => {
-                  handleCloseDrawerMobile();
-                  localStorage.clear();
-                  window.location.reload();
+                  handleCloseDrawerMobile()
+                  sessionStorage.clear()
+                  window.location.reload()
                 }}
               >
                 <img
@@ -884,7 +884,7 @@ const Header = () => {
       </Drawer>
       {loading && <Loading />}
     </>
-  );
-};
+  )
+}
 
-export default Header;
+export default Header

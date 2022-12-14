@@ -52,7 +52,7 @@ const reducers = combineReducers({
 const persistConfig = {
   key: 'root',
   storage,
-  blacklist: ['login', 'test', 'answerHeader', 'answer', ' FinalResult'],
+  blacklist: ['login'],
 };
 
 const persistedReducer = persistReducer(persistConfig, reducers);

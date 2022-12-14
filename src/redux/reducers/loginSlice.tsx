@@ -18,7 +18,7 @@ export const login: any = createAsyncThunk(
       const fetchedData: any = await axios.request({
         method: 'put',
         url:
-          'http://virtuallearnapp2-env.eba-wrr2p8zk.ap-south-1.elasticbeanstalk.com/login',
+          'http://virtuallearn-env.eba-6xmym3vf.ap-south-1.elasticbeanstalk.com/login',
         data: arg,
       })
 

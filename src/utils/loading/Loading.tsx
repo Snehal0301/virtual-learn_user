@@ -1,7 +1,7 @@
-import React from 'react';
-import './loading.css';
+import React from 'react'
+import './loading.css'
 
-const Loading = () => {
+const Loading = (props: any) => {
   return (
     <div className="Loading">
       <svg
@@ -29,8 +29,11 @@ const Loading = () => {
           fill="#092963"
         />
       </svg>
+      <h2 style={{ marginTop: '50px', color: 'var(--error)' }}>
+        {props && props.message}
+      </h2>
     </div>
-  );
-};
+  )
+}
 
-export default Loading;
+export default Loading
