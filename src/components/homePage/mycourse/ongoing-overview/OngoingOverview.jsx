@@ -119,6 +119,7 @@ const OngoingOverview = () => {
     console.log("Component mounted");
     return () => {
       console.log("Component unmounted")
+      dispatch(tabToggleState(1))
     }
   }, [])
 
