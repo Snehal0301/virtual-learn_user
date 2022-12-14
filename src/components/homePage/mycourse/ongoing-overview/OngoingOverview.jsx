@@ -288,29 +288,32 @@ const OngoingOverview = () => {
   }
   return (
     <>
-      <div className="homeCategories-head-link">
-        {/* <div className='homeCategoriesHead'> Categories </div> */}
-        <span>
-          <Link
-            to="/myCourses"
-            style={{ color: "var(--blueFont)", cursor: "pointer" }}
-          >
-            My Course &nbsp; &nbsp; {">"} &nbsp;
-          </Link>
-          &nbsp;
-        </span>
-        <span>
-          <Link
-            to="/myCourses/ongoingCourse"
-            style={{ color: "var(--blueFont)", cursor: "pointer" }}
-          >
-            Ongoing &nbsp; &nbsp; {">"} &nbsp;
-          </Link>
-          &nbsp;
-        </span>
-        {overviewData && overviewData.courseName && overviewData.courseName}
-      </div>
-
+      {
+        chapter && chapter.enrolled ?
+          <div className="homeCategories-head-link">
+            <span>
+              <Link
+                to="/myCourses"
+                style={{ color: "var(--blueFont)", cursor: "pointer" }}
+              >
+                My Course &nbsp; &nbsp; {">"} &nbsp;
+              </Link>
+              &nbsp;
+            </span>
+            <span>
+              <Link
+                to="/myCourses/ongoingCourse"
+                style={{ color: "var(--blueFont)", cursor: "pointer" }}
+              >
+                Ongoing &nbsp; &nbsp; {">"} &nbsp;
+              </Link>
+              &nbsp;
+            </span>
+            {overviewData && overviewData.courseName && overviewData.courseName}
+          </div>
+          :
+          ''
+      }
       <div className="ongoing-overview">
         <div className="ongoing-section-1">
           <div className="ongoing-section-video-player">
