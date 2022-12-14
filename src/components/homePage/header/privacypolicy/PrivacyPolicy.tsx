@@ -17,7 +17,7 @@ const PrivacyPolicy = () => {
   useEffect(() => {
     axios
       .get(
-        `http://virtuallearn-env.eba-6xmym3vf.ap-south-1.elasticbeanstalk.com/privacyPolicy`
+        `http://virtuallearnapp2-env.eba-wrr2p8zk.ap-south-1.elasticbeanstalk.com/privacyPolicy`
       )
       .then((res) => {
         setPrivacyData(res && res.data && res.data.message);
