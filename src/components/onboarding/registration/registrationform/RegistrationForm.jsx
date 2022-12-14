@@ -27,7 +27,7 @@ const RegistrationForm = () => {
 
   const mobileReg = (mobileNum) => {
     fetch(
-      "http://virtuallearnapp2-env.eba-wrr2p8zk.ap-south-1.elasticbeanstalk.com/newUser/continue",
+      "http://virtuallearn-env.eba-6xmym3vf.ap-south-1.elasticbeanstalk.com/newUser/continue",
       {
         method: "POST",
         headers: {

@@ -61,7 +61,7 @@ const PersonalDetails = () => {
 
   const sendUserdata = (data: any) => {
     fetch(
-      `http://virtuallearnapp2-env.eba-wrr2p8zk.ap-south-1.elasticbeanstalk.com/newUser/register`,
+      `http://virtuallearn-env.eba-6xmym3vf.ap-south-1.elasticbeanstalk.com/newUser/register`,
       {
         method: 'POST',
         headers: {

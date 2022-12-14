@@ -21,6 +21,9 @@ const QuizSuccess = () => {
   }, []);
 
   const showResults = useSelector((state: any) => state.testSuccessRed.value);
+  const resultsHeaderData = useSelector(
+    (state: any) => state.answerHeader.data
+  );
 
   useEffect(() => {
     showResults && navigate('/testResults');
@@ -39,9 +42,22 @@ const QuizSuccess = () => {
         <div className="successDesc">
           You have completed{' '}
           <span style={{ fontWeight: '900' }}>
-            Chapter 3 - Setting up a new project
+            Chapter{' '}
+            {resultsHeaderData &&
+              resultsHeaderData.data &&
+              resultsHeaderData.data.chapterNumber &&
+              resultsHeaderData.data.chapterNumber}{' '}
+            -{' '}
+            {resultsHeaderData &&
+              resultsHeaderData.data &&
+              resultsHeaderData.data.chapterName &&
+              resultsHeaderData.data.chapterName}
           </span>{' '}
-          from Course: Learn Figma - UI/UX Design Essential Training
+          from Course:{' '}
+          {resultsHeaderData &&
+            resultsHeaderData.data &&
+            resultsHeaderData.data.courseName &&
+            resultsHeaderData.data.courseName}
         </div>
         <div
           className="getStarted"

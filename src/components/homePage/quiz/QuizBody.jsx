@@ -66,7 +66,7 @@ const QuizBody = () => {
     console.log("submit", submitData);
 
     fetch(
-      `http://virtuallearnapp2-env.eba-wrr2p8zk.ap-south-1.elasticbeanstalk.com/user/${
+      `http://virtuallearn-env.eba-6xmym3vf.ap-south-1.elasticbeanstalk.com/user/${
         quizData.testName === "Final Test" ? "finalSubmit" : "submit"
       }`,
       {
@@ -74,7 +74,7 @@ const QuizBody = () => {
         headers: {
           Accept: "application/json, text/plain, */*",
           "Content-Type": "application/json",
-          Authorization: `Bearer ${localStorage.getItem("Token")}`,
+          Authorization: `Bearer ${sessionStorage.getItem("Token")}`,
         },
         body: JSON.stringify(submitData),
       }

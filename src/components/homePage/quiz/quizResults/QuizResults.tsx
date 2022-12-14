@@ -1,102 +1,35 @@
-import React, { useEffect } from 'react'
-import { closeIcon, showAnsIcon } from '../../../../utils/svgIcons'
-import './QuizResults.css'
-import Drawer from 'react-modern-drawer'
-import { useDispatch, useSelector } from 'react-redux'
-import { quizAnswer } from '../../../../redux/reducers/result'
-import QuizAns from '../quizAnswers/QuizAns'
-import { answerHeader } from '../../../../redux/reducers/testAnswerHeader'
-import { answer } from '../../../../redux/reducers/testAnswer'
-import { testSuccess } from '../../../../redux/reducers/Conditions'
+import React, { useEffect } from 'react';
+import { closeIcon, showAnsIcon } from '../../../../utils/svgIcons';
+import './QuizResults.css';
+import Drawer from 'react-modern-drawer';
+import { useDispatch, useSelector } from 'react-redux';
+import { quizAnswer } from '../../../../redux/reducers/result';
+import QuizAns from '../quizAnswers/QuizAns';
+import { answerHeader } from '../../../../redux/reducers/testAnswerHeader';
+import { answer } from '../../../../redux/reducers/testAnswer';
+import { testSuccess } from '../../../../redux/reducers/Conditions';
 
 const QuizResults = () => {
-  const dispatch = useDispatch()
-
-  const resultsHeaderDataOne = {
-    chapterNumber: 6,
-    chapterName: 'Conclusion',
-    chapterTestPercentage: 60.0,
-    courseName: 'UI-UX Design For Complete Beginners',
-    passingGrade: 75,
-    correctAnswers: 3,
-    wrongAnswers: 2,
-    totalNumberOfQuestions: 5,
-  }
+  const dispatch = useDispatch();
 
   useEffect(() => {
     // dispatch(answerHeader('resultHeader?testId=17'))
     // dispatch(answer('resultAnswers?testId=17'))
-    dispatch(testSuccess(false))
-    dispatch(testSuccess(false))
-  }, [])
+    dispatch(testSuccess(false));
+    dispatch(testSuccess(false));
+  }, []);
 
-  const resultsHeaderData = useSelector((state: any) => state.answerHeader.data)
-  const resultAnswers = useSelector((state: any) => state.answer.data)
+  const resultsHeaderData = useSelector(
+    (state: any) => state.answerHeader.data
+  );
+  const resultAnswers = useSelector((state: any) => state.answer.data);
 
-  console.log('header data', resultsHeaderData, resultAnswers)
+  console.log('header data', resultsHeaderData, resultAnswers);
 
-  const resultAnswersOne = [
-    {
-      questionId: 20,
-      questionName: 'How many letters are there in Tamil alphabets ',
-      option_1: '49',
-      option_2: '40',
-      option_3: '43',
-      option_4: '48',
-      correctAnswer: '48',
-      userAnswer: '43',
-      userAnswerStatus: '0',
-    },
-    {
-      questionId: 25,
-      questionName: 'How many letters are there in Tamil alphabets ',
-      option_1: '49',
-      option_2: '40',
-      option_3: '43',
-      option_4: '48',
-      correctAnswer: '48',
-      userAnswer: '43',
-      userAnswerStatus: '0',
-    },
-    {
-      questionId: 40,
-      questionName: 'What isa 0*2',
-      option_1: '9',
-      option_2: '2',
-      option_3: '0',
-      option_4: '0.2',
-      correctAnswer: '0',
-      userAnswer: '0',
-      userAnswerStatus: '1',
-    },
-    {
-      questionId: 50,
-      questionName: 'What isa UI',
-      option_1: 'User Interface',
-      option_2: 'User Intraface',
-      option_3: 'User Interior',
-      option_4: 'User Inter Data',
-      correctAnswer: 'User Interface',
-      userAnswer: 'User Interface',
-      userAnswerStatus: '1',
-    },
-    {
-      questionId: 60,
-      questionName: 'What isa API',
-      option_1: 'Application Programming Interface',
-      option_2: 'Application Programming Intraface',
-      option_3: 'Application Programming Interior',
-      option_4: 'Application Inter Data',
-      correctAnswer: 'Application Programming Interface',
-      userAnswer: 'Application Programming Interface',
-      userAnswerStatus: '1',
-    },
-  ]
-
-  const [isOpen, setIsOpen] = React.useState(false)
+  const [isOpen, setIsOpen] = React.useState(false);
   const toggleDrawer = () => {
-    setIsOpen((prevState) => !prevState)
-  }
+    setIsOpen((prevState) => !prevState);
+  };
 
   return (
     <div className="quizResults">
@@ -108,7 +41,7 @@ const QuizResults = () => {
           <div className="quizResults-closeicon">{closeIcon}</div>
           <div className="quizResults-headerBody">
             <div className="quizResults-headerBodyResultMarks">
-              {resultsHeaderData.data.chapterTestPercentage}
+              {resultsHeaderData.data.chapterTestPercentage.toFixed(0)}
             </div>
             <div className="quizResults-headerBodyContents">
               <div className="quizResults-headerBodyContentsChapterName">
@@ -176,14 +109,14 @@ const QuizResults = () => {
                   <div
                     className="quizResults-bodyListItemDrawer"
                     onClick={() => {
-                      toggleDrawer()
-                      dispatch(quizAnswer(ele))
+                      toggleDrawer();
+                      dispatch(quizAnswer(ele));
                     }}
                   >
                     {showAnsIcon}
                   </div>
                 </div>
-              )
+              );
             })}
           </div>
         </div>
@@ -202,7 +135,7 @@ const QuizResults = () => {
           <div
             className="quizDrawerCloseIcon"
             onClick={() => {
-              toggleDrawer()
+              toggleDrawer();
             }}
           >
             {closeIcon}
@@ -210,7 +143,7 @@ const QuizResults = () => {
         </Drawer>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default QuizResults
+export default QuizResults;

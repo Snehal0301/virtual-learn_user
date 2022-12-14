@@ -48,10 +48,10 @@ const Profile = () => {
   useEffect(() => {
     axios
       .get(
-        `http://virtuallearnapp2-env.eba-wrr2p8zk.ap-south-1.elasticbeanstalk.com/user/myProfile`,
+        `http://virtuallearn-env.eba-6xmym3vf.ap-south-1.elasticbeanstalk.com/user/myProfile`,
         {
           headers: {
-            Authorization: `Bearer ${localStorage.getItem("Token")}`,
+            Authorization: `Bearer ${sessionStorage.getItem("Token")}`,
           },
         }
       )

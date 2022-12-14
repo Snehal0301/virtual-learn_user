@@ -64,9 +64,11 @@ const Start = () => {
   useEffect(() => {
     axios
       .get(
-        `http://virtuallearnapp2-env.eba-wrr2p8zk.ap-south-1.elasticbeanstalk.com/user/ongoingCourses`,
+        `http://virtuallearn-env.eba-6xmym3vf.ap-south-1.elasticbeanstalk.com/user/ongoingCourses`,
         {
-          headers: { Authorization: `Bearer ${localStorage.getItem("Token")}` },
+          headers: {
+            Authorization: `Bearer ${sessionStorage.getItem("Token")}`,
+          },
         }
       )
       .then((res) => {
@@ -84,9 +86,11 @@ const Start = () => {
   useEffect(() => {
     axios
       .get(
-        `http://virtuallearnapp2-env.eba-wrr2p8zk.ap-south-1.elasticbeanstalk.com/user/home/course`,
+        `http://virtuallearn-env.eba-6xmym3vf.ap-south-1.elasticbeanstalk.com/user/home/course`,
         {
-          headers: { Authorization: `Bearer ${localStorage.getItem("Token")}` },
+          headers: {
+            Authorization: `Bearer ${sessionStorage.getItem("Token")}`,
+          },
         }
       )
       .then((res) => {
@@ -102,9 +106,11 @@ const Start = () => {
   useEffect(() => {
     axios
       .get(
-        `http://virtuallearnapp2-env.eba-wrr2p8zk.ap-south-1.elasticbeanstalk.com/user/home/course/all`,
+        `http://virtuallearn-env.eba-6xmym3vf.ap-south-1.elasticbeanstalk.com/user/home/course/all`,
         {
-          headers: { Authorization: `Bearer ${localStorage.getItem("Token")}` },
+          headers: {
+            Authorization: `Bearer ${sessionStorage.getItem("Token")}`,
+          },
         }
       )
       .then((res) => {
@@ -120,9 +126,11 @@ const Start = () => {
   useEffect(() => {
     axios
       .get(
-        `http://virtuallearnapp2-env.eba-wrr2p8zk.ap-south-1.elasticbeanstalk.com/user/home/course/popular`,
+        `http://virtuallearn-env.eba-6xmym3vf.ap-south-1.elasticbeanstalk.com/user/home/course/popular`,
         {
-          headers: { Authorization: `Bearer ${localStorage.getItem("Token")}` },
+          headers: {
+            Authorization: `Bearer ${sessionStorage.getItem("Token")}`,
+          },
         }
       )
       .then((res) => {
@@ -138,9 +146,11 @@ const Start = () => {
   useEffect(() => {
     axios
       .get(
-        `http://virtuallearnapp2-env.eba-wrr2p8zk.ap-south-1.elasticbeanstalk.com/user/home/course/newest`,
+        `http://virtuallearn-env.eba-6xmym3vf.ap-south-1.elasticbeanstalk.com/user/home/course/newest`,
         {
-          headers: { Authorization: `Bearer ${localStorage.getItem("Token")}` },
+          headers: {
+            Authorization: `Bearer ${sessionStorage.getItem("Token")}`,
+          },
         }
       )
       .then((res) => {
@@ -156,9 +166,11 @@ const Start = () => {
   useEffect(() => {
     axios
       .get(
-        `http://virtuallearnapp2-env.eba-wrr2p8zk.ap-south-1.elasticbeanstalk.com/user/home/course/category`,
+        `http://virtuallearn-env.eba-6xmym3vf.ap-south-1.elasticbeanstalk.com/user/home/course/category`,
         {
-          headers: { Authorization: `Bearer ${localStorage.getItem("Token")}` },
+          headers: {
+            Authorization: `Bearer ${sessionStorage.getItem("Token")}`,
+          },
         }
       )
       .then((res) => {
@@ -174,9 +186,11 @@ const Start = () => {
   useEffect(() => {
     axios
       .get(
-        `http://virtuallearnapp2-env.eba-wrr2p8zk.ap-south-1.elasticbeanstalk.com/user/categoriesWP`,
+        `http://virtuallearn-env.eba-6xmym3vf.ap-south-1.elasticbeanstalk.com/user/categoriesWP`,
         {
-          headers: { Authorization: `Bearer ${localStorage.getItem("Token")}` },
+          headers: {
+            Authorization: `Bearer ${sessionStorage.getItem("Token")}`,
+          },
         }
       )
       .then((res) => {
@@ -190,9 +204,11 @@ const Start = () => {
   useEffect(() => {
     axios
       .get(
-        `http://virtuallearnapp2-env.eba-wrr2p8zk.ap-south-1.elasticbeanstalk.com/user/menu`,
+        `http://virtuallearn-env.eba-6xmym3vf.ap-south-1.elasticbeanstalk.com/user/menu`,
         {
-          headers: { Authorization: `Bearer ${localStorage.getItem("Token")}` },
+          headers: {
+            Authorization: `Bearer ${sessionStorage.getItem("Token")}`,
+          },
         }
       )
       .then((res) => {
@@ -210,7 +226,7 @@ const Start = () => {
     <div className="start">
       <div className="start-greeting">Hello!</div>
       <div className="start-username">{name}</div>
-      <Slider autoplay={true} autoplaySpeed={10000} slidesToShow={3} >
+      <Slider autoplay={true} autoplaySpeed={10000} slidesToShow={3}>
         {headerdata.map((item) => (
           <div
             className="start-image-title"
@@ -385,7 +401,7 @@ const Start = () => {
       {homeTabState === 2 && (
         <div className="start-card">
           <div className="start-choice1">
-            {popular.slice(0,4).map((item) => (
+            {popular.slice(0, 4).map((item) => (
               <div
                 className="start-choice-subcategory-image"
                 onClick={() => {
