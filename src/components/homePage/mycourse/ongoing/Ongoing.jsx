@@ -30,10 +30,20 @@ const Ongoing = () => {
       });
   }, []);
 
-  console.log(ongoingData);
+  // console.log(ongoingData);
   return (
     <div className="ongoing-section">
-      {ongoingData.map((ele, i) => {
+      {
+        ongoingData.length ==0?
+        (
+          <>
+          <div className="ongoingEmptyImage"><img src={require("../../../../assets/images/start-courses-image/EmptyImage.png")} alt="" /></div>
+          <div className="ogoingNotEnrolled">You have not enrolled to any course</div>
+          </>
+        ):
+        (
+          <div>
+            {ongoingData.map((ele, i) => {
         return (
           <div className="ongoing-parent" key={i}>
             <div className="ongoing-images">
@@ -63,6 +73,10 @@ const Ongoing = () => {
           </div>
         );
       })}
+          </div>
+        )
+      }
+      
     </div>
   );
 };
