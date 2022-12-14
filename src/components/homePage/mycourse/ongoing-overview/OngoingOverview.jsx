@@ -46,6 +46,7 @@ import { finaltestShowPage } from '../../../../redux/reducers/finalTestSuccess';
 import Loading from '../../../../utils/loading/Loading';
 import ShowMoreText from "react-show-more-text";
 import { Player } from 'video-react';
+import toast, { Toaster } from 'react-hot-toast';
 
 
 
@@ -58,6 +59,17 @@ const OngoingOverview = () => {
   const [chapterLoading, setChapterLoading] = useState(false);
   const [overviewLoading, setOverviewLoading] = useState(false);
   const [testLoading, setTestLoading] = useState(false);
+
+  // Toast
+  const notify = () => toast((t) => (
+    <div className='toast-div'>
+      Please finish above sections
+      <div className='toast-close' onClick={() => toast.dismiss(t.id)}>
+        X
+      </div>
+    </div>
+  ));
+  // Toast
 
   const navigate = useNavigate();
 
@@ -225,7 +237,7 @@ const OngoingOverview = () => {
               <div className="pause-overlay">
                 {
                   firstPause &&
-                  <div className="continue-chapter-pause-button" onClick={() => { setNextModal(true);setFirstPause(false) }}>Continue Chapter 3 Lesson 21</div>
+                  <div className="continue-chapter-pause-button" onClick={() => { setNextModal(true); setFirstPause(false) }}>Continue Chapter 3 Lesson 21</div>
                 }
                 {
                   nextModal &&
@@ -260,7 +272,7 @@ const OngoingOverview = () => {
             loop={loop}
             onPause={onPause}
             playing={playing}
-            onSeek={()=>{setPause(false);}}
+            onSeek={() => { setPause(false); }}
             onProgress={(progress) => {
               setPlayed(progress.playedSeconds);
             }}
@@ -623,7 +635,7 @@ const OngoingOverview = () => {
                                                   itemele.lessonStatus ?
                                                     getVideoState(itemele)
                                                     :
-                                                    alert('Please finish above video section');
+                                                    notify()
                                                 }}
                                               >
                                                 {itemele.lessonStatus
@@ -957,6 +969,22 @@ const OngoingOverview = () => {
           </div>
         </div>
       </div>
+      <Toaster
+        containerStyle={{
+          top: 100,
+          left: 20,
+          bottom: 20,
+          right: 20,
+        }}
+        toastOptions={{
+          className: '',
+          style: {
+            border: '1px solid #ee5c4d',
+            padding: '10px',
+            color: '#ee5c4d',
+            width: '500px',
+          },
+        }} />
       {(chapterLoading || overviewLoading || testLoading) && <Loading />}
     </div>
   );

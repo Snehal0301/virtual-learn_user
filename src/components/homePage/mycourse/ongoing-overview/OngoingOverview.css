@@ -720,7 +720,15 @@ p:not(.truncated)~label {
 }
 
 /* custom css */
+.toast-div{
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+}
 
+.toast-close{
+  cursor: pointer;
+}
 @media only screen and (max-width: 1300px) {
   .ongoing-overview {
     display: flex;
