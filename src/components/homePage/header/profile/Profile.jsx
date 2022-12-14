@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from 'react';
-import './Profile.css';
+import React, { useEffect, useState } from "react";
+import "./Profile.css";
 import {
   closeProfile,
   editProfile,
   privacyIcon,
   rightArrowPrivacy,
-} from '../../../../utils/svgIcons';
-import { useDispatch, useSelector } from 'react-redux';
+} from "../../../../utils/svgIcons";
+import { useDispatch, useSelector } from "react-redux";
 import {
   editProfileSection,
   notificationSection,
@@ -16,11 +16,11 @@ import {
   settingsSection,
   showChangePasswordSection,
   termsSection,
-} from '../../../../redux/reducers/headerProfileOptions';
-import ChangePassword from '../changePassword/ChangePassword';
-import EditProfile from '../edit-profile/EditProfile';
-import profileData from '../../../../api-results/ProfileResults.json';
-import axios from 'axios';
+} from "../../../../redux/reducers/headerProfileOptions";
+import ChangePassword from "../changePassword/ChangePassword";
+import EditProfile from "../edit-profile/EditProfile";
+import profileData from "../../../../api-results/ProfileResults.json";
+import axios from "axios";
 
 const Profile = () => {
   const dispatch = useDispatch();
@@ -32,7 +32,7 @@ const Profile = () => {
     dispatch(privacySection(false));
   };
 
-  const [profileData, setProfileData] = useState('');
+  const [profileData, setProfileData] = useState("");
   const showChangePassword = () => {
     dispatch(showChangePasswordSection(true));
   };
@@ -48,10 +48,10 @@ const Profile = () => {
   useEffect(() => {
     axios
       .get(
-        `http://virtuallearnapp2-env.eba-wrr2p8zk.ap-south-1.elasticbeanstalk.com/user/myProfile`,
+        `http://virtuallearn-env.eba-6xmym3vf.ap-south-1.elasticbeanstalk.com/user/myProfile`,
         {
           headers: {
-            Authorization: `Bearer ${sessionStorage.getItem('Token')}`,
+            Authorization: `Bearer ${sessionStorage.getItem("Token")}`,
           },
         }
       )

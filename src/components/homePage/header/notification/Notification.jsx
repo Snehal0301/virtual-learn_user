@@ -1,18 +1,18 @@
-import React, { useState, useEffect } from 'react';
-import { closeProfile, editProfile } from '../../../../utils/svgIcons';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useState, useEffect } from "react";
+import { closeProfile, editProfile } from "../../../../utils/svgIcons";
+import { useDispatch, useSelector } from "react-redux";
 import {
   notificationSection,
   profileDrawer,
   profileSection,
   settingsSection,
-} from '../../../../redux/reducers/headerProfileOptions';
-import Switch from 'react-switch';
-import './Notification.css';
-import axios from 'axios';
+} from "../../../../redux/reducers/headerProfileOptions";
+import Switch from "react-switch";
+import "./Notification.css";
+import axios from "axios";
 const Notification = () => {
-  const [notifyData, setNotifyData] = useState('');
-  const [notId, setNotId] = useState('');
+  const [notifyData, setNotifyData] = useState("");
+  const [notId, setNotId] = useState("");
   const dispatch = useDispatch();
 
   const handleClick = () => {
@@ -25,10 +25,10 @@ const Notification = () => {
   useEffect(() => {
     axios
       .get(
-        `http://virtuallearnapp2-env.eba-wrr2p8zk.ap-south-1.elasticbeanstalk.com/user/notifications`,
+        `http://virtuallearn-env.eba-6xmym3vf.ap-south-1.elasticbeanstalk.com/user/notifications`,
         {
           headers: {
-            Authorization: `Bearer ${sessionStorage.getItem('Token')}`,
+            Authorization: `Bearer ${sessionStorage.getItem("Token")}`,
           },
         }
       )
@@ -61,17 +61,17 @@ const Notification = () => {
             return (
               <div
                 className={
-                  ele.readStatus ? 'notificationRead' : 'notificationUnread'
+                  ele.readStatus ? "notificationRead" : "notificationUnread"
                 }
                 onClick={() => {
                   axios
                     .request(
-                      `http://virtuallearnapp2-env.eba-wrr2p8zk.ap-south-1.elasticbeanstalk.com/user/readNotification`,
+                      `http://virtuallearn-env.eba-6xmym3vf.ap-south-1.elasticbeanstalk.com/user/readNotification`,
                       {
-                        method: 'put',
+                        method: "put",
                         headers: {
                           Authorization: `Bearer ${sessionStorage.getItem(
-                            'Token'
+                            "Token"
                           )}`,
                         },
                         data: {
@@ -80,7 +80,7 @@ const Notification = () => {
                       }
                     )
                     .then((res) => {
-                      if (res.data.message === 'Successfully') {
+                      if (res.data.message === "Successfully") {
                         setNotId(ele.notificationId);
                       }
                     });
@@ -94,7 +94,7 @@ const Notification = () => {
                   <div className="notifiedTime">{ele.timeStamp}</div>
                 </div>
                 <div
-                  className={ele.readStatus ? 'unread-dot-read' : 'unread-dot'}
+                  className={ele.readStatus ? "unread-dot-read" : "unread-dot"}
                 ></div>
               </div>
             );

@@ -1,6 +1,6 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import axios from 'axios';
-import type { AxiosError } from 'axios';
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
+import axios from 'axios'
+import type { AxiosError } from 'axios'
 
 const initialState = {
   message: '',
@@ -9,7 +9,7 @@ const initialState = {
   isSuccess: false,
   isRejected: false,
   loading: false,
-};
+}
 
 export const subCategories: any = createAsyncThunk(
   'subCategories/subCategories',
@@ -17,50 +17,50 @@ export const subCategories: any = createAsyncThunk(
     try {
       const fetchedData: any = await axios.request({
         method: 'get',
-        url: `http://virtuallearnapp2-env.eba-wrr2p8zk.ap-south-1.elasticbeanstalk.com/user/${arg}`,
+        url: `http://virtuallearn-env.eba-6xmym3vf.ap-south-1.elasticbeanstalk.com/user/${arg}`,
         headers: {
           Authorization: `Bearer ${sessionStorage.getItem('Token')}`,
         },
-      });
+      })
 
-      return fetchedData;
+      return fetchedData
     } catch (err) {
-      let error: any = err;
+      let error: any = err
       return rejectWithValue(
-        error && error.response && error.response.data && error.response.data
-      );
+        error && error.response && error.response.data && error.response.data,
+      )
     }
-  }
-);
+  },
+)
 
 export const subCategoriesSlice = createSlice({
   name: 'subCategories',
   initialState,
   reducers: {
     subCategoriesisSuccess: (state) => {
-      state.isSuccess = false;
+      state.isSuccess = false
     },
   },
   extraReducers: (builder) => {
     // Add reducers for additional action types here, and handle loading state as needed
     builder.addCase(subCategories.pending, (state, action) => {
       // Add user to the state array
-      state.loading = true;
-    });
+      state.loading = true
+    })
     builder.addCase(subCategories.fulfilled, (state, action) => {
-      state.loading = false;
-      state.data = action.payload;
-      state.headers = action;
-      state.isSuccess = true;
-    });
+      state.loading = false
+      state.data = action.payload
+      state.headers = action
+      state.isSuccess = true
+    })
     builder.addCase(subCategories.rejected, (state, action) => {
-      state.message = action.payload;
-      state.loading = false;
-      state.isRejected = true;
-    });
+      state.message = action.payload
+      state.loading = false
+      state.isRejected = true
+    })
   },
-});
+})
 
-export const { subCategoriesisSuccess } = subCategoriesSlice.actions;
+export const { subCategoriesisSuccess } = subCategoriesSlice.actions
 
-export default subCategoriesSlice;
+export default subCategoriesSlice

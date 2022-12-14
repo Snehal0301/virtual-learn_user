@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import './Completed.css';
-import Certificate from '../../quiz/certificate/Certificate';
-import { useDispatch } from 'react-redux';
-import { showCertificate } from '../../../../redux/reducers/Conditions';
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import "./Completed.css";
+import Certificate from "../../quiz/certificate/Certificate";
+import { useDispatch } from "react-redux";
+import { showCertificate } from "../../../../redux/reducers/Conditions";
 
 const Completed = () => {
   const [completed, setcompleted] = useState([]);
@@ -15,10 +15,10 @@ const Completed = () => {
   useEffect(() => {
     axios
       .get(
-        `http://virtuallearnapp2-env.eba-wrr2p8zk.ap-south-1.elasticbeanstalk.com/user/completedCourses`,
+        `http://virtuallearn-env.eba-6xmym3vf.ap-south-1.elasticbeanstalk.com/user/completedCourses`,
         {
           headers: {
-            Authorization: `Bearer ${sessionStorage.getItem('Token')}`,
+            Authorization: `Bearer ${sessionStorage.getItem("Token")}`,
           },
         }
       )
@@ -55,11 +55,11 @@ const Completed = () => {
 
                     axios
                       .get(
-                        `http://virtuallearnapp2-env.eba-wrr2p8zk.ap-south-1.elasticbeanstalk.com/user/pdf?courseId=${ele.courseId}`,
+                        `http://virtuallearn-env.eba-6xmym3vf.ap-south-1.elasticbeanstalk.com/user/pdf?courseId=${ele.courseId}`,
                         {
                           headers: {
                             Authorization: `Bearer ${sessionStorage.getItem(
-                              'Token'
+                              "Token"
                             )}`,
                           },
                         }

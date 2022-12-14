@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import './Ongoing.css';
-import { courseOverview } from '../../../../redux/reducers/courseOverview';
-import { chapterResponse } from '../../../../redux/reducers/chapterResponses';
-import { useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import "./Ongoing.css";
+import { courseOverview } from "../../../../redux/reducers/courseOverview";
+import { chapterResponse } from "../../../../redux/reducers/chapterResponses";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 const Ongoing = () => {
   const [ongoingData, setongoingData] = useState([]);
@@ -14,10 +14,10 @@ const Ongoing = () => {
   useEffect(() => {
     axios
       .get(
-        `http://virtuallearnapp2-env.eba-wrr2p8zk.ap-south-1.elasticbeanstalk.com/user/ongoingCourses`,
+        `http://virtuallearn-env.eba-6xmym3vf.ap-south-1.elasticbeanstalk.com/user/ongoingCourses`,
         {
           headers: {
-            Authorization: `Bearer ${sessionStorage.getItem('Token')}`,
+            Authorization: `Bearer ${sessionStorage.getItem("Token")}`,
           },
         }
       )
@@ -52,7 +52,7 @@ const Ongoing = () => {
                 onClick={() => {
                   dispatch(courseOverview(ele.courseId));
                   dispatch(chapterResponse(ele.courseId));
-                  navigate('/myCourses/ongoingCourse');
+                  navigate("/myCourses/ongoingCourse");
                 }}
               >
                 Continue
