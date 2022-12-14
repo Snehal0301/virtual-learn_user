@@ -4,7 +4,6 @@ import './Completed.css';
 import Certificate from '../../quiz/certificate/Certificate';
 import { useDispatch } from 'react-redux';
 import { showCertificate } from '../../../../redux/reducers/Conditions';
-import EmptyCourse from '../EmptyCourse';
 
 const Completed = () => {
   const [completed, setcompleted] = useState([]);
@@ -95,12 +94,9 @@ const Completed = () => {
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            position: 'fixed',
-            top: '90px',
-            right: '0',
-            left: '0',
-            bottom: '0',
             fontSize: '30px',
+            height: '50vh',
+            textAlign: 'center',
           }}
         >
           No completed courses
