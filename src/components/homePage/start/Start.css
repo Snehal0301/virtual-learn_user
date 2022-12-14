@@ -60,7 +60,7 @@
 .start-course1-image:hover
 {
   transition: all 0.1s ease-in-out;
-  transform: scale(1.1);
+  transform: scale(1.05);
   z-index: 1;
 }
 
@@ -213,6 +213,7 @@
   border: 1px solid #e4e4e4;
   border-radius: 6px;
   padding: 0.5rem 0.5rem;
+  cursor: pointer;
 }
 
 .start-course-categories-Name {
@@ -437,6 +438,10 @@
   ::-webkit-scrollbar {
     display: none;
   }
+  .react-carousel-responsive__track
+  {
+    gap: 2px;
+  }
 
 
   .start-course1-image img {
@@ -473,6 +478,11 @@
   .start-course-section2-title {
     font-size: 14px;
   }
+  .start-course1-image 
+  {
+    margin-top: 20px;
+  }
+
 
   .start-course-button,
   .start-designbtn {
@@ -495,18 +505,18 @@
     display: flex;
   }
 
-  .react-carousel-responsive__track {
-    gap: 104px !important;
-  }
 
   .start-course-categories-Body {
     flex-wrap: nowrap;
     overflow-x: scroll;
   }
 
-  .react-carousel-responsive__inner {
+  /* .react-carousel-responsive__inner {
     margin-bottom: 19px;
-  }
+  } */
+  .react-carousel-responsive__inner {
+    position: relative;
+}
 
   .start-course-overlay-2 {
     border-radius: 6px;
@@ -536,9 +546,14 @@
   }
 
   .start-map-image>img {
-    width: 200px;
+    /* width: 300px; */
+    /* position: absolute; */
+    /* margin-bottom: 20px; */
 
   }
+  
+ 
+
 }
 
 .all-tabs-home {

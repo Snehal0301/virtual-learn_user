@@ -10,6 +10,8 @@ import {
 } from "../../../utils/svgIcons";
 import Slider from "react-carousel-responsive";
 import "react-carousel-responsive/dist/styles.css";
+import { Carousel } from "react-responsive-carousel";
+import "react-responsive-carousel/lib/styles/carousel.min.css"; 
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { homeTabToggleState } from "../../../redux/reducers/myCourseReducer";
@@ -100,6 +102,7 @@ const Start = () => {
         console.error(err);
       });
   }, []);
+  console.log('headerdata',headerdata)
 
   //fetching data for all course
 
@@ -258,7 +261,7 @@ const Start = () => {
       </div>
       <div className="start-card2">
         <div className="start-course1">
-          {ongoing &&
+          {ongoing.length>0 &&
             ongoing.slice(0, 3).map((item) => (
               <div className="start-course1-image">
                 <div className="start-image-ongoing">
@@ -305,7 +308,7 @@ const Start = () => {
 
       <div className="start-course-categories">
         <div className="start-course-categories-Body">
-          {categoryData.map((ele) => (
+          {categoryData.length>0 && categoryData.map((ele) => (
             <div
               className="start-course-categories-Parent"
               onClick={() => {
@@ -370,7 +373,7 @@ const Start = () => {
       {homeTabState === 1 && (
         <div className="start-card">
           <div className="start-choice1">
-            {allcourseData.slice(0, 4).map((item) => (
+            {allcourseData.length>0 && allcourseData.slice(0, 4).map((item) => (
               <div
                 className="start-choice-subcategory-image"
                 onClick={() => {
@@ -402,7 +405,7 @@ const Start = () => {
       {homeTabState === 2 && (
         <div className="start-card">
           <div className="start-choice1">
-            {popular.slice(0, 4).map((item) => (
+            {popular.length > 0 && popular.slice(0, 4).map((item) => (
               <div
                 className="start-choice-subcategory-image"
                 onClick={() => {
@@ -434,7 +437,7 @@ const Start = () => {
       {homeTabState === 3 && (
         <div className="start-card">
           <div className="start-choice1">
-            {newestData.slice(0, 4).map((item) => (
+            {newestData.length>0 &&newestData.slice(0, 4).map((item) => (
               <div
                 className="start-choice-subcategory-image"
                 onClick={() => {
@@ -464,7 +467,8 @@ const Start = () => {
         </div>
       )}
       <div>
-        {topcourseData.map((item) => (
+        {topcourseData.length>0&&
+        topcourseData.map((item) => (
           <div>
             <div className="start-course-section2">
               <div className="start-ongoing-courses">

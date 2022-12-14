@@ -33,6 +33,16 @@ const Completed = () => {
   console.log(completed);
   return (
     <>
+    {completed.length ==0 ?
+    (
+      <>
+      <div className="completedEmptyImage"><img src={require('../../../../assets/images/start-courses-image/EmptyImage.png')} alt="" /></div>
+      <div className="noCompleted-course">There are no completed courses to show</div>
+      </>
+    )
+  :
+  (
+    <div>
       <div className="completed-section">
         {completed.map((ele, i) => {
           return (
@@ -82,6 +92,10 @@ const Completed = () => {
           );
         })}
       </div>
+
+    </div>
+  )}
+      
       {courseName && certificate && (
         <Certificate certificate={certificate} name={courseName} />
       )}
