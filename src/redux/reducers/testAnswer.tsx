@@ -17,9 +17,9 @@ export const answer: any = createAsyncThunk(
     try {
       const fetchedData: any = await axios.request({
         method: 'get',
-        url: `http://virtuallearnapp2-env.eba-wrr2p8zk.ap-south-1.elasticbeanstalk.com/user/${arg}`,
+        url: `http://virtuallearn-env.eba-6xmym3vf.ap-south-1.elasticbeanstalk.com/user/${arg}`,
         headers: {
-          Authorization: `Bearer ${localStorage.getItem('Token')}`,
+          Authorization: `Bearer ${sessionStorage.getItem('Token')}`,
         },
       })
 

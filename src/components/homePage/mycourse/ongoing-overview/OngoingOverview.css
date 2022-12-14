@@ -729,6 +729,8 @@ p:not(.truncated)~label {
 .toast-close{
   cursor: pointer;
 }
+
+
 @media only screen and (max-width: 1300px) {
   .ongoing-overview {
     display: flex;

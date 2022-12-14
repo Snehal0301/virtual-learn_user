@@ -52,7 +52,7 @@ const LoginPassword = () => {
   const changePW = (data) => {
     console.log("data", data);
     fetch(
-      `http://virtuallearnapp2-env.eba-wrr2p8zk.ap-south-1.elasticbeanstalk.com/resetPassword`,
+      `http://virtuallearn-env.eba-6xmym3vf.ap-south-1.elasticbeanstalk.com/resetPassword`,
       {
         method: "POST",
         headers: {

@@ -10,7 +10,7 @@ import { subCategories } from './../../../redux/reducers/subCategories';
 import { homeCategory_sideArrow } from '../../../utils/svgIcons';
 import { courseOverview } from '../../../redux/reducers/courseOverview';
 import { chapterResponse } from '../../../redux/reducers/chapterResponses';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const HomeCategoriesDesign = () => {
   const dispatch = useDispatch();
@@ -29,7 +29,16 @@ const HomeCategoriesDesign = () => {
     <div className="homecategoriesdesign">
       <div className="homeCategories-head-link">
         {/* <div className='homeCategoriesHead'> Categories </div> */}
-        <a href="#"> {categoryName}</a>
+        <span>
+          <Link
+            to="/categories"
+            style={{ color: 'var(--blueFont)', cursor: 'pointer' }}
+          >
+            Categories &nbsp; &nbsp; {'>'} &nbsp;
+          </Link>
+          &nbsp;
+        </span>
+        {categoryName}
       </div>
       <div className="home-categories-section2">
         <div className="home-categories-courses-started">
@@ -38,7 +47,7 @@ const HomeCategoriesDesign = () => {
         <div className="home-categories-seeall"></div>
       </div>
       <div className="home-categories-card">
-        <div className="home-categories-choice1" >
+        <div className="home-categories-choice1">
           {basicCoursedata &&
             basicCoursedata.data &&
             basicCoursedata.data.slice(0, 4).map((item) => (
