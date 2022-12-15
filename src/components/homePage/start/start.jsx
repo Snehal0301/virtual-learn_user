@@ -74,7 +74,7 @@ const Start = () => {
         }
       )
       .then((res) => {
-        setOngoing(res.data);
+        setOngoing(res && res.data);
       })
       .catch((err) => {
         console.error(err);
@@ -230,8 +230,8 @@ const Start = () => {
     <div className="start">
       <div className="start-greeting">Hello!</div>
       <div className="start-username">{name}</div>
-      <Slider autoplay={true} autoplaySpeed={10000} slidesToShow={3} dots={true}>
-        {headerdata.map((item) => (
+      <Slider autoplay={true} autoplaySpeed={2000} slidesToShow={3} dots={true}>
+        {headerdata &&  headerdata.map((item) => (
           <div
             className="start-image-title"
             onClick={() => {
@@ -525,7 +525,7 @@ const Start = () => {
                       <div className="start-choice-chapter2">
                         {ele.chapterCount} chapters
                       </div>
-                      <div>{start_timeIcon}</div>
+                      <div className='start-time-icon'>{start_timeIcon}</div>
                       {ele.courseDuration}
                     </div>
                   </div>
