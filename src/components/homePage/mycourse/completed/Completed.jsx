@@ -92,13 +92,15 @@ const Completed = () => {
         <div
           style={{
             display: 'flex',
+            flexDirection:'column',
             alignItems: 'center',
             justifyContent: 'center',
             fontSize: '30px',
             height: '50vh',
             textAlign: 'center',
+            marginTop:'30px',
           }}
-        >
+        ><img src={require('../../../../assets/images/start-courses-image/EmptyImage.png')} alt="" />
           No completed courses
         </div>
       )}
