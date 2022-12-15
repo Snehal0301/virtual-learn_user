@@ -9,6 +9,7 @@ import { answerHeader } from '../../../../redux/reducers/testAnswerHeader'
 import { answer } from '../../../../redux/reducers/testAnswer'
 import { testSuccess } from '../../../../redux/reducers/Conditions'
 import { useNavigate } from 'react-router-dom'
+import { tabToggleState } from '../../../../redux/reducers/myCourseReducer'
 
 const QuizResults = () => {
   const dispatch = useDispatch()
@@ -42,6 +43,7 @@ const QuizResults = () => {
             className="quizResults-closeicon"
             onClick={() => {
               console.log('close', resultsHeaderData)
+              dispatch(tabToggleState(2))
               navigate('/myCourses/ongoingCourse')
             }}
           >

@@ -130,6 +130,7 @@
     position: absolute;
     filter: invert(1);
     right: 10%;
+    cursor: pointer;
 }
 
 .quizResults-body {
