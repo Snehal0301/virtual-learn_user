@@ -14,29 +14,30 @@ import { Outlet } from 'react-router-dom'
 import { useEffect } from 'react'
 
 const HomePage = () => {
-  useEffect(() => {
-    fetch(
-      `http://virtuallearn-env.eba-6xmym3vf.ap-south-1.elasticbeanstalk.com/refreshToken`,
-      {
-        method: 'GET',
-        headers: {
-          Accept: 'application/json, text/plain, */*',
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${sessionStorage.getItem('Token')}`,
-        },
-      },
-    )
-      .then((res) => res.json())
-      .then((res) => {
-        if (res.jwtToken) {
-          sessionStorage.setItem('Token', res.jwtToken)
-        }
-      })
-      .catch((err) => {
-        console.log('errrr', err)
-      })
-  }, [])
+  // useEffect(() => {
+  //   fetch(
+  //     `http://virtuallearn-env.eba-6xmym3vf.ap-south-1.elasticbeanstalk.com/refreshToken`,
+  //     {
+  //       method: 'GET',
+  //       headers: {
+  //         Accept: 'application/json, text/plain, */*',
+  //         'Content-Type': 'application/json',
+  //         Authorization: `Bearer ${sessionStorage.getItem('Token')}`,
+  //       },
+  //     },
+  //   )
+  //     .then((res) => res.json())
+  //     .then((res) => {
+  //       if (res.jwtToken) {
+  //         sessionStorage.setItem('Token', res.jwtToken)
+  //       }
+  //     })
+  //     .catch((err) => {
+  //       console.log('errrr', err)
+  //     })
+  // }, [])
 
+  
   return (
     <div className="homePage">
       <div className="homePageNavbar">

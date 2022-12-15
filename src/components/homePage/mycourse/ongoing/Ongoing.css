@@ -27,6 +27,11 @@ flex-wrap: wrap;
   object-fit: cover;
   /* width: 350px; */
 }
+.ongoing-images:hover
+{
+  transition: all 0.1s ease-in-out;
+  transform: scale(1.05);
+}
 .chap-progress {
   display: flex;
   flex-direction: column;
@@ -66,4 +71,24 @@ flex-wrap: wrap;
   position: absolute;
     bottom:15px;
     left: 15px;
+}
+.ogoingNotEnrolled
+{
+  font-family: 'Biko';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 28px;
+  /* line-height: 35px; */
+  text-align: center;
+  color: #747474;
+  /* margin-top: 300px; */
+  text-align: center;
+  width: 100%;
+  
+
+}
+.ongoingEmptyImage {
+  text-align: center;
+  width: 100%;
+  padding-top: 99px;
 }
