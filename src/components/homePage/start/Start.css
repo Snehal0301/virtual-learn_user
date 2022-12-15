@@ -371,6 +371,7 @@
   background-color: #0000003b;
   /* opacity: 0.2; */
   border-radius: 6px;
+  cursor: pointer;
 }
 
 .start-map-image {

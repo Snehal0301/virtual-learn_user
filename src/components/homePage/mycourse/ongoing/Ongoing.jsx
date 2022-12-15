@@ -42,7 +42,7 @@ const Ongoing = () => {
           </>
         ):
         (
-          <div>
+          <div className="ongoingSectionMap">
             {ongoingData.map((ele, i) => {
         return (
           <div className="ongoing-parent" key={i}>
