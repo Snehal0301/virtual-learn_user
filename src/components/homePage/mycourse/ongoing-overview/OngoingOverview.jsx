@@ -48,6 +48,8 @@ import ShowMoreText from 'react-show-more-text';
 import { Player } from 'video-react';
 import toast, { Toaster } from 'react-hot-toast';
 import { chapterResponse } from '../../../../redux/reducers/chapterResponses';
+import { courseOverview } from "../../../../redux/reducers/courseOverview";
+
 
 const OngoingOverview = () => {
   const [activeStep, setActiveStep] = useState(0);
@@ -77,9 +79,9 @@ const OngoingOverview = () => {
           X
         </div>
       </div>
-  ));
-  
-  
+    ));
+
+
   const errorCourse = () =>
     toast.error((t) => (
       <div className="toast-div">
@@ -122,7 +124,7 @@ const OngoingOverview = () => {
   }, []);
 
   const chapterResponses = useSelector((state) => state.chapterResponse.data);
-  const courseOverview = useSelector((state) => state.courseOverview.data);
+  const courseOverviewData = useSelector((state) => state.courseOverview.data);
 
   const chapterLoad = useSelector((state) => state.chapterResponse);
   const courseLoad = useSelector((state) => state.courseOverview);
@@ -161,10 +163,10 @@ const OngoingOverview = () => {
   }, [chapterResponses]);
 
   useEffect(() => {
-    courseOverview &&
-      courseOverview.data &&
-      setOverviewData(courseOverview.data);
-  }, [courseOverview]);
+    courseOverviewData &&
+      courseOverviewData.data &&
+      setOverviewData(courseOverviewData.data);
+  }, [courseOverviewData]);
 
   console.log('new data', chapter, overviewData);
 
@@ -330,42 +332,10 @@ const OngoingOverview = () => {
     console.log('videoLink', videoLink);
   };
 
-  const enrollCourse = async (courseId) => {
-    await axios
-      .request(
-        `http://virtuallearn-env.eba-6xmym3vf.ap-south-1.elasticbeanstalk.com/user/enroll`,
-        {
-          method: 'post',
-          headers: {
-            Authorization: `Bearer ${sessionStorage.getItem('Token')}`,
-          },
-          data: {
-            courseId: courseId,
-          },
-        }
-      )
-      .then((res) => {
-        console.log(res)(
-          res.data.message === 'Enrolled successfully' && navigate('/myCourses')
-        );
-      })
-      // .then((res) => {
-      //   (res.data.message === "Already enrolled" && alreadyCourse());
-      // })
-      .catch((err) => {
-        console.log(err);
-      });
-
-    // window.location.reload();
-    setJoinCourse(true);
-    successCourse();
-    console.log('Clicked');
-  };
-
   useEffect(() => {
-    courseOverview &&
-      courseOverview.data &&
-      setOverviewData(courseOverview.data);
+    courseOverviewData &&
+      courseOverviewData.data &&
+      setOverviewData(courseOverviewData.data);
   }, [joinCourse]);
 
   const [accState, setAccState] = useState();
@@ -382,6 +352,37 @@ const OngoingOverview = () => {
     setDefPause(true);
     setNextModal(false);
     setFirstPause(false);
+  };
+
+  const enrollCourse = async (courseId) => {
+    await axios
+      .request(
+        `http://virtuallearn-env.eba-6xmym3vf.ap-south-1.elasticbeanstalk.com/user/enroll`,
+        {
+          method: 'post',
+          headers: {
+            Authorization: `Bearer ${sessionStorage.getItem('Token')}`,
+          },
+          data: {
+            courseId: courseId,
+          },
+        }
+      )
+      .then((res) => {
+        console.log(res)
+        if (res.data.message === 'Enrolled successfully') {
+          successCourse();
+          dispatch(chapterResponse(chapter.courseId));
+          dispatch(courseOverview(chapter.courseId));
+          dispatch(tabToggleState(2))
+          setJoinCourse(true);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+
+    console.log('Clicked');
   };
 
   return (
@@ -832,8 +833,8 @@ const OngoingOverview = () => {
                                                 {itemele.lessonCompletedStatus
                                                   ? completedlessonIcon
                                                   : itemele.lessonStatus
-                                                  ? inactiveIcon("green")
-                                                  : inactiveIcon("")}
+                                                    ? inactiveIcon("green")
+                                                    : inactiveIcon("")}
                                                 {/* {itemele.lessonCompletedStatus ? completedlessonIcon : itemele.lessonStatus ? inactiveIcon("green")  : inactiveIcon("")} */}
                                               </div>
                                               <div className="accordian-item-section-2">
@@ -1061,7 +1062,7 @@ const OngoingOverview = () => {
                                 <div className="course-accordian-heading">
                                   <div className="course-accordian-container">
                                     {ele.chapterNumber === 1 ? (
-                                      <p className="course-accordian-container-title-active">
+                                      <p className="course-accordian-container-title">
                                         Chapter {ele.chapterNumber} -{' '}
                                         {ele.chapterName}{' '}
                                       </p>
@@ -1091,7 +1092,7 @@ const OngoingOverview = () => {
                                             <div className="accordian-item">
                                               <div className="accordian-item-icon">
                                                 {ele.chapterNumber === 1 &&
-                                                itemele.lessonStatus
+                                                  itemele.lessonStatus
                                                   ? inactiveIcon("green")
                                                   : inactiveIcon("")}
                                               </div>
@@ -1113,13 +1114,13 @@ const OngoingOverview = () => {
                                                   className="video-play-btn"
                                                   onClick={() => {
                                                     ele.chapterNumber === 1 &&
-                                                    itemele.lessonStatus
+                                                      itemele.lessonStatus
                                                       ? console.log("nothing")
                                                       : errorCourse();
                                                   }}
                                                 >
                                                   {ele.chapterNumber === 1 &&
-                                                  itemele.lessonStatus
+                                                    itemele.lessonStatus
                                                     ? videoPlayActive("red")
                                                     : videoPlayActive("")}
                                                 </div>
@@ -1179,14 +1180,14 @@ const OngoingOverview = () => {
                                             </div>
                                             <div
                                               className="video-play-btn"
-                                              // onClick={() => { setVideo(courseele.videoLink) }}
-                                              // onClick={() => {
-                                              //   dispatch(
-                                              //     videoLinkState(
-                                              //       itemele.videoLink
-                                              //     )
-                                              //   );
-                                              // }}
+                                            // onClick={() => { setVideo(courseele.videoLink) }}
+                                            // onClick={() => {
+                                            //   dispatch(
+                                            //     videoLinkState(
+                                            //       itemele.videoLink
+                                            //     )
+                                            //   );
+                                            // }}
                                             ></div>
                                           </div>
                                         </div>
