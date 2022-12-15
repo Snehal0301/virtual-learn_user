@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./ChangePassword.css";
 import { useDispatch, useSelector } from "react-redux";
 import { arrowRight, warningIcon } from "../../../../utils/svgIcons";
@@ -7,72 +7,165 @@ import {
   profileDrawer,
   showChangePasswordSection,
 } from "../../../../redux/reducers/headerProfileOptions";
+import axios from "axios";
+import toast, { Toaster } from "react-hot-toast";
 
 const ChangePassword = () => {
+  const [newpassword, setNewPassword] = useState("");
+  const [cPassword, setCpassword] = useState("");
+  const [currentPass, setCurrentPassword] = useState("");
   const dispatch = useDispatch();
+
   const handleClick = () => {
     // dispatch(profileDrawer(false));
     dispatch(editProfileSection(false));
     dispatch(showChangePasswordSection(false));
   };
 
+  // Toast-Error
+  const PasswordMatch = () =>
+    toast.error((t) => (
+      <div className="toast-div-password">
+        Password Doesn't Match
+        <div
+          className="toast-close-password"
+          onClick={() => toast.dismiss(t.id)}
+        >
+          X
+        </div>
+      </div>
+    ));
+
+  // Toast-Success
+  const successPassword = () =>
+    toast.success((t) => (
+      <div className="toast-div-password">
+        Password Change Successfully
+        <div
+          className="toast-close-password"
+          onClick={() => toast.dismiss(t.id)}
+        >
+          X
+        </div>
+      </div>
+    ));
+
+  const handleChangePassword = (e) => {
+    e.preventDefault();
+    const NewPassword = document.getElementById("newPassword").value;
+    const ConfirmPassword = document.getElementById("confirmPassword").value;
+    if (NewPassword === ConfirmPassword) {
+      axios
+        .request(
+          ` http://virtuallearn-env.eba-6xmym3vf.ap-south-1.elasticbeanstalk.com/user/changePassword`,
+          {
+            method: "post",
+            headers: {
+              Authorization: `Bearer ${sessionStorage.getItem("Token")}`,
+            },
+            data: {
+              currentPassword: currentPass,
+              newPassword: newpassword,
+            },
+          }
+        )
+        .catch((Err) => {
+          console.log(Err);
+        });
+      successPassword();
+      setNewPassword("");
+      setCpassword("");
+      setCurrentPassword("");
+      console.log(newpassword);
+    } else {
+      PasswordMatch();
+    }
+  };
+
   return (
     <>
-      <div className="drawer-profile-change">
-        <div className="drawer-profile-header-change">
-          <div className="drawer-profile-clear-change" onClick={handleClick}>
+      <div className="drawer-profile-change-conpass">
+        <div className="drawer-profile-header-change-conpass">
+          <div
+            className="drawer-profile-clear-change-conpass"
+            onClick={handleClick}
+          >
             {arrowRight}
           </div>
-          <div className="settings-settings-text-change">
+          <div className="change-change-password">
             <p>Change your Password</p>
-            <div className="settings-span">
+            <div className="changePass-span">
               Your password must have at least 6 or more characters
             </div>
           </div>
         </div>
-        <div className="privacy-policy-phrases">
-          <form className="change-password-form">
+
+        <div className="change-changePass-Container">
+          <form
+            className="change-password-form"
+            onSubmit={handleChangePassword}
+          >
+            {/*Current Password*/}
             <input
               className="change-password-form-input"
               type="password"
-              id="fullName"
-              name="fullName"
+              id="currentPassword"
+              name="currentPassword"
+              value={currentPass}
+              onChange={(e) => {
+                setCurrentPassword(e.target.value);
+              }}
               placeholder=" "
             />
-            <label className="change-password-form-label" for="fullName">
+            <label className="change-password-form-label" for="currentPassword">
               Current Password
             </label>
+            {/*Current Password*/}
+
+            {/*New Password*/}
             <input
               className="change-password-form-input"
               type="password"
-              id="email"
-              name="email"
+              id="newPassword"
+              name="newPassword"
+              value={newpassword}
               placeholder=" "
+              onChange={(e) => {
+                setNewPassword(e.target.value);
+              }}
+              pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}"
+              required
             />
-            <label className="change-password-form-label" for="email">
+            <label className="change-password-form-label" for="newPassword">
               New Password
             </label>
+            {/*New Password*/}
+
+            {/*Confirm Password*/}
             <input
               className="change-password-form-input"
               type="password"
-              id="password"
-              name="password"
+              id="confirmPassword"
+              name="confirmPassword"
               placeholder=" "
+              value={cPassword}
+              onChange={(e) => {
+                setCpassword(e.target.value);
+              }}
+              pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}"
+              required
             />
             <label className="change-password-form-label" for="password">
               Confirm Password
             </label>
-            <button type="button" className="change-password-reset-btn">
+            {/*Confirm Password*/}
+
+            <button type="submit" className="change-password-reset-btn">
               Reset Password
             </button>
           </form>
-          {/* <form className='change-password-form'>
-                        <input type="password" placeholder='Current Password' />
-                        <input type="password" placeholder='New Password' />
-                        <input type="password" placeholder='Confirm Password' />
-                        <button type='button' className='change-password-reset-btn'>Reset Password</button>
-                    </form> */}
         </div>
+
         {/* <div className="toast">
                     <div className="warning-content">
                         {warningIcon}
@@ -80,8 +173,38 @@ const ChangePassword = () => {
                     </div>
                 </div> */}
 
-        <div className="toast">{/* add toast here */}</div>
+        {/* <div className="toast">add toast here</div> */}
       </div>
+      <Toaster
+        position="bottom-center"
+        containerStyle={{
+          top: 20,
+          left: 20,
+          bottom: 20,
+          right: 20,
+        }}
+        toastOptions={{
+          className: "",
+          success: {
+            duration: 1500,
+            style: {
+              border: "1px solid #AAFF00",
+              padding: "10px",
+              color: "green",
+              width: "350px",
+            },
+          },
+          error: {
+            duration: 1500,
+            style: {
+              border: "1px solid #ee5c4d",
+              padding: "10px",
+              color: "#ee5c4d",
+              width: "350px",
+            },
+          },
+        }}
+      />
     </>
   );
 };

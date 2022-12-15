@@ -1,29 +1,29 @@
-import './PrivacyPolicy.css'
-import React, { useEffect, useState } from 'react'
-import { arrowRight } from '../../../../utils/svgIcons'
-import { useDispatch, useSelector } from 'react-redux'
+import "./PrivacyPolicy.css";
+import React, { useEffect, useState } from "react";
+import { arrowRight } from "../../../../utils/svgIcons";
+import { useDispatch, useSelector } from "react-redux";
 import {
   privacySection,
   profileDrawer,
-} from '../../../../redux/reducers/headerProfileOptions'
-import axios from 'axios'
+} from "../../../../redux/reducers/headerProfileOptions";
+import axios from "axios";
 
 const PrivacyPolicy = () => {
-  const [privacyData, setPrivacyData] = useState('')
-  const dispatch = useDispatch()
+  const [privacyData, setPrivacyData] = useState("");
+  const dispatch = useDispatch();
   const handleClick = () => {
-    dispatch(privacySection(false))
-  }
+    dispatch(privacySection(false));
+  };
   useEffect(() => {
     axios
       .get(
-        `http://virtuallearn-env.eba-6xmym3vf.ap-south-1.elasticbeanstalk.com/privacyPolicy`,
+        `http://virtuallearn-env.eba-6xmym3vf.ap-south-1.elasticbeanstalk.com/privacyPolicy`
       )
       .then((res) => {
-        setPrivacyData(res && res.data && res.data.message)
-      })
-  }, [])
-  console.log(privacyData)
+        setPrivacyData(res && res.data && res.data.message);
+      });
+  }, []);
+  console.log(privacyData);
 
   return (
     <div className="drawer-profile-privacy">
@@ -43,7 +43,7 @@ const PrivacyPolicy = () => {
       </div>
       <div className="privacy-policy-phrases para">{privacyData}</div>
     </div>
-  )
-}
+  );
+};
 
-export default PrivacyPolicy
+export default PrivacyPolicy;

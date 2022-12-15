@@ -1,7 +1,7 @@
-import './OngoingOverview.css';
-import React, { useState, useEffect, useRef } from 'react';
-import ReactPlayer from 'react-player';
-import { useDispatch, useSelector } from 'react-redux';
+import "./OngoingOverview.css";
+import React, { useState, useEffect, useRef } from "react";
+import ReactPlayer from "react-player";
+import { useDispatch, useSelector } from "react-redux";
 import {
   accordianState,
   accordianToggleState,
@@ -25,7 +25,7 @@ import {
   testImage,
   videoPlayActive,
   whiteStepperIcon,
-} from '../../../../utils/svgIcons';
+} from "../../../../utils/svgIcons";
 import {
   Accordion,
   AccordionItem,
@@ -77,7 +77,9 @@ const OngoingOverview = () => {
           X
         </div>
       </div>
-    ));
+  ));
+  
+  
   const errorCourse = () =>
     toast.error((t) => (
       <div className="toast-div">
@@ -128,10 +130,10 @@ const OngoingOverview = () => {
   useEffect(() => {
     console.log('Component mounted');
     return () => {
-      console.log("Component unmounted")
-      dispatch(tabToggleState(1))
-    }
-  }, [])
+      console.log("Component unmounted");
+      dispatch(tabToggleState(1));
+    };
+  }, []);
 
   useEffect(() => {
     if (courseLoad.loading) {
@@ -351,36 +353,35 @@ const OngoingOverview = () => {
     setDefPause(true);
     setNextModal(false);
     setFirstPause(false);
-  }
+  };
 
   return (
     <>
-      {
-        chapter && chapter.enrolled ?
-          <div className="homeCategories-head-link">
-            <span>
-              <Link
-                to="/myCourses"
-                style={{ color: "var(--blueFont)", cursor: "pointer" }}
-              >
-                My Course &nbsp; &nbsp; {">"} &nbsp;
-              </Link>
-              &nbsp;
-            </span>
-            <span>
-              <Link
-                to="/myCourses/ongoingCourse"
-                style={{ color: "var(--blueFont)", cursor: "pointer" }}
-              >
-                Ongoing &nbsp; &nbsp; {">"} &nbsp;
-              </Link>
-              &nbsp;
-            </span>
-            {overviewData && overviewData.courseName && overviewData.courseName}
-          </div>
-          :
-          ''
-      }
+      {chapter && chapter.enrolled ? (
+        <div className="homeCategories-head-link">
+          <span>
+            <Link
+              to="/myCourses"
+              style={{ color: "var(--blueFont)", cursor: "pointer" }}
+            >
+              My Course &nbsp; &nbsp; {">"} &nbsp;
+            </Link>
+            &nbsp;
+          </span>
+          <span>
+            <Link
+              to="/myCourses/ongoingCourse"
+              style={{ color: "var(--blueFont)", cursor: "pointer" }}
+            >
+              Ongoing &nbsp; &nbsp; {">"} &nbsp;
+            </Link>
+            &nbsp;
+          </span>
+          {overviewData && overviewData.courseName && overviewData.courseName}
+        </div>
+      ) : (
+        ""
+      )}
       <div className="ongoing-overview">
         <div className="ongoing-section-1">
           <div className="ongoing-section-video-player">
@@ -693,7 +694,14 @@ const OngoingOverview = () => {
                   <div className="overview-instructor">
                     <div className="overview-instructor-title">Instructor</div>
                     <div className="instructor-details">
-                      <img src={overviewData.profilePhoto} alt="Profile-logo" />
+                      <img
+                        src={
+                          overviewData.profilePhoto
+                            ? overviewData.profilePhoto
+                            : require("../../../../assets/images/start-courses-image/profilepic.jpg")
+                        }
+                        alt="Profile-logo"
+                      />
                       <div className="profile-details">
                         <p className="profile-name">
                           {overviewData.instructorName}
@@ -792,7 +800,11 @@ const OngoingOverview = () => {
                                           <>
                                             <div className="accordian-item">
                                               <div className="accordian-item-icon">
-                                                {itemele.lessonCompletedStatus ? completedlessonIcon : itemele.lessonStatus ? inactiveIcon("green") : inactiveIcon("")}
+                                                {itemele.lessonCompletedStatus
+                                                  ? completedlessonIcon
+                                                  : itemele.lessonStatus
+                                                  ? inactiveIcon("green")
+                                                  : inactiveIcon("")}
                                                 {/* {itemele.lessonCompletedStatus ? completedlessonIcon : itemele.lessonStatus ? inactiveIcon("green")  : inactiveIcon("")} */}
                                               </div>
                                               <div className="accordian-item-section-2">
@@ -1049,7 +1061,8 @@ const OngoingOverview = () => {
                                           <>
                                             <div className="accordian-item">
                                               <div className="accordian-item-icon">
-                                                {ele.chapterNumber === 1 && itemele.lessonStatus
+                                                {ele.chapterNumber === 1 &&
+                                                itemele.lessonStatus
                                                   ? inactiveIcon("green")
                                                   : inactiveIcon("")}
                                               </div>
@@ -1070,14 +1083,14 @@ const OngoingOverview = () => {
                                                 <div
                                                   className="video-play-btn"
                                                   onClick={() => {
-                                                    ele.chapterNumber === 1 && itemele.lessonStatus
-                                                      ?
-                                                      console.log("nothing")
-                                                      :
-                                                      errorCourse()
+                                                    ele.chapterNumber === 1 &&
+                                                    itemele.lessonStatus
+                                                      ? console.log("nothing")
+                                                      : errorCourse();
                                                   }}
                                                 >
-                                                  {ele.chapterNumber === 1 && itemele.lessonStatus
+                                                  {ele.chapterNumber === 1 &&
+                                                  itemele.lessonStatus
                                                     ? videoPlayActive("red")
                                                     : videoPlayActive("")}
                                                 </div>
@@ -1137,14 +1150,14 @@ const OngoingOverview = () => {
                                             </div>
                                             <div
                                               className="video-play-btn"
-                                            // onClick={() => { setVideo(courseele.videoLink) }}
-                                            // onClick={() => {
-                                            //   dispatch(
-                                            //     videoLinkState(
-                                            //       itemele.videoLink
-                                            //     )
-                                            //   );
-                                            // }}
+                                              // onClick={() => { setVideo(courseele.videoLink) }}
+                                              // onClick={() => {
+                                              //   dispatch(
+                                              //     videoLinkState(
+                                              //       itemele.videoLink
+                                              //     )
+                                              //   );
+                                              // }}
                                             ></div>
                                           </div>
                                         </div>
@@ -1174,30 +1187,29 @@ const OngoingOverview = () => {
             right: 20,
           }}
           toastOptions={{
-            className: '',
+            className: "",
             // style: {
             //   border: '1px solid #ee5c4d',
             //   padding: '10px',
             //   color: '#ee5c4d',
             //   width: '500px',
             // },
-
             success: {
               duration: 1500,
               style: {
-                border: '1px solid #AAFF00',
-                padding: '10px',
-                color: 'green',
-                width: '350px',
+                border: "1px solid #AAFF00",
+                padding: "10px",
+                color: "green",
+                width: "350px",
               },
             },
             error: {
               duration: 1500,
               style: {
-                border: '1px solid #ee5c4d',
-                padding: '10px',
-                color: '#ee5c4d',
-                width: '350px',
+                border: "1px solid #ee5c4d",
+                padding: "10px",
+                color: "#ee5c4d",
+                width: "350px",
               },
             },
           }}

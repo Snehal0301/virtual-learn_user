@@ -133,10 +133,10 @@ const Profile = () => {
                   <p className="pd-title">Occupation</p>
                   <p className="pd-value">{profileData.occupation}</p>
                 </div>
-                {profileData.dob && (
+                {profileData && (
                   <div className="personal-detail-section">
                     <p className="pd-title">Date of Birth</p>
-                    <p className="pd-value">7 July 1981</p>
+                    <p className="pd-value">{profileData.dateOfBirth}</p>
                   </div>
                 )}
                 <div

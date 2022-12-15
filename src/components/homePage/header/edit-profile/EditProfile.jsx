@@ -15,32 +15,71 @@ import { editSchema } from "./edit-schema";
 import axios from "axios";
 
 const EditProfile = () => {
-  const [editProfileData, setEditProfileData] = useState("");
+  const [editProfileData, setEditProfileData] = useState({});
+  const [occupationData, setOccupationData] = useState([]);
+  const [selectedFile, setSelectedFile] = useState({});
   const dispatch = useDispatch();
   const handleClick = () => {
     dispatch(editProfileSection(false));
   };
+  const handleProfilePic = (e) => {
+    setSelectedFile(e.target.files[0]);
+  };
 
-  const { errors, values, touched, handleChange, handleBlur } = useFormik({
-    enableReinitialize: true,
-    initialValues: {
-      editPfullname: editProfileData.fullName,
-      editPUsername: editProfileData.userName,
-      editPEmail: editProfileData.email,
-      MobileNo: editProfileData.mobileNumber,
-      gender: editProfileData.gender,
-      editPDOB: "",
-      editPOccupation: editProfileData.occupation,
-      TwitterURL: "",
-      FacebookURL: "",
-    },
-    validationSchema: editSchema,
-    onSubmit: (values, action, e) => {
-      e.preventDefault();
-      action.resetForm();
-    },
-  });
+  // console.log(selectedFile);
+  const { errors, values, touched, handleChange, handleBlur, handleSubmit } =
+    useFormik({
+      enableReinitialize: true,
+      initialValues: {
+        editPfullname: editProfileData?.fullName ?? "",
+        editPUsername: editProfileData?.userName ?? "",
+        editPEmail: editProfileData?.email ?? "",
+        MobileNo: editProfileData?.mobileNumber ?? "",
+        gender: editProfileData?.gender ?? "",
+        editPDOB: editProfileData?.dateOfBirth ?? "",
+        editPOccupation: editProfileData?.occupation ?? "",
+        TwitterURL: editProfileData?.twitterLink ?? "",
+        FacebookURL: editProfileData?.faceBookLink ?? "",
+      },
+      // validationSchema: editSchema,
+      onSubmit: (values) => {
+        const formData = new FormData();
+        formData.append(
+          "twitterLink",
+          values.TwitterURL ? values.TwitterURL : "empty"
+        );
+        formData.append(
+          "faceBookLink",
+          values.FacebookURL ? values.FacebookURL : "empty"
+        );
+        formData.append("occupation", values.editPOccupation);
+        formData.append("gender", values.gender);
+        formData.append(
+          "dateOfBirth",
+          values.editPDOB ? values.editPDOB : "empty"
+        );
+        formData.append("profilePhoto", selectedFile);
+        formData.forEach((value, key) => {
+          console.log("key %s: value %s", key, value);
+        });
+        axios
+          .request(
+            ` http://virtuallearn-env.eba-6xmym3vf.ap-south-1.elasticbeanstalk.com/user/save`,
+            {
+              method: "put",
+              headers: {
+                Authorization: `Bearer ${sessionStorage.getItem("Token")}`,
+              },
+              data: formData,
+            }
+          )
+          .catch((Err) => {
+            console.log(Err);
+          });
+      },
+    });
 
+  /*EditProfileData Fetch By Mamatha */
   useEffect(() => {
     axios
       .get(
@@ -55,31 +94,24 @@ const EditProfile = () => {
         setEditProfileData(res.data);
       });
   }, []);
+  /*EditProfileData Fetch By Mamatha */
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  /*Occupation Data Fetch By Mamatha*/
+  useEffect(() => {
     axios
-      .request(
-        ` http://virtuallearn-env.eba-6xmym3vf.ap-south-1.elasticbeanstalk.com/user/save`,
+      .get(
+        `http://virtuallearn-env.eba-6xmym3vf.ap-south-1.elasticbeanstalk.com/user/allSubCategoriesWP`,
         {
-          method: "put",
           headers: {
             Authorization: `Bearer ${sessionStorage.getItem("Token")}`,
           },
-          data: {
-            gender: e.target.gender,
-            occupation: e.target.editPOccupation,
-            dateOfBirth: e.target.editPDOB,
-            twitterLink: e.target.TwitterURL,
-            faceBookLink: e.target.FacebookURL,
-          },
         }
       )
-      .catch((Err) => {
-        console.log(Err);
+      .then((res) => {
+        setOccupationData(res.data);
       });
-    alert("Submit Clicked");
-  };
+  }, []);
+  /*Occupation Data Fetch By Mamatha*/
 
   console.log("EditData", editProfileData);
   return (
@@ -89,10 +121,14 @@ const EditProfile = () => {
           {arrowRight}
         </div>
         <div className="editprofiletext">Edit Profile</div>
-        <div className="editProfileImage">
-          <img src={editProfileData && editProfileData.profilePhoto} alt="" />
-        </div>
-        <input type="file" name="" id="" />
+          <div className="editProfileImage">
+            <img src={editProfileData && editProfileData.profilePhoto} alt="" />
+            <input
+              type="file"
+              onChange={handleProfilePic}
+              className="custom-file-input"
+            />
+          </div>
       </div>
       <div className="EditForm">
         <form className="editProfileForm" onSubmit={handleSubmit}>
@@ -103,6 +139,7 @@ const EditProfile = () => {
               name="editPfullname"
               placeholder=""
               className="editPInput"
+              onChange={handleChange}
               value={values.editPfullname}
               autoComplete="off"
             />
@@ -187,7 +224,7 @@ const EditProfile = () => {
             ) : null}
           </div>
 
-          <div className="edit-error-input">
+          {/* <div className="edit-error-input">
             <input
               type="text"
               id="editPOccupation"
@@ -202,12 +239,33 @@ const EditProfile = () => {
             <label htmlFor="" className="editprofilelabel">
               Occupation
             </label>
+
             {errors.editPOccupation && touched.editPOccupation ? (
               <>
                 <div className="edit-error-line"></div>
                 <p className="edit-form-error">{errors.editPOccupation}</p>
               </>
             ) : null}
+          </div> */}
+
+          <div className="genderSection">
+            <label htmlFor="occupation">Occupation</label>
+            <select
+              id="editPOccupation"
+              name="editPOccupation"
+              onChange={handleChange}
+              onBlur={handleBlur}
+              value={values.editPOccupation}
+            >
+              {occupationData &&
+                occupationData.map((ele) => {
+                  return (
+                    <option value={ele.subCategoryName}>
+                      {ele.subCategoryName}
+                    </option>
+                  );
+                })}
+            </select>
           </div>
 
           <div className="genderSection">
@@ -219,9 +277,6 @@ const EditProfile = () => {
               onChange={handleChange}
               onBlur={handleBlur}
             >
-              <option value="none" selected>
-                Gender
-              </option>
               <option value="male">Male</option>
               <option value="female" selected>
                 Female
