@@ -1,108 +1,102 @@
-import React, { useEffect, useState } from 'react'
-import { info_btn } from '../../../../utils/svgIcons'
-import './PersonalDetails.css'
-import { signupSchema } from './schema'
-import { Formik, useFormik } from 'formik'
-import ReactTooltip from 'react-tooltip'
-import { useDispatch } from 'react-redux'
-import { useNavigate } from 'react-router-dom'
+import React, { useEffect, useState } from "react";
+import { info_btn } from "../../../../utils/svgIcons";
+import "./PersonalDetails.css";
+import { signupSchema } from "./schema";
+import { Formik, useFormik } from "formik";
+import ReactTooltip from "react-tooltip";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import {
   registerOtp,
   registerPersonalDetails,
   registerSuccess,
-} from '../../../../redux/reducers/Conditions'
-import { ToastContainer, toast } from 'react-toastify'
-import 'react-toastify/dist/ReactToastify.css'
+} from "../../../../redux/reducers/Conditions";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const PersonalDetails = () => {
-  const [personaldata, setpersonaldata] = useState({})
+  const [personaldata, setpersonaldata] = useState({});
 
-  const dispatch = useDispatch()
-  const navigate = useNavigate()
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-  const {
-    values,
-    errors,
-    handleChange,
-    touched,
-    handleBlur,
-    handleSubmit,
-  } = useFormik({
-    initialValues: {
-      email: '',
-      UserName: '',
-      password: '',
-      ConfirmPassword: '',
-      fullName: '',
-      mobileNumber: '',
-    },
-    validationSchema: signupSchema,
-    onSubmit: (values: any, action: any) => {
-      console.log(values)
-      setpersonaldata(values)
-      action.resetForm()
-      // dispatch(registerSuccess(false))
-      // navigate('/accountCreatedSuccessfully')
-      const data = {
-        mobileNumber: values.mobileNumber,
-        fullName: values.fullName,
-        userName: values.UserName,
-        email: values.email,
-        password: values.password,
-      }
+  const { values, errors, handleChange, touched, handleBlur, handleSubmit } =
+    useFormik({
+      initialValues: {
+        email: "",
+        UserName: "",
+        password: "",
+        ConfirmPassword: "",
+        fullName: "",
+        mobileNumber: "",
+      },
+      validationSchema: signupSchema,
+      onSubmit: (values, action) => {
+        console.log(values);
+        setpersonaldata(values);
+        action.resetForm();
+        // dispatch(registerSuccess(false))
+        // navigate('/accountCreatedSuccessfully')
+        const data = {
+          mobileNumber: values.mobileNumber,
+          fullName: values.fullName,
+          userName: values.UserName,
+          email: values.email,
+          password: values.password,
+        };
 
-      sendUserdata(data)
-    },
-  })
+        sendUserdata(data);
+      },
+    });
 
   useEffect(() => {
-    dispatch(registerOtp(false))
-  }, [])
+    dispatch(registerOtp(false));
+  }, []);
 
-  const sendUserdata = (data: any) => {
+  const sendUserdata = (data) => {
     fetch(
       `http://virtuallearn-env.eba-6xmym3vf.ap-south-1.elasticbeanstalk.com/newUser/register`,
       {
-        method: 'POST',
+        method: "POST",
         headers: {
-          Accept: 'application/json, text/plain, */*',
-          'Content-Type': 'application/json',
+          Accept: "application/json, text/plain, */*",
+          "Content-Type": "application/json",
         },
         body: JSON.stringify(data),
-      },
+      }
     )
       .then((res) => res.json())
       .then((res) => {
-        console.log('res', res)
-        if (res.message !== 'User Created') {
-          showError(res.message)
-        } else if (res.message === 'User Created') {
-          dispatch(registerSuccess(true))
-          navigate('/accountCreatedSuccessfully')
+        console.log("res", res);
+        if (res.message !== "User Created") {
+          showError(res.message);
+        } else if (res.message === "User Created") {
+          dispatch(registerSuccess(true));
+          navigate("/accountCreatedSuccessfully");
         }
-      })
-  }
+      });
+  };
 
-  const showError = (msg: any) => {
+  const showError = (msg) => {
     toast(
       <div className="loginAuth-showError">
         <div className="loginAuth-showErrorIcon">
           <img
-            src={require('../../../../assets/icons/icn_invalid error.png')}
+            src={require("../../../../assets/icons/icn_invalid error.png")}
             alt="invalid"
           />
         </div>
         <div className="loginAuth-showErrorMessage">{msg}</div>
       </div>,
       {
-        position: 'bottom-right',
+        position: "bottom-right",
         autoClose: 5000,
         hideProgressBar: true,
         pauseOnHover: true,
         draggable: true,
-      },
-    )
-  }
+      }
+    );
+  };
 
   return (
     <div className="personaldetails-outerRectangle">
@@ -122,7 +116,7 @@ const PersonalDetails = () => {
               id="mobileNumber"
               name="mobileNumber"
               placeholder=" "
-              value={values.mobileNumber}
+              value={sessionStorage.getItem("regMobileNum")}
               onChange={handleChange}
               onBlur={handleBlur}
               // maxLength={10}
@@ -268,7 +262,7 @@ const PersonalDetails = () => {
       </div>
       <ToastContainer />
     </div>
-  )
-}
+  );
+};
 
-export default PersonalDetails
+export default PersonalDetails;
