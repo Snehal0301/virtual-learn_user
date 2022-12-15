@@ -587,9 +587,17 @@
   .react-carousel-responsive__inner 
   {
     position: relative;
-    width: 211%;
+    width: 221%;
  }
 }
+@media only screen and (max-width: 380px)
+{
+  .react-carousel-responsive__inner {
+    position: relative;
+    width: 259%;
+}
+}
+
 
 .all-tabs-home {
   display: flex;
