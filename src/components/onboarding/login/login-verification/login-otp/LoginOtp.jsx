@@ -105,6 +105,25 @@ const LoginVerfication = () => {
     );
   };
 
+  const resent = (msg) => {
+    toast.success(
+      <div
+        className="loginAuth-showError"
+        style={{ background: 'var( --success) !important' }}
+      >
+        <div className="loginAuth-showErrorMessage">{msg}</div>
+      </div>,
+      {
+        position: 'bottom-right',
+        theme: 'colored',
+        autoClose: 5000,
+        hideProgressBar: true,
+        pauseOnHover: true,
+        draggable: true,
+      }
+    );
+  };
+
   return (
     <div className="login-verification">
       <p className="login-verification-heading">Verify Account</p>
@@ -136,7 +155,33 @@ const LoginVerfication = () => {
           />
           {/* <ResendOTP onResendClick={() => console.log("Resend clicked")} /> */}
           <p className="resend-otp">
-            Didn’t receive a code? <span onClick={() => {}}> Resend</span>
+            Didn’t receive a code?{' '}
+            <span
+              onClick={() => {
+                fetch(
+                  `http://virtuallearn-env.eba-6xmym3vf.ap-south-1.elasticbeanstalk.com/newUser/resend`,
+                  {
+                    method: 'PUT',
+                    headers: {
+                      Accept: 'application/json, text/plain, */*',
+                      'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                      mobileNumber: sessionStorage.getItem('regMobileNum'),
+                    }),
+                  }
+                )
+                  .then((res) => res.json())
+                  .then((res) => {
+                    if (res.message === 'OTP Valid For 2 Minutes') {
+                      resent(res.message);
+                    }
+                  });
+              }}
+            >
+              {' '}
+              Resend
+            </span>
           </p>
         </div>
         <button className="verify-otp-button" onClic>
