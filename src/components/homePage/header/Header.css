@@ -356,6 +356,7 @@
 
 .headerSearchCategoriesTopSearchesIcon > img {
   width: 100%;
+}
 .headerSearchCategoriesTopSearchesIcon>img {
     width: 100%;
 }
@@ -392,6 +393,7 @@
   line-height: 35px;
   border-radius: 6px;
   padding: 4px 38px !important;
+}
 .headerSearch-filterModalButtons>button {
     position: relative !important;
     margin: 0;
@@ -600,6 +602,7 @@
   background-size: cover;
   object-fit: cover;
   border-radius: 6px;
+}
 .headerSearch-responsePic>img {
     height: 98px;
     width: 98px;
