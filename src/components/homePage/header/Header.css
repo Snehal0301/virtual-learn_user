@@ -259,6 +259,7 @@
     /* min-width: 750px; */
     gap: 20px;
     border-bottom: 1px solid #1e4284;
+    cursor: pointer;
 }
 
 .headerSearch-responseTitle {

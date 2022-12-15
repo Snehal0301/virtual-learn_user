@@ -49,7 +49,7 @@ import { Player } from 'video-react';
 import toast, { Toaster } from 'react-hot-toast';
 import { chapterResponse } from '../../../../redux/reducers/chapterResponses';
 import { courseOverview } from "../../../../redux/reducers/courseOverview";
-import {  courseIDState } from "../../../../redux/reducers/pauseTime";
+import { courseIDState } from "../../../../redux/reducers/pauseTime";
 
 
 const OngoingOverview = () => {
@@ -148,7 +148,7 @@ const OngoingOverview = () => {
   }, [chapterLoad]);
 
   useEffect(() => {
-    
+
     chapterResponses &&
       chapterResponses.data &&
       setChapter(chapterResponses.data);
@@ -172,15 +172,6 @@ const OngoingOverview = () => {
   }, [courseOverviewData]);
 
   console.log('new data', chapter, overviewData);
-
-  // setting courseID
-  // useEffect(() => {
-  //   chapter && chapter.courseId && dispatch(courseIDState(chapter.courseId))
-  // },[])
-
-  
-
-  // const chapterID = useSelector((state))
 
   // api call for chapter section
 
@@ -291,24 +282,46 @@ const OngoingOverview = () => {
     };
   }, []);
 
-
   const [pauseData, setPauseData] = useState({
     courseId: '',
     chapterId: '',
-    lessonId: ''
+    lessonId: '',
+    videoTitle: ''
   })
 
-  const showChapter = (courseId, chapterId, lessonId) => {
+  useEffect(() => {
+    chapter &&
+      chapter.chapterResponses &&
+      chapter.chapterResponses[0].lessonResponses &&
+      chapter.chapterResponses[0].lessonResponses[0].lessonName &&
+      setPauseData({
+        courseId: chapter.courseId,
+        chapterId: chapter.chapterResponses[0].chapterId,
+        lessonId: chapter.chapterResponses[0].lessonResponses[0].lessonId,
+        videoTitle: chapter.chapterResponses[0].lessonResponses[0].lessonName
+      })
+  }, [chapter])
+
+  
+  // const [pauseData, setPauseData] = useState({
+  //   courseId: chapter.chapterResponses[0].lessonResponses[0].lessonName,
+  //   chapterId: '',
+  //   lessonId: '',
+  //   videoTitle:''
+  // })
+
+  const showChapter = (courseId, chapterId, lessonId, videoTitle) => {
     setPauseData({
       courseId: courseId,
       chapterId: chapterId,
-      lessonId: lessonId
+      lessonId: lessonId,
+      videoTitle: videoTitle
     })
   }
 
   const getPauseVideoTime = (chapter, ele, itemele) => {
     getVideoState(itemele)
-    showChapter(chapter.courseId, ele.chapterId, itemele.lessonId)
+    showChapter(chapter.courseId, ele.chapterId, itemele.lessonId, itemele.lessonName)
     dispatch(courseIDState(chapter.courseId))
   }
 
@@ -465,7 +478,7 @@ const OngoingOverview = () => {
 
             <ReactPlayer
               url={videoLink}
-              // url='https://youtu.be/yNYYOGeMXgc'
+              // url='https://youtu.be/aeWyp2vXxqA'
               controls="true"
               className="react-player"
               width="100%"
@@ -481,13 +494,7 @@ const OngoingOverview = () => {
                 setPlayed(progress.playedSeconds);
               }}
             />
-            {/* {pause && (
-            <>
-              <div className="pause-overlay" onClick={onPlay}>
-                <div className="pause-button">{start_pauseIconVideo}</div>
-              </div>
-            </>
-          )} */}
+            <div className="video-title-overlay">{pauseData.videoTitle}</div>
           </div>
           {/* <div className="ongoing-video-title-section">
                     <div className="ongoing-video-title">
