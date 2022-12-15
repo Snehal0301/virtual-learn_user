@@ -63,6 +63,9 @@ const LoginVerfication = () => {
           } else if (res.message === 'Input field is incorrect') {
             dispatch(registerPersonalDetails(false));
             showError(res.message);
+          } else if (res.message === 'Verification Fail') {
+            dispatch(registerPersonalDetails(false));
+            showError(res.message);
           }
         }
         if (location.pathname === '/onboarding/otpVerification') {
