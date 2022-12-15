@@ -40,7 +40,6 @@ const PersonalDetails = () => {
     onSubmit: (values: any, action: any) => {
       console.log(values)
       setpersonaldata(values)
-      action.resetForm()
       // dispatch(registerSuccess(false))
       // navigate('/accountCreatedSuccessfully')
       const data = {

@@ -68,7 +68,7 @@
   opacity: 0.3;
 }
 
-.header-profilePic>img {
+.header-profilePic > img {
   width: 40px;
   height: 40px;
   border-radius: 50%;
@@ -353,7 +353,7 @@
   text-align: center;
 }
 
-.headerSearchCategoriesTopSearchesIcon>img {
+.headerSearchCategoriesTopSearchesIcon > img {
   width: 100%;
 }
 
@@ -372,7 +372,7 @@
   color: var(--filterChipFontClr) !important;
 }
 
-.headerSearch-filterModalButtons>button {
+.headerSearch-filterModalButtons > button {
   position: relative !important;
   margin: 0;
   display: flex;
@@ -570,7 +570,7 @@
 
 /* custom styleing */
 
-.headerSearch-responsePic>img {
+.headerSearch-responsePic > img {
   height: 98px;
   width: 98px;
   background-size: cover;
@@ -734,7 +734,7 @@
     gap: 10px;
   }
 
-  .headerSearch-filterModalButtons>button {
+  .headerSearch-filterModalButtons > button {
     position: relative !important;
     margin: 0;
     display: flex;
@@ -882,9 +882,7 @@
   .completed-section {
     flex-wrap: nowrap;
     flex-direction: column;
-
   }
-
 
   .drawer-profile-profile-notify {
     font-size: 26px !important;
@@ -912,5 +910,11 @@
 
   .notificationUnread {
     margin-bottom: 4px !important;
+  }
+  .noNotification-section {
+    font-size: 22px !important;
+    text-align: left !important;
+    padding-top: 15px !important;
+    margin-left: 29px !important;
   }
 }
