@@ -97,7 +97,10 @@ const RegistrationForm = () => {
           >
             <div
               className="login-input-reg"
-              style={{ width: 'unset', border: 'none !important' }}
+              style={{
+                width: 'unset',
+                marginTop: '0px',
+              }}
             >
               +91
             </div>
