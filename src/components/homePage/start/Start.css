@@ -32,6 +32,7 @@
   height: 246px;
   border-radius: 5px;
   object-fit: cover;
+  transition: transform .5s ease;
 }
 
 .start-image-title {
@@ -56,12 +57,19 @@
   width: 100%;
   border-radius: 5px;
 }
+.start-course1-image:hover
+{
+  transition: all 0.1s ease-in-out;
+  transform: scale(1.05);
+  z-index: 1;
+}
 
 .start-course1-image {
   position: relative;
   flex-basis: 32.3%;
   margin-bottom: 20px;
   cursor: pointer;
+  
 }
 
 .start-course1-image-first {
@@ -205,6 +213,7 @@
   border: 1px solid #e4e4e4;
   border-radius: 6px;
   padding: 0.5rem 0.5rem;
+  cursor: pointer;
 }
 
 .start-course-categories-Name {
@@ -405,6 +414,12 @@
   padding: 0;
   border-bottom: none;
 }
+.start-course-categories-Icon img 
+{
+  height: 30px;
+  width: 30px;
+}
+
 
 @media only screen and (max-width: 800px) {
 
@@ -422,6 +437,10 @@
 
   ::-webkit-scrollbar {
     display: none;
+  }
+  .react-carousel-responsive__track
+  {
+    gap: 2px;
   }
 
 
@@ -459,6 +478,11 @@
   .start-course-section2-title {
     font-size: 14px;
   }
+  .start-course1-image 
+  {
+    margin-top: 20px;
+  }
+
 
   .start-course-button,
   .start-designbtn {
@@ -481,18 +505,18 @@
     display: flex;
   }
 
-  .react-carousel-responsive__track {
-    gap: 104px !important;
-  }
 
   .start-course-categories-Body {
     flex-wrap: nowrap;
     overflow-x: scroll;
   }
 
-  .react-carousel-responsive__inner {
+  /* .react-carousel-responsive__inner {
     margin-bottom: 19px;
-  }
+  } */
+  .react-carousel-responsive__inner {
+    position: relative;
+}
 
   .start-course-overlay-2 {
     border-radius: 6px;
@@ -520,6 +544,15 @@
     border-top-left-radius: 6px;
     border-top-right-radius: 6px;
   }
+
+  .start-map-image>img {
+    /* width: 300px; */
+    /* position: absolute; */
+    /* margin-bottom: 20px; */
+
+  }
+  
+ 
 
 }
 

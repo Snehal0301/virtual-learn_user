@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import './Ongoing.css';
-import { courseOverview } from '../../../../redux/reducers/courseOverview';
-import { chapterResponse } from '../../../../redux/reducers/chapterResponses';
-import { useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import "./Ongoing.css";
+import { courseOverview } from "../../../../redux/reducers/courseOverview";
+import { chapterResponse } from "../../../../redux/reducers/chapterResponses";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { tabToggleState } from "../../../../redux/reducers/myCourseReducer";
 
 const Ongoing = () => {
   const [ongoingData, setongoingData] = useState([]);
@@ -29,7 +30,7 @@ const Ongoing = () => {
       });
   }, []);
 
-  console.log(ongoingData);
+  // console.log(ongoingData);
   return (
     <>
       {ongoingData && ongoingData.length > 0 ? (
@@ -54,6 +55,7 @@ const Ongoing = () => {
                     onClick={() => {
                       dispatch(courseOverview(ele.courseId));
                       dispatch(chapterResponse(ele.courseId));
+                      dispatch(tabToggleState(2))
                       navigate('/myCourses/ongoingCourse');
                     }}
                   >

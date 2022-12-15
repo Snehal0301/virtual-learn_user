@@ -37,6 +37,7 @@ const HomePage = () => {
   //     })
   // }, [])
 
+  
   return (
     <div className="homePage">
       <div className="homePageNavbar">
