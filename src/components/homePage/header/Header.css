@@ -183,7 +183,7 @@
     max-height: 70vh;
     color: white;
     background-color: var(--primaryClr);
-    animation: height 0.5s;
+    animation: height ease-in-out 0.5s;
 }
 
 .headerSearchCategoriesTopSearchBody {
