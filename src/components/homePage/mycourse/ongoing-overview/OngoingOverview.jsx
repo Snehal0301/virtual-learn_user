@@ -49,6 +49,7 @@ import { Player } from 'video-react';
 import toast, { Toaster } from 'react-hot-toast';
 import { chapterResponse } from '../../../../redux/reducers/chapterResponses';
 import { courseOverview } from "../../../../redux/reducers/courseOverview";
+import {  courseIDState } from "../../../../redux/reducers/pauseTime";
 
 
 const OngoingOverview = () => {
@@ -59,7 +60,7 @@ const OngoingOverview = () => {
   const [chapterLoading, setChapterLoading] = useState(false);
   const [overviewLoading, setOverviewLoading] = useState(false);
   const [testLoading, setTestLoading] = useState(false);
-
+  const dispatch = useDispatch();
   // Toast
   const notify = () =>
     toast.error((t) => (
@@ -123,6 +124,7 @@ const OngoingOverview = () => {
     dispatch(finaltestShowPage(false));
   }, []);
 
+
   const chapterResponses = useSelector((state) => state.chapterResponse.data);
   const courseOverviewData = useSelector((state) => state.courseOverview.data);
 
@@ -146,6 +148,7 @@ const OngoingOverview = () => {
   }, [chapterLoad]);
 
   useEffect(() => {
+    
     chapterResponses &&
       chapterResponses.data &&
       setChapter(chapterResponses.data);
@@ -170,6 +173,15 @@ const OngoingOverview = () => {
 
   console.log('new data', chapter, overviewData);
 
+  // setting courseID
+  // useEffect(() => {
+  //   chapter && chapter.courseId && dispatch(courseIDState(chapter.courseId))
+  // },[])
+
+  
+
+  // const chapterID = useSelector((state))
+
   // api call for chapter section
 
   useEffect(() => {
@@ -177,20 +189,6 @@ const OngoingOverview = () => {
   }, [defaultvideo]);
 
   // const defaultVideoState = useSelector((state) => state.mycourse.firstVideo);
-
-  const handleNext = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep + 1);
-  };
-
-  const handleBack = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep - 1);
-  };
-
-  const handleReset = () => {
-    setActiveStep(0);
-  };
-
-  const dispatch = useDispatch();
 
   const tabToggle = (id) => {
     dispatch(tabToggleState(id));
@@ -257,9 +255,10 @@ const OngoingOverview = () => {
 
   useEffect(() => {
     console.log('Component mounted');
+    // dispatch(chapterResponse(chapter.chapterId))
     return () => {
       console.log("Component unmounted");
-      // dispatch(tabToggleState(1));
+      dispatch(tabToggleState(1));
       // const unmountPauseTime = new Date(played * 1000).toISOString().slice(11, 19);
       // console.log('unmountPauseTime', unmountPauseTime);
 
@@ -310,6 +309,7 @@ const OngoingOverview = () => {
   const getPauseVideoTime = (chapter, ele, itemele) => {
     getVideoState(itemele)
     showChapter(chapter.courseId, ele.chapterId, itemele.lessonId)
+    dispatch(courseIDState(chapter.courseId))
   }
 
   const videoLink = useSelector((state) => state.mycourse.videoLink);
@@ -784,7 +784,7 @@ const OngoingOverview = () => {
                   <div className="course-sections">
                     {chapter.chapterResponses.map((ele, id) => {
                       let statusTest = false;
-                      if (ele.lessonResponses[ele.lessonResponses.length - 1].lessonCompletedStatus) {
+                      if (ele.lessonResponses[ele.lessonResponses.length - 1].lessonCompletedStatus && ele.lessonResponses[ele.lessonResponses.length - 1].lessonCompletedStatus) {
                         statusTest = true;
                       }
                       return (

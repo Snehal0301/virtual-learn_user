@@ -10,6 +10,7 @@ import { answer } from '../../../../redux/reducers/testAnswer'
 import { testSuccess } from '../../../../redux/reducers/Conditions'
 import { useNavigate } from 'react-router-dom'
 import { tabToggleState } from '../../../../redux/reducers/myCourseReducer'
+import { chapterResponse } from '../../../../redux/reducers/chapterResponses'
 
 const QuizResults = () => {
   const dispatch = useDispatch()
@@ -24,6 +25,7 @@ const QuizResults = () => {
 
   const resultsHeaderData = useSelector((state: any) => state.answerHeader.data)
   const resultAnswers = useSelector((state: any) => state.answer.data)
+  const courseID = useSelector((state:any)=>state.pauseTime.courseID)
 
   console.log('header data', resultsHeaderData, resultAnswers)
 
@@ -44,6 +46,7 @@ const QuizResults = () => {
             onClick={() => {
               console.log('close', resultsHeaderData)
               dispatch(tabToggleState(2))
+              dispatch(chapterResponse(courseID));
               navigate('/myCourses/ongoingCourse')
             }}
           >
