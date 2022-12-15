@@ -128,14 +128,6 @@ const OngoingOverview = () => {
   const courseLoad = useSelector((state) => state.courseOverview);
 
   useEffect(() => {
-    console.log('Component mounted');
-    return () => {
-      console.log("Component unmounted");
-      dispatch(tabToggleState(1));
-    };
-  }, []);
-
-  useEffect(() => {
     if (courseLoad.loading) {
       setOverviewLoading(true);
     } else {
@@ -260,6 +252,43 @@ const OngoingOverview = () => {
         console.log(err);
       });
   };
+
+  useEffect(() => {
+    console.log('Component mounted');
+    return () => {
+      console.log("Component unmounted");
+      // dispatch(tabToggleState(1));
+      // const unmountPauseTime = new Date(played * 1000).toISOString().slice(11, 19);
+      // console.log('unmountPauseTime', unmountPauseTime);
+
+      // await axios
+      //   .request(
+      //     `http://virtuallearn-env.eba-6xmym3vf.ap-south-1.elasticbeanstalk.com/user/pauseTime`,
+      //     {
+      //       method: 'put',
+      //       headers: {
+      //         Authorization: `Bearer ${sessionStorage.getItem('Token')}`,
+      //       },
+      //       data: {
+      //         pauseTime: resultPauseTime,
+      //         lessonId: pauseData.lessonId,
+      //         chapterId: pauseData.chapterId,
+      //         courseId: pauseData.courseId
+      //       },
+      //     }
+      //   )
+      //   .then((res) => {
+      //     console.log(res)
+      //     // dispatch(courseOverview(pauseData.courseId));
+      //     dispatch(chapterResponse(pauseData.courseId));
+      //     // if (res.data.message === "Updated SuccessFully") {
+      //     // }
+      //   })
+      //   .catch((err) => {
+      //     console.log(err);
+      //   });
+    };
+  }, []);
 
 
   const [pauseData, setPauseData] = useState({

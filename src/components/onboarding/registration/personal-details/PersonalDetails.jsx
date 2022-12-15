@@ -28,7 +28,7 @@ const PersonalDetails = () => {
         password: "",
         ConfirmPassword: "",
         fullName: "",
-        mobileNumber: "",
+        mobileNumber: sessionStorage.getItem("regMobileNum"),
       },
       validationSchema: signupSchema,
       onSubmit: (values, action) => {
@@ -220,7 +220,7 @@ const PersonalDetails = () => {
               >
                 <span>
                   <p>Our minimum Requirment</p>
-                  At least 6 characters long with one number, one uppercase
+                  At least 8 characters long with one number, one uppercase
                   letter, and one lowercase letter.
                 </span>
               </ReactTooltip>
