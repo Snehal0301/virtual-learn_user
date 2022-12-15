@@ -25,6 +25,7 @@ import advancedCourseSlice, {
 import subCategoriesSlice, { subCategories } from './../reducers/subCategories';
 import chapterResponseSlice from '../reducers/chapterResponses';
 import courseOverviewSlice from '../reducers/courseOverview';
+import { pauseTimeReducer } from '../reducers/pauseTime';
 
 const reducers = combineReducers({
   headerProfile: showHeaderProfile.reducer,
@@ -47,12 +48,13 @@ const reducers = combineReducers({
   subCategories: subCategoriesSlice.reducer,
   chapterResponse: chapterResponseSlice.reducer,
   courseOverview: courseOverviewSlice.reducer,
+  // pauseTime:pauseTimeReducer
 });
 
 const persistConfig = {
   key: 'root',
   storage,
-  blacklist: ['login'],
+  blacklist: ['login','pauseTime'],
 };
 
 const persistedReducer = persistReducer(persistConfig, reducers);
