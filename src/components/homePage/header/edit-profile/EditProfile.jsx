@@ -17,15 +17,16 @@ import axios from "axios";
 const EditProfile = () => {
   const [editProfileData, setEditProfileData] = useState({});
   const [occupationData, setOccupationData] = useState([]);
-  // const [file, setFile] = useState();
+  const [selectedFile, setSelectedFile] = useState({});
   const dispatch = useDispatch();
   const handleClick = () => {
     dispatch(editProfileSection(false));
   };
-  // const handleProfilePic = (e) => {
-  //   console.log(e.target.files);
-  //   setFile(URL.createObjectURL(e.target.files[0]));
-  // };
+  const handleProfilePic = (e) => {
+    setSelectedFile(e.target.files[0]);
+  };
+
+  // console.log(selectedFile);
   const { errors, values, touched, handleChange, handleBlur, handleSubmit } =
     useFormik({
       enableReinitialize: true,
@@ -53,7 +54,11 @@ const EditProfile = () => {
         );
         formData.append("occupation", values.editPOccupation);
         formData.append("gender", values.gender);
-        formData.append("dateOfBirth", values.editPDOB);
+        formData.append(
+          "dateOfBirth",
+          values.editPDOB ? values.editPDOB : "empty"
+        );
+        formData.append("profilePhoto", selectedFile);
         formData.forEach((value, key) => {
           console.log("key %s: value %s", key, value);
         });
@@ -116,13 +121,14 @@ const EditProfile = () => {
           {arrowRight}
         </div>
         <div className="editprofiletext">Edit Profile</div>
-        <div className="editProfileImage">
-          <img src={editProfileData && editProfileData.profilePhoto} alt="" />
-        </div>
-        {/*Need this*/}
-        {/* <input type="file" name="" id="" onChange={handleProfilePic} />
-        <img src={file} /> */}
-        {/*Need this*/}
+          <div className="editProfileImage">
+            <img src={editProfileData && editProfileData.profilePhoto} alt="" />
+            <input
+              type="file"
+              onChange={handleProfilePic}
+              className="custom-file-input"
+            />
+          </div>
       </div>
       <div className="EditForm">
         <form className="editProfileForm" onSubmit={handleSubmit}>

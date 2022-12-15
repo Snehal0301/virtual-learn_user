@@ -26,12 +26,50 @@
   text-align: center;
   align-items: center;
   padding-top: 20px;
+  position: relative;
 }
-
 .editProfileImage img {
   height: 80px;
   width: 80px;
 }
+/*Custom Input type file*/
+.custom-file-input {
+  color: transparent;
+  width: 45px;
+  margin-bottom: 2px;
+     position: absolute;
+    top:80px;
+    right:115px;
+}
+.custom-file-input::-webkit-file-upload-button {
+  visibility: hidden;
+}
+.custom-file-input::before {
+  content: url(../../../../assets/images/start-courses-image/icn_change_profilepic.png);
+  display: inline-block;
+  outline: none;
+  border: none;
+  white-space: nowrap;
+  -webkit-user-select: none;
+  cursor: pointer;
+  padding: 2px 5px;
+}
+.custom-file-input:focus{
+  outline: none;
+  border: none;
+}
+.custom-file-input:hover::before {
+  border: none;
+  outline: none;
+}
+.custom-file-input:active {
+  outline: 0;
+}
+/* .custom-file-input:active::before {
+  background: -webkit-linear-gradient(top, #e3e3e3, #f9f9f9);
+} */
+
+/*Custom Input type file*/
 
 .editProfileForm {
   padding: 1rem 3rem;
@@ -124,6 +162,7 @@
   width: 100%;
   margin-top: 15px;
   border-radius: 6px;
+  cursor: pointer;
 }
 
 .genderSection {
