@@ -59,7 +59,16 @@ const Router = () => {
     <>
       <Routes>
         <Route path="*" element={<Navigate to="/" />} />
-        <Route path="/onboarding" element={<Onboarding />}>
+        <Route
+          path="/onboarding"
+          element={
+            sessionStorage.getItem('auth') === 'true' ? (
+              <Navigate to="/" />
+            ) : (
+              <Onboarding />
+            )
+          }
+        >
           <Route path="*" element={<Navigate to="login" />} />
           <Route path="" element={<WelcomeScreen />} />
           <Route path="login" element={<LoginAuth />} />

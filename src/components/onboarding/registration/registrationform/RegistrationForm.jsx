@@ -29,7 +29,7 @@ const RegistrationForm = () => {
     fetch(
       "http://virtuallearn-env.eba-6xmym3vf.ap-south-1.elasticbeanstalk.com/newUser/continue",
       {
-        method: "POST",
+        method: "put",
         headers: {
           Accept: "application/json, text/plain, */*",
           "Content-Type": "application/json",
@@ -43,7 +43,7 @@ const RegistrationForm = () => {
         if (res.message === "OTP Valid For 2 Minutes") {
           dispatch(registerOtp(true));
           navigate("/onboarding/registerOtp");
-          localStorage.setItem("regMobileNum", mobileNum);
+          sessionStorage.setItem("regMobileNum", mobileNum);
         } else if (res.message === "Please Enter Valid Phone Number") {
           dispatch(registerOtp(false));
           showError(res.message);
