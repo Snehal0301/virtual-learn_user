@@ -96,7 +96,7 @@ const RegistrationForm = () => {
             }}
           >
             <div
-              className="login-input-reg"
+              className="login-input-reg noBorderReg"
               style={{
                 width: 'unset',
                 marginTop: '0px',
