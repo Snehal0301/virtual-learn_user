@@ -24,8 +24,8 @@
     border: 1px solid #E4E4E4;
     border-radius: 6px;
     padding: 0.5rem 0.5rem;
+    cursor: pointer;
 }
-
 .choice-your-coursecategories-Namee {
     padding-left: 1rem;
 }

@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from "react";
-import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
-import "react-slideshow-image/dist/styles.css";
-import "react-tabs/style/react-tabs.css";
-import "./Start.css";
+import React, { useState, useEffect } from 'react';
+import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
+import 'react-slideshow-image/dist/styles.css';
+import 'react-tabs/style/react-tabs.css';
+import './Start.css';
 import {
   design,
   start_pauseIcon,
@@ -11,7 +11,7 @@ import {
 import Slider from "react-carousel-responsive";
 import "react-carousel-responsive/dist/styles.css";
 import { Carousel } from "react-responsive-carousel";
-import "react-responsive-carousel/lib/styles/carousel.min.css"; 
+import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { homeTabToggleState, tabToggleState } from "../../../redux/reducers/myCourseReducer";
@@ -28,11 +28,11 @@ import { finaltestShowPage } from "../../../redux/reducers/finalTestSuccess";
 import {
   basicCourse,
   categoryName,
-} from "./../../../redux/reducers/basicCourses";
-import { advancedCourse } from "./../../../redux/reducers/advancedCourse";
-import { subCategories } from "./../../../redux/reducers/subCategories";
-import { courseOverview } from "../../../redux/reducers/courseOverview";
-import { chapterResponse } from "../../../redux/reducers/chapterResponses";
+} from './../../../redux/reducers/basicCourses';
+import { advancedCourse } from './../../../redux/reducers/advancedCourse';
+import { subCategories } from './../../../redux/reducers/subCategories';
+import { courseOverview } from '../../../redux/reducers/courseOverview';
+import { chapterResponse } from '../../../redux/reducers/chapterResponses';
 
 const Start = () => {
   const dispatch = useDispatch();
@@ -61,7 +61,7 @@ const Start = () => {
   const [topcourseData, setTopcourseData] = useState([]);
   const [categoryData, setcategoryData] = useState([]);
   const [ongoing, setOngoing] = useState([]);
-  const [name, setName] = useState("");
+  const [name, setName] = useState('');
 
   useEffect(() => {
     axios
@@ -69,19 +69,19 @@ const Start = () => {
         `http://virtuallearn-env.eba-6xmym3vf.ap-south-1.elasticbeanstalk.com/user/ongoingCourses`,
         {
           headers: {
-            Authorization: `Bearer ${sessionStorage.getItem("Token")}`,
+            Authorization: `Bearer ${sessionStorage.getItem('Token')}`,
           },
         }
       )
       .then((res) => {
-        setOngoing(res.data);
+        setOngoing(res && res.data);
       })
       .catch((err) => {
         console.error(err);
       });
   }, []);
 
-  console.log("ongoing data", ongoing);
+  console.log('ongoing data', ongoing);
 
   //Fetching api for slider
 
@@ -91,7 +91,7 @@ const Start = () => {
         `http://virtuallearn-env.eba-6xmym3vf.ap-south-1.elasticbeanstalk.com/user/home/course`,
         {
           headers: {
-            Authorization: `Bearer ${sessionStorage.getItem("Token")}`,
+            Authorization: `Bearer ${sessionStorage.getItem('Token')}`,
           },
         }
       )
@@ -102,7 +102,7 @@ const Start = () => {
         console.error(err);
       });
   }, []);
-  console.log('headerdata',headerdata)
+  console.log('headerdata', headerdata)
 
   //fetching data for all course
 
@@ -112,7 +112,7 @@ const Start = () => {
         `http://virtuallearn-env.eba-6xmym3vf.ap-south-1.elasticbeanstalk.com/user/home/course/all`,
         {
           headers: {
-            Authorization: `Bearer ${sessionStorage.getItem("Token")}`,
+            Authorization: `Bearer ${sessionStorage.getItem('Token')}`,
           },
         }
       )
@@ -132,7 +132,7 @@ const Start = () => {
         `http://virtuallearn-env.eba-6xmym3vf.ap-south-1.elasticbeanstalk.com/user/home/course/popular`,
         {
           headers: {
-            Authorization: `Bearer ${sessionStorage.getItem("Token")}`,
+            Authorization: `Bearer ${sessionStorage.getItem('Token')}`,
           },
         }
       )
@@ -152,7 +152,7 @@ const Start = () => {
         `http://virtuallearn-env.eba-6xmym3vf.ap-south-1.elasticbeanstalk.com/user/home/course/newest`,
         {
           headers: {
-            Authorization: `Bearer ${sessionStorage.getItem("Token")}`,
+            Authorization: `Bearer ${sessionStorage.getItem('Token')}`,
           },
         }
       )
@@ -172,7 +172,7 @@ const Start = () => {
         `http://virtuallearn-env.eba-6xmym3vf.ap-south-1.elasticbeanstalk.com/user/home/course/category`,
         {
           headers: {
-            Authorization: `Bearer ${sessionStorage.getItem("Token")}`,
+            Authorization: `Bearer ${sessionStorage.getItem('Token')}`,
           },
         }
       )
@@ -192,7 +192,7 @@ const Start = () => {
         `http://virtuallearn-env.eba-6xmym3vf.ap-south-1.elasticbeanstalk.com/user/categoriesWP`,
         {
           headers: {
-            Authorization: `Bearer ${sessionStorage.getItem("Token")}`,
+            Authorization: `Bearer ${sessionStorage.getItem('Token')}`,
           },
         }
       )
@@ -211,7 +211,7 @@ const Start = () => {
         `http://virtuallearn-env.eba-6xmym3vf.ap-south-1.elasticbeanstalk.com/user/menu`,
         {
           headers: {
-            Authorization: `Bearer ${sessionStorage.getItem("Token")}`,
+            Authorization: `Bearer ${sessionStorage.getItem('Token')}`,
           },
         }
       )
@@ -230,14 +230,14 @@ const Start = () => {
     <div className="start">
       <div className="start-greeting">Hello!</div>
       <div className="start-username">{name}</div>
-      <Slider autoplay={true} autoplaySpeed={10000} slidesToShow={3} dots={true}>
-        {headerdata.map((item) => (
+      <Slider autoplay={true} autoplaySpeed={2000} slidesToShow={3} dots={true}>
+        {headerdata && headerdata.map((item) => (
           <div
             className="start-image-title"
             onClick={() => {
               dispatch(courseOverview(item.courseId));
               dispatch(chapterResponse(item.courseId));
-              navigate("/myCourses/ongoingCourse");
+              navigate('/myCourses/ongoingCourse');
             }}
           >
             <div className="start-map-image">
@@ -248,101 +248,113 @@ const Start = () => {
           </div>
         ))}
       </Slider>
-      <div className="start-course-section2-first">
-        <div className="start-ongoing-courses">Ongoing courses</div>
-        <div
-          className="start-seeall"
-          onClick={() => {
-            navigate("myCourses");
-          }}
-        >
-          See All
-        </div>
-      </div>
-      <div className="start-card2">
-        <div className="start-course1">
-          {ongoing.length>0 &&
-            ongoing.slice(0, 3).map((item) => (
-              <div className="start-course1-image">
-                <div className="start-image-ongoing">
-                  <img src={item.coursePhoto} alt="" />
-                  <div className="start-image-sub">ongoing</div>
-                </div>
-                <div className="start-course-overlay"></div>
-                <div className="start-title-container">
-                  <div className="start-title-chapter">
-                    <div className="start-course-section2-title">
-                      {item.courseName}
-                    </div>
-                    <div className="start-course-chapter">
-                      {item.completedChapter}/{item.totalChapter} Chapters
-                    </div>
-                  </div>
 
-                  <button
-                    className="start-course-button"
-                    onClick={() => {
-                      dispatch(courseOverview(item.courseId));
-                      dispatch(chapterResponse(item.courseId));
-                      dispatch(tabToggleState(2))
-                      navigate("/myCourses/ongoingCourse");
-                    }}
-                  >
-                    Continue
-                  </button>
-                </div>
-              </div>
-            ))}
-        </div>
-      </div>
-      <div className="start-course-section2">
-        <div className="start-ongoing-courses">Categories</div>
-        <div
-          className="start-seeall"
-          onClick={() => {
-            navigate("/categories");
-          }}
-        >
-          See All
-        </div>
-      </div>
-
-      <div className="start-course-categories">
-        <div className="start-course-categories-Body">
-          {categoryData.length>0 && categoryData.map((ele) => (
+      {
+        ongoing && ongoing.length > 0 &&
+        <>
+          <div className="start-course-section2-first">
+            <div className="start-ongoing-courses">Ongoing courses</div>
             <div
-              className="start-course-categories-Parent"
+              className="start-seeall"
               onClick={() => {
-                dispatch(categoryName(ele.categoryName));
-                dispatch(
-                  basicCourse(`basicCourses?categoryId=${ele.categoryId}`)
-                );
-                dispatch(
-                  advancedCourse(`advanceCourses?categoryId=${ele.categoryId}`)
-                );
-                dispatch(
-                  subCategories(`subCategories?categoryId=${ele.categoryId}`)
-                );
-                navigate("/categories/design");
+                navigate('myCourses');
               }}
             >
-              <div className="start-course-categories-Icon">
-                <img src={ele.categoryPhoto} alt="" />
-              </div>
-              <div className="start-course-categories-Name">
-                {ele.categoryName}
-              </div>
+              See All
             </div>
-          ))}
-        </div>
-      </div>
+          </div>
 
+          <div className="start-card2">
+            <div className="start-course1">
+              {ongoing.length > 0 &&
+                ongoing.slice(0, 3).map((item) => (
+                  <div className="start-course1-image">
+                    <div className="start-image-ongoing">
+                      <img src={item.coursePhoto} alt="" />
+                      <div className="start-image-sub">ongoing</div>
+                    </div>
+                    <div className="start-course-overlay"></div>
+                    <div className="start-title-container">
+                      <div className="start-title-chapter">
+                        <div className="start-course-section2-title">
+                          {item.courseName}
+                        </div>
+                        <div className="start-course-chapter">
+                          {item.completedChapter}/{item.totalChapter} Chapters
+                        </div>
+                      </div>
+
+                      <button
+                        className="start-course-button"
+                        onClick={() => {
+                          dispatch(courseOverview(item.courseId));
+                          dispatch(chapterResponse(item.courseId));
+                          dispatch(tabToggleState(2))
+                          navigate("/myCourses/ongoingCourse");
+                        }}
+                      >
+                        Continue
+                      </button>
+                    </div>
+                  </div>
+                ))}
+            </div>
+          </div>
+        </>
+      }
+
+      {
+        categoryData && categoryData.length > 0 &&
+        <>
+          <div className="start-course-section2">
+            <div className="start-ongoing-courses">Categories</div>
+            <div
+              className="start-seeall"
+              onClick={() => {
+                navigate('/categories');
+              }}
+            >
+              See All
+            </div>
+          </div>
+
+          <div className="start-course-categories">
+            <div className="start-course-categories-Body">
+              {categoryData.length > 0 && categoryData.map((ele) => (
+                <div
+                  className="start-course-categories-Parent"
+                  onClick={() => {
+                    dispatch(categoryName(ele.categoryName));
+                    dispatch(
+                      basicCourse(`basicCourses?categoryId=${ele.categoryId}`)
+                    );
+                    dispatch(
+                      advancedCourse(`advanceCourses?categoryId=${ele.categoryId}`)
+                    );
+                    dispatch(
+                      subCategories(`subCategories?categoryId=${ele.categoryId}`)
+                    );
+                    navigate('/categories/design');
+                  }}
+                >
+                  <div className="start-course-categories-Icon">
+                    <img src={ele.categoryPhoto} alt="" />
+                  </div>
+                  <div className="start-course-categories-Name">
+                    {ele.categoryName}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </>
+      }
       <div className="start-course-section2">
         <div className="start-ongoing-courses">Choice your course</div>
         <div
           className="start-seeall"
           onClick={() => {
-            navigate("courseChoice");
+            navigate('courseChoice');
           }}
         >
           See All
@@ -351,19 +363,19 @@ const Start = () => {
       <div className="start-choice-course-subcategory">
         <div className="all-tabs-home">
           <div
-            className={homeTabState === 1 ? "home-tab-1-active" : "home-tab-1"}
+            className={homeTabState === 1 ? 'home-tab-1-active' : 'home-tab-1'}
             onClick={() => handleTabClick(1)}
           >
             All
           </div>
           <div
-            className={homeTabState === 2 ? "home-tab-1-active" : "home-tab-1"}
+            className={homeTabState === 2 ? 'home-tab-1-active' : 'home-tab-1'}
             onClick={() => handleTabClick(2)}
           >
             Popular
           </div>
           <div
-            className={homeTabState === 3 ? "home-tab-1-active" : "home-tab-1"}
+            className={homeTabState === 3 ? 'home-tab-1-active' : 'home-tab-1'}
             onClick={() => handleTabClick(3)}
           >
             Newest
@@ -374,7 +386,7 @@ const Start = () => {
       {homeTabState === 1 && (
         <div className="start-card">
           <div className="start-choice1">
-            {allcourseData.length>0 && allcourseData.slice(0, 4).map((item) => (
+            {allcourseData.length > 0 && allcourseData.slice(0, 4).map((item) => (
               <div
                 className="start-choice-subcategory-image"
                 onClick={() => {
@@ -440,7 +452,7 @@ const Start = () => {
       {homeTabState === 3 && (
         <div className="start-card">
           <div className="start-choice1">
-            {newestData.length>0 &&newestData.slice(0, 4).map((item) => (
+            {newestData.length > 0 && newestData.slice(0, 4).map((item) => (
               <div
                 className="start-choice-subcategory-image"
                 onClick={() => {
@@ -471,69 +483,69 @@ const Start = () => {
         </div>
       )}
       <div>
-        {topcourseData.length>0&&
-        topcourseData.map((item) => (
-          <div>
-            <div className="start-course-section2">
-              <div className="start-ongoing-courses">
-                Top courses in {item.categoryName}
+        {topcourseData.length > 0 &&
+          topcourseData.map((item) => (
+            <div>
+              <div className="start-course-section2">
+                <div className="start-ongoing-courses">
+                  Top courses in {item.categoryName}
+                </div>
+                <div
+                  className="start-seeall"
+                  onClick={() => {
+                    dispatch(categoryName(item.categoryName));
+                    dispatch(
+                      basicCourse(`basicCourses?categoryId=${item.categoryId}`)
+                    );
+                    dispatch(
+                      advancedCourse(
+                        `advanceCourses?categoryId=${item.categoryId}`
+                      )
+                    );
+                    dispatch(
+                      subCategories(`subCategories?categoryId=${item.categoryId}`)
+                    );
+                    navigate('/categories/design');
+                  }}
+                >
+                  See All
+                </div>
               </div>
-              <div
-                className="start-seeall"
-                onClick={() => {
-                  dispatch(categoryName(item.categoryName));
-                  dispatch(
-                    basicCourse(`basicCourses?categoryId=${item.categoryId}`)
-                  );
-                  dispatch(
-                    advancedCourse(
-                      `advanceCourses?categoryId=${item.categoryId}`
-                    )
-                  );
-                  dispatch(
-                    subCategories(`subCategories?categoryId=${item.categoryId}`)
-                  );
-                  navigate("/categories/design");
-                }}
-              >
-                See All
-              </div>
-            </div>
 
-            <div className="start-card">
-              <div className="start-choice1">
-                {item.popularCourseInEachCategoryList.slice(0, 4).map((ele) => (
-                  <div
-                    className="start-choice-subcategory-image"
-                    onClick={() => {
-                      dispatch(courseOverview(ele.courseId));
-                      dispatch(chapterResponse(ele.courseId));
-                      dispatch(tabToggleState(1))
-                      navigate("/myCourses/ongoingCourse");
-                    }}
-                  >
-                    <div className="start-image-pause">
-                      <div className="start-course-overlay-2"></div>
-                      <img src={ele.coursePhoto} alt="" />
-                      <div className="start-pauseIcon">{start_pauseIcon}</div>
-                    </div>
-
-                    <div className="start-choice-subcategory-title">
-                      {ele.courseName}
-                    </div>
-                    <div className="start-chapter-time">
-                      <div className="start-choice-chapter2">
-                        {ele.chapterCount} chapters
+              <div className="start-card">
+                <div className="start-choice1">
+                  {item.popularCourseInEachCategoryList.slice(0, 4).map((ele) => (
+                    <div
+                      className="start-choice-subcategory-image"
+                      onClick={() => {
+                        dispatch(courseOverview(ele.courseId));
+                        dispatch(chapterResponse(ele.courseId));
+                        dispatch(tabToggleState(1))
+                        navigate("/myCourses/ongoingCourse");
+                      }}
+                    >
+                      <div className="start-image-pause">
+                        <div className="start-course-overlay-2"></div>
+                        <img src={ele.coursePhoto} alt="" />
+                        <div className="start-pauseIcon">{start_pauseIcon}</div>
                       </div>
-                      <div>{start_timeIcon}</div>
-                      {ele.courseDuration}
+
+                      <div className="start-choice-subcategory-title">
+                        {ele.courseName}
+                      </div>
+                      <div className="start-chapter-time">
+                        <div className="start-choice-chapter2">
+                          {ele.chapterCount} chapters
+                        </div>
+                        <div className='start-time-icon'>{start_timeIcon}</div>
+                        {ele.courseDuration}
+                      </div>
                     </div>
-                  </div>
-                ))}
+                  ))}
+                </div>
               </div>
             </div>
-          </div>
-        ))}
+          ))}
       </div>
     </div>
   );

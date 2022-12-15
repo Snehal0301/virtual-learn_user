@@ -33,7 +33,7 @@ const Notification = () => {
         }
       )
       .then((res) => {
-        setNotifyData(res && res.data);
+        res && res.data && setNotifyData(res.data);
       });
   }, [notId]);
 
@@ -58,7 +58,7 @@ const Notification = () => {
       </div>
       {notifyData.length > 0 ? (
         <div className="drawer-profile-body-notify">
-          {notifyData &&
+          {notifyData && notifyData.length > 0 &&
             notifyData.map((ele) => {
               return (
                 <div

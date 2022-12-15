@@ -3,14 +3,24 @@
   flex-wrap: wrap;
   gap: 1rem;
 }
+
+.ongoingSectionMap {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
 .ongoing-parent {
   /* margin-top: 1em; */
   margin-top: 1em;
   flex-basis: 32.3%;
 }
+
 .ongoing-images {
   position: relative;
+  cursor: pointer;
 }
+
 .ong-overlay {
   background-color: rgba(0, 0, 0, 0.261);
   position: absolute;
@@ -20,6 +30,7 @@
   right: 0;
   border-radius: 10px;
 }
+
 .ong-img {
   border-radius: 10px;
   height: 241px;
@@ -31,6 +42,7 @@
   transition: all 0.1s ease-in-out;
   transform: scale(1.05);
 }
+
 .chap-progress {
   display: flex;
   flex-direction: column;
@@ -39,6 +51,7 @@
   top: 15px;
   margin-left: 1em;
 }
+
 .Ongoing-text {
   padding-bottom: 4.8em;
   font-family: "Proxima Nova Soft";
@@ -47,6 +60,7 @@
   font-size: 20px;
   color: #ffffff;
 }
+
 .chap-descp p:nth-child(1) {
   font-family: "Proxima Nova Soft";
   font-style: normal;
@@ -54,6 +68,7 @@
   font-size: 20px;
   color: #ffffff;
 }
+
 .chap-descp p:nth-child(2) {
   font-family: "Proxima Nova Soft";
   font-style: normal;
@@ -61,19 +76,21 @@
   font-size: 18px;
   color: #ffffff;
 }
+
 .btn-continue-ongoing {
   background-color: #ec5d52;
   border-radius: 4px;
   border: none;
-  color: #ffffff;
+  color: #FFFFFF;
   padding: 0.7em 3em;
   position: absolute;
   bottom: 15px;
   left: 15px;
   cursor: pointer;
 }
+
 .ogoingNotEnrolled {
-  font-family: "Biko";
+  font-family: 'Biko';
   font-style: normal;
   font-weight: 400;
   font-size: 28px;
@@ -84,6 +101,7 @@
   text-align: center;
   width: 100%;
 }
+
 .ongoingEmptyImage {
   text-align: center;
   width: 100%;
