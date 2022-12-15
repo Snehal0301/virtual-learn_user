@@ -565,11 +565,12 @@
     border-top-left-radius: 6px;
     border-top-right-radius: 6px;
   }
-  .react-carousel-responsive__inner 
-  {
+
+  .react-carousel-responsive__inner
+   {
     position: relative;
-    width: 263%;
-  }
+    width: 143%;
+}
 
   .start-map-image>img {
     /* width: 300px; */
@@ -580,6 +581,14 @@
   
  
 
+}
+@media only screen and (max-width: 450px)
+{
+  .react-carousel-responsive__inner 
+  {
+    position: relative;
+    width: 211%;
+ }
 }
 
 .all-tabs-home {
