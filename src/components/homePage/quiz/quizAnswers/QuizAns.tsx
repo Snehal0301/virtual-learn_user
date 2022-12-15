@@ -24,7 +24,7 @@ const QuizAns = () => {
         <div className="quizAns">
           <div className="quizAns-header">
             <div className="quizAns-headerQuesNum">
-              {answers && answers.questionName}
+              Question {answers && answers.questionNumber}
             </div>
             <div
               className={
@@ -37,6 +37,9 @@ const QuizAns = () => {
                 ? 'Correct Answer'
                 : 'Wrong Answer'}
             </div>
+          </div>
+          <div className="quizAns-headerQuesNum">
+            {answers && answers.questionName}
           </div>
           <div className="quizAns-Body">
             <div className="quizAns-bodyQuestion">

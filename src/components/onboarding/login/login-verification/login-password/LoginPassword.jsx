@@ -1,20 +1,20 @@
-import "./LoginPassword.css";
-import React, { useEffect } from "react";
-import { useFormik } from "formik";
-import * as Yup from "yup";
-import { useDispatch } from "react-redux";
+import './LoginPassword.css';
+import React, { useEffect } from 'react';
+import { useFormik } from 'formik';
+import * as Yup from 'yup';
+import { useDispatch } from 'react-redux';
 import {
   changePassword,
   otpPage,
   passChangeSuccess,
-} from "../../../../../redux/reducers/Conditions";
-import { useNavigate } from "react-router-dom";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+} from '../../../../../redux/reducers/Conditions';
+import { useNavigate } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const initialValues = {
-  password: "",
-  cpassword: "",
+  password: '',
+  cpassword: '',
 };
 const LoginPassword = () => {
   useEffect(() => {
@@ -28,18 +28,18 @@ const LoginPassword = () => {
     initialValues,
     validationSchema: Yup.object({
       password: Yup.string()
-        .min(6, "Password must be 6 characters long")
-        .matches(/[0-9]/, "Password must contain a number")
-        .matches(/[a-z]/, "Password must contain a lowercase letter")
-        .matches(/[A-Z]/, "Password must contain an uppercase letter")
-        .matches(/[^\w]/, "Password must contain a special symbol")
-        .required("Please Enter your password"),
+        .min(6, 'Password must be 6 characters long')
+        .matches(/[0-9]/, 'Password must contain a number')
+        .matches(/[a-z]/, 'Password must contain a lowercase letter')
+        .matches(/[A-Z]/, 'Password must contain an uppercase letter')
+        .matches(/[^\w]/, 'Password must contain a special symbol')
+        .required('Please Enter your password'),
       cpassword: Yup.string()
         .oneOf(
-          [Yup.ref("password  "), null],
+          [Yup.ref('password  '), null],
           'Must match "password" field value'
         )
-        .required("Please Enter your password"),
+        .required('Please Enter your password'),
     }),
     onSubmit: (values) => {
       // dispatch(passChangeSuccess(true));
@@ -50,17 +50,17 @@ const LoginPassword = () => {
   });
 
   const changePW = (data) => {
-    console.log("data", data);
+    console.log('data', data);
     fetch(
       `http://virtuallearn-env.eba-6xmym3vf.ap-south-1.elasticbeanstalk.com/resetPassword`,
       {
-        method: "POST",
+        method: 'POST',
         headers: {
-          Accept: "application/json, text/plain, */*",
-          "Content-Type": "application/json",
+          Accept: 'application/json, text/plain, */*',
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          mobileNumber: localStorage.getItem("regMobileNum"),
+          mobileNumber: sessionStorage.getItem('regMobileNum'),
           oneTimePassword: data.password,
         }),
       }
@@ -68,9 +68,9 @@ const LoginPassword = () => {
       .then((res) => res.json())
       .then((res) => {
         console.log(res);
-        if (res.message === "Password Changed Successfully") {
+        if (res.message === 'Password Changed Successfully') {
           dispatch(passChangeSuccess(true));
-          navigate("/passwordChangedSuccessfully");
+          navigate('/passwordChangedSuccessfully');
         } else {
           showError(res.message);
         }
@@ -82,14 +82,14 @@ const LoginPassword = () => {
       <div className="loginAuth-showError">
         <div className="loginAuth-showErrorIcon">
           <img
-            src={require("../../../../../assets/icons/icn_invalid error.png")}
+            src={require('../../../../../assets/icons/icn_invalid error.png')}
             alt="invalid"
           />
         </div>
         <div className="loginAuth-showErrorMessage">{msg}</div>
       </div>,
       {
-        position: "bottom-right",
+        position: 'bottom-right',
         autoClose: 5000,
         hideProgressBar: true,
         pauseOnHover: true,

@@ -6,6 +6,7 @@ import {
   testShow,
   testSuccess,
 } from '../../../redux/reducers/Conditions';
+import { tabToggleState } from '../../../redux/reducers/myCourseReducer';
 import { test, testisSuccess } from '../../../redux/reducers/testSlice';
 
 import {
@@ -118,6 +119,7 @@ const Quiz = () => {
                     dispatch(testShow(false));
                     dispatch(testSuccess());
                     dispatch(testisSuccess());
+                    dispatch(tabToggleState(2))
                   }}
                 >
                   Quit
