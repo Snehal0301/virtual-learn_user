@@ -8,7 +8,7 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import {
   registerOtp,
-  registerPersonalDetails,
+  registerPersonalDetails,  
   registerSuccess,
 } from "../../../../redux/reducers/Conditions";
 import { ToastContainer, toast } from "react-toastify";
@@ -115,7 +115,7 @@ const PersonalDetails = () => {
               className="PeronsalDetailsInput"
               id="mobileNumber"
               name="mobileNumber"
-              placeholder=" "
+              placeholder=" "   
               value={sessionStorage.getItem("regMobileNum")}
               onChange={handleChange}
               onBlur={handleBlur}

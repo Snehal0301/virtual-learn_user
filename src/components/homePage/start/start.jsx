@@ -62,6 +62,7 @@ const Start = () => {
   const [categoryData, setcategoryData] = useState([]);
   const [ongoing, setOngoing] = useState([]);
   const [name, setName] = useState('');
+  const [onscourseId, setonscourseId] = useState({})
 
   useEffect(() => {
     axios
@@ -75,6 +76,7 @@ const Start = () => {
       )
       .then((res) => {
         setOngoing(res && res.data);
+        
       })
       .catch((err) => {
         console.error(err);
@@ -82,6 +84,12 @@ const Start = () => {
   }, []);
 
   console.log('ongoing data', ongoing);
+  // {
+  //   ongoing.map(item =>
+  //     (
+  //       onscourseId()
+  //     ))
+  // }
 
   //Fetching api for slider
 
@@ -124,6 +132,7 @@ const Start = () => {
       });
   }, []);
   dispatch(coursedata(allcourseData));
+  console.log('allcoursedata',allcourseData)
 
   //fetching data for popular courses
   useEffect(() => {
@@ -227,7 +236,9 @@ const Start = () => {
   dispatch(categorydata(categoryData));
 
   return (
+    
     <div className="start">
+      
       <div className="start-greeting">Hello!</div>
       <div className="start-username">{name}</div>
       <Slider autoplay={true} autoplaySpeed={2000} slidesToShow={3} dots={true}>
@@ -386,7 +397,10 @@ const Start = () => {
       {homeTabState === 1 && (
         <div className="start-card">
           <div className="start-choice1">
+           
             {allcourseData.length > 0 && allcourseData.slice(0, 4).map((item) => (
+
+              
               <div
                 className="start-choice-subcategory-image"
                 onClick={() => {
@@ -396,6 +410,7 @@ const Start = () => {
                   navigate("/myCourses/ongoingCourse");
                 }}
               >
+              
                 <div className="start-image-pause">
                   <img src={item.coursePhoto} alt="" />
                   <div className="start-course-overlay-2"></div>

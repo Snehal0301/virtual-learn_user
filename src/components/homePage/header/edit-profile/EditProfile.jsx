@@ -138,7 +138,7 @@ const EditProfile = () => {
               id="editPfullname"
               name="editPfullname"
               placeholder=""
-              className="editPInput"
+              className="editPInput"      
               onChange={handleChange}
               value={values.editPfullname}
               autoComplete="off"
@@ -178,7 +178,7 @@ const EditProfile = () => {
             ) : null}
           </div>
 
-          <div className="edit-error-input">
+          <div className="edit-error-input"> 
             <input
               type="email"
               id="editPEmail"

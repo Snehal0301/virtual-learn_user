@@ -141,14 +141,14 @@
 @supports (not (-ms-ime-align: auto)) {
   .editprofilelabel {
     color: #7a7a7a;
-    transform: translate(0rem, -1.8rem);
+    transform: translate(0rem, -1.9rem);
     transition: all 0.2s ease-out;
   }
 
   .editPInput:focus + label,
   .editPInput:not(:placeholder-shown) + label {
     color: #7a7a7a;
-    transform: translate(0, -2.55rem);
+    transform: translate(0, -2.95rem);
   }
 }
 
