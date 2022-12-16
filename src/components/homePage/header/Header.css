@@ -603,13 +603,6 @@
   object-fit: cover;
   border-radius: 6px;
 }
-.headerSearch-responsePic>img {
-    height: 98px;
-    width: 98px;
-    background-size: cover;
-    object-fit: cover;
-    border-radius: 6px;
-}
 
 .chipBackgroundYellow {
     background-color: var(--videoCatgryClr);
