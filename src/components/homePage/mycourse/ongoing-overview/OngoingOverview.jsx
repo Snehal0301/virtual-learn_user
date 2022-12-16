@@ -49,7 +49,8 @@ import { Player } from 'video-react';
 import toast, { Toaster } from 'react-hot-toast';
 import { chapterResponse } from '../../../../redux/reducers/chapterResponses';
 import { courseOverview } from "../../../../redux/reducers/courseOverview";
-import { courseIDState } from "../../../../redux/reducers/pauseTime";
+import { accordianIDState, chapterIDState, courseIDState, lessonIDState, pauseTimeState, unmountState } from "../../../../redux/reducers/pauseTime";
+import { pauseUnmount } from "../../../../redux/reducers/pauseTimeSlice";
 
 
 const OngoingOverview = () => {
@@ -93,7 +94,7 @@ const OngoingOverview = () => {
       </div>
     ));
 
-  const alreadyCourse = () => 
+  const alreadyCourse = () =>
     toast.success((t) => (
       <div className="toast-div">
         Already enrolled
@@ -191,6 +192,16 @@ const OngoingOverview = () => {
     dispatch(accordianToggleState(id));
   };
 
+  // Required State data
+  const accordianStateID = useSelector((state) => state.pauseTime.accordianID) //this is chapter number
+  const chapterStateID = useSelector((state) => state.pauseTime.chapterID)
+  const lessonStateID = useSelector((state) => state.pauseTime.lessonID)
+  const courseStateID = useSelector((state) => state.pauseTime.courseID)
+  const pauseStateID = useSelector((state) => state.pauseTime.ptime)
+  console.log('id', accordianStateID, chapterStateID, lessonStateID, courseStateID)
+  // Required State data
+
+
   const accordianState = useSelector((state) => state.mycourse.accordian);
   const [pause, setPause] = useState(false);
   const [playing, setPlaying] = useState(false);
@@ -201,7 +212,9 @@ const OngoingOverview = () => {
   const onPause = () => {
     setPause(true);
     setPlaying(false);
+    console.log('pause time', Math.floor(played) / 100);
   };
+
   const onPlay = () => {
     setPause(false);
     setPlaying(true);
@@ -244,43 +257,64 @@ const OngoingOverview = () => {
       });
   };
 
+  const componentUnMount = () => {
+
+    const unmountPauseTime = new Date(pauseStateID * 1000).toISOString().slice(11, 19);
+    console.log('played', unmountPauseTime);
+
+    const unmountData = {
+      pauseTime: unmountPauseTime,
+      lessonId: pauseData.lessonId,
+      chapterId: pauseData.chapterId,
+      courseId: pauseData.courseId
+    }
+
+    dispatch(pauseUnmount(unmountData))
+
+    // await axios
+    //   .request(
+    //     `http://virtuallearn-env.eba-6xmym3vf.ap-south-1.elasticbeanstalk.com/user/pauseTime`,
+    //     {
+    //       method: 'put',
+    //       headers: {
+    //         Authorization: `Bearer ${sessionStorage.getItem('Token')}`,
+    //       },
+    //       data: {
+    //         pauseTime: unmountPauseTime,
+    //         lessonId: pauseData.lessonId,
+    //         chapterId: pauseData.chapterId,
+    //         courseId: pauseData.courseId
+    //       },
+    //     }
+    //   )
+    //   .then((res) => {
+    //     console.log(res)
+    //     console.log('unmountPauseTime', unmountPauseTime)
+    //     // dispatch(courseOverview(pauseData.courseId));
+    //     // dispatch(chapterResponse(pauseData.courseId));
+    //     // if (res.data.message === "Updated SuccessFully") {
+    //     // }
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //   });
+  }
+
   useEffect(() => {
     console.log('Component mounted');
-    // dispatch(chapterResponse(chapter.chapterId))
+
     return () => {
       console.log("Component unmounted");
       dispatch(tabToggleState(1));
-      // const unmountPauseTime = new Date(played * 1000).toISOString().slice(11, 19);
-      // console.log('unmountPauseTime', unmountPauseTime);
-
-      // await axios
-      //   .request(
-      //     `http://virtuallearn-env.eba-6xmym3vf.ap-south-1.elasticbeanstalk.com/user/pauseTime`,
-      //     {
-      //       method: 'put',
-      //       headers: {
-      //         Authorization: `Bearer ${sessionStorage.getItem('Token')}`,
-      //       },
-      //       data: {
-      //         pauseTime: resultPauseTime,
-      //         lessonId: pauseData.lessonId,
-      //         chapterId: pauseData.chapterId,
-      //         courseId: pauseData.courseId
-      //       },
-      //     }
-      //   )
-      //   .then((res) => {
-      //     console.log(res)
-      //     // dispatch(courseOverview(pauseData.courseId));
-      //     dispatch(chapterResponse(pauseData.courseId));
-      //     // if (res.data.message === "Updated SuccessFully") {
-      //     // }
-      //   })
-      //   .catch((err) => {
-      //     console.log(err);
-      //   });
+      dispatch(unmountState('true'))
+      componentUnMount();
     };
   }, []);
+
+  // componentUnMount()
+  const unmountPauseTime = new Date(pauseStateID * 1000).toISOString().slice(11, 19);
+  console.log('played', unmountPauseTime);
+
 
   const [pauseData, setPauseData] = useState({
     courseId: '',
@@ -302,7 +336,7 @@ const OngoingOverview = () => {
       })
   }, [chapter])
 
-  
+
   // const [pauseData, setPauseData] = useState({
   //   courseId: chapter.chapterResponses[0].lessonResponses[0].lessonName,
   //   chapterId: '',
@@ -323,6 +357,8 @@ const OngoingOverview = () => {
     getVideoState(itemele)
     showChapter(chapter.courseId, ele.chapterId, itemele.lessonId, itemele.lessonName)
     dispatch(courseIDState(chapter.courseId))
+    dispatch(chapterIDState(ele.chapterId))
+    dispatch(lessonIDState(itemele.lessonNumber))
   }
 
   const videoLink = useSelector((state) => state.mycourse.videoLink);
@@ -365,6 +401,7 @@ const OngoingOverview = () => {
     setDefPause(true);
     setNextModal(false);
     setFirstPause(false);
+    dispatch(unmountState('false'))
   };
 
   const enrollCourse = async (courseId) => {
@@ -398,6 +435,9 @@ const OngoingOverview = () => {
     console.log('Clicked');
   };
 
+  const unmountStateRedux = useSelector((state) => state.pauseTime.unmount)
+
+  console.log('unmountStateRedux', unmountStateRedux)
   return (
     <>
       {chapter && chapter.enrolled ? (
@@ -431,6 +471,23 @@ const OngoingOverview = () => {
             {pause && (
               <>
                 <div className="pause-overlay">
+                  <div className="pause-button" onClick={onPlay}>
+                    {start_pauseIconVideo}
+                  </div>
+                  {/* {defPause && (
+                    <div className="pause-button" onClick={onPlay}>
+                      {start_pauseIconVideo}
+                    </div>
+                  )} */}
+                </div>
+
+              </>
+            )}
+
+            {
+              unmountStateRedux === 'true' &&
+              <>
+                <div className="pause-overlay">
                   {firstPause && (
                     <div
                       className="continue-chapter-pause-button"
@@ -439,9 +496,10 @@ const OngoingOverview = () => {
                         setFirstPause(false);
                       }}
                     >
-                      Continue Chapter 3 Lesson 21
+                      Continue Chapter {accordianStateID} Lesson {lessonStateID}
                     </div>
                   )}
+
                   {nextModal && (
                     <div className="onpause-modal">
                       <p className="onpause-modal-title">
@@ -461,6 +519,7 @@ const OngoingOverview = () => {
                           playerRef.current.seekTo(0, 'seconds');
                           setPause(false);
                           setPlaying(true);
+                          dispatch(unmountState('false'))
                         }}
                       >
                         Watch from beginning
@@ -474,7 +533,7 @@ const OngoingOverview = () => {
                   )}
                 </div>
               </>
-            )}
+            }
 
             <ReactPlayer
               url={videoLink}
@@ -485,6 +544,7 @@ const OngoingOverview = () => {
               height="100%"
               ref={playerRef}
               onPause={onPause}
+              onPlay={onPlay}
               playing={playing}
               onEnded={onEnd}
               onSeek={() => {
@@ -492,6 +552,7 @@ const OngoingOverview = () => {
               }}
               onProgress={(progress) => {
                 setPlayed(progress.playedSeconds);
+                dispatch(pauseTimeState(progress.playedSeconds))
               }}
             />
             <div className="video-title-overlay">{pauseData.videoTitle}</div>
@@ -544,6 +605,11 @@ const OngoingOverview = () => {
                     {/* <label for="expanded" role="button">
                     SHOW MORE
                   </label> */}
+
+                    {/* {
+                      unmountStateRedux === 'true' ? <p>Unmount true</p> : <p>Unmount false</p>
+                    } */}
+
                   </div>
                 </div>
               ) : (
@@ -656,7 +722,7 @@ const OngoingOverview = () => {
 
                 {overviewData ? (
                   <div className="overview-content">
-                    <p className="overview-content-title">Course Includes</p>
+                    <p className="overview-content-title" onClick={componentUnMount}>Course Includes</p>
                     <div className="course-points">
                       <div className="course-points-img">{courseHourIcon}</div>
                       <div className="course-points-title">
@@ -802,7 +868,7 @@ const OngoingOverview = () => {
                               <div
                                 div
                                 className="course-accordian"
-                                onClick={() => accordianToggle(id)}
+                                onClick={() => { accordianToggle(id); dispatch(accordianIDState(id + 1)) }}
                               >
                                 <div className="course-accordian-heading">
                                   <div className="course-accordian-container">
@@ -863,7 +929,6 @@ const OngoingOverview = () => {
                                                   // onClick={() => { setVideo(courseele.videoLink) }}
                                                   onClick={() => {
                                                     itemele.lessonStatus ?
-
                                                       getPauseVideoTime(chapter, ele, itemele)
                                                       // getVideoState(itemele)
 
