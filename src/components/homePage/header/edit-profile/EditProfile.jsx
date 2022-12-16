@@ -33,7 +33,7 @@ const EditProfile = () => {
         editPEmail: editProfileData?.email ?? "",
         MobileNo: editProfileData?.mobileNumber ?? "",
         gender: editProfileData?.gender ?? "",
-        editPDOB: editProfileData.dateOfBirth ? new Date(editProfileData.dateOfBirth): "",
+        editPDOB: editProfileData.dateOfBirth ? editProfileData.dateOfBirth:'',
         editPOccupation: editProfileData?.occupation ?? "",
         TwitterURL: editProfileData?.twitterLink ?? "",
         FacebookURL: editProfileData?.faceBookLink ?? "",
@@ -279,7 +279,6 @@ const EditProfile = () => {
             name="editPDOB"
             value={values.editPDOB}
             placeholder=" "
-            value={values.dateOfBirth}
             className="editPInput"
             onChange={handleChange}
             onBlur={handleBlur}
