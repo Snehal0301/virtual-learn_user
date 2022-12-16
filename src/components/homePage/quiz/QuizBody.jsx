@@ -81,6 +81,7 @@ const QuizBody = () => {
     )
       .then((res) => res.json())
       .then((res) => {
+        sessionStorage.removeItem("timer");
         console.log("resppp", res);
         if (res && res.chapterTestPercentage > 0) {
           if (quizData.testName === "Final Test") {

@@ -1,24 +1,24 @@
-import React, { useEffect, useState } from 'react';
-import Countdown from 'react-countdown';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useEffect, useState } from "react";
+import Countdown from "react-countdown";
+import { useDispatch, useSelector } from "react-redux";
 import {
   showQuizModal,
   testShow,
   testSuccess,
-} from '../../../redux/reducers/Conditions';
-import { tabToggleState } from '../../../redux/reducers/myCourseReducer';
-import { test, testisSuccess } from '../../../redux/reducers/testSlice';
+} from "../../../redux/reducers/Conditions";
+import { tabToggleState } from "../../../redux/reducers/myCourseReducer";
+import { test, testisSuccess } from "../../../redux/reducers/testSlice";
 
 import {
   closeIcon,
   nextIcon,
   previousIcon,
   timerIcon,
-} from '../../../utils/svgIcons';
-import Timer from '../../../utils/Timer';
-import './Quiz.css';
-import QuizBody from './QuizBody';
-import QuizModal from './QuizModal';
+} from "../../../utils/svgIcons";
+import Timer from "../../../utils/Timer";
+import "./Quiz.css";
+import QuizBody from "./QuizBody";
+import QuizModal from "./QuizModal";
 
 const Quiz = () => {
   const dispatch = useDispatch();
@@ -84,8 +84,8 @@ const Quiz = () => {
         <aside
           className="headerSearch-filterModal"
           style={{
-            alignItems: 'center',
-            marginTop: 'unset',
+            alignItems: "center",
+            marginTop: "unset",
           }}
         >
           <div
@@ -97,7 +97,7 @@ const Quiz = () => {
             <div className="headerSearch-filterModalBody">
               <div
                 className="headerSearch-filterModalBodyTitle"
-                style={{ fontSize: '24px' }}
+                style={{ fontSize: "24px" }}
               >
                 Are you sure you want to quit the exam?
               </div>
@@ -119,7 +119,8 @@ const Quiz = () => {
                     dispatch(testShow(false));
                     dispatch(testSuccess());
                     dispatch(testisSuccess());
-                    dispatch(tabToggleState(2))
+                    dispatch(tabToggleState(2));
+                    sessionStorage.removeItem("timer");
                   }}
                 >
                   Quit

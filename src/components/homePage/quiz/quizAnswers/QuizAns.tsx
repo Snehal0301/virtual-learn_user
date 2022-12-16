@@ -1,26 +1,30 @@
-import React, { useEffect } from 'react';
-import './QuizAns.css';
-import '../Quiz.css';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useEffect } from "react";
+import "./QuizAns.css";
+import "../Quiz.css";
+import { useDispatch, useSelector } from "react-redux";
 import {
   correctOptionEllipse,
   optionEllipse,
   wrongOptionEllipse,
-} from '../../../../utils/svgIcons';
-import { testSuccess } from '../../../../redux/reducers/Conditions';
+} from "../../../../utils/svgIcons";
+import { testSuccess } from "../../../../redux/reducers/Conditions";
 
 const QuizAns = () => {
   const answers = useSelector((state: any) => state.quizAnswer.value);
   const dispatch = useDispatch();
 
-  console.log('answers', answers);
+  console.log("answers", answers);
   useEffect(() => {
     dispatch(testSuccess(false));
   });
 
+  useEffect(() => {
+    sessionStorage.removeItem("timer");
+  }, []);
+
   return (
     <>
-      {JSON.stringify(answers) !== '{}' && (
+      {JSON.stringify(answers) !== "{}" && (
         <div className="quizAns">
           <div className="quizAns-header">
             <div className="quizAns-headerQuesNum">
@@ -29,13 +33,13 @@ const QuizAns = () => {
             <div
               className={
                 answers.correctAnswer === answers.userAnswer
-                  ? 'quizAns-headerQuesResult correctAns'
-                  : 'quizAns-headerQuesResult wrongAns'
+                  ? "quizAns-headerQuesResult correctAns"
+                  : "quizAns-headerQuesResult wrongAns"
               }
             >
               {answers.correctAnswer === answers.userAnswer
-                ? 'Correct Answer'
-                : 'Wrong Answer'}
+                ? "Correct Answer"
+                : "Wrong Answer"}
             </div>
           </div>
           <div className="quizAns-headerQuesNum">
@@ -49,11 +53,11 @@ const QuizAns = () => {
               <div
                 className={
                   answers.option_1 === answers.correctAnswer
-                    ? 'quizAns-bodyOptions quizAns-bodyOptionIconCorrect'
+                    ? "quizAns-bodyOptions quizAns-bodyOptionIconCorrect"
                     : answers.option_1 !== answers.correctAnswer &&
                       answers.option_1 === answers.userAnswer
-                    ? 'quizAns-bodyOptions quizAns-bodyOptionIconWrong'
-                    : 'quizAns-bodyOptions'
+                    ? "quizAns-bodyOptions quizAns-bodyOptionIconWrong"
+                    : "quizAns-bodyOptions"
                 }
               >
                 <div className="quizAns-bodyOptionIcon">
@@ -69,11 +73,11 @@ const QuizAns = () => {
               <div
                 className={
                   answers.option_2 === answers.correctAnswer
-                    ? 'quizAns-bodyOptions quizAns-bodyOptionIconCorrect'
+                    ? "quizAns-bodyOptions quizAns-bodyOptionIconCorrect"
                     : answers.option_2 !== answers.correctAnswer &&
                       answers.option_2 === answers.userAnswer
-                    ? 'quizAns-bodyOptions quizAns-bodyOptionIconWrong'
-                    : 'quizAns-bodyOptions'
+                    ? "quizAns-bodyOptions quizAns-bodyOptionIconWrong"
+                    : "quizAns-bodyOptions"
                 }
               >
                 <div className="quizAns-bodyOptionIcon">
@@ -89,11 +93,11 @@ const QuizAns = () => {
               <div
                 className={
                   answers.option_3 === answers.correctAnswer
-                    ? 'quizAns-bodyOptions quizAns-bodyOptionIconCorrect'
+                    ? "quizAns-bodyOptions quizAns-bodyOptionIconCorrect"
                     : answers.option_3 !== answers.correctAnswer &&
                       answers.option_3 === answers.userAnswer
-                    ? 'quizAns-bodyOptions quizAns-bodyOptionIconWrong'
-                    : 'quizAns-bodyOptions'
+                    ? "quizAns-bodyOptions quizAns-bodyOptionIconWrong"
+                    : "quizAns-bodyOptions"
                 }
               >
                 <div className="quizAns-bodyOptionIcon">
@@ -109,11 +113,11 @@ const QuizAns = () => {
               <div
                 className={
                   answers.option_4 === answers.correctAnswer
-                    ? 'quizAns-bodyOptions quizAns-bodyOptionIconCorrect'
+                    ? "quizAns-bodyOptions quizAns-bodyOptionIconCorrect"
                     : answers.option_4 !== answers.correctAnswer &&
                       answers.option_4 === answers.userAnswer
-                    ? 'quizAns-bodyOptions quizAns-bodyOptionIconWrong'
-                    : 'quizAns-bodyOptions'
+                    ? "quizAns-bodyOptions quizAns-bodyOptionIconWrong"
+                    : "quizAns-bodyOptions"
                 }
               >
                 <div className="quizAns-bodyOptionIcon">

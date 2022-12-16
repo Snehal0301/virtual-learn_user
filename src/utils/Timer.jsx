@@ -10,7 +10,7 @@ import { testisSuccess } from "../redux/reducers/testSlice";
 import Loading from "./loading/Loading";
 
 const Timer = () => {
-  const initialTimer = localStorage.getItem("timer") ?? 480;
+  const initialTimer = sessionStorage.getItem("timer");
   const timeoutId = React.useRef(null);
   const [timer, setTimer] = React.useState(initialTimer);
   const [loading, setLoading] = React.useState(false);
@@ -20,7 +20,7 @@ const Timer = () => {
   let userAnswer = [];
   const countTimer = React.useCallback(() => {
     if (timer <= 0) {
-      localStorage.removeItem("timer");
+      sessionStorage.removeItem("timer");
       setLoading(true);
 
       var form = document.getElementById("quiz");
@@ -52,6 +52,7 @@ const Timer = () => {
       )
         .then((res) => res.json())
         .then((res) => {
+          sessionStorage.removeItem("timer");
           setLoading(false);
           console.log("resppp", res);
           if (res && res.chapterTestPercentage > 0) {

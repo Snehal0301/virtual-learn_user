@@ -1,14 +1,14 @@
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { Navigate, useNavigate } from 'react-router-dom';
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Navigate, useNavigate } from "react-router-dom";
 import {
   resultShow,
   testShow,
   testSuccess,
-} from '../../../../redux/reducers/Conditions';
-import { testSuccessRed } from '../../../../redux/reducers/SuccessTestRed';
-import { testisSuccess } from '../../../../redux/reducers/testSlice';
-import '../../../../views/onboarding/success_page/Success_Page.css';
+} from "../../../../redux/reducers/Conditions";
+import { testSuccessRed } from "../../../../redux/reducers/SuccessTestRed";
+import { testisSuccess } from "../../../../redux/reducers/testSlice";
+import "../../../../views/onboarding/success_page/Success_Page.css";
 
 const QuizSuccess = () => {
   const dispatch = useDispatch();
@@ -18,6 +18,7 @@ const QuizSuccess = () => {
     dispatch(testShow(false));
     dispatch(testisSuccess());
     dispatch(testSuccess(false));
+    sessionStorage.removeItem("timer");
   }, []);
 
   const showResults = useSelector((state: any) => state.testSuccessRed.value);
@@ -26,7 +27,7 @@ const QuizSuccess = () => {
   );
 
   useEffect(() => {
-    showResults && navigate('/testResults');
+    showResults && navigate("/testResults");
   }, [showResults]);
 
   return (
@@ -34,26 +35,26 @@ const QuizSuccess = () => {
       <div className="successContent">
         <div className="successImage">
           <img
-            src={require('../../../../assets/images/img_moduletest_success_illustration 1.png')}
+            src={require("../../../../assets/images/img_moduletest_success_illustration 1.png")}
             alt="module test success"
           />
         </div>
         <div className="successText">Congratulations!</div>
         <div className="successDesc">
-          You have completed{' '}
-          <span style={{ fontWeight: '900' }}>
-            Chapter{' '}
+          You have completed{" "}
+          <span style={{ fontWeight: "900" }}>
+            Chapter{" "}
             {resultsHeaderData &&
               resultsHeaderData.data &&
               resultsHeaderData.data.chapterNumber &&
-              resultsHeaderData.data.chapterNumber}{' '}
-            -{' '}
+              resultsHeaderData.data.chapterNumber}{" "}
+            -{" "}
             {resultsHeaderData &&
               resultsHeaderData.data &&
               resultsHeaderData.data.chapterName &&
               resultsHeaderData.data.chapterName}
-          </span>{' '}
-          from Course:{' '}
+          </span>{" "}
+          from Course:{" "}
           {resultsHeaderData &&
             resultsHeaderData.data &&
             resultsHeaderData.data.courseName &&
@@ -61,7 +62,7 @@ const QuizSuccess = () => {
         </div>
         <div
           className="getStarted"
-          style={{ cursor: 'pointer' }}
+          style={{ cursor: "pointer" }}
           onClick={() => {
             dispatch(testSuccessRed(true));
           }}
