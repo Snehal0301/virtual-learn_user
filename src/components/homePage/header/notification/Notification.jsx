@@ -106,7 +106,8 @@ const Notification = () => {
         </div>
       ) : (
         <div className="noNotification-section">
-          <p>No Notifications</p>
+            <p>No Notifications</p>
+            {/* <img src={require("../../../../assets/images/start-courses-image/notification.png") } alt="no-notification" /> */}
         </div>
       )}
     </div>
