@@ -8,9 +8,9 @@ import {
   start_pauseIcon,
   start_timeIcon,
 } from "../../../utils/svgIcons";
-import Slider from "react-carousel-responsive";
+// import Slider from "react-carousel-responsive";
 import "react-carousel-responsive/dist/styles.css";
-import { Carousel } from "react-responsive-carousel";
+
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
@@ -33,6 +33,13 @@ import { advancedCourse } from './../../../redux/reducers/advancedCourse';
 import { subCategories } from './../../../redux/reducers/subCategories';
 import { courseOverview } from '../../../redux/reducers/courseOverview';
 import { chapterResponse } from '../../../redux/reducers/chapterResponses';
+import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
+import { Carousel } from 'react-responsive-carousel';
+// import Slider from "react-slick"
+// import Slider from 'react-slick'
+// import "slick-carousel/slick/slick.css";
+// import "slick-carousel/slick/slick-theme.css";
+import Slider from 'react-slick'
 
 const Start = () => {
   const dispatch = useDispatch();
@@ -62,8 +69,15 @@ const Start = () => {
   const [categoryData, setcategoryData] = useState([]);
   const [ongoing, setOngoing] = useState([]);
   const [name, setName] = useState('');
-  const [onscourseId, setonscourseId] = useState({})
-
+  
+  var settings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 3,
+    slidesToScroll: 1
+  };
+ 
   useEffect(() => {
     axios
       .get(
@@ -84,13 +98,7 @@ const Start = () => {
   }, []);
 
   console.log('ongoing data', ongoing);
-  // {
-  //   ongoing.map(item =>
-  //     (
-  //       onscourseId()
-  //     ))
-  // }
-
+  
   //Fetching api for slider
 
   useEffect(() => {
@@ -241,7 +249,7 @@ const Start = () => {
       
       <div className="start-greeting">Hello!</div>
       <div className="start-username">{name}</div>
-      <Slider autoplay={true} autoplaySpeed={2000} slidesToShow={3} dots={true}>
+      <Slider autoplay={true} autoplaySpeed={2000} slidesToShow={3} dots={true} settings={settings} showIndicators={true}>
         {headerdata && headerdata.map((item) => (
           <div
             className="start-image-title"

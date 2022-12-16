@@ -85,7 +85,7 @@
   color: #072d5b;
   font-weight: 700;
   font-family: Avenir;
-  font-size: 14px;
+  font-size: 19px;
 }
 
 .editprofilelabel {
@@ -120,7 +120,7 @@
   outline: none;
   margin-bottom: 17px;
   color: #072d5b;
-  font-size: 14px;
+  font-size: 19px;
   font-family: Avenir;
   font-weight: 700;
   /* margin-left: -5px; */
@@ -132,7 +132,7 @@
   outline: none;
   margin-bottom: 17px;
   color: #072d5b;
-  font-size: 14px;
+  font-size: 19px;
   font-family: Avenir;
   font-weight: 700;
   /* margin-left: -5px; */
@@ -150,6 +150,7 @@
     transform: translate(0, -2.95rem);
   }
 }
+
 
 .editPbtn {
   padding: 0.75rem 1.5rem;
@@ -173,7 +174,7 @@
   color: #7a7a7a;
   font-size: 16px;
   font-family: Avenir;
-  margin-top: 12px;
+  margin-top: -3px;
 }
 option {
   color: #072d5b;

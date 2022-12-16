@@ -426,6 +426,17 @@
 {
   padding-top: 4px;
 }
+.slick-dots li button:before 
+{
+  color: rgba(238, 92, 77, 0.3);
+  opacity: 14.25;
+
+}
+.slick-dots li.slick-active button:before 
+{
+  color: #EE5C4D;
+}
+
 
 @media only screen and (max-width: 800px) {
 
