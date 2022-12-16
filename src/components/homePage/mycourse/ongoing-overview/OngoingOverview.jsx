@@ -904,7 +904,7 @@ const OngoingOverview = () => {
                                                   +a[1] * 60 +
                                                   +a[2];
 
-                                                localStorage.setItem(
+                                                sessionStorage.setItem(
                                                   'timer',
                                                   seconds
                                                 );
@@ -1016,7 +1016,7 @@ const OngoingOverview = () => {
                                               +a[1] * 60 +
                                               +a[2];
 
-                                            localStorage.setItem(
+                                            sessionStorage.setItem(
                                               'timer',
                                               seconds
                                             );
@@ -1155,7 +1155,7 @@ const OngoingOverview = () => {
                                                   +a[1] * 60 +
                                                   +a[2];
 
-                                                localStorage.setItem(
+                                                sessionStorage.setItem(
                                                   'timer',
                                                   seconds
                                                 );

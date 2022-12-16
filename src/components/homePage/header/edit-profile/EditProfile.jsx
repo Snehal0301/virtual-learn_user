@@ -56,9 +56,8 @@ const EditProfile = () => {
           values.editPDOB ? values.editPDOB : "empty"
         );
         if (selectedFile == null) {
-          console.log("No image been uploaded")
-        }
-        else {
+          console.log("No image been uploaded");
+        } else {
           formData.append("profilePhoto", selectedFile);
         }
         formData.forEach((value, key) => {
@@ -263,17 +262,20 @@ const EditProfile = () => {
               onChange={handleChange}
               onBlur={handleBlur}
             >
+              <option value="other" selected>
+                other
+              </option>
               <option value="male">Male</option>
               <option value="female" selected>
                 Female
               </option>
-              <option value="other">other</option>
             </select>
           </div>
           <input
             type="date"
             id="editPDOB"
             name="editPDOB"
+            value={values.editPDOB}
             placeholder=" "
             className="editPInput"
             onChange={handleChange}
