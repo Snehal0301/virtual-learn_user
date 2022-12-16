@@ -49,7 +49,8 @@ import { Player } from 'video-react';
 import toast, { Toaster } from 'react-hot-toast';
 import { chapterResponse } from '../../../../redux/reducers/chapterResponses';
 import { courseOverview } from "../../../../redux/reducers/courseOverview";
-import { accordianIDState, chapterIDState, courseIDState, lessonIDState, unmountState } from "../../../../redux/reducers/pauseTime";
+import { accordianIDState, chapterIDState, courseIDState, lessonIDState, pauseTimeState, unmountState } from "../../../../redux/reducers/pauseTime";
+import { pauseUnmount } from "../../../../redux/reducers/pauseTimeSlice";
 
 
 const OngoingOverview = () => {
@@ -196,6 +197,7 @@ const OngoingOverview = () => {
   const chapterStateID = useSelector((state) => state.pauseTime.chapterID)
   const lessonStateID = useSelector((state) => state.pauseTime.lessonID)
   const courseStateID = useSelector((state) => state.pauseTime.courseID)
+  const pauseStateID = useSelector((state) => state.pauseTime.ptime)
   console.log('id', accordianStateID, chapterStateID, lessonStateID, courseStateID)
   // Required State data
 
@@ -210,6 +212,7 @@ const OngoingOverview = () => {
   const onPause = () => {
     setPause(true);
     setPlaying(false);
+    console.log('pause time', Math.floor(played) / 100);
   };
 
   const onPlay = () => {
@@ -254,6 +257,49 @@ const OngoingOverview = () => {
       });
   };
 
+  const componentUnMount = () => {
+
+    const unmountPauseTime = new Date(pauseStateID * 1000).toISOString().slice(11, 19);
+    console.log('played', unmountPauseTime);
+
+    const unmountData = {
+      pauseTime: unmountPauseTime,
+      lessonId: pauseData.lessonId,
+      chapterId: pauseData.chapterId,
+      courseId: pauseData.courseId
+    }
+
+    dispatch(pauseUnmount(unmountData))
+
+    // await axios
+    //   .request(
+    //     `http://virtuallearn-env.eba-6xmym3vf.ap-south-1.elasticbeanstalk.com/user/pauseTime`,
+    //     {
+    //       method: 'put',
+    //       headers: {
+    //         Authorization: `Bearer ${sessionStorage.getItem('Token')}`,
+    //       },
+    //       data: {
+    //         pauseTime: unmountPauseTime,
+    //         lessonId: pauseData.lessonId,
+    //         chapterId: pauseData.chapterId,
+    //         courseId: pauseData.courseId
+    //       },
+    //     }
+    //   )
+    //   .then((res) => {
+    //     console.log(res)
+    //     console.log('unmountPauseTime', unmountPauseTime)
+    //     // dispatch(courseOverview(pauseData.courseId));
+    //     // dispatch(chapterResponse(pauseData.courseId));
+    //     // if (res.data.message === "Updated SuccessFully") {
+    //     // }
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //   });
+  }
+
   useEffect(() => {
     console.log('Component mounted');
 
@@ -261,37 +307,14 @@ const OngoingOverview = () => {
       console.log("Component unmounted");
       dispatch(tabToggleState(1));
       dispatch(unmountState('true'))
-      // const unmountPauseTime = new Date(played * 1000).toISOString().slice(11, 19);
-      // console.log('unmountPauseTime', unmountPauseTime);
-
-      // await axios
-      //   .request(
-      //     `http://virtuallearn-env.eba-6xmym3vf.ap-south-1.elasticbeanstalk.com/user/pauseTime`,
-      //     {
-      //       method: 'put',
-      //       headers: {
-      //         Authorization: `Bearer ${sessionStorage.getItem('Token')}`,
-      //       },
-      //       data: {
-      //         pauseTime: resultPauseTime,
-      //         lessonId: pauseData.lessonId,
-      //         chapterId: pauseData.chapterId,
-      //         courseId: pauseData.courseId
-      //       },
-      //     }
-      //   )
-      //   .then((res) => {
-      //     console.log(res)
-      //     // dispatch(courseOverview(pauseData.courseId));
-      //     dispatch(chapterResponse(pauseData.courseId));
-      //     // if (res.data.message === "Updated SuccessFully") {
-      //     // }
-      //   })
-      //   .catch((err) => {
-      //     console.log(err);
-      //   });
+      componentUnMount();
     };
   }, []);
+
+  // componentUnMount()
+  const unmountPauseTime = new Date(pauseStateID * 1000).toISOString().slice(11, 19);
+  console.log('played', unmountPauseTime);
+
 
   const [pauseData, setPauseData] = useState({
     courseId: '',
@@ -448,58 +471,9 @@ const OngoingOverview = () => {
             {pause && (
               <>
                 <div className="pause-overlay">
-                  {
-                    unmountStateRedux === 'true' ?
-                      <>
-                        {firstPause && (
-                          <div
-                            className="continue-chapter-pause-button"
-                            onClick={() => {
-                              setNextModal(true);
-                              setFirstPause(false);
-                            }}
-                          >
-                            Continue Chapter {accordianStateID} Lesson {lessonStateID}
-                          </div>
-                        )}
-
-                        {nextModal && (
-                          <div className="onpause-modal">
-                            <p className="onpause-modal-title">
-                              Your lesson paused at{' '}
-                              <span>{Math.floor(played) / 100}</span> Do you want to
-                              continue watching?
-                            </p>
-                            <button
-                              className="onpause-button"
-                              onClick={defaultNormalPause}
-                            >
-                              Continue Watching
-                            </button>
-                            <button
-                              className="onpause-button beginning"
-                              onClick={() => {
-                                playerRef.current.seekTo(0, 'seconds');
-                                setPause(false);
-                                setPlaying(true);
-                                dispatch(unmountState('false'))
-                              }}
-                            >
-                              Watch from beginning
-                            </button>
-                          </div>
-                        )}
-                        {defPause && (
-                          <div className="pause-button" onClick={onPlay}>
-                            {start_pauseIconVideo}
-                          </div>
-                        )}
-                      </>
-                      :
-                      <div className="pause-button" onClick={onPlay}>
-                        {start_pauseIconVideo}
-                      </div>
-                  }
+                  <div className="pause-button" onClick={onPlay}>
+                    {start_pauseIconVideo}
+                  </div>
                   {/* {defPause && (
                     <div className="pause-button" onClick={onPlay}>
                       {start_pauseIconVideo}
@@ -509,6 +483,57 @@ const OngoingOverview = () => {
 
               </>
             )}
+
+            {
+              unmountStateRedux === 'true' &&
+              <>
+                <div className="pause-overlay">
+                  {firstPause && (
+                    <div
+                      className="continue-chapter-pause-button"
+                      onClick={() => {
+                        setNextModal(true);
+                        setFirstPause(false);
+                      }}
+                    >
+                      Continue Chapter {accordianStateID} Lesson {lessonStateID}
+                    </div>
+                  )}
+
+                  {nextModal && (
+                    <div className="onpause-modal">
+                      <p className="onpause-modal-title">
+                        Your lesson paused at{' '}
+                        <span>{Math.floor(played) / 100}</span> Do you want to
+                        continue watching?
+                      </p>
+                      <button
+                        className="onpause-button"
+                        onClick={defaultNormalPause}
+                      >
+                        Continue Watching
+                      </button>
+                      <button
+                        className="onpause-button beginning"
+                        onClick={() => {
+                          playerRef.current.seekTo(0, 'seconds');
+                          setPause(false);
+                          setPlaying(true);
+                          dispatch(unmountState('false'))
+                        }}
+                      >
+                        Watch from beginning
+                      </button>
+                    </div>
+                  )}
+                  {defPause && (
+                    <div className="pause-button" onClick={onPlay}>
+                      {start_pauseIconVideo}
+                    </div>
+                  )}
+                </div>
+              </>
+            }
 
             <ReactPlayer
               url={videoLink}
@@ -527,6 +552,7 @@ const OngoingOverview = () => {
               }}
               onProgress={(progress) => {
                 setPlayed(progress.playedSeconds);
+                dispatch(pauseTimeState(progress.playedSeconds))
               }}
             />
             <div className="video-title-overlay">{pauseData.videoTitle}</div>
@@ -696,7 +722,7 @@ const OngoingOverview = () => {
 
                 {overviewData ? (
                   <div className="overview-content">
-                    <p className="overview-content-title">Course Includes</p>
+                    <p className="overview-content-title" onClick={componentUnMount}>Course Includes</p>
                     <div className="course-points">
                       <div className="course-points-img">{courseHourIcon}</div>
                       <div className="course-points-title">
@@ -842,7 +868,7 @@ const OngoingOverview = () => {
                               <div
                                 div
                                 className="course-accordian"
-                                onClick={() => { accordianToggle(id); dispatch(accordianIDState(id+1))}}
+                                onClick={() => { accordianToggle(id); dispatch(accordianIDState(id + 1)) }}
                               >
                                 <div className="course-accordian-heading">
                                   <div className="course-accordian-container">
