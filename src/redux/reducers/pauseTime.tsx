@@ -1,7 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 const initialState: any = {
-    ptime:''
+    ptime: '',
+    courseID:''
 };
 
 
@@ -12,8 +13,11 @@ export const pauseTimeReducer = createSlice({
         pauseTimeState: (state, { payload }) => {
             state.ptime = payload
         },
+        courseIDState: (state, { payload }) => {
+            state.courseID = payload
+        },
     },
 });
 
-export const { pauseTimeState } = pauseTimeReducer.actions;
+export const { pauseTimeState, courseIDState } = pauseTimeReducer.actions;
 export default pauseTimeReducer.reducer;
