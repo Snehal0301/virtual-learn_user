@@ -1,36 +1,36 @@
-import '../login-auth/LoginAuth.css'
-import * as yup from 'yup'
-import 'yup-phone'
-import { useState } from 'react'
-import { useDispatch } from 'react-redux'
-import { otpPage } from '../../../../redux/reducers/Conditions'
-import { useNavigate } from 'react-router-dom'
-import { mobileBackBtn } from '../../../../utils/svgIcons'
-import { ToastContainer, toast } from 'react-toastify'
-import 'react-toastify/dist/ReactToastify.css'
+import '../login-auth/LoginAuth.css';
+import * as yup from 'yup';
+import 'yup-phone';
+import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { otpPage } from '../../../../redux/reducers/Conditions';
+import { useNavigate } from 'react-router-dom';
+import { mobileBackBtn } from '../../../../utils/svgIcons';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const LoginForgotPW = () => {
-  const [invalidPhone, setInvalidPhone] = useState(false)
-  const [mobileNum, setMobileNum] = useState('')
+  const [invalidPhone, setInvalidPhone] = useState(false);
+  const [mobileNum, setMobileNum] = useState('');
 
-  const dispatch = useDispatch()
-  const navigate = useNavigate()
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-  const phoneSchema = yup.string().phone().required()
+  const phoneSchema = yup.string().phone().required();
   const phoneNumValidation = (e: any) => {
-    setMobileNum(e.target.value)
-    ;(async () => {
-      setInvalidPhone(await phoneSchema.isValid(e.target.value)) // → true
-    })()
-  }
+    setMobileNum(e.target.value);
+    (async () => {
+      setInvalidPhone(await phoneSchema.isValid(e.target.value)); // → true
+    })();
+  };
 
   const submitHandler = (e: any) => {
-    e.preventDefault()
-    const mobileNum = e.target.mobileNum.value
+    e.preventDefault();
+    const mobileNum = e.target.mobileNum.value;
     // dispatch(otpPage(true));
     // navigate('/onboarding/otpVerification');
-    forgotPW(mobileNum)
-  }
+    forgotPW(mobileNum);
+  };
 
   const forgotPW = (mobileNum: any) => {
     fetch(
@@ -41,21 +41,21 @@ const LoginForgotPW = () => {
           Accept: 'application/json, text/plain, */*',
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ mobileNumber: mobileNum }),
-      },
+        body: JSON.stringify({ mobileNumber: `+91${mobileNum}` }),
+      }
     )
       .then((res) => res.json())
       .then((res) => {
-        console.log(res)
+        console.log(res);
         if (res.message === 'OTP Valid For 2 Minutes') {
-          localStorage.setItem('regMobileNum', mobileNum)
-          dispatch(otpPage(true))
-          navigate('/onboarding/otpVerification')
+          localStorage.setItem('regMobileNum', mobileNum);
+          dispatch(otpPage(true));
+          navigate('/onboarding/otpVerification');
         } else {
-          showError(res.message)
+          showError(res.message);
         }
-      })
-  }
+      });
+  };
 
   const showError = (msg: any) => {
     toast(
@@ -74,16 +74,16 @@ const LoginForgotPW = () => {
         hideProgressBar: true,
         pauseOnHover: true,
         draggable: true,
-      },
-    )
-  }
+      }
+    );
+  };
 
   return (
     <div className="loginAuth">
       <div className="loginAuth-backButton">
         <div
           onClick={() => {
-            navigate('login')
+            navigate('login');
           }}
           style={{ width: '28px', cursor: 'pointer' }}
         >
@@ -100,25 +100,40 @@ const LoginForgotPW = () => {
       <div className="loginAuth-Form">
         <form className="loginAuth-FormContainer" onSubmit={submitHandler}>
           {' '}
-          <div className="loginAuth-FormInput">
-            <input
-              type="text"
-              name="mobileNum"
-              id="mobileNum"
-              placeholder="Enter your mobile number"
-              className={
-                mobileNum === ''
-                  ? 'loginAuth-formInput'
-                  : invalidPhone
-                  ? 'loginAuth-formInput loginAuth-formInputSuccess'
-                  : 'loginAuth-formInput loginAuth-formInputError'
-              }
-              onChange={phoneNumValidation}
-              required
-            />
-            {/* loginAuth-formInputSuccess */}
-            {/* loginAuth-formInputError */}
-            <label htmlFor="mobileNum">Enter your mobile number</label>
+          <div
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: '10px',
+            }}
+          >
+            <div
+              className="loginAuth-formInput"
+              style={{ borderBottom: '0px solid red' }}
+            >
+              +91
+            </div>
+            <div className="loginAuth-FormInput" style={{ width: '100%' }}>
+              <input
+                type="text"
+                name="mobileNum"
+                id="mobileNum"
+                placeholder="Enter your mobile number"
+                style={{ width: '100%' }}
+                className={
+                  mobileNum === ''
+                    ? 'loginAuth-formInput'
+                    : invalidPhone
+                    ? 'loginAuth-formInput loginAuth-formInputSuccess'
+                    : 'loginAuth-formInput loginAuth-formInputError'
+                }
+                onChange={phoneNumValidation}
+                required
+              />
+              {/* loginAuth-formInputSuccess */}
+              {/* loginAuth-formInputError */}
+              <label htmlFor="mobileNum">Enter your mobile number</label>
+            </div>
           </div>
           <button className="loginAuth-formSubmit" disabled={!invalidPhone}>
             Send
@@ -127,7 +142,7 @@ const LoginForgotPW = () => {
       </div>
       <ToastContainer />
     </div>
-  )
-}
+  );
+};
 
-export default LoginForgotPW
+export default LoginForgotPW;

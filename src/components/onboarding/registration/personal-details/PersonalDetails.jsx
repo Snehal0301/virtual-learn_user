@@ -28,13 +28,12 @@ const PersonalDetails = () => {
         password: "",
         ConfirmPassword: "",
         fullName: "",
-        mobileNumber: sessionStorage.getItem("regMobileNum"),
+        mobileNumber: "",
       },
       validationSchema: signupSchema,
       onSubmit: (values, action) => {
         console.log(values);
         setpersonaldata(values);
-        action.resetForm();
         // dispatch(registerSuccess(false))
         // navigate('/accountCreatedSuccessfully')
         const data = {

@@ -94,7 +94,7 @@ const OngoingOverview = () => {
       </div>
     ));
 
-  const alreadyCourse = () =>
+  const alreadyCourse = () => 
     toast.success((t) => (
       <div className="toast-div">
         Already enrolled
