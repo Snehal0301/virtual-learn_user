@@ -84,7 +84,13 @@ const Profile = () => {
 
             <div className="profile-logo-name">
               <div className="profile-img-frame">
-                <img src={profileData.profilePhoto} />
+                <img
+                  src={
+                    profileData && profileData.profilePhoto
+                      ? profileData.profilePhoto
+                      : require("../../../../assets/images/start-courses-image/profilepic.jpg")
+                  }
+                />
               </div>
               <div className="profile-image-name">
                 <p className="name">{profileData.fullName}</p>
