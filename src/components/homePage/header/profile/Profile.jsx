@@ -142,7 +142,11 @@ const Profile = () => {
                 {profileData && (
                   <div className="personal-detail-section">
                     <p className="pd-title">Date of Birth</p>
-                    <p className="pd-value">{profileData.dateOfBirth}</p>
+                    <p className="pd-value">
+                      {profileData && profileData.dateOfBirth
+                        ? profileData.dateOfBirth
+                        : ""}
+                    </p>
                   </div>
                 )}
                 <div

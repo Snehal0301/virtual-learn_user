@@ -32,7 +32,7 @@ const EditProfile = () => {
         editPUsername: editProfileData?.userName ?? "",
         editPEmail: editProfileData?.email ?? "",
         MobileNo: editProfileData?.mobileNumber ?? "",
-        gender: editProfileData?.gender ?? "",
+        gender: editProfileData?.gender ?? "Male",
         editPDOB: editProfileData?.dateOfBirth ?? "",
         editPOccupation: editProfileData?.occupation ?? "",
         TwitterURL: editProfileData?.twitterLink ?? "",
@@ -56,9 +56,8 @@ const EditProfile = () => {
           values.editPDOB ? values.editPDOB : "empty"
         );
         if (selectedFile == null) {
-          console.log("No image been uploaded")
-        }
-        else {
+          console.log("No image been uploaded");
+        } else {
           formData.append("profilePhoto", selectedFile);
         }
         formData.forEach((value, key) => {
