@@ -254,12 +254,12 @@
 }
 
 .headersearch-responseBody {
-    display: flex;
-    padding: 20px 0;
-    /* min-width: 750px; */
-    gap: 20px;
-    border-bottom: 1px solid #1e4284;
-    cursor: pointer;
+  display: flex;
+  padding: 20px 0;
+  /* min-width: 750px; */
+  gap: 20px;
+  border-bottom: 1px solid #1e4284;
+  cursor: pointer;
 }
 
 .headerSearch-responseTitle {
@@ -358,8 +358,8 @@
 .headerSearchCategoriesTopSearchesIcon > img {
   width: 100%;
 }
-.headerSearchCategoriesTopSearchesIcon>img {
-    width: 100%;
+.headerSearchCategoriesTopSearchesIcon > img {
+  width: 100%;
 }
 
 .headerSearch-filterModalCategoryTitle {
@@ -395,23 +395,23 @@
   border-radius: 6px;
   padding: 4px 38px !important;
 }
-.headerSearch-filterModalButtons>button {
-    position: relative !important;
-    margin: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    top: unset;
-    right: unset;
-    cursor: pointer;
-    height: auto;
-    width: auto;
-    font-style: normal;
-    font-weight: 700;
-    font-size: 18px;
-    line-height: 35px;
-    border-radius: 6px;
-    padding: 4px 38px !important;
+.headerSearch-filterModalButtons > button {
+  position: relative !important;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  top: unset;
+  right: unset;
+  cursor: pointer;
+  height: auto;
+  width: auto;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 35px;
+  border-radius: 6px;
+  padding: 4px 38px !important;
 }
 
 .headerSearch-applyFilterButton {
@@ -605,6 +605,12 @@
 .chipBackgroundYellow {
   background-color: var(--videoCatgryClr);
 }
+/* @media only screen and (max-width: 759px) and (min-width:400px) {
+  .custom-file-input {
+    top: 77px !important;
+    right: 293px !important;
+  }
+} */
 
 @media only screen and (max-width: 760px) {
   .mobile-header-search {
@@ -886,15 +892,14 @@
     margin-bottom: 4px !important;
   }
 
-
-@keyframes height {
-  from {
-    max-height: 0;
+  @keyframes height {
+    from {
+      max-height: 0;
+    }
+    to {
+      max-height: 70vh;
+    }
   }
-  to {
-    max-height: 70vh;
-  }
-}
 
   .drawer-profile-clear-notify {
     display: none !important;
