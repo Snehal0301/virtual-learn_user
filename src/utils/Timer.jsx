@@ -10,7 +10,7 @@ import { testisSuccess } from "../redux/reducers/testSlice";
 import Loading from "./loading/Loading";
 
 const Timer = () => {
-  const initialTimer = localStorage.getItem("timer") ?? 480;
+  const initialTimer = localStorage.getItem("timer") ?? sessionStorage.getItem('timer');
   const timeoutId = React.useRef(null);
   const [timer, setTimer] = React.useState(initialTimer);
   const [loading, setLoading] = React.useState(false);

@@ -60,6 +60,9 @@ const OngoingOverview = () => {
   const [chapterLoading, setChapterLoading] = useState(false);
   const [overviewLoading, setOverviewLoading] = useState(false);
   const [testLoading, setTestLoading] = useState(false);
+
+  const courseIdRedux = useSelector((state) => state.pauseTime.courseID);
+  
   const dispatch = useDispatch();
   // Toast
   const notify = () =>
@@ -235,7 +238,8 @@ const OngoingOverview = () => {
       .then((res) => {
         console.log(res)
         // dispatch(courseOverview(pauseData.courseId));
-        dispatch(chapterResponse(pauseData.courseId));
+        // dispatch(chapterResponse(pauseData.courseId));
+        dispatch(chapterResponse(courseIdRedux));
         // if (res.data.message === "Updated SuccessFully") {
         // }
       })

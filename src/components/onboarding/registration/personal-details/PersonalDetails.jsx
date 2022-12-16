@@ -28,7 +28,7 @@ const PersonalDetails = () => {
         password: "",
         ConfirmPassword: "",
         fullName: "",
-        mobileNumber: "",
+        mobileNumber: sessionStorage.getItem("regMobileNum"),
       },
       validationSchema: signupSchema,
       onSubmit: (values, action) => {
