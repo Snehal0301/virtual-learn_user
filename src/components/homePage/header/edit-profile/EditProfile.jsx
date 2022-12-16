@@ -17,13 +17,10 @@ import axios from "axios";
 const EditProfile = () => {
   const [editProfileData, setEditProfileData] = useState({});
   const [occupationData, setOccupationData] = useState([]);
-  const [selectedFile, setSelectedFile] = useState({});
+  const [selectedFile, setSelectedFile] = useState(null);
   const dispatch = useDispatch();
   const handleClick = () => {
     dispatch(editProfileSection(false));
-  };
-  const handleProfilePic = (e) => {
-    setSelectedFile(e.target.files[0]);
   };
 
   // console.log(selectedFile);
@@ -58,7 +55,12 @@ const EditProfile = () => {
           "dateOfBirth",
           values.editPDOB ? values.editPDOB : "empty"
         );
-        formData.append("profilePhoto", selectedFile);
+        if (selectedFile == null) {
+          console.log("No image been uploaded")
+        }
+        else {
+          formData.append("profilePhoto", selectedFile);
+        }
         formData.forEach((value, key) => {
           console.log("key %s: value %s", key, value);
         });
@@ -78,6 +80,10 @@ const EditProfile = () => {
           });
       },
     });
+
+  const handleProfilePic = (e) => {
+    setSelectedFile(e.target.files[0]);
+  };
 
   /*EditProfileData Fetch By Mamatha */
   useEffect(() => {
@@ -114,6 +120,7 @@ const EditProfile = () => {
   /*Occupation Data Fetch By Mamatha*/
 
   console.log("EditData", editProfileData);
+  /*Changed Profile Pic*/
   return (
     <div className="drawer-profile">
       <div className="drawer-profile-header">
@@ -121,14 +128,21 @@ const EditProfile = () => {
           {arrowRight}
         </div>
         <div className="editprofiletext">Edit Profile</div>
-          <div className="editProfileImage">
-            <img src={editProfileData && editProfileData.profilePhoto} alt="" />
-            <input
-              type="file"
-              onChange={handleProfilePic}
-              className="custom-file-input"
-            />
-          </div>
+        <div className="editProfileImage">
+          <img
+            src={
+              editProfileData && editProfileData.profilePhoto
+                ? editProfileData.profilePhoto
+                : require("../../../../assets/images/start-courses-image/profilepic.jpg")
+            }
+            alt=""
+          />
+          <input
+            type="file"
+            onChange={handleProfilePic}
+            className="custom-file-input"
+          />
+        </div>
       </div>
       <div className="EditForm">
         <form className="editProfileForm" onSubmit={handleSubmit}>
@@ -138,8 +152,7 @@ const EditProfile = () => {
               id="editPfullname"
               name="editPfullname"
               placeholder=""
-              className="editPInput"      
-              onChange={handleChange}
+              className="editPInput"
               value={values.editPfullname}
               autoComplete="off"
             />
@@ -162,7 +175,6 @@ const EditProfile = () => {
               name="editPUsername"
               placeholder=" "
               className="editPInput"
-              onChange={handleChange}
               onBlur={handleBlur}
               value={values.editPUsername}
               autoComplete="off"
@@ -185,7 +197,6 @@ const EditProfile = () => {
               name="editPEmail"
               placeholder=" "
               className="editPInput"
-              onChange={handleChange}
               onBlur={handleBlur}
               value={values.editPEmail}
               autoComplete="off"
@@ -208,7 +219,6 @@ const EditProfile = () => {
               name="MobileNo"
               placeholder=" "
               className="editPInput"
-              onChange={handleChange}
               onBlur={handleBlur}
               value={values.MobileNo}
               autoComplete="off"
@@ -223,30 +233,6 @@ const EditProfile = () => {
               </>
             ) : null}
           </div>
-
-          {/* <div className="edit-error-input">
-            <input
-              type="text"
-              id="editPOccupation"
-              name="editPOccupation"
-              placeholder=" "
-              className="editPInput"
-              onChange={handleChange}
-              onBlur={handleBlur}
-              value={values.editPOccupation}
-              autoComplete="off"
-            />
-            <label htmlFor="" className="editprofilelabel">
-              Occupation
-            </label>
-
-            {errors.editPOccupation && touched.editPOccupation ? (
-              <>
-                <div className="edit-error-line"></div>
-                <p className="edit-form-error">{errors.editPOccupation}</p>
-              </>
-            ) : null}
-          </div> */}
 
           <div className="genderSection">
             <label htmlFor="occupation">Occupation</label>

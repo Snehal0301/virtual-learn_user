@@ -141,3 +141,14 @@
 .drawer-profile-body-notify {
   overflow: scroll;
 }
+
+.noNotification-section {
+  font-family: "Biko";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 28px;
+  color: #747474;
+  text-align: center;
+  padding-top: 35px;
+  /* width: 100%; */
+}

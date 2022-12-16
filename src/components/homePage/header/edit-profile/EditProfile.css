@@ -37,9 +37,9 @@
   color: transparent;
   width: 45px;
   margin-bottom: 2px;
-     position: absolute;
-    top:80px;
-    right:115px;
+  position: absolute;
+  top: 80px;
+  right: 115px;
 }
 .custom-file-input::-webkit-file-upload-button {
   visibility: hidden;
@@ -50,11 +50,10 @@
   outline: none;
   border: none;
   white-space: nowrap;
-  -webkit-user-select: none;
   cursor: pointer;
   padding: 2px 5px;
 }
-.custom-file-input:focus{
+.custom-file-input:focus {
   outline: none;
   border: none;
 }
