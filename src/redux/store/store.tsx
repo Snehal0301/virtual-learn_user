@@ -48,7 +48,7 @@ const reducers = combineReducers({
   subCategories: subCategoriesSlice.reducer,
   chapterResponse: chapterResponseSlice.reducer,
   courseOverview: courseOverviewSlice.reducer,
-  // pauseTime:pauseTimeReducer
+  pauseTime:pauseTimeReducer.reducer
 });
 
 const persistConfig = {
