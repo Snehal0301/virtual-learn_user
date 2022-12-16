@@ -33,7 +33,7 @@ const EditProfile = () => {
         editPEmail: editProfileData?.email ?? "",
         MobileNo: editProfileData?.mobileNumber ?? "",
         gender: editProfileData?.gender ?? "",
-        editPDOB: editProfileData?.dateOfBirth ?? "",
+        editPDOB: editProfileData.dateOfBirth ? new Date(editProfileData.dateOfBirth): "",
         editPOccupation: editProfileData?.occupation ?? "",
         TwitterURL: editProfileData?.twitterLink ?? "",
         FacebookURL: editProfileData?.faceBookLink ?? "",
@@ -74,7 +74,9 @@ const EditProfile = () => {
               },
               data: formData,
             }
-          )
+        ).then((res) => {
+            console.log('res',res);
+          })
           .catch((Err) => {
             console.log(Err);
           });
@@ -275,6 +277,7 @@ const EditProfile = () => {
             id="editPDOB"
             name="editPDOB"
             placeholder=" "
+            value={values.dateOfBirth}
             className="editPInput"
             onChange={handleChange}
             onBlur={handleBlur}
