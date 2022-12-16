@@ -61,6 +61,7 @@ const OngoingOverview = () => {
   const [overviewLoading, setOverviewLoading] = useState(false);
   const [testLoading, setTestLoading] = useState(false);
   const dispatch = useDispatch();
+
   // Toast
   const notify = () =>
     toast.error((t) => (
@@ -178,6 +179,10 @@ const OngoingOverview = () => {
   useEffect(() => {
     dispatch(firstVideoState(defaultvideo));
   }, [defaultvideo]);
+
+  useEffect(() => {
+    chapter && chapter.enrolled === true ? dispatch(tabToggleState(2)):dispatch(tabToggleState(1))
+  },[chapter])
 
   // const defaultVideoState = useSelector((state) => state.mycourse.firstVideo);
 
@@ -802,7 +807,7 @@ const OngoingOverview = () => {
                               <div
                                 div
                                 className="course-accordian"
-                                onClick={() => accordianToggle(id)}
+                                onClick={() => { accordianToggle(id); console.log('chapterID, accordianID',ele.chapterId,id);}}
                               >
                                 <div className="course-accordian-heading">
                                   <div className="course-accordian-container">
