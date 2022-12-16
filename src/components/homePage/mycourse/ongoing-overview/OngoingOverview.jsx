@@ -490,7 +490,7 @@ const OngoingOverview = () => {
             )}
 
             {
-              unmountStateRedux === 'true' &&
+              unmountStateRedux === 'true' && chapter && chapter.enrolled === true &&
               <>
                 <div className="pause-overlay">
                   {firstPause && (
