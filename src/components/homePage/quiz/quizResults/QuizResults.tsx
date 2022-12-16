@@ -1,38 +1,43 @@
-import React, { useEffect } from 'react'
-import { closeIcon, showAnsIcon } from '../../../../utils/svgIcons'
-import './QuizResults.css'
-import Drawer from 'react-modern-drawer'
-import { useDispatch, useSelector } from 'react-redux'
-import { quizAnswer } from '../../../../redux/reducers/result'
-import QuizAns from '../quizAnswers/QuizAns'
-import { answerHeader } from '../../../../redux/reducers/testAnswerHeader'
-import { answer } from '../../../../redux/reducers/testAnswer'
-import { testSuccess } from '../../../../redux/reducers/Conditions'
-import { useNavigate } from 'react-router-dom'
-import { tabToggleState } from '../../../../redux/reducers/myCourseReducer'
-import { chapterResponse } from '../../../../redux/reducers/chapterResponses'
+import React, { useEffect } from 'react';
+import { closeIcon, showAnsIcon } from '../../../../utils/svgIcons';
+import './QuizResults.css';
+import Drawer from 'react-modern-drawer';
+import { useDispatch, useSelector } from 'react-redux';
+import { quizAnswer } from '../../../../redux/reducers/result';
+import QuizAns from '../quizAnswers/QuizAns';
+import { answerHeader } from '../../../../redux/reducers/testAnswerHeader';
+import { answer } from '../../../../redux/reducers/testAnswer';
+import { testSuccess } from '../../../../redux/reducers/Conditions';
+import { useNavigate } from 'react-router-dom';
+import { tabToggleState } from '../../../../redux/reducers/myCourseReducer';
+import { courseOverview } from '../../../../redux/reducers/courseOverview';
+import { chapterResponse } from '../../../../redux/reducers/chapterResponses';
 
 const QuizResults = () => {
-  const dispatch = useDispatch()
-  const navigate = useNavigate()
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   useEffect(() => {
     // dispatch(answerHeader('resultHeader?testId=17'))
     // dispatch(answer('resultAnswers?testId=17'))
-    dispatch(testSuccess(false))
-    dispatch(testSuccess(false))
-  }, [])
+    dispatch(testSuccess(false));
+    dispatch(testSuccess(false));
+  }, []);
 
   const resultsHeaderData = useSelector((state: any) => state.answerHeader.data)
   const resultAnswers = useSelector((state: any) => state.answer.data)
   const courseID = useSelector((state:any)=>state.pauseTime.courseID)
 
-  console.log('header data', resultsHeaderData, resultAnswers)
+  console.log('header data', resultsHeaderData, resultAnswers);
 
-  const [isOpen, setIsOpen] = React.useState(false)
+  const [isOpen, setIsOpen] = React.useState(false);
   const toggleDrawer = () => {
-    setIsOpen((prevState) => !prevState)
-  }
+    setIsOpen((prevState) => !prevState);
+  };
+
+  const chapterResponses = useSelector(
+    (state: any) => state.chapterResponse.data
+  );
 
   return (
     <div className="quizResults">
@@ -122,14 +127,14 @@ const QuizResults = () => {
                   <div
                     className="quizResults-bodyListItemDrawer"
                     onClick={() => {
-                      toggleDrawer()
-                      dispatch(quizAnswer(ele))
+                      toggleDrawer();
+                      dispatch(quizAnswer(ele));
                     }}
                   >
                     {showAnsIcon}
                   </div>
                 </div>
-              )
+              );
             })}
           </div>
         </div>
@@ -148,7 +153,7 @@ const QuizResults = () => {
           <div
             className="quizDrawerCloseIcon"
             onClick={() => {
-              toggleDrawer()
+              toggleDrawer();
             }}
           >
             {closeIcon}
@@ -156,7 +161,7 @@ const QuizResults = () => {
         </Drawer>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default QuizResults
+export default QuizResults;
