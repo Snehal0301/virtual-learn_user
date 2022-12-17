@@ -43,6 +43,7 @@ form {
   transform: translate(0, -1.75rem);
   font-size: 16px;
   position: relative;
+  line-height: 10px;
 }
 
 .PeronsalDetailsInput {
@@ -54,7 +55,7 @@ form {
   transition: border-color 0.2s ease;
   background-color: transparent;
   color: var(--primaryFontClr);
-  font-weight: 700;
+  font-weight: 500;
   font-family: Avenir;
   font-size: 16px;
   margin-left: 5px;
@@ -86,11 +87,10 @@ form {
   color: rgb(255, 57, 57);
   font-size: 14px;
   width: 100%;
-  line-height: 1pt;
+  line-height: 8pt;
   padding-left: 5px;
-  margin-top: -8px;
+  margin-top: -3px;
 }
-
 .personalDetailtooltip {
   height: 16px;
   width: 16px;

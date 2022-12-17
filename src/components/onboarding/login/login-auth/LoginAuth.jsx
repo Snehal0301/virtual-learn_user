@@ -107,6 +107,7 @@ const LoginAuth = () => {
         <button>{facebookIcon}</button>
         <button>{googleIcon}</button>
       </div>
+      
       <div className="loginAuth-Form">
         <form
           className="loginAuth-FormContainer"
@@ -121,6 +122,7 @@ const LoginAuth = () => {
               id="username"
               placeholder="Enter your username"
               className="loginAuth-formInput "
+              autoComplete="off"
             />
             {/* loginAuth-formInputSuccess */}
             {/* loginAuth-formInputError */}
@@ -155,6 +157,7 @@ const LoginAuth = () => {
           </div>
           <button className="loginAuth-formSubmit">Continue</button>
         </form>
+
         <div className="loginAuth-noAccount">
           Don’t have a account?{" "}
           <span

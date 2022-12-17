@@ -39,6 +39,13 @@ const Notification = () => {
 
   console.log("notifyData", notifyData);
   /*Changed*/
+
+  const current = new Date();
+  const date = `${current.getDate()}/${
+    current.getMonth() + 1
+  }/${current.getFullYear()}`;
+  console.log("date obtained", date);
+
   return (
     <div className="drawer-profile-notify">
       <div className="drawer-profile-header-notify">
@@ -58,7 +65,8 @@ const Notification = () => {
       </div>
       {notifyData.length > 0 ? (
         <div className="drawer-profile-body-notify">
-          {notifyData && notifyData.length > 0 &&
+          {notifyData &&
+            notifyData.length > 0 &&
             notifyData.map((ele) => {
               return (
                 <div
@@ -106,8 +114,8 @@ const Notification = () => {
         </div>
       ) : (
         <div className="noNotification-section">
-            <p>No Notifications</p>
-            {/* <img src={require("../../../../assets/images/start-courses-image/notification.png") } alt="no-notification" /> */}
+          <p>No Notifications</p>
+          {/* <img src={require("../../../../assets/images/start-courses-image/notification.png") } alt="no-notification" /> */}
         </div>
       )}
     </div>

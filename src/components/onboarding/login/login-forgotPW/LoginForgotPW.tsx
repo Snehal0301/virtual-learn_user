@@ -130,6 +130,7 @@ const LoginForgotPW = () => {
                     : 'loginAuth-formInput loginAuth-formInputError'
                 }
                 onChange={phoneNumValidation}
+                autoComplete="off"
                 required
               />
               {/* loginAuth-formInputSuccess */}

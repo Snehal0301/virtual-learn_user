@@ -22,6 +22,7 @@ import EditProfile from "../edit-profile/EditProfile";
 import profileData from "../../../../api-results/ProfileResults.json";
 import axios from "axios";
 
+ 
 const Profile = () => {
   const dispatch = useDispatch();
   const handleProfileClose = () => {
