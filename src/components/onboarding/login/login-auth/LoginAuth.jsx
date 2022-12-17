@@ -121,6 +121,7 @@ const LoginAuth = () => {
               id="username"
               placeholder="Enter your username"
               className="loginAuth-formInput "
+              autoComplete="off"
             />
             {/* loginAuth-formInputSuccess */}
             {/* loginAuth-formInputError */}
