@@ -7,12 +7,7 @@
   background-color: white;
   width: 50%;
   height: 60%;
-  position: absolute;
   z-index: 1;
-  top: 17%;
-  bottom: 0%;
-  left: 25%;
-  right: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -58,9 +53,6 @@
 }
 
 .pause-button {
-  position: absolute;
-  top: 43%;
-  right: 47.5%;
   cursor: pointer;
 }
 
@@ -622,18 +614,19 @@ p:not(.truncated)~label {
   border-radius: 6px;
   background-color: #7a7a7a76;
   z-index: 5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .continue-chapter-pause-button {
   background-color: var(--secondaryClr);
-  position: absolute;
-  top: 45%;
-  left: 34.8%;
   padding: 20px;
   color: white;
   font-size: 20px;
   border-radius: 6px;
   cursor: pointer;
+  z-index: 10;
 }
 
 .continue-chapter-pause-button:hover {
@@ -749,25 +742,6 @@ p:not(.truncated)~label {
   height: 100%;
 }
 
-/* .progressbar {
-  position: relative;
-  overflow: hidden;
-  width: 350px;
-  height: 35px;
-  border-radius: 50px;
-  background-color: #eee;
-}
-
-.progressPercent {
-  font-weight: 600;
-  font-family: 'Franklin Gothic Medium';
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  color: #eee;
-  text-shadow: -1px 0 #555, 0 1px #555, 1px 0 #555, 0 -1px #555;
-} */
 
 /* Safari */
 @-webkit-keyframes spin {
