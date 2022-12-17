@@ -69,7 +69,7 @@ const Start = () => {
   const [categoryData, setcategoryData] = useState([]);
   const [ongoing, setOngoing] = useState([]);
   const [name, setName] = useState('');
-  
+
   var settings = {
     dots: true,
     infinite: true,
@@ -77,7 +77,7 @@ const Start = () => {
     slidesToShow: 3,
     slidesToScroll: 1
   };
- 
+
   useEffect(() => {
     axios
       .get(
@@ -90,7 +90,7 @@ const Start = () => {
       )
       .then((res) => {
         setOngoing(res && res.data);
-        
+
       })
       .catch((err) => {
         console.error(err);
@@ -98,7 +98,7 @@ const Start = () => {
   }, []);
 
   console.log('ongoing data', ongoing);
-  
+
   //Fetching api for slider
 
   useEffect(() => {
@@ -140,7 +140,7 @@ const Start = () => {
       });
   }, []);
   dispatch(coursedata(allcourseData));
-  console.log('allcoursedata',allcourseData)
+  console.log('allcoursedata', allcourseData)
 
   //fetching data for popular courses
   useEffect(() => {
@@ -244,50 +244,50 @@ const Start = () => {
   dispatch(categorydata(categoryData));
 
   return (
-    
+
     <div className="start">
-      
+
       <div className="start-greeting">Hello!</div>
       <div className="start-username">{name}</div>
       <div className='webslider'>
-      <Slider autoplay={true} autoplaySpeed={2000} slidesToShow={3} dots={true} settings={settings} showIndicators={true}>
-        {headerdata && headerdata.map((item) => (
-          <div
-            className="start-image-title"
-            onClick={() => {
-              dispatch(courseOverview(item.courseId));
-              dispatch(chapterResponse(item.courseId));
-              navigate('/myCourses/ongoingCourse');
-            }}
-          >
-            <div className="start-map-image">
-              <img src={item.coursePhoto} alt="" />
+        <Slider autoplay={true} autoplaySpeed={2000} slidesToShow={3} dots={true} settings={settings} showIndicators={true}>
+          {headerdata && headerdata.map((item) => (
+            <div
+              className="start-image-title"
+              onClick={() => {
+                dispatch(courseOverview(item.courseId));
+                dispatch(chapterResponse(item.courseId));
+                navigate('/myCourses/ongoingCourse');
+              }}
+            >
+              <div className="start-map-image">
+                <img src={item.coursePhoto} alt="" />
+              </div>
+              <div className="start-course-overlay-header"></div>
+              <div className="start-title-text">{item.courseName}</div>
             </div>
-            <div className="start-course-overlay-header"></div>
-            <div className="start-title-text">{item.courseName}</div>
-          </div>
-        ))}
-      </Slider>
+          ))}
+        </Slider>
       </div>
       <div className='mobileSlider'>
-      <Slide autoplay={true} autoplaySpeed={2000} slidesToShow={3} dots={true} settings={settings} showIndicators={true}>
-        {headerdata && headerdata.map((item) => (
-          <div
-            className="start-image-title"
-            onClick={() => {
-              dispatch(courseOverview(item.courseId));
-              dispatch(chapterResponse(item.courseId));
-              navigate('/myCourses/ongoingCourse');
-            }}
-          >
-            <div className="start-map-image">
-              <img src={item.coursePhoto} alt="" />
+        <Slide autoplay={true} autoplaySpeed={2000} slidesToShow={3} dots={true} settings={settings} showIndicators={true}>
+          {headerdata && headerdata.map((item) => (
+            <div
+              className="start-image-title"
+              onClick={() => {
+                dispatch(courseOverview(item.courseId));
+                dispatch(chapterResponse(item.courseId));
+                navigate('/myCourses/ongoingCourse');
+              }}
+            >
+              <div className="start-map-image">
+                <img src={item.coursePhoto} alt="" />
+              </div>
+              <div className="start-course-overlay-header"></div>
+              <div className="start-title-text">{item.courseName}</div>
             </div>
-            <div className="start-course-overlay-header"></div>
-            <div className="start-title-text">{item.courseName}</div>
-          </div>
-        ))}
-      </Slide>
+          ))}
+        </Slide>
       </div>
 
       {
@@ -427,10 +427,10 @@ const Start = () => {
       {homeTabState === 1 && (
         <div className="start-card">
           <div className="start-choice1">
-           
+
             {allcourseData.length > 0 && allcourseData.slice(0, 4).map((item) => (
 
-              
+
               <div
                 className="start-choice-subcategory-image"
                 onClick={() => {
@@ -440,7 +440,7 @@ const Start = () => {
                   navigate("/myCourses/ongoingCourse");
                 }}
               >
-              
+
                 <div className="start-image-pause">
                   <img src={item.coursePhoto} alt="" />
                   <div className="start-course-overlay-2"></div>
