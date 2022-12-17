@@ -605,8 +605,9 @@
 .chipBackgroundYellow {
   background-color: var(--videoCatgryClr);
 }
-/* @media only screen and (max-width: 759px) and (min-width:400px) {
+/* @media only screen and (max-width: 759px) and (min-width:416px) {
   .custom-file-input {
+    position: absolute!important;
     top: 77px !important;
     right: 293px !important;
   }
