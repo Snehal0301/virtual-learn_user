@@ -24,26 +24,38 @@ const ChangePassword = () => {
 
   // Toast-Error
   const PasswordMatch = () =>
-    toast.error((t) => (
+    toast.error((w) => (
       <div className="toast-div-password">
         Password Doesn't Match
         <div
           className="toast-close-password"
-          onClick={() => toast.dismiss(t.id)}
+          onClick={() => toast.dismiss(w.id)}
         >
           X
         </div>
       </div>
     ));
-
+//Toast-CurrentNew
+  const CurrentNew = () =>
+    toast.error((w) => (
+      <div className="toast-div-password">
+        New Password is same as Current Password
+        <div
+          className="toast-close-password"
+          onClick={() => toast.dismiss(w.id)}
+        >
+          X
+        </div>
+      </div>
+    ));
   // Toast-Success
   const successPassword = () =>
-    toast.success((t) => (
+    toast.success((w) => (
       <div className="toast-div-password">
         Password Change Successfully
         <div
           className="toast-close-password"
-          onClick={() => toast.dismiss(t.id)}
+          onClick={() => toast.dismiss(w.id)}
         >
           X
         </div>
@@ -54,7 +66,8 @@ const ChangePassword = () => {
     e.preventDefault();
     const NewPassword = document.getElementById("newPassword").value;
     const ConfirmPassword = document.getElementById("confirmPassword").value;
-    if (NewPassword === ConfirmPassword) {
+    const CurrentPassword = document.getElementById("currentPassword").value;
+    if (NewPassword === ConfirmPassword && NewPassword !== CurrentPassword) {
       axios
         .request(
           ` http://virtuallearn-env.eba-6xmym3vf.ap-south-1.elasticbeanstalk.com/user/changePassword`,
@@ -78,7 +91,12 @@ const ChangePassword = () => {
       setCurrentPassword("");
       console.log(newpassword);
     } else {
-      PasswordMatch();
+      if (NewPassword !== ConfirmPassword) {
+        PasswordMatch();
+      }
+      else {
+        CurrentNew();
+      }
     }
   };
 
