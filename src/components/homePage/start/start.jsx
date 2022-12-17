@@ -8,7 +8,7 @@ import {
   start_pauseIcon,
   start_timeIcon,
 } from "../../../utils/svgIcons";
-// import Slider from "react-carousel-responsive";
+import Slide from "react-carousel-responsive";
 import "react-carousel-responsive/dist/styles.css";
 
 import "react-responsive-carousel/lib/styles/carousel.min.css";
@@ -249,6 +249,7 @@ const Start = () => {
       
       <div className="start-greeting">Hello!</div>
       <div className="start-username">{name}</div>
+      <div className='webslider'>
       <Slider autoplay={true} autoplaySpeed={2000} slidesToShow={3} dots={true} settings={settings} showIndicators={true}>
         {headerdata && headerdata.map((item) => (
           <div
@@ -267,6 +268,27 @@ const Start = () => {
           </div>
         ))}
       </Slider>
+      </div>
+      <div className='mobileSlider'>
+      <Slide autoplay={true} autoplaySpeed={2000} slidesToShow={3} dots={true} settings={settings} showIndicators={true}>
+        {headerdata && headerdata.map((item) => (
+          <div
+            className="start-image-title"
+            onClick={() => {
+              dispatch(courseOverview(item.courseId));
+              dispatch(chapterResponse(item.courseId));
+              navigate('/myCourses/ongoingCourse');
+            }}
+          >
+            <div className="start-map-image">
+              <img src={item.coursePhoto} alt="" />
+            </div>
+            <div className="start-course-overlay-header"></div>
+            <div className="start-title-text">{item.courseName}</div>
+          </div>
+        ))}
+      </Slide>
+      </div>
 
       {
         ongoing && ongoing.length > 0 &&

@@ -43,12 +43,13 @@
   position: absolute;
   bottom: 18px;
   left: 36px;
-  font-family: 'Biko';
+  /* font-family: 'Biko'; */
   font-style: normal;
   font-weight: 400;
   font-size: 18px;
   /* line-height: 50px; */
   color: var(--primaryFontClr);
+  cursor: pointer;
 }
 
 .start-course1-image-first img {
@@ -436,6 +437,10 @@
 {
   color: #EE5C4D;
 }
+.mobileSlider
+{
+  display: none;
+}
 
 
 @media only screen and (max-width: 800px) {
@@ -454,7 +459,18 @@
   .start-choice1 {
     /* padding-top: 34px; */
   }
-  
+  /* .slick-slider {
+   
+    width: 121%;
+} */
+.webslider
+{
+  display: none;
+}
+.mobileSlider
+{
+  display: block;
+}
 
   ::-webkit-scrollbar {
     display: none;
@@ -557,6 +573,12 @@
     width: 90px;
     height: 30px;
   }
+  .slick-list {
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
   
   
   .react-carousel-responsive__controlPrev
@@ -581,7 +603,7 @@
    {
     position: relative;
     width: 143%;
-}
+   }
 
   .start-map-image>img {
     /* width: 300px; */
@@ -631,4 +653,8 @@
   background-color: #dfe7f4;
   cursor: pointer;
   color: #092963;
+}
+.slick-dots li button:before {
+  font-size: 10px;
+  
 }

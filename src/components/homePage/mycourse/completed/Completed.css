@@ -1,7 +1,7 @@
 .completed-section {
   display: flex;
   flex-wrap: wrap;
-  gap: 1rem;
+  gap: 1%;
 }
 
 .completed-parent {

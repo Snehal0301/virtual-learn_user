@@ -79,7 +79,7 @@ ul.breadcrumb-categories li a:hover {
 .categories-home-chipBorder {
   border: 1px solid var(--chipBorder);
   color: var(--filterChipFontClr) !important;
-  flex-basis: 19%;
+  flex-basis: 13%;
 }
 
 .categories-home-Names {
