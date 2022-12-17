@@ -114,6 +114,17 @@ const OngoingOverview = () => {
         </div>
       </div>
     ));
+
+  const attemptTest = () =>
+    toast.error((t) => (
+      <div className="toast-div">
+        You have already attempted the test
+        <div className="toast-close" onClick={() => toast.dismiss(t.id)}>
+          X
+        </div>
+      </div>
+    ));
+
   // Toast
 
   const navigate = useNavigate();
@@ -182,10 +193,10 @@ const OngoingOverview = () => {
   }, [defaultvideo]);
 
   useEffect(() => {
-    chapter && chapter.enrolled === true ? dispatch(tabToggleState(2)):dispatch(tabToggleState(1))
-  },[chapter])
+    chapter && overviewData.enrolled === true ? dispatch(tabToggleState(2)) : dispatch(tabToggleState(1))
+  }, [chapter])
 
-  // const defaultVideoState = useSelector((state) => state.mycourse.firstVideo);
+  const defaultVideoState = useSelector((state) => state.mycourse.firstVideo);
 
   const tabToggle = (id) => {
     dispatch(tabToggleState(id));
@@ -205,7 +216,6 @@ const OngoingOverview = () => {
   const pauseStateID = useSelector((state) => state.pauseTime.ptime)
   console.log('id', accordianStateID, chapterStateID, lessonStateID, courseStateID)
   // Required State data
-
 
   const accordianState = useSelector((state) => state.mycourse.accordian);
   const [pause, setPause] = useState(false);
@@ -262,9 +272,12 @@ const OngoingOverview = () => {
       });
   };
 
+  const pauseTimeLocal = localStorage.getItem('pauseTimeLocal')
+  console.log("pauseTimeLocal", pauseTimeLocal)
+
   const componentUnMount = () => {
 
-    const unmountPauseTime = new Date(pauseStateID * 1000).toISOString().slice(11, 19);
+    const unmountPauseTime = new Date(pauseTimeLocal * 1000).toISOString().slice(11, 19);
     console.log('played', unmountPauseTime);
 
     const unmountData = {
@@ -443,11 +456,18 @@ const OngoingOverview = () => {
   const unmountStateRedux = useSelector((state) => state.pauseTime.unmount)
 
   console.log('unmountStateRedux', unmountStateRedux)
+
+  // see this logic
+  // if (overviewData && !overviewData.enrolled) {
+  //   dispatch(accordianToggleState(0));
+  // }
+
+
   return (
     <>
-      {chapter && chapter.enrolled ? (
+      {chapter && overviewData.enrolled ? (
         <div className="homeCategories-head-link">
-          <span>
+          <span onClick={componentUnMount}>
             <Link
               to="/myCourses"
               style={{ color: "var(--blueFont)", cursor: "pointer" }}
@@ -490,7 +510,7 @@ const OngoingOverview = () => {
             )}
 
             {
-              unmountStateRedux === 'true' && chapter && chapter.enrolled === true &&
+              unmountStateRedux === 'true' && chapter && overviewData.enrolled === true &&
               <>
                 <div className="pause-overlay">
                   {firstPause && (
@@ -541,7 +561,7 @@ const OngoingOverview = () => {
             }
 
             <ReactPlayer
-              url={videoLink}
+              url={videoLink ? videoLink : defaultVideoState}
               // url='https://youtu.be/aeWyp2vXxqA'
               controls="true"
               className="react-player"
@@ -558,6 +578,7 @@ const OngoingOverview = () => {
               onProgress={(progress) => {
                 setPlayed(progress.playedSeconds);
                 dispatch(pauseTimeState(progress.playedSeconds))
+                localStorage.setItem('pauseTimeLocal', progress.playedSeconds)
               }}
             />
             <div className="video-title-overlay">{pauseData.videoTitle}</div>
@@ -867,7 +888,7 @@ const OngoingOverview = () => {
                       }
                       return (
                         <>
-                          {chapter.enrolled ? (
+                          {overviewData.enrolled ? (
                             <>
                               {/* <Accordian active /> */}
                               <div
@@ -981,17 +1002,23 @@ const OngoingOverview = () => {
                                               }
 
                                               statusTest ?
-                                                dispatch(
-                                                  test(
-                                                    `${ele.testName ===
-                                                      'Final Test'
-                                                      ? 'finalTest'
-                                                      : 'moduleTest'
-                                                    }?testId=${ele.testId}`
-                                                  )
+                                                (
+                                                  ele && ele.chapterTestPercentage && ele.chapterTestPercentage > 0 ?
+                                                    attemptTest()
+                                                    :
+                                                    dispatch(
+                                                      test(
+                                                        `${ele.testName ===
+                                                          'Final Test'
+                                                          ? 'finalTest'
+                                                          : 'moduleTest'
+                                                        }?testId=${ele.testId}`
+                                                      )
+                                                    )
                                                 )
                                                 :
                                                 inactiveTest()
+
                                             }}
                                           >
                                             <div className="accordian-item-section-2-part-1">
