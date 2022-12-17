@@ -891,7 +891,9 @@
   .notificationUnread {
     margin-bottom: 4px !important;
   }
-
+.drawer-profile-body-notify {
+    margin: 0 10px !important;
+}
   @keyframes height {
     from {
       max-height: 0;
