@@ -80,6 +80,7 @@ const LoginForgotPW = () => {
 
   return (
     <div className="loginAuth">
+
       <div className="loginAuth-backButton">
         <div
           onClick={() => {
@@ -91,6 +92,7 @@ const LoginForgotPW = () => {
           {mobileBackBtn}
         </div>
       </div>
+      
       <div className="loginAuth-title">Forgot Password</div>
       <div className="loginAuth-text">
         Please enter your phone number. You will receive a code to create a new
@@ -128,6 +130,7 @@ const LoginForgotPW = () => {
                     : 'loginAuth-formInput loginAuth-formInputError'
                 }
                 onChange={phoneNumValidation}
+                autoComplete="off"
                 required
               />
               {/* loginAuth-formInputSuccess */}

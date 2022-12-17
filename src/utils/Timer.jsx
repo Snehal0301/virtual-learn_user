@@ -10,7 +10,7 @@ import { testisSuccess } from "../redux/reducers/testSlice";
 import Loading from "./loading/Loading";
 
 const Timer = () => {
-  const initialTimer = localStorage.getItem("timer") ?? 480;
+  const initialTimer = sessionStorage.getItem("timer") ?? 0;
   const timeoutId = React.useRef(null);
   const [timer, setTimer] = React.useState(initialTimer);
   const [loading, setLoading] = React.useState(false);
@@ -20,7 +20,7 @@ const Timer = () => {
   let userAnswer = [];
   const countTimer = React.useCallback(() => {
     if (timer <= 0) {
-      localStorage.removeItem("timer");
+      sessionStorage.removeItem("timer");
       setLoading(true);
 
       var form = document.getElementById("quiz");
@@ -91,13 +91,12 @@ const Timer = () => {
     return () => window.clearTimeout(timeoutId.current);
   }, [timer, countTimer]);
 
-  var minutes = timer > 60 ? Math.floor(timer / 60) : timer;
+
+  var MinSec = new Date(timer * 1000).toISOString().substring(14, 19)
 
   return (
     <>
-      <div align="center">
-        {minutes} {timer > 60 ? "mins" : "sec"}
-      </div>
+      <div align="center">{MinSec}</div>
       {loading && (
         <>
           <Loading message={"Time Up..."} />

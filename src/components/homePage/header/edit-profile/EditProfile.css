@@ -31,6 +31,7 @@
 .editProfileImage img {
   height: 80px;
   width: 80px;
+  position: relative;
 }
 /*Custom Input type file*/
 .custom-file-input {
@@ -38,8 +39,9 @@
   width: 45px;
   margin-bottom: 2px;
   position: absolute;
-  top: 80px;
-  right: 115px;
+  bottom: 0px;
+  margin-bottom: -14px;
+  margin-left: -30px;
 }
 .custom-file-input::-webkit-file-upload-button {
   visibility: hidden;
@@ -77,7 +79,7 @@
 .editPInput {
   width: 100%;
   margin-top: 1.5rem;
-  /* padding: 0.25rem; */
+  padding: 1px 0;
   border: none;
   border-bottom: 1px solid #072d5b;
   transition: border-color 0.2s ease;
@@ -87,12 +89,12 @@
   font-family: Avenir;
   font-size: 19px;
 }
-
 .editprofilelabel {
   display: block;
   transform: translate(0, -1.75rem);
-  font-size: 16px;
+  font-size: 17px;
   font-family: Avenir;
+  line-height: 11px;
 }
 .editprofilelabelGender {
   color: #7a7a7a;
@@ -118,19 +120,20 @@
   border: none;
   border-bottom: 1px solid #072d5b;
   outline: none;
-  margin-bottom: 17px;
+  margin-bottom: 8px;
   color: #072d5b;
   font-size: 19px;
   font-family: Avenir;
   font-weight: 700;
   /* margin-left: -5px; */
 }
+
 #editPOccupation {
   padding-top: 1px;
   border: none;
   border-bottom: 1px solid #072d5b;
   outline: none;
-  margin-bottom: 17px;
+  margin-bottom: 4px;
   color: #072d5b;
   font-size: 19px;
   font-family: Avenir;

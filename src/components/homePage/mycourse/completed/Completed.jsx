@@ -61,7 +61,7 @@ const Completed = () => {
                             {
                               headers: {
                                 Authorization: `Bearer ${sessionStorage.getItem(
-                                  'Token'
+                                  "Token"
                                 )}`,
                               },
                             }
@@ -91,16 +91,22 @@ const Completed = () => {
       ) : (
         <div
           style={{
-            display: 'flex',
-            flexDirection:'column',
-            alignItems: 'center',
-            justifyContent: 'center',
-            fontSize: '30px',
-            height: '50vh',
-            textAlign: 'center',
-            marginTop:'30px',
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+            fontSize: "30px",
+            height: "50vh",
+            textAlign: "center",
+            marginTop: "30px",
           }}
-        ><img src={require('../../../../assets/images/start-courses-image/EmptyImage.png')} alt="" />
+        >
+          <div className="emptyImageCourse">
+            <img
+              src={require("../../../../assets/images/start-courses-image/EmptyImage.png")}
+              alt=""
+            />
+          </div>
           No completed courses
         </div>
       )}

@@ -22,6 +22,7 @@ import EditProfile from "../edit-profile/EditProfile";
 import profileData from "../../../../api-results/ProfileResults.json";
 import axios from "axios";
 
+ 
 const Profile = () => {
   const dispatch = useDispatch();
   const handleProfileClose = () => {
@@ -139,7 +140,7 @@ const Profile = () => {
                   <p className="pd-title">Occupation</p>
                   <p className="pd-value">{profileData.occupation}</p>
                 </div>
-                {profileData && (
+                {profileData && profileData.dateOfBirth && (
                   <div className="personal-detail-section">
                     <p className="pd-title">Date of Birth</p>
                     <p className="pd-value">{profileData.dateOfBirth}</p>
