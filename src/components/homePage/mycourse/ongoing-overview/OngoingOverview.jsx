@@ -410,6 +410,7 @@ const OngoingOverview = () => {
   const [nextModal, setNextModal] = useState(false);
   const [defPause, setDefPause] = useState(false);
   const [firstPause, setFirstPause] = useState(true);
+  const [vtitle, setVtitle] = useState(false);
 
   const playerRef = useRef();
 
@@ -463,6 +464,13 @@ const OngoingOverview = () => {
   // }
 
 
+  const mouseOverEvent = () => {
+    setVtitle(true)
+  }
+  const mouseOutEvent = () => {
+    setVtitle(false)
+  }
+
   return (
     <>
       {chapter && overviewData.enrolled ? (
@@ -492,7 +500,7 @@ const OngoingOverview = () => {
       )}
       <div className="ongoing-overview">
         <div className="ongoing-section-1">
-          <div className="ongoing-section-video-player">
+          <div className="ongoing-section-video-player" onMouseOver={mouseOverEvent} onMouseOut={mouseOutEvent}>
             {pause && (
               <>
                 <div className="pause-overlay">
@@ -510,7 +518,7 @@ const OngoingOverview = () => {
             )}
 
             {
-              unmountStateRedux === 'true' && chapter && overviewData.enrolled === true &&
+              unmountStateRedux === 'true' && chapter && overviewData && overviewData.enrolled === true &&
               <>
                 <div className="pause-overlay">
                   {firstPause && (
@@ -581,7 +589,10 @@ const OngoingOverview = () => {
                 localStorage.setItem('pauseTimeLocal', progress.playedSeconds)
               }}
             />
-            <div className="video-title-overlay">{pauseData.videoTitle}</div>
+            {
+              vtitle &&
+              <div className="video-title-overlay">{pauseData.videoTitle}</div>
+            }
           </div>
           {/* <div className="ongoing-video-title-section">
                     <div className="ongoing-video-title">
@@ -1241,32 +1252,36 @@ const OngoingOverview = () => {
                                           <div
                                             className="accordian-item-section-2 test-section"
                                             onClick={() => {
-                                              let a =
-                                                ele &&
-                                                ele.testDuration &&
-                                                ele.testDuration.split(':');
 
-                                              if (a) {
-                                                let seconds =
-                                                  +a[0] * 60 * 60 +
-                                                  +a[1] * 60 +
-                                                  +a[2];
+                                              errorCourse()
+                                              // let a =
+                                              //   ele &&
+                                              //   ele.testDuration &&
+                                              //   ele.testDuration.split(':');
 
-                                                sessionStorage.setItem(
-                                                  'timer',
-                                                  seconds
-                                                );
-                                              }
-                                              dispatch(
-                                                test(
-                                                  `${ele.testName ===
-                                                    'Final Test'
-                                                    ? 'finalTest'
-                                                    : 'moduleTest'
-                                                  }?testId=${ele.testId}`
-                                                )
-                                              );
-                                            }}
+                                              // if (a) {
+                                              //   let seconds =
+                                              //     +a[0] * 60 * 60 +
+                                              //     +a[1] * 60 +
+                                              //     +a[2];
+
+                                              //   sessionStorage.setItem(
+                                              //     'timer',
+                                              //     seconds
+                                              //   );
+                                              // }
+                                              // dispatch(
+                                              //   test(
+                                              //     `${ele.testName ===
+                                              //       'Final Test'
+                                              //       ? 'finalTest'
+                                              //       : 'moduleTest'
+                                              //     }?testId=${ele.testId}`
+                                              //   )
+                                              // );
+
+                                            }
+                                            }
                                           >
                                             <div className="accordian-item-section-2-part-1">
                                               <p className="accordian-item-chapter-number">
@@ -1301,7 +1316,8 @@ const OngoingOverview = () => {
                                 </div>
                               </div>
                             </>
-                          )}
+                          )
+                          }
                         </>
                       );
                     })}
