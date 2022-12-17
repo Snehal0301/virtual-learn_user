@@ -20,7 +20,7 @@
   font-weight: 400;
   text-align: center;
   margin-bottom: 25px;
-  margin-top: 40px;
+  margin-top: 30px;
 }
 
 .onpause-button {
@@ -121,7 +121,7 @@
   text-align: justify;
 }
 
-.ongoing-course-desc-content .showmore {}
+/* .ongoing-course-desc-content .showmore {} */
 
 .ongoing-course-desc-content label {
   color: red;
@@ -644,9 +644,9 @@ p:not(.truncated)~label {
   border-radius: 2px;
 }
 
-.accordion__item+.accordion__item {
-  /* border-top: 1px solid rgba(0, 0, 0, 0.1); */
-}
+/* .accordion__item+.accordion__item {
+
+} */
 
 .accordion__button {
   background-color: white;
@@ -780,6 +780,7 @@ p:not(.truncated)~label {
 
 .approval-rate {
   font-size: 12px;
+  text-align: center;
 }
 
 .video-title-overlay {
@@ -793,6 +794,13 @@ p:not(.truncated)~label {
 }
 
 /* all media queries */
+
+@media only screen and (max-width: 1400px) {
+
+  .homePageBody {
+    padding: 25px 2%;
+  }
+}
 
 @media only screen and (max-width: 1300px) {
   .ongoing-overview {
@@ -811,6 +819,12 @@ p:not(.truncated)~label {
 
   .videosection-title {
     font-size: 15px;
+  }
+
+  .percent {
+    color: green;
+    font-size: 1.2rem;
+    font-weight: 700;
   }
 }
 
@@ -833,6 +847,10 @@ p:not(.truncated)~label {
     width: 85%;
     height: 50px;
     /* margin: 0 30px; */
+  }
+
+  .percent {
+    font-size: 1.2rem;
   }
 }
 
@@ -878,11 +896,23 @@ p:not(.truncated)~label {
 
   .onpause-modal {
     padding: 0px 35px;
-    display: none;
+    /* display: none; */
   }
 
   .overview-content {
     margin-top: unset;
+  }
+
+  .onpause-modal-title {
+    font-size: 15px;
+    font-weight: 400;
+    text-align: center;
+    margin-bottom: 25px;
+    margin-top: 30px;
+  }
+
+  .onpause-button {
+    font-size: 15px;
   }
 }
 
@@ -915,11 +945,11 @@ p:not(.truncated)~label {
   }
 
   .accordian-item-chapter-title {
-    font-size: 15px;
+    font-size: 12px;
   }
 
   .accordian-item-chapter-duration {
-    font-size: 12px;
+    font-size: 9px;
   }
 
   .course-accordian-container-title {
@@ -942,5 +972,25 @@ p:not(.truncated)~label {
     border-radius: 6px;
     cursor: pointer;
     z-index: 10;
+  }
+
+  .onpause-modal {
+    padding: 0px 35px;
+    width: 85%;
+    /* display: none; */
+  }
+
+  .onpause-modal-title {
+    margin-bottom: 12px;
+    margin-top: 15px;
+  }
+
+  .onpause-button {
+    font-size: 12px;
+    margin-bottom: 10px;
+  }
+
+  .video-title-overlay {
+    font-size: 15px;
   }
 }

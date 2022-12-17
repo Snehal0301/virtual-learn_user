@@ -320,11 +320,14 @@ const OngoingOverview = () => {
 
   useEffect(() => {
     console.log('Component mounted');
+    // dispatch(accordianIDState(accordianStateID-1))
+    accordianToggle(accordianStateID - 1)
 
     return () => {
       console.log("Component unmounted");
       dispatch(tabToggleState(1));
       dispatch(unmountState('true'))
+      dispatch(accordianToggleState(0))
       componentUnMount();
     };
   }, []);
@@ -355,12 +358,14 @@ const OngoingOverview = () => {
   }, [chapter])
 
 
-  // const [pauseData, setPauseData] = useState({
-  //   courseId: chapter.chapterResponses[0].lessonResponses[0].lessonName,
-  //   chapterId: '',
-  //   lessonId: '',
-  //   videoTitle:''
-  // })
+  // overviewData && overviewData.enrolled ?
+  //   accordianToggle(accordianStateID - 1)
+  //   :
+  //   dispatch(accordianIDState(0))
+  // accordianToggle(0)
+
+  // clear logic
+  // overviewData && !overviewData.enrolled && accordianToggle(0)
 
   const showChapter = (courseId, chapterId, lessonId, videoTitle) => {
     setPauseData({
@@ -540,6 +545,7 @@ const OngoingOverview = () => {
                         <span>{Math.floor(played) / 100}</span> Do you want to
                         continue watching?
                       </p>
+                      {/* <div className="onpause-modal-button"> */}
                       <button
                         className="onpause-button"
                         onClick={defaultNormalPause}
@@ -557,6 +563,7 @@ const OngoingOverview = () => {
                       >
                         Watch from beginning
                       </button>
+                      {/* </div> */}
                     </div>
                   )}
                   {defPause && (
@@ -589,6 +596,7 @@ const OngoingOverview = () => {
                 localStorage.setItem('pauseTimeLocal', progress.playedSeconds)
               }}
             />
+
             {
               vtitle &&
               <div className="video-title-overlay">{pauseData.videoTitle}</div>
