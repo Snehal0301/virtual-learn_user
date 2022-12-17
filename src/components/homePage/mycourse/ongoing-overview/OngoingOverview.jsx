@@ -49,7 +49,8 @@ import { Player } from 'video-react';
 import toast, { Toaster } from 'react-hot-toast';
 import { chapterResponse } from '../../../../redux/reducers/chapterResponses';
 import { courseOverview } from "../../../../redux/reducers/courseOverview";
-import { courseIDState } from "../../../../redux/reducers/pauseTime";
+import { accordianIDState, chapterIDState, courseIDState, lessonIDState, pauseTimeState, unmountState } from "../../../../redux/reducers/pauseTime";
+import { pauseUnmount } from "../../../../redux/reducers/pauseTimeSlice";
 
 
 const OngoingOverview = () => {
@@ -61,6 +62,7 @@ const OngoingOverview = () => {
   const [overviewLoading, setOverviewLoading] = useState(false);
   const [testLoading, setTestLoading] = useState(false);
   const dispatch = useDispatch();
+
   // Toast
   const notify = () =>
     toast.error((t) => (
@@ -93,7 +95,7 @@ const OngoingOverview = () => {
       </div>
     ));
 
-  const alreadyCourse = () => 
+  const alreadyCourse = () =>
     toast.success((t) => (
       <div className="toast-div">
         Already enrolled
@@ -112,6 +114,17 @@ const OngoingOverview = () => {
         </div>
       </div>
     ));
+
+  const attemptTest = () =>
+    toast.error((t) => (
+      <div className="toast-div">
+        You have already attempted the test
+        <div className="toast-close" onClick={() => toast.dismiss(t.id)}>
+          X
+        </div>
+      </div>
+    ));
+
   // Toast
 
   const navigate = useNavigate();
@@ -179,7 +192,11 @@ const OngoingOverview = () => {
     dispatch(firstVideoState(defaultvideo));
   }, [defaultvideo]);
 
-  // const defaultVideoState = useSelector((state) => state.mycourse.firstVideo);
+  useEffect(() => {
+    chapter && overviewData.enrolled === true ? dispatch(tabToggleState(2)) : dispatch(tabToggleState(1))
+  }, [chapter])
+
+  const defaultVideoState = useSelector((state) => state.mycourse.firstVideo);
 
   const tabToggle = (id) => {
     dispatch(tabToggleState(id));
@@ -191,6 +208,15 @@ const OngoingOverview = () => {
     dispatch(accordianToggleState(id));
   };
 
+  // Required State data
+  const accordianStateID = useSelector((state) => state.pauseTime.accordianID) //this is chapter number
+  const chapterStateID = useSelector((state) => state.pauseTime.chapterID)
+  const lessonStateID = useSelector((state) => state.pauseTime.lessonID)
+  const courseStateID = useSelector((state) => state.pauseTime.courseID)
+  const pauseStateID = useSelector((state) => state.pauseTime.ptime)
+  console.log('id', accordianStateID, chapterStateID, lessonStateID, courseStateID)
+  // Required State data
+
   const accordianState = useSelector((state) => state.mycourse.accordian);
   const [pause, setPause] = useState(false);
   const [playing, setPlaying] = useState(false);
@@ -201,7 +227,9 @@ const OngoingOverview = () => {
   const onPause = () => {
     setPause(true);
     setPlaying(false);
+    console.log('pause time', Math.floor(played) / 100);
   };
+
   const onPlay = () => {
     setPause(false);
     setPlaying(true);
@@ -244,43 +272,67 @@ const OngoingOverview = () => {
       });
   };
 
+  const pauseTimeLocal = localStorage.getItem('pauseTimeLocal')
+  console.log("pauseTimeLocal", pauseTimeLocal)
+
+  const componentUnMount = () => {
+
+    const unmountPauseTime = new Date(pauseTimeLocal * 1000).toISOString().slice(11, 19);
+    console.log('played', unmountPauseTime);
+
+    const unmountData = {
+      pauseTime: unmountPauseTime,
+      lessonId: pauseData.lessonId,
+      chapterId: pauseData.chapterId,
+      courseId: pauseData.courseId
+    }
+
+    dispatch(pauseUnmount(unmountData))
+
+    // await axios
+    //   .request(
+    //     `http://virtuallearn-env.eba-6xmym3vf.ap-south-1.elasticbeanstalk.com/user/pauseTime`,
+    //     {
+    //       method: 'put',
+    //       headers: {
+    //         Authorization: `Bearer ${sessionStorage.getItem('Token')}`,
+    //       },
+    //       data: {
+    //         pauseTime: unmountPauseTime,
+    //         lessonId: pauseData.lessonId,
+    //         chapterId: pauseData.chapterId,
+    //         courseId: pauseData.courseId
+    //       },
+    //     }
+    //   )
+    //   .then((res) => {
+    //     console.log(res)
+    //     console.log('unmountPauseTime', unmountPauseTime)
+    //     // dispatch(courseOverview(pauseData.courseId));
+    //     // dispatch(chapterResponse(pauseData.courseId));
+    //     // if (res.data.message === "Updated SuccessFully") {
+    //     // }
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //   });
+  }
+
   useEffect(() => {
     console.log('Component mounted');
-    // dispatch(chapterResponse(chapter.chapterId))
+
     return () => {
       console.log("Component unmounted");
       dispatch(tabToggleState(1));
-      // const unmountPauseTime = new Date(played * 1000).toISOString().slice(11, 19);
-      // console.log('unmountPauseTime', unmountPauseTime);
-
-      // await axios
-      //   .request(
-      //     `http://virtuallearn-env.eba-6xmym3vf.ap-south-1.elasticbeanstalk.com/user/pauseTime`,
-      //     {
-      //       method: 'put',
-      //       headers: {
-      //         Authorization: `Bearer ${sessionStorage.getItem('Token')}`,
-      //       },
-      //       data: {
-      //         pauseTime: resultPauseTime,
-      //         lessonId: pauseData.lessonId,
-      //         chapterId: pauseData.chapterId,
-      //         courseId: pauseData.courseId
-      //       },
-      //     }
-      //   )
-      //   .then((res) => {
-      //     console.log(res)
-      //     // dispatch(courseOverview(pauseData.courseId));
-      //     dispatch(chapterResponse(pauseData.courseId));
-      //     // if (res.data.message === "Updated SuccessFully") {
-      //     // }
-      //   })
-      //   .catch((err) => {
-      //     console.log(err);
-      //   });
+      dispatch(unmountState('true'))
+      componentUnMount();
     };
   }, []);
+
+  // componentUnMount()
+  const unmountPauseTime = new Date(pauseStateID * 1000).toISOString().slice(11, 19);
+  console.log('played', unmountPauseTime);
+
 
   const [pauseData, setPauseData] = useState({
     courseId: '',
@@ -302,7 +354,7 @@ const OngoingOverview = () => {
       })
   }, [chapter])
 
-  
+
   // const [pauseData, setPauseData] = useState({
   //   courseId: chapter.chapterResponses[0].lessonResponses[0].lessonName,
   //   chapterId: '',
@@ -323,6 +375,8 @@ const OngoingOverview = () => {
     getVideoState(itemele)
     showChapter(chapter.courseId, ele.chapterId, itemele.lessonId, itemele.lessonName)
     dispatch(courseIDState(chapter.courseId))
+    dispatch(chapterIDState(ele.chapterId))
+    dispatch(lessonIDState(itemele.lessonNumber))
   }
 
   const videoLink = useSelector((state) => state.mycourse.videoLink);
@@ -356,6 +410,7 @@ const OngoingOverview = () => {
   const [nextModal, setNextModal] = useState(false);
   const [defPause, setDefPause] = useState(false);
   const [firstPause, setFirstPause] = useState(true);
+  const [vtitle, setVtitle] = useState(false);
 
   const playerRef = useRef();
 
@@ -365,6 +420,7 @@ const OngoingOverview = () => {
     setDefPause(true);
     setNextModal(false);
     setFirstPause(false);
+    dispatch(unmountState('false'))
   };
 
   const enrollCourse = async (courseId) => {
@@ -398,11 +454,28 @@ const OngoingOverview = () => {
     console.log('Clicked');
   };
 
+  const unmountStateRedux = useSelector((state) => state.pauseTime.unmount)
+
+  console.log('unmountStateRedux', unmountStateRedux)
+
+  // see this logic
+  // if (overviewData && !overviewData.enrolled) {
+  //   dispatch(accordianToggleState(0));
+  // }
+
+
+  const mouseOverEvent = () => {
+    setVtitle(true)
+  }
+  const mouseOutEvent = () => {
+    setVtitle(false)
+  }
+
   return (
     <>
-      {chapter && chapter.enrolled ? (
+      {chapter && overviewData.enrolled ? (
         <div className="homeCategories-head-link">
-          <span>
+          <span onClick={componentUnMount}>
             <Link
               to="/myCourses"
               style={{ color: "var(--blueFont)", cursor: "pointer" }}
@@ -427,8 +500,25 @@ const OngoingOverview = () => {
       )}
       <div className="ongoing-overview">
         <div className="ongoing-section-1">
-          <div className="ongoing-section-video-player">
+          <div className="ongoing-section-video-player" onMouseOver={mouseOverEvent} onMouseOut={mouseOutEvent}>
             {pause && (
+              <>
+                <div className="pause-overlay">
+                  <div className="pause-button" onClick={onPlay}>
+                    {start_pauseIconVideo}
+                  </div>
+                  {/* {defPause && (
+                    <div className="pause-button" onClick={onPlay}>
+                      {start_pauseIconVideo}
+                    </div>
+                  )} */}
+                </div>
+
+              </>
+            )}
+
+            {
+              unmountStateRedux === 'true' && chapter && overviewData && overviewData.enrolled === true &&
               <>
                 <div className="pause-overlay">
                   {firstPause && (
@@ -439,9 +529,10 @@ const OngoingOverview = () => {
                         setFirstPause(false);
                       }}
                     >
-                      Continue Chapter 3 Lesson 21
+                      Continue Chapter {accordianStateID} Lesson {lessonStateID}
                     </div>
                   )}
+
                   {nextModal && (
                     <div className="onpause-modal">
                       <p className="onpause-modal-title">
@@ -461,6 +552,7 @@ const OngoingOverview = () => {
                           playerRef.current.seekTo(0, 'seconds');
                           setPause(false);
                           setPlaying(true);
+                          dispatch(unmountState('false'))
                         }}
                       >
                         Watch from beginning
@@ -474,10 +566,10 @@ const OngoingOverview = () => {
                   )}
                 </div>
               </>
-            )}
+            }
 
             <ReactPlayer
-              url={videoLink}
+              url={videoLink ? videoLink : defaultVideoState}
               // url='https://youtu.be/aeWyp2vXxqA'
               controls="true"
               className="react-player"
@@ -485,6 +577,7 @@ const OngoingOverview = () => {
               height="100%"
               ref={playerRef}
               onPause={onPause}
+              onPlay={onPlay}
               playing={playing}
               onEnded={onEnd}
               onSeek={() => {
@@ -492,9 +585,14 @@ const OngoingOverview = () => {
               }}
               onProgress={(progress) => {
                 setPlayed(progress.playedSeconds);
+                dispatch(pauseTimeState(progress.playedSeconds))
+                localStorage.setItem('pauseTimeLocal', progress.playedSeconds)
               }}
             />
-            <div className="video-title-overlay">{pauseData.videoTitle}</div>
+            {
+              vtitle &&
+              <div className="video-title-overlay">{pauseData.videoTitle}</div>
+            }
           </div>
           {/* <div className="ongoing-video-title-section">
                     <div className="ongoing-video-title">
@@ -544,6 +642,11 @@ const OngoingOverview = () => {
                     {/* <label for="expanded" role="button">
                     SHOW MORE
                   </label> */}
+
+                    {/* {
+                      unmountStateRedux === 'true' ? <p>Unmount true</p> : <p>Unmount false</p>
+                    } */}
+
                   </div>
                 </div>
               ) : (
@@ -656,7 +759,7 @@ const OngoingOverview = () => {
 
                 {overviewData ? (
                   <div className="overview-content">
-                    <p className="overview-content-title">Course Includes</p>
+                    <p className="overview-content-title" onClick={componentUnMount}>Course Includes</p>
                     <div className="course-points">
                       <div className="course-points-img">{courseHourIcon}</div>
                       <div className="course-points-title">
@@ -796,13 +899,13 @@ const OngoingOverview = () => {
                       }
                       return (
                         <>
-                          {chapter.enrolled ? (
+                          {overviewData.enrolled ? (
                             <>
                               {/* <Accordian active /> */}
                               <div
                                 div
                                 className="course-accordian"
-                                onClick={() => accordianToggle(id)}
+                                onClick={() => { accordianToggle(id); dispatch(accordianIDState(id + 1)) }}
                               >
                                 <div className="course-accordian-heading">
                                   <div className="course-accordian-container">
@@ -863,7 +966,6 @@ const OngoingOverview = () => {
                                                   // onClick={() => { setVideo(courseele.videoLink) }}
                                                   onClick={() => {
                                                     itemele.lessonStatus ?
-
                                                       getPauseVideoTime(chapter, ele, itemele)
                                                       // getVideoState(itemele)
 
@@ -911,17 +1013,23 @@ const OngoingOverview = () => {
                                               }
 
                                               statusTest ?
-                                                dispatch(
-                                                  test(
-                                                    `${ele.testName ===
-                                                      'Final Test'
-                                                      ? 'finalTest'
-                                                      : 'moduleTest'
-                                                    }?testId=${ele.testId}`
-                                                  )
+                                                (
+                                                  ele && ele.chapterTestPercentage && ele.chapterTestPercentage > 0 ?
+                                                    attemptTest()
+                                                    :
+                                                    dispatch(
+                                                      test(
+                                                        `${ele.testName ===
+                                                          'Final Test'
+                                                          ? 'finalTest'
+                                                          : 'moduleTest'
+                                                        }?testId=${ele.testId}`
+                                                      )
+                                                    )
                                                 )
                                                 :
                                                 inactiveTest()
+
                                             }}
                                           >
                                             <div className="accordian-item-section-2-part-1">
@@ -1144,32 +1252,36 @@ const OngoingOverview = () => {
                                           <div
                                             className="accordian-item-section-2 test-section"
                                             onClick={() => {
-                                              let a =
-                                                ele &&
-                                                ele.testDuration &&
-                                                ele.testDuration.split(':');
 
-                                              if (a) {
-                                                let seconds =
-                                                  +a[0] * 60 * 60 +
-                                                  +a[1] * 60 +
-                                                  +a[2];
+                                              errorCourse()
+                                              // let a =
+                                              //   ele &&
+                                              //   ele.testDuration &&
+                                              //   ele.testDuration.split(':');
 
-                                                sessionStorage.setItem(
-                                                  'timer',
-                                                  seconds
-                                                );
-                                              }
-                                              dispatch(
-                                                test(
-                                                  `${ele.testName ===
-                                                    'Final Test'
-                                                    ? 'finalTest'
-                                                    : 'moduleTest'
-                                                  }?testId=${ele.testId}`
-                                                )
-                                              );
-                                            }}
+                                              // if (a) {
+                                              //   let seconds =
+                                              //     +a[0] * 60 * 60 +
+                                              //     +a[1] * 60 +
+                                              //     +a[2];
+
+                                              //   sessionStorage.setItem(
+                                              //     'timer',
+                                              //     seconds
+                                              //   );
+                                              // }
+                                              // dispatch(
+                                              //   test(
+                                              //     `${ele.testName ===
+                                              //       'Final Test'
+                                              //       ? 'finalTest'
+                                              //       : 'moduleTest'
+                                              //     }?testId=${ele.testId}`
+                                              //   )
+                                              // );
+
+                                            }
+                                            }
                                           >
                                             <div className="accordian-item-section-2-part-1">
                                               <p className="accordian-item-chapter-number">
@@ -1204,7 +1316,8 @@ const OngoingOverview = () => {
                                 </div>
                               </div>
                             </>
-                          )}
+                          )
+                          }
                         </>
                       );
                     })}
