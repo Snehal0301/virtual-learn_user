@@ -4,6 +4,7 @@ import "../profile/Profile";
 import {
   editProfileSection,
   profileDrawer,
+  profileSection,
   showChangePasswordSection,
 } from "../../../../redux/reducers/headerProfileOptions";
 import { useDispatch, useSelector } from "react-redux";
@@ -13,6 +14,7 @@ import { type } from "./../../../../redux/store/store";
 import { useFormik } from "formik";
 import { editSchema } from "./edit-schema";
 import axios from "axios";
+import toast, { Toaster } from "react-hot-toast";
 
 const EditProfile = () => {
   const [editProfileData, setEditProfileData] = useState({});
@@ -22,6 +24,24 @@ const EditProfile = () => {
   const handleClick = () => {
     dispatch(editProfileSection(false));
   };
+  const handleProfilePic = (e) => {
+    var image = document.getElementById("ProfileImage");
+    image.src = URL.createObjectURL(e.target.files[0]);
+    setSelectedFile(e.target.files[0]);
+  };
+  // Toast-Success-Edit
+  const successEditData = () =>
+    toast.success((w) => (
+      <div className="toast-div-password">
+        Profile Edited Successfully
+        <div
+          className="toast-close-password"
+          onClick={() => toast.dismiss(w.id)}
+        >
+          X
+        </div>
+      </div>
+    ));
 
   // console.log(selectedFile);
   const { errors, values, touched, handleChange, handleBlur, handleSubmit } =
@@ -33,7 +53,7 @@ const EditProfile = () => {
         editPEmail: editProfileData?.email ?? "",
         MobileNo: editProfileData?.mobileNumber ?? "",
         gender: editProfileData?.gender ?? "",
-        editPDOB: editProfileData?.dateOfBirth ?? "",
+        editPDOB: editProfileData.dateOfBirth ? editProfileData.dateOfBirth:'',
         editPOccupation: editProfileData?.occupation ?? "",
         TwitterURL: editProfileData?.twitterLink ?? "",
         FacebookURL: editProfileData?.faceBookLink ?? "",
@@ -56,9 +76,8 @@ const EditProfile = () => {
           values.editPDOB ? values.editPDOB : "empty"
         );
         if (selectedFile == null) {
-          console.log("No image been uploaded")
-        }
-        else {
+          console.log("No image been uploaded");
+        } else {
           formData.append("profilePhoto", selectedFile);
         }
         formData.forEach((value, key) => {
@@ -74,16 +93,15 @@ const EditProfile = () => {
               },
               data: formData,
             }
-          )
+        ).then((res) => {
+            console.log('res',res);
+          })
           .catch((Err) => {
             console.log(Err);
           });
+        successEditData();
       },
     });
-
-  const handleProfilePic = (e) => {
-    setSelectedFile(e.target.files[0]);
-  };
 
   /*EditProfileData Fetch By Mamatha */
   useEffect(() => {
@@ -130,6 +148,7 @@ const EditProfile = () => {
         <div className="editprofiletext">Edit Profile</div>
         <div className="editProfileImage">
           <img
+            id="ProfileImage"
             src={
               editProfileData && editProfileData.profilePhoto
                 ? editProfileData.profilePhoto
@@ -139,6 +158,7 @@ const EditProfile = () => {
           />
           <input
             type="file"
+            id="file"
             onChange={handleProfilePic}
             className="custom-file-input"
           />
@@ -263,17 +283,20 @@ const EditProfile = () => {
               onChange={handleChange}
               onBlur={handleBlur}
             >
+              <option value="other" selected>
+                other
+              </option>
               <option value="male">Male</option>
               <option value="female" selected>
                 Female
               </option>
-              <option value="other">other</option>
             </select>
           </div>
           <input
             type="date"
             id="editPDOB"
             name="editPDOB"
+            value={values.editPDOB}
             placeholder=" "
             className="editPInput"
             onChange={handleChange}
@@ -334,6 +357,36 @@ const EditProfile = () => {
           </button>
         </form>
       </div>
+      <Toaster
+        position="bottom-center"
+        containerStyle={{
+          top: 20,
+          left: 20,
+          bottom: 20,
+          right: 20,
+        }}
+        toastOptions={{
+          className: "",
+          success: {
+            duration: 1500,
+            style: {
+              border: "1px solid #AAFF00",
+              padding: "10px",
+              color: "green",
+              width: "300px",
+            },
+          },
+          error: {
+            duration: 1500,
+            style: {
+              border: "1px solid #ee5c4d",
+              padding: "10px",
+              color: "#ee5c4d",
+              width: "350px",
+            },
+          },
+        }}
+      />
     </div>
   );
 };

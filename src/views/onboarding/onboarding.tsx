@@ -10,6 +10,7 @@ import LoginForgotPW from '../../components/onboarding/login/login-forgotPW/Logi
 import PersonalDetails from '../../components/onboarding/registration/personal-details/PersonalDetails';
 import RegistrationForm from '../../components/onboarding/registration/registrationform/RegistrationForm';
 
+
 const Onboarding = () => {
   const indicators = () => <div className="indicator"></div>;
   return (

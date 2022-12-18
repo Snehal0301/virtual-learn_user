@@ -101,7 +101,7 @@
 }
 
 .loginAuth-FormContainer label {
-    text-transform: uppercase;
+   text-transform: capitalize;
     letter-spacing: 0.05em;
 }
 
@@ -183,6 +183,7 @@ input[type='number'] {
     /* identical to box height, or 130% */
     text-align: center;
     color: var(--primaryFontClr);
+    letter-spacing: 1px;
 }
 
 .loginAuth-regLink {

@@ -7,12 +7,7 @@
   background-color: white;
   width: 50%;
   height: 60%;
-  position: absolute;
   z-index: 1;
-  top: 17%;
-  bottom: 0%;
-  left: 25%;
-  right: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -25,7 +20,7 @@
   font-weight: 400;
   text-align: center;
   margin-bottom: 25px;
-  margin-top: 40px;
+  margin-top: 30px;
 }
 
 .onpause-button {
@@ -58,9 +53,6 @@
 }
 
 .pause-button {
-  position: absolute;
-  top: 43%;
-  right: 47.5%;
   cursor: pointer;
 }
 
@@ -129,7 +121,7 @@
   text-align: justify;
 }
 
-.ongoing-course-desc-content .showmore {}
+/* .ongoing-course-desc-content .showmore {} */
 
 .ongoing-course-desc-content label {
   color: red;
@@ -622,18 +614,19 @@ p:not(.truncated)~label {
   border-radius: 6px;
   background-color: #7a7a7a76;
   z-index: 5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .continue-chapter-pause-button {
   background-color: var(--secondaryClr);
-  position: absolute;
-  top: 45%;
-  left: 34.8%;
   padding: 20px;
   color: white;
   font-size: 20px;
   border-radius: 6px;
   cursor: pointer;
+  z-index: 10;
 }
 
 .continue-chapter-pause-button:hover {
@@ -651,9 +644,9 @@ p:not(.truncated)~label {
   border-radius: 2px;
 }
 
-.accordion__item+.accordion__item {
-  /* border-top: 1px solid rgba(0, 0, 0, 0.1); */
-}
+/* .accordion__item+.accordion__item {
+
+} */
 
 .accordion__button {
   background-color: white;
@@ -749,25 +742,6 @@ p:not(.truncated)~label {
   height: 100%;
 }
 
-/* .progressbar {
-  position: relative;
-  overflow: hidden;
-  width: 350px;
-  height: 35px;
-  border-radius: 50px;
-  background-color: #eee;
-}
-
-.progressPercent {
-  font-weight: 600;
-  font-family: 'Franklin Gothic Medium';
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  color: #eee;
-  text-shadow: -1px 0 #555, 0 1px #555, 1px 0 #555, 0 -1px #555;
-} */
 
 /* Safari */
 @-webkit-keyframes spin {
@@ -806,9 +780,10 @@ p:not(.truncated)~label {
 
 .approval-rate {
   font-size: 12px;
+  text-align: center;
 }
 
-.video-title-overlay{
+.video-title-overlay {
   position: absolute;
   left: 20px;
   bottom: 65px;
@@ -819,6 +794,13 @@ p:not(.truncated)~label {
 }
 
 /* all media queries */
+
+@media only screen and (max-width: 1400px) {
+
+  .homePageBody {
+    padding: 25px 2%;
+  }
+}
 
 @media only screen and (max-width: 1300px) {
   .ongoing-overview {
@@ -837,6 +819,12 @@ p:not(.truncated)~label {
 
   .videosection-title {
     font-size: 15px;
+  }
+
+  .percent {
+    color: green;
+    font-size: 1.2rem;
+    font-weight: 700;
   }
 }
 
@@ -859,6 +847,10 @@ p:not(.truncated)~label {
     width: 85%;
     height: 50px;
     /* margin: 0 30px; */
+  }
+
+  .percent {
+    font-size: 1.2rem;
   }
 }
 
@@ -904,11 +896,23 @@ p:not(.truncated)~label {
 
   .onpause-modal {
     padding: 0px 35px;
-    display: none;
+    /* display: none; */
   }
 
   .overview-content {
     margin-top: unset;
+  }
+
+  .onpause-modal-title {
+    font-size: 15px;
+    font-weight: 400;
+    text-align: center;
+    margin-bottom: 25px;
+    margin-top: 30px;
+  }
+
+  .onpause-button {
+    font-size: 15px;
   }
 }
 
@@ -941,11 +945,11 @@ p:not(.truncated)~label {
   }
 
   .accordian-item-chapter-title {
-    font-size: 15px;
+    font-size: 12px;
   }
 
   .accordian-item-chapter-duration {
-    font-size: 12px;
+    font-size: 9px;
   }
 
   .course-accordian-container-title {
@@ -958,5 +962,35 @@ p:not(.truncated)~label {
 
   .course-content-desc {
     line-height: 25px;
+  }
+
+  .continue-chapter-pause-button {
+    background-color: var(--secondaryClr);
+    padding: 20px;
+    color: white;
+    font-size: 15px;
+    border-radius: 6px;
+    cursor: pointer;
+    z-index: 10;
+  }
+
+  .onpause-modal {
+    padding: 0px 35px;
+    width: 85%;
+    /* display: none; */
+  }
+
+  .onpause-modal-title {
+    margin-bottom: 12px;
+    margin-top: 15px;
+  }
+
+  .onpause-button {
+    font-size: 12px;
+    margin-bottom: 10px;
+  }
+
+  .video-title-overlay {
+    font-size: 15px;
   }
 }

@@ -28,7 +28,7 @@ const PersonalDetails = () => {
         password: "",
         ConfirmPassword: "",
         fullName: "",
-        mobileNumber: "",
+        mobileNumber: sessionStorage.getItem("regMobileNum"),
       },
       validationSchema: signupSchema,
       onSubmit: (values, action) => {
@@ -118,6 +118,7 @@ const PersonalDetails = () => {
               value={sessionStorage.getItem("regMobileNum")}
               onChange={handleChange}
               onBlur={handleBlur}
+              autoComplete="off"
               // maxLength={10}
             />
             <label htmlFor="mobileNumber">Mobile Number</label>
@@ -140,6 +141,7 @@ const PersonalDetails = () => {
               value={values.fullName}
               onChange={handleChange}
               onBlur={handleBlur}
+              autoComplete="off"
             />
             <label htmlFor="fullName">Full Name</label>
             {errors.fullName && touched.fullName ? (
@@ -160,6 +162,7 @@ const PersonalDetails = () => {
               value={values.UserName}
               onChange={handleChange}
               onBlur={handleBlur}
+              autoComplete="off"
             />
             <label htmlFor="UserName">User Name</label>
             {errors.UserName && touched.UserName ? (
@@ -180,6 +183,7 @@ const PersonalDetails = () => {
               value={values.email}
               onChange={handleChange}
               onBlur={handleBlur}
+              autoComplete="off"
             />
             <label htmlFor="email">Email Id</label>
             {errors.email && touched.email ? (
