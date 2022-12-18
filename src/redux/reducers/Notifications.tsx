@@ -11,19 +11,19 @@ const initialState = {
   loading: false,
 };
 
-export const courseOverview: any = createAsyncThunk(
-  "courseOverview/courseOverview",
+export const NotifyClick: any = createAsyncThunk(
+  "NotifyClick/NotifyClick",
   async (arg: any, { rejectWithValue }) => {
     try {
-      const fetchedData: any = await axios.request({
+      const fetchedNotifyData: any = await axios.request({
         method: "get",
-        url: `http://virtuallearn-env.eba-6xmym3vf.ap-south-1.elasticbeanstalk.com/user/courseOverView?courseId=${arg}`,
+        url: `http://virtuallearn-env.eba-6xmym3vf.ap-south-1.elasticbeanstalk.com/user/notifications`,
         headers: {
           Authorization: `Bearer ${sessionStorage.getItem("Token")}`,
         },
       });
 
-      return fetchedData;
+      return fetchedNotifyData;
     } catch (err) {
       let error: any = err;
       return rejectWithValue(
@@ -33,23 +33,23 @@ export const courseOverview: any = createAsyncThunk(
   }
 );
 
-export const courseOverviewSlice = createSlice({
-  name: "courseOverview",
+export const NotifySlice = createSlice({
+  name: "NotificationData",
   initialState,
   reducers: {},
   extraReducers: (builder) => {
     // Add reducers for additional action types here, and handle loading state as needed
-    builder.addCase(courseOverview.pending, (state, action) => {
+    builder.addCase(NotifyClick.pending, (state, action) => {
       // Add user to the state array
       state.loading = true;
     });
-    builder.addCase(courseOverview.fulfilled, (state, action) => {
+    builder.addCase(NotifyClick.fulfilled, (state, action) => {
       state.loading = false;
       state.data = action.payload;
       state.headers = action;
       state.isSuccess = true;
     });
-    builder.addCase(courseOverview.rejected, (state, action) => {
+    builder.addCase(NotifyClick.rejected, (state, action) => {
       state.message = action.payload;
       state.loading = false;
       state.isRejected = true;
@@ -57,6 +57,4 @@ export const courseOverviewSlice = createSlice({
   },
 });
 
-export const {} = courseOverviewSlice.actions;
-
-export default courseOverviewSlice;
+export default NotifySlice;

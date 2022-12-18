@@ -81,11 +81,12 @@ const ChangePassword = () => {
               newPassword: newpassword,
             },
           }
-        )
+      ).then((res) => {
+           successPassword();
+        })
         .catch((Err) => {
           console.log(Err);
         });
-      successPassword();
       setNewPassword("");
       setCpassword("");
       setCurrentPassword("");
@@ -194,7 +195,7 @@ const ChangePassword = () => {
         {/* <div className="toast">add toast here</div> */}
       </div>
       <Toaster
-        position="bottom-center"
+        position="bottom-center" 
         containerStyle={{
           top: 20,
           left: 20,

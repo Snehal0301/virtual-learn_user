@@ -565,6 +565,7 @@
 .left-drawer-link img {
   width: 16px;
   height: 16px;
+  filter: grayscale(1);
 }
 
 .left-drawer-link p {
