@@ -193,7 +193,7 @@ const OngoingOverview = () => {
   }, [defaultvideo]);
 
   useEffect(() => {
-    chapter && overviewData.enrolled === true ? dispatch(tabToggleState(2)) : dispatch(tabToggleState(1))
+    chapter && chapter.enrolled === true ? dispatch(tabToggleState(2)) : dispatch(tabToggleState(1))
   }, [chapter])
 
   const defaultVideoState = useSelector((state) => state.mycourse.firstVideo);
@@ -478,7 +478,7 @@ const OngoingOverview = () => {
 
   return (
     <>
-      {chapter && overviewData.enrolled ? (
+      {chapter && chapter.enrolled ? (
         <div className="homeCategories-head-link">
           <span onClick={componentUnMount}>
             <Link
@@ -523,7 +523,7 @@ const OngoingOverview = () => {
             )}
 
             {
-              unmountStateRedux === 'true' && chapter && overviewData && overviewData.enrolled === true &&
+              unmountStateRedux === 'true' && chapter && overviewData && chapter.enrolled === true &&
               <>
                 <div className="pause-overlay">
                   {firstPause && (
@@ -874,7 +874,7 @@ const OngoingOverview = () => {
                   <h3>Loading</h3>
                 )}
               </div>
-              {overviewData && overviewData.enrolled === true ? (
+              {chapter && chapter.enrolled === true ? (
                 ''
               ) : (
                 <button
@@ -907,7 +907,7 @@ const OngoingOverview = () => {
                       }
                       return (
                         <>
-                          {overviewData.enrolled ? (
+                          {chapter.enrolled ? (
                             <>
                               {/* <Accordian active /> */}
                               <div
