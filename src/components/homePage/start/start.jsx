@@ -246,7 +246,7 @@ const Start = () => {
       <div className="start-username">{name}</div>
       <div className='webslider'>
         <Slider autoplay={true} autoplaySpeed={2000} slidesToShow={3} dots={true}  showIndicators={true}>
-          {headerdata && headerdata.map((item) => (
+          {headerdata && headerdata.slice(0,4).map((item) => (
             <div
               className="start-image-title"
               onClick={() => {
