@@ -210,7 +210,7 @@ const EditProfile = () => {
             ) : null}
           </div>
 
-          <div className="edit-error-input">
+          <div className="edit-error-input"> 
             <input
               type="email"
               id="editPEmail"

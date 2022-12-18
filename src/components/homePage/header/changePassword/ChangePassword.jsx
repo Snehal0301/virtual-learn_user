@@ -81,11 +81,13 @@ const ChangePassword = () => {
               newPassword: newpassword,
             },
           }
-        )
+        ).then((res)=>{
+          successPassword();
+        })
         .catch((Err) => {
           console.log(Err);
         });
-      successPassword();
+      
       setNewPassword("");
       setCpassword("");
       setCurrentPassword("");
@@ -165,15 +167,15 @@ const ChangePassword = () => {
               type="password"
               id="confirmPassword"
               name="confirmPassword"
-              placeholder=" "
               value={cPassword}
               onChange={(e) => {
                 setCpassword(e.target.value);
               }}
+              placeholder=" "
               pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}"
               required
             />
-            <label className="change-password-form-label" for="password">
+            <label className="change-password-form-label" for="confirmPassword">
               Confirm Password
             </label>
             {/*Confirm Password*/}
