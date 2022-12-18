@@ -245,10 +245,8 @@ const Start = () => {
       <div className="start-greeting">Hello!</div>
       <div className="start-username">{name}</div>
       <div className='webslider'>
-        <Slider autoplay={true} enableAutoPlay={true} slidesToShow={3} dots={true} 
-          
-         >
-          {headerdata && headerdata.slice(0,6).map((item) => (
+        <Slider autoplay={true} autoplaySpeed={2000} slidesToShow={3} dots={true} settings={settings} showIndicators={true}>
+          {headerdata && headerdata.map((item) => (
             <div
               className="start-image-title"
               onClick={() => {
