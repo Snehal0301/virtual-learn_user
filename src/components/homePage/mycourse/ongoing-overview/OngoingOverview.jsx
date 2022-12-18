@@ -160,9 +160,7 @@ const OngoingOverview = () => {
   }, [chapterLoad]);
 
 
-
   useEffect(() => {
-
     chapterResponses &&
       chapterResponses.data &&
       setChapter(chapterResponses.data);
@@ -198,7 +196,7 @@ const OngoingOverview = () => {
   // }, []);
 
   useEffect(() => {
-    chapter && overviewData.enrolled === true ? dispatch(tabToggleState(2)) : dispatch(tabToggleState(1))
+    chapter && chapter.enrolled === true ? dispatch(tabToggleState(2)) : dispatch(tabToggleState(1))
   }, [chapter])
 
   const defaultVideoState = useSelector((state) => state.mycourse.firstVideo);
@@ -322,6 +320,31 @@ const OngoingOverview = () => {
     //     console.log(err);
     //   });
   }
+
+  // const continueModalData = async() => {
+  //   await axios
+  //     .request(
+  //       `http://virtuallearn-env.eba-6xmym3vf.ap-south-1.elasticbeanstalk.com/user/continue?courseId=32`,
+  //       {
+  //         method: 'get',
+  //         headers: {
+  //           Authorization: `Bearer ${sessionStorage.getItem('Token')}`,
+  //         },
+  //       }
+  //     )
+  //     .then((res) => {
+  //       console.log('modal continue data',res)
+  //     })
+  //     .catch((err) => {
+  //       console.log('Modal continue error',err);
+  //     });
+  // }
+
+
+  // useEffect(() => {
+  //   continueModalData()
+  // }, [])
+
 
   useEffect(() => {
     console.log('Component mounted');
@@ -492,7 +515,7 @@ const OngoingOverview = () => {
 
   return (
     <>
-      {chapter && overviewData.enrolled ? (
+      {chapter && chapter.enrolled ? (
         <div className="homeCategories-head-link">
           <span onClick={componentUnMount}>
             <Link
@@ -532,7 +555,7 @@ const OngoingOverview = () => {
             )}
 
             {
-              unmountStateRedux === 'true' && chapter && overviewData && overviewData.enrolled === true &&
+              unmountStateRedux === 'true' && chapter && chapter.enrolled === true &&
               <>
                 <div className="pause-overlay">
                   {firstPause && (
@@ -883,7 +906,7 @@ const OngoingOverview = () => {
                   <h3>Loading</h3>
                 )}
               </div>
-              {overviewData && overviewData.enrolled === true ? (
+              {chapter && chapter.enrolled === true ? (
                 ''
               ) : (
                 <button
@@ -916,7 +939,7 @@ const OngoingOverview = () => {
                       }
                       return (
                         <>
-                          {overviewData.enrolled ? (
+                          {chapter.enrolled ? (
                             <>
                               {/* <Accordian active /> */}
                               <div
