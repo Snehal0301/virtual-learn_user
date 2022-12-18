@@ -45,6 +45,7 @@ import Loading from "../../../utils/loading/Loading";
 import axios from "axios";
 import { courseOverview } from "../../../redux/reducers/courseOverview";
 import { chapterResponse } from "../../../redux/reducers/chapterResponses";
+import { NotifyClick } from "../../../redux/reducers/Notifications";
 
 const Header = () => {
   const [onChange, setOnChange] = useState("");
@@ -839,6 +840,7 @@ const Header = () => {
                 onClick={() => {
                   handlenotify();
                   handleCloseDrawerMobile();
+                  dispatch(NotifyClick());
                 }}
               >
                 <img

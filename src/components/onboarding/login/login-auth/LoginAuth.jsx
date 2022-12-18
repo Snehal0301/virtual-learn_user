@@ -130,7 +130,7 @@ const LoginAuth = () => {
           </div>
           <div className="loginAuth-FormInput">
             <input
-              type="password"
+              type="password"  
               name="password"
               id="password"
               placeholder="Enter your password"

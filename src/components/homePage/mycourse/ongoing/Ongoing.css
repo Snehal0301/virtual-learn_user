@@ -1,7 +1,7 @@
 .ongoing-section {
   display: flex;
   flex-wrap: wrap;
-  gap: 1rem;
+  gap: 1%;
 }
 
 .ongoingSectionMap {
@@ -53,7 +53,7 @@
 }
 
 .Ongoing-text {
-  padding-bottom: 4.8em;
+  padding-bottom: 86px;
   font-family: "Proxima Nova Soft";
   font-style: normal;
   font-weight: 600;
