@@ -1,9 +1,9 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import axios from "axios";
-import type { AxiosError } from "axios";
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import axios from 'axios';
+import type { AxiosError } from 'axios';
 
 const initialState = {
-  message: "",
+  message: '',
   data: [],
   headers: [],
   isSuccess: false,
@@ -12,14 +12,14 @@ const initialState = {
 };
 
 export const courseOverview: any = createAsyncThunk(
-  "courseOverview/courseOverview",
+  'courseOverview/courseOverview',
   async (arg: any, { rejectWithValue }) => {
     try {
       const fetchedData: any = await axios.request({
-        method: "get",
+        method: 'get',
         url: `http://virtuallearn-env.eba-6xmym3vf.ap-south-1.elasticbeanstalk.com/user/courseOverView?courseId=${arg}`,
         headers: {
-          Authorization: `Bearer ${sessionStorage.getItem("Token")}`,
+          Authorization: `Bearer ${sessionStorage.getItem('Token')}`,
         },
       });
 
@@ -34,7 +34,7 @@ export const courseOverview: any = createAsyncThunk(
 );
 
 export const courseOverviewSlice = createSlice({
-  name: "courseOverview",
+  name: 'courseOverview',
   initialState,
   reducers: {},
   extraReducers: (builder) => {
@@ -50,6 +50,7 @@ export const courseOverviewSlice = createSlice({
       state.isSuccess = true;
     });
     builder.addCase(courseOverview.rejected, (state, action) => {
+      action.payload && action.payload.message && alert(action.payload.message);
       state.message = action.payload;
       state.loading = false;
       state.isRejected = true;

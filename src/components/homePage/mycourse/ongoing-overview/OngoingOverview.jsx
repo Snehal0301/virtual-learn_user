@@ -1,14 +1,14 @@
-import "./OngoingOverview.css";
-import React, { useState, useEffect, useRef } from "react";
-import ReactPlayer from "react-player";
-import { useDispatch, useSelector } from "react-redux";
+import './OngoingOverview.css';
+import React, { useState, useEffect, useRef } from 'react';
+import ReactPlayer from 'react-player';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   accordianState,
   accordianToggleState,
   firstVideoState,
   tabToggleState,
   videoLinkState,
-} from "../../../../redux/reducers/myCourseReducer";
+} from '../../../../redux/reducers/myCourseReducer';
 import {
   completedlessonIcon,
   courseAccessIcon,
@@ -25,30 +25,30 @@ import {
   testImage,
   videoPlayActive,
   whiteStepperIcon,
-} from "../../../../utils/svgIcons";
+} from '../../../../utils/svgIcons';
 import {
   Accordion,
   AccordionItem,
   AccordionItemHeading,
   AccordionItemButton,
   AccordionItemPanel,
-} from "react-accessible-accordion";
+} from 'react-accessible-accordion';
 
-import instructorImage from "../../../../assets/images/instructorImage.jpg";
-import Accordian from "../accordian/Accordian";
-import axios from "axios";
-import { Link, Navigate, useNavigate } from "react-router-dom";
-import { test, testisSuccess } from "../../../../redux/reducers/testSlice";
-import { testShow, testSuccess } from "../../../../redux/reducers/Conditions";
-import { testSuccessRed } from "../../../../redux/reducers/SuccessTestRed";
-import { showSuccessPage } from "../../../../redux/reducers/showSuccesspage";
-import { finaltestShowPage } from "../../../../redux/reducers/finalTestSuccess";
-import Loading from "../../../../utils/loading/Loading";
-import ShowMoreText from "react-show-more-text";
-import { Player } from "video-react";
-import toast, { Toaster } from "react-hot-toast";
-import { chapterResponse } from "../../../../redux/reducers/chapterResponses";
-import { courseOverview } from "../../../../redux/reducers/courseOverview";
+import instructorImage from '../../../../assets/images/instructorImage.jpg';
+import Accordian from '../accordian/Accordian';
+import axios from 'axios';
+import { Link, Navigate, useNavigate } from 'react-router-dom';
+import { test, testisSuccess } from '../../../../redux/reducers/testSlice';
+import { testShow, testSuccess } from '../../../../redux/reducers/Conditions';
+import { testSuccessRed } from '../../../../redux/reducers/SuccessTestRed';
+import { showSuccessPage } from '../../../../redux/reducers/showSuccesspage';
+import { finaltestShowPage } from '../../../../redux/reducers/finalTestSuccess';
+import Loading from '../../../../utils/loading/Loading';
+import ShowMoreText from 'react-show-more-text';
+import { Player } from 'video-react';
+import toast, { Toaster } from 'react-hot-toast';
+import { chapterResponse } from '../../../../redux/reducers/chapterResponses';
+import { courseOverview } from '../../../../redux/reducers/courseOverview';
 import {
   accordianIDState,
   chapterIDState,
@@ -56,13 +56,13 @@ import {
   lessonIDState,
   pauseTimeState,
   unmountState,
-} from "../../../../redux/reducers/pauseTime";
-import { pauseUnmount } from "../../../../redux/reducers/pauseTimeSlice";
+} from '../../../../redux/reducers/pauseTime';
+import { pauseUnmount } from '../../../../redux/reducers/pauseTimeSlice';
 
 const OngoingOverview = () => {
   const [chapter, setChapter] = useState();
   const [overviewData, setOverviewData] = useState();
-  const [defaultvideo, setDefaultVideo] = useState("");
+  const [defaultvideo, setDefaultVideo] = useState('');
   const [chapterLoading, setChapterLoading] = useState(false);
   const [overviewLoading, setOverviewLoading] = useState(false);
   const [testLoading, setTestLoading] = useState(false);
@@ -186,7 +186,7 @@ const OngoingOverview = () => {
       setOverviewData(courseOverviewData.data);
   }, [courseOverviewData]);
 
-  console.log("new data", chapter, overviewData);
+  console.log('new data', chapter, overviewData);
 
   // api call for chapter section
 
@@ -199,8 +199,10 @@ const OngoingOverview = () => {
   // }, []);
 
   useEffect(() => {
-    chapter && chapter.enrolled === true ? dispatch(tabToggleState(2)) : dispatch(tabToggleState(1))
-  }, [chapter])
+    chapter && chapter.enrolled === true
+      ? dispatch(tabToggleState(2))
+      : dispatch(tabToggleState(1));
+  }, [chapter]);
 
   const defaultVideoState = useSelector((state) => state.mycourse.firstVideo);
 
@@ -221,7 +223,7 @@ const OngoingOverview = () => {
   const courseStateID = useSelector((state) => state.pauseTime.courseID);
   const pauseStateID = useSelector((state) => state.pauseTime.ptime);
   console.log(
-    "id",
+    'id',
     accordianStateID,
     chapterStateID,
     lessonStateID,
@@ -239,7 +241,7 @@ const OngoingOverview = () => {
   const onPause = () => {
     setPause(true);
     setPlaying(false);
-    console.log("pause time", Math.floor(played) / 100);
+    console.log('pause time', Math.floor(played) / 100);
   };
 
   const onPlay = () => {
@@ -259,9 +261,9 @@ const OngoingOverview = () => {
       .request(
         `http://virtuallearn-env.eba-6xmym3vf.ap-south-1.elasticbeanstalk.com/user/pauseTime`,
         {
-          method: "put",
+          method: 'put',
           headers: {
-            Authorization: `Bearer ${sessionStorage.getItem("Token")}`,
+            Authorization: `Bearer ${sessionStorage.getItem('Token')}`,
           },
           data: {
             pauseTime: resultPauseTime,
@@ -283,14 +285,14 @@ const OngoingOverview = () => {
       });
   };
 
-  const pauseTimeLocal = localStorage.getItem("pauseTimeLocal");
-  console.log("pauseTimeLocal", pauseTimeLocal);
+  const pauseTimeLocal = localStorage.getItem('pauseTimeLocal');
+  console.log('pauseTimeLocal', pauseTimeLocal);
 
   const componentUnMount = () => {
     const unmountPauseTime = new Date(pauseTimeLocal * 1000)
       .toISOString()
       .slice(11, 19);
-    console.log("played", unmountPauseTime);
+    console.log('played', unmountPauseTime);
 
     const unmountData = {
       pauseTime: unmountPauseTime,
@@ -349,24 +351,22 @@ const OngoingOverview = () => {
   //     });
   // }
 
-
   // useEffect(() => {
   //   continueModalData()
   // }, [])
 
-
   useEffect(() => {
     console.log('Component mounted');
     // dispatch(accordianIDState(accordianStateID-1))
-    accordianToggle(accordianStateID - 1)
+    accordianToggle(accordianStateID - 1);
 
     return () => {
-      console.log("Component unmounted");
+      console.log('Component unmounted');
       dispatch(tabToggleState(1));
-      dispatch(unmountState('true'))
-      dispatch(accordianToggleState(0))
-      setDefaultVideo('')
-      dispatch(firstVideoState('https://youtu.be/d1UNXbRxxZE'))
+      dispatch(unmountState('true'));
+      dispatch(accordianToggleState(0));
+      setDefaultVideo('');
+      dispatch(firstVideoState('https://youtu.be/d1UNXbRxxZE'));
       dispatch(videoLinkState(''));
       componentUnMount();
     };
@@ -376,19 +376,21 @@ const OngoingOverview = () => {
   const unmountPauseTime = new Date(pauseStateID * 1000)
     .toISOString()
     .slice(11, 19);
-  console.log("played", unmountPauseTime);
+  console.log('played', unmountPauseTime);
 
   const [pauseData, setPauseData] = useState({
-    courseId: "",
-    chapterId: "",
-    lessonId: "",
-    videoTitle: "",
+    courseId: '',
+    chapterId: '',
+    lessonId: '',
+    videoTitle: '',
   });
 
   useEffect(() => {
     chapter &&
       chapter.chapterResponses &&
+      chapter.chapterResponses.length > 0 &&
       chapter.chapterResponses[0].lessonResponses &&
+      chapter.chapterResponses[0].lessonResponses.length > 0 &&
       chapter.chapterResponses[0].lessonResponses[0].lessonName &&
       setPauseData({
         courseId: chapter.courseId,
@@ -398,7 +400,7 @@ const OngoingOverview = () => {
       });
   }, [chapter]);
 
-  console.log('pauseData',pauseData)
+  console.log('pauseData', pauseData);
   // overviewData && overviewData.enrolled ?
   //   accordianToggle(accordianStateID - 1)
   //   :
@@ -441,14 +443,14 @@ const OngoingOverview = () => {
   const showTest = useSelector((state) => state.loginConditions.showTest);
 
   useEffect(() => {
-    showTest && navigate("/myCourses/ongoingCourse/moduleTest");
+    showTest && navigate('/myCourses/ongoingCourse/moduleTest');
     showTest && setTestLoading(false);
   }, [showTest]);
 
   const getVideoState = (itemele) => {
     dispatch(videoLinkState(itemele.videoLink));
     console.log('videoLink', videoLink);
-    dispatch(firstVideoState(''))
+    dispatch(firstVideoState(''));
   };
 
   useEffect(() => {
@@ -464,7 +466,6 @@ const OngoingOverview = () => {
   const [firstPause, setFirstPause] = useState(true);
   const [vtitle, setVtitle] = useState(false);
 
-
   const playerRef = useRef();
 
   const defaultNormalPause = () => {
@@ -473,7 +474,7 @@ const OngoingOverview = () => {
     setDefPause(true);
     setNextModal(false);
     setFirstPause(false);
-    dispatch(unmountState("false"));
+    dispatch(unmountState('false'));
   };
 
   const enrollCourse = async (courseId) => {
@@ -481,9 +482,9 @@ const OngoingOverview = () => {
       .request(
         `http://virtuallearn-env.eba-6xmym3vf.ap-south-1.elasticbeanstalk.com/user/enroll`,
         {
-          method: "post",
+          method: 'post',
           headers: {
-            Authorization: `Bearer ${sessionStorage.getItem("Token")}`,
+            Authorization: `Bearer ${sessionStorage.getItem('Token')}`,
           },
           data: {
             courseId: courseId,
@@ -492,7 +493,7 @@ const OngoingOverview = () => {
       )
       .then((res) => {
         console.log(res);
-        if (res.data.message === "Enrolled successfully") {
+        if (res.data.message === 'Enrolled successfully') {
           successCourse();
           dispatch(chapterResponse(chapter.courseId));
           dispatch(courseOverview(chapter.courseId));
@@ -504,12 +505,12 @@ const OngoingOverview = () => {
         console.log(err);
       });
 
-    console.log("Clicked");
+    console.log('Clicked');
   };
 
   const unmountStateRedux = useSelector((state) => state.pauseTime.unmount);
 
-  console.log("unmountStateRedux", unmountStateRedux);
+  console.log('unmountStateRedux', unmountStateRedux);
 
   // see this logic
   // if (overviewData && !overviewData.enrolled) {
@@ -523,8 +524,6 @@ const OngoingOverview = () => {
     setVtitle(false);
   };
 
-
-
   return (
     <>
       {chapter && chapter.enrolled ? (
@@ -532,25 +531,25 @@ const OngoingOverview = () => {
           <span onClick={componentUnMount}>
             <Link
               to="/myCourses"
-              style={{ color: "var(--blueFont)", cursor: "pointer" }}
+              style={{ color: 'var(--blueFont)', cursor: 'pointer' }}
             >
-              My Course &nbsp; &nbsp; {">"} &nbsp;
+              My Course &nbsp; &nbsp; {'>'} &nbsp;
             </Link>
             &nbsp;
           </span>
           <span>
             <Link
               to="/myCourses"
-              style={{ color: "var(--blueFont)", cursor: "pointer" }}
+              style={{ color: 'var(--blueFont)', cursor: 'pointer' }}
             >
-              Ongoing &nbsp; &nbsp; {">"} &nbsp;
+              Ongoing &nbsp; &nbsp; {'>'} &nbsp;
             </Link>
             &nbsp;
           </span>
           {overviewData && overviewData.courseName && overviewData.courseName}
         </div>
       ) : (
-        ""
+        ''
       )}
       <div className="ongoing-overview">
         <div className="ongoing-section-1">
@@ -565,63 +564,69 @@ const OngoingOverview = () => {
                   <div className="pause-button" onClick={onPlay}>
                     {start_pauseIconVideo}
                   </div>
-                  <div className="video-title-overlay">{pauseData.videoTitle}</div>
+                  <div className="video-title-overlay">
+                    {pauseData.videoTitle}
+                  </div>
                 </div>
               </>
             )}
 
-            {
-              unmountStateRedux === 'true' && chapter && chapter.enrolled === true &&
-              <>
-                <div className="pause-overlay">
-                  {firstPause && (
-                    <div
-                      className="continue-chapter-pause-button"
-                      onClick={() => {
-                        setNextModal(true);
-                        setFirstPause(false);
-                      }}
-                    >
-                      Continue Chapter {accordianStateID} Lesson {lessonStateID}
-                    </div>
-                  )}
-
-                  {nextModal && (
-                    <div className="onpause-modal">
-                      <p className="onpause-modal-title">
-                        Your lesson paused at{' '}
-                        <span>{Math.floor(played) / 100}</span> Do you want to
-                        continue watching?
-                      </p>
-                      {/* <div className="onpause-modal-button"> */}
-                      <button
-                        className="onpause-button"
-                        onClick={defaultNormalPause}
-                      >
-                        Continue Watching
-                      </button>
-                      <button
-                        className="onpause-button beginning"
+            {unmountStateRedux === 'true' &&
+              chapter &&
+              chapter.enrolled === true && (
+                <>
+                  <div className="pause-overlay">
+                    {firstPause && (
+                      <div
+                        className="continue-chapter-pause-button"
                         onClick={() => {
-                          playerRef.current.seekTo(0, 'seconds');
-                          setPause(false);
-                          setPlaying(true);
-                          dispatch(unmountState('false'))
+                          setNextModal(true);
+                          setFirstPause(false);
                         }}
                       >
-                        Watch from beginning
-                      </button>
+                        Continue Chapter {accordianStateID} Lesson{' '}
+                        {lessonStateID}
+                      </div>
+                    )}
+
+                    {nextModal && (
+                      <div className="onpause-modal">
+                        <p className="onpause-modal-title">
+                          Your lesson paused at{' '}
+                          <span>{Math.floor(played) / 100}</span> Do you want to
+                          continue watching?
+                        </p>
+                        {/* <div className="onpause-modal-button"> */}
+                        <button
+                          className="onpause-button"
+                          onClick={defaultNormalPause}
+                        >
+                          Continue Watching
+                        </button>
+                        <button
+                          className="onpause-button beginning"
+                          onClick={() => {
+                            playerRef.current.seekTo(0, 'seconds');
+                            setPause(false);
+                            setPlaying(true);
+                            dispatch(unmountState('false'));
+                          }}
+                        >
+                          Watch from beginning
+                        </button>
+                      </div>
+                    )}
+                    {defPause && (
+                      <div className="pause-button" onClick={onPlay}>
+                        {start_pauseIconVideo}
+                      </div>
+                    )}
+                    <div className="video-title-overlay">
+                      {pauseData.videoTitle}
                     </div>
-                  )}
-                  {defPause && (
-                    <div className="pause-button" onClick={onPlay}>
-                      {start_pauseIconVideo}
-                    </div>
-                  )}
-                  <div className="video-title-overlay">{pauseData.videoTitle}</div>
-                </div>
-              </>
-            }
+                  </div>
+                </>
+              )}
 
             <ReactPlayer
               url={videoLink ? videoLink : defaultvideo}
@@ -640,14 +645,13 @@ const OngoingOverview = () => {
               onProgress={(progress) => {
                 setPlayed(progress.playedSeconds);
                 dispatch(pauseTimeState(progress.playedSeconds));
-                localStorage.setItem("pauseTimeLocal", progress.playedSeconds);
+                localStorage.setItem('pauseTimeLocal', progress.playedSeconds);
               }}
             />
 
-            {
-              vtitle &&
+            {vtitle && (
               <div className="video-title-overlay">{pauseData.videoTitle}</div>
-            }
+            )}
           </div>
           {/* <div className="ongoing-video-title-section">
                     <div className="ongoing-video-title">
@@ -665,7 +669,7 @@ const OngoingOverview = () => {
               <div className="ongoing-video-title">
                 <p className="video-title">{overviewData.courseName}</p>
                 <p className="video-chapters">
-                  {overviewData.chapterCount} Chapter |{" "}
+                  {overviewData.chapterCount} Chapter |{' '}
                   {overviewData.lessonCount} lessons
                 </p>
               </div>
@@ -745,27 +749,27 @@ const OngoingOverview = () => {
             //         </div>
             //     </div>
             // </div>
-            ""
+            ''
           )}
         </div>
         <div className="ongoing-section-2">
           <div className="ongoing-container-1">
             <div className="tabs">
               <div
-                className={tabState === 1 ? "tab active-tab" : "tab"}
+                className={tabState === 1 ? 'tab active-tab' : 'tab'}
                 onClick={() => tabToggle(1)}
               >
                 Overview
               </div>
               <div
-                className={tabState === 2 ? "tab active-tab" : "tab"}
+                className={tabState === 2 ? 'tab active-tab' : 'tab'}
                 onClick={() => tabToggle(2)}
               >
                 Chapters
               </div>
             </div>
             <div
-              className={tabState === 1 ? "tab-content-1" : "tab-content-none"}
+              className={tabState === 1 ? 'tab-content-1' : 'tab-content-none'}
             >
               <div className="tab-1-all">
                 {/*Mobile Screen*/}
@@ -801,7 +805,7 @@ const OngoingOverview = () => {
                       </ShowMoreText>
 
                       <img
-                        src={require("../../../../assets/images/icn_previewgo.png")}
+                        src={require('../../../../assets/images/icn_previewgo.png')}
                         alt=""
                         className="right-icon"
                       />
@@ -897,7 +901,7 @@ const OngoingOverview = () => {
                         src={
                           overviewData.profilePhoto
                             ? overviewData.profilePhoto
-                            : require("../../../../assets/images/start-courses-image/profilepic.jpg")
+                            : require('../../../../assets/images/start-courses-image/profilepic.jpg')
                         }
                         alt="Profile-logo"
                       />
@@ -906,7 +910,7 @@ const OngoingOverview = () => {
                           {overviewData.instructorName}
                         </p>
                         <div className="profile-occupation">
-                          {overviewData.designation} {""}
+                          {overviewData.designation} {''}
                           {overviewData.url}
                         </div>
                       </div>
@@ -937,15 +941,15 @@ const OngoingOverview = () => {
               )}
             </div>
             <div
-              className={tabState === 2 ? "tab-content-2" : "tab-content-none"}
+              className={tabState === 2 ? 'tab-content-2' : 'tab-content-none'}
             >
               {chapter ? (
                 <div className="tab-2-all">
                   <div className="course-contents">
                     <p className="course-content-title">Course Content</p>
                     <p className="course-content-desc">
-                      {chapter.chapterCount} Chapter | {chapter.lessonCount}{" "}
-                      lessons | {chapter.testCount} Assignment Test |{" "}
+                      {chapter.chapterCount} Chapter | {chapter.lessonCount}{' '}
+                      lessons | {chapter.testCount} Assignment Test |{' '}
                       {chapter.courseDuration} Total length
                     </p>
                   </div>
@@ -979,24 +983,24 @@ const OngoingOverview = () => {
                                     <p
                                       className={
                                         ele.chapterCompletedStatus
-                                          ? "course-accordian-container-title-active"
-                                          : "course-accordian-container-title"
+                                          ? 'course-accordian-container-title-active'
+                                          : 'course-accordian-container-title'
                                       }
                                     >
-                                      Chapter {ele.chapterNumber} -{" "}
-                                      {ele.chapterName}{" "}
+                                      Chapter {ele.chapterNumber} -{' '}
+                                      {ele.chapterName}{' '}
                                     </p>
 
                                     <p className="course-accordian-container-state">
-                                      {accordianState === id ? "-" : "+"}
+                                      {accordianState === id ? '-' : '+'}
                                     </p>
                                   </div>
                                 </div>
                                 <div
                                   className={
                                     (accordianState === id
-                                      ? "accordian-show"
-                                      : "") + " course-accordian-content"
+                                      ? 'accordian-show'
+                                      : '') + ' course-accordian-content'
                                   }
                                 >
                                   <div className="course-accordian-container-body">
@@ -1009,8 +1013,8 @@ const OngoingOverview = () => {
                                                 {itemele.lessonCompletedStatus
                                                   ? completedlessonIcon
                                                   : itemele.lessonStatus
-                                                  ? inactiveIcon("green")
-                                                  : inactiveIcon("")}
+                                                  ? inactiveIcon('green')
+                                                  : inactiveIcon('')}
                                                 {/* {itemele.lessonCompletedStatus ? completedlessonIcon : itemele.lessonStatus ? inactiveIcon("green")  : inactiveIcon("")} */}
                                               </div>
                                               <div className="accordian-item-section-2">
@@ -1045,8 +1049,8 @@ const OngoingOverview = () => {
                                                   }}
                                                 >
                                                   {itemele.lessonStatus
-                                                    ? videoPlayActive("red")
-                                                    : videoPlayActive("")}
+                                                    ? videoPlayActive('red')
+                                                    : videoPlayActive('')}
                                                 </div>
                                               </div>
                                             </div>
@@ -1060,8 +1064,8 @@ const OngoingOverview = () => {
                                             {ele.chapterTestPercentage > 0
                                               ? completedlessonIcon
                                               : statusTest
-                                              ? inactiveIcon("green")
-                                              : inactiveIcon("")}
+                                              ? inactiveIcon('green')
+                                              : inactiveIcon('')}
                                           </div>
                                           <div
                                             className="accordian-item-section-2 test-section"
@@ -1070,7 +1074,7 @@ const OngoingOverview = () => {
                                               let a =
                                                 ele &&
                                                 ele.testDuration &&
-                                                ele.testDuration.split(":");
+                                                ele.testDuration.split(':');
 
                                               if (a) {
                                                 let seconds =
@@ -1079,7 +1083,7 @@ const OngoingOverview = () => {
                                                   +a[2];
 
                                                 sessionStorage.setItem(
-                                                  "timer",
+                                                  'timer',
                                                   seconds
                                                 );
                                               }
@@ -1093,9 +1097,9 @@ const OngoingOverview = () => {
                                                       test(
                                                         `${
                                                           ele.testName ===
-                                                          "Final Test"
-                                                            ? "finalTest"
-                                                            : "moduleTest"
+                                                          'Final Test'
+                                                            ? 'finalTest'
+                                                            : 'moduleTest'
                                                         }?testId=${ele.testId}`
                                                       )
                                                     )
@@ -1111,7 +1115,7 @@ const OngoingOverview = () => {
                                                   {ele.testName}
                                                 </p>
                                                 <p className="accordian-item-chapter-duration">
-                                                  {ele.testDuration} min |{" "}
+                                                  {ele.testDuration} min |{' '}
                                                   {ele.questionCount} questions
                                                 </p>
                                               </div>
@@ -1252,25 +1256,24 @@ const OngoingOverview = () => {
                                   <div className="course-accordian-container">
                                     {ele.chapterNumber === 1 ? (
                                       <p className="course-accordian-container-title">
-                                        Chapter {ele.chapterNumber} -{" "}
-                                        {ele.chapterName}{" "}
+                                        Chapter {ele.chapterNumber} -{' '}
+                                        {ele.chapterName}{' '}
                                       </p>
                                     ) : (
                                       <p className="course-accordian-container-title">
-                                        Chapter {ele.chapterNumber} -{" "}
-                                        {ele.chapterName}{" "}
+                                        Chapter {ele.chapterNumber} -{' '}
+                                        {ele.chapterName}{' '}
                                       </p>
                                     )}
                                     <p className="course-accordian-container-state">
-                                      {accordianState === id ? "-" : "+"}
+                                      {accordianState === id ? '-' : '+'}
                                     </p>
                                   </div>
                                 </div>
                                 <div
                                   className={
-                                    (accState === id
-                                      ? 'accordian-show'
-                                      : '') + ' course-accordian-content'
+                                    (accState === id ? 'accordian-show' : '') +
+                                    ' course-accordian-content'
                                   }
                                 >
                                   <div className="course-accordian-container-body">
@@ -1282,8 +1285,8 @@ const OngoingOverview = () => {
                                               <div className="accordian-item-icon">
                                                 {ele.chapterNumber === 1 &&
                                                 itemele.lessonStatus
-                                                  ? inactiveIcon("green")
-                                                  : inactiveIcon("")}
+                                                  ? inactiveIcon('green')
+                                                  : inactiveIcon('')}
                                               </div>
                                               <div className="accordian-item-section-2">
                                                 <div className="accordian-item-section-2-part-1">
@@ -1304,14 +1307,14 @@ const OngoingOverview = () => {
                                                   onClick={() => {
                                                     ele.chapterNumber === 1 &&
                                                     itemele.lessonStatus
-                                                      ? console.log("nothing")
+                                                      ? console.log('nothing')
                                                       : errorCourse();
                                                   }}
                                                 >
                                                   {ele.chapterNumber === 1 &&
                                                   itemele.lessonStatus
-                                                    ? videoPlayActive("red")
-                                                    : videoPlayActive("")}
+                                                    ? videoPlayActive('red')
+                                                    : videoPlayActive('')}
                                                 </div>
                                               </div>
                                             </div>
@@ -1363,7 +1366,7 @@ const OngoingOverview = () => {
                                                   {ele.testName}
                                                 </p>
                                                 <p className="accordian-item-chapter-duration">
-                                                  {ele.testDuration} min |{" "}
+                                                  {ele.testDuration} min |{' '}
                                                   {ele.questionCount} questions
                                                 </p>
                                               </div>
@@ -1407,7 +1410,7 @@ const OngoingOverview = () => {
             right: 20,
           }}
           toastOptions={{
-            className: "",
+            className: '',
             // style: {
             //   border: '1px solid #ee5c4d',
             //   padding: '10px',
@@ -1417,19 +1420,19 @@ const OngoingOverview = () => {
             success: {
               duration: 1500,
               style: {
-                border: "1px solid #AAFF00",
-                padding: "10px",
-                color: "green",
-                width: "350px",
+                border: '1px solid #AAFF00',
+                padding: '10px',
+                color: 'green',
+                width: '350px',
               },
             },
             error: {
               duration: 1500,
               style: {
-                border: "1px solid #ee5c4d",
-                padding: "10px",
-                color: "#ee5c4d",
-                width: "350px",
+                border: '1px solid #ee5c4d',
+                padding: '10px',
+                color: '#ee5c4d',
+                width: '350px',
               },
             },
           }}
