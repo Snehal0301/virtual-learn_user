@@ -100,7 +100,7 @@ const Completed = () => {
             textAlign: 'center',
             marginTop:'30px',
           }}
-        ><img src={require('../../../../assets/images/start-courses-image/EmptyImage.png')} alt="" />
+        ><img src={require('../../../../assets/images/start-courses-image/EmptyImage.png')} alt="" className='completed-image' />
           No completed courses
         </div>
       )}

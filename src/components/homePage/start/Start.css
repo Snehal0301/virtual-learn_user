@@ -120,6 +120,18 @@
   color: #ffffff;
   z-index: 1;
 }
+.Slxdj:disabled {
+  cursor: not-allowed;
+  display: none;
+}
+.kXteup {
+
+  display: none;
+}
+.start-image-title {
+  position: relative;
+  width: 100%;
+}
 
 .start-course-section2 {
   display: flex;
