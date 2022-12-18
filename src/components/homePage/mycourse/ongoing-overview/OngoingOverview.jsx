@@ -196,10 +196,8 @@ const OngoingOverview = () => {
   }, [defaultvideo]);
 
   useEffect(() => {
-    chapter && overviewData.enrolled === true
-      ? dispatch(tabToggleState(2))
-      : dispatch(tabToggleState(1));
-  }, [chapter]);
+    chapter && chapter.enrolled === true ? dispatch(tabToggleState(2)) : dispatch(tabToggleState(1))
+  }, [chapter])
 
   const defaultVideoState = useSelector((state) => state.mycourse.firstVideo);
 
@@ -248,8 +246,8 @@ const OngoingOverview = () => {
 
   const onEnd = async () => {
     setEndVideo(true);
-    console.log("Ended");
-    // console.log('pauseData', pauseData);
+    console.log('Ended');
+    console.log('pauseData', pauseData);
 
     const resultPauseTime = new Date(played * 1000).toISOString().slice(11, 19);
     // console.log(typeof(pauseData));
@@ -330,12 +328,15 @@ const OngoingOverview = () => {
   };
 
   useEffect(() => {
-    console.log("Component mounted");
+    console.log('Component mounted');
+    // dispatch(accordianIDState(accordianStateID-1))
+    accordianToggle(accordianStateID - 1)
 
     return () => {
       console.log("Component unmounted");
       dispatch(tabToggleState(1));
-      dispatch(unmountState("true"));
+      dispatch(unmountState('true'))
+      dispatch(accordianToggleState(0))
       componentUnMount();
     };
   }, []);
@@ -366,12 +367,15 @@ const OngoingOverview = () => {
       });
   }, [chapter]);
 
-  // const [pauseData, setPauseData] = useState({
-  //   courseId: chapter.chapterResponses[0].lessonResponses[0].lessonName,
-  //   chapterId: '',
-  //   lessonId: '',
-  //   videoTitle:''
-  // })
+  console.log('pauseData',pauseData)
+  // overviewData && overviewData.enrolled ?
+  //   accordianToggle(accordianStateID - 1)
+  //   :
+  //   dispatch(accordianIDState(0))
+  // accordianToggle(0)
+
+  // clear logic
+  // overviewData && !overviewData.enrolled && accordianToggle(0)
 
   const showChapter = (courseId, chapterId, lessonId, videoTitle) => {
     setPauseData({
@@ -488,7 +492,7 @@ const OngoingOverview = () => {
 
   return (
     <>
-      {chapter && overviewData.enrolled ? (
+      {chapter && chapter.enrolled ? (
         <div className="homeCategories-head-link">
           <span onClick={componentUnMount}>
             <Link
@@ -535,59 +539,58 @@ const OngoingOverview = () => {
               </>
             )}
 
-            {unmountStateRedux === "true" &&
-              chapter &&
-              overviewData &&
-              overviewData.enrolled === true && (
-                <>
-                  <div className="pause-overlay">
-                    {firstPause && (
-                      <div
-                        className="continue-chapter-pause-button"
+            {
+              unmountStateRedux === 'true' && chapter && chapter && chapter.enrolled === true &&
+              <>
+                <div className="pause-overlay">
+                  {firstPause && (
+                    <div
+                      className="continue-chapter-pause-button"
+                      onClick={() => {
+                        setNextModal(true);
+                        setFirstPause(false);
+                      }}
+                    >
+                      Continue Chapter {accordianStateID} Lesson {lessonStateID}
+                    </div>
+                  )}
+
+                  {nextModal && (
+                    <div className="onpause-modal">
+                      <p className="onpause-modal-title">
+                        Your lesson paused at{' '}
+                        <span>{Math.floor(played) / 100}</span> Do you want to
+                        continue watching?
+                      </p>
+                      {/* <div className="onpause-modal-button"> */}
+                      <button
+                        className="onpause-button"
+                        onClick={defaultNormalPause}
+                      >
+                        Continue Watching
+                      </button>
+                      <button
+                        className="onpause-button beginning"
                         onClick={() => {
-                          setNextModal(true);
-                          setFirstPause(false);
+                          playerRef.current.seekTo(0, 'seconds');
+                          setPause(false);
+                          setPlaying(true);
+                          dispatch(unmountState('false'))
                         }}
                       >
-                        Continue Chapter {accordianStateID} Lesson{" "}
-                        {lessonStateID}
-                      </div>
-                    )}
-
-                    {nextModal && (
-                      <div className="onpause-modal">
-                        <p className="onpause-modal-title">
-                          Your lesson paused at{" "}
-                          <span>{Math.floor(played) / 100}</span> Do you want to
-                          continue watching?
-                        </p>
-                        <button
-                          className="onpause-button"
-                          onClick={defaultNormalPause}
-                        >
-                          Continue Watching
-                        </button>
-                        <button
-                          className="onpause-button beginning"
-                          onClick={() => {
-                            playerRef.current.seekTo(0, "seconds");
-                            setPause(false);
-                            setPlaying(true);
-                            dispatch(unmountState("false"));
-                          }}
-                        >
-                          Watch from beginning
-                        </button>
-                      </div>
-                    )}
-                    {defPause && (
-                      <div className="pause-button" onClick={onPlay}>
-                        {start_pauseIconVideo}
-                      </div>
-                    )}
-                  </div>
-                </>
-              )}
+                        Watch from beginning
+                      </button>
+                    </div>
+                  )}
+                  {defPause && (
+                    <div className="pause-button" onClick={onPlay}>
+                      {start_pauseIconVideo}
+                    </div>
+                  )}
+                  <div className="video-title-overlay">{pauseData.videoTitle}</div>
+                </div>
+              </>
+            }
 
             <ReactPlayer
               url={videoLink ? videoLink : defaultVideoState}
@@ -610,9 +613,11 @@ const OngoingOverview = () => {
                 localStorage.setItem("pauseTimeLocal", progress.playedSeconds);
               }}
             />
-            {vtitle && (
+
+            {
+              vtitle &&
               <div className="video-title-overlay">{pauseData.videoTitle}</div>
-            )}
+            }
           </div>
           {/* <div className="ongoing-video-title-section">
                     <div className="ongoing-video-title">
@@ -890,8 +895,8 @@ const OngoingOverview = () => {
                   <h3>Loading</h3>
                 )}
               </div>
-              {overviewData && overviewData.enrolled === true ? (
-                ""
+              {chapter && chapter.enrolled === true ? (
+                ''
               ) : (
                 <button
                   className="join-course"
@@ -928,7 +933,7 @@ const OngoingOverview = () => {
                       }
                       return (
                         <>
-                          {overviewData.enrolled ? (
+                          {chapter.enrolled ? (
                             <>
                               {/* <Accordian active /> */}
                               <div

@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from 'react';
-import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
+import React, { useState, useEffect, useRef } from 'react';
 import 'react-slideshow-image/dist/styles.css';
 import 'react-tabs/style/react-tabs.css';
 import './Start.css';
@@ -8,15 +7,14 @@ import {
   start_pauseIcon,
   start_timeIcon,
 } from "../../../utils/svgIcons";
-import Slider from "react-carousel-responsive";
+import Carousel from "react-carousel-responsive";
 import "react-carousel-responsive/dist/styles.css";
-import { Carousel } from "react-responsive-carousel";
+
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { homeTabToggleState, tabToggleState } from "../../../redux/reducers/myCourseReducer";
 import axios from "axios";
-import { array } from "yup/lib/locale";
 import { coursedata } from "../../../redux/reducers/allcourseSlice";
 import { categorydata } from "../../../redux/reducers/categorySlice";
 import { useNavigate } from "react-router-dom";
@@ -33,6 +31,15 @@ import { advancedCourse } from './../../../redux/reducers/advancedCourse';
 import { subCategories } from './../../../redux/reducers/subCategories';
 import { courseOverview } from '../../../redux/reducers/courseOverview';
 import { chapterResponse } from '../../../redux/reducers/chapterResponses';
+import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
+// import { Carousel } from 'react-responsive-carousel';
+// import Carousel from "react-elastic-carousel";
+// import Slider from "react-slick"
+// import Slider from 'react-slick'
+// import "slick-carousel/slick/slick.css";
+// import "slick-carousel/slick/slick-theme.css";
+import Slider from 'react-slick'
+
 
 const Start = () => {
   const dispatch = useDispatch();
@@ -63,6 +70,8 @@ const Start = () => {
   const [ongoing, setOngoing] = useState([]);
   const [name, setName] = useState('');
 
+  
+
   useEffect(() => {
     axios
       .get(
@@ -75,6 +84,7 @@ const Start = () => {
       )
       .then((res) => {
         setOngoing(res && res.data);
+
       })
       .catch((err) => {
         console.error(err);
@@ -124,6 +134,7 @@ const Start = () => {
       });
   }, []);
   dispatch(coursedata(allcourseData));
+  console.log('allcoursedata', allcourseData)
 
   //fetching data for popular courses
   useEffect(() => {
@@ -225,29 +236,54 @@ const Start = () => {
 
   // console.log(categoryData);
   dispatch(categorydata(categoryData));
+ 
 
   return (
+
     <div className="start">
+
       <div className="start-greeting">Hello!</div>
       <div className="start-username">{name}</div>
-      <Slider autoplay={true} autoplaySpeed={2000} slidesToShow={3} dots={true}>
-        {headerdata && headerdata.map((item) => (
-          <div
-            className="start-image-title"
-            onClick={() => {
-              dispatch(courseOverview(item.courseId));
-              dispatch(chapterResponse(item.courseId));
-              navigate('/myCourses/ongoingCourse');
-            }}
-          >
-            <div className="start-map-image">
-              <img src={item.coursePhoto} alt="" />
+      <div className='webslider'>
+        <Slider autoplay={true} autoplaySpeed={2000} slidesToShow={3} dots={true}  showIndicators={true}>
+          {headerdata && headerdata.slice(0,4).map((item) => (
+            <div
+              className="start-image-title"
+              onClick={() => {
+                dispatch(courseOverview(item.courseId));
+                dispatch(chapterResponse(item.courseId));
+                navigate('/myCourses/ongoingCourse');
+              }}
+            >
+              <div className="start-map-image">
+                <img src={item.coursePhoto} alt="" />
+              </div>
+              <div className="start-course-overlay-header"></div>
+              <div className="start-title-text">{item.courseName}</div>
             </div>
-            <div className="start-course-overlay-header"></div>
-            <div className="start-title-text">{item.courseName}</div>
-          </div>
-        ))}
-      </Slider>
+          ))}
+        </Slider>
+      </div>
+      <div className='mobileSlider'>
+        <Carousel autoplay={true} autoplaySpeed={2000} slidesToShow={3} >
+          {headerdata && headerdata.map((item) => (
+            <div
+              className="start-image-title"
+              onClick={() => {
+                dispatch(courseOverview(item.courseId));
+                dispatch(chapterResponse(item.courseId));
+                navigate('/myCourses/ongoingCourse');
+              }}
+            >
+              <div className="start-map-image">
+                <img src={item.coursePhoto} alt="" />
+              </div>
+              <div className="start-course-overlay-header"></div>
+              <div className="start-title-text">{item.courseName}</div>
+            </div>
+          ))}
+        </Carousel>
+      </div>
 
       {
         ongoing && ongoing.length > 0 &&
@@ -386,7 +422,10 @@ const Start = () => {
       {homeTabState === 1 && (
         <div className="start-card">
           <div className="start-choice1">
+
             {allcourseData.length > 0 && allcourseData.slice(0, 4).map((item) => (
+
+
               <div
                 className="start-choice-subcategory-image"
                 onClick={() => {
@@ -396,6 +435,7 @@ const Start = () => {
                   navigate("/myCourses/ongoingCourse");
                 }}
               >
+
                 <div className="start-image-pause">
                   <img src={item.coursePhoto} alt="" />
                   <div className="start-course-overlay-2"></div>

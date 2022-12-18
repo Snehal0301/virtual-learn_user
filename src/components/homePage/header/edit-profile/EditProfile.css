@@ -122,11 +122,12 @@
   outline: none;
   margin-bottom: 8px;
   color: #072d5b;
-  font-size: 18px;
+  font-size: 19px;
   font-family: Avenir;
   font-weight: 700;
   /* margin-left: -5px; */
 }
+
 #editPOccupation {
   padding-top: 1px;
   border: none;
@@ -142,16 +143,17 @@
 @supports (not (-ms-ime-align: auto)) {
   .editprofilelabel {
     color: #7a7a7a;
-    transform: translate(0rem, -1.8rem);
+    transform: translate(0rem, -1.9rem);
     transition: all 0.2s ease-out;
   }
 
   .editPInput:focus + label,
   .editPInput:not(:placeholder-shown) + label {
     color: #7a7a7a;
-    transform: translate(0, -2.55rem);
+    transform: translate(0, -2.95rem);
   }
 }
+
 
 .editPbtn {
   padding: 0.75rem 1.5rem;
@@ -175,7 +177,7 @@
   color: #7a7a7a;
   font-size: 16px;
   font-family: Avenir;
-  margin-top: 7px;
+  margin-top: -3px;
 }
 option {
   color: #072d5b;

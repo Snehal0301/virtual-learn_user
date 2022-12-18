@@ -1,7 +1,7 @@
 .completed-section {
   display: flex;
   flex-wrap: wrap;
-  gap: 1rem;
+  gap: 1%;
 }
 
 .completed-parent {
@@ -95,4 +95,8 @@
   align-items: center;
   text-align: center;
   padding-top: 99px;
+}
+.completed-image {
+  width: 357px;
+  height: 344px;
 }
