@@ -54,7 +54,6 @@ import { pauseUnmount } from "../../../../redux/reducers/pauseTimeSlice";
 
 
 const OngoingOverview = () => {
-  const [activeStep, setActiveStep] = useState(0);
   const [chapter, setChapter] = useState();
   const [overviewData, setOverviewData] = useState();
   const [defaultvideo, setDefaultVideo] = useState('');
@@ -160,6 +159,8 @@ const OngoingOverview = () => {
     }
   }, [chapterLoad]);
 
+
+
   useEffect(() => {
 
     chapterResponses &&
@@ -188,9 +189,13 @@ const OngoingOverview = () => {
 
   // api call for chapter section
 
-  useEffect(() => {
-    dispatch(firstVideoState(defaultvideo));
-  }, [defaultvideo]);
+  // useEffect(() => {
+  //   chapter && chapter.chapterResponses &&
+  //     chapter.chapterResponses[0].lessonResponses
+  //   chapter.chapterResponses[0].lessonResponses[0].videoLink &&
+  //     // dispatch(firstVideoState('https://youtu.be/d1UNXbRxxZE'));
+  //     setDefaultVideo(chapter.chapterResponses[0].lessonResponses[0].videoLink)
+  // }, []);
 
   useEffect(() => {
     chapter && overviewData.enrolled === true ? dispatch(tabToggleState(2)) : dispatch(tabToggleState(1))
@@ -328,6 +333,9 @@ const OngoingOverview = () => {
       dispatch(tabToggleState(1));
       dispatch(unmountState('true'))
       dispatch(accordianToggleState(0))
+      setDefaultVideo('')
+      dispatch(firstVideoState('https://youtu.be/d1UNXbRxxZE'))
+      dispatch(videoLinkState(''));
       componentUnMount();
     };
   }, []);
@@ -357,6 +365,8 @@ const OngoingOverview = () => {
       })
   }, [chapter])
 
+
+  console.log('pauseData', pauseData)
 
   // overviewData && overviewData.enrolled ?
   //   accordianToggle(accordianStateID - 1)
@@ -402,6 +412,7 @@ const OngoingOverview = () => {
   const getVideoState = (itemele) => {
     dispatch(videoLinkState(itemele.videoLink));
     console.log('videoLink', videoLink);
+    dispatch(firstVideoState(''))
   };
 
   useEffect(() => {
@@ -410,12 +421,13 @@ const OngoingOverview = () => {
       setOverviewData(courseOverviewData.data);
   }, [joinCourse]);
 
-  const [accState, setAccState] = useState();
+  const [accState, setAccState] = useState(0);
   const [loop, setLoop] = useState(false);
   const [nextModal, setNextModal] = useState(false);
   const [defPause, setDefPause] = useState(false);
   const [firstPause, setFirstPause] = useState(true);
   const [vtitle, setVtitle] = useState(false);
+
 
   const playerRef = useRef();
 
@@ -465,7 +477,7 @@ const OngoingOverview = () => {
 
   // see this logic
   // if (overviewData && !overviewData.enrolled) {
-  //   dispatch(accordianToggleState(0));
+  //   accordianToggle(0)
   // }
 
 
@@ -475,6 +487,8 @@ const OngoingOverview = () => {
   const mouseOutEvent = () => {
     setVtitle(false)
   }
+
+
 
   return (
     <>
@@ -491,7 +505,7 @@ const OngoingOverview = () => {
           </span>
           <span>
             <Link
-              to="/myCourses/ongoingCourse"
+              to="/myCourses"
               style={{ color: "var(--blueFont)", cursor: "pointer" }}
             >
               Ongoing &nbsp; &nbsp; {">"} &nbsp;
@@ -512,13 +526,8 @@ const OngoingOverview = () => {
                   <div className="pause-button" onClick={onPlay}>
                     {start_pauseIconVideo}
                   </div>
-                  {/* {defPause && (
-                    <div className="pause-button" onClick={onPlay}>
-                      {start_pauseIconVideo}
-                    </div>
-                  )} */}
+                  <div className="video-title-overlay">{pauseData.videoTitle}</div>
                 </div>
-
               </>
             )}
 
@@ -571,13 +580,13 @@ const OngoingOverview = () => {
                       {start_pauseIconVideo}
                     </div>
                   )}
+                  <div className="video-title-overlay">{pauseData.videoTitle}</div>
                 </div>
               </>
             }
 
             <ReactPlayer
-              url={videoLink ? videoLink : defaultVideoState}
-              // url='https://youtu.be/aeWyp2vXxqA'
+              url={videoLink ? videoLink : defaultvideo}
               controls="true"
               className="react-player"
               width="100%"
@@ -1180,7 +1189,7 @@ const OngoingOverview = () => {
                               <div
                                 div
                                 className="course-accordian"
-                                onClick={() => accordianToggle(id)}
+                                onClick={() => setAccState(id)}
                               >
                                 <div className="course-accordian-heading">
                                   <div className="course-accordian-container">
@@ -1202,7 +1211,7 @@ const OngoingOverview = () => {
                                 </div>
                                 <div
                                   className={
-                                    (accordianState === id
+                                    (accState === id
                                       ? 'accordian-show'
                                       : '') + ' course-accordian-content'
                                   }
