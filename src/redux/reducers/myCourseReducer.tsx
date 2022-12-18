@@ -31,7 +31,7 @@ export const mycourseReducer = createSlice({
         },
         firstVideoState: (state, { payload }) => {
             state.firstVideo = payload
-            state.videoLink = payload
+            // state.videoLink = payload
         }
     },
 });
