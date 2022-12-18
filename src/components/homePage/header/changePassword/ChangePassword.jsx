@@ -196,7 +196,7 @@ const ChangePassword = () => {
         {/* <div className="toast">add toast here</div> */}
       </div>
       <Toaster
-        position="bottom-center"
+        position="bottom-center" 
         containerStyle={{
           top: 20,
           left: 20,

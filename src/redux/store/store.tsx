@@ -18,6 +18,7 @@ import { testSuccessRedSlice } from '../reducers/SuccessTestRed';
 import { showSuccessPageSlice } from '../reducers/showSuccesspage';
 import { finaltestShowPageSlice } from '../reducers/finalTestSuccess';
 import FinalResultSlice from '../reducers/finalResult';
+import NotifySlice from '../reducers/Notifications';
 import basicCourseSlice from '../reducers/basicCourses';
 import advancedCourseSlice, {
   advancedCourse,
