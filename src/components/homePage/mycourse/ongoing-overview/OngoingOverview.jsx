@@ -235,11 +235,10 @@ const OngoingOverview = () => {
     setPlaying(true);
   };
 
-
   const onEnd = async () => {
     setEndVideo(true);
     console.log('Ended');
-    // console.log('pauseData', pauseData);
+    console.log('pauseData', pauseData);
 
     const resultPauseTime = new Date(played * 1000).toISOString().slice(11, 19);
     // console.log(typeof(pauseData));
@@ -358,6 +357,7 @@ const OngoingOverview = () => {
   }, [chapter])
 
 
+  console.log('pauseData',pauseData)
   // overviewData && overviewData.enrolled ?
   //   accordianToggle(accordianStateID - 1)
   //   :
