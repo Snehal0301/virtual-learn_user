@@ -32,11 +32,20 @@ const ChoiceYourCourse = () => {
     dispatch(allCoursePW({ pageNum: pageNum, pageLimit: 4 }));
   }, [pageNum]);
 
+  useEffect(() => {
+    dispatch(allCoursePW({ pageNum: pageNum, pageLimit: 4 }));
+  }, []);
+
   const allCoursePagination = useSelector((state) => state.allCoursePW.data);
 
   console.log('all Course PW', allCoursePagination.data);
 
-  console.log('obtainedcourse', obtainedcourse);
+  console.log(
+    'obtainedcourse',
+
+    Math.ceil(allCoursePagination.data[0].chapterCount / 4),
+    pageNum
+  );
   return (
     <div className="choice-your-course">
       <div className="choice-your-course-heading">Choice your course</div>
@@ -80,32 +89,35 @@ const ChoiceYourCourse = () => {
       <div className="choice-your-course-allcourse">All courses</div>
       <div className="choice-your-course-card">
         <div className="choice-your-course-choice1">
-          {obtainedcourse.map((item) => (
-            <div
-              className="choice-your-coursesubcategory-image"
-              onClick={() => {
-                dispatch(courseOverview(item.courseId));
-                dispatch(chapterResponse(item.courseId));
-                navigate('/myCourses/ongoingCourse');
-              }}
-            >
-              <img src={item.coursePhoto} alt="" />
+          {allCoursePagination &&
+            allCoursePagination.data &&
+            allCoursePagination.data.length > 0 &&
+            allCoursePagination.data.map((item) => (
+              <div
+                className="choice-your-coursesubcategory-image"
+                onClick={() => {
+                  dispatch(courseOverview(item.courseId));
+                  dispatch(chapterResponse(item.courseId));
+                  navigate('/myCourses/ongoingCourse');
+                }}
+              >
+                <img src={item.coursePhoto} alt="" />
 
-              <div className="choiceYourCourse-title-chapter">
-                <div className="choice-your-coursesubcategory-title">
-                  {item.courseName}
-                </div>
-                <div className="choice-your-cahpbtn">
-                  <div className="choice-your-coursechapter">
-                    {item.chapterCount} chapters
+                <div className="choiceYourCourse-title-chapter">
+                  <div className="choice-your-coursesubcategory-title">
+                    {item.courseName}
                   </div>
-                  <button className="choice-yourcourse-designbtn">
-                    {item.categoryName}
-                  </button>
+                  <div className="choice-your-cahpbtn">
+                    <div className="choice-your-coursechapter">
+                      {item.chapterCount} chapters
+                    </div>
+                    <button className="choice-yourcourse-designbtn">
+                      {item.categoryName}
+                    </button>
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
+            ))}
         </div>
       </div>
       <div className="paginationBtns">
@@ -113,7 +125,7 @@ const ChoiceYourCourse = () => {
           onClick={() => {
             dispatch(paginatePrevious());
           }}
-          disabled={pageNum < 2}
+          disabled={pageNum <= 1}
         >
           Previous
         </button>
@@ -123,13 +135,7 @@ const ChoiceYourCourse = () => {
             dispatch(paginateNext());
           }}
           disabled={
-            Math.ceil(
-              allCoursePagination &&
-                allCoursePagination.data &&
-                allCoursePagination.data.length > 0 &&
-                allCoursePagination.data.chapterCount &&
-                allCoursePagination.data[0].chapterCount / 4
-            ) <= pageNum
+            Math.ceil(allCoursePagination.data[0].chapterCount / 4) === pageNum
           }
         >
           Next
