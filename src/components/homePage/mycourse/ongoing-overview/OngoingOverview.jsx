@@ -335,7 +335,7 @@ const OngoingOverview = () => {
   const continueModalData = async() => {
     await axios
       .request(
-        `http://virtuallearn-env.eba-6xmym3vf.ap-south-1.elasticbeanstalk.com/user/continue?courseId=23`,
+        `http://virtuallearn-env.eba-6xmym3vf.ap-south-1.elasticbeanstalk.com/user/continue?courseId=${chapter.courseId}`,
         {
           method: 'get',
           headers: {
@@ -344,7 +344,7 @@ const OngoingOverview = () => {
         }
       )
       .then((res) => {
-        console.log('modal continue data',res)
+        console.log('modal continue data', res)
       })
       .catch((err) => {
         console.log('Modal continue error',err);
@@ -352,6 +352,7 @@ const OngoingOverview = () => {
   }
 
   useEffect(() => {
+    chapter &&
     continueModalData()
   }, [])
 
@@ -714,44 +715,44 @@ const OngoingOverview = () => {
               )}
             </>
           ) : (
-            //  <div className="course-completion">
-            //     <div className="course-completion-section-1">
-            //         <div className="completion-section-1-main">
+             <div className="course-completion">
+                <div className="course-completion-section-1">
+                    <div className="completion-section-1-main">
 
-            //             <p className='completion-section-1-main-title'>Course Result</p>
-            //             <p className='completion-section-1-main-per'>90%</p>
-            //             <p className='completion-section-1-main-apr'>approval rate</p>
-            //         </div>
-            //     </div>
-            //     <div className="course-completion-section-2">
-            //         <div className="completion-section-2-main">
-            //             <div className="cmain-1">
-            //                 <p>Joined</p>
-            //                 <p className='cmain-1-date'>02/04/2021</p>
-            //             </div>
-            //             <div className="cmain-2">
-            //                 <p>Completed</p>
-            //                 <p className='cmain-1-date'>02/04/2021</p>
-            //             </div>
-            //             <div className="cmain-3">
-            //                 <p>Duration</p>
-            //                 <p className='cmain-1-date'>4h 30m</p>
-            //             </div>
-            //         </div>
-            //     </div>
-            //     <div className="course-completion-section-3">
-            //         <div className="completion-section-3-main">
-            //             <div className="cs3-main-1">
-            //                 <p className='cs3-main-1-title'>Course Certificate</p>
-            //                 <div className='download-icon-image'>{downloadIcon}</div>
-            //             </div>
-            //             <div className="cs3-main-2">
-            //                 <img src={require('../../../../assets/images/certicon.png')} alt="" />
-            //             </div>
-            //         </div>
-            //     </div>
-            // </div>
-            ''
+                        <p className='completion-section-1-main-title'>Course Result</p>
+                        <p className='completion-section-1-main-per'>90%</p>
+                        <p className='completion-section-1-main-apr'>approval rate</p>
+                    </div>
+                </div>
+                <div className="course-completion-section-2">
+                    <div className="completion-section-2-main">
+                        <div className="cmain-1">
+                            <p>Joined</p>
+                            <p className='cmain-1-date'>02/04/2021</p>
+                        </div>
+                        <div className="cmain-2">
+                            <p>Completed</p>
+                            <p className='cmain-1-date'>02/04/2021</p>
+                        </div>
+                        <div className="cmain-3">
+                            <p>Duration</p>
+                            <p className='cmain-1-date'>4h 30m</p>
+                        </div>
+                    </div>
+                </div>
+                <div className="course-completion-section-3">
+                    <div className="completion-section-3-main">
+                        <div className="cs3-main-1">
+                            <p className='cs3-main-1-title'>Course Certificate</p>
+                            <div className='download-icon-image'>{downloadIcon}</div>
+                        </div>
+                        <div className="cs3-main-2">
+                            <img src={require('../../../../assets/images/certicon.png')} alt="" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            // ''
           )}
         </div>
         <div className="ongoing-section-2">
