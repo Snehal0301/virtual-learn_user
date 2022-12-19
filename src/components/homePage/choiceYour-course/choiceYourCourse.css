@@ -193,7 +193,8 @@
     {
         /* display: flex; */
         flex-direction: column;
-        flex-wrap: nowrap;
+        flex-wrap: nowrap;  
+        gap: 10px;
     }
     .choice-your-coursesubcategory-image 
     {
@@ -201,11 +202,13 @@
         margin-bottom: 10px;
     }
 
-    .choice-your-coursesubcategory-image img {
-    width: 90px;
-    height: 90px;
-    border-radius: 6px;
-}
+    .choice-your-coursesubcategory-image img 
+    {
+        width: 83px;
+        height: 79px;
+        border-radius: 6px;
+        object-fit: cover;
+    }
     .choice-yourcourse-designbtn {
         width: 110px;
         height: 29px;

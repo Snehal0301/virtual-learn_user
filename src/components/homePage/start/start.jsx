@@ -32,13 +32,11 @@ import { subCategories } from './../../../redux/reducers/subCategories';
 import { courseOverview } from '../../../redux/reducers/courseOverview';
 import { chapterResponse } from '../../../redux/reducers/chapterResponses';
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
-// import { Carousel } from 'react-responsive-carousel';
-// import Carousel from "react-elastic-carousel";
-// import Slider from "react-slick"
-// import Slider from 'react-slick'
+import Slider from "react-slick";
 // import "slick-carousel/slick/slick.css";
 // import "slick-carousel/slick/slick-theme.css";
-import Slider from 'react-slick'
+
+
 
 
 const Start = () => {
@@ -70,6 +68,13 @@ const Start = () => {
   const [ongoing, setOngoing] = useState([]);
   const [name, setName] = useState('');
 
+  const settings =  {
+    arrows: false,
+    autoplay: true,
+    dots: true,
+    dotsScroll: 3,
+    slidesToShow: 3
+  };
   
 
   useEffect(() => {
@@ -245,8 +250,8 @@ const Start = () => {
       <div className="start-greeting">Hello!</div>
       <div className="start-username">{name}</div>
       <div className='webslider'>
-        <Slider autoplay={true} autoplaySpeed={2000} slidesToShow={3} dots={true}  showIndicators={true}>
-          {headerdata && headerdata.slice(0,4).map((item) => (
+        <Slider autoplay={true} autoplaySpeed={2000} slidesToShow={3} dots={true}>
+          {headerdata && headerdata.map((item) => (
             <div
               className="start-image-title"
               onClick={() => {
