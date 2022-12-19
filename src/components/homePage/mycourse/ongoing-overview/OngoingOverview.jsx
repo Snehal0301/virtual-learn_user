@@ -337,6 +337,8 @@ const OngoingOverview = () => {
     // accordianToggle(accordianStateID - 1);
     // accordianToggle(continueModal.chapterNumber - 1)
     console.log('pauseData.videoTitle', pauseData.videoTitle);
+    getVideoState(continueModal)
+
   }, [chapter])
 
 
@@ -442,6 +444,7 @@ const OngoingOverview = () => {
   const getVideoState = (itemele) => {
     dispatch(videoLinkState(itemele.videoLink));
     console.log('videoLink', videoLink);
+    console.log('pauseData.videolink', itemele.videoLink);
     dispatch(firstVideoState(''));
   };
 
