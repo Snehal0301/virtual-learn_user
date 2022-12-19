@@ -351,7 +351,6 @@ const OngoingOverview = () => {
       })
       .catch((err) => {
         console.log('Modal continue error', err);
-        alert('message: null')
       });
   }
 
@@ -473,7 +472,17 @@ const OngoingOverview = () => {
 
   const playerRef = useRef();
 
-  const defaultNormalPause = () => {
+  const defaultNormalPause = (time) => {
+    var hms = time;   // your input string
+    var a = hms.split(':'); // split it at the colons
+
+    // minutes are worth 60 seconds. Hours are worth 60 minutes.
+    var seconds = (+a[0]) * 60 * 60 + (+a[1]) * 60 + (+a[2]);
+
+    console.log('seconds', seconds);
+    
+    playerRef.current.seekTo(seconds, 'seconds');
+
     setPause(false);
     setPlaying(true);
     setDefPause(true);
@@ -591,8 +600,8 @@ const OngoingOverview = () => {
                           setFirstPause(false);
                         }}
                       >
-                        Continue Chapter {accordianStateID} Lesson{' '}
-                        {lessonStateID}
+                        Continue Chapter {continueModal.chapterNumber} Lesson{' '}
+                        {continueModal.lessonNumber}
                       </div>
                     )}
 
@@ -600,13 +609,13 @@ const OngoingOverview = () => {
                       <div className="onpause-modal">
                         <p className="onpause-modal-title">
                           Your lesson paused at{' '}
-                          <span>{Math.floor(played) / 100}</span> Do you want to
+                          <span>{continueModal.pauseTime}</span> Do you want to
                           continue watching?
                         </p>
                         {/* <div className="onpause-modal-button"> */}
                         <button
                           className="onpause-button"
-                          onClick={defaultNormalPause}
+                          onClick={()=>defaultNormalPause(continueModal.pauseTime)}
                         >
                           Continue Watching
                         </button>
