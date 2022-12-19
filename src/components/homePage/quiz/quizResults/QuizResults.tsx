@@ -24,9 +24,11 @@ const QuizResults = () => {
     dispatch(testSuccess(false));
   }, []);
 
-  const resultsHeaderData = useSelector((state: any) => state.answerHeader.data)
-  const resultAnswers = useSelector((state: any) => state.answer.data)
-  const courseID = useSelector((state:any)=>state.pauseTime.courseID)
+  const resultsHeaderData = useSelector(
+    (state: any) => state.answerHeader.data
+  );
+  const resultAnswers = useSelector((state: any) => state.answer.data);
+  const courseID = useSelector((state: any) => state.pauseTime.courseID);
 
   console.log('header data', resultsHeaderData, resultAnswers);
 
@@ -49,10 +51,17 @@ const QuizResults = () => {
           <div
             className="quizResults-closeicon"
             onClick={() => {
-              console.log('close', resultsHeaderData)
-              dispatch(tabToggleState(2))
-              dispatch(chapterResponse(courseID));
-              navigate('/myCourses/ongoingCourse')
+              console.log('close', resultsHeaderData);
+              dispatch(tabToggleState(2));
+              dispatch(
+                chapterResponse(
+                  chapterResponses &&
+                    chapterResponses.data &&
+                    chapterResponses.data.courseId &&
+                    chapterResponses.data.courseId
+                )
+              );
+              navigate('/myCourses/ongoingCourse');
             }}
           >
             {closeIcon}
