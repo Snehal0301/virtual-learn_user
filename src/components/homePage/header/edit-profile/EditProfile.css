@@ -120,7 +120,7 @@
   border: none;
   border-bottom: 1px solid #072d5b;
   outline: none;
-  margin-bottom: 8px;
+  margin-bottom: 11px;
   color: #072d5b;
   font-size: 19px;
   font-family: Avenir;
@@ -133,7 +133,7 @@
   border: none;
   border-bottom: 1px solid #072d5b;
   outline: none;
-  margin-bottom: 4px;
+  margin-bottom: 12px;
   color: #072d5b;
   font-size: 19px;
   font-family: Avenir;
@@ -153,7 +153,6 @@
     transform: translate(0, -2.95rem);
   }
 }
-
 
 .editPbtn {
   padding: 0.75rem 1.5rem;
@@ -189,6 +188,7 @@
   font-size: 16px;
   font-family: Avenir;
   margin-top: -3px;
+  margin-bottom: 4px;
 }
 option {
   color: #072d5b;
