@@ -38,14 +38,6 @@ const ChoiceYourCourse = () => {
 
   const allCoursePagination = useSelector((state) => state.allCoursePW.data);
 
-  console.log('all Course PW', allCoursePagination.data);
-
-  console.log(
-    'obtainedcourse',
-
-    Math.ceil(allCoursePagination.data[0].chapterCount / 4),
-    pageNum
-  );
   return (
     <div className="choice-your-course">
       <div className="choice-your-course-heading">Choice your course</div>
