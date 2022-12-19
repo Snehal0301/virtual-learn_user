@@ -61,7 +61,8 @@ const Completed = () => {
                     </div>
                     <button
                       className="btn-continue-completed"
-                      onClick={() => {
+                      onClick={(e) => {
+                        e.stopPropagation();
                         dispatch(showCertificate(true));
                         setCourseName(ele.courseName);
 
