@@ -34,10 +34,7 @@ const ChoiceYourCourse = () => {
 
   const allCoursePagination = useSelector((state) => state.allCoursePW.data);
 
-  console.log(
-    'all Course PW',
-    Math.ceil(allCoursePagination.data[0].chapterCount / 4)
-  );
+  console.log('all Course PW', allCoursePagination.data);
 
   console.log('obtainedcourse', obtainedcourse);
   return (
@@ -116,16 +113,23 @@ const ChoiceYourCourse = () => {
           onClick={() => {
             dispatch(paginatePrevious());
           }}
-          disabled={pageNum <= 0}
+          disabled={pageNum < 2}
         >
           Previous
         </button>
+        &nbsp;Page: {pageNum} &nbsp;
         <button
           onClick={() => {
             dispatch(paginateNext());
           }}
           disabled={
-            Math.ceil(allCoursePagination.data[0].chapterCount / 4) <= pageNum
+            Math.ceil(
+              allCoursePagination &&
+                allCoursePagination.data &&
+                allCoursePagination.data.length > 0 &&
+                allCoursePagination.data.chapterCount &&
+                allCoursePagination.data[0].chapterCount / 4
+            ) <= pageNum
           }
         >
           Next
