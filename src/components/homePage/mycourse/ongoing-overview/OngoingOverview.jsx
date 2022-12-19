@@ -171,12 +171,12 @@ const OngoingOverview = () => {
       chapterResponses.data &&
       setDefaultVideo(
         chapterResponses &&
-          chapterResponses.data &&
-          chapterResponses.data.chapterResponses[0] &&
-          chapterResponses.data.chapterResponses[0].lessonResponses[0] &&
-          chapterResponses.data.chapterResponses[0].lessonResponses[0]
-            .videoLink &&
-          chapterResponses.data.chapterResponses[0].lessonResponses[0].videoLink
+        chapterResponses.data &&
+        chapterResponses.data.chapterResponses[0] &&
+        chapterResponses.data.chapterResponses[0].lessonResponses[0] &&
+        chapterResponses.data.chapterResponses[0].lessonResponses[0]
+          .videoLink &&
+        chapterResponses.data.chapterResponses[0].lessonResponses[0].videoLink
       );
   }, [chapterResponses]);
 
@@ -237,6 +237,7 @@ const OngoingOverview = () => {
   const [played, setPlayed] = useState();
   const [joinCourse, setJoinCourse] = useState(false);
   const [endVideo, setEndVideo] = useState(false);
+  const [continueModal, setContinueModal] = useState('');
 
   const onPause = () => {
     setPause(true);
@@ -301,7 +302,8 @@ const OngoingOverview = () => {
       courseId: pauseData.courseId,
     };
 
-    dispatch(pauseUnmount(unmountData));
+    (unmountData.chapterId !== '') && (unmountData.pauseTime !== '') && (unmountData.lessonId !== '') && (unmountData.courseId !== '') &&
+      dispatch(pauseUnmount(unmountData));
 
     // await axios
     //   .request(
@@ -332,10 +334,10 @@ const OngoingOverview = () => {
     //   });
   };
 
-  const continueModalData = async() => {
+  const continueModalData = async () => {
     await axios
       .request(
-        `http://virtuallearn-env.eba-6xmym3vf.ap-south-1.elasticbeanstalk.com/user/continue?courseId=23`,
+        `http://virtuallearn-env.eba-6xmym3vf.ap-south-1.elasticbeanstalk.com/user/continue?courseId=${chapter.courseId}`,
         {
           method: 'get',
           headers: {
@@ -344,16 +346,19 @@ const OngoingOverview = () => {
         }
       )
       .then((res) => {
-        console.log('modal continue data',res)
+        console.log('modal continue data', res)
+        setContinueModal(res.data)
       })
       .catch((err) => {
-        console.log('Modal continue error',err);
+        console.log('Modal continue error', err);
+        alert('message: null')
       });
   }
 
   useEffect(() => {
-    continueModalData()
-  }, [])
+    chapter &&
+      continueModalData()
+  }, [chapter])
 
   useEffect(() => {
     console.log('Component mounted');
@@ -1015,8 +1020,8 @@ const OngoingOverview = () => {
                                                 {itemele.lessonCompletedStatus
                                                   ? completedlessonIcon
                                                   : itemele.lessonStatus
-                                                  ? inactiveIcon('green')
-                                                  : inactiveIcon('')}
+                                                    ? inactiveIcon('green')
+                                                    : inactiveIcon('')}
                                                 {/* {itemele.lessonCompletedStatus ? completedlessonIcon : itemele.lessonStatus ? inactiveIcon("green")  : inactiveIcon("")} */}
                                               </div>
                                               <div className="accordian-item-section-2">
@@ -1039,15 +1044,15 @@ const OngoingOverview = () => {
                                                   onClick={() => {
                                                     itemele.lessonStatus
                                                       ? getPauseVideoTime(
-                                                          chapter,
-                                                          ele,
-                                                          itemele
-                                                        )
+                                                        chapter,
+                                                        ele,
+                                                        itemele
+                                                      )
                                                       : // getVideoState(itemele)
 
-                                                        // showChapter(chapter.courseId,ele.chapterId,itemele.lessonId)
-                                                        // showChapter(chapter.courseId, ele.chapterId, itemele.lessonId)
-                                                        notify();
+                                                      // showChapter(chapter.courseId,ele.chapterId,itemele.lessonId)
+                                                      // showChapter(chapter.courseId, ele.chapterId, itemele.lessonId)
+                                                      notify();
                                                   }}
                                                 >
                                                   {itemele.lessonStatus
@@ -1066,8 +1071,8 @@ const OngoingOverview = () => {
                                             {ele.chapterTestPercentage > 0
                                               ? completedlessonIcon
                                               : statusTest
-                                              ? inactiveIcon('green')
-                                              : inactiveIcon('')}
+                                                ? inactiveIcon('green')
+                                                : inactiveIcon('')}
                                           </div>
                                           <div
                                             className="accordian-item-section-2 test-section"
@@ -1096,15 +1101,14 @@ const OngoingOverview = () => {
                                                   ele.chapterTestPercentage > 0
                                                   ? attemptTest()
                                                   : dispatch(
-                                                      test(
-                                                        `${
-                                                          ele.testName ===
-                                                          'Final Test'
-                                                            ? 'finalTest'
-                                                            : 'moduleTest'
-                                                        }?testId=${ele.testId}`
-                                                      )
+                                                    test(
+                                                      `${ele.testName ===
+                                                        'Final Test'
+                                                        ? 'finalTest'
+                                                        : 'moduleTest'
+                                                      }?testId=${ele.testId}`
                                                     )
+                                                  )
                                                 : inactiveTest();
                                             }}
                                           >
@@ -1286,7 +1290,7 @@ const OngoingOverview = () => {
                                             <div className="accordian-item">
                                               <div className="accordian-item-icon">
                                                 {ele.chapterNumber === 1 &&
-                                                itemele.lessonStatus
+                                                  itemele.lessonStatus
                                                   ? inactiveIcon('green')
                                                   : inactiveIcon('')}
                                               </div>
@@ -1308,13 +1312,13 @@ const OngoingOverview = () => {
                                                   className="video-play-btn"
                                                   onClick={() => {
                                                     ele.chapterNumber === 1 &&
-                                                    itemele.lessonStatus
+                                                      itemele.lessonStatus
                                                       ? console.log('nothing')
                                                       : errorCourse();
                                                   }}
                                                 >
                                                   {ele.chapterNumber === 1 &&
-                                                  itemele.lessonStatus
+                                                    itemele.lessonStatus
                                                     ? videoPlayActive('red')
                                                     : videoPlayActive('')}
                                                 </div>
@@ -1375,14 +1379,14 @@ const OngoingOverview = () => {
                                             </div>
                                             <div
                                               className="video-play-btn"
-                                              // onClick={() => { setVideo(courseele.videoLink) }}
-                                              // onClick={() => {
-                                              //   dispatch(
-                                              //     videoLinkState(
-                                              //       itemele.videoLink
-                                              //     )
-                                              //   );
-                                              // }}
+                                            // onClick={() => { setVideo(courseele.videoLink) }}
+                                            // onClick={() => {
+                                            //   dispatch(
+                                            //     videoLinkState(
+                                            //       itemele.videoLink
+                                            //     )
+                                            //   );
+                                            // }}
                                             ></div>
                                           </div>
                                         </div>
