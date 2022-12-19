@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { design } from '../../../utils/svgIcons';
 import './choiceYourCourse.css';
 import { useDispatch, useSelector } from 'react-redux';
@@ -11,14 +11,33 @@ import { subCategories } from './../../../redux/reducers/subCategories';
 import { useNavigate } from 'react-router-dom';
 import { courseOverview } from '../../../redux/reducers/courseOverview';
 import { chapterResponse } from '../../../redux/reducers/chapterResponses';
+import { allCoursePW } from '../../../redux/reducers/AllcoursePW';
+import {
+  paginateNext,
+  paginatePrevious,
+} from '../../../redux/reducers/pagination';
 
 const ChoiceYourCourse = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
   const obtainedcourse = useSelector((state) => state.allcourse.value);
   const obtainedcategory = useSelector((state) => state.categorydata.value);
   console.log(obtainedcategory);
+
+  const pageNum = useSelector((state) => state.pagination.pageNum);
+
+  console.log('page number', pageNum);
+
+  useEffect(() => {
+    dispatch(allCoursePW({ pageNum: pageNum, pageLimit: 4 }));
+  }, [pageNum]);
+
+  const allCoursePagination = useSelector((state) => state.allCoursePW.data);
+
+  console.log(
+    'all Course PW',
+    Math.ceil(allCoursePagination.data[0].chapterCount / 4)
+  );
 
   console.log('obtainedcourse', obtainedcourse);
   return (
@@ -75,8 +94,7 @@ const ChoiceYourCourse = () => {
             >
               <img src={item.coursePhoto} alt="" />
 
-              <div className='choiceYourCourse-title-chapter'>
-
+              <div className="choiceYourCourse-title-chapter">
                 <div className="choice-your-coursesubcategory-title">
                   {item.courseName}
                 </div>
@@ -92,6 +110,26 @@ const ChoiceYourCourse = () => {
             </div>
           ))}
         </div>
+      </div>
+      <div className="paginationBtns">
+        <button
+          onClick={() => {
+            dispatch(paginatePrevious());
+          }}
+          disabled={pageNum <= 0}
+        >
+          Previous
+        </button>
+        <button
+          onClick={() => {
+            dispatch(paginateNext());
+          }}
+          disabled={
+            Math.ceil(allCoursePagination.data[0].chapterCount / 4) <= pageNum
+          }
+        >
+          Next
+        </button>
       </div>
     </div>
   );

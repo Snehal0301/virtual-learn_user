@@ -28,6 +28,8 @@ import chapterResponseSlice from '../reducers/chapterResponses';
 import courseOverviewSlice from '../reducers/courseOverview';
 import { pauseTimeReducer } from '../reducers/pauseTime';
 import pauseSlice from '../reducers/pauseTimeSlice';
+import allCoursePWSlice from '../reducers/AllcoursePW';
+import { paginationSlice } from '../reducers/pagination';
 
 const reducers = combineReducers({
   headerProfile: showHeaderProfile.reducer,
@@ -51,7 +53,9 @@ const reducers = combineReducers({
   chapterResponse: chapterResponseSlice.reducer,
   courseOverview: courseOverviewSlice.reducer,
   pauseTime: pauseTimeReducer.reducer,
-  pauseUnmount: pauseSlice.reducer
+  pauseUnmount: pauseSlice.reducer,
+  allCoursePW: allCoursePWSlice.reducer,
+  pagination: paginationSlice.reducer,
 });
 
 const persistConfig = {
