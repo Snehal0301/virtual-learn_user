@@ -488,6 +488,7 @@ const OngoingOverview = () => {
     setDefPause(true);
     setNextModal(false);
     setFirstPause(false);
+    showChapter(chapter.courseId, continueModal.chapterId, continueModal.lessonId, continueModal.lessonName)
     dispatch(unmountState('false'));
   };
 
