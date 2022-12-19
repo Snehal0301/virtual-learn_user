@@ -50,6 +50,13 @@ export const answerHeaderSlice = createSlice({
       state.isSuccess = true
     })
     builder.addCase(answerHeader.rejected, (state, action) => {
+      ;(action.payload &&
+        action.payload.message &&
+        alert(action.payload.message)) ||
+        (action.payload &&
+          action.payload.error &&
+          alert(action.payload.error)) ||
+        alert('Internal server error')
       state.message = action.payload
       state.loading = false
       state.isRejected = true
