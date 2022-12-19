@@ -15,6 +15,7 @@ import { useFormik } from "formik";
 import { editSchema } from "./edit-schema";
 import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
+import { ProfileClick } from "../../../../redux/reducers/EditProfileData";
 
 const EditProfile = () => {
   const [editProfileData, setEditProfileData] = useState({});
@@ -23,6 +24,7 @@ const EditProfile = () => {
   const dispatch = useDispatch();
   const handleClick = () => {
     dispatch(editProfileSection(false));
+    dispatch(ProfileClick());
   };
   const handleProfilePic = (e) => {
     var image = document.getElementById("ProfileImage");
@@ -52,7 +54,7 @@ const EditProfile = () => {
         editPUsername: editProfileData?.userName ?? "",
         editPEmail: editProfileData?.email ?? "",
         MobileNo: editProfileData?.mobileNumber ?? "",
-        gender: editProfileData?.gender ?? null,
+        gender: editProfileData?.gender ?? "prefer not to say",
         editPDOB: editProfileData.dateOfBirth
           ? editProfileData.dateOfBirth
           : "",
@@ -85,6 +87,7 @@ const EditProfile = () => {
         formData.forEach((value, key) => {
           console.log("key %s: value %s", key, value);
         });
+
         axios
           .request(
             ` http://virtuallearn-env.eba-6xmym3vf.ap-south-1.elasticbeanstalk.com/user/save`,
@@ -99,9 +102,11 @@ const EditProfile = () => {
           .then((res) => {
             console.log("res", res);
             successEditData();
+            dispatch(ProfileClick());
           })
           .catch((Err) => {
             console.log(Err);
+            dispatch(ProfileClick());
           });
       },
     });
@@ -213,7 +218,7 @@ const EditProfile = () => {
             ) : null}
           </div>
 
-          <div className="edit-error-input"> 
+          <div className="edit-error-input">
             <input
               type="email"
               id="editPEmail"
@@ -257,7 +262,7 @@ const EditProfile = () => {
             ) : null}
           </div>
 
-          <div className="genderSection">
+          <div className="occupationSection">
             <label htmlFor="occupation">Occupation</label>
             <select
               id="editPOccupation"
@@ -286,13 +291,11 @@ const EditProfile = () => {
               onChange={handleChange}
               onBlur={handleBlur}
             >
-              <option value="other" selected>
-                Other
+              <option value="prefer not to say" selected>
+                prefer not to say
               </option>
               <option value="male">Male</option>
-              <option value="female" selected>
-                Female
-              </option>
+              <option value="female">Female</option>
             </select>
           </div>
           <input

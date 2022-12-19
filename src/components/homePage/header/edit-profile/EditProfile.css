@@ -179,6 +179,17 @@
   font-family: Avenir;
   margin-top: -3px;
 }
+.occupationSection {
+  /* background-color: red; */
+  display: flex;
+  flex-direction: column;
+}
+.occupationSection label {
+  color: #7a7a7a;
+  font-size: 16px;
+  font-family: Avenir;
+  margin-top: -3px;
+}
 option {
   color: #072d5b;
 }

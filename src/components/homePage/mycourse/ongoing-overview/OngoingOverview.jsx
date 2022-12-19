@@ -58,6 +58,7 @@ import {
   unmountState,
 } from '../../../../redux/reducers/pauseTime';
 import { pauseUnmount } from '../../../../redux/reducers/pauseTimeSlice';
+import { NotifyClick } from '../../../../redux/reducers/NotificationsData';
 
 const OngoingOverview = () => {
   const [chapter, setChapter] = useState();
@@ -332,28 +333,28 @@ const OngoingOverview = () => {
     //   });
   };
 
-  // const continueModalData = async() => {
-  //   await axios
-  //     .request(
-  //       `http://virtuallearn-env.eba-6xmym3vf.ap-south-1.elasticbeanstalk.com/user/continue?courseId=32`,
-  //       {
-  //         method: 'get',
-  //         headers: {
-  //           Authorization: `Bearer ${sessionStorage.getItem('Token')}`,
-  //         },
-  //       }
-  //     )
-  //     .then((res) => {
-  //       console.log('modal continue data',res)
-  //     })
-  //     .catch((err) => {
-  //       console.log('Modal continue error',err);
-  //     });
-  // }
+  const continueModalData = async() => {
+    await axios
+      .request(
+        `http://virtuallearn-env.eba-6xmym3vf.ap-south-1.elasticbeanstalk.com/user/continue?courseId=23`,
+        {
+          method: 'get',
+          headers: {
+            Authorization: `Bearer ${sessionStorage.getItem('Token')}`,
+          },
+        }
+      )
+      .then((res) => {
+        console.log('modal continue data',res)
+      })
+      .catch((err) => {
+        console.log('Modal continue error',err);
+      });
+  }
 
-  // useEffect(() => {
-  //   continueModalData()
-  // }, [])
+  useEffect(() => {
+    continueModalData()
+  }, [])
 
   useEffect(() => {
     console.log('Component mounted');
@@ -499,6 +500,7 @@ const OngoingOverview = () => {
           dispatch(courseOverview(chapter.courseId));
           dispatch(tabToggleState(2));
           setJoinCourse(true);
+          dispatch(NotifyClick())
         }
       })
       .catch((err) => {
@@ -934,7 +936,7 @@ const OngoingOverview = () => {
               ) : (
                 <button
                   className="join-course"
-                  onClick={() => enrollCourse(overviewData.courseId)}
+                  onClick={() => {enrollCourse(overviewData.courseId)}}
                 >
                   Join Course
                 </button>

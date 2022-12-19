@@ -294,13 +294,13 @@ button.Toastify__close-button.Toastify__close-button--light {
         color: var(--greyFont);
         font-size: 12px;
     }
-    .loginAuth-formInput {
-        color: var(--drawerBlueClr);
-        font-size: 24px;
-        letter-spacing: 0.4px;
-        line-height: 20px;
-        border-bottom: 0.5px solid var(--greyFont);
-    }
+   .loginAuth-formInput {
+    color: var(--drawerBlueClr);
+    font-size: 19px;
+    letter-spacing: 0.4px;
+    line-height: 20px;
+    border-bottom: 0.5px solid var(--greyFont);
+}
     .loginAuth-regLink {
         font-size: 18px;
         font-weight: bold;

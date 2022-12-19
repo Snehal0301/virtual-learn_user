@@ -76,6 +76,7 @@ form {
   width: 100%;
   margin-top: 15px;
   border-radius: 6px;
+  cursor: pointer;
 }
 
 .btn_info {

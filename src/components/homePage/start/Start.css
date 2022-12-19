@@ -1,3 +1,11 @@
+.start-greeting {
+    font-size: 22px;
+    font-family: 'Biko';
+    font-style: normal;
+    font-weight: 400;
+    /* line-height: 50px; */
+    color: #7A7A7A;
+}
 .start-username {
   font-family: 'Biko';
   font-style: normal;

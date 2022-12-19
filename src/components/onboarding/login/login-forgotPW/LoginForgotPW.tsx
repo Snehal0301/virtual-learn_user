@@ -111,7 +111,7 @@ const LoginForgotPW = () => {
           >
             <div
               className="loginAuth-formInput"
-              style={{ borderBottom: '0px solid red' }}
+              style={{ borderBottom: '0px solid red', }}
             >
               +91
             </div>

@@ -160,6 +160,7 @@
   .settings-settings-text-set p {
     color: #000;
     margin-left: 0.5em;
+    padding-top: 1em; 
   }
   .drawer-profile-header-settings {
     background-color: unset;

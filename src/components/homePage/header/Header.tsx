@@ -45,7 +45,9 @@ import Loading from "../../../utils/loading/Loading";
 import axios from "axios";
 import { courseOverview } from "../../../redux/reducers/courseOverview";
 import { chapterResponse } from "../../../redux/reducers/chapterResponses";
-import { NotifyClick } from "../../../redux/reducers/Notifications";
+import { NotifyClick } from "../../../redux/reducers/NotificationsData";
+import { MobileNotifyClick } from "../../../redux/reducers/MobileNotification";
+import { ProfileClick } from "../../../redux/reducers/EditProfileData";
 
 const Header = () => {
   const [onChange, setOnChange] = useState("");
@@ -54,12 +56,12 @@ const Header = () => {
   const [topSearch, setTopSearch] = useState([]);
   const [topCategories, setTopCategories] = useState([]);
   const [searchedCourse, setSearchedCourse] = useState([]);
-  const [profileData, setprofileData] = useState<any>({});
+  const [profileData1, setprofileData] = useState<any>({});
 
   const navigate = useNavigate();
 
   const filterData = useSelector((state: any) => state.filter.value);
-
+const profileData = useSelector((state: any) => state.MobileNotifyClick.data);
   useEffect(() => {
     fetch(
       `http://virtuallearn-env.eba-6xmym3vf.ap-south-1.elasticbeanstalk.com/user/topSearches`,
@@ -96,21 +98,22 @@ const Header = () => {
   }, []);
 
   useEffect(() => {
-    axios
-      .get(
-        `http://virtuallearn-env.eba-6xmym3vf.ap-south-1.elasticbeanstalk.com/user/menu`,
-        {
-          headers: {
-            Authorization: `Bearer ${sessionStorage.getItem("Token")}`,
-          },
-        }
-      )
-      .then((res) => {
-        setprofileData(res.data);
-      })
-      .catch((err) => {
-        console.error(err);
-      });
+    dispatch(MobileNotifyClick());
+    // axios
+    //   .get(
+    //     `http://virtuallearn-env.eba-6xmym3vf.ap-south-1.elasticbeanstalk.com/user/menu`,
+    //     {
+    //       headers: {
+    //         Authorization: `Bearer ${sessionStorage.getItem("Token")}`,
+    //       },
+    //     }
+    //   )
+    //   .then((res) => {
+    //     setprofileData(res.data);
+    //   })
+    //   .catch((err) => {
+    //     console.error(err);
+    //   });
   }, []);
 
   console.log("profile data", profileData);
@@ -129,6 +132,7 @@ const Header = () => {
     dispatch(profileDrawer(true));
     dispatch(headerProfile(false));
     dispatch(profileSection(true));
+    dispatch(ProfileClick());
     // dispatch(notificationSection(false))
     // dispatch(termsSection(false))
     // dispatch(privacySection(false))
@@ -150,6 +154,7 @@ const Header = () => {
     dispatch(profileSection(false));
     dispatch(notificationSection(true));
     dispatch(settingsSection(false));
+    dispatch(NotifyClick());
   };
 
   const handleSetting = () => {
@@ -212,6 +217,7 @@ const Header = () => {
 
   const handleMobileDrawer = () => {
     setLeftdrawer(true);
+    dispatch(NotifyClick());
   };
 
   const [arrow, setArrow] = useState(false);
@@ -365,8 +371,10 @@ const Header = () => {
                 <div className="header-profilePic">
                   <img
                     src={
-                      profileData && profileData.profilePhoto
-                        ? profileData.profilePhoto
+                      profileData &&
+                      profileData.data &&
+                      profileData.data.profilePhoto
+                        ? profileData.data.profilePhoto
                         : require("../../../assets/images/start-courses-image/profilepic.jpg")
                     }
                     alt="Profile Pic"
@@ -775,21 +783,21 @@ const Header = () => {
                 <img
                   src={
                     profileData &&
-                    profileData.profilePhoto &&
-                    profileData.profilePhoto
+                    profileData.data &&
+                    profileData.data.profilePhoto
                   }
                   alt=""
                 />
               </div>
               <div className="left-drawer-profile-image-name">
                 <p className="left-drawer-name">
-                  {profileData && profileData.fullName && profileData.fullName}
+                  {profileData && profileData.data && profileData.data.fullName}
                 </p>
                 <p className="left-drawer-role">
                   {" "}
                   {profileData &&
-                    profileData.occupation &&
-                    profileData.occupation}
+                    profileData.data &&
+                    profileData.data.occupation}
                 </p>
               </div>
             </div>
@@ -850,8 +858,8 @@ const Header = () => {
                 <p>Notifications</p>
                 <span>
                   {profileData &&
-                    profileData.notificationCount &&
-                    profileData.notificationCount}
+                    profileData.data &&
+                    profileData.data.notificationCount}
                 </span>
               </div>
               <div
