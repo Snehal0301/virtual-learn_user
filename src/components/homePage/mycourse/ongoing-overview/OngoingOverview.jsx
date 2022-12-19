@@ -332,28 +332,28 @@ const OngoingOverview = () => {
     //   });
   };
 
-  // const continueModalData = async() => {
-  //   await axios
-  //     .request(
-  //       `http://virtuallearn-env.eba-6xmym3vf.ap-south-1.elasticbeanstalk.com/user/continue?courseId=32`,
-  //       {
-  //         method: 'get',
-  //         headers: {
-  //           Authorization: `Bearer ${sessionStorage.getItem('Token')}`,
-  //         },
-  //       }
-  //     )
-  //     .then((res) => {
-  //       console.log('modal continue data',res)
-  //     })
-  //     .catch((err) => {
-  //       console.log('Modal continue error',err);
-  //     });
-  // }
+  const continueModalData = async() => {
+    await axios
+      .request(
+        `http://virtuallearn-env.eba-6xmym3vf.ap-south-1.elasticbeanstalk.com/user/continue?courseId=23`,
+        {
+          method: 'get',
+          headers: {
+            Authorization: `Bearer ${sessionStorage.getItem('Token')}`,
+          },
+        }
+      )
+      .then((res) => {
+        console.log('modal continue data',res)
+      })
+      .catch((err) => {
+        console.log('Modal continue error',err);
+      });
+  }
 
-  // useEffect(() => {
-  //   continueModalData()
-  // }, [])
+  useEffect(() => {
+    continueModalData()
+  }, [])
 
   useEffect(() => {
     console.log('Component mounted');
@@ -366,7 +366,7 @@ const OngoingOverview = () => {
       dispatch(unmountState('true'));
       dispatch(accordianToggleState(0));
       setDefaultVideo('');
-      dispatch(firstVideoState('https://youtu.be/d1UNXbRxxZE'));
+      // dispatch(firstVideoState('https://youtu.be/d1UNXbRxxZE'));
       dispatch(videoLinkState(''));
       componentUnMount();
     };
@@ -532,6 +532,7 @@ const OngoingOverview = () => {
             <Link
               to="/myCourses"
               style={{ color: 'var(--blueFont)', cursor: 'pointer' }}
+              onClick={componentUnMount}
             >
               My Course &nbsp; &nbsp; {'>'} &nbsp;
             </Link>
@@ -541,6 +542,7 @@ const OngoingOverview = () => {
             <Link
               to="/myCourses"
               style={{ color: 'var(--blueFont)', cursor: 'pointer' }}
+              onClick={componentUnMount}
             >
               Ongoing &nbsp; &nbsp; {'>'} &nbsp;
             </Link>
