@@ -225,7 +225,7 @@
   cursor: pointer;
   background: var(--secondaryClr);
   font-size: 24px;
-  /* padding: 7px 5px; */
+
   height: 40px;
   width: 107px;
   color: var(--primaryFontClr);
