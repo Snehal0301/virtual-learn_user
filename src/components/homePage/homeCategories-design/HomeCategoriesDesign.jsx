@@ -40,6 +40,7 @@ const HomeCategoriesDesign = () => {
         </span>
         {categoryName}
       </div>
+      <div className='mobileCategoryHead'>{categoryName}</div>
       <div className="home-categories-section2">
         <div className="home-categories-courses-started">
           Courses to get you started
@@ -73,7 +74,7 @@ const HomeCategoriesDesign = () => {
                   <div className="home-categories-chapter2">
                     {item.chapterCount} Chapters
                   </div>
-                  <div>{start_timeIcon}</div>
+                  <div className='homeCategoriesTime'>{start_timeIcon}</div>
                   {item.courseDuration}
                 </div>
               </div>
