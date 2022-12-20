@@ -65,7 +65,7 @@ const Notification = () => {
           <p className="drawer-profile-profile-notify">Notifications</p>
         </div>
       </div>
-      {notifyData.data.length > 0 ? (
+      {notifyData && notifyData.data && notifyData.data.length > 0 ? (
         <div className="drawer-profile-body-notify">
           {notifyData &&
             notifyData.data &&
