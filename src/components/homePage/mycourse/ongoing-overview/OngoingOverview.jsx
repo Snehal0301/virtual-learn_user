@@ -398,6 +398,9 @@ const OngoingOverview = () => {
         lessonId: chapter.chapterResponses[0].lessonResponses[0].lessonId,
         videoTitle: chapter.chapterResponses[0].lessonResponses[0].lessonName,
       });
+    
+    chapter &&
+    chapter.courseCompletedStatus === true && accordianToggle(chapter.chapterResponses.length-1)
   }, [chapter]);
 
   console.log("pauseData", pauseData);
@@ -551,16 +554,32 @@ const OngoingOverview = () => {
             </Link>
             &nbsp;
           </span>
-          <span>
-            <Link
-              to="/myCourses"
-              style={{ color: "var(--blueFont)", cursor: "pointer" }}
-              // onClick={componentUnMount}
-            >
-              Ongoing &nbsp; &nbsp; {">"} &nbsp;
-            </Link>
-            &nbsp;
-          </span>
+          {
+            chapter.courseCompletedStatus === true ?
+              <span>
+                <Link
+                  to="/myCourses"
+                  style={{ color: "var(--blueFont)", cursor: "pointer" }}
+                // onClick={componentUnMount}
+                  // onClick={}
+                >
+                  Ongoing &nbsp; &nbsp; {">"} &nbsp;
+                </Link>
+                &nbsp;
+              </span>
+              :
+              <span>
+                <Link
+                  to="/myCourses"
+                  style={{ color: "var(--blueFont)", cursor: "pointer" }}
+                // onClick={componentUnMount}
+                >
+                  Ongoing &nbsp; &nbsp; {">"} &nbsp;
+                </Link>
+                &nbsp;
+              </span>
+          }
+          
           {overviewData && overviewData.courseName && overviewData.courseName}
         </div>
       ) : (
@@ -588,7 +607,7 @@ const OngoingOverview = () => {
 
             {continueModal &&
               chapter &&
-              chapter.enrolled === true && (
+              chapter.enrolled === true && chapter.courseCompletedStatus === false && (
                 <>
                   {
                     videoPlayState &&
