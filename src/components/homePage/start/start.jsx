@@ -1,48 +1,48 @@
-import React, { useState, useEffect, useRef } from "react";
-import "react-slideshow-image/dist/styles.css";
-import "react-tabs/style/react-tabs.css";
-import "./Start.css";
+import React, { useState, useEffect, useRef } from 'react';
+import 'react-slideshow-image/dist/styles.css';
+import 'react-tabs/style/react-tabs.css';
+import './Start.css';
 import {
   design,
   start_pauseIcon,
   start_timeIcon,
-} from "../../../utils/svgIcons";
-import Carousel from "react-carousel-responsive";
-import "react-carousel-responsive/dist/styles.css";
+} from '../../../utils/svgIcons';
+import Carousel from 'react-carousel-responsive';
+import 'react-carousel-responsive/dist/styles.css';
 
-import "react-responsive-carousel/lib/styles/carousel.min.css";
-import { useDispatch } from "react-redux";
-import { useSelector } from "react-redux";
+import 'react-responsive-carousel/lib/styles/carousel.min.css';
+import { useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import {
   homeTabToggleState,
   tabToggleState,
-} from "../../../redux/reducers/myCourseReducer";
-import axios from "axios";
-import { coursedata } from "../../../redux/reducers/allcourseSlice";
-import { categorydata } from "../../../redux/reducers/categorySlice";
-import { useNavigate } from "react-router-dom";
-import { testShow, testSuccess } from "../../../redux/reducers/Conditions";
-import { testisSuccess } from "../../../redux/reducers/testSlice";
-import { testSuccessRed } from "../../../redux/reducers/SuccessTestRed";
-import { showSuccessPage } from "../../../redux/reducers/showSuccesspage";
-import { finaltestShowPage } from "../../../redux/reducers/finalTestSuccess";
+} from '../../../redux/reducers/myCourseReducer';
+import axios from 'axios';
+import { coursedata } from '../../../redux/reducers/allcourseSlice';
+import { categorydata } from '../../../redux/reducers/categorySlice';
+import { useNavigate } from 'react-router-dom';
+import { testShow, testSuccess } from '../../../redux/reducers/Conditions';
+import { testisSuccess } from '../../../redux/reducers/testSlice';
+import { testSuccessRed } from '../../../redux/reducers/SuccessTestRed';
+import { showSuccessPage } from '../../../redux/reducers/showSuccesspage';
+import { finaltestShowPage } from '../../../redux/reducers/finalTestSuccess';
 import {
   basicCourse,
   categoryName,
-} from "./../../../redux/reducers/basicCourses";
-import { advancedCourse } from "./../../../redux/reducers/advancedCourse";
-import { subCategories } from "./../../../redux/reducers/subCategories";
-import { courseOverview } from "../../../redux/reducers/courseOverview";
-import { chapterResponse } from "../../../redux/reducers/chapterResponses";
-import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
+} from './../../../redux/reducers/basicCourses';
+import { advancedCourse } from './../../../redux/reducers/advancedCourse';
+import { subCategories } from './../../../redux/reducers/subCategories';
+import { courseOverview } from '../../../redux/reducers/courseOverview';
+import { chapterResponse } from '../../../redux/reducers/chapterResponses';
+import 'react-responsive-carousel/lib/styles/carousel.min.css'; // requires a loader
 // import { Carousel } from 'react-responsive-carousel';
 // import Carousel from "react-elastic-carousel";
 // import Slider from "react-slick"
 // import Slider from 'react-slick'
 // import "slick-carousel/slick/slick.css";
 // import "slick-carousel/slick/slick-theme.css";
-import Slider from "react-slick";
-import { headerCarousel } from "../../../redux/reducers/HomeCarouseldata";
+import Slider from 'react-slick';
+import { headerCarousel } from '../../../redux/reducers/HomeCarouseldata';
 
 const Start = () => {
   const dispatch = useDispatch();
@@ -71,7 +71,7 @@ const Start = () => {
   const [topcourseData, setTopcourseData] = useState([]);
   const [categoryData, setcategoryData] = useState([]);
   const [ongoing, setOngoing] = useState([]);
-  const [name, setName] = useState("");
+  const [name, setName] = useState('');
 
   const headerdata = useSelector((state) => state.headerCarousel.data);
 
@@ -81,7 +81,7 @@ const Start = () => {
         `http://virtuallearn-env.eba-6xmym3vf.ap-south-1.elasticbeanstalk.com/user/ongoingCourses`,
         {
           headers: {
-            Authorization: `Bearer ${sessionStorage.getItem("Token")}`,
+            Authorization: `Bearer ${sessionStorage.getItem('Token')}`,
           },
         }
       )
@@ -93,7 +93,7 @@ const Start = () => {
       });
   }, []);
 
-  console.log("ongoing data", ongoing);
+  console.log('ongoing data', ongoing);
 
   //Fetching api for slider
 
@@ -104,7 +104,7 @@ const Start = () => {
         `http://virtuallearn-env.eba-6xmym3vf.ap-south-1.elasticbeanstalk.com/user/home/course`,
         {
           headers: {
-            Authorization: `Bearer ${sessionStorage.getItem("Token")}`,
+            Authorization: `Bearer ${sessionStorage.getItem('Token')}`,
           },
         }
       )
@@ -115,7 +115,7 @@ const Start = () => {
         console.error(err);
       });
   }, []);
-  console.log("headerdata", headerdata);
+  console.log('headerdata', headerdata);
 
   //fetching data for all course
 
@@ -125,7 +125,7 @@ const Start = () => {
         `http://virtuallearn-env.eba-6xmym3vf.ap-south-1.elasticbeanstalk.com/user/home/course/all`,
         {
           headers: {
-            Authorization: `Bearer ${sessionStorage.getItem("Token")}`,
+            Authorization: `Bearer ${sessionStorage.getItem('Token')}`,
           },
         }
       )
@@ -137,7 +137,7 @@ const Start = () => {
       });
   }, []);
   dispatch(coursedata(allcourseData));
-  console.log("allcoursedata", allcourseData);
+  console.log('allcoursedata', allcourseData);
 
   //fetching data for popular courses
   useEffect(() => {
@@ -146,7 +146,7 @@ const Start = () => {
         `http://virtuallearn-env.eba-6xmym3vf.ap-south-1.elasticbeanstalk.com/user/home/course/popular`,
         {
           headers: {
-            Authorization: `Bearer ${sessionStorage.getItem("Token")}`,
+            Authorization: `Bearer ${sessionStorage.getItem('Token')}`,
           },
         }
       )
@@ -166,7 +166,7 @@ const Start = () => {
         `http://virtuallearn-env.eba-6xmym3vf.ap-south-1.elasticbeanstalk.com/user/home/course/newest`,
         {
           headers: {
-            Authorization: `Bearer ${sessionStorage.getItem("Token")}`,
+            Authorization: `Bearer ${sessionStorage.getItem('Token')}`,
           },
         }
       )
@@ -186,7 +186,7 @@ const Start = () => {
         `http://virtuallearn-env.eba-6xmym3vf.ap-south-1.elasticbeanstalk.com/user/home/course/category`,
         {
           headers: {
-            Authorization: `Bearer ${sessionStorage.getItem("Token")}`,
+            Authorization: `Bearer ${sessionStorage.getItem('Token')}`,
           },
         }
       )
@@ -206,7 +206,7 @@ const Start = () => {
         `http://virtuallearn-env.eba-6xmym3vf.ap-south-1.elasticbeanstalk.com/user/categoriesWP`,
         {
           headers: {
-            Authorization: `Bearer ${sessionStorage.getItem("Token")}`,
+            Authorization: `Bearer ${sessionStorage.getItem('Token')}`,
           },
         }
       )
@@ -224,7 +224,7 @@ const Start = () => {
         `http://virtuallearn-env.eba-6xmym3vf.ap-south-1.elasticbeanstalk.com/user/menu`,
         {
           headers: {
-            Authorization: `Bearer ${sessionStorage.getItem("Token")}`,
+            Authorization: `Bearer ${sessionStorage.getItem('Token')}`,
           },
         }
       )
@@ -260,7 +260,7 @@ const Start = () => {
                 onClick={() => {
                   dispatch(courseOverview(item.courseId));
                   dispatch(chapterResponse(item.courseId));
-                  navigate("/myCourses/ongoingCourse");
+                  navigate('/myCourses/ongoingCourse');
                 }}
               >
                 <div className="start-map-image">
@@ -274,16 +274,15 @@ const Start = () => {
       </div>
 
       <div className="mobileSlider">
-        <Carousel autoplay={true} autoplaySpeed={2000} slidesToShow={3}>
-          {headerdata &&
-            headerdata.data &&
-            headerdata.data.map((item) => (
+        {headerdata && headerdata.data && (
+          <Carousel autoplay={true} autoplaySpeed={2000} slidesToShow={3}>
+            {headerdata.data.map((item) => (
               <div
                 className="start-image-title"
                 onClick={() => {
                   dispatch(courseOverview(item.courseId));
                   dispatch(chapterResponse(item.courseId));
-                  navigate("/myCourses/ongoingCourse");
+                  navigate('/myCourses/ongoingCourse');
                 }}
               >
                 <div className="start-map-image">
@@ -293,7 +292,8 @@ const Start = () => {
                 <div className="start-title-text">{item.courseName}</div>
               </div>
             ))}
-        </Carousel>
+          </Carousel>
+        )}
       </div>
 
       {ongoing && ongoing.length > 0 && (
@@ -303,7 +303,7 @@ const Start = () => {
             <div
               className="start-seeall"
               onClick={() => {
-                navigate("myCourses");
+                navigate('myCourses');
               }}
             >
               See All
@@ -320,7 +320,7 @@ const Start = () => {
                       dispatch(courseOverview(item.courseId));
                       dispatch(chapterResponse(item.courseId));
                       dispatch(tabToggleState(2));
-                      navigate("/myCourses/ongoingCourse");
+                      navigate('/myCourses/ongoingCourse');
                     }}
                   >
                     <div className="start-image-ongoing">
@@ -354,7 +354,7 @@ const Start = () => {
             <div
               className="start-seeall"
               onClick={() => {
-                navigate("/categories");
+                navigate('/categories');
               }}
             >
               See All
@@ -382,7 +382,7 @@ const Start = () => {
                           `subCategories?categoryId=${ele.categoryId}`
                         )
                       );
-                      navigate("/categories/design");
+                      navigate('/categories/design');
                     }}
                   >
                     <div className="start-course-categories-Icon">
@@ -402,7 +402,7 @@ const Start = () => {
         <div
           className="start-seeall"
           onClick={() => {
-            navigate("courseChoice");
+            navigate('courseChoice');
           }}
         >
           See All
@@ -411,19 +411,19 @@ const Start = () => {
       <div className="start-choice-course-subcategory">
         <div className="all-tabs-home">
           <div
-            className={homeTabState === 1 ? "home-tab-1-active" : "home-tab-1"}
+            className={homeTabState === 1 ? 'home-tab-1-active' : 'home-tab-1'}
             onClick={() => handleTabClick(1)}
           >
             All
           </div>
           <div
-            className={homeTabState === 2 ? "home-tab-1-active" : "home-tab-1"}
+            className={homeTabState === 2 ? 'home-tab-1-active' : 'home-tab-1'}
             onClick={() => handleTabClick(2)}
           >
             Popular
           </div>
           <div
-            className={homeTabState === 3 ? "home-tab-1-active" : "home-tab-1"}
+            className={homeTabState === 3 ? 'home-tab-1-active' : 'home-tab-1'}
             onClick={() => handleTabClick(3)}
           >
             Newest
@@ -442,7 +442,7 @@ const Start = () => {
                     dispatch(courseOverview(item.courseId));
                     dispatch(chapterResponse(item.courseId));
                     dispatch(tabToggleState(1));
-                    navigate("/myCourses/ongoingCourse");
+                    navigate('/myCourses/ongoingCourse');
                   }}
                 >
                   <div className="start-image-pause">
@@ -476,7 +476,7 @@ const Start = () => {
                     dispatch(courseOverview(item.courseId));
                     dispatch(chapterResponse(item.courseId));
                     dispatch(tabToggleState(1));
-                    navigate("/myCourses/ongoingCourse");
+                    navigate('/myCourses/ongoingCourse');
                   }}
                 >
                   <div className="start-image-pause">
@@ -510,7 +510,7 @@ const Start = () => {
                     dispatch(courseOverview(item.courseId));
                     dispatch(chapterResponse(item.courseId));
                     dispatch(tabToggleState(1));
-                    navigate("/myCourses/ongoingCourse");
+                    navigate('/myCourses/ongoingCourse');
                   }}
                 >
                   <div className="start-image-pause">
@@ -558,7 +558,7 @@ const Start = () => {
                         `subCategories?categoryId=${item.categoryId}`
                       )
                     );
-                    navigate("/categories/design");
+                    navigate('/categories/design');
                   }}
                 >
                   See All
@@ -576,7 +576,7 @@ const Start = () => {
                           dispatch(courseOverview(ele.courseId));
                           dispatch(chapterResponse(ele.courseId));
                           dispatch(tabToggleState(1));
-                          navigate("/myCourses/ongoingCourse");
+                          navigate('/myCourses/ongoingCourse');
                         }}
                       >
                         <div className="start-image-pause">
