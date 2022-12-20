@@ -112,7 +112,7 @@ const ChoiceYourCourse = () => {
             ))}
         </div>
       </div>
-      {allCoursePagination && allCoursePagination.data && (
+      {allCoursePagination && allCoursePagination.data&& allCoursePagination.data.length > 0 && (
         <div className="paginationBtns">
           <button
             onClick={() => {
