@@ -1,13 +1,13 @@
 .start-greeting {
-    font-size: 22px;
-    font-family: 'Biko';
-    font-style: normal;
-    font-weight: 400;
-    /* line-height: 50px; */
-    color: #7A7A7A;
+  font-size: 22px;
+  font-family: "Biko";
+  font-style: normal;
+  font-weight: 400;
+  /* line-height: 50px; */
+  color: #7a7a7a;
 }
 .start-username {
-  font-family: 'Biko';
+  font-family: "Biko";
   font-style: normal;
   font-weight: 700;
   font-size: 20px;
@@ -40,7 +40,7 @@
   height: 246px;
   border-radius: 5px;
   object-fit: cover;
-  transition: transform .5s ease;
+  transition: transform 0.5s ease;
 }
 
 .start-image-title {
@@ -66,8 +66,7 @@
   width: 100%;
   border-radius: 5px;
 }
-.start-course1-image:hover
-{
+.start-course1-image:hover {
   transition: all 0.1s ease-in-out;
   transform: scale(1.05);
   z-index: 1;
@@ -78,7 +77,6 @@
   flex-basis: 32.3%;
   margin-bottom: 20px;
   cursor: pointer;
-  
 }
 
 .start-course1-image-first {
@@ -108,7 +106,7 @@
   /* top: 144px; */
   left: 20px;
   bottom: 19px;
-  font-family: 'Biko';
+  font-family: "Biko";
   font-style: normal;
   font-weight: 400;
   font-size: 20px;
@@ -121,7 +119,7 @@
   /* top: 144px; */
   left: 20px;
   bottom: 19px;
-  font-family: 'Biko';
+  font-family: "Biko";
   font-style: normal;
   font-weight: 400;
   font-size: 20px;
@@ -133,7 +131,6 @@
   display: none;
 }
 .kXteup {
-
   display: none;
 }
 .start-image-title {
@@ -156,7 +153,7 @@
 }
 
 .start-ongoing-courses {
-  font-family: 'Biko';
+  font-family: "Biko";
   font-style: normal;
   font-weight: 400;
   font-size: 20px;
@@ -165,7 +162,7 @@
 }
 
 .start-seeall {
-  font-family: 'Proxima Nova Soft';
+  font-family: "Proxima Nova Soft";
   font-style: normal;
   font-weight: 400;
   font-size: 16px;
@@ -180,13 +177,13 @@
   display: flex;
   flex-direction: row;
   /* top: 125px; */
-  bottom: 13px;
+  bottom: 32px;
   text-align: center;
   align-items: center;
   justify-content: space-between;
   width: 100%;
   padding-left: 20px;
-  padding-right: 30px;
+  padding-right: 11px;
 }
 
 .start-course-button {
@@ -199,7 +196,7 @@
 }
 
 .start-course-section2-title {
-  font-family: 'Proxima Nova Soft';
+  font-family: "Proxima Nova Soft";
   font-style: normal;
   font-weight: 600;
   font-size: 20px;
@@ -212,7 +209,7 @@
 }
 
 .start-course-chapter {
-  font-family: 'Proxima Nova Soft';
+  font-family: "Proxima Nova Soft";
   font-style: normal;
   font-weight: 500;
   font-size: 16px;
@@ -291,7 +288,7 @@
 }
 
 .start-choice-subcategory-title {
-  font-family: 'Proxima Nova Soft';
+  font-family: "Proxima Nova Soft";
   font-style: normal;
   font-weight: 400;
   font-size: 16px;
@@ -304,7 +301,7 @@
 }
 
 .start-choice-chapter {
-  font-family: 'Proxima Nova Soft';
+  font-family: "Proxima Nova Soft";
   font-style: normal;
   font-weight: 400;
   font-size: 16px;
@@ -321,7 +318,7 @@
   padding-left: 1rem;
   padding-bottom: 1rem;
   gap: 0.5rem;
-  font-family: 'Proxima Nova Soft';
+  font-family: "Proxima Nova Soft";
   font-style: normal;
   font-weight: 400;
   font-size: 14px;
@@ -403,7 +400,7 @@
   gap: 0px !important;
 }
 
-.start-map-image>img {
+.start-map-image > img {
   /* object-fit: cover; */
   width: 100%;
   height: 231px;
@@ -436,33 +433,25 @@
   padding: 0;
   border-bottom: none;
 }
-.start-course-categories-Icon img 
-{
+.start-course-categories-Icon img {
   height: 30px;
   width: 30px;
 }
-.start-time-icon 
-{
+.start-time-icon {
   padding-top: 4px;
 }
-.slick-dots li button:before 
-{
+.slick-dots li button:before {
   color: rgba(238, 92, 77, 0.3);
   opacity: 14.25;
-
 }
-.slick-dots li.slick-active button:before 
-{
-  color: #EE5C4D;
+.slick-dots li.slick-active button:before {
+  color: #ee5c4d;
 }
-.mobileSlider
-{
+.mobileSlider {
   display: none;
 }
 
-
 @media only screen and (max-width: 800px) {
-
   .start-course1,
   .start-choice1 {
     flex-wrap: nowrap;
@@ -473,7 +462,7 @@
   .start-map-image {
     margin-bottom: 20px;
     /* width: 100vw; */
-}
+  }
   .start-choice1 {
     /* padding-top: 34px; */
   }
@@ -481,28 +470,24 @@
    
     width: 121%;
 } */
-.webslider
-{
-  display: none;
-}
-.mobileSlider
-{
-  display: block;
-}
+  .webslider {
+    display: none;
+  }
+  .mobileSlider {
+    display: block;
+  }
 
   ::-webkit-scrollbar {
     display: none;
   }
-  .react-carousel-responsive__track
-  {
+  .react-carousel-responsive__track {
     gap: 2px;
   }
 
-  .start-map-image>img
-  {
+  .start-map-image > img {
     height: 190px;
   }
-  
+
   .start-course1-image img {
     height: 172px;
     /* width: 298px; */
@@ -511,7 +496,6 @@
     /* margin: 0 10px; */
     margin-right: 13px;
   }
-
 
   .start-choice-subcategory-image img {
     height: 150px;
@@ -537,11 +521,9 @@
   .start-course-section2-title {
     font-size: 14px;
   }
-  .start-course1-image 
-  {
+  .start-course1-image {
     margin-top: 20px;
   }
-
 
   .start-course-button,
   .start-designbtn {
@@ -564,7 +546,6 @@
     display: flex;
   }
 
-
   .start-course-categories-Body {
     flex-wrap: nowrap;
     overflow-x: scroll;
@@ -575,7 +556,7 @@
   } */
   .react-carousel-responsive__inner {
     position: relative;
-}
+  }
 
   .start-course-overlay-2 {
     border-radius: 6px;
@@ -584,7 +565,7 @@
   .start-title-text {
     /* width: max-content; */
     /* left: 9px; */
-}
+  }
 
   .start-course-button {
     padding: unset;
@@ -596,11 +577,9 @@
     margin: 0;
     padding: 0;
     width: 100%;
-}
-  
-  
-  .react-carousel-responsive__controlPrev
-  {
+  }
+
+  .react-carousel-responsive__controlPrev {
     display: none;
   }
 
@@ -626,40 +605,31 @@
     /* opacity: 0.2; */
     border-radius: 6px;
     cursor: pointer;
-}
+  }
 
-  .react-carousel-responsive__inner
-   {
+  .react-carousel-responsive__inner {
     position: relative;
     width: 143%;
-   }
+  }
 
-  .start-map-image>img {
+  .start-map-image > img {
     /* width: 300px; */
     /* position: absolute; */
     /* margin-bottom: 20px; */
-
   }
-  
- 
-
 }
-@media only screen and (max-width: 450px)
-{
-  .react-carousel-responsive__inner 
-  {
+@media only screen and (max-width: 450px) {
+  .react-carousel-responsive__inner {
     position: relative;
     width: 221%;
- }
+  }
 }
-@media only screen and (max-width: 380px)
-{
+@media only screen and (max-width: 380px) {
   .react-carousel-responsive__inner {
     position: relative;
     width: 259%;
+  }
 }
-}
-
 
 .all-tabs-home {
   display: flex;
@@ -685,5 +655,4 @@
 }
 .slick-dots li button:before {
   font-size: 10px;
-  
 }
