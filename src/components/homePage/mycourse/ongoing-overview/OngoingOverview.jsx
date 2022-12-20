@@ -593,6 +593,7 @@ const OngoingOverview = () => {
                         <div
                           className="continue-chapter-pause-button"
                           onClick={() => {
+                            
                             setNextModal(true);
                             setFirstPause(false);
                           }}
