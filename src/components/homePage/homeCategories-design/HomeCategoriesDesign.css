@@ -98,6 +98,9 @@
     /* padding-left: 1rem; */
     width: max-content;
 }
+.startTimeIcon {
+    margin-top: 5px;
+}
 
 /* .start-choice-course-subcategory {
     display: flex;
