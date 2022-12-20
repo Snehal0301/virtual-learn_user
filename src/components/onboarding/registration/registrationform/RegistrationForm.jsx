@@ -1,4 +1,4 @@
-import '../registrationform/RegistrationForm.css';
+import "../registrationform/RegistrationForm.css";
 import "../../../onboarding/login/login-auth/LoginAuth.css";
 import * as yup from "yup";
 import "yup-phone";
@@ -118,7 +118,7 @@ const RegistrationForm = () => {
               className="loginAuth-formInput"
               style={{ borderBottom: "0px solid red" }}
             >
-              +91
+              <p>+91</p>
             </div>
             <div className="loginAuth-FormInput" style={{ width: "100%" }}>
               <input
@@ -148,7 +148,7 @@ const RegistrationForm = () => {
           </button>
         </form>
       </div>
-      
+
       <span className="already-text">
         Already have an account?
         <span
