@@ -123,7 +123,10 @@ const ChoiceYourCourse = () => {
             }}
             disabled={pageNum <= 1}
           >
-            Previous
+          <img
+                src={require("../../../assets/icons/previousIcon.png")}
+                alt="previous"
+              />
           </button>
           &nbsp;Page: {pageNum} &nbsp;
           <button
@@ -136,7 +139,10 @@ const ChoiceYourCourse = () => {
               ) <= pageNum
             }
           >
-            Next
+           <img
+                  src={require("../../../assets/icons/nextIcon.png")}
+                  alt="next"
+                ></img>
           </button>
         </div>
       )}

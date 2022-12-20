@@ -222,15 +222,18 @@
 }
 
 .paginationBtns button {
-  cursor: pointer;
-  background: var(--secondaryClr);
-  font-size: 24px;
-
-  height: 40px;
-  width: 107px;
-  color: var(--primaryFontClr);
-  border: none;
-  border-radius: 6px;
+      cursor: pointer;
+    background: var(--secondaryClr);
+    font-size: 24px;
+    height: 56px;
+    width: 56px;
+    color: var(--primaryFontClr);
+    border: none;
+    border-radius: 50%;
+   
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .paginationBtns button:disabled {
