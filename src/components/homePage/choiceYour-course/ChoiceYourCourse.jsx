@@ -24,6 +24,9 @@ const ChoiceYourCourse = () => {
   const obtainedcategory = useSelector((state) => state.categorydata.value);
   console.log(obtainedcategory);
 
+   const allcourseItem = useSelector((state) => state.allcourse.value);
+   console.log("all",allcourseItem.length);
+
   const pageNum = useSelector((state) => state.pagination.pageNum);
 
   console.log("page number", pageNum);
@@ -120,7 +123,10 @@ const ChoiceYourCourse = () => {
             }}
             disabled={pageNum <= 1}
           >
-            Previous
+          <img
+                src={require("../../../assets/icons/previousIcon.png")}
+                alt="previous"
+              />
           </button>
           &nbsp;Page: {pageNum} &nbsp;
           <button
@@ -129,12 +135,14 @@ const ChoiceYourCourse = () => {
             }}
             disabled={
               Math.ceil(
-                allCoursePagination &&
-                  allCoursePagination.data[0].chapterCount / 4
+                allcourseItem&&allcourseItem.length / 4
               ) <= pageNum
             }
           >
-            Next
+           <img
+                  src={require("../../../assets/icons/nextIcon.png")}
+                  alt="next"
+                ></img>
           </button>
         </div>
       )}
