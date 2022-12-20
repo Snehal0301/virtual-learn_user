@@ -52,7 +52,7 @@
 .home-categories-section2 {
     display: flex;
     justify-content: space-between;
-    padding-top: 22px;
+    padding-top: 11px;
     width: 99%;
 }
 
@@ -338,6 +338,10 @@
     display: flex;
 }
 
+.mobileCategoriesheadLink {
+    display: none;
+}
+
 @media only screen and (max-width: 800px) {
     .home-categories-choice1 {
         overflow-x: scroll;
@@ -355,6 +359,16 @@
         /* background-color: red; */
         flex-basis: 34%;
 
+    }
+
+    .mobileCategoriesheadLink {
+        display: flex;
+        color: #2B2B2B;
+        font-family: Biko;
+        font-size: 26px;
+        font-weight: bold;
+        /* letter-spacing: 0; */
+        /* line-height: 35px; */
     }
 
     .home-categories-subcategory-image img,

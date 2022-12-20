@@ -248,7 +248,7 @@ const Start = () => {
       <div className="start-username">{name}</div>
      
         <div className='webslider'>
-        <Slider autoplay={true} autoplaySpeed={2000} slidesToShow={3} dots={true}slidesToScroll={1}>
+        <Slider autoplay={true} autoplaySpeed={20000} slidesToShow={3} dots={true}slidesToScroll={1}>
           {headerdata && headerdata.data && headerdata.data.map((item) => (
             <div
               className="start-image-title"

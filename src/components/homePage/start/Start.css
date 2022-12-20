@@ -53,8 +53,8 @@
   left: 36px;
   /* font-family: 'Biko'; */
   font-style: normal;
-  font-weight: 400;
-  font-size: 18px;
+  font-weight: 500;
+  font-size: 20px;
   /* line-height: 50px; */
   color: var(--primaryFontClr);
   cursor: pointer;
@@ -389,7 +389,7 @@
   right: 6px;
   bottom: 0px;
   left: 6px;
-  background-color: #0000003b;
+  background-color: #00000057;
   /* opacity: 0.2; */
   border-radius: 6px;
   cursor: pointer;
@@ -625,7 +625,7 @@
     right: 6px;
     bottom: 3px;
     left: 6px;
-    background-color: #0000003b;
+    background-color: #0000005e;
     /* opacity: 0.2; */
     border-radius: 6px;
     cursor: pointer;
