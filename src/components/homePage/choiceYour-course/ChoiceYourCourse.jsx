@@ -24,6 +24,9 @@ const ChoiceYourCourse = () => {
   const obtainedcategory = useSelector((state) => state.categorydata.value);
   console.log(obtainedcategory);
 
+   const allcourseItem = useSelector((state) => state.allcourse.value);
+   console.log("all",allcourseItem.length);
+
   const pageNum = useSelector((state) => state.pagination.pageNum);
 
   console.log("page number", pageNum);
@@ -129,8 +132,7 @@ const ChoiceYourCourse = () => {
             }}
             disabled={
               Math.ceil(
-                allCoursePagination &&
-                  allCoursePagination.data[0].chapterCount / 4
+                allcourseItem&&allcourseItem.length / 4
               ) <= pageNum
             }
           >

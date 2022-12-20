@@ -22,7 +22,7 @@ const HomeCategoriesDesign = () => {
   const navigate = useNavigate();
 
   const allcourseItem = useSelector((state) => state.allcourse.value);
-  // console.log(allcourseItem);
+   console.log("all",allcourseItem.length);
 
   const basicCoursedata = useSelector((state) => state.basicCourse.data);
   const advancedCoursedata = useSelector((state) => state.advancedCourse.data);
@@ -217,8 +217,7 @@ console.log("all course", allCoursePagination)
             }}
             disabled={
               Math.ceil(
-                allCoursePagination &&
-                  allCoursePagination.data[0].chapterCount / 4
+                allcourseItem&&allcourseItem.length / 4
               ) <= pageNum
             }
           >
