@@ -112,32 +112,32 @@ const ChoiceYourCourse = () => {
             ))}
         </div>
       </div>
-      <div className="paginationBtns">
-        <button
-          onClick={() => {
-            dispatch(paginatePrevious());
-          }}
-          disabled={pageNum <= 1}
-        >
-          Previous
-        </button>
-        &nbsp;Page: {pageNum} &nbsp;
-        <button
-          onClick={() => {
-            dispatch(paginateNext());
-          }}
-          disabled={
-            (allCoursePagination &&
-              allCoursePagination.data &&
-              allCoursePagination.data.length > 0 &&
-              allCoursePagination.data.chapterCount &&
-              Math.ceil(allCoursePagination.data[0].chapterCount / 4)) <=
-            pageNum
-          }
-        >
-          Next
-        </button>
-      </div>
+      {allCoursePagination && allCoursePagination.data && (
+        <div className="paginationBtns">
+          <button
+            onClick={() => {
+              dispatch(paginatePrevious());
+            }}
+            disabled={pageNum <= 1}
+          >
+            Previous
+          </button>
+          &nbsp;Page: {pageNum} &nbsp;
+          <button
+            onClick={() => {
+              dispatch(paginateNext());
+            }}
+            disabled={
+              Math.ceil(
+                allCoursePagination &&
+                  allCoursePagination.data[0].chapterCount / 4
+              ) <= pageNum
+            }
+          >
+            Next
+          </button>
+        </div>
+      )}
     </div>
   );
 };
