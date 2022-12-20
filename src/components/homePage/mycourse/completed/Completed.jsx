@@ -7,7 +7,7 @@ import { showCertificate } from '../../../../redux/reducers/Conditions';
 import { courseOverview } from '../../../../redux/reducers/courseOverview';
 import { chapterResponse } from '../../../../redux/reducers/chapterResponses';
 import { tabToggleState } from '../../../../redux/reducers/myCourseReducer';
-import { useNavigate } from 'react-router';
+import { useNavigate } from 'react-router-dom';
 
 const Completed = () => {
   const [completed, setcompleted] = useState([]);

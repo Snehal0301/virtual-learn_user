@@ -1,17 +1,17 @@
-import '../login-auth/LoginAuth.css';
-import * as yup from 'yup';
-import 'yup-phone';
-import { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { otpPage } from '../../../../redux/reducers/Conditions';
-import { useNavigate } from 'react-router-dom';
-import { mobileBackBtn } from '../../../../utils/svgIcons';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import "../login-auth/LoginAuth.css";
+import * as yup from "yup";
+import "yup-phone";
+import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { otpPage } from "../../../../redux/reducers/Conditions";
+import { useNavigate } from "react-router-dom";
+import { mobileBackBtn } from "../../../../utils/svgIcons";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const LoginForgotPW = () => {
   const [invalidPhone, setInvalidPhone] = useState(false);
-  const [mobileNum, setMobileNum] = useState('');
+  const [mobileNum, setMobileNum] = useState("");
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -36,10 +36,10 @@ const LoginForgotPW = () => {
     fetch(
       `http://virtuallearn-env.eba-6xmym3vf.ap-south-1.elasticbeanstalk.com/send`,
       {
-        method: 'POST',
+        method: "POST",
         headers: {
-          Accept: 'application/json, text/plain, */*',
-          'Content-Type': 'application/json',
+          Accept: "application/json, text/plain, */*",
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({ mobileNumber: `+91${mobileNum}` }),
       }
@@ -47,10 +47,10 @@ const LoginForgotPW = () => {
       .then((res) => res.json())
       .then((res) => {
         console.log(res);
-        if (res.message === 'OTP Valid For 2 Minutes') {
-         sessionStorage.setItem('regMobileNum', `+91${mobileNum}`);
+        if (res.message === "OTP Valid For 2 Minutes") {
+          sessionStorage.setItem("regMobileNum", `+91${mobileNum}`);
           dispatch(otpPage(true));
-          navigate('/onboarding/otpVerification');
+          navigate("/onboarding/otpVerification");
         } else {
           showError(res.message);
         }
@@ -62,14 +62,14 @@ const LoginForgotPW = () => {
       <div className="loginAuth-showError">
         <div className="loginAuth-showErrorIcon">
           <img
-            src={require('../../../../assets/icons/icn_invalid error.png')}
+            src={require("../../../../assets/icons/icn_invalid error.png")}
             alt="invalid"
           />
         </div>
         <div className="loginAuth-showErrorMessage">{msg}</div>
       </div>,
       {
-        position: 'bottom-right',
+        position: "bottom-right",
         autoClose: 5000,
         hideProgressBar: true,
         pauseOnHover: true,
@@ -80,19 +80,18 @@ const LoginForgotPW = () => {
 
   return (
     <div className="loginAuth">
-
       <div className="loginAuth-backButton">
         <div
           onClick={() => {
-            navigate('login');
+            navigate("login");
           }}
-          style={{ width: '28px', cursor: 'pointer' }}
+          style={{ width: "28px", cursor: "pointer" }}
         >
-          {' '}
+          {" "}
           {mobileBackBtn}
         </div>
       </div>
-      
+
       <div className="loginAuth-title">Forgot Password</div>
       <div className="loginAuth-text">
         Please enter your phone number. You will receive a code to create a new
@@ -101,33 +100,33 @@ const LoginForgotPW = () => {
 
       <div className="loginAuth-Form">
         <form className="loginAuth-FormContainer" onSubmit={submitHandler}>
-          {' '}
+          {" "}
           <div
             style={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: '10px',
+              display: "flex",
+              alignItems: "center",
+              gap: "10px",
             }}
           >
             <div
               className="loginAuth-formInput"
-              style={{ borderBottom: '0px solid red' }}
+              style={{ borderBottom: "0px solid red" }}
             >
-              +91
+              <p>+91</p>
             </div>
-            <div className="loginAuth-FormInput" style={{ width: '100%' }}>
+            <div className="loginAuth-FormInput" style={{ width: "100%" }}>
               <input
                 type="text"
                 name="mobileNum"
                 id="mobileNum"
-                placeholder="Enter your mobile number"
-                style={{ width: '100%' }}
+                placeholder="Mobile Number"
+                style={{ width: "100%" }}
                 className={
-                  mobileNum === ''
-                    ? 'loginAuth-formInput'
+                  mobileNum === ""
+                    ? "loginAuth-formInput"
                     : invalidPhone
-                    ? 'loginAuth-formInput loginAuth-formInputSuccess'
-                    : 'loginAuth-formInput loginAuth-formInputError'
+                    ? "loginAuth-formInput loginAuth-formInputSuccess"
+                    : "loginAuth-formInput loginAuth-formInputError"
                 }
                 onChange={phoneNumValidation}
                 autoComplete="off"
@@ -135,7 +134,7 @@ const LoginForgotPW = () => {
               />
               {/* loginAuth-formInputSuccess */}
               {/* loginAuth-formInputError */}
-              <label htmlFor="mobileNum">Enter your mobile number</label>
+              <label htmlFor="mobileNum">Mobile Number</label>
             </div>
           </div>
           <button className="loginAuth-formSubmit" disabled={!invalidPhone}>

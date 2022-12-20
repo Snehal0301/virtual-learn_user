@@ -10,35 +10,39 @@ import {
 import Switch from "react-switch";
 import "./Notification.css";
 import axios from "axios";
-import TimeAgo from 'timeago-react';
-
+import TimeAgo from "timeago-react";
+import { NotifyClick } from "../../../../redux/reducers/NotificationsData";
+import { MobileNotifyClick } from "../../../../redux/reducers/MobileNotification";
 
 const Notification = () => {
-  const [notifyData, setNotifyData] = useState([]); /*Changed*/
+  const [notifyData1, setNotifyData] = useState([]); /*Changed*/
   const [notId, setNotId] = useState("");
   const dispatch = useDispatch();
-
+  const notifyData = useSelector((state) => state.NotifyClick.data);
 
   const handleClick = () => {
     dispatch(profileDrawer(false));
     dispatch(profileSection(false));
     // dispatch(notificationSection(false))
     dispatch(settingsSection(false));
+    dispatch(NotifyClick());
+    dispatch(MobileNotifyClick());
   };
 
   useEffect(() => {
-    axios
-      .get(
-        `http://virtuallearn-env.eba-6xmym3vf.ap-south-1.elasticbeanstalk.com/user/notifications`,
-        {
-          headers: {
-            Authorization: `Bearer ${sessionStorage.getItem("Token")}`,
-          },
-        }
-      )
-      .then((res) => {
-        res && res.data && setNotifyData(res.data);
-      });
+    dispatch(NotifyClick());
+    // axios
+    //   .get(
+    //     `http://virtuallearn-env.eba-6xmym3vf.ap-south-1.elasticbeanstalk.com/user/notifications`,
+    //     {
+    //       headers: {
+    //         Authorization: `Bearer ${sessionStorage.getItem("Token")}`,
+    //       },
+    //     }
+    //   )
+    //   .then((res) => {
+    //     res && res.data && setNotifyData(res.data);
+    //   });
   }, [notId]);
 
   console.log("notifyData", notifyData);
@@ -61,12 +65,12 @@ const Notification = () => {
           <p className="drawer-profile-profile-notify">Notifications</p>
         </div>
       </div>
-      {notifyData.length > 0 ? (
+      {notifyData.data.length > 0 ? (
         <div className="drawer-profile-body-notify">
           {notifyData &&
-            notifyData.length > 0 &&
-            notifyData.map((ele) => {
-              
+            notifyData.data &&
+            notifyData.data.length > 0 &&
+            notifyData.data.map((ele) => {
               return (
                 <div
                   className={

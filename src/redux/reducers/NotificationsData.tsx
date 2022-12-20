@@ -12,7 +12,7 @@ const initialState = {
 };
 
 export const NotifyClick: any = createAsyncThunk(
-  "NotifyClick/NotifyClick",
+  "NotifyClick/NotificationData",
   async (arg: any, { rejectWithValue }) => {
     try {
       const fetchedNotifyData: any = await axios.request({

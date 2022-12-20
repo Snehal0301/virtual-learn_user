@@ -390,6 +390,14 @@ p:not(.truncated)~label {
   border-radius: 6px;
 }
 
+.course-completion-section-1-2{
+  display: flex;
+  /* flex-direction: column; */
+  align-items: center;
+  justify-content: space-between;
+  flex: 2;
+}
+
 .course-completion-section-1 {
   flex: 1;
   /* display: flex;
@@ -404,6 +412,7 @@ p:not(.truncated)~label {
   display: flex;
   flex-direction: column;
   border-right: 1px solid rgba(255, 255, 255, 0.418);
+  padding-right: 10px;
 }
 
 .completion-section-1-main-title,
@@ -795,10 +804,48 @@ p:not(.truncated)~label {
 
 /* all media queries */
 
-@media only screen and (max-width: 1400px) {
+@media only screen and (max-width: 1500px) {
 
   .homePageBody {
     padding: 25px 2%;
+  }
+
+  .ongoing-overview {
+    display: flex;
+    gap: 10px;
+  }
+
+  .completion-section-2-main {
+    background-color: white;
+    border-radius: 6px;
+    display: flex;
+    justify-content: space-between;
+    padding: 40px 15px;
+  }
+
+  .cmain-1-date {
+    color: #2bb5f4;
+    font-weight: 600;
+    font-size: 17px;
+    margin-top: 10px;
+  }
+
+  .cs3-main-2 img {
+    height: 200px;
+    width: 300px;
+  }
+
+  .completion-section-1-main-title,
+  .completion-section-1-main-apr {
+    font-size: 15px;
+    font-weight: 600;
+    color: white;
+  }
+
+  .completion-section-1-main-per {
+    color: #1eab0d;
+    font-size: 50px;
+    font-weight: 600;
   }
 }
 

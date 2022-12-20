@@ -21,8 +21,9 @@ import ChangePassword from "../changePassword/ChangePassword";
 import EditProfile from "../edit-profile/EditProfile";
 import profileData from "../../../../api-results/ProfileResults.json";
 import axios from "axios";
+import { ProfileClick } from "../../../../redux/reducers/EditProfileData";
+import { MobileNotifyClick } from "../../../../redux/reducers/MobileNotification";
 
- 
 const Profile = () => {
   const dispatch = useDispatch();
   const handleProfileClose = () => {
@@ -31,9 +32,10 @@ const Profile = () => {
     dispatch(settingsSection(false));
     dispatch(termsSection(false));
     dispatch(privacySection(false));
+    dispatch(MobileNotifyClick());
   };
 
-  const [profileData, setProfileData] = useState("");
+  const [profileData1, setProfileData] = useState("");
   const showChangePassword = () => {
     dispatch(showChangePasswordSection(true));
   };
@@ -46,20 +48,23 @@ const Profile = () => {
   );
   const editState = useSelector((state) => state.headerProfile.editSection);
 
+  const profileData = useSelector((state) => state.ProfileClick.data);
+
   useEffect(() => {
-    axios
-      .get(
-        `http://virtuallearn-env.eba-6xmym3vf.ap-south-1.elasticbeanstalk.com/user/myProfile`,
-        {
-          headers: {
-            Authorization: `Bearer ${sessionStorage.getItem("Token")}`,
-          },
-        }
-      )
-      .then((res) => {
-        console.log(profileData);
-        setProfileData(res.data);
-      });
+    dispatch(ProfileClick());
+    // axios
+    //   .get(
+    //     `http://virtuallearn-env.eba-6xmym3vf.ap-south-1.elasticbeanstalk.com/user/myProfile`,
+    //     {
+    //       headers: {
+    //         Authorization: `Bearer ${sessionStorage.getItem("Token")}`,
+    //       },
+    //     }
+    //   )
+    //   .then((res) => {
+    //     console.log(profileData);
+    //     setProfileData(res.data);
+    //   });
   }, []);
 
   const renderElement = () => {
@@ -87,32 +92,50 @@ const Profile = () => {
               <div className="profile-img-frame">
                 <img
                   src={
-                    profileData && profileData.profilePhoto
-                      ? profileData.profilePhoto
+                    profileData &&
+                    profileData.data &&
+                    profileData.data.profilePhoto
+                      ? profileData.data.profilePhoto
                       : require("../../../../assets/images/start-courses-image/profilepic.jpg")
                   }
                 />
               </div>
               <div className="profile-image-name">
-                <p className="name">{profileData.fullName}</p>
-                <p className="role">{profileData.occupation}</p>
+                <p className="name">
+                  {profileData && profileData.data && profileData.data.fullName}
+                </p>
+                <p className="role">
+                  {profileData &&
+                    profileData.data &&
+                    profileData.data.occupation}
+                </p>
               </div>
             </div>
           </div>
           <div className="drawer-profile-body">
             <div className="progress-details">
               <div className="progress-1">
-                <p className="progress-digit">{profileData.courseCompleted}</p>
+                <p className="progress-digit">
+                  {profileData &&
+                    profileData.data &&
+                    profileData.data.courseCompleted}
+                </p>
                 <p className="progress-content">Courses</p>
               </div>
               <div className="progress-1">
                 <p className="progress-digit">
-                  {profileData.chaptersCompleted}
+                  {profileData &&
+                    profileData.data &&
+                    profileData.data.chaptersCompleted}
                 </p>
                 <p className="progress-content">Chapters</p>
               </div>
               <div className="progress-1">
-                <p className="progress-digit">{profileData.testsCompleted}</p>
+                <p className="progress-digit">
+                  {profileData &&
+                    profileData.data &&
+                    profileData.data.testsCompleted}
+                </p>
                 <p className="progress-content">Test</p>
               </div>
             </div>
@@ -122,30 +145,54 @@ const Profile = () => {
               <div className="personal-section-1">
                 <div className="personal-detail-section">
                   <p className="pd-title">Name</p>
-                  <p className="pd-value">{profileData.fullName}</p>
+                  <p className="pd-value">
+                    {profileData &&
+                      profileData.data &&
+                      profileData.data.fullName}
+                  </p>
                 </div>
                 <div className="personal-detail-section">
                   <p className="pd-title">Username</p>
-                  <p className="pd-value">{profileData.userName}</p>
+                  <p className="pd-value">
+                    {profileData &&
+                      profileData.data &&
+                      profileData.data.userName}
+                  </p>
                 </div>
                 <div className="personal-detail-section">
                   <p className="pd-title">Email ID</p>
-                  <p className="pd-value">{profileData.email}</p>
+                  <p className="pd-value">
+                    {profileData && profileData.data && profileData.data.email}
+                  </p>
                 </div>
                 <div className="personal-detail-section">
                   <p className="pd-title">Mobile Number</p>
-                  <p className="pd-value">{profileData.mobileNumber}</p>
+                  <p className="pd-value">
+                    {profileData &&
+                      profileData.data &&
+                      profileData.data.mobileNumber}
+                  </p>
                 </div>
                 <div className="personal-detail-section">
                   <p className="pd-title">Occupation</p>
-                  <p className="pd-value">{profileData.occupation}</p>
+                  <p className="pd-value">
+                    {profileData &&
+                      profileData.data &&
+                      profileData.data.occupation}
+                  </p>
                 </div>
-                {profileData && profileData.dateOfBirth && (
-                  <div className="personal-detail-section">
-                    <p className="pd-title">Date of Birth</p>
-                    <p className="pd-value">{profileData.dateOfBirth}</p>
-                  </div>
-                )}
+                {profileData &&
+                  profileData.data &&
+                  profileData.data.dateOfBirth && (
+                    <div className="personal-detail-section">
+                      <p className="pd-title">Date of Birth</p>
+                      <p className="pd-value">
+                        {profileData &&
+                          profileData.data &&
+                          profileData.data.dateOfBirth}
+                      </p>
+                    </div>
+                  )}
                 <div
                   className="personal-detail-section  password-chng"
                   onClick={showChangePassword}
