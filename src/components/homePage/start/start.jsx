@@ -32,14 +32,9 @@ import { subCategories } from './../../../redux/reducers/subCategories';
 import { courseOverview } from '../../../redux/reducers/courseOverview';
 import { chapterResponse } from '../../../redux/reducers/chapterResponses';
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
-// import { Carousel } from 'react-responsive-carousel';
-// import Carousel from "react-elastic-carousel";
-// import Slider from "react-slick"
-// import Slider from 'react-slick'
-// import "slick-carousel/slick/slick.css";
-// import "slick-carousel/slick/slick-theme.css";
 import Slider from 'react-slick'
 import { headerCarousel } from '../../../redux/reducers/HomeCarouseldata';
+// import Carousel from 'better-react-carousel'
 
 
 const Start = () => {
@@ -71,7 +66,7 @@ const Start = () => {
   const [ongoing, setOngoing] = useState([]);
   const [name, setName] = useState('');
 
-  const headerdata = useSelector((state)=>state.headerCarousel.data)
+  const headerdata = useSelector((state) => state.headerCarousel.data)
 
   useEffect(() => {
     axios
@@ -238,7 +233,7 @@ const Start = () => {
 
   // console.log(categoryData);
   dispatch(categorydata(categoryData));
- 
+
 
   return (
 
@@ -246,9 +241,9 @@ const Start = () => {
 
       <div className="start-greeting">Hello!</div>
       <div className="start-username">{name}</div>
-     
-        <div className='webslider'>
-        <Slider autoplay={true} autoplaySpeed={20000} slidesToShow={3} dots={true}slidesToScroll={1}>
+
+      <div className='webslider'>
+        <Slider autoplay={true} autoplaySpeed={2000} slidesToShow={3} dots={true}>
           {headerdata && headerdata.data && headerdata.data.map((item) => (
             <div
               className="start-image-title"
@@ -267,9 +262,7 @@ const Start = () => {
           ))}
         </Slider>
       </div>
-      
-      
-      
+
       <div className='mobileSlider'>
         <Carousel autoplay={true} autoplaySpeed={2000} slidesToShow={3} >
           {headerdata && headerdata.data&& headerdata.data.map((item) => (
@@ -289,8 +282,8 @@ const Start = () => {
             </div>
           ))}
         </Carousel>
-      </div>
-     
+      </div> 
+
       {
         ongoing && ongoing.length > 0 &&
         <>
