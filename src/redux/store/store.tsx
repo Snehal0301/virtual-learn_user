@@ -30,6 +30,8 @@ import pauseSlice from "../reducers/pauseTimeSlice";
 import NotifySlice from "../reducers/NotificationsData";
 import EditProfileSlice from "../reducers/EditProfileData";
 import MobileNotifySlice from "../reducers/MobileNotification";
+import allCoursePWSlice from '../reducers/AllcoursePW';
+import { paginationSlice } from '../reducers/pagination';
 
 const reducers = combineReducers({
   headerProfile: showHeaderProfile.reducer,
@@ -57,12 +59,14 @@ const reducers = combineReducers({
   NotifyClick: NotifySlice.reducer,
   ProfileClick: EditProfileSlice.reducer,
   MobileNotifyClick:MobileNotifySlice.reducer,
+  allCoursePW: allCoursePWSlice.reducer,
+  pagination: paginationSlice.reducer,
 });
 
 const persistConfig = {
   key: "root",
   storage,
-  blacklist: ["login"],
+  blacklist: ['login', 'pagination'],
 };
 
 const persistedReducer = persistReducer(persistConfig, reducers);

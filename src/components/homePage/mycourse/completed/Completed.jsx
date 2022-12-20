@@ -4,6 +4,10 @@ import './Completed.css';
 import Certificate from '../../quiz/certificate/Certificate';
 import { useDispatch } from 'react-redux';
 import { showCertificate } from '../../../../redux/reducers/Conditions';
+import { courseOverview } from '../../../../redux/reducers/courseOverview';
+import { chapterResponse } from '../../../../redux/reducers/chapterResponses';
+import { tabToggleState } from '../../../../redux/reducers/myCourseReducer';
+import { useNavigate } from 'react-router-dom';
 
 const Completed = () => {
   const [completed, setcompleted] = useState([]);
@@ -11,6 +15,7 @@ const Completed = () => {
   const [courseName, setCourseName] = useState();
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   useEffect(() => {
     axios
@@ -38,7 +43,15 @@ const Completed = () => {
           <div className="completed-section">
             {completed.map((ele, i) => {
               return (
-                <div className="completed-parent" key={i}>
+                <div className="completed-parent" key={i}
+                  style={{cursor:'pointer'}}
+                  onClick={(e) => {
+                    dispatch(courseOverview(ele.courseId));
+                    dispatch(chapterResponse(ele.courseId));
+                    dispatch(tabToggleState(1))
+                    navigate('/myCourses/ongoingCourse');
+                  }}
+                >
                   <div className="completed-images">
                     <div className="comp-overlay"></div>
                     <img src={ele.coursePhoto} alt="" className="comp-img" />
@@ -51,7 +64,8 @@ const Completed = () => {
                     </div>
                     <button
                       className="btn-continue-completed"
-                      onClick={() => {
+                      onClick={(e) => {
+                        e.stopPropagation();
                         dispatch(showCertificate(true));
                         setCourseName(ele.courseName);
 
