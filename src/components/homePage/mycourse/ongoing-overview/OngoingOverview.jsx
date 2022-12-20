@@ -2,6 +2,7 @@ import "./OngoingOverview.css";
 import React, { useState, useEffect, useRef } from "react";
 import ReactPlayer from "react-player";
 import { useDispatch, useSelector } from "react-redux";
+import { saveAs } from 'file-saver'
 import {
   accordianState,
   accordianToggleState,
@@ -26,6 +27,7 @@ import {
   videoPlayActive,
   whiteStepperIcon,
 } from "../../../../utils/svgIcons";
+import { showCertificate } from '../../../../redux/reducers/Conditions';
 import {
   Accordion,
   AccordionItem,
@@ -33,7 +35,7 @@ import {
   AccordionItemButton,
   AccordionItemPanel,
 } from "react-accessible-accordion";
-
+import Certificate from '../../quiz/certificate/Certificate';
 import instructorImage from "../../../../assets/images/instructorImage.jpg";
 import Accordian from "../accordian/Accordian";
 import axios from "axios";
@@ -766,13 +768,20 @@ const OngoingOverview = () => {
                         <div className="completion-section-3-main">
                           <div className="cs3-main-1">
                             <p className='cs3-main-1-title'>Course Certificate</p>
-                            <div className='download-icon-image'>{downloadIcon}</div>
+                            <div className='download-icon-image' onClick={()=>{
+                               saveAs(chapter.certificateUrl, chapter.courseName)
+                            }}>{downloadIcon}</div>
                           </div>
-                          <div className="cs3-main-2">
-                            <img src={require('../../../../assets/images/certicon.png')} alt="" />
+                          <div className="cs3-main-2" onClick={()=>{
+                            dispatch(showCertificate(true));
+                          }}>
+                            <img src={chapter.certificateUrl} alt="" />
                           </div>
                         </div>
                       </div>
+                       {true&& (
+            <Certificate certificate={chapter.certificateUrl} name={chapter.courseName} />
+          )}
                     </div>
                     :
                     ''
