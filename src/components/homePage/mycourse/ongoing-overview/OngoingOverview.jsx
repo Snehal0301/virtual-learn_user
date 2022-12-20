@@ -245,6 +245,7 @@ const OngoingOverview = () => {
     setPause(true);
     setPlaying(false);
     console.log("pause time", Math.floor(played) / 100);
+    componentUnMount()
   };
 
   const onPlay = () => {
