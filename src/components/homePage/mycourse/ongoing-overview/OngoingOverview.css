@@ -816,11 +816,12 @@ p:not(.truncated)~label {
   }
 
   .completion-section-2-main {
-    background-color: white;
+       background-color: white;
     border-radius: 6px;
     display: flex;
     justify-content: space-between;
     padding: 40px 15px;
+    gap: 10px;
   }
 
   .cmain-1-date {
@@ -1039,5 +1040,31 @@ p:not(.truncated)~label {
 
   .video-title-overlay {
     font-size: 15px;
+  }
+}
+
+
+
+@media only screen and (max-width: 765px) {
+  .course-completion{
+    flex-direction:column
+  }
+   .course-completion-section-2{
+    border-right:0 solid black
+  }
+}
+
+@media only screen and (max-width: 460px) {
+ 
+ .course-completion-section-1-2 {
+    flex-direction: column;
+    gap: 20px;
+}
+  
+  .course-completion-section-2{
+    border-right:0 solid black
+  }
+  .completion-section-1-main{
+     border-right:0 solid black
   }
 }
