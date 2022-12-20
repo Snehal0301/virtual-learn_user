@@ -918,4 +918,7 @@
     padding-top: 15px !important;
     margin-left: 29px !important;
   }
+  .emptyImageCourse img {
+    width: 300px;
+}
 }

@@ -61,6 +61,7 @@ console.log("all course", allCoursePagination)
         </span>
         {categoryName}
       </div>
+      <div className="mobileCategoriesheadLink">{categoryName}</div>
       <div className="home-categories-section2">
         <div className="home-categories-courses-started">
           Courses to get you started

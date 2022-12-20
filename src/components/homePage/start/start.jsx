@@ -39,6 +39,7 @@ import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a lo
 // import "slick-carousel/slick/slick.css";
 // import "slick-carousel/slick/slick-theme.css";
 import Slider from 'react-slick'
+import { headerCarousel } from '../../../redux/reducers/HomeCarouseldata';
 
 
 const Start = () => {
@@ -61,7 +62,7 @@ const Start = () => {
     dispatch(homeTabToggleState(id));
   };
 
-  const [headerdata, setheaderdata] = useState([]);
+  const [headerdata1, setheaderdata] = useState([]);
   const [allcourseData, setallcourseData] = useState([]);
   const [popular, setpopular] = useState([]);
   const [newestData, setnewestData] = useState([]);
@@ -70,7 +71,7 @@ const Start = () => {
   const [ongoing, setOngoing] = useState([]);
   const [name, setName] = useState('');
 
-  
+  const headerdata = useSelector((state)=>state.headerCarousel.data)
 
   useEffect(() => {
     axios
@@ -96,6 +97,7 @@ const Start = () => {
   //Fetching api for slider
 
   useEffect(() => {
+    dispatch(headerCarousel())
     axios
       .get(
         `http://virtuallearn-env.eba-6xmym3vf.ap-south-1.elasticbeanstalk.com/user/home/course`,
@@ -244,9 +246,10 @@ const Start = () => {
 
       <div className="start-greeting">Hello!</div>
       <div className="start-username">{name}</div>
-      <div className='webslider'>
-        <Slider autoplay={true} autoplaySpeed={2000} slidesToShow={3} dots={true}  showIndicators={true}>
-          {headerdata && headerdata.slice(0,4).map((item) => (
+     
+        <div className='webslider'>
+        <Slider autoplay={true} autoplaySpeed={20000} slidesToShow={3} dots={true}slidesToScroll={1}>
+          {headerdata && headerdata.data && headerdata.data.map((item) => (
             <div
               className="start-image-title"
               onClick={() => {
@@ -264,9 +267,12 @@ const Start = () => {
           ))}
         </Slider>
       </div>
+      
+      
+      
       <div className='mobileSlider'>
         <Carousel autoplay={true} autoplaySpeed={2000} slidesToShow={3} >
-          {headerdata && headerdata.map((item) => (
+          {headerdata && headerdata.data&& headerdata.data.map((item) => (
             <div
               className="start-image-title"
               onClick={() => {
@@ -284,7 +290,7 @@ const Start = () => {
           ))}
         </Carousel>
       </div>
-
+     
       {
         ongoing && ongoing.length > 0 &&
         <>

@@ -16,6 +16,7 @@ import { editSchema } from "./edit-schema";
 import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
 import { ProfileClick } from "../../../../redux/reducers/EditProfileData";
+import { headerCarousel } from "../../../../redux/reducers/HomeCarouseldata";
 
 const EditProfile = () => {
   const [editProfileData, setEditProfileData] = useState({});
@@ -25,6 +26,7 @@ const EditProfile = () => {
   const handleClick = () => {
     dispatch(editProfileSection(false));
     dispatch(ProfileClick());
+    dispatch(headerCarousel())
   };
   const handleProfilePic = (e) => {
     var image = document.getElementById("ProfileImage");
