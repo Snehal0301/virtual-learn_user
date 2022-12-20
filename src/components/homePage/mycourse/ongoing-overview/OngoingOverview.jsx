@@ -336,17 +336,14 @@ const OngoingOverview = () => {
     setPauseData({
       videoTitle: continueModal.lessonName
     })
-    // accordianToggle(accordianStateID - 1);
-    // accordianToggle(continueModal.chapterNumber - 1)
     console.log('pauseData.videoTitle', pauseData.videoTitle);
     getVideoState(continueModal)
 
   }, [chapter])
 
-  useEffect(() => {
-    continueModalData()
-  },[])
-
+  // useEffect(() => {
+  //   continueModalData()
+  // },[])
 
   useEffect(() => {
     console.log('Component mounted');
