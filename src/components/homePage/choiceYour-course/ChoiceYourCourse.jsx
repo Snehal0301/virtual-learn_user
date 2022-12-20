@@ -1,21 +1,21 @@
-import React, { useEffect } from 'react';
-import { design } from '../../../utils/svgIcons';
-import './choiceYourCourse.css';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useEffect } from "react";
+import { design } from "../../../utils/svgIcons";
+import "./choiceYourCourse.css";
+import { useDispatch, useSelector } from "react-redux";
 import {
   basicCourse,
   categoryName,
-} from './../../../redux/reducers/basicCourses';
-import { advancedCourse } from './../../../redux/reducers/advancedCourse';
-import { subCategories } from './../../../redux/reducers/subCategories';
-import { useNavigate } from 'react-router-dom';
-import { courseOverview } from '../../../redux/reducers/courseOverview';
-import { chapterResponse } from '../../../redux/reducers/chapterResponses';
-import { allCoursePW } from '../../../redux/reducers/AllcoursePW';
+} from "./../../../redux/reducers/basicCourses";
+import { advancedCourse } from "./../../../redux/reducers/advancedCourse";
+import { subCategories } from "./../../../redux/reducers/subCategories";
+import { useNavigate } from "react-router-dom";
+import { courseOverview } from "../../../redux/reducers/courseOverview";
+import { chapterResponse } from "../../../redux/reducers/chapterResponses";
+import { allCoursePW } from "../../../redux/reducers/AllcoursePW";
 import {
   paginateNext,
   paginatePrevious,
-} from '../../../redux/reducers/pagination';
+} from "../../../redux/reducers/pagination";
 
 const ChoiceYourCourse = () => {
   const dispatch = useDispatch();
@@ -26,7 +26,7 @@ const ChoiceYourCourse = () => {
 
   const pageNum = useSelector((state) => state.pagination.pageNum);
 
-  console.log('page number', pageNum);
+  console.log("page number", pageNum);
 
   useEffect(() => {
     dispatch(allCoursePW({ pageNum: pageNum, pageLimit: 4 }));
@@ -64,7 +64,7 @@ const ChoiceYourCourse = () => {
                   dispatch(
                     subCategories(`subCategories?categoryId=${ele.categoryId}`)
                   );
-                  navigate('/categories/design');
+                  navigate("/categories/design");
                 }}
               >
                 <div className="choice-your-coursecategories-Icon">
@@ -90,7 +90,7 @@ const ChoiceYourCourse = () => {
                 onClick={() => {
                   dispatch(courseOverview(item.courseId));
                   dispatch(chapterResponse(item.courseId));
-                  navigate('/myCourses/ongoingCourse');
+                  navigate("/myCourses/ongoingCourse");
                 }}
               >
                 <img src={item.coursePhoto} alt="" />
@@ -127,6 +127,10 @@ const ChoiceYourCourse = () => {
             dispatch(paginateNext());
           }}
           disabled={
+            allCoursePagination &&
+            allCoursePagination.data &&
+            allCoursePagination.data.length > 0 &&
+            allCoursePagination.data.chapterCount &&
             Math.ceil(allCoursePagination.data[0].chapterCount / 4) === pageNum
           }
         >
