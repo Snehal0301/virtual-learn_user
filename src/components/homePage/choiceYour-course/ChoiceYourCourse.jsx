@@ -131,7 +131,7 @@ const ChoiceYourCourse = () => {
               allCoursePagination.data &&
               allCoursePagination.data.length > 0 &&
               allCoursePagination.data.chapterCount &&
-              Math.ceil(allCoursePagination.data[0].chapterCount / 4)) ===
+              Math.ceil(allCoursePagination.data[0].chapterCount / 4)) <=
             pageNum
           }
         >
