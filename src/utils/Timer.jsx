@@ -34,8 +34,7 @@ const Timer = () => {
 
     const submitData = { testId: quizData.testId, userAnswers: userAnswer };
 
-    console.log("submit", submitData);
-
+    
     fetch(
       `http://virtuallearn-env.eba-6xmym3vf.ap-south-1.elasticbeanstalk.com/user/${
         quizData.testName === "Final Test" ? "finalSubmit" : "submit"
@@ -83,6 +82,7 @@ const Timer = () => {
       sessionStorage.setItem("timer", timer);
     }
   }, [timer]);
+
 
   React.useEffect(() => {
     timeoutId.current = window.setTimeout(countTimer, 1000);
