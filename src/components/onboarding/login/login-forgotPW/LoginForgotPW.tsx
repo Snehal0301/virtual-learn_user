@@ -48,7 +48,7 @@ const LoginForgotPW = () => {
       .then((res) => {
         console.log(res)
         if (res.message === 'OTP Valid For 2 Minutes') {
-          sessionStorage.setItem('regMobileNum', `+91${mobileNum}`)
+          sessionStorage.setItem('regMobileNum', mobileNum)
           dispatch(otpPage(true))
           navigate('/onboarding/otpVerification')
         } else {
