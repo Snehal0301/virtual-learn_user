@@ -44,6 +44,8 @@ const HomeCategoriesDesign = () => {
 
   const allCoursePagination = useSelector((state) => state.allCoursePW.data);
 
+console.log("all course", allCoursePagination)
+
   return (
     <div className="homecategoriesdesign">
       <div className="homeCategories-head-link">
@@ -198,7 +200,7 @@ const HomeCategoriesDesign = () => {
             ))}
         </div>
       </div>
-      {allCoursePagination && allCoursePagination.data && (
+      {allCoursePagination && allCoursePagination.data&& allCoursePagination.data.length > 0  && (
         <div className="paginationBtns">
           <button
             onClick={() => {
