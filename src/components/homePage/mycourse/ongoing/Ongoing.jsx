@@ -52,7 +52,7 @@ const Ongoing = () => {
                   </div>
                   <button
                     className="btn-continue-ongoing"
-                    onClick={() => {
+                    onClick={(e) => {
                       dispatch(courseOverview(ele.courseId));
                       dispatch(chapterResponse(ele.courseId));
                       dispatch(tabToggleState(2))

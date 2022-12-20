@@ -1,16 +1,21 @@
-import React, { useState, useEffect } from 'react';
-import { start_pauseIcon } from '../../../utils/svgIcons';
-import { start_timeIcon } from '../../../utils/svgIcons';
+import React, { useState, useEffect } from "react";
+import { start_pauseIcon } from "../../../utils/svgIcons";
+import { start_timeIcon } from "../../../utils/svgIcons";
 
-import axios from 'axios';
-import './HomeCategoriesDesign.css';
-import { useDispatch, useSelector } from 'react-redux';
-import { basicCourse } from './../../../redux/reducers/basicCourses';
-import { subCategories } from './../../../redux/reducers/subCategories';
-import { homeCategory_sideArrow } from '../../../utils/svgIcons';
-import { courseOverview } from '../../../redux/reducers/courseOverview';
-import { chapterResponse } from '../../../redux/reducers/chapterResponses';
-import { Link, useNavigate } from 'react-router-dom';
+import axios from "axios";
+import "./HomeCategoriesDesign.css";
+import { useDispatch, useSelector } from "react-redux";
+import { basicCourse } from "./../../../redux/reducers/basicCourses";
+import { subCategories } from "./../../../redux/reducers/subCategories";
+import { homeCategory_sideArrow } from "../../../utils/svgIcons";
+import { courseOverview } from "../../../redux/reducers/courseOverview";
+import { chapterResponse } from "../../../redux/reducers/chapterResponses";
+import { Link, useNavigate } from "react-router-dom";
+import { allCoursePW } from "../../../redux/reducers/AllcoursePW";
+import {
+  paginateNext,
+  paginatePrevious,
+} from "../../../redux/reducers/pagination";
 
 const HomeCategoriesDesign = () => {
   const dispatch = useDispatch();
@@ -25,6 +30,20 @@ const HomeCategoriesDesign = () => {
 
   const categoryName = useSelector((state) => state.basicCourse.category);
 
+  const pageNum = useSelector((state) => state.pagination.pageNum);
+
+  console.log("page number", pageNum);
+
+  useEffect(() => {
+    dispatch(allCoursePW({ pageNum: pageNum, pageLimit: 4 }));
+  }, [pageNum]);
+
+  useEffect(() => {
+    dispatch(allCoursePW({ pageNum: pageNum, pageLimit: 4 }));
+  }, []);
+
+  const allCoursePagination = useSelector((state) => state.allCoursePW.data);
+
   return (
     <div className="homecategoriesdesign">
       <div className="homeCategories-head-link">
@@ -32,9 +51,9 @@ const HomeCategoriesDesign = () => {
         <span>
           <Link
             to="/categories"
-            style={{ color: 'var(--blueFont)', cursor: 'pointer' }}
+            style={{ color: "var(--blueFont)", cursor: "pointer" }}
           >
-            Categories &nbsp; &nbsp; {'>'} &nbsp;
+            Categories &nbsp; &nbsp; {">"} &nbsp;
           </Link>
           &nbsp;
         </span>
@@ -56,7 +75,7 @@ const HomeCategoriesDesign = () => {
                 onClick={() => {
                   dispatch(courseOverview(item.courseId));
                   dispatch(chapterResponse(item.courseId));
-                  navigate('/myCourses/ongoingCourse');
+                  navigate("/myCourses/ongoingCourse");
                 }}
               >
                 <div className="home-categories-image-pause">
@@ -94,7 +113,7 @@ const HomeCategoriesDesign = () => {
                 onClick={() => {
                   dispatch(courseOverview(item.courseId));
                   dispatch(chapterResponse(item.courseId));
-                  navigate('/myCourses/ongoingCourse');
+                  navigate("/myCourses/ongoingCourse");
                 }}
               >
                 <div className="home-categories-image-pause">
@@ -146,35 +165,64 @@ const HomeCategoriesDesign = () => {
       </div>
       <div className="home-categories-card-allcourse">
         <div className="home-categories-choice1-allcourse">
-          {allcourseItem.map((item) => (
-            <div
-              className="home-categories-subcategory-allcourse-image"
-              onClick={() => {
-                dispatch(courseOverview(item.courseId));
-                dispatch(chapterResponse(item.courseId));
-                navigate('/myCourses/ongoingCourse');
-              }}
-            >
-              <div className="home-categories-image-allcourse-pause">
-                <img src={item.coursePhoto} alt="" />
-                <div className="home-categories-overlay-allcourse"></div>
-              </div>
-              <div className="home-categories-allcourse-ttlchapbtn">
-                <div className="home-categories-subcategory-allcourse-title">
-                  {item.courseName}
+          {allCoursePagination &&
+            allCoursePagination.data &&
+            allCoursePagination.data.length > 0 &&
+            allCoursePagination.data.map((item) => (
+              <div
+                className="home-categories-subcategory-allcourse-image"
+                onClick={() => {
+                  dispatch(courseOverview(item.courseId));
+                  dispatch(chapterResponse(item.courseId));
+                  navigate("/myCourses/ongoingCourse");
+                }}
+              >
+                <div className="home-categories-image-allcourse-pause">
+                  <img src={item.coursePhoto} alt="" />
+                  <div className="home-categories-overlay-allcourse"></div>
                 </div>
-                <div className="home-categories-allcourse-titleBtn">
-                  <div className="home-categories-allcourse-chapter">
-                    {item.chapterCount} Chapters
+                <div className="home-categories-allcourse-ttlchapbtn">
+                  <div className="home-categories-subcategory-allcourse-title">
+                    {item.courseName}
                   </div>
-                  <button className="home-categories-allcourse-designbtn">
-                    {item.categoryName}
-                  </button>
+                  <div className="home-categories-allcourse-titleBtn">
+                    <div className="home-categories-allcourse-chapter">
+                      {item.chapterCount} Chapters
+                    </div>
+                    <button className="home-categories-allcourse-designbtn">
+                      {item.categoryName}
+                    </button>
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
+            ))}
         </div>
+      </div>
+      <div className="paginationBtns">
+        <button
+          onClick={() => {
+            dispatch(paginatePrevious());
+          }}
+          disabled={pageNum <= 1}
+        >
+          Previous
+        </button>
+        &nbsp;Page: {pageNum} &nbsp;
+        <button
+          onClick={() => {
+            dispatch(paginateNext());
+          }}
+          disabled={
+            (allCoursePagination &&
+              allCoursePagination.data &&
+              allCoursePagination.data.length > 0 &&
+              allCoursePagination.data.chapterCount &&
+              Math.ceil(allCoursePagination.data[0].chapterCount / 4)) <=
+            pageNum
+          }
+        >
+          Next
+        </button>
       </div>
     </div>
   );

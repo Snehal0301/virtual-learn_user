@@ -43,12 +43,15 @@ const Completed = () => {
           <div className="completed-section">
             {completed.map((ele, i) => {
               return (
-                <div className="completed-parent" key={i} style={{ cursor: 'pointer' }} onClick={() => {
-                  dispatch(courseOverview(ele.courseId));
-                  dispatch(chapterResponse(ele.courseId));
-                  dispatch(tabToggleState(1))
-                  navigate('/myCourses/ongoingCourse');
-                }}>
+                <div className="completed-parent" key={i}
+                  style={{cursor:'pointer'}}
+                  onClick={(e) => {
+                    dispatch(courseOverview(ele.courseId));
+                    dispatch(chapterResponse(ele.courseId));
+                    dispatch(tabToggleState(1))
+                    navigate('/myCourses/ongoingCourse');
+                  }}
+                >
                   <div className="completed-images">
                     <div className="comp-overlay"></div>
                     <img src={ele.coursePhoto} alt="" className="comp-img" />
