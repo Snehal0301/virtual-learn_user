@@ -626,6 +626,9 @@ const OngoingOverview = () => {
                               playerRef.current.seekTo(0, 'seconds');
                               setPause(false);
                               setPlaying(true);
+                              setNextModal(false)
+                              setVideoPlayState(false)
+                              showChapter(chapter.courseId, continueModal.chapterId, continueModal.lessonId, continueModal.lessonName)
                               dispatch(unmountState('false'));
                             }}
                           >
