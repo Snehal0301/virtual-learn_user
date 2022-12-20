@@ -22,7 +22,7 @@ const HomeCategoriesDesign = () => {
   const navigate = useNavigate();
 
   const allcourseItem = useSelector((state) => state.allcourse.value);
-  // console.log(allcourseItem);
+   console.log("all",allcourseItem.length);
 
   const basicCoursedata = useSelector((state) => state.basicCourse.data);
   const advancedCoursedata = useSelector((state) => state.advancedCourse.data);
@@ -43,6 +43,8 @@ const HomeCategoriesDesign = () => {
   }, []);
 
   const allCoursePagination = useSelector((state) => state.allCoursePW.data);
+
+console.log("all course", allCoursePagination)
 
   return (
     <div className="homecategoriesdesign">
@@ -198,7 +200,7 @@ const HomeCategoriesDesign = () => {
             ))}
         </div>
       </div>
-      {allCoursePagination && allCoursePagination.data && (
+      {allCoursePagination && allCoursePagination.data&& allCoursePagination.data.length > 0  && (
         <div className="paginationBtns">
           <button
             onClick={() => {
@@ -215,8 +217,7 @@ const HomeCategoriesDesign = () => {
             }}
             disabled={
               Math.ceil(
-                allCoursePagination &&
-                  allCoursePagination.data[0].chapterCount / 4
+                allcourseItem&&allcourseItem.length / 4
               ) <= pageNum
             }
           >
