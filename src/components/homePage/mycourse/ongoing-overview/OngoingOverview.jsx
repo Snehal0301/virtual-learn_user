@@ -348,12 +348,13 @@ const OngoingOverview = () => {
     console.log('Component mounted');
 
     // look here
-    accordianToggle(accordianStateID - 1);
+    // accordianToggle(accordianStateID - 1);
     return () => {
       console.log("Component unmounted");
       dispatch(tabToggleState(1));
       dispatch(unmountState("true"));
-      dispatch(accordianToggleState(0));
+      // accordianToggle(0)
+      // dispatch(accordianToggleState(0));
       // dispatch(accordianIDState(0))
       setDefaultVideo('');
       // dispatch(firstVideoState('https://youtu.be/d1UNXbRxxZE'));
