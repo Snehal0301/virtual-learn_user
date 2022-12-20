@@ -338,13 +338,14 @@ const OngoingOverview = () => {
     setPauseData({
       videoTitle: continueModal.lessonName
     })
-    // accordianToggle(accordianStateID - 1);
-    // accordianToggle(continueModal.chapterNumber - 1)
     console.log('pauseData.videoTitle', pauseData.videoTitle);
     getVideoState(continueModal)
 
   }, [chapter])
 
+  // useEffect(() => {
+  //   continueModalData()
+  // },[])
 
   useEffect(() => {
     console.log('Component mounted');
@@ -365,11 +366,11 @@ const OngoingOverview = () => {
     };
   }, []);
 
-  // useEffect(() => {
+  useEffect(() => {
 
-  //   dispatch(accordianIDState(continueModal.chapterNumber))
-  //   accordianToggle(accordianStateID - 1);
-  // },[])
+    // dispatch(accordianIDState(continueModal.chapterNumber))
+    accordianToggle(continueModal.chapterNumber - 1)
+  },[continueModal])
 
   // componentUnMount()
   const unmountPauseTime = new Date(pauseStateID * 1000)
@@ -467,8 +468,8 @@ const OngoingOverview = () => {
 
   const playerRef = useRef();
 
-  const defaultNormalPause = (time) => {
-    var hms = time;
+  const defaultNormalPause = (continueModal) => {
+    var hms = continueModal.pauseTime;
     var a = hms.split(':');
     var seconds = (+a[0]) * 60 * 60 + (+a[1]) * 60 + (+a[2]);
 
@@ -508,6 +509,7 @@ const OngoingOverview = () => {
           dispatch(chapterResponse(chapter.courseId));
           dispatch(courseOverview(chapter.courseId));
           dispatch(tabToggleState(2));
+          accordianToggle(0)
           setJoinCourse(true);
           dispatch(NotifyClick())
         }
@@ -543,7 +545,7 @@ const OngoingOverview = () => {
             <Link
               to="/myCourses"
               style={{ color: "var(--blueFont)", cursor: "pointer" }}
-              onClick={componentUnMount}
+              // onClick={componentUnMount}
             >
               My Course &nbsp; &nbsp; {">"} &nbsp;
             </Link>
@@ -553,7 +555,7 @@ const OngoingOverview = () => {
             <Link
               to="/myCourses"
               style={{ color: "var(--blueFont)", cursor: "pointer" }}
-              onClick={componentUnMount}
+              // onClick={componentUnMount}
             >
               Ongoing &nbsp; &nbsp; {">"} &nbsp;
             </Link>
@@ -595,7 +597,7 @@ const OngoingOverview = () => {
                         <div
                           className="continue-chapter-pause-button"
                           onClick={() => {
-                            
+
                             setNextModal(true);
                             setFirstPause(false);
                           }}
@@ -614,7 +616,7 @@ const OngoingOverview = () => {
                           </p>
                           <button
                             className="onpause-button"
-                            onClick={() => defaultNormalPause(continueModal.pauseTime)}
+                            onClick={() => defaultNormalPause(continueModal)}
                           >
                             Continue Watching
                           </button>
@@ -624,6 +626,9 @@ const OngoingOverview = () => {
                               playerRef.current.seekTo(0, 'seconds');
                               setPause(false);
                               setPlaying(true);
+                              setNextModal(false)
+                              setVideoPlayState(false)
+                              showChapter(chapter.courseId, continueModal.chapterId, continueModal.lessonId, continueModal.lessonName)
                               dispatch(unmountState('false'));
                             }}
                           >
@@ -1099,7 +1104,7 @@ const OngoingOverview = () => {
                                         <div className="accordian-item">
                                           <div className="accordian-item-icon">
                                             {/* {itemele.lessonCompletedStatus ? completedlessonIcon : itemele.lessonStatus ? inactiveIcon("green") : inactiveIcon("")} */}
-                                            {ele.chapterTestPercentage > 0
+                                            {ele.chapterTestPercentage >= 0
                                               ? completedlessonIcon
                                               : statusTest
                                                 ? inactiveIcon('green')
