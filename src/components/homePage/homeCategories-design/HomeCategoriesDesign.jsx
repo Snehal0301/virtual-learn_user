@@ -86,6 +86,7 @@ console.log("all course", allCoursePagination)
                   <img src={item.coursePhoto} alt="" />
                   <div className="home-categories-pauseIcon">
                     {start_pauseIcon}
+                    
                   </div>
                 </div>
                 <div className="home-categories-subcategory-title">
