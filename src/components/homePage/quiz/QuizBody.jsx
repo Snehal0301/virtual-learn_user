@@ -82,7 +82,7 @@ const QuizBody = () => {
       .then((res) => res.json())
       .then((res) => {
         console.log("resppp", res);
-        if (res && res.chapterTestPercentage > 0) {
+        if (res && res.chapterTestPercentage >= 0) {
           if (quizData.testName === "Final Test") {
             dispatch(finaltestShowPage(true));
             dispatch(FinalResult(`result?testId=${quizData.testId}`));
@@ -94,7 +94,7 @@ const QuizBody = () => {
 
           dispatch(testisSuccess());
           dispatch(showSuccessPage(true));
-        } else if (res && res.chapterTestPercentage === 0) {
+        } else if (res && res.chapterTestPercentage < 0) {
           alert("You have not met the minimum passing grade");
           dispatch(testShow(false));
           dispatch(testSuccess());

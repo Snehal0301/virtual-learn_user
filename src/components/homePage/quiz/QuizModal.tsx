@@ -1,10 +1,10 @@
-import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { showQuizModal, testShow } from '../../../redux/reducers/Conditions';
-import { testisSuccess } from '../../../redux/reducers/testSlice';
+import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { showQuizModal, testShow } from "../../../redux/reducers/Conditions";
+import { testisSuccess } from "../../../redux/reducers/testSlice";
 
-import { closeIcon } from '../../../utils/svgIcons';
-import './Quiz.css';
+import { closeIcon } from "../../../utils/svgIcons";
+import "./Quiz.css";
 
 const QuizModal = () => {
   const dispatch = useDispatch();
@@ -18,8 +18,8 @@ const QuizModal = () => {
         <aside
           className="headerSearch-filterModal"
           style={{
-            alignItems: 'center',
-            marginTop: 'unset',
+            alignItems: "center",
+            marginTop: "unset",
           }}
         >
           <div
@@ -31,12 +31,12 @@ const QuizModal = () => {
             <div className="headerSearch-filterModalBody">
               <div
                 className="headerSearch-filterModalBodyTitle"
-                style={{ fontSize: '24px' }}
+                style={{ fontSize: "24px" }}
               >
                 Do you want to end the test?
               </div>
               <div className="quizModal-text">
-                You still have {sessionStorage.getItem('timer')} seconds
+                You still have {sessionStorage.getItem("timer")} seconds
                 remaining
                 <br />
                 <br />
