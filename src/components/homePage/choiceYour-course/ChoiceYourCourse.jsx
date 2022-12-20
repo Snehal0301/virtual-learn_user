@@ -127,11 +127,12 @@ const ChoiceYourCourse = () => {
             dispatch(paginateNext());
           }}
           disabled={
-            allCoursePagination &&
-            allCoursePagination.data &&
-            allCoursePagination.data.length > 0 &&
-            allCoursePagination.data.chapterCount &&
-            Math.ceil(allCoursePagination.data[0].chapterCount / 4) === pageNum
+            (allCoursePagination &&
+              allCoursePagination.data &&
+              allCoursePagination.data.length > 0 &&
+              allCoursePagination.data.chapterCount &&
+              Math.ceil(allCoursePagination.data[0].chapterCount / 4)) ===
+            pageNum
           }
         >
           Next
