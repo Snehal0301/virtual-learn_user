@@ -201,7 +201,7 @@ console.log("all course", allCoursePagination)
             ))}
         </div>
       </div>
-      {allCoursePagination && allCoursePagination.data&& allCoursePagination.data.length > 0  && (
+       {allCoursePagination && allCoursePagination.data&& allCoursePagination.data.length > 0 && (
         <div className="paginationBtns">
           <button
             onClick={() => {
@@ -209,7 +209,10 @@ console.log("all course", allCoursePagination)
             }}
             disabled={pageNum <= 1}
           >
-            Previous
+          <img
+                src={require("../../../assets/icons/previousIcon.png")}
+                alt="previous"
+              />
           </button>
           &nbsp;Page: {pageNum} &nbsp;
           <button
@@ -222,7 +225,10 @@ console.log("all course", allCoursePagination)
               ) <= pageNum
             }
           >
-            Next
+           <img
+                  src={require("../../../assets/icons/nextIcon.png")}
+                  alt="next"
+                ></img>
           </button>
         </div>
       )}
