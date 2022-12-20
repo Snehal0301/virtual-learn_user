@@ -61,6 +61,7 @@ console.log("all course", allCoursePagination)
         </span>
         {categoryName}
       </div>
+      <div className="mobileCategoriesheadLink">{categoryName}</div>
       <div className="home-categories-section2">
         <div className="home-categories-courses-started">
           Courses to get you started
@@ -85,6 +86,7 @@ console.log("all course", allCoursePagination)
                   <img src={item.coursePhoto} alt="" />
                   <div className="home-categories-pauseIcon">
                     {start_pauseIcon}
+                    
                   </div>
                 </div>
                 <div className="home-categories-subcategory-title">
@@ -94,7 +96,7 @@ console.log("all course", allCoursePagination)
                   <div className="home-categories-chapter2">
                     {item.chapterCount} Chapters
                   </div>
-                  <div>{start_timeIcon}</div>
+                  <div className="startPageTime">{start_timeIcon}</div>
                   {item.courseDuration}
                 </div>
               </div>
