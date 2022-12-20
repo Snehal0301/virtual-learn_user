@@ -1,4 +1,4 @@
-import '../registrationform/RegistrationForm.css';
+import "../registrationform/RegistrationForm.css";
 import "../../../onboarding/login/login-auth/LoginAuth.css";
 import * as yup from "yup";
 import "yup-phone";
@@ -43,7 +43,7 @@ const RegistrationForm = () => {
           Accept: "application/json, text/plain, */*",
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ mobileNumber: `+91${mobileNum}` }),
+        body: JSON.stringify({ mobileNumber: mobileNum }),
       }
     )
       .then((res) => res.json())
@@ -52,7 +52,7 @@ const RegistrationForm = () => {
         if (res.message === "OTP Valid For 2 Minutes") {
           dispatch(registerOtp(true));
           navigate("/onboarding/registerOtp");
-          sessionStorage.setItem("regMobileNum", `+91${mobileNum}`);
+          sessionStorage.setItem("regMobileNum", mobileNum);
         } else if (res.message === "Please Enter Valid Phone Number") {
           dispatch(registerOtp(false));
           showError(res.message);
@@ -148,7 +148,7 @@ const RegistrationForm = () => {
           </button>
         </form>
       </div>
-      
+
       <span className="already-text">
         Already have an account?
         <span
