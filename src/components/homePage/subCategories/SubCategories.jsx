@@ -14,12 +14,12 @@ const SubCategories = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  console.log(
-    "categoriesSubCategoriesdata",
-    categoriesSubCategoriesdata.data[0].categoryName
-  );
+  // console.log(
+  //   "categoriesSubCategoriesdata",
+  //   categoriesSubCategoriesdata.data[0].categoryName
+  // );
 
-  
+
 
   return (
     <div className="subCategoryCat">
@@ -37,10 +37,10 @@ const SubCategories = () => {
           <Link
             to="/categories/design"
             style={{ color: "var(--blueFont)", cursor: "pointer" }}
-            // onClick={componentUnMount}
-            // onClick={dispatch(mycoursetabToggleState(2))}
+          // onClick={componentUnMount}
+          // onClick={dispatch(mycoursetabToggleState(2))}
           >
-            {categoriesSubCategoriesdata.data[0].categoryName} &nbsp; &nbsp;{" "}
+            {categoriesSubCategoriesdata && categoriesSubCategoriesdata.data && categoriesSubCategoriesdata.data.length > 0 && categoriesSubCategoriesdata.data[0].categoryName} &nbsp; &nbsp;{" "}
             {">"} &nbsp;
           </Link>
           &nbsp;
@@ -55,9 +55,7 @@ const SubCategories = () => {
         </div>
         <div className="home-categories-seeall"></div>
       </div> */}
-      {categoriesSubCategoriesdata == 0 ? (
-        <div>No Courses Available</div>
-      ) : (
+      {categoriesSubCategoriesdata && categoriesSubCategoriesdata.data && categoriesSubCategoriesdata.data.length > 0 ? (
         <div className="home-categories-card">
           <div className="home-categories-choice1">
             {categoriesSubCategoriesdata &&
@@ -92,6 +90,8 @@ const SubCategories = () => {
               ))}
           </div>
         </div>
+      ) : (
+        <div>No Courses Available</div>
       )}
     </div>
   );

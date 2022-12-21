@@ -70,7 +70,7 @@ const reducers = combineReducers({
 const persistConfig = {
   key: "root",
   storage,
-  blacklist: ['login', 'pagination'],
+  blacklist: ['login', 'pagination','CatSubCategories'],
 }
 
 const persistedReducer = persistReducer(persistConfig, reducers)

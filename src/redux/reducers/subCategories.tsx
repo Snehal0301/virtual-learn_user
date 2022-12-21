@@ -55,6 +55,7 @@ export const subCategoriesSlice = createSlice({
     })
     builder.addCase(subCategories.rejected, (state, action) => {
       state.message = action.payload
+      state.data = []
       state.loading = false
       state.isRejected = true
     })
