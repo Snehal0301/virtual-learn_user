@@ -247,10 +247,11 @@ const Start = () => {
       <div className="webslider">
         <Slider
           autoplay={true}
-          autoplaySpeed={20000}
+          autoplaySpeed={2000}
           slidesToShow={3}
           dots={true}
           slidesToScroll={1}
+          infinite={true}
         >
           {headerdata &&
             headerdata.data &&

@@ -396,7 +396,8 @@ const OngoingOverview = () => {
   useEffect(() => {
 
     // dispatch(accordianIDState(continueModal.chapterNumber))
-    accordianToggle(continueModal.chapterNumber - 1)
+    continueModal.chapterNumber &&
+      accordianToggle(continueModal.chapterNumber - 1)
   }, [continueModal])
 
   // componentUnMount()
@@ -567,7 +568,13 @@ const OngoingOverview = () => {
     <>
       {chapter && chapter.enrolled ? (
         <div className="homeCategories-head-link">
-          <span onClick={componentUnMount}>
+          <span onClick={() => {
+            componentUnMount();
+            setDefaultVideo('');
+            dispatch(firstVideoState(''));
+            dispatch(videoLinkState(""));
+          }
+          }>
             <Link
               to="/myCourses"
               style={{ color: "var(--blueFont)", cursor: "pointer" }}
@@ -584,19 +591,31 @@ const OngoingOverview = () => {
                   to="/myCourses"
                   style={{ color: "var(--blueFont)", cursor: "pointer" }}
                   // onClick={componentUnMount}
-                  onClick={dispatch(mycoursetabToggleState(2))}
+                  onClick={() => {
+
+                    dispatch(mycoursetabToggleState(2));
+                    setDefaultVideo('');
+                    dispatch(firstVideoState(''));
+                    dispatch(videoLinkState(""));
+                  }
+                  }
                 >
                   Completed &nbsp; &nbsp; {">"} &nbsp;
                 </Link>
-                &nbsp;
               </span>
               :
               <span>
                 <Link
                   to="/myCourses"
                   style={{ color: "var(--blueFont)", cursor: "pointer" }}
-                  // onClick={componentUnMount}
-                  onClick={dispatch(mycoursetabToggleState(1))}
+                  onClick={() => {
+
+                    dispatch(mycoursetabToggleState(1));
+                    setDefaultVideo('');
+                    dispatch(firstVideoState(''));
+                    dispatch(videoLinkState(""));
+                  }
+                  }
                 >
                   Ongoing &nbsp; &nbsp; {">"} &nbsp;
                 </Link>
@@ -608,7 +627,8 @@ const OngoingOverview = () => {
         </div>
       ) : (
         ""
-      )}
+      )
+      }
       <div className="ongoing-overview">
         <div className="ongoing-section-1">
           <div
