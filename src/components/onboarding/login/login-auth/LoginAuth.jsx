@@ -47,7 +47,6 @@ const LoginAuth = () => {
     };
 
     if (e.target.username.value !== "" && e.target.password.value !== "") {
-      console.log("credentials", credentials);
       dispatch(login(credentials));
 
       // localStorage.setItem('auth', 'true')
