@@ -16,6 +16,7 @@ import {
   paginateNext,
   paginatePrevious,
 } from "../../../redux/reducers/pagination";
+import { CatSubCategories } from "../../../redux/reducers/CategoriesSubCategories";
 
 const HomeCategoriesDesign = () => {
   const dispatch = useDispatch();
@@ -151,7 +152,7 @@ console.log("all course", allCoursePagination)
             subCategoriesdata.data &&
             subCategoriesdata.data.map((ele, i) => {
               return (
-                <div className="home-categories-Parent" key={i}>
+                <div className="home-categories-Parent" key={i} onClick={() => { dispatch(CatSubCategories(ele.subCategoryId)); navigate("/subcategories");}}>
                   {/* <div className="start-course-categories-Icon">
           {design}
         </div> */}

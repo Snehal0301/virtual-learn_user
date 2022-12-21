@@ -8,6 +8,7 @@ import MyCourse from '../../components/homePage/mycourse/MyCourse'
 import Categories from '../../components/homePage/start/categories/Categories'
 import './HomePage.css'
 import ChoiceYourCourse from './../../components/homePage/choiceYour-course/ChoiceYourCourse'
+import SubCategories from '../../components/homePage/subCategories/SubCategories'
 import HomeCategoriesDesign from '../../components/homePage/homeCategories-design/HomeCategoriesDesign'
 import Start from '../../components/homePage/start/start'
 import { Outlet } from 'react-router-dom'
@@ -53,10 +54,11 @@ const HomePage = () => {
         {/* <CourseCompleted /> */}
         {/* <MyCourse /> */}
         {/* <Categories /> */}
+        {/* <SubCategories /> */}
         <Outlet />
       </div>
     </div>
-  )
+  );
 }
 
 export default HomePage
