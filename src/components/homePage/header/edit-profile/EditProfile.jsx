@@ -86,9 +86,9 @@ const EditProfile = () => {
         } else {
           formData.append("profilePhoto", selectedFile);
         }
-        formData.forEach((value, key) => {
-          console.log("key %s: value %s", key, value);
-        });
+        // formData.forEach((value, key) => {
+        //   console.log("key %s: value %s", key, value);
+        // });
 
         axios
           .request(
@@ -147,7 +147,7 @@ const EditProfile = () => {
   }, []);
   /*Occupation Data Fetch By Mamatha*/
 
-  console.log("EditData", editProfileData);
+  // console.log("EditData", editProfileData);
   /*Changed Profile Pic*/
   return (
     <div className="drawer-profile">

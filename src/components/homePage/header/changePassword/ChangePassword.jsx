@@ -61,6 +61,19 @@ const ChangePassword = () => {
         </div>
       </div>
     ));
+  
+    const ErrorPassword = () =>
+      toast.error((w) => (
+        <div className="toast-div-password">
+          Password Change Failed
+          <div
+            className="toast-close-password"
+            onClick={() => toast.dismiss(w.id)}
+          >
+            X
+          </div>
+        </div>
+      ));
 
   const handleChangePassword = (e) => {
     e.preventDefault();
@@ -86,6 +99,7 @@ const ChangePassword = () => {
         })
         .catch((Err) => {
           console.log(Err);
+          ErrorPassword();
         });
       
       setNewPassword("");

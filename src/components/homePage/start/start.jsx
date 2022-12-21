@@ -468,8 +468,8 @@ const Start = () => {
       {homeTabState === 2 && (
         <div className="start-card">
           <div className="start-choice1">
-            {popular.length > 0 &&
-              popular.slice(0, 4).map((item) => (
+            {popular.length > 0 ?
+              popular.length > 0 &&popular.slice(0, 4).map((item) => (
                 <div
                   className="start-choice-subcategory-image"
                   onClick={() => {
@@ -495,7 +495,10 @@ const Start = () => {
                     {item.chapterCount} chapters
                   </div>
                 </div>
-              ))}
+              ))
+              :
+              <div className="No-popular">No Popular Courses Available</div>
+            }
           </div>
         </div>
       )}
