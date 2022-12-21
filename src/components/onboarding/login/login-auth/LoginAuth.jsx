@@ -59,14 +59,6 @@ const LoginAuth = () => {
   }, [loginResponse && loginResponse.isRejected && loginResponse.message]);
 
   useEffect(() => {
-    console.log(
-      "login message",
-      loginResponse &&
-        loginResponse.data &&
-        loginResponse.data.headers &&
-        loginResponse.data.headers["JWT_Token"]
-    );
-
     if (
       loginResponse &&
       loginResponse.data &&
@@ -77,6 +69,14 @@ const LoginAuth = () => {
       sessionStorage.setItem("auth", "true");
       navigate("/");
       // window.location.reload();
+    } else {
+      loginResponse &&
+        loginResponse.data &&
+        loginResponse.data.data &&
+        loginResponse.data.data.message &&
+        showError(
+          loginResponse && loginResponse.data && loginResponse.data.data.message
+        );
     }
 
     sessionStorage.setItem(
@@ -107,7 +107,7 @@ const LoginAuth = () => {
         <button>{facebookIcon}</button>
         <button>{googleIcon}</button>
       </div>
-      
+
       <div className="loginAuth-Form">
         <form
           className="loginAuth-FormContainer"
@@ -130,7 +130,7 @@ const LoginAuth = () => {
           </div>
           <div className="loginAuth-FormInput">
             <input
-              type="password"  
+              type="password"
               name="password"
               id="password"
               placeholder="Enter your password"
