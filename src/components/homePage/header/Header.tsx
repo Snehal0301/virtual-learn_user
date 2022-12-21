@@ -557,9 +557,9 @@ const Header = () => {
                                     ele.categoryPhoto &&
                                     ele.categoryPhoto
                                   }
-                                  alt={
-                                    ele && ele.categoryName && ele.categoryName
-                                  }
+                                  // alt={
+                                  //   ele && ele.categoryName && ele.categoryName
+                                  // }
                                 />
                               </div>
                               <div className="headerSearchCategoriesTopSearchesName">
@@ -588,7 +588,7 @@ const Header = () => {
                           }}
                         >
                           <div className="headerSearch-responsePic">
-                            <img src={ele.coursePhoto} alt={ele.courseName} />
+                            <img src={ele.coursePhoto}  />
                           </div>
                           <div className="headerSearch-responseContainer">
                             <div className="headerSearch-responseTitle">
@@ -658,7 +658,7 @@ const Header = () => {
                               src={
                                 ele && ele.categoryPhoto && ele.categoryPhoto
                               }
-                              alt={ele && ele.categoryName && ele.categoryName}
+                              // alt={ele && ele.categoryName && ele.categoryName}
                             />
                           </div>
                           <div className="headerSearchCategoriesTopSearchesName">
