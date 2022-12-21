@@ -361,9 +361,11 @@ const OngoingOverview = () => {
     })
 
     console.log('pauseData.videoTitle', pauseData.videoTitle);
-    getVideoState(continueModal)
+    // getVideoState(continueModal)
     // dispatch(videoLinkState(continueModal.videoLinkState))
     // dispatch(videoLinkState(continueModal.videoLink))
+    dispatch(firstVideoState('https://youtu.be/d1UNXbRxxZE'));
+    // dispatch(firstVideoState(continueModal.videoLink));
   }, [chapter])
 
 
@@ -380,7 +382,7 @@ const OngoingOverview = () => {
       // dispatch(accordianToggleState(0));
       // dispatch(accordianIDState(0))
       setDefaultVideo('');
-      // dispatch(firstVideoState('https://youtu.be/d1UNXbRxxZE'));
+      dispatch(firstVideoState(''));
       dispatch(videoLinkState(""));
       componentUnMount();
     };
@@ -484,7 +486,7 @@ const OngoingOverview = () => {
   const playerRef = useRef();
 
   const defaultNormalPause = (continueModal) => {
-    
+
     setPause(false);
     setPlaying(true);
     setDefPause(true);
@@ -494,7 +496,7 @@ const OngoingOverview = () => {
     setVideoPlayState(false)
     // setVtitle(true)
     dispatch(unmountState('false'));
-    
+
     // look here yesterday
     // dispatch(videoLinkState(continueModal.videoLink))
 
@@ -690,7 +692,7 @@ const OngoingOverview = () => {
             }
 
             <ReactPlayer
-              url={videoLink ? videoLink : defaultvideo}
+              url={videoLink ? videoLink : (continueModal.videoLink ? defaultVideoState : defaultvideo)}
               controls="true"
               className="react-player"
               width="100%"
