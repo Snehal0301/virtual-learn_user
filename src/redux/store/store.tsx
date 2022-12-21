@@ -34,6 +34,8 @@ import allCoursePWSlice from "../reducers/AllcoursePW";
 import { paginationSlice } from "../reducers/pagination";
 import headerCarouselSlice from "../reducers/HomeCarouseldata";
 import CatSubCategoriesSlice from "../reducers/CategoriesSubCategories";
+import subCatAdvanceSlice from "../reducers/catSubadvance";
+import catSubBasicSlice from "../reducers/catSubBasic";
 
 const reducers = combineReducers({
   headerProfile: showHeaderProfile.reducer,
@@ -65,6 +67,8 @@ const reducers = combineReducers({
   pagination: paginationSlice.reducer,
   headerCarousel: headerCarouselSlice.reducer,
   CatSubCategories: CatSubCategoriesSlice.reducer,
+  subCatAdvance: subCatAdvanceSlice.reducer,
+  catSubBasic: catSubBasicSlice.reducer,
 });
 
 const persistConfig = {

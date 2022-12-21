@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import { basicCourse, categoryName } from './../../../../redux/reducers/basicCourses';
 import { advancedCourse } from './../../../../redux/reducers/advancedCourse';
 import { subCategories } from './../../../../redux/reducers/subCategories';
+
 const Categories = () => {
 
   const navigate = useNavigate()
@@ -41,7 +42,8 @@ const Categories = () => {
                 dispatch(categoryName(ele.categoryName))
                 dispatch(basicCourse(`basicCourses?categoryId=${ele.categoryId}`))
                 dispatch(advancedCourse(`advanceCourses?categoryId=${ele.categoryId}`))
-                dispatch(subCategories(`subCategories?categoryId=${ele.categoryId}`))
+                dispatch(subCategories(`subCategoriesWP?categoryId=${ele.categoryId}`))
+                // dispatch(subcatInCategory(ele.categoryId));
                 navigate('/categories/design')
               }
               }
