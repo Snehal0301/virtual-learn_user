@@ -96,7 +96,7 @@ console.log("all course", allCoursePagination)
                   <div className="home-categories-chapter2">
                     {item.chapterCount} Chapters
                   </div>
-                  <div className="startPageTime">{start_timeIcon}</div>
+                  <div className="startTimeIcon">{start_timeIcon}</div>
                   {item.courseDuration}
                 </div>
               </div>

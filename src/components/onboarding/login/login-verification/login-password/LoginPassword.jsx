@@ -1,5 +1,5 @@
 import './LoginPassword.css';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { useDispatch } from 'react-redux';
@@ -11,6 +11,7 @@ import {
 import { useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Loading from '../../../../../utils/loading/Loading';
 
 const initialValues = {
   password: '',
@@ -20,6 +21,7 @@ const LoginPassword = () => {
   useEffect(() => {
     dispatch(otpPage(false));
   }, []);
+  const [loading, setLoading] = useState(false);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -50,6 +52,7 @@ const LoginPassword = () => {
   });
 
   const changePW = (data) => {
+    setLoading(true);
     console.log('data', data);
     fetch(
       `http://virtuallearn-env.eba-6xmym3vf.ap-south-1.elasticbeanstalk.com/resetPassword`,
@@ -67,6 +70,7 @@ const LoginPassword = () => {
     )
       .then((res) => res.json())
       .then((res) => {
+        setLoading(false);
         console.log(res);
         if (res.message === 'Password Changed Successfully') {
           dispatch(passChangeSuccess(true));
@@ -74,6 +78,10 @@ const LoginPassword = () => {
         } else {
           showError(res.message);
         }
+      })
+      .catch((err) => {
+        setLoading(false);
+        alert('some error occured');
       });
   };
 
@@ -154,6 +162,7 @@ const LoginPassword = () => {
         </button>
       </form>
       <ToastContainer />
+      {loading && <Loading />}
     </div>
   );
 };
