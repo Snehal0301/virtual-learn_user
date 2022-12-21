@@ -15,9 +15,12 @@ const theme = createTheme({
     },
   },
 });
+
+
+
 const App = () => {
   const dispatch = useDispatch();
-
+  
   return (
     <div
       className="app"
@@ -25,6 +28,7 @@ const App = () => {
         dispatch(headerProfile(false));
       }}
     >
+
       <ThemeProvider theme={theme}>
         <Router />
       </ThemeProvider>
