@@ -10,9 +10,11 @@ import {
 } from '../../../../../redux/reducers/Conditions';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Loading from '../../../../../utils/loading/Loading';
 
 const LoginVerfication = () => {
   const [OTP, setOTP] = useState('');
+  const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -38,6 +40,7 @@ const LoginVerfication = () => {
   };
 
   const sendOtpServer = (otp, url) => {
+    setLoading(true);
     console.log('OTP', otp, url);
     fetch(
       `http://virtuallearn-env.eba-6xmym3vf.ap-south-1.elasticbeanstalk.com${url}`,
@@ -56,6 +59,7 @@ const LoginVerfication = () => {
       .then((res) => res.json())
       .then((res) => {
         console.log('response', res);
+        setLoading(false);
         if (location.pathname === '/onboarding/registerOtp') {
           if (res && res.message === 'Verified') {
             dispatch(registerPersonalDetails(true));
@@ -77,6 +81,10 @@ const LoginVerfication = () => {
             showError(res.message);
           }
         }
+      })
+      .catch((err) => {
+        setLoading(false);
+        alert('some error occured');
       });
   };
 
@@ -158,6 +166,7 @@ const LoginVerfication = () => {
             Didn’t receive a code?{' '}
             <span
               onClick={() => {
+                setLoading(true);
                 fetch(
                   `http://virtuallearn-env.eba-6xmym3vf.ap-south-1.elasticbeanstalk.com/newUser/resend`,
                   {
@@ -173,9 +182,14 @@ const LoginVerfication = () => {
                 )
                   .then((res) => res.json())
                   .then((res) => {
+                    setLoading(false);
                     if (res.message === 'OTP Valid For 2 Minutes') {
                       resent(res.message);
                     }
+                  })
+                  .catch((err) => {
+                    setLoading(false);
+                    alert('some error occured');
                   });
               }}
             >
@@ -189,6 +203,7 @@ const LoginVerfication = () => {
         </button>
       </form>
       <ToastContainer />
+      {loading && <Loading />}
     </div>
   );
 };
