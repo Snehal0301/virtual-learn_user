@@ -6,9 +6,12 @@ import { facebookIcon, googleIcon } from "../../../../utils/svgIcons";
 import { useDispatch, useSelector } from "react-redux";
 import { login } from "../../../../redux/reducers/loginSlice";
 import { useEffect, useState } from "react";
+import Loading from "../../../../utils/loading/Loading";
 
 const LoginAuth = () => {
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const loginResponse = useSelector((state) => state.login);
@@ -57,6 +60,11 @@ const LoginAuth = () => {
   useEffect(() => {
     responseFunction();
   }, [loginResponse && loginResponse.isRejected && loginResponse.message]);
+
+  useEffect(() => {
+    loginResponse.loading && setLoading(true);
+    !loginResponse.loading && setLoading(false);
+  }, [loginResponse && loginResponse.loading]);
 
   useEffect(() => {
     if (
@@ -172,6 +180,7 @@ const LoginAuth = () => {
       </div>
       {/* onClick={showError} to call error */}
       <ToastContainer />
+      {loading && <Loading />}
     </div>
   );
 };
