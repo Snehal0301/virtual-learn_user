@@ -344,7 +344,7 @@ const Start = () => {
             </div>
           </div>
         </>
-      )}
+      }
 
       {categoryData && categoryData.length > 0 && (
         <>
