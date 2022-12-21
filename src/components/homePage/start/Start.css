@@ -420,14 +420,14 @@
 }
 
 .start-image-sub {
-  position: absolute;
-  top: 8px;
-  color: var(--primaryFontClr);
-  z-index: 1;
-  left: 19px;
-  display: none;
-  font-size: 14px;
-  font-weight: 500;
+    position: absolute;
+    top: 8px;
+    color: var(--primaryFontClr);
+    z-index: 1;
+    left: 19px;
+    display: none;
+    font-size: 17px;
+    font-weight: 500;
 }
 
 .react-tabs__tab-list {
@@ -510,15 +510,15 @@
     height: 190px;
   }
 
-  .start-course1-image img {
-    height: 172px;
+ .start-course1-image img {
+    height: 204px;
     /* width: 298px; */
     /* width: auto; */
     width: 300px;
     /* margin: 0 10px; */
     margin-right: 13px;
     object-fit: cover;
-  }
+}
 
   .start-choice-subcategory-image img {
     height: 150px;

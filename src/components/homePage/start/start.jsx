@@ -260,7 +260,7 @@ const Start = () => {
                 onClick={() => {
                   dispatch(courseOverview(item.courseId));
                   dispatch(chapterResponse(item.courseId));
-                  navigate('/myCourses/ongoingCourse');
+                  navigate("/myCourses/ongoingCourse");
                 }}
               >
                 <div className="start-map-image">
@@ -282,7 +282,7 @@ const Start = () => {
                 onClick={() => {
                   dispatch(courseOverview(item.courseId));
                   dispatch(chapterResponse(item.courseId));
-                  navigate('/myCourses/ongoingCourse');
+                  navigate("/myCourses/ongoingCourse");
                 }}
               >
                 <div className="start-map-image">
@@ -303,7 +303,7 @@ const Start = () => {
             <div
               className="start-seeall"
               onClick={() => {
-                navigate('myCourses');
+                navigate("myCourses");
               }}
             >
               See All
@@ -320,7 +320,7 @@ const Start = () => {
                       dispatch(courseOverview(item.courseId));
                       dispatch(chapterResponse(item.courseId));
                       dispatch(tabToggleState(2));
-                      navigate('/myCourses/ongoingCourse');
+                      navigate("/myCourses/ongoingCourse");
                     }}
                   >
                     <div className="start-image-ongoing">
@@ -354,7 +354,7 @@ const Start = () => {
             <div
               className="start-seeall"
               onClick={() => {
-                navigate('/categories');
+                navigate("/categories");
               }}
             >
               See All
@@ -382,7 +382,7 @@ const Start = () => {
                           `subCategories?categoryId=${ele.categoryId}`
                         )
                       );
-                      navigate('/categories/design');
+                      navigate("/categories/design");
                     }}
                   >
                     <div className="start-course-categories-Icon">
@@ -402,7 +402,7 @@ const Start = () => {
         <div
           className="start-seeall"
           onClick={() => {
-            navigate('courseChoice');
+            navigate("courseChoice");
           }}
         >
           See All
@@ -411,19 +411,19 @@ const Start = () => {
       <div className="start-choice-course-subcategory">
         <div className="all-tabs-home">
           <div
-            className={homeTabState === 1 ? 'home-tab-1-active' : 'home-tab-1'}
+            className={homeTabState === 1 ? "home-tab-1-active" : "home-tab-1"}
             onClick={() => handleTabClick(1)}
           >
             All
           </div>
           <div
-            className={homeTabState === 2 ? 'home-tab-1-active' : 'home-tab-1'}
+            className={homeTabState === 2 ? "home-tab-1-active" : "home-tab-1"}
             onClick={() => handleTabClick(2)}
           >
             Popular
           </div>
           <div
-            className={homeTabState === 3 ? 'home-tab-1-active' : 'home-tab-1'}
+            className={homeTabState === 3 ? "home-tab-1-active" : "home-tab-1"}
             onClick={() => handleTabClick(3)}
           >
             Newest
@@ -442,7 +442,7 @@ const Start = () => {
                     dispatch(courseOverview(item.courseId));
                     dispatch(chapterResponse(item.courseId));
                     dispatch(tabToggleState(1));
-                    navigate('/myCourses/ongoingCourse');
+                    navigate("/myCourses/ongoingCourse");
                   }}
                 >
                   <div className="start-image-pause">
@@ -468,15 +468,16 @@ const Start = () => {
       {homeTabState === 2 && (
         <div className="start-card">
           <div className="start-choice1">
-            {popular.length > 0 ?
-              popular.length > 0 &&popular.slice(0, 4).map((item) => (
+            {popular.length > 0 ? (
+              popular.length > 0 &&
+              popular.slice(0, 4).map((item) => (
                 <div
                   className="start-choice-subcategory-image"
                   onClick={() => {
                     dispatch(courseOverview(item.courseId));
                     dispatch(chapterResponse(item.courseId));
                     dispatch(tabToggleState(1));
-                    navigate('/myCourses/ongoingCourse');
+                    navigate("/myCourses/ongoingCourse");
                   }}
                 >
                   <div className="start-image-pause">
@@ -496,16 +497,17 @@ const Start = () => {
                   </div>
                 </div>
               ))
-              :
+            ) : (
               <div className="No-popular">No Popular Courses Available</div>
-            }
+            )}
           </div>
         </div>
       )}
       {homeTabState === 3 && (
         <div className="start-card">
           <div className="start-choice1">
-            {newestData.length > 0 &&
+            {newestData.length > 0 ? (
+              newestData.length > 0 &&
               newestData.slice(0, 4).map((item) => (
                 <div
                   className="start-choice-subcategory-image"
@@ -513,7 +515,7 @@ const Start = () => {
                     dispatch(courseOverview(item.courseId));
                     dispatch(chapterResponse(item.courseId));
                     dispatch(tabToggleState(1));
-                    navigate('/myCourses/ongoingCourse');
+                    navigate("/myCourses/ongoingCourse");
                   }}
                 >
                   <div className="start-image-pause">
@@ -532,7 +534,10 @@ const Start = () => {
                     {item.chapterCount} chapters
                   </div>
                 </div>
-              ))}
+              ))
+            ) : (
+              <div className="No-newest">No New Courses Available</div>
+            )}
           </div>
         </div>
       )}
@@ -561,7 +566,7 @@ const Start = () => {
                         `subCategories?categoryId=${item.categoryId}`
                       )
                     );
-                    navigate('/categories/design');
+                    navigate("/categories/design");
                   }}
                 >
                   See All
@@ -579,7 +584,7 @@ const Start = () => {
                           dispatch(courseOverview(ele.courseId));
                           dispatch(chapterResponse(ele.courseId));
                           dispatch(tabToggleState(1));
-                          navigate('/myCourses/ongoingCourse');
+                          navigate("/myCourses/ongoingCourse");
                         }}
                       >
                         <div className="start-image-pause">
