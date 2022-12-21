@@ -240,6 +240,7 @@ const Start = () => {
   dispatch(categorydata(categoryData));
 
   return (
+
     <div className="start">
       <div className="start-greeting">Hello!</div>
       <div className="start-username">{name}</div>
@@ -617,6 +618,7 @@ const Start = () => {
           ))}
       </div>
     </div>
+
   );
 };
 
