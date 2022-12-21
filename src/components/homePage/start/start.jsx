@@ -273,29 +273,30 @@ const Start = () => {
         </Slider>
       </div>
 
-      <div className='mobileSlider'>
-        <Carousel autoplay={true} autoplaySpeed={2000} slidesToShow={3} >
-          {headerdata && headerdata.data&& headerdata.data.map((item) => (
-            <div
-              className="start-image-title"
-              onClick={() => {
-                dispatch(courseOverview(item.courseId));
-                dispatch(chapterResponse(item.courseId));
-                navigate('/myCourses/ongoingCourse');
-              }}
-            >
-              <div className="start-map-image">
-                <img src={item.coursePhoto} alt="" />
+      <div className="mobileSlider">
+        {headerdata && headerdata.data && (
+          <Carousel autoplay={true} autoplaySpeed={2000} slidesToShow={3}>
+            {headerdata.data.map((item) => (
+              <div
+                className="start-image-title"
+                onClick={() => {
+                  dispatch(courseOverview(item.courseId));
+                  dispatch(chapterResponse(item.courseId));
+                  navigate('/myCourses/ongoingCourse');
+                }}
+              >
+                <div className="start-map-image">
+                  <img src={item.coursePhoto} alt="" />
+                </div>
+                <div className="start-course-overlay-header"></div>
+                <div className="start-title-text">{item.courseName}</div>
               </div>
-              <div className="start-course-overlay-header"></div>
-              <div className="start-title-text">{item.courseName}</div>
-            </div>
-          ))}
-        </Carousel>
-      </div> 
+            ))}
+          </Carousel>
+        )}
+      </div>
 
-      {
-        ongoing && ongoing.length > 0 &&
+      {ongoing && ongoing.length > 0 && (
         <>
           <div className="start-course-section2-first">
             <div className="start-ongoing-courses">Ongoing courses</div>
@@ -344,7 +345,7 @@ const Start = () => {
             </div>
           </div>
         </>
-      }
+      )}
 
       {categoryData && categoryData.length > 0 && (
         <>
