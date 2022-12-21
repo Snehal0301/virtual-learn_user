@@ -456,6 +456,22 @@
 .webslider {
   margin-bottom: 38px;
 }
+.No-popular{
+  width: 100%;
+  text-align: center;
+  font-family: "Biko";
+  font-style: normal;
+    font-size: 18px;
+    line-height: 50px;
+}
+.No-newest{
+  width: 100%;
+  text-align: center;
+  font-family: "Biko";
+  font-style: normal;
+    font-size: 18px;
+    line-height: 50px;
+}
 
 @media only screen and (max-width: 800px) {
   .start-course1,
@@ -527,7 +543,7 @@
   }
 
   .start-course-section2-title {
-    font-size: 14px;
+    /* font-size: 14px; */
   }
   .start-course1-image {
     margin-top: 20px;
