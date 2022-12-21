@@ -19,8 +19,7 @@ const SubCategories = () => {
   //   categoriesSubCategoriesdata.data[0].categoryName
   // );
 
-
-
+  console.log("dfjkbnj", categoriesSubCategoriesdata);
   return (
     <div className="subCategoryCat">
       <div className="homeCategories-head-link">
@@ -40,15 +39,16 @@ const SubCategories = () => {
             // onClick={componentUnMount}
             // onClick={dispatch(mycoursetabToggleState(2))}
           >
-            {categoriesSubCategoriesdata &&
+            {(categoriesSubCategoriesdata &&
               categoriesSubCategoriesdata.data &&
               categoriesSubCategoriesdata.data.length > 0 &&
-              categoriesSubCategoriesdata.data[0].categoryName}{" "}
+              categoriesSubCategoriesdata.data[0].categoryName) ||
+              "Category"}
             &nbsp; &nbsp; {">"} &nbsp;
           </Link>
-          &nbsp;
+          &nbsp; Sub Category
         </span>
-        Mamatha
+
         {/* {overviewData && overviewData.courseName && overviewData.courseName} */}
       </div>
 
