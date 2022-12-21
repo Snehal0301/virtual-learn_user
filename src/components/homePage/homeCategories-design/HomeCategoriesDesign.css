@@ -113,15 +113,13 @@
 } */
 
 .home-categories-subcategory-image img {
-
     height: 181px;
     margin: 0;
     width: 100%;
     /* border-radius: 5px; */
     border-top-left-radius: 6px;
     border-top-right-radius: 6px;
-
-
+    object-fit: cover;
 }
 
 .home-categories-subcategory-allcourse-image img {
@@ -132,7 +130,7 @@
     border-top-left-radius: 6px;
     border-top-right-radius: 6px;
     height: 175px;
-
+    object-fit: cover;
 }
 
 .home-categories-subcategory-image {
@@ -355,9 +353,9 @@
 
     }
 
-    ::-webkit-scrollbar {
+    /* ::-webkit-scrollbar {
         display: none;
-    }
+    } */
 
     .home-categories-subcategory-image {
         /* background-color: red; */

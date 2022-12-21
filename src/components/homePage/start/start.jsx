@@ -543,7 +543,8 @@ const Start = () => {
         </div>
       )}
       <div>
-        {topcourseData.length > 0 &&
+        {topcourseData &&
+          topcourseData.length > 0 &&
           topcourseData.map((item) => (
             <div>
               <div className="start-course-section2">
