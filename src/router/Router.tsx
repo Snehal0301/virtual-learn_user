@@ -25,6 +25,7 @@ import Quiz from '../components/homePage/quiz/Quiz';
 import QuizSuccess from '../components/homePage/quiz/quizSuccessPage/quizSuccess';
 import QuizResults from '../components/homePage/quiz/quizResults/QuizResults';
 import CourseCompleted from '../components/homePage/quiz/courseCompleted/CourseCompleted';
+import SubCategories from '../components/homePage/subCategories/SubCategories';
 const Router = () => {
   const showOtp = useSelector((state: any) => state.loginConditions.value);
   const changePass = useSelector(
@@ -62,7 +63,7 @@ const Router = () => {
         <Route
           path="/onboarding"
           element={
-            sessionStorage.getItem('auth') === 'true' ? (
+            sessionStorage.getItem("auth") === "true" ? (
               <Navigate to="/" />
             ) : (
               <Onboarding />
@@ -158,6 +159,10 @@ const Router = () => {
           <Route
             path={`categories/design`}
             element={<HomeCategoriesDesign />}
+          />
+          <Route
+            path={`/subcategories`}
+            element={<SubCategories/>}
           />
           <Route path="myCourses" element={<MyCourse />} />
           <Route path="myCourses/ongoingCourse" element={<OngoingOverview />} />

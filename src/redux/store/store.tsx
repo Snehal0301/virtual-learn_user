@@ -33,6 +33,7 @@ import MobileNotifySlice from "../reducers/MobileNotification";
 import allCoursePWSlice from '../reducers/AllcoursePW';
 import { paginationSlice } from '../reducers/pagination';
 import headerCarouselSlice from "../reducers/HomeCarouseldata";
+import CatSubCategoriesSlice from "../reducers/CategoriesSubCategories";
 
 const reducers = combineReducers({
   headerProfile: showHeaderProfile.reducer,
@@ -59,11 +60,12 @@ const reducers = combineReducers({
   pauseUnmount: pauseSlice.reducer,
   NotifyClick: NotifySlice.reducer,
   ProfileClick: EditProfileSlice.reducer,
-  MobileNotifyClick:MobileNotifySlice.reducer,
+  MobileNotifyClick: MobileNotifySlice.reducer,
   allCoursePW: allCoursePWSlice.reducer,
   pagination: paginationSlice.reducer,
-  headerCarousel:headerCarouselSlice.reducer,
-})
+  headerCarousel: headerCarouselSlice.reducer,
+  CatSubCategories: CatSubCategoriesSlice.reducer,
+});
 
 const persistConfig = {
   key: "root",
