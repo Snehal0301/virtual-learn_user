@@ -49,9 +49,9 @@ import { NotifyClick } from "../../../redux/reducers/NotificationsData";
 import { MobileNotifyClick } from "../../../redux/reducers/MobileNotification";
 import { ProfileClick } from "../../../redux/reducers/EditProfileData";
 import { testSuccessRed } from "../../../redux/reducers/SuccessTestRed";
-import {testSuccess } from "../../../redux/reducers/Conditions";
+import { testSuccess } from "../../../redux/reducers/Conditions";
 import { showSuccessPage } from "../../../redux/reducers/showSuccesspage";
-import {  testisSuccess } from "../../../redux/reducers/testSlice";
+import { testisSuccess } from "../../../redux/reducers/testSlice";
 import { finaltestShowPage } from "../../../redux/reducers/finalTestSuccess";
 
 
@@ -67,7 +67,7 @@ const Header = () => {
   const navigate = useNavigate();
 
   const filterData = useSelector((state: any) => state.filter.value);
-const profileData = useSelector((state: any) => state.MobileNotifyClick.data);
+  const profileData = useSelector((state: any) => state.MobileNotifyClick.data);
   useEffect(() => {
     fetch(
       `http://virtuallearn-env.eba-6xmym3vf.ap-south-1.elasticbeanstalk.com/user/topSearches`,
@@ -105,21 +105,7 @@ const profileData = useSelector((state: any) => state.MobileNotifyClick.data);
 
   useEffect(() => {
     dispatch(MobileNotifyClick());
-    // axios
-    //   .get(
-    //     `http://virtuallearn-env.eba-6xmym3vf.ap-south-1.elasticbeanstalk.com/user/menu`,
-    //     {
-    //       headers: {
-    //         Authorization: `Bearer ${sessionStorage.getItem("Token")}`,
-    //       },
-    //     }
-    //   )
-    //   .then((res) => {
-    //     setprofileData(res.data);
-    //   })
-    //   .catch((err) => {
-    //     console.error(err);
-    //   });
+
   }, []);
 
   console.log("profile data", profileData);
@@ -139,9 +125,6 @@ const profileData = useSelector((state: any) => state.MobileNotifyClick.data);
     dispatch(headerProfile(false));
     dispatch(profileSection(true));
     dispatch(ProfileClick());
-    // dispatch(notificationSection(false))
-    // dispatch(termsSection(false))
-    // dispatch(privacySection(false))
   };
 
   const handleCloseDrawer = () => {
@@ -378,8 +361,8 @@ const profileData = useSelector((state: any) => state.MobileNotifyClick.data);
                   <img
                     src={
                       profileData &&
-                      profileData.data &&
-                      profileData.data.profilePhoto
+                        profileData.data &&
+                        profileData.data.profilePhoto
                         ? profileData.data.profilePhoto
                         : require("../../../assets/images/start-courses-image/profilepic.jpg")
                     }
@@ -399,11 +382,11 @@ const profileData = useSelector((state: any) => state.MobileNotifyClick.data);
                       <div
                         className="header-profileOption header-profileOptionBorder"
                         onClick={() => {
-                            dispatch(testSuccess(false));
-    dispatch(testisSuccess());
-    dispatch(testSuccessRed(false));
-    dispatch(showSuccessPage(false));
-    dispatch(finaltestShowPage(false));
+                          dispatch(testSuccess(false));
+                          dispatch(testisSuccess());
+                          dispatch(testSuccessRed(false));
+                          dispatch(showSuccessPage(false));
+                          dispatch(finaltestShowPage(false));
                           navigate("/myCourses");
                         }}
                       >
@@ -820,9 +803,9 @@ const profileData = useSelector((state: any) => state.MobileNotifyClick.data);
                 onClick={() => {
                   navigate("/");
                   dispatch(testisSuccess());
-    dispatch(testSuccessRed(false));
-    dispatch(showSuccessPage(false));
-    dispatch(finaltestShowPage(false));
+                  dispatch(testSuccessRed(false));
+                  dispatch(showSuccessPage(false));
+                  dispatch(finaltestShowPage(false));
                   handleCloseDrawerMobile();
                 }}
               >
@@ -836,10 +819,10 @@ const profileData = useSelector((state: any) => state.MobileNotifyClick.data);
                 className="left-drawer-link"
                 onClick={() => {
                   navigate("/myCourses");
-                    dispatch(testisSuccess());
-    dispatch(testSuccessRed(false));
-    dispatch(showSuccessPage(false));
-    dispatch(finaltestShowPage(false));
+                  dispatch(testisSuccess());
+                  dispatch(testSuccessRed(false));
+                  dispatch(showSuccessPage(false));
+                  dispatch(finaltestShowPage(false));
                   handleCloseDrawerMobile();
                 }}
               >

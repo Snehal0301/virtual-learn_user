@@ -217,6 +217,11 @@
   font-weight: 700;
   font-size: 16px;
   line-height: 26px;
+  transition: all 100ms ease-in-out;
+}
+
+.headerSearchCategoriesTopSearchesParent:hover{
+  transform: scale(1.1);
 }
 
 .headerSearchCategoriesTopSearchesIcon {

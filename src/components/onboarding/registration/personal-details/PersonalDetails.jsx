@@ -1,19 +1,19 @@
-import React, { useEffect, useState } from 'react';
-import { info_btn } from '../../../../utils/svgIcons';
-import './PersonalDetails.css';
-import { signupSchema } from './schema';
-import { Formik, useFormik } from 'formik';
-import ReactTooltip from 'react-tooltip';
-import { useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import React, { useEffect, useState } from "react";
+import { info_btn } from "../../../../utils/svgIcons";
+import "./PersonalDetails.css";
+import { signupSchema } from "./schema";
+import { Formik, useFormik } from "formik";
+import ReactTooltip from "react-tooltip";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import {
   registerOtp,
   registerPersonalDetails,
   registerSuccess,
-} from '../../../../redux/reducers/Conditions';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import Loading from '../../../../utils/loading/Loading';
+} from "../../../../redux/reducers/Conditions";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import Loading from "../../../../utils/loading/Loading";
 
 const PersonalDetails = () => {
   const [personaldata, setpersonaldata] = useState({});
@@ -25,12 +25,12 @@ const PersonalDetails = () => {
   const { values, errors, handleChange, touched, handleBlur, handleSubmit } =
     useFormik({
       initialValues: {
-        email: '',
-        UserName: '',
-        password: '',
-        ConfirmPassword: '',
-        fullName: '',
-        mobileNumber: sessionStorage.getItem('regMobileNum'),
+        email: "",
+        UserName: "",
+        password: "",
+        ConfirmPassword: "",
+        fullName: "",
+        mobileNumber: sessionStorage.getItem("regMobileNum"),
       },
       validationSchema: signupSchema,
       onSubmit: (values, action) => {
@@ -39,7 +39,7 @@ const PersonalDetails = () => {
         // dispatch(registerSuccess(false))
         // navigate('/accountCreatedSuccessfully')
         const data = {
-          mobileNumber: sessionStorage.getItem('regMobileNum'),
+          mobileNumber: sessionStorage.getItem("regMobileNum"),
           fullName: values.fullName,
           userName: values.UserName,
           email: values.email,
@@ -59,10 +59,10 @@ const PersonalDetails = () => {
     fetch(
       `http://virtuallearn-env.eba-6xmym3vf.ap-south-1.elasticbeanstalk.com/newUser/register`,
       {
-        method: 'POST',
+        method: "POST",
         headers: {
-          Accept: 'application/json, text/plain, */*',
-          'Content-Type': 'application/json',
+          Accept: "application/json, text/plain, */*",
+          "Content-Type": "application/json",
         },
         body: JSON.stringify(data),
       }
@@ -70,16 +70,14 @@ const PersonalDetails = () => {
       .then((res) => res.json())
       .then((res) => {
         setLoading(false);
-        console.log('res', res);
-        if (res.message !== 'User Created') {
-          showError(res.message);
-        } else if (res.message === 'User Created') {
+        console.log("res", res);
+        if (res.message === "User Created") {
           dispatch(registerSuccess(true));
-          navigate('/accountCreatedSuccessfully');
+          navigate("/accountCreatedSuccessfully");
         }
       })
       .catch((err) => {
-        alert('some error occured');
+        showError("Some error occured");
         setLoading(false);
       });
   };
@@ -89,14 +87,14 @@ const PersonalDetails = () => {
       <div className="loginAuth-showError">
         <div className="loginAuth-showErrorIcon">
           <img
-            src={require('../../../../assets/icons/icn_invalid error.png')}
+            src={require("../../../../assets/icons/icn_invalid error.png")}
             alt="invalid"
           />
         </div>
         <div className="loginAuth-showErrorMessage">{msg}</div>
       </div>,
       {
-        position: 'bottom-right',
+        position: "bottom-right",
         autoClose: 5000,
         hideProgressBar: true,
         pauseOnHover: true,
@@ -123,7 +121,7 @@ const PersonalDetails = () => {
               id="mobileNumber"
               name="mobileNumber"
               placeholder=" "
-              value={sessionStorage.getItem('regMobileNum')}
+              value={sessionStorage.getItem("regMobileNum")}
               onChange={handleChange}
               onBlur={handleBlur}
               autoComplete="off"
