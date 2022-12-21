@@ -14,6 +14,8 @@ const SubCategories = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  const categoriesName = useSelector((state) => state.basicCourse.category);
+
   // console.log(
   //   "categoriesSubCategoriesdata",
   //   categoriesSubCategoriesdata.data[0].categoryName
@@ -43,10 +45,14 @@ const SubCategories = () => {
               categoriesSubCategoriesdata.data &&
               categoriesSubCategoriesdata.data.length > 0 &&
               categoriesSubCategoriesdata.data[0].categoryName) ||
-              "Category"}
+              categoriesName}
             &nbsp; &nbsp; {">"} &nbsp;
           </Link>
-          &nbsp; Sub Category
+          &nbsp;{" "}
+          {(categoriesSubCategoriesdata &&
+            categoriesSubCategoriesdata.data &&
+            categoriesSubCategoriesdata.data.length > 0 &&
+            categoriesSubCategoriesdata.data[0].subCategoryName)}
         </span>
 
         {/* {overviewData && overviewData.courseName && overviewData.courseName} */}
@@ -85,7 +91,6 @@ const SubCategories = () => {
                       <div className="choice-your-coursechapter">
                         {item.chapterCount} chapters
                       </div>
-                    
                     </div>
                   </div>
                 </div>

@@ -30,8 +30,8 @@ import pauseSlice from "../reducers/pauseTimeSlice";
 import NotifySlice from "../reducers/NotificationsData";
 import EditProfileSlice from "../reducers/EditProfileData";
 import MobileNotifySlice from "../reducers/MobileNotification";
-import allCoursePWSlice from '../reducers/AllcoursePW';
-import { paginationSlice } from '../reducers/pagination';
+import allCoursePWSlice from "../reducers/AllcoursePW";
+import { paginationSlice } from "../reducers/pagination";
 import headerCarouselSlice from "../reducers/HomeCarouseldata";
 import CatSubCategoriesSlice from "../reducers/CategoriesSubCategories";
 
@@ -70,18 +70,18 @@ const reducers = combineReducers({
 const persistConfig = {
   key: "root",
   storage,
-  blacklist: ['login', 'pagination','CatSubCategories'],
-}
+  blacklist: ["login", "pagination"],
+};
 
-const persistedReducer = persistReducer(persistConfig, reducers)
+const persistedReducer = persistReducer(persistConfig, reducers);
 
 export const store = configureStore({
   reducer: persistedReducer,
   devTools: process.env.NODE_ENV !== "production",
   middleware: [thunk],
-})
+});
 
 // Infer the `RootState` and `AppDispatch` types from the store itself
-export type RootState = ReturnType<typeof store.getState>
+export type RootState = ReturnType<typeof store.getState>;
 // Inferred type: {posts: PostsState, comments: CommentsState, users: UsersState}
-export type AppDispatch = typeof store.dispatch
+export type AppDispatch = typeof store.dispatch;
