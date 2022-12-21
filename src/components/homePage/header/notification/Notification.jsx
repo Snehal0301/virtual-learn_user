@@ -14,9 +14,12 @@ import TimeAgo from "timeago-react";
 import { NotifyClick } from "../../../../redux/reducers/NotificationsData";
 import { MobileNotifyClick } from "../../../../redux/reducers/MobileNotification";
 
+
+
 const Notification = () => {
   const [notifyData1, setNotifyData] = useState([]); /*Changed*/
   const [notId, setNotId] = useState("");
+  const [changeNotId, setChangeNotId] = useState(false);
   const dispatch = useDispatch();
   const notifyData = useSelector((state) => state.NotifyClick.data);
 
@@ -29,24 +32,14 @@ const Notification = () => {
     dispatch(MobileNotifyClick());
   };
 
+
+
+
   useEffect(() => {
     dispatch(NotifyClick());
-    // axios
-    //   .get(
-    //     `http://virtuallearn-env.eba-6xmym3vf.ap-south-1.elasticbeanstalk.com/user/notifications`,
-    //     {
-    //       headers: {
-    //         Authorization: `Bearer ${sessionStorage.getItem("Token")}`,
-    //       },
-    //     }
-    //   )
-    //   .then((res) => {
-    //     res && res.data && setNotifyData(res.data);
-    //   });
   }, [notId]);
 
-  console.log("notifyData", notifyData);
-  /*Changed*/
+  console.log("notifyData", notifyData.data[0].description);
 
   return (
     <div className="drawer-profile-notify">
@@ -122,6 +115,7 @@ const Notification = () => {
           <p>No Notifications</p>
         </div>
       )}
+
     </div>
   );
 };

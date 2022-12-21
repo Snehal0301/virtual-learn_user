@@ -7,6 +7,7 @@ const initialState: any = {
     hometab: 1,
     firstVideo:'',
     videoLink: '',
+    notify: '',
 };
 
 
@@ -32,9 +33,14 @@ export const mycourseReducer = createSlice({
         firstVideoState: (state, { payload }) => {
             state.firstVideo = payload
             // state.videoLink = payload
+        },
+        notifyState: (state, { payload }) => {
+            state.notify = payload
+            // state.videoLink = payload
         }
+
     },
 });
 
-export const { tabToggleState, accordianToggleState, mycoursetabToggleState, homeTabToggleState, videoLinkState, firstVideoState } = mycourseReducer.actions;
+export const { tabToggleState, accordianToggleState, mycoursetabToggleState, homeTabToggleState, videoLinkState, firstVideoState, notifyState } = mycourseReducer.actions;
 export default mycourseReducer.reducer;

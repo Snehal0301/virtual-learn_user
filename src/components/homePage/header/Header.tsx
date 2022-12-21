@@ -858,11 +858,18 @@ const Header = () => {
                   alt="Notifications"
                 />
                 <p>Notifications</p>
-                <span>
-                  {profileData &&
-                    profileData.data &&
-                    profileData.data.notificationCount}
-                </span>
+                {profileData &&
+                  profileData.data &&
+                  profileData.data.notificationCount > 0 ?
+                  <span>
+                    {profileData &&
+                      profileData.data &&
+                      profileData.data.notificationCount}
+                  </span>
+                  :
+                  ""
+                }
+                
               </div>
               <div
                 className="left-drawer-link"

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./Settings.css";
 import {
   closeProfile,
@@ -19,6 +19,9 @@ import {
 import Switch from "react-switch";
 import PrivacyPolicy from "../privacypolicy/PrivacyPolicy";
 import Terms from "../terms/Terms";
+import addNotification from 'react-push-notification'
+import { NotifyClick } from "../../../../redux/reducers/NotificationsData";
+import { notifyState } from "../../../../redux/reducers/myCourseReducer";
 
 const Settings = () => {
   const [checked, setChecked] = useState(false);
@@ -29,10 +32,31 @@ const Settings = () => {
     (state: any) => state.headerProfile.privacy
   );
   const TermsState = useSelector((state: any) => state.headerProfile.terms);
+  const notifyData = useSelector((state: any) => state.NotifyClick.data);
+  const pushState = useSelector((state: any) => state.mycourse.notify);
 
   const handleChange = (nextChecked: any) => {
     setChecked(nextChecked);
   };
+
+  dispatch(notifyState(checked))
+  
+  useEffect(() => {
+    checked &&
+      notifyMe()
+  }, [checked])
+
+  function notifyMe() {
+    let notifyMsg = notifyData.data[0].description;
+    addNotification({
+      title: 'Virtual Learn',
+      message: notifyMsg,
+      duration: 4000,
+      native: true
+    })
+  }
+
+  console.log(checked)
   const handleChangeSound = (nextChecked: any) => {
     setCheckedSound(nextChecked);
   };
@@ -95,7 +119,7 @@ const Settings = () => {
                     <p>Push Notification</p>
                     <Switch
                       onChange={handleChange}
-                      checked={checked}
+                      checked={pushState}
                       uncheckedIcon={false}
                       checkedIcon={false}
                       width={48}
