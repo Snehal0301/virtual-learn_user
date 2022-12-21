@@ -1,6 +1,18 @@
 .subcatNocourse {
     font-size: 18px;
     /* text-align: center; */
-    color: red;
+    /* color: red; */
     margin-bottom: 10px;
+}
+.subcategoryDesignbtn {
+    background: #fcbe4b;
+    mix-blend-mode: normal;
+    border-radius: 6px;
+    border: none;
+    padding: 0.5rem 1rem;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    cursor: pointer;
 }

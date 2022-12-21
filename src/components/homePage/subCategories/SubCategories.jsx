@@ -105,7 +105,7 @@ const SubCategories = () => {
                     <div className="home-categories-chapter2">
                       {item.chapterCount} Chapters
                     </div>
-                    <div>{start_timeIcon}</div>
+                    <div className="homecatTime">{start_timeIcon}</div>
                     {item.courseDuration}
                   </div>
                 </div>
@@ -150,7 +150,7 @@ const SubCategories = () => {
                     <div className="home-categories-chapter2">
                       {item.chapterCount} Chapters
                     </div>
-                    <div>{start_timeIcon}</div>
+                    <div className="homecatTime">{start_timeIcon}</div>
                     {item.courseDuration}
                   </div>
                 </div>
@@ -192,7 +192,7 @@ const SubCategories = () => {
                       <div className="choice-your-coursechapter">
                         {item.chapterCount} chapters
                       </div>
-                      <button className="choice-yourcourse-designbtn">
+                      <button className="subcategoryDesignbtn">
                         {item.subCategoryName}
                       </button>
                     </div>
