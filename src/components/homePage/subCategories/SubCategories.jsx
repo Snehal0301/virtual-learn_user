@@ -19,8 +19,7 @@ const SubCategories = () => {
   //   categoriesSubCategoriesdata.data[0].categoryName
   // );
 
-
-
+  console.log("dfjkbnj", categoriesSubCategoriesdata);
   return (
     <div className="subCategoryCat">
       <div className="homeCategories-head-link">
@@ -37,15 +36,19 @@ const SubCategories = () => {
           <Link
             to="/categories/design"
             style={{ color: "var(--blueFont)", cursor: "pointer" }}
-          // onClick={componentUnMount}
-          // onClick={dispatch(mycoursetabToggleState(2))}
+            // onClick={componentUnMount}
+            // onClick={dispatch(mycoursetabToggleState(2))}
           >
-            {categoriesSubCategoriesdata && categoriesSubCategoriesdata.data && categoriesSubCategoriesdata.data.length > 0 && categoriesSubCategoriesdata.data[0].categoryName} &nbsp; &nbsp;{" "}
-            {">"} &nbsp;
+            {(categoriesSubCategoriesdata &&
+              categoriesSubCategoriesdata.data &&
+              categoriesSubCategoriesdata.data.length > 0 &&
+              categoriesSubCategoriesdata.data[0].categoryName) ||
+              "Category"}
+            &nbsp; &nbsp; {">"} &nbsp;
           </Link>
-          &nbsp;
+          &nbsp; Sub Category
         </span>
-        Mamatha
+
         {/* {overviewData && overviewData.courseName && overviewData.courseName} */}
       </div>
 
@@ -55,7 +58,9 @@ const SubCategories = () => {
         </div>
         <div className="home-categories-seeall"></div>
       </div> */}
-      {categoriesSubCategoriesdata && categoriesSubCategoriesdata.data && categoriesSubCategoriesdata.data.length > 0 ? (
+      {categoriesSubCategoriesdata &&
+      categoriesSubCategoriesdata.data &&
+      categoriesSubCategoriesdata.data.length > 0 ? (
         <div className="home-categories-card">
           <div className="home-categories-choice1">
             {categoriesSubCategoriesdata &&
