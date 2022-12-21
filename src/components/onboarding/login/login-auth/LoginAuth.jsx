@@ -6,9 +6,12 @@ import { facebookIcon, googleIcon } from "../../../../utils/svgIcons";
 import { useDispatch, useSelector } from "react-redux";
 import { login } from "../../../../redux/reducers/loginSlice";
 import { useEffect, useState } from "react";
+import Loading from "../../../../utils/loading/Loading";
 
 const LoginAuth = () => {
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const loginResponse = useSelector((state) => state.login);
@@ -44,7 +47,6 @@ const LoginAuth = () => {
     };
 
     if (e.target.username.value !== "" && e.target.password.value !== "") {
-      console.log("credentials", credentials);
       dispatch(login(credentials));
 
       // localStorage.setItem('auth', 'true')
@@ -59,14 +61,11 @@ const LoginAuth = () => {
   }, [loginResponse && loginResponse.isRejected && loginResponse.message]);
 
   useEffect(() => {
-    console.log(
-      "login message",
-      loginResponse &&
-        loginResponse.data &&
-        loginResponse.data.headers &&
-        loginResponse.data.headers["JWT_Token"]
-    );
+    loginResponse.loading && setLoading(true);
+    !loginResponse.loading && setLoading(false);
+  }, [loginResponse && loginResponse.loading]);
 
+  useEffect(() => {
     if (
       loginResponse &&
       loginResponse.data &&
@@ -77,6 +76,14 @@ const LoginAuth = () => {
       sessionStorage.setItem("auth", "true");
       navigate("/");
       // window.location.reload();
+    } else {
+      loginResponse &&
+        loginResponse.data &&
+        loginResponse.data.data &&
+        loginResponse.data.data.message &&
+        showError(
+          loginResponse && loginResponse.data && loginResponse.data.data.message
+        );
     }
 
     sessionStorage.setItem(
@@ -107,7 +114,7 @@ const LoginAuth = () => {
         <button>{facebookIcon}</button>
         <button>{googleIcon}</button>
       </div>
-      
+
       <div className="loginAuth-Form">
         <form
           className="loginAuth-FormContainer"
@@ -130,7 +137,7 @@ const LoginAuth = () => {
           </div>
           <div className="loginAuth-FormInput">
             <input
-              type="password"  
+              type="password"
               name="password"
               id="password"
               placeholder="Enter your password"
@@ -172,6 +179,7 @@ const LoginAuth = () => {
       </div>
       {/* onClick={showError} to call error */}
       <ToastContainer />
+      {loading && <Loading />}
     </div>
   );
 };
