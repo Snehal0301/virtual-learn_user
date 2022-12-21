@@ -37,11 +37,14 @@ const SubCategories = () => {
           <Link
             to="/categories/design"
             style={{ color: "var(--blueFont)", cursor: "pointer" }}
-          // onClick={componentUnMount}
-          // onClick={dispatch(mycoursetabToggleState(2))}
+            // onClick={componentUnMount}
+            // onClick={dispatch(mycoursetabToggleState(2))}
           >
-            {categoriesSubCategoriesdata && categoriesSubCategoriesdata.data && categoriesSubCategoriesdata.data.length > 0 && categoriesSubCategoriesdata.data[0].categoryName} &nbsp; &nbsp;{" "}
-            {">"} &nbsp;
+            {categoriesSubCategoriesdata &&
+              categoriesSubCategoriesdata.data &&
+              categoriesSubCategoriesdata.data.length > 0 &&
+              categoriesSubCategoriesdata.data[0].categoryName}{" "}
+            &nbsp; &nbsp; {">"} &nbsp;
           </Link>
           &nbsp;
         </span>
@@ -55,36 +58,35 @@ const SubCategories = () => {
         </div>
         <div className="home-categories-seeall"></div>
       </div> */}
-      {categoriesSubCategoriesdata && categoriesSubCategoriesdata.data && categoriesSubCategoriesdata.data.length > 0 ? (
-        <div className="home-categories-card">
-          <div className="home-categories-choice1">
+      {categoriesSubCategoriesdata &&
+      categoriesSubCategoriesdata.data &&
+      categoriesSubCategoriesdata.data.length > 0 ? (
+        <div className="choice-your-course-card">
+          <div className="choice-your-course-choice1">
             {categoriesSubCategoriesdata &&
               categoriesSubCategoriesdata.data &&
+              categoriesSubCategoriesdata.data.length > 0 &&
               categoriesSubCategoriesdata.data.map((item) => (
                 <div
-                  className="home-categories-subcategory-image"
+                  className="choice-your-coursesubcategory-image"
                   onClick={() => {
                     dispatch(courseOverview(item.courseId));
                     dispatch(chapterResponse(item.courseId));
                     navigate("/myCourses/ongoingCourse");
                   }}
                 >
-                  <div className="home-categories-image-pause">
-                    <div className="home-categories-overlay"></div>
-                    <img src={item.coursePhoto} alt="" />
-                    <div className="home-categories-pauseIcon">
-                      {start_pauseIcon}
+                  <img src={item.coursePhoto} alt="" />
+
+                  <div className="choiceYourCourse-title-chapter">
+                    <div className="choice-your-coursesubcategory-title">
+                      {item.courseName}
                     </div>
-                  </div>
-                  <div className="home-categories-subcategory-title">
-                    {item.courseName}
-                  </div>
-                  <div className="home-categories-time">
-                    <div className="home-categories-chapter2">
-                      {item.chapterCount} Chapters
+                    <div className="choice-your-cahpbtn">
+                      <div className="choice-your-coursechapter">
+                        {item.chapterCount} chapters
+                      </div>
+                    
                     </div>
-                    <div className="startTimeIcon">{start_timeIcon}</div>
-                    {item.courseDuration}
                   </div>
                 </div>
               ))}
