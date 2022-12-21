@@ -576,14 +576,14 @@
     margin-top: 20px;
   }
 
-  .start-course-button,
+  .start-course-button, 
   .start-designbtn {
     margin-top: 10px;
     padding: unset;
     width: 70px;
-    height: 20px;
-    border-radius: 4px;
-  }
+    height: 30px;
+    border-radius: 6px;
+}
 
   .start-course-section2 {
     padding: unset;

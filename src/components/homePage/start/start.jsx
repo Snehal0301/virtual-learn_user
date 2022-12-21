@@ -380,7 +380,7 @@ const Start = () => {
                       );
                       dispatch(
                         subCategories(
-                          `subCategories?categoryId=${ele.categoryId}`
+                          `subCategoriesWP?categoryId=${ele.categoryId}`
                         )
                       );
                       navigate("/categories/design");

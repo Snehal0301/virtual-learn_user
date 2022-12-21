@@ -17,6 +17,8 @@ import {
   paginatePrevious,
 } from "../../../redux/reducers/pagination";
 import { CatSubCategories } from "../../../redux/reducers/CategoriesSubCategories";
+import { subCatAdvance } from "../../../redux/reducers/catSubadvance";
+import { catSubBasic } from "../../../redux/reducers/catSubBasic";
 
 const HomeCategoriesDesign = () => {
   const dispatch = useDispatch();
@@ -28,6 +30,7 @@ const HomeCategoriesDesign = () => {
   const basicCoursedata = useSelector((state) => state.basicCourse.data);
   const advancedCoursedata = useSelector((state) => state.advancedCourse.data);
   const subCategoriesdata = useSelector((state) => state.subCategories.data);
+ 
 
   const categoryName = useSelector((state) => state.basicCourse.category);
 
@@ -132,10 +135,10 @@ console.log("all course", allCoursePagination)
                   {item.courseName}
                 </div>
                 <div className="home-categories-time">
-                  <div className="home-categories-chapter2">
+                  <div >
                     {item.chapterCount} Chapters
                   </div>
-                  <div>{start_timeIcon}</div>
+                  <div className="homecatTime">{start_timeIcon}</div>
                   {item.courseDuration}
                 </div>
               </div>
@@ -152,7 +155,14 @@ console.log("all course", allCoursePagination)
             subCategoriesdata.data &&
             subCategoriesdata.data.map((ele, i) => {
               return (
-                <div className="home-categories-Parent" key={i} onClick={() => { dispatch(CatSubCategories(ele.subCategoryId)); navigate("/subcategories");}}>
+                <div className="home-categories-Parent" key={i}
+                  onClick={() =>
+                  {
+                    dispatch(CatSubCategories(ele.subCategoryId));
+                    dispatch(subCatAdvance(ele.subCategoryId));
+                    dispatch(catSubBasic(ele.subCategoryId));
+                    navigate("/subcategories");
+                  }}>
                   {/* <div className="start-course-categories-Icon">
           {design}
         </div> */}
