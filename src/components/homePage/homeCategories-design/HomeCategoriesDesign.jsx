@@ -25,12 +25,12 @@ const HomeCategoriesDesign = () => {
   const navigate = useNavigate();
 
   const allcourseItem = useSelector((state) => state.allcourse.value);
-   console.log("all",allcourseItem.length);
+  console.log("all", allcourseItem.length);
 
   const basicCoursedata = useSelector((state) => state.basicCourse.data);
   const advancedCoursedata = useSelector((state) => state.advancedCourse.data);
   const subCategoriesdata = useSelector((state) => state.subCategories.data);
- 
+
 
   const categoryName = useSelector((state) => state.basicCourse.category);
 
@@ -48,7 +48,7 @@ const HomeCategoriesDesign = () => {
 
   const allCoursePagination = useSelector((state) => state.allCoursePW.data);
 
-console.log("all course", allCoursePagination)
+  console.log("all course", allCoursePagination)
 
   return (
     <div className="homecategoriesdesign">
@@ -90,7 +90,7 @@ console.log("all course", allCoursePagination)
                   <img src={item.coursePhoto} alt="" />
                   <div className="home-categories-pauseIcon">
                     {start_pauseIcon}
-                    
+
                   </div>
                 </div>
                 <div className="home-categories-subcategory-title">
@@ -156,8 +156,7 @@ console.log("all course", allCoursePagination)
             subCategoriesdata.data.map((ele, i) => {
               return (
                 <div className="home-categories-Parent" key={i}
-                  onClick={() =>
-                  {
+                  onClick={() => {
                     dispatch(CatSubCategories(ele.subCategoryId));
                     dispatch(subCatAdvance(ele.subCategoryId));
                     dispatch(catSubBasic(ele.subCategoryId));
@@ -213,34 +212,36 @@ console.log("all course", allCoursePagination)
             ))}
         </div>
       </div>
-       {allCoursePagination && allCoursePagination.data&& allCoursePagination.data.length > 0 && (
-        <div className="paginationBtns">
+      {allCoursePagination && allCoursePagination.data && allCoursePagination.data.length > 0 && (
+        <div className=" ">
           <button
             onClick={() => {
               dispatch(paginatePrevious());
             }}
             disabled={pageNum <= 1}
           >
-          <img
+            {/* <img
                 src={require("../../../assets/icons/previousIcon.png")}
                 alt="previous"
-              />
+              /> */}
+            <i class="fa-solid fa-caret-left"></i>
           </button>
-          &nbsp;Page: {pageNum} &nbsp;
+          &nbsp;{pageNum} &nbsp;
           <button
             onClick={() => {
               dispatch(paginateNext());
             }}
             disabled={
               Math.ceil(
-                allcourseItem&&allcourseItem.length / 4
+                allcourseItem && allcourseItem.length / 4
               ) <= pageNum
             }
           >
-           <img
+            {/* <img
                   src={require("../../../assets/icons/nextIcon.png")}
                   alt="next"
-                ></img>
+                ></img> */}
+            <i class="fa-solid fa-caret-right"></i>
           </button>
         </div>
       )}
