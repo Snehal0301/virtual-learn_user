@@ -233,12 +233,13 @@ console.log("all course", allCoursePagination)
             }}
             disabled={pageNum <= 1}
           >
-            <img
+            {/* <img
               src={require("../../../assets/icons/previousIcon.png")}
               alt="previous"
-            />
+            /> */}
+            <i class="fa-solid fa-caret-left"></i>
           </button>
-          &nbsp;Page: {pageNum} &nbsp;
+          &nbsp;{pageNum} &nbsp;
           <button
             onClick={() => {
               dispatch(paginateNext());
@@ -249,10 +250,11 @@ console.log("all course", allCoursePagination)
               ) <= pageNum
             }
           >
-            <img
+            {/* <img
               src={require("../../../assets/icons/nextIcon.png")}
               alt="next"
-            ></img>
+            ></img> */}
+             <i class="fa-solid fa-caret-right"></i>
           </button>
         </div>
       )}

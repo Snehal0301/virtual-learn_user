@@ -213,7 +213,7 @@ const HomeCategoriesDesign = () => {
         </div>
       </div>
       {allCoursePagination && allCoursePagination.data && allCoursePagination.data.length > 0 && (
-        <div className=" ">
+        <div className="paginationBtns">
           <button
             onClick={() => {
               dispatch(paginatePrevious());
