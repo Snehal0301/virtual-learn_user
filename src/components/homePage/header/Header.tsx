@@ -81,7 +81,7 @@ const Header = () => {
     )
       .then((res) => res.json())
       .then((res) => {
-        console.log("Top Search", res);
+        // console.log("Top Search", res);
         setTopSearch(res);
       });
   }, []);
@@ -108,7 +108,7 @@ const Header = () => {
 
   }, []);
 
-  console.log("profile data", profileData);
+  // console.log("profile data", profileData);
 
   const Duration = [
     { start: 0, end: 5 },
