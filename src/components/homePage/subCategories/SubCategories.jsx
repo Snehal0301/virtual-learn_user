@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { CatSubCategories } from "../../../redux/reducers/CategoriesSubCategories";
@@ -7,6 +7,8 @@ import { start_timeIcon } from "../../../utils/svgIcons";
 import { courseOverview } from "../../../redux/reducers/courseOverview";
 import { chapterResponse } from "../../../redux/reducers/chapterResponses";
 import './subCategories.css'
+import { paginateNext, paginatePrevious } from "../../../redux/reducers/pagination";
+import { allCoursePW } from "../../../redux/reducers/AllcoursePW";
 
 const SubCategories = () => {
   const categoriesSubCategoriesdata = useSelector(
@@ -15,11 +17,27 @@ const SubCategories = () => {
 
   const subBasicData = useSelector((state) => state.catSubBasic.data);
   const subAdvanceData = useSelector((state) => state.subCatAdvance.data);
+  const allcourseItem = useSelector((state) => state.allcourse.value);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const categoriesName = useSelector((state) => state.basicCourse.category);
 
+  const pageNum = useSelector((state) => state.pagination.pageNum);
+
+  console.log("page number", pageNum);
+
+  useEffect(() => {
+    dispatch(allCoursePW({ pageNum: pageNum, pageLimit: 4 }));
+  }, [pageNum]);
+
+  useEffect(() => {
+    dispatch(allCoursePW({ pageNum: pageNum, pageLimit: 4 }));
+  }, []);
+
+  const allCoursePagination = useSelector((state) => state.allCoursePW.data);
+
+console.log("all course", allCoursePagination)
 
   // console.log(
   //   "categoriesSubCategoriesdata",
@@ -43,8 +61,8 @@ const SubCategories = () => {
           <Link
             to="/categories/design"
             style={{ color: "var(--blueFont)", cursor: "pointer" }}
-            // onClick={componentUnMount}
-            // onClick={dispatch(mycoursetabToggleState(2))}
+          // onClick={componentUnMount}
+          // onClick={dispatch(mycoursetabToggleState(2))}
           >
             {(categoriesSubCategoriesdata &&
               categoriesSubCategoriesdata.data &&
@@ -121,8 +139,8 @@ const SubCategories = () => {
         <div className="home-categories-seeall"></div>
       </div>
       {subAdvanceData &&
-      subAdvanceData.data &&
-      subAdvanceData.data.length > 0 ? (
+        subAdvanceData.data &&
+        subAdvanceData.data.length > 0 ? (
         <div className="home-categories-card">
           <div className="home-categories-choice1">
             {subAdvanceData &&
@@ -166,43 +184,77 @@ const SubCategories = () => {
         <div className="home-categories-seeall"></div>
       </div>
       {categoriesSubCategoriesdata &&
-      categoriesSubCategoriesdata.data &&
-      categoriesSubCategoriesdata.data.length > 0 ? (
+        categoriesSubCategoriesdata.data &&
+        categoriesSubCategoriesdata.data.length > 0 ? (
         <div className="choice-your-course-card">
           <div className="choice-your-course-choice1">
-            {categoriesSubCategoriesdata &&
-              categoriesSubCategoriesdata.data &&
-              categoriesSubCategoriesdata.data.length > 0 &&
-              categoriesSubCategoriesdata.data.map((item) => (
-                <div
-                  className="choice-your-coursesubcategory-image"
-                  onClick={() => {
-                    dispatch(courseOverview(item.courseId));
-                    dispatch(chapterResponse(item.courseId));
-                    navigate("/myCourses/ongoingCourse");
-                  }}
-                >
+          {allCoursePagination &&
+            allCoursePagination.data &&
+            allCoursePagination.data.length > 0 &&
+            allCoursePagination.data.map((item) => (
+              <div
+                className="home-categories-subcategory-allcourse-image"
+                onClick={() => {
+                  dispatch(courseOverview(item.courseId));
+                  dispatch(chapterResponse(item.courseId));
+                  navigate("/myCourses/ongoingCourse");
+                }}
+              >
+                <div className="home-categories-image-allcourse-pause">
                   <img src={item.coursePhoto} alt="" />
-
-                  <div className="choiceYourCourse-title-chapter">
-                    <div className="choice-your-coursesubcategory-title">
-                      {item.courseName}
+                  <div className="home-categories-overlay-allcourse"></div>
+                </div>
+                <div className="home-categories-allcourse-ttlchapbtn">
+                  <div className="home-categories-subcategory-allcourse-title">
+                    {item.courseName}
+                  </div>
+                  <div className="home-categories-allcourse-titleBtn">
+                    <div className="home-categories-allcourse-chapter">
+                      {item.chapterCount} Chapters
                     </div>
-                    <div className="choice-your-cahpbtn">
-                      <div className="choice-your-coursechapter">
-                        {item.chapterCount} chapters
-                      </div>
-                      <button className="subcategoryDesignbtn">
-                        {item.subCategoryName}
-                      </button>
-                    </div>
+                    <button className="home-categories-allcourse-designbtn">
+                      {item.categoryName}
+                    </button>
                   </div>
                 </div>
-              ))}
+              </div>
+            ))}
           </div>
         </div>
       ) : (
         <div className="subcatNocourse">No Courses Available</div>
+      )}
+
+      {allCoursePagination && allCoursePagination.data && allCoursePagination.data.length > 0 && (
+        <div className="paginationBtns">
+          <button
+            onClick={() => {
+              dispatch(paginatePrevious());
+            }}
+            disabled={pageNum <= 1}
+          >
+            <img
+              src={require("../../../assets/icons/previousIcon.png")}
+              alt="previous"
+            />
+          </button>
+          &nbsp;Page: {pageNum} &nbsp;
+          <button
+            onClick={() => {
+              dispatch(paginateNext());
+            }}
+            disabled={
+              Math.ceil(
+                allcourseItem && allcourseItem.length / 4
+              ) <= pageNum
+            }
+          >
+            <img
+              src={require("../../../assets/icons/nextIcon.png")}
+              alt="next"
+            ></img>
+          </button>
+        </div>
       )}
     </div>
   );
