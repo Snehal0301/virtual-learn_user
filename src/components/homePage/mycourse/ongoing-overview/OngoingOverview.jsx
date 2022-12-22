@@ -250,14 +250,44 @@ const OngoingOverview = () => {
     var mDisplay = m > 0 ? m + (m == 1 ? " ." : " .") : "";
     var sDisplay = s > 0 ? s + (s == 1 ? " min" : " mins") : "";
 
-    // var hDisplay = h > 0 ? h + (h == 1 ? " hour, " : " hours, ") : "";
-    // var mDisplay = m > 0 ? m + (m == 1 ? " minute, " : " minutes, ") : "";
-    // var sDisplay = s > 0 ? s + (s == 1 ? " second" : " seconds") : "";
-
     const res = hDisplay + mDisplay + sDisplay;
 
-    setModifiedTime(res);
+    // setModifiedTime(res);
+    return <p>{res}</p>
+    // return res;
   }
+
+  const convertMinute = (time) => {
+    var arrTime = time.split(':');
+    var a = arrTime[1]
+    var b = arrTime[2]
+    var res = a + '.' + b
+    return <span>{res} mins</span>
+  }
+
+  const convertHour = (time) => {
+    var arrTime = time.split(':');
+    var arrTime = time.split(':');
+    var a = arrTime[0]
+    if (a < 10) {
+      a = a % 10
+    }
+    var b = arrTime[1]
+    if (a === 0 && b < 10) {
+      b = b % 10;
+      return <span>{b} min</span>
+    }
+
+    // var m = (parseInt((b + 7.5) / 15) * 15) % 60;
+
+    // m = m < 10 ? '0' + m : m;
+    // var h = b > 52 ? (a === 23 ? 0 : ++a) : a;
+    // var res = h + '.' + m
+    var res = a + '.' + b
+    // return <span>{Math.round(res)}h</span>
+    return <span>{res}h</span>
+  }
+
 
   const onPause = () => {
     setPause(true);
@@ -941,7 +971,8 @@ const OngoingOverview = () => {
                     <div className="course-points">
                       <div className="course-points-img">{courseHourIcon}</div>
                       <div className="course-points-title">
-                        {overviewData.courseDuration}
+                        {/* {convertHour(overviewData.courseDuration)} total video */}
+                        {overviewData.courseDuration} total video
                       </div>
                     </div>
                     <div className="course-points">
@@ -1067,7 +1098,7 @@ const OngoingOverview = () => {
                     <p className="course-content-desc">
                       {chapter.chapterCount} Chapter | {chapter.lessonCount}{" "}
                       lessons | {chapter.testCount} Assignment Test |{" "}
-                      {chapter.courseDuration} Total length
+                      {convertHour(chapter.courseDuration)} Total length
                     </p>
                   </div>
 
@@ -1145,12 +1176,15 @@ const OngoingOverview = () => {
                                                     <p className="accordian-item-chapter-title">
                                                       {itemele.lessonName}
                                                     </p>
-                                                    <p className="accordian-item-chapter-duration">
+                                                    <p className="accordian-item-chapter-duration"
+                                                    >
                                                       {
                                                         // convertTime(itemele.lessonDuration)
-                                                        itemele.lessonDuration
+                                                        convertMinute(itemele.lessonDuration)
                                                         // modifiedTime
+                                                        // console.log('result', result);
                                                       }
+                                                      {/* {itemele.lessonDuration} */}
                                                     </p>
                                                   </div>
                                                 </div>
@@ -1231,7 +1265,10 @@ const OngoingOverview = () => {
                                                   {ele.testName}
                                                 </p>
                                                 <p className="accordian-item-chapter-duration">
-                                                  {ele.testDuration} min |{" "}
+                                                  {
+                                                    convertMinute(ele.testDuration)
+                                                    // convertMinute(itemele.lessonDuration)
+                                                  } |{" "}
                                                   {ele.questionCount} questions
                                                 </p>
                                               </div>
@@ -1325,7 +1362,7 @@ const OngoingOverview = () => {
                                                       {itemele.lessonName}
                                                     </p>
                                                     <p className="accordian-item-chapter-duration">
-                                                      {itemele.lessonDuration}
+                                                      {convertMinute(itemele.lessonDuration)}
                                                     </p>
                                                   </div>
                                                 </div>
