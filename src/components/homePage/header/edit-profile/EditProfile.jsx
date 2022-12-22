@@ -82,7 +82,7 @@ const EditProfile = () => {
           values.editPDOB ? values.editPDOB : "empty"
         );
         if (selectedFile == null) {
-          console.log("No image been uploaded");
+          // console.log("No image been uploaded");
         } else {
           formData.append("profilePhoto", selectedFile);
         }
@@ -102,7 +102,7 @@ const EditProfile = () => {
             }
           )
           .then((res) => {
-            console.log("res", res);
+            // console.log("res", res);
             successEditData();
             dispatch(ProfileClick());
           })

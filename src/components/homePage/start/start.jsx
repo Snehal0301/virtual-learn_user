@@ -93,7 +93,7 @@ const Start = () => {
       });
   }, []);
 
-  console.log('ongoing data', ongoing);
+  // console.log('ongoing data', ongoing);
 
   //Fetching api for slider
 
@@ -115,7 +115,7 @@ const Start = () => {
         console.error(err);
       });
   }, []);
-  console.log('headerdata', headerdata);
+  // console.log('headerdata', headerdata);
 
   //fetching data for all course
 
@@ -137,7 +137,7 @@ const Start = () => {
       });
   }, []);
   dispatch(coursedata(allcourseData));
-  console.log('allcoursedata', allcourseData);
+  // console.log('allcoursedata', allcourseData);
 
   //fetching data for popular courses
   useEffect(() => {

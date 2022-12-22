@@ -7,7 +7,7 @@ const initialState: any = {
     hometab: 1,
     firstVideo:'',
     videoLink: '',
-    notify: '',
+    notify:true,
 };
 
 
