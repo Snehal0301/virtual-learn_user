@@ -218,13 +218,13 @@ const OngoingOverview = () => {
   const lessonStateID = useSelector((state) => state.pauseTime.lessonID);
   const courseStateID = useSelector((state) => state.pauseTime.courseID);
   const pauseStateID = useSelector((state) => state.pauseTime.ptime);
-  console.log(
-    "id",
-    accordianStateID,
-    chapterStateID,
-    lessonStateID,
-    courseStateID
-  );
+  // console.log(
+  //   "id",
+  //   accordianStateID,
+  //   chapterStateID,
+  //   lessonStateID,
+  //   courseStateID
+  // );
   // Required State data
 
   const accordianState = useSelector((state) => state.mycourse.accordian);
@@ -309,13 +309,13 @@ const OngoingOverview = () => {
   };
 
   const pauseTimeLocal = localStorage.getItem("pauseTimeLocal");
-  console.log("pauseTimeLocal", pauseTimeLocal);
+  // console.log("pauseTimeLocal", pauseTimeLocal);
 
   const componentUnMount = () => {
     const unmountPauseTime = new Date(pauseTimeLocal * 1000)
       .toISOString()
       .slice(11, 19);
-    console.log("played", unmountPauseTime);
+    // console.log("played", unmountPauseTime);
 
     const unmountData = {
       pauseTime: unmountPauseTime,
@@ -404,7 +404,7 @@ const OngoingOverview = () => {
   const unmountPauseTime = new Date(pauseStateID * 1000)
     .toISOString()
     .slice(11, 19);
-  console.log("played", unmountPauseTime);
+  // console.log("played", unmountPauseTime);
 
   const [pauseData, setPauseData] = useState({
     courseId: "",
@@ -431,7 +431,7 @@ const OngoingOverview = () => {
       chapter.courseCompletedStatus === true && accordianToggle(chapter.chapterResponses.length - 1)
   }, [chapter]);
 
-  console.log("pauseData", pauseData);
+  // console.log("pauseData", pauseData);
 
   const showChapter = (courseId, chapterId, lessonId, videoTitle) => {
     setPauseData({
@@ -510,7 +510,7 @@ const OngoingOverview = () => {
     var a = hms.split(':');
     var seconds = (+a[0]) * 60 * 60 + (+a[1]) * 60 + (+a[2]);
 
-    console.log('seconds', seconds);
+    // console.log('seconds', seconds);
 
     playerRef.current.seekTo(seconds, 'seconds');
   };
@@ -550,7 +550,7 @@ const OngoingOverview = () => {
 
   const unmountStateRedux = useSelector((state) => state.pauseTime.unmount);
 
-  console.log("unmountStateRedux", unmountStateRedux);
+  // console.log("unmountStateRedux", unmountStateRedux);
 
   // see this logic
   // if (overviewData && !overviewData.enrolled) {

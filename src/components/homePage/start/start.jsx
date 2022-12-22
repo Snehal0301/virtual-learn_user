@@ -60,7 +60,7 @@ const Start = () => {
   const homeTabState = useSelector((state) => state.mycourse.hometab);
 
   const handleTabClick = (id) => {
-    console.log(id);
+    // console.log(id);
     dispatch(homeTabToggleState(id));
   };
 

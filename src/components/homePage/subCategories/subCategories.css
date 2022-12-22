@@ -16,3 +16,20 @@
     justify-content: center;
     cursor: pointer;
 }
+.mobileSubcategory
+{
+    display: none;
+}
+@media only screen and (max-width: 800px) 
+{
+.mobileSubcategory
+{
+    display: flex;
+    display: flex;
+    color: #2B2B2B;
+    font-family: Biko;
+    font-size: 26px;
+    font-weight: bold;
+    
+}
+}

@@ -25,7 +25,7 @@ const SubCategories = () => {
 
   const pageNum = useSelector((state) => state.pagination.pageNum);
 
-  console.log("page number", pageNum);
+  // console.log("page number", pageNum);
 
   useEffect(() => {
     dispatch(allCoursePW({ pageNum: pageNum, pageLimit: 4 }));
@@ -37,14 +37,14 @@ const SubCategories = () => {
 
   const allCoursePagination = useSelector((state) => state.allCoursePW.data);
 
-console.log("all course", allCoursePagination)
+// console.log("all course", allCoursePagination)
 
   // console.log(
   //   "categoriesSubCategoriesdata",
   //   categoriesSubCategoriesdata.data[0].categoryName
   // );
 
-  console.log("dfjkbnj", categoriesSubCategoriesdata);
+  // console.log("dfjkbnj", categoriesSubCategoriesdata);
   return (
     <div className="subCategoryCat">
       <div className="homeCategories-head-link">
@@ -80,6 +80,10 @@ console.log("all course", allCoursePagination)
 
         {/* {overviewData && overviewData.courseName && overviewData.courseName} */}
       </div>
+      <div className='mobileSubcategory'>{categoriesSubCategoriesdata &&
+            categoriesSubCategoriesdata.data &&
+            categoriesSubCategoriesdata.data.length > 0 &&
+            categoriesSubCategoriesdata.data[0].subCategoryName}</div>
 
       {/* <div className="home-categories-section2">
         <div className="home-categories-courses-started">

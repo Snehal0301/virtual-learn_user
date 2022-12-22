@@ -25,7 +25,7 @@ const HomeCategoriesDesign = () => {
   const navigate = useNavigate();
 
   const allcourseItem = useSelector((state) => state.allcourse.value);
-  console.log("all", allcourseItem.length);
+  // console.log("all", allcourseItem.length);
 
   const basicCoursedata = useSelector((state) => state.basicCourse.data);
   const advancedCoursedata = useSelector((state) => state.advancedCourse.data);
@@ -36,7 +36,7 @@ const HomeCategoriesDesign = () => {
 
   const pageNum = useSelector((state) => state.pagination.pageNum);
 
-  console.log("page number", pageNum);
+  // console.log("page number", pageNum);
 
   useEffect(() => {
     dispatch(allCoursePW({ pageNum: pageNum, pageLimit: 4 }));
@@ -48,7 +48,7 @@ const HomeCategoriesDesign = () => {
 
   const allCoursePagination = useSelector((state) => state.allCoursePW.data);
 
-  console.log("all course", allCoursePagination)
+  // console.log("all course", allCoursePagination)
 
   return (
     <div className="homecategoriesdesign">

@@ -35,7 +35,7 @@ const Completed = () => {
       });
   }, []);
 
-  console.log(completed);
+  // console.log(completed);
   return (
     <>
       {completed && completed.length > 0 ? (

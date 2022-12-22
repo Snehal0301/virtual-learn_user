@@ -25,7 +25,7 @@ const MyCourse = () => {
         }
       )
       .then((res) => {
-        console.log(res);
+        // console.log(res);
         setMyCourse(res.data.message);
       })
       .catch((err) => {
