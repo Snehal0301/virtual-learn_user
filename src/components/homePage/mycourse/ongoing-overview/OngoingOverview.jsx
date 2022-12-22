@@ -2,7 +2,7 @@ import "./OngoingOverview.css";
 import React, { useState, useEffect, useRef } from "react";
 import ReactPlayer from "react-player";
 import { useDispatch, useSelector } from "react-redux";
-import { saveAs } from 'file-saver'
+import { saveAs } from "file-saver";
 import {
   accordianState,
   accordianToggleState,
@@ -28,7 +28,7 @@ import {
   videoPlayActive,
   whiteStepperIcon,
 } from "../../../../utils/svgIcons";
-import { showCertificate } from '../../../../redux/reducers/Conditions';
+import { showCertificate } from "../../../../redux/reducers/Conditions";
 import {
   Accordion,
   AccordionItem,
@@ -36,7 +36,7 @@ import {
   AccordionItemButton,
   AccordionItemPanel,
 } from "react-accessible-accordion";
-import Certificate from '../../quiz/certificate/Certificate';
+import Certificate from "../../quiz/certificate/Certificate";
 import instructorImage from "../../../../assets/images/instructorImage.jpg";
 import Accordian from "../accordian/Accordian";
 import axios from "axios";
@@ -59,9 +59,9 @@ import {
   lessonIDState,
   pauseTimeState,
   unmountState,
-} from '../../../../redux/reducers/pauseTime';
-import { pauseUnmount } from '../../../../redux/reducers/pauseTimeSlice';
-import { NotifyClick } from '../../../../redux/reducers/NotificationsData';
+} from "../../../../redux/reducers/pauseTime";
+import { pauseUnmount } from "../../../../redux/reducers/pauseTimeSlice";
+import { NotifyClick } from "../../../../redux/reducers/NotificationsData";
 
 const OngoingOverview = () => {
   const [chapter, setChapter] = useState();
@@ -176,12 +176,12 @@ const OngoingOverview = () => {
       chapterResponses.data &&
       setDefaultVideo(
         chapterResponses &&
-        chapterResponses.data &&
-        chapterResponses.data.chapterResponses[0] &&
-        chapterResponses.data.chapterResponses[0].lessonResponses[0] &&
-        chapterResponses.data.chapterResponses[0].lessonResponses[0]
-          .videoLink &&
-        chapterResponses.data.chapterResponses[0].lessonResponses[0].videoLink
+          chapterResponses.data &&
+          chapterResponses.data.chapterResponses[0] &&
+          chapterResponses.data.chapterResponses[0].lessonResponses[0] &&
+          chapterResponses.data.chapterResponses[0].lessonResponses[0]
+            .videoLink &&
+          chapterResponses.data.chapterResponses[0].lessonResponses[0].videoLink
       );
   }, [chapterResponses]);
 
@@ -192,7 +192,6 @@ const OngoingOverview = () => {
   }, [courseOverviewData]);
 
   console.log("new data", chapter, overviewData);
-
 
   useEffect(() => {
     chapter && chapter.enrolled === true
@@ -233,20 +232,19 @@ const OngoingOverview = () => {
   const [played, setPlayed] = useState();
   const [joinCourse, setJoinCourse] = useState(false);
   const [endVideo, setEndVideo] = useState(false);
-  const [continueModal, setContinueModal] = useState('');
+  const [continueModal, setContinueModal] = useState("");
   const [errorData, setErrorData] = useState(false);
   const [modifiedTime, setModifiedTime] = useState();
 
   function convertTime(time) {
-
     var initialTime = time;
-    var a = initialTime.split(':');
+    var a = initialTime.split(":");
 
-    var seconds = (+a[0]) * 60 * 60 + (+a[1]) * 60 + (+a[2]);
+    var seconds = +a[0] * 60 * 60 + +a[1] * 60 + +a[2];
 
     var h = Math.floor(seconds / 3600);
-    var m = Math.floor(seconds % 3600 / 60);
-    var s = Math.floor(seconds % 3600 % 60);
+    var m = Math.floor((seconds % 3600) / 60);
+    var s = Math.floor((seconds % 3600) % 60);
 
     var hDisplay = h > 0 ? h + (h == 1 ? "." : ".") : "";
     var mDisplay = m > 0 ? m + (m == 1 ? " ." : " .") : "";
@@ -258,15 +256,14 @@ const OngoingOverview = () => {
 
     const res = hDisplay + mDisplay + sDisplay;
 
-    setModifiedTime(res)
-
-  };
+    setModifiedTime(res);
+  }
 
   const onPause = () => {
     setPause(true);
     setPlaying(false);
     console.log("pause time", Math.floor(played) / 100);
-    componentUnMount()
+    componentUnMount();
   };
 
   const onPlay = () => {
@@ -324,7 +321,10 @@ const OngoingOverview = () => {
       courseId: pauseData.courseId,
     };
 
-    (unmountData.chapterId !== '') && (unmountData.pauseTime !== '') && (unmountData.lessonId !== '') && (unmountData.courseId !== '') &&
+    unmountData.chapterId !== "" &&
+      unmountData.pauseTime !== "" &&
+      unmountData.lessonId !== "" &&
+      unmountData.courseId !== "" &&
       dispatch(pauseUnmount(unmountData));
   };
 
@@ -340,42 +340,38 @@ const OngoingOverview = () => {
         }
       )
       .then((res) => {
-        console.log('modal continue data', res)
-        setContinueModal(res.data)
-        setErrorData(false)
+        console.log("modal continue data", res);
+        setContinueModal(res.data);
+        setErrorData(false);
       })
       .catch((err) => {
-        console.log('Modal continue error', err);
+        console.log("Modal continue error", err);
         // alert('errrr from continueModal')
-        console.log('errrr from continueModal')
-        setErrorData(true)
+        console.log("errrr from continueModal");
+        setErrorData(true);
       });
   };
 
   useEffect(() => {
-    chapter &&
-      continueModalData()
+    chapter && continueModalData();
 
     setPauseData({
-      videoTitle: continueModal.lessonName
-    })
+      videoTitle: continueModal.lessonName,
+    });
 
-    console.log('pauseData.videoTitle', pauseData.videoTitle);
+    console.log("pauseData.videoTitle", pauseData.videoTitle);
     // getVideoState(continueModal)
     // dispatch(videoLinkState(continueModal.videoLinkState))
     // dispatch(videoLinkState(continueModal.videoLink))
     // dispatch(firstVideoState('https://youtu.be/d1UNXbRxxZE'));
-
-  }, [chapter])
-
-  useEffect(() => {
-    continueModal &&
-      dispatch(firstVideoState(continueModal.videoLink));
-  }, [continueModal])
-
+  }, [chapter]);
 
   useEffect(() => {
-    console.log('Component mounted');
+    continueModal && dispatch(firstVideoState(continueModal.videoLink));
+  }, [continueModal]);
+
+  useEffect(() => {
+    console.log("Component mounted");
 
     // look here
     // accordianToggle(accordianStateID - 1);
@@ -386,19 +382,18 @@ const OngoingOverview = () => {
       // accordianToggle(0)
       // dispatch(accordianToggleState(0));
       // dispatch(accordianIDState(0))
-      setDefaultVideo('');
-      dispatch(firstVideoState(''));
+      setDefaultVideo("");
+      dispatch(firstVideoState(""));
       dispatch(videoLinkState(""));
       componentUnMount();
     };
   }, []);
 
   useEffect(() => {
-
     // dispatch(accordianIDState(continueModal.chapterNumber))
     continueModal.chapterNumber &&
-      accordianToggle(continueModal.chapterNumber - 1)
-  }, [continueModal])
+      accordianToggle(continueModal.chapterNumber - 1);
+  }, [continueModal]);
 
   // componentUnMount()
   const unmountPauseTime = new Date(pauseStateID * 1000)
@@ -428,7 +423,8 @@ const OngoingOverview = () => {
       });
 
     chapter &&
-      chapter.courseCompletedStatus === true && accordianToggle(chapter.chapterResponses.length - 1)
+      chapter.courseCompletedStatus === true &&
+      accordianToggle(chapter.chapterResponses.length - 1);
   }, [chapter]);
 
   console.log("pauseData", pauseData);
@@ -472,9 +468,9 @@ const OngoingOverview = () => {
 
   const getVideoState = (itemele) => {
     dispatch(videoLinkState(itemele.videoLink));
-    console.log('videoLink', videoLink);
-    console.log('pauseData.videolink', itemele.videoLink);
-    dispatch(firstVideoState(''));
+    console.log("videoLink", videoLink);
+    console.log("pauseData.videolink", itemele.videoLink);
+    dispatch(firstVideoState(""));
   };
 
   useEffect(() => {
@@ -492,27 +488,31 @@ const OngoingOverview = () => {
   const playerRef = useRef();
 
   const defaultNormalPause = (continueModal) => {
-
     setPause(false);
     setPlaying(true);
     setDefPause(true);
     setNextModal(false);
     setFirstPause(false);
-    showChapter(chapter.courseId, continueModal.chapterId, continueModal.lessonId, continueModal.lessonName)
-    setVideoPlayState(false)
+    showChapter(
+      chapter.courseId,
+      continueModal.chapterId,
+      continueModal.lessonId,
+      continueModal.lessonName
+    );
+    setVideoPlayState(false);
     // setVtitle(true)
-    dispatch(unmountState('false'));
+    dispatch(unmountState("false"));
 
     // look here yesterday
     // dispatch(videoLinkState(continueModal.videoLink))
 
     var hms = continueModal.pauseTime;
-    var a = hms.split(':');
-    var seconds = (+a[0]) * 60 * 60 + (+a[1]) * 60 + (+a[2]);
+    var a = hms.split(":");
+    var seconds = +a[0] * 60 * 60 + +a[1] * 60 + +a[2];
 
-    console.log('seconds', seconds);
+    console.log("seconds", seconds);
 
-    playerRef.current.seekTo(seconds, 'seconds');
+    playerRef.current.seekTo(seconds, "seconds");
   };
 
   const enrollCourse = async (courseId) => {
@@ -536,9 +536,9 @@ const OngoingOverview = () => {
           dispatch(chapterResponse(chapter.courseId));
           dispatch(courseOverview(chapter.courseId));
           dispatch(tabToggleState(2));
-          accordianToggle(0)
+          accordianToggle(0);
           setJoinCourse(true);
-          dispatch(NotifyClick())
+          dispatch(NotifyClick());
         }
       })
       .catch((err) => {
@@ -568,67 +568,62 @@ const OngoingOverview = () => {
     <>
       {chapter && chapter.enrolled ? (
         <div className="homeCategories-head-link">
-          <span onClick={() => {
-            componentUnMount();
-            setDefaultVideo('');
-            dispatch(firstVideoState(''));
-            dispatch(videoLinkState(""));
-          }
-          }>
+          <span
+            onClick={() => {
+              componentUnMount();
+              setDefaultVideo("");
+              dispatch(firstVideoState(""));
+              dispatch(videoLinkState(""));
+            }}
+          >
             <Link
               to="/myCourses"
               style={{ color: "var(--blueFont)", cursor: "pointer" }}
-            // onClick={componentUnMount}
+              // onClick={componentUnMount}
             >
               My Course &nbsp; &nbsp; {">"} &nbsp;
             </Link>
             &nbsp;
           </span>
-          {
-            chapter.courseCompletedStatus === true ?
-              <span>
-                <Link
-                  to="/myCourses"
-                  style={{ color: "var(--blueFont)", cursor: "pointer" }}
-                  // onClick={componentUnMount}
-                  onClick={() => {
-
-                    dispatch(mycoursetabToggleState(2));
-                    setDefaultVideo('');
-                    dispatch(firstVideoState(''));
-                    dispatch(videoLinkState(""));
-                  }
-                  }
-                >
-                  Completed &nbsp; &nbsp; {">"} &nbsp;
-                </Link>
-              </span>
-              :
-              <span>
-                <Link
-                  to="/myCourses"
-                  style={{ color: "var(--blueFont)", cursor: "pointer" }}
-                  onClick={() => {
-
-                    dispatch(mycoursetabToggleState(1));
-                    setDefaultVideo('');
-                    dispatch(firstVideoState(''));
-                    dispatch(videoLinkState(""));
-                  }
-                  }
-                >
-                  Ongoing &nbsp; &nbsp; {">"} &nbsp;
-                </Link>
-                &nbsp;
-              </span>
-          }
+          {chapter.courseCompletedStatus === true ? (
+            <span>
+              <Link
+                to="/myCourses"
+                style={{ color: "var(--blueFont)", cursor: "pointer" }}
+                // onClick={componentUnMount}
+                onClick={() => {
+                  dispatch(mycoursetabToggleState(2));
+                  setDefaultVideo("");
+                  dispatch(firstVideoState(""));
+                  dispatch(videoLinkState(""));
+                }}
+              >
+                Completed &nbsp; &nbsp; {">"} &nbsp;
+              </Link>
+            </span>
+          ) : (
+            <span>
+              <Link
+                to="/myCourses"
+                style={{ color: "var(--blueFont)", cursor: "pointer" }}
+                onClick={() => {
+                  dispatch(mycoursetabToggleState(1));
+                  setDefaultVideo("");
+                  dispatch(firstVideoState(""));
+                  dispatch(videoLinkState(""));
+                }}
+              >
+                Ongoing &nbsp; &nbsp; {">"} &nbsp;
+              </Link>
+              &nbsp;
+            </span>
+          )}
 
           {overviewData && overviewData.courseName && overviewData.courseName}
         </div>
       ) : (
         ""
-      )
-      }
+      )}
       <div className="ongoing-overview">
         <div className="ongoing-section-1">
           <div
@@ -651,21 +646,21 @@ const OngoingOverview = () => {
 
             {continueModal &&
               chapter &&
-              chapter.enrolled === true && chapter.courseCompletedStatus === false && !errorData && (
+              chapter.enrolled === true &&
+              chapter.courseCompletedStatus === false &&
+              !errorData && (
                 <>
-                  {
-                    videoPlayState &&
+                  {videoPlayState && (
                     <div div className="pause-overlay">
                       {firstPause && (
                         <div
                           className="continue-chapter-pause-button"
                           onClick={() => {
-
                             setNextModal(true);
                             setFirstPause(false);
                           }}
                         >
-                          Continue Chapter {continueModal.chapterNumber} Lesson{' '}
+                          Continue Chapter {continueModal.chapterNumber} Lesson{" "}
                           {continueModal.lessonNumber}
                         </div>
                       )}
@@ -673,9 +668,9 @@ const OngoingOverview = () => {
                       {nextModal && (
                         <div className="onpause-modal">
                           <p className="onpause-modal-title">
-                            Your lesson paused at{' '}
-                            <span>{continueModal.pauseTime}</span> Do you want to
-                            continue watching?
+                            Your lesson paused at{" "}
+                            <span>{continueModal.pauseTime}</span> Do you want
+                            to continue watching?
                           </p>
                           <button
                             className="onpause-button"
@@ -686,13 +681,18 @@ const OngoingOverview = () => {
                           <button
                             className="onpause-button beginning"
                             onClick={() => {
-                              playerRef.current.seekTo(0, 'seconds');
+                              playerRef.current.seekTo(0, "seconds");
                               setPause(false);
                               setPlaying(true);
-                              setNextModal(false)
-                              setVideoPlayState(false)
-                              showChapter(chapter.courseId, continueModal.chapterId, continueModal.lessonId, continueModal.lessonName)
-                              dispatch(unmountState('false'));
+                              setNextModal(false);
+                              setVideoPlayState(false);
+                              showChapter(
+                                chapter.courseId,
+                                continueModal.chapterId,
+                                continueModal.lessonId,
+                                continueModal.lessonName
+                              );
+                              dispatch(unmountState("false"));
                             }}
                           >
                             Watch from beginning
@@ -704,20 +704,24 @@ const OngoingOverview = () => {
                         {start_pauseIconVideo}
                       </div>
                     )} */}
-                      {
-                        vtitle &&
+                      {vtitle && (
                         <div className="video-title-overlay">
                           {pauseData.videoTitle}
                         </div>
-                      }
+                      )}
                     </div>
-                  }
+                  )}
                 </>
-              )
-            }
+              )}
 
             <ReactPlayer
-              url={videoLink ? videoLink : (errorData ? defaultvideo : defaultVideoState)}
+              url={
+                videoLink
+                  ? videoLink
+                  : errorData
+                  ? defaultvideo
+                  : defaultVideoState
+              }
               controls="true"
               className="react-player"
               width="100%"
@@ -759,93 +763,109 @@ const OngoingOverview = () => {
           ) : (
             <h3>Loading</h3>
           )}
-          {tabState === 1 ?
-            (
-              <>
-                {overviewData ? (
-                  <div className="ongoing-course-desc">
-                    <div className="ongoing-course-desc-title">
-                      <p>{overviewData.courseTagLine}</p>
-                    </div>
-                    <div className="ongoing-course-desc-content">
-                      <input type="checkbox" id="expanded"></input>
-                      <ShowMoreText
-                        className="showmore"
-                        anchorClass="show-more-style"
-                      >
-                        {overviewData.description}
-                      </ShowMoreText>
-                      {/* <ShowMoreText className="showmore" anchorClass="show-more-style">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quis quod ullam, iste quo hic voluptatem, et tempore, modi quaerat placeat cum. Quam eos itaque quo omnis, quae delectus illo quos autem nobis ut possimus in, excepturi et illum sunt perspiciatis accusamus, repellat facilis fuga animi voluptatem pariatur nisi consequatur voluptates! Rem cum nobis itaque consequuntur eveniet a nihil ab quibusdam deleniti dolorum quia libero ullam culpa minima eaque debitis minus aperiam ducimus odio delectus, eius consequatur iusto odit! Nemo quasi corporis velit itaque neque fugit soluta dolores dolorem facere, molestias maxime non consequatur quidem odio totam esse iure, delectus fuga!</ShowMoreText> */}
-                      {/* <label for="expanded" role="button">
+          {tabState === 1 ? (
+            <>
+              {overviewData ? (
+                <div className="ongoing-course-desc">
+                  <div className="ongoing-course-desc-title">
+                    <p>{overviewData.courseTagLine}</p>
+                  </div>
+                  <div className="ongoing-course-desc-content">
+                    <input type="checkbox" id="expanded"></input>
+                    <ShowMoreText
+                      className="showmore"
+                      anchorClass="show-more-style"
+                    >
+                      {overviewData.description}
+                    </ShowMoreText>
+                    {/* <ShowMoreText className="showmore" anchorClass="show-more-style">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quis quod ullam, iste quo hic voluptatem, et tempore, modi quaerat placeat cum. Quam eos itaque quo omnis, quae delectus illo quos autem nobis ut possimus in, excepturi et illum sunt perspiciatis accusamus, repellat facilis fuga animi voluptatem pariatur nisi consequatur voluptates! Rem cum nobis itaque consequuntur eveniet a nihil ab quibusdam deleniti dolorum quia libero ullam culpa minima eaque debitis minus aperiam ducimus odio delectus, eius consequatur iusto odit! Nemo quasi corporis velit itaque neque fugit soluta dolores dolorem facere, molestias maxime non consequatur quidem odio totam esse iure, delectus fuga!</ShowMoreText> */}
+                    {/* <label for="expanded" role="button">
                     SHOW MORE
                   </label> */}
 
-                      {/* {
+                    {/* {
                       unmountStateRedux === 'true' ? <p>Unmount true</p> : <p>Unmount false</p>
                     } */}
+                  </div>
+                </div>
+              ) : (
+                <h3>Loading</h3>
+              )}
+            </>
+          ) : (
+            <>
+              {chapter && chapter.coursePercentage ? (
+                <div className="course-completion">
+                  <div className="course-completion-section-1-2">
+                    <div className="course-completion-section-1">
+                      <div className="completion-section-1-main">
+                        <p className="completion-section-1-main-title">
+                          Course Result
+                        </p>
+                        <p className="completion-section-1-main-per">
+                          {chapter.coursePercentage.toFixed(0)}%
+                        </p>
+                        <p className="completion-section-1-main-apr">
+                          approval rate
+                        </p>
+                      </div>
+                    </div>
+                    <div className="course-completion-section-2">
+                      <div className="completion-section-2-main">
+                        <div className="cmain-1">
+                          <p>Joined</p>
+                          <p className="cmain-1-date">{chapter.joinedDate}</p>
+                        </div>
+                        <div className="cmain-2">
+                          <p>Completed</p>
+                          <p className="cmain-1-date">
+                            {chapter.completedDate}
+                          </p>
+                        </div>
+                        <div className="cmain-3">
+                          <p>Duration</p>
+                          <p className="cmain-1-date">
+                            {chapter.courseDuration}
+                          </p>
+                        </div>
+                      </div>
                     </div>
                   </div>
-                ) : (
-                  <h3>Loading</h3>
-                )}
-              </>
-            ) :
-            (
-              <>
-                {
-                  chapter && chapter.coursePercentage ?
-                    <div className="course-completion">
-                      <div className="course-completion-section-1-2">
-                        <div className="course-completion-section-1">
-                          <div className="completion-section-1-main">
-
-                            <p className='completion-section-1-main-title'>Course Result</p>
-                            <p className='completion-section-1-main-per'>{chapter.coursePercentage.toFixed(0)}%</p>
-                            <p className='completion-section-1-main-apr'>approval rate</p>
-                          </div>
-                        </div>
-                        <div className="course-completion-section-2">
-                          <div className="completion-section-2-main">
-                            <div className="cmain-1">
-                              <p>Joined</p>
-                              <p className='cmain-1-date'>{chapter.joinedDate}</p>
-                            </div>
-                            <div className="cmain-2">
-                              <p>Completed</p>
-                              <p className='cmain-1-date'>{chapter.completedDate}</p>
-                            </div>
-                            <div className="cmain-3">
-                              <p>Duration</p>
-                              <p className='cmain-1-date'>{chapter.courseDuration}</p>
-                            </div>
-                          </div>
+                  <div className="course-completion-section-3">
+                    <div className="completion-section-3-main">
+                      <div className="cs3-main-1">
+                        <p className="cs3-main-1-title">Course Certificate</p>
+                        <div
+                          className="download-icon-image"
+                          onClick={() => {
+                            saveAs(chapter.certificateUrl, chapter.courseName);
+                          }}
+                        >
+                          {downloadIcon}
                         </div>
                       </div>
-                      <div className="course-completion-section-3">
-                        <div className="completion-section-3-main">
-                          <div className="cs3-main-1">
-                            <p className='cs3-main-1-title'>Course Certificate</p>
-                            <div className='download-icon-image' onClick={() => {
-                              saveAs(chapter.certificateUrl, chapter.courseName)
-                            }}>{downloadIcon}</div>
-                          </div>
-                          <div className="cs3-main-2" onClick={() => {
-                            dispatch(showCertificate(true));
-                          }}>
-                            <img src={chapter.certificateUrl} alt="" />
-                          </div>
-                        </div>
+                      <div
+                        className="cs3-main-2"
+                        onClick={() => {
+                          dispatch(showCertificate(true));
+                        }}
+                      >
+                        <img src={chapter.certificateUrl} alt="" />
                       </div>
-                      {true && (
-                        <Certificate certificate={chapter.certificateUrl} name={chapter.courseName} />
-                      )}
                     </div>
-                    :
-                    ''
-                }
-              </>
-            )
-          }
+                  </div>
+                  {true && (
+                    <Certificate
+                      certificate={chapter.certificateUrl}
+                      name={chapter.courseName}
+                    />
+                  )}
+                </div>
+              ) : (
+                ""
+              )}
+            </>
+          )}
         </div>
         <div className="ongoing-section-2">
           <div className="ongoing-container-1">
@@ -1029,7 +1049,9 @@ const OngoingOverview = () => {
               ) : (
                 <button
                   className="join-course"
-                  onClick={() => { enrollCourse(overviewData.courseId) }}
+                  onClick={() => {
+                    enrollCourse(overviewData.courseId);
+                  }}
                 >
                   Join Course
                 </button>
@@ -1053,8 +1075,10 @@ const OngoingOverview = () => {
                     {chapter.chapterResponses.map((ele, id) => {
                       let statusTest = false;
                       if (
+                        ele.lessonResponses[ele.lessonResponses.length - 1] &&
                         ele.lessonResponses[ele.lessonResponses.length - 1]
                           .lessonCompletedStatus &&
+                        ele.lessonResponses[ele.lessonResponses.length - 1] &&
                         ele.lessonResponses[ele.lessonResponses.length - 1]
                           .lessonCompletedStatus
                       ) {
@@ -1108,8 +1132,8 @@ const OngoingOverview = () => {
                                                 {itemele.lessonCompletedStatus
                                                   ? completedlessonIcon
                                                   : itemele.lessonStatus
-                                                    ? inactiveIcon('green')
-                                                    : inactiveIcon('')}
+                                                  ? inactiveIcon("green")
+                                                  : inactiveIcon("")}
                                                 {/* {itemele.lessonCompletedStatus ? completedlessonIcon : itemele.lessonStatus ? inactiveIcon("green")  : inactiveIcon("")} */}
                                               </div>
                                               <div className="accordian-item-section-2">
@@ -1136,15 +1160,15 @@ const OngoingOverview = () => {
                                                   onClick={() => {
                                                     itemele.lessonStatus
                                                       ? getPauseVideoTime(
-                                                        chapter,
-                                                        ele,
-                                                        itemele
-                                                      )
+                                                          chapter,
+                                                          ele,
+                                                          itemele
+                                                        )
                                                       : // getVideoState(itemele)
 
-                                                      // showChapter(chapter.courseId,ele.chapterId,itemele.lessonId)
-                                                      // showChapter(chapter.courseId, ele.chapterId, itemele.lessonId)
-                                                      notify();
+                                                        // showChapter(chapter.courseId,ele.chapterId,itemele.lessonId)
+                                                        // showChapter(chapter.courseId, ele.chapterId, itemele.lessonId)
+                                                        notify();
                                                   }}
                                                 >
                                                   {itemele.lessonStatus
@@ -1163,8 +1187,8 @@ const OngoingOverview = () => {
                                             {ele.chapterTestPercentage >= 0
                                               ? completedlessonIcon
                                               : statusTest
-                                                ? inactiveIcon('green')
-                                                : inactiveIcon('')}
+                                              ? inactiveIcon("green")
+                                              : inactiveIcon("")}
                                           </div>
                                           <div
                                             className="accordian-item-section-2 test-section"
@@ -1193,14 +1217,15 @@ const OngoingOverview = () => {
                                                   ele.chapterTestPercentage >= 0
                                                   ? attemptTest()
                                                   : dispatch(
-                                                    test(
-                                                      `${ele.testName ===
-                                                        'Final Test'
-                                                        ? 'finalTest'
-                                                        : 'moduleTest'
-                                                      }?testId=${ele.testId}`
+                                                      test(
+                                                        `${
+                                                          ele.testName ===
+                                                          "Final Test"
+                                                            ? "finalTest"
+                                                            : "moduleTest"
+                                                        }?testId=${ele.testId}`
+                                                      )
                                                     )
-                                                  )
                                                 : inactiveTest();
                                             }}
                                           >
@@ -1219,7 +1244,8 @@ const OngoingOverview = () => {
                                               </div>
                                             </div>
                                             {ele.chapterTestPercentage &&
-                                              ele.chapterTestPercentage >= 0 && (
+                                              ele.chapterTestPercentage >=
+                                                0 && (
                                                 <div className="percent-marks">
                                                   <div className="percent">
                                                     {ele.chapterTestPercentage.toFixed(
@@ -1404,15 +1430,15 @@ const OngoingOverview = () => {
                                                   className="video-play-btn"
                                                   onClick={() => {
                                                     ele.chapterNumber === 1 &&
-                                                      itemele.lessonStatus
-                                                      ? console.log('nothing')
+                                                    itemele.lessonStatus
+                                                      ? console.log("nothing")
                                                       : errorCourse();
                                                   }}
                                                 >
                                                   {ele.chapterNumber === 1 &&
-                                                    itemele.lessonStatus
-                                                    ? videoPlayActive('red')
-                                                    : videoPlayActive('')}
+                                                  itemele.lessonStatus
+                                                    ? videoPlayActive("red")
+                                                    : videoPlayActive("")}
                                                 </div>
                                               </div>
                                             </div>
@@ -1471,14 +1497,14 @@ const OngoingOverview = () => {
                                             </div>
                                             <div
                                               className="video-play-btn"
-                                            // onClick={() => { setVideo(courseele.videoLink) }}
-                                            // onClick={() => {
-                                            //   dispatch(
-                                            //     videoLinkState(
-                                            //       itemele.videoLink
-                                            //     )
-                                            //   );
-                                            // }}
+                                              // onClick={() => { setVideo(courseele.videoLink) }}
+                                              // onClick={() => {
+                                              //   dispatch(
+                                              //     videoLinkState(
+                                              //       itemele.videoLink
+                                              //     )
+                                              //   );
+                                              // }}
                                             ></div>
                                           </div>
                                         </div>
