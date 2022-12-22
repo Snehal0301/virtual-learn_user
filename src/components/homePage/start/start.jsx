@@ -256,7 +256,7 @@ const Start = () => {
         >
           {headerdata &&
             headerdata.data &&
-            headerdata.data.map((item) => (
+            headerdata.data.slice(0,6).map((item) => (
               <div
                 className="start-image-title"
                 onClick={() => {
