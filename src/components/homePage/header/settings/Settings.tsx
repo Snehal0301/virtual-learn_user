@@ -56,7 +56,7 @@ const Settings = () => {
     })
   }
 
-  console.log(checked)
+
   const handleChangeSound = (nextChecked: any) => {
     setCheckedSound(nextChecked);
   };
