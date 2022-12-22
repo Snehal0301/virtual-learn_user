@@ -14,7 +14,6 @@ import TimeAgo from "timeago-react";
 import { NotifyClick } from "../../../../redux/reducers/NotificationsData";
 import { MobileNotifyClick } from "../../../../redux/reducers/MobileNotification";
 
-
 const Notification = () => {
   const [notifyData1, setNotifyData] = useState([]); /*Changed*/
   const [notId, setNotId] = useState("");
@@ -31,12 +30,9 @@ const Notification = () => {
     dispatch(MobileNotifyClick());
   };
 
-
   useEffect(() => {
     dispatch(NotifyClick());
   }, [notId]);
-
-  console.log("notifyData", notifyData.data[0].description);
 
   return (
     <div className="drawer-profile-notify">
