@@ -15,7 +15,6 @@ import { NotifyClick } from "../../../../redux/reducers/NotificationsData";
 import { MobileNotifyClick } from "../../../../redux/reducers/MobileNotification";
 
 
-
 const Notification = () => {
   const [notifyData1, setNotifyData] = useState([]); /*Changed*/
   const [notId, setNotId] = useState("");
@@ -31,8 +30,6 @@ const Notification = () => {
     dispatch(NotifyClick());
     dispatch(MobileNotifyClick());
   };
-
-
 
 
   useEffect(() => {

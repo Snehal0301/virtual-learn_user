@@ -35,16 +35,17 @@ const Settings = () => {
   const notifyData = useSelector((state: any) => state.NotifyClick.data);
   const pushState = useSelector((state: any) => state.mycourse.notify);
 
-  const handleChange = (nextChecked: any) => {
-    setChecked(nextChecked);
+  const handleChange = () => {
+    // setChecked(nextChecked);
+    dispatch(notifyState('true'))
   };
 
   dispatch(notifyState(checked))
-  
+
   useEffect(() => {
-    checked &&
+    checked && notifyData &&
       notifyMe()
-  }, [checked])
+  }, [checked,notifyData])
 
   function notifyMe() {
     let notifyMsg = notifyData.data[0].description;
