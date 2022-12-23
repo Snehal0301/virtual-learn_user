@@ -34,11 +34,18 @@ const Ongoing = () => {
   return (
     <>
       {ongoingData && ongoingData.length > 0 ? (
-        <div className="ongoing-section">
+        <div className="ongoing-section"
+        >
           {ongoingData.map((ele, i) => {
             return (
               <div className="ongoing-parent" key={i}>
-                <div className="ongoing-images">
+                <div className="ongoing-images"
+                onClick={(e) => {
+                  dispatch(courseOverview(ele.courseId));
+                  dispatch(chapterResponse(ele.courseId));
+                  dispatch(tabToggleState(2))
+                  navigate('/myCourses/ongoingCourse');
+                }}>
                   <div className="ong-overlay"></div>
                   <img src={ele.coursePhoto} alt="" className="ong-img" />
                   <div className="chap-progress">
@@ -52,12 +59,7 @@ const Ongoing = () => {
                   </div>
                   <button
                     className="btn-continue-ongoing"
-                    onClick={(e) => {
-                      dispatch(courseOverview(ele.courseId));
-                      dispatch(chapterResponse(ele.courseId));
-                      dispatch(tabToggleState(2))
-                      navigate('/myCourses/ongoingCourse');
-                    }}
+                    
                   >
                     Continue
                   </button>

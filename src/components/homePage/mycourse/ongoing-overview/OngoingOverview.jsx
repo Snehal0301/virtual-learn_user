@@ -973,8 +973,8 @@ const OngoingOverview = () => {
                     <div className="course-points">
                       <div className="course-points-img">{courseHourIcon}</div>
                       <div className="course-points-title">
-                        {/* {convertHour(overviewData.courseDuration)} total video */}
-                        {overviewData.courseDuration} total video
+                        {convertHour(overviewData.courseDuration)} total video
+                        {/* {overviewData.courseDuration} total video */}
                       </div>
                     </div>
                     <div className="course-points">
