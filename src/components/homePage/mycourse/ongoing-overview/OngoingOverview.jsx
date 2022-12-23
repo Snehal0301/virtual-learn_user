@@ -192,7 +192,7 @@ const OngoingOverview = () => {
       setOverviewData(courseOverviewData.data);
   }, [courseOverviewData]);
 
-  // console.log("new data", chapter, overviewData);
+  console.log("new data", chapter, overviewData);
 
   useEffect(() => {
     chapter && chapter.enrolled === true
@@ -1248,9 +1248,16 @@ const OngoingOverview = () => {
                                                   ele.chapterTestPercentage >= 0
                                                   ? attemptTest()
                                                   : dispatch(
+                                                    // test(
+                                                    //   `${ele.testName ===
+                                                    //     "Final Test"
+                                                    //     ? "finalTest"
+                                                    //     : "moduleTest"
+                                                    //   }?testId=${ele.testId}`
+                                                    // )
                                                     test(
-                                                      `${ele.testName ===
-                                                        "Final Test"
+                                                      `${ele.isFinalTest ===
+                                                        true
                                                         ? "finalTest"
                                                         : "moduleTest"
                                                       }?testId=${ele.testId}`
