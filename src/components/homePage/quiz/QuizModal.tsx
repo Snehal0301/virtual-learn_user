@@ -34,6 +34,14 @@ const QuizModal = () => {
                 style={{ fontSize: "24px" }}
               >
                 Do you want to end the test?
+                <div
+                  className="headerSearch-filterModalBodyCloseIcon"
+                  onClick={(e) => {
+                    dispatch(showQuizModal(false));
+                  }}
+                >
+                  {closeIcon}
+                </div>
               </div>
               <div className="quizModal-text">
                 You still have {sessionStorage.getItem("timer")} seconds
@@ -63,14 +71,14 @@ const QuizModal = () => {
               </div>
             </div>
 
-            <div
+            {/* <div
               className="headerSearch-filterModalBodyCloseIcon"
               onClick={(e) => {
                 dispatch(showQuizModal(false));
               }}
             >
               {closeIcon}
-            </div>
+            </div> */}
           </div>
         </aside>
       )}

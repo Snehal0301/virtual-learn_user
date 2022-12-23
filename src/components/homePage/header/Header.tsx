@@ -626,6 +626,14 @@ const Header = () => {
             <div className="headerSearch-filterModalBody">
               <div className="headerSearch-filterModalBodyTitle">
                 Search Filters
+                <div
+              className="headerSearch-filterModalBodyCloseIcon"
+              onClick={() => {
+                dispatch(modalFilter(false));
+              }}
+            >
+              {closeIcon}
+            </div>
               </div>
               <div className="headerSearch-filterModalCategory">
                 {" "}
@@ -720,14 +728,14 @@ const Header = () => {
                 </button>
               </div>
             </div>
-            <div
+            {/* <div
               className="headerSearch-filterModalBodyCloseIcon"
               onClick={() => {
                 dispatch(modalFilter(false));
               }}
             >
               {closeIcon}
-            </div>
+            </div> */}
           </div>
         </aside>
       )}
