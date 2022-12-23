@@ -1330,7 +1330,7 @@ const OngoingOverview = () => {
                                       </p>
                                     )}
                                     <p className="course-accordian-container-state">
-                                      {accordianState === id ? "-" : "+"}
+                                      {accState === id ? "-" : "+"}
                                     </p>
                                   </div>
                                 </div>
