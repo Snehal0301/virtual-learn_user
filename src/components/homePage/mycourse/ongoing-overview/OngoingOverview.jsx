@@ -62,6 +62,7 @@ import {
 } from "../../../../redux/reducers/pauseTime";
 import { pauseUnmount } from "../../../../redux/reducers/pauseTimeSlice";
 import { NotifyClick } from "../../../../redux/reducers/NotificationsData";
+import { MobileNotifyClick } from "../../../../redux/reducers/MobileNotification";
 
 const OngoingOverview = () => {
   const [chapter, setChapter] = useState();
@@ -569,6 +570,7 @@ const OngoingOverview = () => {
           accordianToggle(0);
           setJoinCourse(true);
           dispatch(NotifyClick());
+          dispatch(MobileNotifyClick());
         }
       })
       .catch((err) => {
@@ -1082,6 +1084,7 @@ const OngoingOverview = () => {
                   className="join-course"
                   onClick={() => {
                     enrollCourse(overviewData.courseId);
+                    
                   }}
                 >
                   Join Course
