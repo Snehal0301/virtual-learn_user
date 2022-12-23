@@ -54,7 +54,7 @@ const Router = () => {
     (state: any) => state.finaltestShowPage.value
   );
 
-  console.log('test successs', showFinalResult);
+  // console.log('test successs', showFinalResult);
 
   return (
     <>

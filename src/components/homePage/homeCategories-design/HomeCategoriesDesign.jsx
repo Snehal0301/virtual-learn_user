@@ -63,7 +63,7 @@ const HomeCategoriesDesign = () => {
           </Link>
           &nbsp;
         </span>
-        {categoryName}
+        <span style={{ color:'#7A7A7A'}}>{categoryName}</span>
       </div>
       <div className="mobileCategoriesheadLink">{categoryName}</div>
       <div className="home-categories-section2">

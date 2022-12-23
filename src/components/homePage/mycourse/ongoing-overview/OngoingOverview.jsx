@@ -192,7 +192,7 @@ const OngoingOverview = () => {
       setOverviewData(courseOverviewData.data);
   }, [courseOverviewData]);
 
-  console.log("new data", chapter, overviewData);
+  // console.log("new data", chapter, overviewData);
 
   useEffect(() => {
     chapter && chapter.enrolled === true
@@ -293,7 +293,7 @@ const OngoingOverview = () => {
   const onPause = () => {
     setPause(true);
     setPlaying(false);
-    console.log("pause time", Math.floor(played) / 100);
+    // console.log("pause time", Math.floor(played) / 100);
     componentUnMount();
   };
 
@@ -304,8 +304,8 @@ const OngoingOverview = () => {
 
   const onEnd = async () => {
     setEndVideo(true);
-    console.log("Ended");
-    console.log("pauseData", pauseData);
+    // console.log("Ended");
+    // console.log("pauseData", pauseData);
 
     const resultPauseTime = new Date(played * 1000).toISOString().slice(11, 19);
     // console.log(typeof(pauseData));
@@ -327,12 +327,12 @@ const OngoingOverview = () => {
         }
       )
       .then((res) => {
-        console.log(res);
+        // console.log(res);
         // dispatch(courseOverview(pauseData.courseId));
         dispatch(chapterResponse(pauseData.courseId));
       })
       .catch((err) => {
-        console.log(err);
+        // console.log(err);
       });
   };
 
@@ -371,14 +371,14 @@ const OngoingOverview = () => {
         }
       )
       .then((res) => {
-        console.log("modal continue data", res);
+        // console.log("modal continue data", res);
         setContinueModal(res.data);
         setErrorData(false);
       })
       .catch((err) => {
-        console.log("Modal continue error", err);
+        // console.log("Modal continue error", err);
         // alert('errrr from continueModal')
-        console.log("errrr from continueModal");
+        // console.log("errrr from continueModal");
         setErrorData(true);
       });
   };
@@ -390,7 +390,7 @@ const OngoingOverview = () => {
       videoTitle: continueModal.lessonName,
     });
 
-    console.log("pauseData.videoTitle", pauseData.videoTitle);
+    // console.log("pauseData.videoTitle", pauseData.videoTitle);
     // getVideoState(continueModal)
     // dispatch(videoLinkState(continueModal.videoLinkState))
     // dispatch(videoLinkState(continueModal.videoLink))
@@ -402,12 +402,12 @@ const OngoingOverview = () => {
   }, [continueModal]);
 
   useEffect(() => {
-    console.log("Component mounted");
+    // console.log("Component mounted");
 
     // look here
     // accordianToggle(accordianStateID - 1);
     return () => {
-      console.log("Component unmounted");
+      // console.log("Component unmounted");
       dispatch(tabToggleState(1));
       dispatch(unmountState("true"));
       // accordianToggle(0)
@@ -499,8 +499,8 @@ const OngoingOverview = () => {
 
   const getVideoState = (itemele) => {
     dispatch(videoLinkState(itemele.videoLink));
-    console.log("videoLink", videoLink);
-    console.log("pauseData.videolink", itemele.videoLink);
+    // console.log("videoLink", videoLink);
+    // console.log("pauseData.videolink", itemele.videoLink);
     dispatch(firstVideoState(""));
   };
 
@@ -561,7 +561,7 @@ const OngoingOverview = () => {
         }
       )
       .then((res) => {
-        console.log(res);
+        // console.log(res);
         if (res.data.message === "Enrolled successfully") {
           successCourse();
           dispatch(chapterResponse(chapter.courseId));
@@ -574,10 +574,10 @@ const OngoingOverview = () => {
         }
       })
       .catch((err) => {
-        console.log(err);
+        // console.log(err);
       });
 
-    console.log("Clicked");
+    // console.log("Clicked");
   };
 
   const unmountStateRedux = useSelector((state) => state.pauseTime.unmount);
@@ -651,7 +651,7 @@ const OngoingOverview = () => {
             </span>
           )}
 
-          {overviewData && overviewData.courseName && overviewData.courseName}
+          <span style={{ color:'#7A7A7A' }}>{overviewData && overviewData.courseName && overviewData.courseName}</span> 
         </div>
       ) : (
         ""
