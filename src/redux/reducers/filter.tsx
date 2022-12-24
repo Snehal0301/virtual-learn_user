@@ -32,6 +32,17 @@ export const filterSlice = createSlice({
         action.payload.end &&
         state.value.chapterEndCount.push(action.payload.end);
     },
+    removeChapterCount: (state, action) => {
+      var index = state.value.chapterStartCount.indexOf(action.payload.start);
+      if (index > -1) {
+        state.value.chapterStartCount.splice(index, 1);
+      }
+
+      var index1 = state.value.chapterEndCount.indexOf(action.payload.end);
+      if (index > -1) {
+        action.payload.end && state.value.chapterEndCount.splice(index1, 1);
+      }
+    },
     clearFilter: (state) => {
       state.value.categoryId = [];
       state.value.chapterStartCount = [];
@@ -41,7 +52,12 @@ export const filterSlice = createSlice({
 });
 
 // Action creators are generated for each case reducer function
-export const { setfilter, clearFilter, setChapterCount, removefilter } =
-  filterSlice.actions;
+export const {
+  setfilter,
+  clearFilter,
+  setChapterCount,
+  removefilter,
+  removeChapterCount,
+} = filterSlice.actions;
 
 export default filterSlice.reducer;

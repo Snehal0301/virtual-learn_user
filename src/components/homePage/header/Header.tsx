@@ -38,6 +38,7 @@ import ChangePassword from './changePassword/ChangePassword';
 import { useNavigate } from 'react-router-dom';
 import filter, {
   clearFilter,
+  removeChapterCount,
   removefilter,
   setChapterCount,
   setfilter,
@@ -258,7 +259,7 @@ const Header = () => {
             ? arrA.filter((a: any) =>
                 arrB.some((b: any) => a.courseId === b.courseId)
               )
-            : searchedCourse;
+            : courseFromSearch;
         setSearchedCourse(intersection);
         console.log('arr intersection filter', intersection);
         //here changed
@@ -728,7 +729,12 @@ const Header = () => {
                           className="headerSearchCategoriesTopSearchesName"
                           onClick={() => {
                             filterData.chapterStartCount.includes(ele.start)
-                              ? alert('includes')
+                              ? dispatch(
+                                  removeChapterCount({
+                                    start: ele.start,
+                                    end: ele.end,
+                                  })
+                                )
                               : dispatch(
                                   setChapterCount({
                                     start: ele.start,
