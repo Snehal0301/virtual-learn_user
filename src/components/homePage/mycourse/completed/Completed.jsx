@@ -43,12 +43,14 @@ const Completed = () => {
           <div className="completed-section">
             {completed.map((ele, i) => {
               return (
-                <div className="completed-parent" key={i}
-                  style={{cursor:'pointer'}}
+                <div
+                  className="completed-parent"
+                  key={i}
+                  style={{ cursor: 'pointer' }}
                   onClick={(e) => {
                     dispatch(courseOverview(ele.courseId));
                     dispatch(chapterResponse(ele.courseId));
-                    dispatch(tabToggleState(1))
+                    dispatch(tabToggleState(1));
                     navigate('/myCourses/ongoingCourse');
                   }}
                 >
@@ -58,8 +60,13 @@ const Completed = () => {
                     <div className="completed-chap-progress">
                       <p className="completed-text">Completed</p>
                       <div className="completed-chap-descp">
-                        <p>{ele.courseName}</p>
-                        <p>{ele.coursePercentage.toFixed(2)}% Approval Rate</p>
+                        <p>{ele && ele.coursePercentage && ele.courseName}</p>
+                        <p>
+                          {ele &&
+                            ele.coursePercentage &&
+                            ele.coursePercentage.toFixed(2)}
+                          % Approval Rate
+                        </p>
                       </div>
                     </div>
                     <button
@@ -75,7 +82,7 @@ const Completed = () => {
                             {
                               headers: {
                                 Authorization: `Bearer ${sessionStorage.getItem(
-                                  "Token"
+                                  'Token'
                                 )}`,
                               },
                             }
@@ -105,19 +112,19 @@ const Completed = () => {
       ) : (
         <div
           style={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            justifyContent: "center",
-            fontSize: "30px",
-            height: "50vh",
-            textAlign: "center",
-            marginTop: "30px",
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            justifyContent: 'center',
+            fontSize: '30px',
+            height: '50vh',
+            textAlign: 'center',
+            marginTop: '30px',
           }}
         >
           <div className="emptyImageCourse">
             <img
-              src={require("../../../../assets/images/start-courses-image/EmptyImage.png")}
+              src={require('../../../../assets/images/start-courses-image/EmptyImage.png')}
               alt=""
             />
           </div>
