@@ -758,6 +758,7 @@ const Header = () => {
                     dispatch(clearFilter());
                     setSearchedCourse(courseFromSearch);
                     sessionStorage.removeItem('filter');
+                    dispatch(modalFilter(false));
                   }}
                 >
                   Clear All
