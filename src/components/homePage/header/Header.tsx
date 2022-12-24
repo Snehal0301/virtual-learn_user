@@ -38,6 +38,7 @@ import ChangePassword from './changePassword/ChangePassword';
 import { useNavigate } from 'react-router-dom';
 import filter, {
   clearFilter,
+  removefilter,
   setChapterCount,
   setfilter,
 } from '../../../redux/reducers/filter';
@@ -642,9 +643,9 @@ const Header = () => {
       {modalFilterStatus && (
         <aside
           className="headerSearch-filterModal"
-          onClick={() => {
-            dispatch(modalFilter(false));
-          }}
+          // onClick={() => {
+          //   dispatch(modalFilter(false));
+          // }}
         >
           <div
             className="headerSearch-filterActualModal"
@@ -682,11 +683,13 @@ const Header = () => {
                           }
                           key={i}
                           onClick={() => {
-                            dispatch(
-                              setfilter({
-                                catId: ele.categoryId,
-                              })
-                            );
+                            filterData.categoryId.includes(ele.categoryId)
+                              ? dispatch(removefilter(ele.categoryId))
+                              : dispatch(
+                                  setfilter({
+                                    catId: ele.categoryId,
+                                  })
+                                );
                           }}
                         >
                           <div className="headerSearchCategoriesTopSearchesIcon">
@@ -724,12 +727,14 @@ const Header = () => {
                         <div
                           className="headerSearchCategoriesTopSearchesName"
                           onClick={() => {
-                            dispatch(
-                              setChapterCount({
-                                start: ele.start,
-                                end: ele.end,
-                              })
-                            );
+                            filterData.chapterStartCount.includes(ele.start)
+                              ? alert('includes')
+                              : dispatch(
+                                  setChapterCount({
+                                    start: ele.start,
+                                    end: ele.end,
+                                  })
+                                );
                           }}
                         >
                           {ele.start}

@@ -16,6 +16,14 @@ export const filterSlice = createSlice({
       !state.value.categoryId.includes(action.payload.catId) &&
         state.value.categoryId.push(action.payload.catId);
     },
+
+    removefilter: (state, action) => {
+      console.log('uncaught', action.payload, state.value.categoryId);
+      var index = state.value.categoryId.indexOf(action.payload);
+      if (index > -1) {
+        state.value.categoryId.splice(index, 1);
+      }
+    },
     setChapterCount: (state, action) => {
       !state.value.categoryId.includes(action.payload.start) &&
         state.value.chapterStartCount.push(action.payload.start);
@@ -33,6 +41,7 @@ export const filterSlice = createSlice({
 });
 
 // Action creators are generated for each case reducer function
-export const { setfilter, clearFilter, setChapterCount } = filterSlice.actions;
+export const { setfilter, clearFilter, setChapterCount, removefilter } =
+  filterSlice.actions;
 
 export default filterSlice.reducer;
