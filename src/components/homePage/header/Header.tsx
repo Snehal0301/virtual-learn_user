@@ -62,6 +62,7 @@ const Header = () => {
   const [topCategories, setTopCategories] = useState([]);
   const [searchedCourse, setSearchedCourse] = useState([]);
   const [profileData1, setprofileData] = useState<any>({});
+  const [courseFromSearch, setCourseFromSearch] = useState([]);
 
   const navigate = useNavigate();
 
@@ -189,6 +190,7 @@ const Header = () => {
       .then((res) => res.json())
       .then((res) => {
         console.log('response', res);
+        setCourseFromSearch(res);
 
         const arrA = JSON.parse(sessionStorage.getItem('filter') || '[]');
         const arrB = res;
@@ -246,6 +248,18 @@ const Header = () => {
         setLoading(false);
         //here changed
         sessionStorage.setItem('filter', JSON.stringify(res));
+
+        const arrA = res;
+        const arrB = courseFromSearch;
+        console.log('arr ', arrA);
+        let intersection =
+          arrA && arrA.length > 0
+            ? arrA.filter((a: any) =>
+                arrB.some((b: any) => a.courseId === b.courseId)
+              )
+            : searchedCourse;
+        setSearchedCourse(intersection);
+        console.log('arr intersection filter', intersection);
         //here changed
       })
       .catch((err) => {
@@ -737,6 +751,7 @@ const Header = () => {
                   className="headerSearch-clearAllButton"
                   onClick={() => {
                     dispatch(clearFilter());
+                    setSearchedCourse(courseFromSearch);
                     sessionStorage.removeItem('filter');
                   }}
                 >
