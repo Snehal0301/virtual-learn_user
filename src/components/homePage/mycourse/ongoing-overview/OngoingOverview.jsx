@@ -826,7 +826,7 @@ const OngoingOverview = () => {
             </>
           ) : (
             <>
-              {chapter && chapter.coursePercentage ? (
+              {chapter && chapter.coursePercentage >=0 ? (
                 <div className="course-completion">
                   <div className="course-completion-section-1-2">
                     <div className="course-completion-section-1">
@@ -880,7 +880,8 @@ const OngoingOverview = () => {
                         className="cs3-main-2"
                         onClick={() => {
                           dispatch(showCertificate(true));
-                        }}
+                          }}
+                          style={{cursor:'pointer'}}
                       >
                         <img src={chapter.certificateUrl} alt="" />
                       </div>

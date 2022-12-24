@@ -60,7 +60,7 @@ const Completed = () => {
                     <div className="completed-chap-progress">
                       <p className="completed-text">Completed</p>
                       <div className="completed-chap-descp">
-                        <p>{ele && ele.coursePercentage && ele.courseName}</p>
+                        <p>{ele && ele.courseName}</p>
                         <p>
                           {ele &&
                             ele.coursePercentage &&
