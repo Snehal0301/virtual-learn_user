@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import "./Header.css";
+import React, { useEffect, useState } from 'react';
+import './Header.css';
 import {
   bellIcon,
   closeIcon,
@@ -12,8 +12,8 @@ import {
   profileIcon,
   searchIcon,
   settingsIcon,
-} from "../../../utils/svgIcons";
-import { useDispatch, useSelector } from "react-redux";
+} from '../../../utils/svgIcons';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   editProfileSection,
   headerProfile,
@@ -24,39 +24,38 @@ import {
   profileSection,
   settingsSection,
   termsSection,
-} from "../../../redux/reducers/headerProfileOptions";
-import Drawer from "react-modern-drawer";
-import "react-modern-drawer/dist/index.css";
-import Profile from "./profile/Profile";
-import Settings from "./settings/Settings";
-import PrivacyPolicy from "./privacypolicy/PrivacyPolicy";
-import Terms from "./terms/Terms";
-import Notification from "./notification/Notification";
-import { searchFocus } from "../../../redux/reducers/headerProfileOptions";
-import EditProfile from "./edit-profile/EditProfile";
-import ChangePassword from "./changePassword/ChangePassword";
-import { useNavigate } from "react-router-dom";
+} from '../../../redux/reducers/headerProfileOptions';
+import Drawer from 'react-modern-drawer';
+import 'react-modern-drawer/dist/index.css';
+import Profile from './profile/Profile';
+import Settings from './settings/Settings';
+import PrivacyPolicy from './privacypolicy/PrivacyPolicy';
+import Terms from './terms/Terms';
+import Notification from './notification/Notification';
+import { searchFocus } from '../../../redux/reducers/headerProfileOptions';
+import EditProfile from './edit-profile/EditProfile';
+import ChangePassword from './changePassword/ChangePassword';
+import { useNavigate } from 'react-router-dom';
 import filter, {
   clearFilter,
   setChapterCount,
   setfilter,
-} from "../../../redux/reducers/filter";
-import Loading from "../../../utils/loading/Loading";
-import axios from "axios";
-import { courseOverview } from "../../../redux/reducers/courseOverview";
-import { chapterResponse } from "../../../redux/reducers/chapterResponses";
-import { NotifyClick } from "../../../redux/reducers/NotificationsData";
-import { MobileNotifyClick } from "../../../redux/reducers/MobileNotification";
-import { ProfileClick } from "../../../redux/reducers/EditProfileData";
-import { testSuccessRed } from "../../../redux/reducers/SuccessTestRed";
-import { testSuccess } from "../../../redux/reducers/Conditions";
-import { showSuccessPage } from "../../../redux/reducers/showSuccesspage";
-import { testisSuccess } from "../../../redux/reducers/testSlice";
-import { finaltestShowPage } from "../../../redux/reducers/finalTestSuccess";
-
+} from '../../../redux/reducers/filter';
+import Loading from '../../../utils/loading/Loading';
+import axios from 'axios';
+import { courseOverview } from '../../../redux/reducers/courseOverview';
+import { chapterResponse } from '../../../redux/reducers/chapterResponses';
+import { NotifyClick } from '../../../redux/reducers/NotificationsData';
+import { MobileNotifyClick } from '../../../redux/reducers/MobileNotification';
+import { ProfileClick } from '../../../redux/reducers/EditProfileData';
+import { testSuccessRed } from '../../../redux/reducers/SuccessTestRed';
+import { testSuccess } from '../../../redux/reducers/Conditions';
+import { showSuccessPage } from '../../../redux/reducers/showSuccesspage';
+import { testisSuccess } from '../../../redux/reducers/testSlice';
+import { finaltestShowPage } from '../../../redux/reducers/finalTestSuccess';
 
 const Header = () => {
-  const [onChange, setOnChange] = useState("");
+  const [onChange, setOnChange] = useState('');
   const [showFilter, setShowFilter] = useState(false);
   const [loading, setLoading] = useState(false);
   const [topSearch, setTopSearch] = useState([]);
@@ -73,9 +72,9 @@ const Header = () => {
       `http://virtuallearn-env.eba-6xmym3vf.ap-south-1.elasticbeanstalk.com/user/topSearches`,
       {
         headers: {
-          Accept: "application/json, text/plain, */*",
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${sessionStorage.getItem("Token")}`,
+          Accept: 'application/json, text/plain, */*',
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${sessionStorage.getItem('Token')}`,
         },
       }
     )
@@ -91,9 +90,9 @@ const Header = () => {
       `http://virtuallearn-env.eba-6xmym3vf.ap-south-1.elasticbeanstalk.com/user/categoriesWP`,
       {
         headers: {
-          Accept: "application/json, text/plain, */*",
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${sessionStorage.getItem("Token")}`,
+          Accept: 'application/json, text/plain, */*',
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${sessionStorage.getItem('Token')}`,
         },
       }
     )
@@ -105,7 +104,6 @@ const Header = () => {
 
   useEffect(() => {
     dispatch(MobileNotifyClick());
-
   }, []);
 
   // console.log("profile data", profileData);
@@ -182,16 +180,27 @@ const Header = () => {
       `http://virtuallearn-env.eba-6xmym3vf.ap-south-1.elasticbeanstalk.com/user/search?searchKey=${e.target.value}`,
       {
         headers: {
-          Accept: "application/json, text/plain, */*",
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${sessionStorage.getItem("Token")}`,
+          Accept: 'application/json, text/plain, */*',
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${sessionStorage.getItem('Token')}`,
         },
       }
     )
       .then((res) => res.json())
       .then((res) => {
-        console.log("response", res);
-        setSearchedCourse(res);
+        console.log('response', res);
+
+        const arrA = JSON.parse(sessionStorage.getItem('filter') || '[]');
+        const arrB = res;
+        console.log('arr ', arrA);
+        let intersection =
+          arrA && arrA.length > 0
+            ? arrA.filter((a: any) =>
+                arrB.some((b: any) => a.courseId === b.courseId)
+              )
+            : res;
+        setSearchedCourse(intersection);
+        console.log('arr intersection', intersection);
       });
   };
 
@@ -212,26 +221,32 @@ const Header = () => {
   const [arrow, setArrow] = useState(false);
   const [leftdrawer, setLeftdrawer] = useState(false);
 
+  //filter logic
+
+  //filter logic
   const filterHandler = () => {
     setLoading(true);
     setShowFilter(true);
     fetch(
       `http://virtuallearn-env.eba-6xmym3vf.ap-south-1.elasticbeanstalk.com/user/applyFilter`,
       {
-        method: "POST",
+        method: 'POST',
         headers: {
-          Accept: "application/json, text/plain, */*",
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${sessionStorage.getItem("Token")}`,
+          Accept: 'application/json, text/plain, */*',
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${sessionStorage.getItem('Token')}`,
         },
         body: JSON.stringify(filterData),
       }
     )
       .then((res) => res.json())
       .then((res) => {
-        setSearchedCourse(res);
+        // setSearchedCourse(res);
         dispatch(modalFilter(false));
         setLoading(false);
+        //here changed
+        sessionStorage.setItem('filter', JSON.stringify(res));
+        //here changed
       })
       .catch((err) => {
         setSearchedCourse([]);
@@ -246,11 +261,11 @@ const Header = () => {
     fetch(
       `http://virtuallearn-env.eba-6xmym3vf.ap-south-1.elasticbeanstalk.com/user/searchByKeyword?keyword=${keyword}`,
       {
-        method: "GET",
+        method: 'GET',
         headers: {
-          Accept: "application/json, text/plain, */*",
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${sessionStorage.getItem("Token")}`,
+          Accept: 'application/json, text/plain, */*',
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${sessionStorage.getItem('Token')}`,
         },
       }
     )
@@ -271,17 +286,17 @@ const Header = () => {
     fetch(
       `http://virtuallearn-env.eba-6xmym3vf.ap-south-1.elasticbeanstalk.com/user/allCoursesOfCategory?categoryId=${catId}`,
       {
-        method: "GET",
+        method: 'GET',
         headers: {
-          Accept: "application/json, text/plain, */*",
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${sessionStorage.getItem("Token")}`,
+          Accept: 'application/json, text/plain, */*',
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${sessionStorage.getItem('Token')}`,
         },
       }
     )
       .then((res) => res.json())
       .then((res) => {
-        console.log("category", res);
+        console.log('category', res);
         setSearchedCourse(res);
         setLoading(false);
       })
@@ -295,12 +310,12 @@ const Header = () => {
     <>
       <div className="header-parent">
         <div
-          className={searchFieldFocus ? "header headerSearchFocus" : "header"}
+          className={searchFieldFocus ? 'header headerSearchFocus' : 'header'}
         >
           <div
             className="header-logo"
             onClick={() => {
-              navigate("/");
+              navigate('/');
             }}
           >
             {headerLogo}
@@ -308,14 +323,14 @@ const Header = () => {
           {arrow ? (
             <img
               className="mobile-logo"
-              src={require("../../../assets/images/right_arrow.png")}
+              src={require('../../../assets/images/right_arrow.png')}
               alt=""
               onClick={closeMobileHeader}
             />
           ) : (
             <img
               className="mobile-logo"
-              src={require("../../../assets/images/burger-mobile-icon.png")}
+              src={require('../../../assets/images/burger-mobile-icon.png')}
               alt=""
               onClick={handleMobileDrawer}
             />
@@ -330,8 +345,8 @@ const Header = () => {
               type="text"
               className={
                 searchFieldFocus
-                  ? "header-searchField header-searchFieldPadding"
-                  : "header-searchField"
+                  ? 'header-searchField header-searchFieldPadding'
+                  : 'header-searchField'
               }
               placeholder="Search"
               onFocus={() => {
@@ -361,10 +376,10 @@ const Header = () => {
                   <img
                     src={
                       profileData &&
-                        profileData.data &&
-                        profileData.data.profilePhoto
+                      profileData.data &&
+                      profileData.data.profilePhoto
                         ? profileData.data.profilePhoto
-                        : require("../../../assets/images/start-courses-image/profilepic.jpg")
+                        : require('../../../assets/images/start-courses-image/profilepic.jpg')
                     }
                     alt="Profile Pic"
                     onClick={(e: any) => {
@@ -387,7 +402,7 @@ const Header = () => {
                           dispatch(testSuccessRed(false));
                           dispatch(showSuccessPage(false));
                           dispatch(finaltestShowPage(false));
-                          navigate("/myCourses");
+                          navigate('/myCourses');
                         }}
                       >
                         <div className="header-profileOptionIcon">
@@ -428,7 +443,7 @@ const Header = () => {
               </div>
               <div
                 className="mobile-search"
-                style={{ filter: "invert(1)" }}
+                style={{ filter: 'invert(1)' }}
                 onClick={toggleMobileHeader}
               >
                 {searchIcon}
@@ -470,8 +485,8 @@ const Header = () => {
                     type="text"
                     className={
                       searchFieldFocus
-                        ? "header-searchField header-searchFieldPadding"
-                        : "header-searchField"
+                        ? 'header-searchField header-searchFieldPadding'
+                        : 'header-searchField'
                     }
                     placeholder="Search"
                     onFocus={() => {
@@ -525,7 +540,7 @@ const Header = () => {
                     <div className="headerSearchcategories-nosearchResults">
                       <div
                         className="headerSearchCategoriesTopSearchTitle"
-                        style={{ fontSize: "32px" }}
+                        style={{ fontSize: '32px' }}
                       >
                         No matching course
                       </div>
@@ -582,13 +597,13 @@ const Header = () => {
                           onClick={() => {
                             dispatch(courseOverview(ele.courseId));
                             dispatch(chapterResponse(ele.courseId));
-                            navigate("/myCourses/ongoingCourse");
+                            navigate('/myCourses/ongoingCourse');
                             dispatch(searchFocus(false));
                             setShowFilter(false);
                           }}
                         >
                           <div className="headerSearch-responsePic">
-                            <img src={ele.coursePhoto}  />
+                            <img src={ele.coursePhoto} />
                           </div>
                           <div className="headerSearch-responseContainer">
                             <div className="headerSearch-responseTitle">
@@ -627,16 +642,16 @@ const Header = () => {
               <div className="headerSearch-filterModalBodyTitle">
                 Search Filters
                 <div
-              className="headerSearch-filterModalBodyCloseIcon"
-              onClick={() => {
-                dispatch(modalFilter(false));
-              }}
-            >
-              {closeIcon}
-            </div>
+                  className="headerSearch-filterModalBodyCloseIcon"
+                  onClick={() => {
+                    dispatch(modalFilter(false));
+                  }}
+                >
+                  {closeIcon}
+                </div>
               </div>
               <div className="headerSearch-filterModalCategory">
-                {" "}
+                {' '}
                 <div className="headerSearch-filterModalCategoryTitle">
                   Search from Categories
                 </div>
@@ -648,8 +663,8 @@ const Header = () => {
                         <div
                           className={
                             filterData.categoryId.includes(ele.categoryId)
-                              ? "headerSearchCategoriesTopSearchesParent headerSearchCategories-chpBorder chipBackgroundYellow"
-                              : "headerSearchCategoriesTopSearchesParent headerSearchCategories-chpBorder "
+                              ? 'headerSearchCategoriesTopSearchesParent headerSearchCategories-chpBorder chipBackgroundYellow'
+                              : 'headerSearchCategoriesTopSearchesParent headerSearchCategories-chpBorder '
                           }
                           key={i}
                           onClick={() => {
@@ -661,7 +676,7 @@ const Header = () => {
                           }}
                         >
                           <div className="headerSearchCategoriesTopSearchesIcon">
-                            {" "}
+                            {' '}
                             <img
                               src={
                                 ele && ele.categoryPhoto && ele.categoryPhoto
@@ -687,8 +702,8 @@ const Header = () => {
                       <div
                         className={
                           filterData.chapterStartCount.includes(ele.start)
-                            ? "headerSearchCategoriesTopSearchesParent  headerSearchCategories-chpBorder chipBackgroundYellow"
-                            : "headerSearchCategoriesTopSearchesParent  headerSearchCategories-chpBorder"
+                            ? 'headerSearchCategoriesTopSearchesParent  headerSearchCategories-chpBorder chipBackgroundYellow'
+                            : 'headerSearchCategoriesTopSearchesParent  headerSearchCategories-chpBorder'
                         }
                         key={i}
                       >
@@ -704,7 +719,7 @@ const Header = () => {
                           }}
                         >
                           {ele.start}
-                          {ele.end ? `/${ele.end}` : "+"} Chapters
+                          {ele.end ? `/${ele.end}` : '+'} Chapters
                         </div>
                       </div>
                     );
@@ -722,6 +737,7 @@ const Header = () => {
                   className="headerSearch-clearAllButton"
                   onClick={() => {
                     dispatch(clearFilter());
+                    sessionStorage.removeItem('filter');
                   }}
                 >
                   Clear All
@@ -748,8 +764,8 @@ const Header = () => {
         enableOverlay={true}
         overlayOpacity={0.7}
         style={{
-          width: "25rem",
-          zIndex: "9999",
+          width: '25rem',
+          zIndex: '9999',
         }}
       >
         {profileSectionState && <Profile />}
@@ -774,8 +790,8 @@ const Header = () => {
         enableOverlay={true}
         overlayOpacity={0.7}
         style={{
-          width: "25rem",
-          zIndex: "9999",
+          width: '25rem',
+          zIndex: '9999',
         }}
       >
         <div className="left-drawer">
@@ -796,7 +812,7 @@ const Header = () => {
                   {profileData && profileData.data && profileData.data.fullName}
                 </p>
                 <p className="left-drawer-role">
-                  {" "}
+                  {' '}
                   {profileData &&
                     profileData.data &&
                     profileData.data.occupation}
@@ -809,7 +825,7 @@ const Header = () => {
               <div
                 className="left-drawer-link"
                 onClick={() => {
-                  navigate("/");
+                  navigate('/');
                   dispatch(testisSuccess());
                   dispatch(testSuccessRed(false));
                   dispatch(showSuccessPage(false));
@@ -818,7 +834,7 @@ const Header = () => {
                 }}
               >
                 <img
-                  src={require("../../../assets/icons/icn_home_menu-Home.png")}
+                  src={require('../../../assets/icons/icn_home_menu-Home.png')}
                   alt=""
                 />
                 <p>Home</p>
@@ -826,7 +842,7 @@ const Header = () => {
               <div
                 className="left-drawer-link"
                 onClick={() => {
-                  navigate("/myCourses");
+                  navigate('/myCourses');
                   dispatch(testisSuccess());
                   dispatch(testSuccessRed(false));
                   dispatch(showSuccessPage(false));
@@ -835,7 +851,7 @@ const Header = () => {
                 }}
               >
                 <img
-                  src={require("../../../assets/icons/icn_course_menu-Briefcase.png")}
+                  src={require('../../../assets/icons/icn_course_menu-Briefcase.png')}
                   alt="My Course"
                 />
                 <p>My Course</p>
@@ -848,7 +864,7 @@ const Header = () => {
                 }}
               >
                 <img
-                  src={require("../../../assets/icons/icn_profile_menu.png")}
+                  src={require('../../../assets/icons/icn_profile_menu.png')}
                   alt="Profile"
                 />
                 <p>My Profile</p>
@@ -862,22 +878,21 @@ const Header = () => {
                 }}
               >
                 <img
-                  src={require("../../../assets/icons/icn_notification_menu.png")}
+                  src={require('../../../assets/icons/icn_notification_menu.png')}
                   alt="Notifications"
                 />
                 <p>Notifications</p>
                 {profileData &&
-                  profileData.data &&
-                  profileData.data.notificationCount > 0 ?
+                profileData.data &&
+                profileData.data.notificationCount > 0 ? (
                   <span>
                     {profileData &&
                       profileData.data &&
                       profileData.data.notificationCount}
                   </span>
-                  :
-                  ""
-                }
-                
+                ) : (
+                  ''
+                )}
               </div>
               <div
                 className="left-drawer-link"
@@ -887,7 +902,7 @@ const Header = () => {
                 }}
               >
                 <img
-                  src={require("../../../assets/icons/icn_settings_menu-Settings.png")}
+                  src={require('../../../assets/icons/icn_settings_menu-Settings.png')}
                   alt="Settings"
                 />
                 <p>Settings</p>
@@ -901,7 +916,7 @@ const Header = () => {
                 }}
               >
                 <img
-                  src={require("../../../assets/icons/icn_logout_menu-Power buttom.png")}
+                  src={require('../../../assets/icons/icn_logout_menu-Power buttom.png')}
                   alt="Logout"
                 />
                 <p>Logout</p>
