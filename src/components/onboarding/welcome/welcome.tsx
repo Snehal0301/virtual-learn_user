@@ -1,9 +1,16 @@
 import './welcome.css';
 import { useNavigate } from 'react-router-dom';
 import { virtualLearn_logo } from '../../../utils/svgIcons';
+import OnBoardingModal from '../OnboardingModal/OnBoardingModal';
+import { useState } from 'react';
 
 const WelcomeScreen = () => {
+  const [modal, setModal] = useState('');
   const navigate = useNavigate();
+
+  const childToParent = (childData: any) => {
+    setModal(childData);
+  };
 
   return (
     <div className="welcomeScreen">
@@ -39,8 +46,25 @@ const WelcomeScreen = () => {
       </div>
       <div className="welcome-footer">
         By creating new account, you agree to our{' '}
-        <a href="#">Terms of Services</a> & <a href="#">Privacy Policy</a>
+        <span
+          className="welcome-footer-links"
+          onClick={() => {
+            setModal('Terms of Services');
+          }}
+        >
+          Terms of Services
+        </span>{' '}
+        &{' '}
+        <span
+          className="welcome-footer-links"
+          onClick={() => {
+            setModal('Privacy Policy');
+          }}
+        >
+          Privacy Policy
+        </span>
       </div>
+      {<OnBoardingModal title={modal} childToParent={childToParent} />}
     </div>
   );
 };
